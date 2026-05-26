@@ -44,7 +44,7 @@ abstract class HASharkEntityModel<T : HASharkEntity>(
 
         val head = animationProcessor.getBone(PartNames.HEAD)
         val body = animationProcessor.getBone(PartNames.BODY)
-        val body2 = animationProcessor.getBone("body_2")
+        val torso2 = animationProcessor.getBone("torso_2")
         val tail = animationProcessor.getBone(PartNames.TAIL)
         val tailFin = animationProcessor.getBone(PartNames.TAIL_FIN)
 
@@ -62,7 +62,7 @@ abstract class HASharkEntityModel<T : HASharkEntity>(
         head.rotY += roll * -Mth.DEG_TO_RAD
         body.rotX += tilt * -Mth.DEG_TO_RAD
         body.rotZ += roll * -Mth.DEG_TO_RAD
-        body2.rotY += roll * Mth.DEG_TO_RAD
+        torso2.rotY += roll * Mth.DEG_TO_RAD
         tail.rotY += roll * Mth.DEG_TO_RAD
         tailFin.rotY += roll * 2.0f * Mth.DEG_TO_RAD
     }
