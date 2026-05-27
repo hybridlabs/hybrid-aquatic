@@ -15,6 +15,7 @@ import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
 import java.util.function.Supplier
 
+
 /**
  * The registry of all blocks in Hybrid Aquatic.
  */
@@ -237,6 +238,12 @@ object HABlocks {
     val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(Properties.copy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
 
     val BONE_WORMS = register("bone_worms") { BoneWormsBlock(Properties.copy(Blocks.SEAGRASS)) }
+
+    val BRINE = register(
+        "brine"
+    ) {
+        LiquidBlock(HAFluids.BRINE_STILL.get(), Properties.copy(Blocks.WATER))
+    }
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register("dead_lophelia_coral_block") {
         Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)

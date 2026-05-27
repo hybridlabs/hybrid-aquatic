@@ -1,9 +1,6 @@
 package dev.hybridlabs.aquatic
 
-import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.HAPlatformBlocks
-import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
+import dev.hybridlabs.aquatic.block.*
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.property.FlammableProperty
 import dev.hybridlabs.aquatic.block.property.StrippableProperty
@@ -54,6 +51,7 @@ object HybridAquatic : ModInitializer {
         CommonClass.init()
 
         HABlocks
+        HAFluids
         HAPlatformBlocks
         HASoundEvents
         HAInstruments
