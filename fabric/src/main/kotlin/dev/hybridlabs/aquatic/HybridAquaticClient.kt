@@ -2,6 +2,7 @@
 
 package dev.hybridlabs.aquatic
 
+import dev.hybridlabs.aquatic.client.data.HypnoticEntities
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.item.HAItemProperties
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
@@ -13,6 +14,7 @@ import dev.hybridlabs.aquatic.client.render.item.HAGeoRendererRegistry
 import dev.hybridlabs.aquatic.client.render.item.HAItemRendererRegistry
 import dev.hybridlabs.aquatic.client.render.item.HATrinketRendererRegistry
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 
 @Suppress("UnusedExpression", "DEPRECATION")
 object HybridAquaticClient : ClientModInitializer {
@@ -30,6 +32,10 @@ object HybridAquaticClient : ClientModInitializer {
         HAItemProperties
 
         HAMenuScreens
+
+        ClientTickEvents.END_CLIENT_TICK.register { client ->
+            HypnoticEntities.mobs.clear()
+        }
     }
 
     private fun registerWeatherRenderers() {

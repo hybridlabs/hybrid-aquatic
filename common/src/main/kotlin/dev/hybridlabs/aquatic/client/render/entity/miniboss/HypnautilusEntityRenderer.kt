@@ -15,6 +15,11 @@ class HypnautilusEntityRenderer(context: Context) :
         return 180f
     }
 
+    override fun doPostRenderCleanup() {
+        this.animatable.registerHypnotizing()
+        super.doPostRenderCleanup()
+    }
+
     init {
         this.addRenderLayer(AutoGlowingGeoLayer(this))
         this.shadowRadius = 0.4f
