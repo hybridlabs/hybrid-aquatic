@@ -71,6 +71,12 @@
 					]
 				},
 				{
+					"name": "bone",
+					"parent": "head",
+					"pivot": [0, 5, -6.5],
+					"rotation": [0, -45, 0]
+				},
+				{
 					"name": "tail",
 					"parent": "torso",
 					"pivot": [0, 4.5, 4],

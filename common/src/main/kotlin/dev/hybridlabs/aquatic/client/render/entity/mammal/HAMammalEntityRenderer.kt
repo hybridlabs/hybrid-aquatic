@@ -52,7 +52,7 @@ open class HAMammalEntityRenderer<T : HAMammalEntity>(
                 packedLight: Int,
                 packedOverlay: Int
             ) {
-                poseStack.mulPose(Axis.XP.rotationDegrees(-90f))
+                rotateItem(poseStack, bone, stack, animatable)
 
                 super.renderStackForBone(
                     poseStack,
@@ -66,6 +66,15 @@ open class HAMammalEntityRenderer<T : HAMammalEntity>(
                 )
             }
         })
+    }
+
+    protected open fun rotateItem(
+        poseStack: PoseStack,
+        bone: GeoBone,
+        stack: ItemStack,
+        animatable: T
+    ) {
+        poseStack.mulPose(Axis.XP.rotationDegrees(-90f))
     }
 
     override fun render(

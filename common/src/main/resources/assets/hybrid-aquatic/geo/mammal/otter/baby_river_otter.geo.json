@@ -45,6 +45,12 @@
 					]
 				},
 				{
+					"name": "item",
+					"parent": "head",
+					"pivot": [0, 4.5, -6.5],
+					"rotation": [0, -45, 0]
+				},
+				{
 					"name": "right_leg_2",
 					"parent": "body",
 					"pivot": [-2, 1.5, 2.5],

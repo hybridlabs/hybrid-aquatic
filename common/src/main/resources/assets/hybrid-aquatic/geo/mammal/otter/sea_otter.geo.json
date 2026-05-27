@@ -71,6 +71,12 @@
 					]
 				},
 				{
+					"name": "item",
+					"parent": "head",
+					"pivot": [0, 7, -8.5],
+					"rotation": [0, -45, 0]
+				},
+				{
 					"name": "tail",
 					"parent": "torso",
 					"pivot": [0, 6.5, 5],

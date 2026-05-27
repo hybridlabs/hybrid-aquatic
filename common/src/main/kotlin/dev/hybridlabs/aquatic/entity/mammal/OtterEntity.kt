@@ -3,11 +3,13 @@ package dev.hybridlabs.aquatic.entity.mammal
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -85,6 +87,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         goalSelector.addGoal(2, OtterFloatGoal(this))
         goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
         goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
@@ -99,7 +102,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAItems.CLAM.get())
+        return stack.`is`(HAItems.CLAM.get()) ||
+                stack.`is`(HAItemTags.SMALL_FISH)
     }
 
     /**
