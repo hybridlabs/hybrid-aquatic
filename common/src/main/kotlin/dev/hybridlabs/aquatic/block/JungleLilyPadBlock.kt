@@ -61,7 +61,7 @@ class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, WATER, WATER.getTickDelay(world))
@@ -78,7 +78,7 @@ class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return SHAPE
     }

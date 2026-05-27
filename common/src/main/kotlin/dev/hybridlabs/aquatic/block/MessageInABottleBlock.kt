@@ -7,11 +7,14 @@ import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.vehicle.Boat
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -39,6 +42,13 @@ import kotlin.jvm.optionals.getOrNull
 class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
+    }
+
+    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+        super.entityInside(state, level, pos, entity)
+        if (level is ServerLevel && entity is Boat) {
+            level.destroyBlock(BlockPos(pos), true, entity)
+        }
     }
 
     override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
@@ -69,7 +79,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         pos: BlockPos,
         state: BlockState,
         placer: LivingEntity?,
-        stack: ItemStack
+        stack: ItemStack,
     ) {
         stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG)?.let { nbt ->
             // if not present, generate a random message
@@ -121,7 +131,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         // tick fluid when waterlogged
         if (state.getValue(WATERLOGGED)) {
@@ -144,7 +154,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return if (state.getValue(WATERLOGGED)) WATER_SHAPE else SHAPE
     }

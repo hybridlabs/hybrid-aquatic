@@ -2,8 +2,12 @@ package dev.hybridlabs.aquatic.block
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.vehicle.Boat
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
@@ -39,6 +43,13 @@ class WaterHyacinthBlock(settings: Properties) : BushBlock(settings), SimpleWate
         return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
+    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+        super.entityInside(state, level, pos, entity)
+        if (level is ServerLevel && entity is Boat) {
+            level.destroyBlock(BlockPos(pos), true, entity)
+        }
+    }
+
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         val world = context.level
         val pos = context.clickedPos
@@ -56,7 +67,7 @@ class WaterHyacinthBlock(settings: Properties) : BushBlock(settings), SimpleWate
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
@@ -73,7 +84,7 @@ class WaterHyacinthBlock(settings: Properties) : BushBlock(settings), SimpleWate
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return SHAPE
     }
