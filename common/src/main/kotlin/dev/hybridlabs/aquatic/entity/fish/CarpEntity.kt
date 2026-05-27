@@ -60,6 +60,12 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
     }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
+        if (p1 is CarpEntity) {
+            if (this.variant == Type.SMALL_KOI && p1.variant == Type.SMALL_KOI) {
+                return HAEntityTypes.GOLDFISH.get().create(p0)
+            }
+        }
+
         return HAEntityTypes.CARP.get().create(p0)
     }
 
@@ -88,13 +94,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
         patternTexture = when (selectedType) {
             Type.PRUSSIAN,
-            Type.COMMON,
-            Type.TELESCOPE,
-            Type.BUBBLE_EYE,
-            Type.FANTAIL,
-            Type.RYUKIN,
-            Type.SHUBUNKIN,
-            Type.COMMON_GOLDFISH, -> PatternTextures.NONE
+            Type.COMMON -> PatternTextures.NONE
 
             Type.KOI, Type.SMALL_KOI -> {
                 val patternID = world.random.nextIntBetweenInclusive(
@@ -121,13 +121,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
             baby.patternTexture = when (baby.variant) {
                 Type.PRUSSIAN,
-                Type.COMMON,
-                Type.TELESCOPE,
-                Type.BUBBLE_EYE,
-                Type.FANTAIL,
-                Type.RYUKIN,
-                Type.SHUBUNKIN,
-                Type.COMMON_GOLDFISH -> PatternTextures.NONE
+                Type.COMMON -> PatternTextures.NONE
 
                 Type.KOI, Type.SMALL_KOI -> {
                     val patternID = level.random.nextIntBetweenInclusive(
@@ -144,15 +138,6 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
     private fun getChildVariant(random: RandomSource, parent: Type): Type {
         val roll = random.nextDouble()
 
-        val goldfishTypes = listOf(
-            Type.FANTAIL,
-            Type.RYUKIN,
-            Type.TELESCOPE,
-            Type.BUBBLE_EYE,
-            Type.COMMON_GOLDFISH,
-            Type.SHUBUNKIN
-        )
-
         return when (parent) {
             Type.COMMON -> {
                 if (roll < 0.75) Type.KOI else Type.SMALL_KOI
@@ -163,27 +148,11 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             }
 
             Type.KOI -> {
-                when {
-                    roll < 0.60 -> Type.KOI
-                    roll < 0.90 -> Type.SMALL_KOI
-                    else -> goldfishTypes[random.nextInt(goldfishTypes.size)]
-                }
+                if (roll < 0.60) Type.KOI else Type.SMALL_KOI
             }
 
             Type.SMALL_KOI -> {
-                when {
-                    roll < 0.60 -> Type.SMALL_KOI
-                    else -> goldfishTypes[random.nextInt(goldfishTypes.size)]
-                }
-            }
-
-            Type.COMMON_GOLDFISH,
-            Type.FANTAIL,
-            Type.RYUKIN,
-            Type.TELESCOPE,
-            Type.SHUBUNKIN,
-            Type.BUBBLE_EYE -> {
-                goldfishTypes[random.nextInt(goldfishTypes.size)]
+                Type.SMALL_KOI
             }
         }
     }
@@ -215,13 +184,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             COMMON(0, "common"),
             PRUSSIAN(1, "prussian"),
             KOI(2, "koi"),
-            SMALL_KOI(3, "small_koi"),
-            FANTAIL(4, "fantail_goldfish"),
-            RYUKIN(5, "ryukin_goldfish"),
-            TELESCOPE(6, "telescope_goldfish"),
-            BUBBLE_EYE(7, "bubble_eye_goldfish"),
-            COMMON_GOLDFISH(8, "common_goldfish"),
-            SHUBUNKIN(9, "shubunkin_goldfish");
+            SMALL_KOI(3, "small_koi");
 
             override fun getSerializedName(): String {
                 return this.key

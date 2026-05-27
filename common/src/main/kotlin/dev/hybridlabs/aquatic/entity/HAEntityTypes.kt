@@ -62,6 +62,13 @@ object HAEntityTypes {
         CarpEntity::createMobAttributes
     )
 
+    val GOLDFISH = registerRiverFish(
+        "goldfish",
+        ::GoldfishEntity,
+        EntityDimensions.fixed(0.3f, 0.3f),
+        GoldfishEntity::createMobAttributes
+    )
+
     val TROUT = registerRiverFish(
         "trout",
         ::TroutEntity,

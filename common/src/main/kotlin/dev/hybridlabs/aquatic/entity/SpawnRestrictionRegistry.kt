@@ -1,21 +1,12 @@
 package dev.hybridlabs.aquatic.entity
 
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.aquatic.entity.base.*
 import dev.hybridlabs.aquatic.entity.cephalopod.*
-import dev.hybridlabs.aquatic.entity.base.HACritterEntity
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
-import dev.hybridlabs.aquatic.entity.crustacean.*
+import dev.hybridlabs.aquatic.entity.crustacean.CoconutCrabEntity
+import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
+import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
+import dev.hybridlabs.aquatic.entity.crustacean.SpiderCrabEntity
 import dev.hybridlabs.aquatic.entity.fish.*
-import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
-import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
-import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
-import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
-import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacements
@@ -43,6 +34,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.DANIO.get(),
             HAEntityTypes.DISCUS.get(),
             HAEntityTypes.CORYDORA.get(),
+            HAEntityTypes.GOLDFISH.get(),
             HAEntityTypes.BETTA.get(),
             HAEntityTypes.GOLDEN_DORADO.get(),
         ).forEach { registerShallowFish(it) }

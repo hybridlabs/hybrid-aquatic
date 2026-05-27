@@ -369,6 +369,12 @@ object HybridAquaticEntityRenderers {
             ::CarpEntityRenderer
         )
 
+    val GOLDFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.GOLDFISH,
+            ::GoldfishEntityRenderer
+        )
+
     val SHINER =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.SHINER,
