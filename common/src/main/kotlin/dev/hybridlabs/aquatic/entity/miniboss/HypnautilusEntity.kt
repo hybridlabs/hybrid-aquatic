@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import dev.hybridlabs.aquatic.client.data.HypnoticEntities
 import dev.hybridlabs.aquatic.entity.ai.goal.HypnotizeTargetGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
@@ -87,6 +88,11 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
                 }
             )
         )
+    }
+
+    fun registerHypnotizing(){
+        if (isHypnotizing())
+            HypnoticEntities.mobs.add(this)
     }
 
     fun isHypnotizing(): Boolean {
