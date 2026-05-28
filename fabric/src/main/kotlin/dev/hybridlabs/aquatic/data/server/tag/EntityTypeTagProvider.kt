@@ -57,6 +57,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.SHINER.get(),
                 HAEntityTypes.SUNFISH.get(),
                 HAEntityTypes.CARP.get(),
+                HAEntityTypes.GOLDFISH.get(),
                 HAEntityTypes.PEARLFISH.get(),
                 HAEntityTypes.SNAILFISH.get(),
                 HAEntityTypes.BOXFISH.get(),
@@ -296,6 +297,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HAEntityTags.RIVER_FISH)
             .add(
                 HAEntityTypes.CARP.get(),
+                HAEntityTypes.GOLDFISH.get(),
                 HAEntityTypes.SHINER.get(),
                 HAEntityTypes.SUNFISH.get(),
                 HAEntityTypes.TROUT.get(),
