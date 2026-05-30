@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.data.client
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlockFamilies
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
@@ -23,7 +22,6 @@ import net.minecraft.world.item.SpawnEggItem
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.CropBlock
-import net.minecraft.world.level.block.LiquidBlock
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockModelGenerators) {
@@ -35,16 +33,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                     skipAutoItemBlock(block)
                     createAirLikeBlock(block, TextureMapping.getBlockTexture(block.particleBlock))
                     delegateItemModel(block, TEMPLATE_PLUSHIE)
-                }
-
-            //#region Fluids
-            BuiltInRegistries.BLOCK
-                .filterIsInstance<LiquidBlock>()
-                .forEach { block ->
-                    val id = BuiltInRegistries.BLOCK.getKey(block)
-                    if (id.namespace == Constants.MOD_ID) {
-                        createNonTemplateModelBlock(block)
-                    }
                 }
 
             //#region Spawn Eggs

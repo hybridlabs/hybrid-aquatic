@@ -25,6 +25,7 @@ import net.minecraft.world.level.material.FluidState
 import java.util.*
 
 abstract class BrineFluid : FlowingFluid() {
+
     override fun getFlowing(): Fluid {
         return HAFluids.BRINE_FLOWING.get()
     }
@@ -82,11 +83,12 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     public override fun createLegacyBlock(state: FluidState): BlockState {
-        return HABlocks.BRINE.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(state))
+        return HABlocks.BRINE.get().defaultBlockState()
+            .setValue(LiquidBlock.LEVEL, getLegacyLevel(state))
     }
 
     override fun isSame(fluid: Fluid): Boolean {
-        return fluid == HAFluids.BRINE_STILL || fluid == HAFluids.BRINE_FLOWING
+        return fluid === source || fluid === flowing
     }
 
     public override fun getDropOff(level: LevelReader): Int {
@@ -97,14 +99,14 @@ abstract class BrineFluid : FlowingFluid() {
         return 5
     }
 
-    public override fun canBeReplacedWith(
+    override fun canBeReplacedWith(
         fluidState: FluidState,
         blockReader: BlockGetter,
         pos: BlockPos,
         fluid: Fluid,
-        direction: Direction,
+        direction: Direction
     ): Boolean {
-        return direction == Direction.DOWN && !fluid.`is`(HAFluidTags.BRINE)
+        return fluid.`is`(HAFluidTags.BRINE)
     }
 
     override fun getExplosionResistance(): Float {

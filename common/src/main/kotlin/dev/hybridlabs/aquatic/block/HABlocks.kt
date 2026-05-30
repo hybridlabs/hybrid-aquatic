@@ -239,10 +239,11 @@ object HABlocks {
 
     val BONE_WORMS = register("bone_worms") { BoneWormsBlock(Properties.copy(Blocks.SEAGRASS)) }
 
-    val BRINE = register(
-        "brine"
-    ) {
-        LiquidBlock(HAFluids.BRINE_STILL.get(), Properties.copy(Blocks.WATER))
+    val BRINE = register("brine") {
+        LiquidBlock(
+            HAFluids.BRINE_STILL.get(),
+            Properties.copy(Blocks.WATER).liquid()
+        )
     }
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register("dead_lophelia_coral_block") {

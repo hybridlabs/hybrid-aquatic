@@ -6,8 +6,8 @@ import net.minecraft.world.level.material.FlowingFluid
 import java.util.function.Supplier
 
 object HAFluids {
-    val BRINE_FLOWING = register("flowing_acid") { BrineFluid.Flowing() }
-    val BRINE_STILL = register("acid") { BrineFluid.Source() }
+    val BRINE_FLOWING = register("flowing_brine") { BrineFluid.Flowing() }
+    val BRINE_STILL = register("brine") { BrineFluid.Source() }
 
     private fun <T: FlowingFluid> register(id: String, fluid: Supplier<T>): RegistryObject<T> {
         return CommonClass.FLUIDS.register(id, fluid)

@@ -551,6 +551,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get() to "Comically Large Nautilus Shell",
             HAItems.ARGONAUT.get() to "Argonaut",
             HAItems.DIVING_WEIGHT.get() to "Diving Weight",
+            HAItems.BRINE_BUCKET.get() to "Brine Bucket",
             HAItems.SULFUR.get() to "Sulfur",
             HAItems.CORAL_CHUNK.get() to "Coral Chunk",
             HAItems.BARBED_HOOK.get() to "Barbed Hook",
