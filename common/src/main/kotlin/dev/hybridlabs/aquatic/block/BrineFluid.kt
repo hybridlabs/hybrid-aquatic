@@ -70,7 +70,7 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     override fun canConvertToSource(level: Level): Boolean {
-        return false
+        return true
     }
 
     override fun beforeDestroyingBlock(level: LevelAccessor, pos: BlockPos, state: BlockState) {
