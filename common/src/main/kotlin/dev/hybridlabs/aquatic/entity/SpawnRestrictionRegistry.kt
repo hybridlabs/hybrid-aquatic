@@ -91,6 +91,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.VIPERFISH.get(),
             HAEntityTypes.FANGTOOTH.get(),
             HAEntityTypes.HATCHETFISH.get(),
+            HAEntityTypes.BLOBFISH.get(),
             HAEntityTypes.BARRELEYE.get(),
             HAEntityTypes.COELACANTH.get(),
             HAEntityTypes.SLICKHEAD.get(),

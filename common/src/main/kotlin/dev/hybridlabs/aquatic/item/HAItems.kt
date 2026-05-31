@@ -1095,6 +1095,21 @@ object HAItems {
         )
     }
 
+    val BLOBFISH = register(
+        "blobfish"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationMod(0.2F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val HAGFISH = register(
         "hagfish"
     ) {
@@ -1873,6 +1888,8 @@ object HAItems {
         registerSpawnEgg("viperfish_spawn_egg", HAEntityTypes.VIPERFISH, 0x65727e, 0x65727e)
     val HATCHETFISH_SPAWN_EGG =
         registerSpawnEgg("hatchetfish_spawn_egg", HAEntityTypes.HATCHETFISH, 0x5e718e, 0x4c7597)
+    val BLOBFISH_SPAWN_EGG =
+        registerSpawnEgg("blobfish_spawn_egg", HAEntityTypes.BLOBFISH, 0x736c6d, 0x86948f)
     val HAGFISH_SPAWN_EGG =
         registerSpawnEgg("hagfish_spawn_egg", HAEntityTypes.HAGFISH, 0x412c33, 0x7b535b)
     val TRIPOD_FISH_SPAWN_EGG =

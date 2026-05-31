@@ -464,6 +464,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.DANIO.get(),
             HAItems.DISCUS.get(),
             HAItems.DRAGONFISH.get(),
+            HAItems.BLOBFISH.get(),
             HAItems.HAGFISH.get(),
             HAItems.FLASHLIGHT_FISH.get(),
             HAItems.GOURAMI.get(),

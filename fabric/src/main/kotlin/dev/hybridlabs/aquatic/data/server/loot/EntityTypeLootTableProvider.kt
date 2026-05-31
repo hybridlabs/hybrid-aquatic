@@ -716,6 +716,17 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+        export(exporter, HAEntityTypes.BLOBFISH.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.BLOBFISH.get())
+                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
         export(exporter, HAEntityTypes.HAGFISH.get()) {
             pool(
                 LootPool.lootPool()

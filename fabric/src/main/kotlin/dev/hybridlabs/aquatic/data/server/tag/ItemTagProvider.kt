@@ -283,6 +283,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
         }
 
         listOf(
+            HAItems.BLOBFISH.get(),
             HAItems.MORAY_EEL.get(),
             HAItems.TRIGGERFISH.get(),
             HAItems.TREVALLY.get(),

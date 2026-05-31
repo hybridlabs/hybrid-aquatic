@@ -127,6 +127,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .add(
                 HAEntityTypes.RATFISH.get(),
                 HAEntityTypes.TRIPOD_FISH.get(),
+                HAEntityTypes.BLOBFISH.get(),
                 HAEntityTypes.STINGRAY.get(),
                 HAEntityTypes.TRIGGERFISH.get(),
                 HAEntityTypes.TREVALLY.get(),
@@ -277,6 +278,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.FANGTOOTH.get(),
                 HAEntityTypes.FLASHLIGHT_FISH.get(),
                 HAEntityTypes.HATCHETFISH.get(),
+                HAEntityTypes.BLOBFISH.get(),
                 HAEntityTypes.HAGFISH.get(),
                 HAEntityTypes.TRIPOD_FISH.get(),
                 HAEntityTypes.JOHN_DORY.get(),

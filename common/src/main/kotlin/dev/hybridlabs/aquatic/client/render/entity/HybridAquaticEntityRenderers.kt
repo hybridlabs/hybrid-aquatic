@@ -51,6 +51,12 @@ object HybridAquaticEntityRenderers {
             ::HatchetfishEntityRenderer
         )
 
+    val BLOBFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.BLOBFISH,
+            ::BlobfishEntityRenderer
+        )
+
     val TRIPOD_FISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.TRIPOD_FISH,

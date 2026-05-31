@@ -183,6 +183,13 @@ object HAEntityTypes {
         HatchetfishEntity::createMobAttributes
     )
 
+    val BLOBFISH = registerFishUnderground(
+        "blobfish",
+        ::BlobfishEntity,
+        EntityDimensions.fixed(0.5f, 0.5f),
+        BlobfishEntity::createMobAttributes
+    )
+
     val HAGFISH = registerFishUnderground(
         "hagfish",
         ::HagfishEntity,
