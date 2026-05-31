@@ -188,6 +188,27 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 )
             )
         }
+
+        add(HABlocks.MUSSELS.get()) { block ->
+            val ageCondition: LootItemCondition.Builder =
+                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7))
+
+            applyExplosionDecay(
+                block,
+                LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(block))).withPool(
+                    LootPool.lootPool().`when`(ageCondition).add(
+                        LootItem.lootTableItem(HAItems.MUSSEL.get()).apply(
+                            ApplyBonusCount.addBonusBinomialDistributionCount(
+                                Enchantments.BLOCK_FORTUNE,
+                                0.5714286f,
+                                3
+                            )
+                        )
+                    )
+                )
+            )
+        }
         //#endregion
 
         //#region Wood

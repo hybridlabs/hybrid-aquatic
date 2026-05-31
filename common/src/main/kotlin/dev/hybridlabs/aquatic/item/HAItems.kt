@@ -780,6 +780,22 @@ object HAItems {
         )
     }
 
+    val MUSSEL = register(
+        "mussel"
+    ) {
+        BlockItem(
+            HABlocks.MUSSELS.get(),
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(4)
+                        .saturationMod(0.5F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val RAW_CRAYFISH = register(
         "raw_crayfish"
     ) {

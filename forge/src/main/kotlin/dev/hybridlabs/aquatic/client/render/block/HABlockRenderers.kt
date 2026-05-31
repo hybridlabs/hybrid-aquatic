@@ -41,6 +41,7 @@ object HABlockRenderers {
 
             HABlocks.BONE_WORMS.get(),
             HABlocks.CLAMS.get(),
+            HABlocks.MUSSELS.get(),
             HABlocks.SEA_LETTUCE.get(),
             HABlocks.TALL_SEA_LETTUCE.get(),
 

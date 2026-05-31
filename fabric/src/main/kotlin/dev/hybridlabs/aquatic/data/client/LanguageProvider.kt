@@ -290,6 +290,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.GIANT_CLAM.get() to "Giant Clam",
             HABlocks.OYSTER.get() to "Oyster",
             HABlocks.CLAMS.get() to "Clam",
+            HABlocks.MUSSELS.get() to "Mussel",
             HABlocks.CRYSTALLINE_SULFUR.get() to "Crystalline Sulfur",
             HABlocks.DEPTH_CHARGE.get() to "Depth Charge",
 

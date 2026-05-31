@@ -27,6 +27,7 @@ object HABlockRendererRegistry {
             HAPlatformBlocks.CATTAIL.get(),
 
             HABlocks.CLAMS.get(),
+            HABlocks.MUSSELS.get(),
             HABlocks.BONE_WORMS.get(),
 
             HABlocks.SHORT_RED_ALGAE.get(),

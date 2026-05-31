@@ -247,7 +247,15 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             createNormalTorch(HABlocks.GLOWSTICK.get(), HABlocks.WALL_GLOWSTICK.get())
 
-            createCropBlock(HABlocks.CLAMS.get(),CropBlock.AGE, 0, 0, 0, 1, 1, 2, 2, 3)
+            createCropBlock(
+                HABlocks.CLAMS.get(),
+                CropBlock.AGE,
+                0, 0, 0, 1, 1, 2, 2, 3)
+
+            createCropBlock(
+                HABlocks.MUSSELS.get(),
+                CropBlock.AGE,
+                0, 0, 0, 1, 1, 2, 2, 3)
 
             //#region Corals
             createCoral(

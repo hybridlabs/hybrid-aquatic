@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "hybrid-aquatic:block/mussels_stage0"
+  }
+}
