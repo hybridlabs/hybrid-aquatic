@@ -74,8 +74,9 @@ class LivingSpongeBlock(
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
         val fluidState = ctx.level.getFluidState(ctx.clickedPos)
         return if (fluidState.`is`(FluidTags.WATER)) defaultBlockState().setValue(
-            WATERLOGGED, ctx.level.getFluidState(ctx.clickedPos).`is`(
-                Fluids.WATER)) else null
+            WATERLOGGED,
+            ctx.level.getFluidState(ctx.clickedPos).`is`(Fluids.WATER))
+        else null
     }
 
     override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {

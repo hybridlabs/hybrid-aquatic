@@ -35,6 +35,7 @@ object HAConfiguredFeatures {
 
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
     val OYSTER_BED = register("oyster_bed")
+    val WILD_MUSSEL_PATCH = register("wild_mussel_patch")
     val TUBE_SPONGE_PATCH = register("tube_sponge_patch")
     val GLASS_SPONGE_PATCH = register("glass_sponge_patch")
     val HARP_SPONGE_PATCH = register("harp_sponge_patch")

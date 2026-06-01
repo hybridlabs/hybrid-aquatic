@@ -392,6 +392,11 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
 
+            createCrossBlock(
+                HABlocks.WILD_MUSSELS.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
             createNonTemplateModelBlock(
                 HABlocks.DECORATIVE_BUBBLE_COLUMN.get(),
                 Blocks.WATER

@@ -16,7 +16,6 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.core.HolderSet
 import net.minecraft.core.Vec3i
 import net.minecraft.data.worldgen.placement.PlacementUtils
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.random.SimpleWeightedRandomList
 import net.minecraft.util.valueproviders.BiasedToBottomInt
@@ -45,7 +44,6 @@ import net.minecraft.world.level.levelgen.placement.HeightmapPlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
-import java.util.List
 import java.util.concurrent.CompletableFuture
 
 class ConfiguredFeatureProvider(
@@ -413,6 +411,26 @@ class ConfiguredFeatureProvider(
             ConfiguredFeature(
                 HAFeatures.SEA_LETTUCE_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.33f
+                )
+            )
+        )
+
+        // mussel patch
+        entries.add(
+            HAConfiguredFeatures.WILD_MUSSEL_PATCH,
+            ConfiguredFeature(
+                Feature.FLOWER,
+                RandomPatchConfiguration(
+                    16, 4, 4,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            BlockStateProvider.simple(
+                                HABlocks.WILD_MUSSELS.get().defaultBlockState()
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
                 )
             )
         )

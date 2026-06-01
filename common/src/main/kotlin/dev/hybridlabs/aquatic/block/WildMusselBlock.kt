@@ -2,16 +2,11 @@ package dev.hybridlabs.aquatic.block
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
-import net.minecraft.util.RandomSource
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
-import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
-import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.BushBlock
 import net.minecraft.world.level.block.LiquidBlockContainer
 import net.minecraft.world.level.block.state.BlockState
@@ -22,8 +17,8 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
-class ShortRedAlgaeBlock(settings: Properties?) :
-    BushBlock(settings), BonemealableBlock, LiquidBlockContainer {
+class WildMusselBlock(properties: Properties) :
+    BushBlock(properties), LiquidBlockContainer {
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
@@ -58,26 +53,8 @@ class ShortRedAlgaeBlock(settings: Properties?) :
         return blockState
     }
 
-    override fun isValidBonemealTarget(
-        world: LevelReader,
-        pos: BlockPos,
-        state: BlockState,
-        isClient: Boolean,
-    ): Boolean {
-        return true
-    }
-
-    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
-        return true
-    }
-
     override fun getFluidState(state: BlockState): FluidState {
         return Fluids.WATER.getSource(false)
-    }
-
-    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        val blockState = HABlocks.RED_ALGAE.get().defaultBlockState()
-        world.setBlock(pos, blockState, 2)
     }
 
     override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {

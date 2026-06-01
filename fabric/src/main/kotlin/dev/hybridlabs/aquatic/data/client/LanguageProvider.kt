@@ -289,8 +289,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HABlocks.BELL_BUOY.get() to "Bell Buoy",
             HABlocks.GIANT_CLAM.get() to "Giant Clam",
             HABlocks.OYSTER.get() to "Oyster",
-            HABlocks.CLAMS.get() to "Clam",
-            HABlocks.MUSSELS.get() to "Mussel",
+            HABlocks.CLAMS.get() to "Clams",
+            HABlocks.MUSSELS.get() to "Mussels",
+            HABlocks.WILD_MUSSELS.get() to "Wild Mussels",
             HABlocks.CRYSTALLINE_SULFUR.get() to "Crystalline Sulfur",
             HABlocks.DEPTH_CHARGE.get() to "Depth Charge",
 

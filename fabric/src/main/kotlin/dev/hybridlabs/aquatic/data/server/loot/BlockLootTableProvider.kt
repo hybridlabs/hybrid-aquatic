@@ -209,6 +209,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 )
             )
         }
+
+        add(HABlocks.WILD_MUSSELS.get()) { _ ->
+            LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(HAItems.MUSSEL.get()))
+            )
+        }
         //#endregion
 
         //#region Wood

@@ -21,8 +21,8 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
-class ClamBlock(properties: Properties) : CropBlock(properties),
-    LiquidBlockContainer {
+class ClamBlock(properties: Properties) :
+    CropBlock(properties), LiquidBlockContainer {
 
     override fun getBaseSeedId(): ItemLike {
         return HAItems.CLAM.get()

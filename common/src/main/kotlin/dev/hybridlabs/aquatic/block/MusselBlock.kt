@@ -22,8 +22,8 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
-class MusselBlock(properties: Properties) : CropBlock(properties),
-    SimpleWaterloggedBlock {
+class MusselBlock(properties: Properties) :
+    CropBlock(properties), SimpleWaterloggedBlock {
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
         val fluidState = ctx.level.getFluidState(ctx.clickedPos)

@@ -65,7 +65,15 @@ data class BiomeFeatureAddition(
             )
             //#endregion
 
-            //#region Giant Clams
+            //#region Shellfish
+            add(
+                BiomeFeatureAddition(
+                    HABiomeTags.ALL_TRENCHES,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.WILD_MUSSEL_PATCH
+                ),
+            )
+
             add(
                 BiomeFeatureAddition(
                     HABiomeTags.CORAL_REEF,

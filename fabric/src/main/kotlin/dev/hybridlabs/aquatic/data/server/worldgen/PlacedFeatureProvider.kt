@@ -248,6 +248,17 @@ class PlacedFeatureProvider(
         )
         //#endregion
 
+        //#region Mussels
+        entries.add(
+            HAPlacedFeatures.WILD_MUSSEL_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.WILD_MUSSEL_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    RarityFilter.onAverageOnceEvery(3)
+                )
+            )
+        )
+
         //#region Sponges
         entries.add(
             HAPlacedFeatures.TUBE_SPONGE_PATCH, PlacedFeature(
