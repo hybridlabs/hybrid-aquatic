@@ -64,7 +64,7 @@ object HABlocks {
 
     val CLAMS = register("clams") { ClamBlock(Properties.copy(Blocks.CARROTS)) }
     val MUSSELS = register("mussels") { MusselBlock(Properties.copy(Blocks.CARROTS)) }
-    val WILD_MUSSELS = register("wild_mussels") { WildMusselBlock(Properties.copy(Blocks.TALL_GRASS)) }
+    val WILD_MUSSELS = register("wild_mussels") { WildMusselBlock(Properties.copy(Blocks.TALL_GRASS).dropsLike(MUSSELS.get())) }
     val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
