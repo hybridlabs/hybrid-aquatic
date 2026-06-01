@@ -20,6 +20,10 @@ class BlobfishEntity(entityType: EntityType<out BlobfishEntity>, world: Level) :
         return 1
     }
 
+    override fun shouldFlopOnLand(): Boolean {
+        return false
+    }
+
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
