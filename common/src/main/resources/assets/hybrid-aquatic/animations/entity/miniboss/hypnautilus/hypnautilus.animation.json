@@ -101,8 +101,7 @@
 					"rotation": [-90, -45, 0],
 					"position": ["-3-math.sin(query.anim_time*180*1-80)*3", "-3+math.sin(query.anim_time*180*1-80)*-3", 0]
 				}
-			},
-			"particle_effects": {}
+			}
 		}
 	}
 }
