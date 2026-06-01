@@ -95,7 +95,7 @@ class ConfiguredFeatureProvider(
                 HAFeatures.BRINE_LAKE.get(),
                 BrineLakeFeatureConfig(
                     BlockStateProvider.simple(
-                        HABlocks.MARINE_SNOW.get()
+                        HABlocks.BRINESTONE.get()
                     ),
                     BlockStateProvider.simple(
                         HAFluids.BRINE_STILL.get()

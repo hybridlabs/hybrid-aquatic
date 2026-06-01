@@ -644,6 +644,7 @@ object HAItems {
     val SHORESTONE = registerBlockItem("shorestone") { HABlocks.SHORESTONE.get() }
     val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HABlocks.BARNACLE_SHORESTONE.get() }
     val MARINE_SNOW = registerBlockItem("marine_snow") { HABlocks.MARINE_SNOW.get() }
+    val BRINESTONE = registerBlockItem("brinestone") { HABlocks.BRINESTONE.get() }
     //#endregion
 
     //#region Plushies

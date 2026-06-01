@@ -85,6 +85,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.SHORESTONE.get(),
                 HABlocks.BARNACLE_SHORESTONE.get(),
                 HABlocks.MARINE_SNOW.get(),
+                HABlocks.BRINESTONE.get(),
             ).forEach(generator::createTrivialCube)
 
             setOf(

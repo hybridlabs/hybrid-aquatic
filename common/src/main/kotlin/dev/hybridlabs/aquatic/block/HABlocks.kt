@@ -102,6 +102,7 @@ object HABlocks {
     val BARNACLE_SHORESTONE = register("barnacle_shorestone") { Block(Properties.copy(Blocks.SANDSTONE)) }
 
     val MARINE_SNOW = register("marine_snow") { SandBlock(14406560, Properties.copy(Blocks.MUD)) }
+    val BRINESTONE = register("brinestone") { Block(Properties.copy(Blocks.DEEPSLATE)) }
 
     val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
     val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }

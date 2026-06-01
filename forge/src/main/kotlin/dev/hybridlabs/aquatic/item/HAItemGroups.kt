@@ -55,6 +55,8 @@ object HAItemGroups {
                 entries.accept(HABlocks.CORALSTONE.get())
                 entries.accept(HABlocks.SHORESTONE.get())
                 entries.accept(HABlocks.BARNACLE_SHORESTONE.get())
+                entries.accept(HABlocks.BRINESTONE.get())
+                entries.accept(HABlocks.MARINE_SNOW.get())
                 entries.accept(Blocks.BONE_BLOCK)
                 entries.accept(HABlocks.BONE_STAIRS.get())
                 entries.accept(HABlocks.BONE_SLAB.get())

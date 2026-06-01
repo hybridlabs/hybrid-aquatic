@@ -245,6 +245,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.CORALSTONE.get())
             .add(HABlocks.SHORESTONE.get())
             .add(HABlocks.BARNACLE_SHORESTONE.get())
+            .add(HABlocks.BRINESTONE.get())
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
             .add(HABlocks.RAFT.get())
