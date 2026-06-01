@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.tag.HAFluidTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -9,6 +10,7 @@ import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.BlockGetter
@@ -39,6 +41,26 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     public override fun animateTick(level: Level, pos: BlockPos, state: FluidState, random: RandomSource) {
+        val blockpos = pos.above()
+        if (level.getBlockState(blockpos).fluidState.`is`(FluidTags.WATER) && !level.getBlockState(blockpos).isSolidRender(level, blockpos)) {
+            if (random.nextInt(100) == 0) {
+                val d0 = pos.x.toDouble() + random.nextDouble()
+                val d1 = pos.y.toDouble() + 1.0
+                val d2 = pos.z.toDouble() + random.nextDouble()
+                level.addParticle(HAParticleTypes.BRINE_BUBBLE.get(), d0, d1, d2, 0.0, 0.0, 0.0)
+                level.playLocalSound(
+                    d0,
+                    d1,
+                    d2,
+                    SoundEvents.BUBBLE_COLUMN_BUBBLE_POP,
+                    SoundSource.BLOCKS,
+                    0.2f + random.nextFloat() * 0.2f,
+                    0.9f + random.nextFloat() * 0.15f,
+                    false
+                )
+            }
+        }
+
         if (!state.isSource && !state.getValue(FALLING)) {
             if (random.nextInt(64) == 0) {
                 level.playLocalSound(
@@ -104,7 +126,7 @@ abstract class BrineFluid : FlowingFluid() {
         blockReader: BlockGetter,
         pos: BlockPos,
         fluid: Fluid,
-        direction: Direction
+        direction: Direction,
     ): Boolean {
         return fluid.`is`(HAFluidTags.BRINE)
     }

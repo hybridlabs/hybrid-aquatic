@@ -10,6 +10,8 @@ object HAParticleTypes {
     val WATER_UP_WHIRL = register("water_up_whirl") { SimpleParticleType(true) }
     val SARGASSUM = register("sargassum") { SimpleParticleType(true) }
     val VENT_SMOKE = register("vent_smoke") { SimpleParticleType(true) }
+    val BRINE_BUBBLE = register("brine_bubble") { SimpleParticleType(true) }
+    val BRINE_BUBBLE_POP = register("brine_bubble_pop") { SimpleParticleType(true) }
 
     fun <T: ParticleType<SimpleParticleType>> register(id: String, particle: Supplier<T>): RegistryObject<T> {
         return CommonClass.PARTICLE_TYPE.register(id,  particle)
