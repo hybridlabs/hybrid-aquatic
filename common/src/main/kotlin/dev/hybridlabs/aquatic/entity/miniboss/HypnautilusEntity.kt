@@ -33,8 +33,6 @@ import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.animation.RawAnimation
 import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
@@ -79,14 +77,8 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         )
 
         controllers.add(
-            AnimationController(
-                this, "Hypnotize",
-                AnimationStateHandler { state: AnimationState<HypnautilusEntity> ->
-                    if (this.isHypnotizing())
-                        return@AnimationStateHandler state.setAndContinue(SPIN_ANIMATION)
-                    PlayState.STOP
-                }
-            )
+            AnimationController(this, "hypnosis_controller") { PlayState.STOP }
+                .triggerableAnim("hypnosis", HYPNOSIS_ANIMATION)
         )
     }
 
@@ -224,7 +216,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 24.0)
         }
 
-        val SPIN_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("attack.spin")
+        val HYPNOSIS_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("attack.spin")
 
         val HYPNOTIZING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(HypnautilusEntity::class.java, EntityDataSerializers.BOOLEAN)

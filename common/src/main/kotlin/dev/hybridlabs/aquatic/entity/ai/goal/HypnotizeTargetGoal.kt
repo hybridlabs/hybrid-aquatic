@@ -26,6 +26,7 @@ class HypnotizeTargetGoal(
         hypnautilus.navigation.stop()
         hypnosisTime = 60
         hypnautilus.startHypnotizing()
+        hypnautilus.triggerAnim("hypnosis_controller", "hypnosis")
     }
 
     override fun canContinueToUse(): Boolean {
