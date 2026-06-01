@@ -63,6 +63,14 @@ data class BiomeFeatureAddition(
                     HAPlacedFeatures.PING_PONG_SPONGE_PATCH
                 ),
             )
+
+            add(
+                BiomeFeatureAddition(
+                    HABiomeTags.ALL_TRENCHES,
+                    GenerationStep.Decoration.LAKES,
+                    HAPlacedFeatures.BRINE_POOLS
+                ),
+            )
             //#endregion
 
             //#region Shellfish

@@ -17,6 +17,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
  */
 object HAFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle", MessageInABottleFeature(MessageInABottleFeatureConfig.CODEC))
+    val BRINE_LAKE = register("brine_lake", BrineLakeFeature(BrineLakeFeatureConfig.CODEC))
     val ANEMONES = register("anemones", AnemoneFeature())
     val BULL_KELP = register("bull_kelp", BullKelpFeature(BullKelpFeatureConfig.CODEC))
     val DELESSERIA = register("delesseria", DelesseriaFeature(DelesseriaFeatureConfig.CODEC))

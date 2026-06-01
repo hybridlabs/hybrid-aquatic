@@ -334,6 +334,17 @@ class PlacedFeatureProvider(
                 )
             )
         )
+
+        entries.add(
+            HAPlacedFeatures.BRINE_POOLS, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BRINE_POOLS), listOf(
+                    InSquarePlacement.spread(),
+                    CountOnEveryLayerPlacement.of(1),
+                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    BiomeFilter.biome()
+                )
+            )
+        )
         //#endregion
 
         //#region Red Algae

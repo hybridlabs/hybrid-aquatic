@@ -44,6 +44,7 @@ object HAConfiguredFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
     val TIDE_POOLS = register("tide_pools")
     val BOULDER = register("boulder")
+    val BRINE_POOLS = register("brine_pools")
 
     val CORAL_MOUND = register("coral_mound")
     val CORAL_LAYER = register("coral_layer")

@@ -4,6 +4,7 @@ package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAFluids
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*
@@ -83,6 +84,23 @@ class ConfiguredFeatureProvider(
                             BlockPredicate.matchesBlocks(Blocks.WATER),
                             BlockPredicate.hasSturdyFace(Vec3i(0, -1, 0), Direction.UP)
                         )
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HAConfiguredFeatures.BRINE_POOLS,
+            ConfiguredFeature(
+                HAFeatures.BRINE_LAKE.get(),
+                BrineLakeFeatureConfig(
+                    BlockStateProvider.simple(
+                        HABlocks.MARINE_SNOW.get()
+                    ),
+                    BlockStateProvider.simple(
+                        HAFluids.BRINE_STILL.get()
+                            .defaultFluidState()
+                            .createLegacyBlock()
                     )
                 )
             )
