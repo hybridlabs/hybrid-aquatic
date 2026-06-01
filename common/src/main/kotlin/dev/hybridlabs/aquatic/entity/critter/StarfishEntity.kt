@@ -124,6 +124,10 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                             BRITTLESTAR
                         }
 
+                        biome.`is`(HABiomeTags.ALL_TRENCHES) -> {
+                            BRITTLESTAR
+                        }
+
                         biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                         }
