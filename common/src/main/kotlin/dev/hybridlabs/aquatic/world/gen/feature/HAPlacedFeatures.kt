@@ -36,9 +36,13 @@ object HAPlacedFeatures {
 
     val THERMAL_VENT_CAVES = register("thermal_vent_caves")
     val THERMAL_VENT_TRENCHES = register("thermal_vent_trenches")
-    val BRINE_POOLS = register("brine_pools")
+    val TRENCH_BRINE_POOLS = register("trench_brine_pools")
+    val CAVE_BRINE_POOLS = register("cave_brine_pools")
+    val RED_BRINE_POOL = register("red_brine_pool")
+    val ORANGE_BRINE_POOL = register("orange_brine_pool")
+    val YELLOW_BRINE_POOL = register("yellow_brine_pool")
 
-    val WILD_MUSSEL_PATCH = register("wild_mussel_patch")
+    val TIDE_POOL_MUSSEL_PATCH = register("tide_pool_mussel_patch")
     val TUBE_SPONGE_PATCH = register("sponge_patch")
     val GLASS_SPONGE_PATCH = register("glass_sponge_patch")
     val HARP_SPONGE_PATCH = register("harp_sponge_patch")

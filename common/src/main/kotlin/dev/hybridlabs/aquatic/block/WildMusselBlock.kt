@@ -2,23 +2,27 @@ package dev.hybridlabs.aquatic.block
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.tags.FluidTags
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BushBlock
-import net.minecraft.world.level.block.LiquidBlockContainer
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.CollisionContext
+import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
 class WildMusselBlock(properties: Properties) :
-    BushBlock(properties), LiquidBlockContainer {
+    BushBlock(properties), SimpleWaterloggedBlock {
     override fun getShape(
         state: BlockState,
         world: BlockGetter,
@@ -29,12 +33,26 @@ class WildMusselBlock(properties: Properties) :
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HABlocks.AERATED_SAND.get()) && !floor.`is`(HABlocks.BUBBLE_GEYSER.get())
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK)
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
-        val fluidState = ctx.level.getFluidState(ctx.clickedPos)
-        return if (fluidState.`is`(FluidTags.WATER) && fluidState.amount == 8) super.getStateForPlacement(ctx) else null
+        val world = ctx.level
+        val pos = ctx.clickedPos
+        return defaultBlockState()
+            .setValue(WATERLOGGED, world.getFluidState(pos) == Fluids.WATER)
+    }
+
+    override fun getFluidState(state: BlockState): FluidState {
+        return if (state.getValue(WATERLOGGED)) {
+            Fluids.WATER.getSource(false)
+        } else {
+            super.getFluidState(state)
+        }
+    }
+
+    override fun getOcclusionShape(state: BlockState, world: BlockGetter, pos: BlockPos): VoxelShape {
+        return Shapes.empty()
     }
 
     override fun updateShape(
@@ -53,8 +71,8 @@ class WildMusselBlock(properties: Properties) :
         return blockState
     }
 
-    override fun getFluidState(state: BlockState): FluidState {
-        return Fluids.WATER.getSource(false)
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+        builder.add(WATERLOGGED)
     }
 
     override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
@@ -72,5 +90,7 @@ class WildMusselBlock(properties: Properties) :
 
     companion object {
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
+
+        val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
     }
 }

@@ -3,6 +3,12 @@
   "values": [
     "hybrid-aquatic:bone_stairs",
     "hybrid-aquatic:white_sandstone_stairs",
-    "hybrid-aquatic:smooth_white_sandstone_stairs"
+    "hybrid-aquatic:smooth_white_sandstone_stairs",
+    "hybrid-aquatic:red_brinestone_stairs",
+    "hybrid-aquatic:orange_brinestone_stairs",
+    "hybrid-aquatic:yellow_brinestone_stairs",
+    "hybrid-aquatic:polished_red_brinestone_stairs",
+    "hybrid-aquatic:orange_brinestone_stairs",
+    "hybrid-aquatic:polished_yellow_brinestone_stairs"
   ]
 }

@@ -85,7 +85,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.SHORESTONE.get(),
                 HABlocks.BARNACLE_SHORESTONE.get(),
                 HABlocks.MARINE_SNOW.get(),
-                HABlocks.BRINESTONE.get(),
             ).forEach(generator::createTrivialCube)
 
             setOf(
@@ -104,6 +103,24 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             generator.family(HABlocks.SMOOTH_WHITE_SANDSTONE.get())
                 .generateFor(HABlockFamilies.SMOOTH_WHITE_SANDSTONE)
+
+            generator.family(HABlocks.RED_BRINESTONE.get())
+                .generateFor(HABlockFamilies.RED_BRINESTONE)
+
+            generator.family(HABlocks.ORANGE_BRINESTONE.get())
+                .generateFor(HABlockFamilies.ORANGE_BRINESTONE)
+
+            generator.family(HABlocks.YELLOW_BRINESTONE.get())
+                .generateFor(HABlockFamilies.YELLOW_BRINESTONE)
+
+            generator.family(HABlocks.POLISHED_RED_BRINESTONE.get())
+                .generateFor(HABlockFamilies.POLISHED_RED_BRINESTONE)
+
+            generator.family(HABlocks.POLISHED_ORANGE_BRINESTONE.get())
+                .generateFor(HABlockFamilies.POLISHED_ORANGE_BRINESTONE)
+
+            generator.family(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
+                .generateFor(HABlockFamilies.POLISHED_YELLOW_BRINESTONE)
 
             //#region Crates
             setOf(

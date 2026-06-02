@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hybrid-aquatic:block/polished_orange_brinestone_slab"
+    },
+    "type=double": {
+      "model": "hybrid-aquatic:block/polished_orange_brinestone"
+    },
+    "type=top": {
+      "model": "hybrid-aquatic:block/polished_orange_brinestone_slab_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "hybrid-aquatic:yellow_brinestone"
+  },
+  "result": "hybrid-aquatic:yellow_brinestone_wall"
+}

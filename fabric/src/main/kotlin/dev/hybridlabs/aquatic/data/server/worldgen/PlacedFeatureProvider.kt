@@ -250,11 +250,11 @@ class PlacedFeatureProvider(
 
         //#region Mussels
         entries.add(
-            HAPlacedFeatures.WILD_MUSSEL_PATCH, PlacedFeature(
-                entries.ref(HAConfiguredFeatures.WILD_MUSSEL_PATCH), listOf(
+            HAPlacedFeatures.TIDE_POOL_MUSSEL_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH), listOf(
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    RarityFilter.onAverageOnceEvery(3)
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    BiomeFilter.biome()
                 )
             )
         )
@@ -336,13 +336,60 @@ class PlacedFeatureProvider(
         )
 
         entries.add(
-            HAPlacedFeatures.BRINE_POOLS, PlacedFeature(
-                entries.ref(HAConfiguredFeatures.BRINE_POOLS), listOf(
+            HAPlacedFeatures.TRENCH_BRINE_POOLS,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BRINE_POOL),
+                listOf(
                     InSquarePlacement.spread(),
                     CountOnEveryLayerPlacement.of(1),
-                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    SurfaceRelativeThresholdFilter.of(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        Int.MIN_VALUE,
+                        -64
+                    ),
                     BiomeFilter.biome()
                 )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.CAVE_BRINE_POOLS,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BRINE_POOL),
+                listOf(
+                    InSquarePlacement.spread(),
+                    CountOnEveryLayerPlacement.of(3),
+                    SurfaceRelativeThresholdFilter.of(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        Int.MIN_VALUE,
+                        -64
+                    ),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.RED_BRINE_POOL,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.RED_BRINE_POOL),
+                listOf()
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.ORANGE_BRINE_POOL,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.ORANGE_BRINE_POOL),
+                listOf()
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.YELLOW_BRINE_POOL,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.YELLOW_BRINE_POOL),
+                listOf()
             )
         )
         //#endregion

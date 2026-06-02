@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "hybrid-aquatic:block/polished_red_brinestone",
+    "side": "hybrid-aquatic:block/polished_red_brinestone",
+    "top": "hybrid-aquatic:block/polished_red_brinestone"
+  }
+}

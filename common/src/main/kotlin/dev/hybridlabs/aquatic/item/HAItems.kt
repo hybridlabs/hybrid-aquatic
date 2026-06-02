@@ -644,7 +644,33 @@ object HAItems {
     val SHORESTONE = registerBlockItem("shorestone") { HABlocks.SHORESTONE.get() }
     val BARNACLE_SHORESTONE = registerBlockItem("barnacle_shorestone") { HABlocks.BARNACLE_SHORESTONE.get() }
     val MARINE_SNOW = registerBlockItem("marine_snow") { HABlocks.MARINE_SNOW.get() }
-    val BRINESTONE = registerBlockItem("brinestone") { HABlocks.BRINESTONE.get() }
+
+    val RED_BRINESTONE = registerBlockItem("red_brinestone") { HABlocks.RED_BRINESTONE.get() }
+    val RED_BRINESTONE_STAIRS = registerBlockItem("red_brinestone_stairs") { HABlocks.RED_BRINESTONE_STAIRS.get() }
+    val RED_BRINESTONE_SLAB = registerBlockItem("red_brinestone_slab") { HABlocks.RED_BRINESTONE_SLAB.get() }
+    val RED_BRINESTONE_WALL = registerBlockItem("red_brinestone_wall") { HABlocks.RED_BRINESTONE_WALL.get() }
+
+    val POLISHED_RED_BRINESTONE = registerBlockItem("polished_red_brinestone") { HABlocks.POLISHED_RED_BRINESTONE.get() }
+    val POLISHED_RED_BRINESTONE_STAIRS = registerBlockItem("polished_red_brinestone_stairs") { HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get() }
+    val POLISHED_RED_BRINESTONE_SLAB = registerBlockItem("polished_red_brinestone_slab") { HABlocks.POLISHED_RED_BRINESTONE_SLAB.get() }
+
+    val ORANGE_BRINESTONE = registerBlockItem("orange_brinestone") { HABlocks.ORANGE_BRINESTONE.get() }
+    val ORANGE_BRINESTONE_STAIRS = registerBlockItem("orange_brinestone_stairs") { HABlocks.ORANGE_BRINESTONE_STAIRS.get() }
+    val ORANGE_BRINESTONE_SLAB = registerBlockItem("orange_brinestone_slab") { HABlocks.ORANGE_BRINESTONE_SLAB.get() }
+    val ORANGE_BRINESTONE_WALL = registerBlockItem("orange_brinestone_wall") { HABlocks.ORANGE_BRINESTONE_WALL.get() }
+
+    val POLISHED_ORANGE_BRINESTONE = registerBlockItem("polished_orange_brinestone") { HABlocks.POLISHED_ORANGE_BRINESTONE.get() }
+    val POLISHED_ORANGE_BRINESTONE_STAIRS = registerBlockItem("polished_orange_brinestone_stairs") { HABlocks.POLISHED_ORANGE_BRINESTONE_STAIRS.get() }
+    val POLISHED_ORANGE_BRINESTONE_SLAB = registerBlockItem("polished_orange_brinestone_slab") { HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get() }
+
+    val YELLOW_BRINESTONE = registerBlockItem("yellow_brinestone") { HABlocks.YELLOW_BRINESTONE.get() }
+    val YELLOW_BRINESTONE_STAIRS = registerBlockItem("yellow_brinestone_stairs") { HABlocks.YELLOW_BRINESTONE_STAIRS.get() }
+    val YELLOW_BRINESTONE_SLAB = registerBlockItem("yellow_brinestone_slab") { HABlocks.YELLOW_BRINESTONE_SLAB.get() }
+    val YELLOW_BRINESTONE_WALL = registerBlockItem("yellow_brinestone_wall") { HABlocks.YELLOW_BRINESTONE_WALL.get() }
+
+    val POLISHED_YELLOW_BRINESTONE = registerBlockItem("polished_yellow_brinestone") { HABlocks.POLISHED_YELLOW_BRINESTONE.get() }
+    val POLISHED_YELLOW_BRINESTONE_STAIRS = registerBlockItem("polished_yellow_brinestone_stairs") { HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get() }
+    val POLISHED_YELLOW_BRINESTONE_SLAB = registerBlockItem("polished_yellow_brinestone_slab") { HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get() }
     //#endregion
 
     //#region Plushies

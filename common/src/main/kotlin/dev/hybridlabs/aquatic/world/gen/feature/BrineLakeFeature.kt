@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.WildMusselBlock
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
@@ -97,7 +99,22 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                                 val blockState4 = worldGenLevel.getBlockState(blockPos.offset(t, v, u))
                                 if (blockState4.isSolid && !blockState4.`is`(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE)) {
                                     val blockPos3 = blockPos.offset(t, v, u)
+
                                     worldGenLevel.setBlock(blockPos3, blockState3, 2)
+
+                                    val abovePos = blockPos3.above()
+                                    val aboveState = worldGenLevel.getBlockState(abovePos)
+
+                                    if (aboveState.`is`(Blocks.WATER) && randomSource.nextInt(3) == 0) {
+                                        worldGenLevel.setBlock(
+                                            abovePos,
+                                            HABlocks.WILD_MUSSELS.get()
+                                                .defaultBlockState()
+                                                .setValue(WildMusselBlock.WATERLOGGED, true),
+                                            2
+                                        )
+                                    }
+
                                     this.markAboveForPostProcessing(worldGenLevel, blockPos3)
                                 }
                             }

@@ -2,19 +2,19 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.tags.BlockTags
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.ItemLike
+import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.CropBlock
-import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.LiquidBlockContainer
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -23,16 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
 class MusselBlock(properties: Properties) :
-    CropBlock(properties), SimpleWaterloggedBlock {
-
-    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
-        val fluidState = ctx.level.getFluidState(ctx.clickedPos)
-        return if (fluidState.`is`(FluidTags.WATER) && fluidState.amount == 8) super.getStateForPlacement(ctx) else null
-    }
-
-    override fun getFluidState(state: BlockState): FluidState {
-        return Fluids.WATER.getSource(false)
-    }
+    CropBlock(properties), LiquidBlockContainer {
 
     override fun getBaseSeedId(): ItemLike {
         return HAItems.MUSSEL.get()
@@ -43,10 +34,7 @@ class MusselBlock(properties: Properties) :
     }
 
     override fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
-        return state.`is`(BlockTags.BASE_STONE_OVERWORLD) ||
-                state.`is`(HABlocks.MARINE_SNOW.get()) ||
-                state.`is`(HABlocks.SHORESTONE.get()) ||
-                state.`is`(HABlocks.BARNACLE_SHORESTONE.get())
+        return state.isFaceSturdy(level, pos, Direction.UP) && !state.`is`(Blocks.MAGMA_BLOCK)
     }
 
     override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
@@ -58,10 +46,7 @@ class MusselBlock(properties: Properties) :
         val belowState = level.getBlockState(below)
         val fluidState = level.getFluidState(pos)
 
-        return (belowState.`is`(BlockTags.BASE_STONE_OVERWORLD) ||
-                belowState.`is`(HABlocks.MARINE_SNOW.get()) ||
-                belowState.`is`(HABlocks.SHORESTONE.get()) ||
-                belowState.`is`(HABlocks.BARNACLE_SHORESTONE.get()))
+        return (belowState.isSolid)
                 && fluidState.`is`(FluidTags.WATER)
                 && fluidState.amount == 8
     }
@@ -81,6 +66,24 @@ class MusselBlock(properties: Properties) :
         }
     }
 
+    override fun placeLiquid(
+        world: LevelAccessor,
+        pos: BlockPos,
+        state: BlockState,
+        fluidState: FluidState,
+    ): Boolean {
+        return false
+    }
+
+    override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
+        val fluidState = ctx.level.getFluidState(ctx.clickedPos)
+        return if (fluidState.`is`(FluidTags.WATER) && fluidState.amount == 8) super.getStateForPlacement(ctx) else null
+    }
+
+    override fun getFluidState(state: BlockState): FluidState {
+        return Fluids.WATER.getSource(false)
+    }
+
     companion object {
         private val SHAPE_BY_AGE = arrayOf<VoxelShape>(
             box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
@@ -92,7 +95,5 @@ class MusselBlock(properties: Properties) :
             box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
             box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
         )
-
-        val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
     }
 }

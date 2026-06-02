@@ -90,17 +90,65 @@ class ConfiguredFeatureProvider(
         )
 
         entries.add(
-            HAConfiguredFeatures.BRINE_POOLS,
+            HAConfiguredFeatures.RED_BRINE_POOL,
             ConfiguredFeature(
                 HAFeatures.BRINE_LAKE.get(),
                 BrineLakeFeatureConfig(
                     BlockStateProvider.simple(
-                        HABlocks.BRINESTONE.get()
+                        HABlocks.RED_BRINESTONE.get()
                     ),
                     BlockStateProvider.simple(
                         HAFluids.BRINE_STILL.get()
                             .defaultFluidState()
                             .createLegacyBlock()
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HAConfiguredFeatures.ORANGE_BRINE_POOL,
+            ConfiguredFeature(
+                HAFeatures.BRINE_LAKE.get(),
+                BrineLakeFeatureConfig(
+                    BlockStateProvider.simple(
+                        HABlocks.ORANGE_BRINESTONE.get()
+                    ),
+                    BlockStateProvider.simple(
+                        HAFluids.BRINE_STILL.get()
+                            .defaultFluidState()
+                            .createLegacyBlock()
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HAConfiguredFeatures.YELLOW_BRINE_POOL,
+            ConfiguredFeature(
+                HAFeatures.BRINE_LAKE.get(),
+                BrineLakeFeatureConfig(
+                    BlockStateProvider.simple(
+                        HABlocks.YELLOW_BRINESTONE.get()
+                    ),
+                    BlockStateProvider.simple(
+                        HAFluids.BRINE_STILL.get()
+                            .defaultFluidState()
+                            .createLegacyBlock()
+                    )
+                )
+            )
+        )
+
+        entries.add(
+            HAConfiguredFeatures.BRINE_POOL,
+            ConfiguredFeature(
+                Feature.SIMPLE_RANDOM_SELECTOR,
+                SimpleRandomFeatureConfiguration(
+                    HolderSet.direct(
+                        entries.ref(HAPlacedFeatures.RED_BRINE_POOL),
+                        entries.ref(HAPlacedFeatures.ORANGE_BRINE_POOL),
+                        entries.ref(HAPlacedFeatures.YELLOW_BRINE_POOL)
                     )
                 )
             )
@@ -435,7 +483,7 @@ class ConfiguredFeatureProvider(
 
         // mussel patch
         entries.add(
-            HAConfiguredFeatures.WILD_MUSSEL_PATCH,
+            HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH,
             ConfiguredFeature(
                 Feature.FLOWER,
                 RandomPatchConfiguration(
@@ -445,9 +493,10 @@ class ConfiguredFeatureProvider(
                         SimpleBlockConfiguration(
                             BlockStateProvider.simple(
                                 HABlocks.WILD_MUSSELS.get().defaultBlockState()
+                                    .setValue(WATERLOGGED, false)
                             )
                         ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                        BlockPredicate.hasSturdyFace(Vec3i(0, -1, 0), Direction.UP)
                     )
                 )
             )

@@ -35,7 +35,7 @@ object HAConfiguredFeatures {
 
     val GIANT_CLAM_PATCH = register("giant_clam_patch")
     val OYSTER_BED = register("oyster_bed")
-    val WILD_MUSSEL_PATCH = register("wild_mussel_patch")
+    val TIDE_POOL_MUSSEL_PATCH = register("tide_pool_mussel_patch")
     val TUBE_SPONGE_PATCH = register("tube_sponge_patch")
     val GLASS_SPONGE_PATCH = register("glass_sponge_patch")
     val HARP_SPONGE_PATCH = register("harp_sponge_patch")
@@ -44,7 +44,10 @@ object HAConfiguredFeatures {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle")
     val TIDE_POOLS = register("tide_pools")
     val BOULDER = register("boulder")
-    val BRINE_POOLS = register("brine_pools")
+    val BRINE_POOL = register("brine_pool")
+    val RED_BRINE_POOL = register("red_brine_pool")
+    val ORANGE_BRINE_POOL = register("orange_brine_pool")
+    val YELLOW_BRINE_POOL = register("yellow_brine_pool")
 
     val CORAL_MOUND = register("coral_mound")
     val CORAL_LAYER = register("coral_layer")

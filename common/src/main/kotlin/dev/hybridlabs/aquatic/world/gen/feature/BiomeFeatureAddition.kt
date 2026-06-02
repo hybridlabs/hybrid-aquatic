@@ -68,7 +68,15 @@ data class BiomeFeatureAddition(
                 BiomeFeatureAddition(
                     HABiomeTags.ALL_TRENCHES,
                     GenerationStep.Decoration.LAKES,
-                    HAPlacedFeatures.BRINE_POOLS
+                    HAPlacedFeatures.TRENCH_BRINE_POOLS
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HABiomeTags.SULFURIC_CAVE,
+                    GenerationStep.Decoration.LAKES,
+                    HAPlacedFeatures.CAVE_BRINE_POOLS
                 ),
             )
             //#endregion
@@ -76,9 +84,9 @@ data class BiomeFeatureAddition(
             //#region Shellfish
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.ALL_TRENCHES,
+                    HABiomeTags.TIDE_POOLS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
-                    HAPlacedFeatures.WILD_MUSSEL_PATCH
+                    HAPlacedFeatures.TIDE_POOL_MUSSEL_PATCH
                 ),
             )
 

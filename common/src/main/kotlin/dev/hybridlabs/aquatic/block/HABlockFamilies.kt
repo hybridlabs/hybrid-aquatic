@@ -22,6 +22,54 @@ object HABlockFamilies {
             .family
     }
 
+    val YELLOW_BRINESTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.YELLOW_BRINESTONE.get())
+            .stairs(HABlocks.YELLOW_BRINESTONE_STAIRS.get())
+            .slab(HABlocks.YELLOW_BRINESTONE_SLAB.get())
+            .polished(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
+            .wall(HABlocks.YELLOW_BRINESTONE_WALL.get())
+            .family
+    }
+
+    val ORANGE_BRINESTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.ORANGE_BRINESTONE.get())
+            .stairs(HABlocks.ORANGE_BRINESTONE_STAIRS.get())
+            .slab(HABlocks.ORANGE_BRINESTONE_SLAB.get())
+            .polished(HABlocks.POLISHED_ORANGE_BRINESTONE.get())
+            .wall(HABlocks.ORANGE_BRINESTONE_WALL.get())
+            .family
+    }
+
+    val RED_BRINESTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.RED_BRINESTONE.get())
+            .stairs(HABlocks.RED_BRINESTONE_STAIRS.get())
+            .slab(HABlocks.RED_BRINESTONE_SLAB.get())
+            .polished(HABlocks.POLISHED_RED_BRINESTONE.get())
+            .wall(HABlocks.RED_BRINESTONE_WALL.get())
+            .family
+    }
+
+    val POLISHED_YELLOW_BRINESTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
+            .stairs(HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get())
+            .slab(HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get())
+            .family
+    }
+
+    val POLISHED_ORANGE_BRINESTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.POLISHED_ORANGE_BRINESTONE.get())
+            .stairs(HABlocks.POLISHED_ORANGE_BRINESTONE_STAIRS.get())
+            .slab(HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get())
+            .family
+    }
+
+    val POLISHED_RED_BRINESTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.POLISHED_RED_BRINESTONE.get())
+            .stairs(HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get())
+            .slab(HABlocks.POLISHED_RED_BRINESTONE_SLAB.get())
+            .family
+    }
+
     val CUT_WHITE_SANDSTONE: BlockFamily by lazy {
         BlockFamily.Builder(HABlocks.CUT_WHITE_SANDSTONE.get())
             .slab(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get())
