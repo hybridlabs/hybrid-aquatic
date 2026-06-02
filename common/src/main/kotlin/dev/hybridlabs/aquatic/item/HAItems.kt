@@ -4,8 +4,8 @@ package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.seashell.*
 import dev.hybridlabs.aquatic.platform.Services.*
@@ -650,6 +650,12 @@ object HAItems {
     val RED_BRINESTONE_SLAB = registerBlockItem("red_brinestone_slab") { HABlocks.RED_BRINESTONE_SLAB.get() }
     val RED_BRINESTONE_WALL = registerBlockItem("red_brinestone_wall") { HABlocks.RED_BRINESTONE_WALL.get() }
 
+    val RED_BRINESTONE_BRICKS = registerBlockItem("red_brinestone_bricks") { HABlocks.RED_BRINESTONE_BRICKS.get() }
+    val RED_BRINESTONE_BRICK_STAIRS = registerBlockItem("red_brinestone_brick_stairs") { HABlocks.RED_BRINESTONE_BRICK_STAIRS.get() }
+    val RED_BRINESTONE_BRICK_SLAB = registerBlockItem("red_brinestone_brick_slab") { HABlocks.RED_BRINESTONE_BRICK_SLAB.get() }
+    val RED_BRINESTONE_BRICK_WALL = registerBlockItem("red_brinestone_brick_wall") { HABlocks.RED_BRINESTONE_BRICK_WALL.get() }
+
+    val CHISELED_RED_BRINESTONE = registerBlockItem("chiseled_red_brinestone") { HABlocks.CHISELED_RED_BRINESTONE.get() }
     val POLISHED_RED_BRINESTONE = registerBlockItem("polished_red_brinestone") { HABlocks.POLISHED_RED_BRINESTONE.get() }
     val POLISHED_RED_BRINESTONE_STAIRS = registerBlockItem("polished_red_brinestone_stairs") { HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get() }
     val POLISHED_RED_BRINESTONE_SLAB = registerBlockItem("polished_red_brinestone_slab") { HABlocks.POLISHED_RED_BRINESTONE_SLAB.get() }
@@ -659,6 +665,12 @@ object HAItems {
     val ORANGE_BRINESTONE_SLAB = registerBlockItem("orange_brinestone_slab") { HABlocks.ORANGE_BRINESTONE_SLAB.get() }
     val ORANGE_BRINESTONE_WALL = registerBlockItem("orange_brinestone_wall") { HABlocks.ORANGE_BRINESTONE_WALL.get() }
 
+    val ORANGE_BRINESTONE_BRICKS = registerBlockItem("orange_brinestone_bricks") { HABlocks.ORANGE_BRINESTONE_BRICKS.get() }
+    val ORANGE_BRINESTONE_BRICK_STAIRS = registerBlockItem("orange_brinestone_brick_stairs") { HABlocks.ORANGE_BRINESTONE_BRICK_STAIRS.get() }
+    val ORANGE_BRINESTONE_BRICK_SLAB = registerBlockItem("orange_brinestone_brick_slab") { HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get() }
+    val ORANGE_BRINESTONE_BRICK_WALL = registerBlockItem("orange_brinestone_brick_wall") { HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get() }
+
+    val CHISELED_ORANGE_BRINESTONE = registerBlockItem("chiseled_orange_brinestone") { HABlocks.CHISELED_ORANGE_BRINESTONE.get() }
     val POLISHED_ORANGE_BRINESTONE = registerBlockItem("polished_orange_brinestone") { HABlocks.POLISHED_ORANGE_BRINESTONE.get() }
     val POLISHED_ORANGE_BRINESTONE_STAIRS = registerBlockItem("polished_orange_brinestone_stairs") { HABlocks.POLISHED_ORANGE_BRINESTONE_STAIRS.get() }
     val POLISHED_ORANGE_BRINESTONE_SLAB = registerBlockItem("polished_orange_brinestone_slab") { HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get() }
@@ -668,6 +680,12 @@ object HAItems {
     val YELLOW_BRINESTONE_SLAB = registerBlockItem("yellow_brinestone_slab") { HABlocks.YELLOW_BRINESTONE_SLAB.get() }
     val YELLOW_BRINESTONE_WALL = registerBlockItem("yellow_brinestone_wall") { HABlocks.YELLOW_BRINESTONE_WALL.get() }
 
+    val YELLOW_BRINESTONE_BRICKS = registerBlockItem("yellow_brinestone_bricks") { HABlocks.YELLOW_BRINESTONE_BRICKS.get() }
+    val YELLOW_BRINESTONE_BRICK_STAIRS = registerBlockItem("yellow_brinestone_brick_stairs") { HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get() }
+    val YELLOW_BRINESTONE_BRICK_SLAB = registerBlockItem("yellow_brinestone_brick_slab") { HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get() }
+    val YELLOW_BRINESTONE_BRICK_WALL = registerBlockItem("yellow_brinestone_brick_wall") { HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get() }
+
+    val CHISELED_YELLOW_BRINESTONE = registerBlockItem("chiseled_yellow_brinestone") { HABlocks.CHISELED_YELLOW_BRINESTONE.get() }
     val POLISHED_YELLOW_BRINESTONE = registerBlockItem("polished_yellow_brinestone") { HABlocks.POLISHED_YELLOW_BRINESTONE.get() }
     val POLISHED_YELLOW_BRINESTONE_STAIRS = registerBlockItem("polished_yellow_brinestone_stairs") { HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get() }
     val POLISHED_YELLOW_BRINESTONE_SLAB = registerBlockItem("polished_yellow_brinestone_slab") { HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get() }

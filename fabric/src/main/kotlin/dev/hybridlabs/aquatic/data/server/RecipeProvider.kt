@@ -146,6 +146,21 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         )
         //#endregion
 
+        //#region chiseled red brinestone
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_RED_BRINESTONE.get(),
+            HAItems.POLISHED_RED_BRINESTONE.get()
+        )
+
+        chiseledBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_RED_BRINESTONE.get(),
+            Ingredient.of(HAItems.POLISHED_RED_BRINESTONE.get())
+        )
+        //#endregion
+
         //#region red brinestone stairs
         stonecutterResultFromBase(
             exporter,
@@ -218,6 +233,67 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             Ingredient.of(HABlocks.RED_BRINESTONE.get()),
         )
         //#endregion
+        
+        //#region red brinestone bricks
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.RED_BRINESTONE_BRICKS.get(),
+            HAItems.POLISHED_RED_BRINESTONE.get()
+        )
+
+        polishedBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.RED_BRINESTONE_BRICKS.get(),
+            Ingredient.of(HAItems.POLISHED_RED_BRINESTONE.get())
+        )
+        //#endregion
+
+        //#region red brinestone brick stairs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.RED_BRINESTONE_BRICK_STAIRS.get(),
+            HAItems.RED_BRINESTONE_BRICKS.get()
+        )
+
+        stairBuilder(
+            HAItems.RED_BRINESTONE_BRICK_STAIRS.get(),
+            Ingredient.of(HABlocks.RED_BRINESTONE_BRICKS.get())
+        )
+        //#endregion
+
+        //#region red brinestone brick slabs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.RED_BRINESTONE_BRICK_SLAB.get(),
+            HAItems.RED_BRINESTONE_BRICKS.get(),
+            2
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.RED_BRINESTONE_BRICK_SLAB.get(),
+            HABlocks.RED_BRINESTONE_BRICKS.get(),
+        )
+        //#endregion
+
+        //#region red brinestone brick walls
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.RED_BRINESTONE_BRICK_WALL.get(),
+            HAItems.RED_BRINESTONE_BRICKS.get()
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.RED_BRINESTONE_BRICK_WALL.get(),
+            Ingredient.of(HABlocks.RED_BRINESTONE_BRICKS.get()),
+        )
+        //#endregion
 
         //orange
         //#region polished orange brinestone
@@ -232,6 +308,21 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_ORANGE_BRINESTONE.get(),
             Ingredient.of(HAItems.ORANGE_BRINESTONE.get())
+        )
+        //#endregion
+
+        //#region chiseled orange brinestone
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_ORANGE_BRINESTONE.get(),
+            HAItems.POLISHED_ORANGE_BRINESTONE.get()
+        )
+
+        chiseledBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_ORANGE_BRINESTONE.get(),
+            Ingredient.of(HAItems.POLISHED_ORANGE_BRINESTONE.get())
         )
         //#endregion
 
@@ -308,7 +399,68 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         )
         //#endregion
 
-        //yellow brinestone
+        //#region orange brinestone bricks
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.ORANGE_BRINESTONE_BRICKS.get(),
+            HAItems.POLISHED_ORANGE_BRINESTONE.get()
+        )
+
+        polishedBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.ORANGE_BRINESTONE_BRICKS.get(),
+            Ingredient.of(HAItems.POLISHED_ORANGE_BRINESTONE.get())
+        )
+        //#endregion
+
+        //#region orange brinestone brick stairs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.ORANGE_BRINESTONE_BRICK_STAIRS.get(),
+            HAItems.ORANGE_BRINESTONE_BRICKS.get()
+        )
+
+        stairBuilder(
+            HAItems.ORANGE_BRINESTONE_BRICK_STAIRS.get(),
+            Ingredient.of(HABlocks.ORANGE_BRINESTONE_BRICKS.get())
+        )
+        //#endregion
+
+        //#region orange brinestone brick slabs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.ORANGE_BRINESTONE_BRICK_SLAB.get(),
+            HAItems.ORANGE_BRINESTONE_BRICKS.get(),
+            2
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get(),
+            HABlocks.ORANGE_BRINESTONE_BRICKS.get(),
+        )
+        //#endregion
+
+        //#region orange brinestone brick walls
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.ORANGE_BRINESTONE_BRICK_WALL.get(),
+            HAItems.ORANGE_BRINESTONE_BRICKS.get()
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get(),
+            Ingredient.of(HABlocks.ORANGE_BRINESTONE_BRICKS.get()),
+        )
+        //#endregion
+
+        //yellow
         //#region polished yellow brinestone
         stonecutterResultFromBase(
             exporter,
@@ -321,6 +473,21 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_YELLOW_BRINESTONE.get(),
             Ingredient.of(HAItems.YELLOW_BRINESTONE.get())
+        )
+        //#endregion
+        
+        //#region chiseled yellow brinestone
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_YELLOW_BRINESTONE.get(),
+            HAItems.POLISHED_YELLOW_BRINESTONE.get()
+        )
+
+        chiseledBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_YELLOW_BRINESTONE.get(),
+            Ingredient.of(HAItems.POLISHED_YELLOW_BRINESTONE.get())
         )
         //#endregion
 
@@ -393,6 +560,67 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.YELLOW_BRINESTONE_WALL.get(),
             Ingredient.of(HABlocks.YELLOW_BRINESTONE.get()),
+        )
+        //#endregion
+
+        //#region yellow brinestone bricks
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.YELLOW_BRINESTONE_BRICKS.get(),
+            HAItems.POLISHED_YELLOW_BRINESTONE.get()
+        )
+
+        polishedBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.YELLOW_BRINESTONE_BRICKS.get(),
+            Ingredient.of(HAItems.POLISHED_YELLOW_BRINESTONE.get())
+        )
+        //#endregion
+
+        //#region yellow brinestone brick stairs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.YELLOW_BRINESTONE_BRICK_STAIRS.get(),
+            HAItems.YELLOW_BRINESTONE_BRICKS.get()
+        )
+
+        stairBuilder(
+            HAItems.YELLOW_BRINESTONE_BRICK_STAIRS.get(),
+            Ingredient.of(HABlocks.YELLOW_BRINESTONE_BRICKS.get())
+        )
+        //#endregion
+
+        //#region yellow brinestone brick slabs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.YELLOW_BRINESTONE_BRICK_SLAB.get(),
+            HAItems.YELLOW_BRINESTONE_BRICKS.get(),
+            2
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get(),
+            HABlocks.YELLOW_BRINESTONE_BRICKS.get(),
+        )
+        //#endregion
+
+        //#region yellow brinestone brick walls
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.YELLOW_BRINESTONE_BRICK_WALL.get(),
+            HAItems.YELLOW_BRINESTONE_BRICKS.get()
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get(),
+            Ingredient.of(HABlocks.YELLOW_BRINESTONE_BRICKS.get()),
         )
         //#endregion
         //#endregion

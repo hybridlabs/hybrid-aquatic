@@ -5,6 +5,9 @@
     "hybrid-aquatic:white_sandstone_wall",
     "hybrid-aquatic:red_brinestone_wall",
     "hybrid-aquatic:orange_brinestone_wall",
-    "hybrid-aquatic:yellow_brinestone_wall"
+    "hybrid-aquatic:yellow_brinestone_wall",
+    "hybrid-aquatic:red_brinestone_brick_wall",
+    "hybrid-aquatic:orange_brinestone_brick_wall",
+    "hybrid-aquatic:yellow_brinestone_brick_wall"
   ]
 }

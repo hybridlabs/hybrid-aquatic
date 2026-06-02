@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "hybrid-aquatic:block/orange_brinestone_bricks"
+  }
+}

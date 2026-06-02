@@ -3,6 +3,6 @@
   "textures": {
     "bottom": "hybrid-aquatic:block/orange_brinestone",
     "side": "hybrid-aquatic:block/orange_brinestone",
-    "top": "hybrid-aquatic:block/orange_brinestone"
+    "top": "hybrid-aquatic:block/orange_brinestone_"
   }
 }

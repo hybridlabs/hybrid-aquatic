@@ -79,12 +79,14 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.PEARL_BLOCK.get(),
                 HABlocks.BLACK_PEARL_BLOCK.get(),
                 HABlocks.WHITE_SAND.get(),
-                HABlocks.WHITE_SAND.get(),
                 HABlocks.CORALSTONE.get(),
                 HABlocks.CRYSTALLINE_SULFUR.get(),
                 HABlocks.SHORESTONE.get(),
                 HABlocks.BARNACLE_SHORESTONE.get(),
                 HABlocks.MARINE_SNOW.get(),
+                HABlocks.RED_BRINESTONE.get(),
+                HABlocks.ORANGE_BRINESTONE.get(),
+                HABlocks.YELLOW_BRINESTONE.get(),
             ).forEach(generator::createTrivialCube)
 
             setOf(
@@ -96,6 +98,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.GRASSY_SAND.get(),
                 HABlocks.CUT_WHITE_SANDSTONE.get(),
                 HABlocks.CHISELED_WHITE_SANDSTONE.get(),
+                HABlocks.CHISELED_RED_BRINESTONE.get(),
+                HABlocks.CHISELED_YELLOW_BRINESTONE.get(),
+                HABlocks.CHISELED_ORANGE_BRINESTONE.get(),
                 HABlocks.WHITE_SANDSTONE.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
@@ -104,14 +109,14 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             generator.family(HABlocks.SMOOTH_WHITE_SANDSTONE.get())
                 .generateFor(HABlockFamilies.SMOOTH_WHITE_SANDSTONE)
 
-            generator.family(HABlocks.RED_BRINESTONE.get())
-                .generateFor(HABlockFamilies.RED_BRINESTONE)
+            generator.family(HABlocks.RED_BRINESTONE_BRICKS.get())
+                .generateFor(HABlockFamilies.RED_BRINESTONE_BRICKS)
 
-            generator.family(HABlocks.ORANGE_BRINESTONE.get())
-                .generateFor(HABlockFamilies.ORANGE_BRINESTONE)
+            generator.family(HABlocks.ORANGE_BRINESTONE_BRICKS.get())
+                .generateFor(HABlockFamilies.ORANGE_BRINESTONE_BRICKS)
 
-            generator.family(HABlocks.YELLOW_BRINESTONE.get())
-                .generateFor(HABlockFamilies.YELLOW_BRINESTONE)
+            generator.family(HABlocks.YELLOW_BRINESTONE_BRICKS.get())
+                .generateFor(HABlockFamilies.YELLOW_BRINESTONE_BRICKS)
 
             generator.family(HABlocks.POLISHED_RED_BRINESTONE.get())
                 .generateFor(HABlockFamilies.POLISHED_RED_BRINESTONE)
