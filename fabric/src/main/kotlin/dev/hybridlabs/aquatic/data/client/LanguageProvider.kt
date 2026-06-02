@@ -185,6 +185,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HASoundEvents.SHELL_BEAST_AMBIENT to "Shell Beast chitters",
             HASoundEvents.SHELL_BEAST_HURT to "Shell Beast hurts",
             HASoundEvents.SHELL_BEAST_DIE to "Shell Beast dies",
+            HASoundEvents.SHELL_BEAST_ROAR to "Shell Beast roars",
 
             HASoundEvents.HYPNAUTILUS_AMBIENT to "Hypnautilus spirals",
             HASoundEvents.HYPNAUTILUS_HURT to "Hypnautilus hurts",
