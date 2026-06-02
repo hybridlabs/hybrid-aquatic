@@ -30,7 +30,8 @@
         "client.SkullBlockEntityTextureMixin",
         "client.CameraMixin",
         "client.WeatherDisplayMixin",
-        "client.ParticleEngineMixin"
+        "client.ParticleEngineMixin",
+        "client.MouseHandlerMixin"
     ],
     "injectors": {
         "defaultRequire": 1
