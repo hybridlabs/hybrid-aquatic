@@ -58,15 +58,6 @@ class LivingSpongeBlock(
         } else super.updateShape(state, direction, neighborState, world, pos, neighborPos)
     }
 
-    override fun getCollisionShape(
-        state: BlockState,
-        world: BlockGetter,
-        pos: BlockPos,
-        context: CollisionContext
-    ): VoxelShape {
-        return COLLISION_SHAPE
-    }
-
     override fun getShape(state: BlockState, world: BlockGetter, pos: BlockPos, context: CollisionContext): VoxelShape {
         return SHAPE
     }
@@ -110,6 +101,5 @@ class LivingSpongeBlock(
 
     companion object {
         private val SHAPE = box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
-        private val COLLISION_SHAPE = box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }
 }
