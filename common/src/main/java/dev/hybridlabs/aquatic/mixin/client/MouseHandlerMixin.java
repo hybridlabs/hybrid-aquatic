@@ -45,8 +45,8 @@ public class MouseHandlerMixin {
 
     @Unique
     private void nudgeMouse(LocalPlayer localPlayer, Mob target) {
-        Vec3 targetPosition = EntityAnchorArgument.Anchor.EYES.apply(target);
-        Vec3 playerPosition = localPlayer.position();
+        Vec3 playerPosition = EntityAnchorArgument.Anchor.EYES.apply(localPlayer);
+        Vec3 targetPosition = target.position();
         double dX = targetPosition.x - playerPosition.x;
         double dY = targetPosition.y - playerPosition.y;
         double dZ = targetPosition.z - playerPosition.z;
