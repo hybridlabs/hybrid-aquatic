@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.block.HAFluids
+import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.tag.HAFluidTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider

@@ -4,7 +4,7 @@ package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.HAFluids
+import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*

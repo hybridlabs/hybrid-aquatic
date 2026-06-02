@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.wood.BaseWoodBlock
 import dev.hybridlabs.aquatic.block.wood.HAWoodTypes
+import dev.hybridlabs.aquatic.fluid.HAForgeFluids
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
@@ -209,6 +210,13 @@ object HAPlatformBlocks {
             .sound(SoundType.SLIME_BLOCK)
             .mapColor { MapColor.COLOR_CYAN }
             .lightLevel { 14 }
+        )
+    }
+
+    val BRINE = HABlocks.register("brine") {
+        BrineFluidBlock(
+            HAForgeFluids.BRINE_STILL.get(),
+            BlockBehaviour.Properties.copy(Blocks.WATER)
         )
     }
 }

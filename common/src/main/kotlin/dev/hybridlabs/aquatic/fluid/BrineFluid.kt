@@ -1,5 +1,6 @@
-package dev.hybridlabs.aquatic.block
+package dev.hybridlabs.aquatic.fluid
 
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.tag.HAFluidTags

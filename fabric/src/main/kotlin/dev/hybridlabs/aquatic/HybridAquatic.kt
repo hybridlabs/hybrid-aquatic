@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.config.HAConfig
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems

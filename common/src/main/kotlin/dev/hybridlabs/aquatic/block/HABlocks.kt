@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.item.DyeColor

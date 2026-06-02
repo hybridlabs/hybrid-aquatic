@@ -1,12 +1,13 @@
 package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.HAFluids
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.fluid.HAFluidTypes
+import dev.hybridlabs.aquatic.fluid.HAForgeFluids
 import dev.hybridlabs.aquatic.forge.HybridAquaticEventBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticForgeBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticModBusEvents
@@ -27,6 +28,7 @@ import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HAFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
+import dev.hybridlabs.aquatic.world.inventory.HAMenuTypes
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.minecraftforge.fml.common.Mod
 
@@ -43,7 +45,8 @@ object HybridAquaticForge {
         HAGlobalLootModifier.registerGlobalLootModifiers()
 
         HABlocks
-        HAFluids
+        HAFluidTypes
+        HAForgeFluids
         HAPlatformBlocks
         HASoundEvents
         HAEntityTypes
@@ -65,6 +68,8 @@ object HybridAquaticForge {
         HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         HAPlacedFeatures
         HAConfiguredFeatures
+
+        HAMenuTypes
 
         HANetworking.registerPackets()
         HybridAquaticLootPoolEntryTypes

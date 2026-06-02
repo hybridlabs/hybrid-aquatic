@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.fluid
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.block.HAFluids
+import dev.hybridlabs.aquatic.fluid.HAFluids
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler

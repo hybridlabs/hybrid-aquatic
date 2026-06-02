@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.block
+package dev.hybridlabs.aquatic.fluid
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
