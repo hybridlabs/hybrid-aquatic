@@ -10,7 +10,7 @@ class HypnotizeTargetGoal(
     private var hypnosisCooldown: Int
 
     init {
-        hypnosisCooldown = hypnautilus.tickCount + (10 * 40 + hypnautilus.getRandom().nextInt(10) * 80)
+        hypnosisCooldown = hypnautilus.tickCount + (10 * 20 + hypnautilus.getRandom().nextInt(5) * 20)
     }
 
     override fun canUse(): Boolean {
