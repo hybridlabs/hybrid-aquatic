@@ -180,29 +180,35 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get())
+
             .add(HABlocks.RED_BRINESTONE_SLAB.get())
-            .add(HABlocks.RED_BRINESTONE_BRICK_SLAB.get())
-            .add(HABlocks.ORANGE_BRINESTONE_SLAB.get())
-            .add(HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get())
-            .add(HABlocks.YELLOW_BRINESTONE_SLAB.get())
-            .add(HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get())
             .add(HABlocks.POLISHED_RED_BRINESTONE_SLAB.get())
+            .add(HABlocks.RED_BRINESTONE_BRICK_SLAB.get())
+
             .add(HABlocks.ORANGE_BRINESTONE_SLAB.get())
+            .add(HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get())
+
+            .add(HABlocks.YELLOW_BRINESTONE_SLAB.get())
             .add(HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get())
 
         getOrCreateTagBuilder(BlockTags.STAIRS)
             .add(HABlocks.BONE_STAIRS.get())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get())
+
             .add(HABlocks.RED_BRINESTONE_STAIRS.get())
-            .add(HABlocks.RED_BRINESTONE_BRICK_STAIRS.get())
-            .add(HABlocks.ORANGE_BRINESTONE_STAIRS.get())
-            .add(HABlocks.ORANGE_BRINESTONE_BRICK_STAIRS.get())
-            .add(HABlocks.YELLOW_BRINESTONE_STAIRS.get())
-            .add(HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get())
             .add(HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get())
+            .add(HABlocks.RED_BRINESTONE_BRICK_STAIRS.get())
+
             .add(HABlocks.ORANGE_BRINESTONE_STAIRS.get())
+            .add(HABlocks.POLISHED_ORANGE_BRINESTONE_STAIRS.get())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICK_STAIRS.get())
+
+            .add(HABlocks.YELLOW_BRINESTONE_STAIRS.get())
             .add(HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get())
 
         getOrCreateTagBuilder(BlockTags.FENCE_GATES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
@@ -242,6 +248,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BUTTON_CORAL_WALL_FAN.get())
             .add(HABlocks.SUN_CORAL_WALL_FAN.get())
 
+        getOrCreateTagBuilder(BlockTags.SAND)
+            .add(HABlocks.WHITE_SAND.get())
+
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(HABlocks.BUTTON_CORAL_BLOCK.get())
             .add(HABlocks.DEAD_BUTTON_CORAL_BLOCK.get())
@@ -259,62 +268,79 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get())
             .add(HABlocks.ZIGZAG_CORAL_BLOCK.get())
             .add(HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get())
+
             .add(HABlocks.PEARL_BLOCK.get())
             .add(HABlocks.BLACK_PEARL_BLOCK.get())
+
             .add(HABlocks.THERMAL_VENT.get())
             .add(HABlocks.GIANT_THERMAL_VENT.get())
+
             .add(HABlocks.CRYSTALLINE_SULFUR.get())
+
             .add(HABlocks.GIANT_CLAM.get())
             .add(HABlocks.OYSTER.get())
+
             .add(HABlocks.CORALSTONE.get())
             .add(HABlocks.SHORESTONE.get())
             .add(HABlocks.BARNACLE_SHORESTONE.get())
+
             .add(HABlocks.RED_BRINESTONE.get())
-            .add(HABlocks.RED_BRINESTONE_BRICKS.get())
             .add(HABlocks.POLISHED_RED_BRINESTONE.get())
             .add(HABlocks.CHISELED_RED_BRINESTONE.get())
-            .add(HABlocks.ORANGE_BRINESTONE.get())
-            .add(HABlocks.ORANGE_BRINESTONE_BRICKS.get())
-            .add(HABlocks.POLISHED_ORANGE_BRINESTONE.get())
-            .add(HABlocks.CHISELED_ORANGE_BRINESTONE.get())
-            .add(HABlocks.YELLOW_BRINESTONE.get())
-            .add(HABlocks.YELLOW_BRINESTONE_BRICKS.get())
-            .add(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
-            .add(HABlocks.CHISELED_YELLOW_BRINESTONE.get())
+            .add(HABlocks.RED_BRINESTONE_BRICKS.get())
+
+            .add(HABlocks.RED_BRINESTONE_SLAB.get())
+            .add(HABlocks.POLISHED_RED_BRINESTONE_SLAB.get())
+            .add(HABlocks.RED_BRINESTONE_BRICK_SLAB.get())
+
+            .add(HABlocks.RED_BRINESTONE_STAIRS.get())
+            .add(HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get())
+            .add(HABlocks.RED_BRINESTONE_BRICK_STAIRS.get())
+
             .add(HABlocks.RED_BRINESTONE_WALL.get())
             .add(HABlocks.RED_BRINESTONE_BRICK_WALL.get())
+
+            .add(HABlocks.ORANGE_BRINESTONE.get())
+            .add(HABlocks.POLISHED_ORANGE_BRINESTONE.get())
+            .add(HABlocks.CHISELED_ORANGE_BRINESTONE.get())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICKS.get())
+
+            .add(HABlocks.ORANGE_BRINESTONE_SLAB.get())
+            .add(HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get())
+
+            .add(HABlocks.ORANGE_BRINESTONE_STAIRS.get())
+            .add(HABlocks.POLISHED_ORANGE_BRINESTONE_STAIRS.get())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICK_STAIRS.get())
+
             .add(HABlocks.ORANGE_BRINESTONE_WALL.get())
             .add(HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get())
+
+            .add(HABlocks.YELLOW_BRINESTONE.get())
+            .add(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
+            .add(HABlocks.CHISELED_YELLOW_BRINESTONE.get())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICKS.get())
+
+            .add(HABlocks.YELLOW_BRINESTONE_SLAB.get())
+            .add(HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get())
+
+            .add(HABlocks.YELLOW_BRINESTONE_STAIRS.get())
+            .add(HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get())
+
             .add(HABlocks.YELLOW_BRINESTONE_WALL.get())
             .add(HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get())
-            .add(HABlocks.RED_BRINESTONE_SLAB.get())
-            .add(HABlocks.RED_BRINESTONE_BRICK_SLAB.get())
-            .add(HABlocks.ORANGE_BRINESTONE_SLAB.get())
-            .add(HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get())
-            .add(HABlocks.YELLOW_BRINESTONE_SLAB.get())
-            .add(HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get())
-            .add(HABlocks.POLISHED_RED_BRINESTONE_SLAB.get())
-            .add(HABlocks.ORANGE_BRINESTONE_SLAB.get())
-            .add(HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get())
-            .add(HABlocks.RED_BRINESTONE_STAIRS.get())
-            .add(HABlocks.RED_BRINESTONE_BRICK_STAIRS.get())
-            .add(HABlocks.ORANGE_BRINESTONE_STAIRS.get())
-            .add(HABlocks.ORANGE_BRINESTONE_BRICK_STAIRS.get())
-            .add(HABlocks.YELLOW_BRINESTONE_STAIRS.get())
-            .add(HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get())
-            .add(HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get())
-            .add(HABlocks.ORANGE_BRINESTONE_STAIRS.get())
-            .add(HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get())
 
             .add(HABlocks.BONE_WALL.get())
-            .add(HABlocks.WHITE_SANDSTONE_WALL.get())
-
             .add(HABlocks.BONE_SLAB.get())
+            .add(HABlocks.BONE_STAIRS.get())
+
+            .add(HABlocks.WHITE_SANDSTONE_WALL.get())
             .add(HABlocks.WHITE_SANDSTONE_SLAB.get())
+            .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
             .add(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get())
-            .add(HABlocks.BONE_STAIRS.get())
-            .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get())
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)

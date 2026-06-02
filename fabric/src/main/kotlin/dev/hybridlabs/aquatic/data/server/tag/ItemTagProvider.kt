@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HAItems
@@ -167,6 +168,55 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
             .add(HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
+
+        getOrCreateTagBuilder(ItemTags.SLABS)
+            .add(HABlocks.BONE_SLAB.get().asItem())
+
+            .add(HABlocks.WHITE_SANDSTONE_SLAB.get().asItem())
+            .add(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get().asItem())
+            .add(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get().asItem())
+
+            .add(HABlocks.RED_BRINESTONE_SLAB.get().asItem())
+            .add(HABlocks.POLISHED_RED_BRINESTONE_SLAB.get().asItem())
+            .add(HABlocks.RED_BRINESTONE_BRICK_SLAB.get().asItem())
+
+            .add(HABlocks.ORANGE_BRINESTONE_SLAB.get().asItem())
+            .add(HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get().asItem())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get().asItem())
+
+            .add(HABlocks.YELLOW_BRINESTONE_SLAB.get().asItem())
+            .add(HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get().asItem())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get().asItem());
+
+        getOrCreateTagBuilder(ItemTags.STAIRS)
+            .add(HABlocks.BONE_STAIRS.get().asItem())
+            .add(HABlocks.WHITE_SANDSTONE_STAIRS.get().asItem())
+            .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get().asItem())
+
+            .add(HABlocks.RED_BRINESTONE_STAIRS.get().asItem())
+            .add(HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get().asItem())
+            .add(HABlocks.RED_BRINESTONE_BRICK_STAIRS.get().asItem())
+
+            .add(HABlocks.ORANGE_BRINESTONE_STAIRS.get().asItem())
+            .add(HABlocks.POLISHED_ORANGE_BRINESTONE_STAIRS.get().asItem())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICK_STAIRS.get().asItem())
+
+            .add(HABlocks.YELLOW_BRINESTONE_STAIRS.get().asItem())
+            .add(HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get().asItem())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get().asItem());
+
+        getOrCreateTagBuilder(ItemTags.WALLS)
+            .add(HABlocks.BONE_WALL.get().asItem())
+            .add(HABlocks.WHITE_SANDSTONE_WALL.get().asItem())
+            .add(HABlocks.RED_BRINESTONE_WALL.get().asItem())
+            .add(HABlocks.RED_BRINESTONE_BRICK_WALL.get().asItem())
+            .add(HABlocks.ORANGE_BRINESTONE_WALL.get().asItem())
+            .add(HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get().asItem())
+            .add(HABlocks.YELLOW_BRINESTONE_WALL.get().asItem())
+            .add(HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get().asItem());
+
+        getOrCreateTagBuilder(ItemTags.SAND)
+            .add(HABlocks.WHITE_SAND.get().asItem())
         //#endregion
 
         getOrCreateTagBuilder(HAItemTags.STONES)
