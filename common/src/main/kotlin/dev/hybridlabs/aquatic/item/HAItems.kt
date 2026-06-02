@@ -5,7 +5,6 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.seashell.*
 import dev.hybridlabs.aquatic.platform.Services.*
