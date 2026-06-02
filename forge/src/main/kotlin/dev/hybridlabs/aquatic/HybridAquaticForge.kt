@@ -7,7 +7,7 @@ import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.fluid.HAFluidTypes
-import dev.hybridlabs.aquatic.fluid.HAForgeFluids
+import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.forge.HybridAquaticEventBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticForgeBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticModBusEvents
@@ -46,7 +46,7 @@ object HybridAquaticForge {
 
         HABlocks
         HAFluidTypes
-        HAForgeFluids
+        HAFluids
         HAPlatformBlocks
         HASoundEvents
         HAEntityTypes

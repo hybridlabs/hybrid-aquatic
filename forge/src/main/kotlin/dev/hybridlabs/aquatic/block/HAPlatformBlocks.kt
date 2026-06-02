@@ -2,12 +2,11 @@ package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.wood.BaseWoodBlock
 import dev.hybridlabs.aquatic.block.wood.HAWoodTypes
-import dev.hybridlabs.aquatic.fluid.HAForgeFluids
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.*
-import net.minecraft.world.level.block.state.BlockBehaviour
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockSetType
 import net.minecraft.world.level.material.MapColor
@@ -15,28 +14,28 @@ import net.minecraft.world.level.material.MapColor
 object HAPlatformBlocks {
     val DRIFTWOOD_LOG = HABlocks.register("driftwood_log") {
         BaseWoodBlock(
-            BlockBehaviour.Properties.copy(
+            Properties.copy(
                 Blocks.OAK_LOG
             )
         )
     }
     val STRIPPED_DRIFTWOOD_LOG = HABlocks.register("stripped_driftwood_log") {
         BaseWoodBlock(
-            BlockBehaviour.Properties.copy(
+            Properties.copy(
                 Blocks.OAK_LOG
             )
         )
     }
     val DRIFTWOOD_WOOD = HABlocks.register("driftwood_wood") {
         BaseWoodBlock(
-            BlockBehaviour.Properties.copy(
+            Properties.copy(
                 Blocks.OAK_WOOD
             )
         )
     }
     val STRIPPED_DRIFTWOOD_WOOD = HABlocks.register("stripped_driftwood_wood") {
         BaseWoodBlock(
-            BlockBehaviour.Properties.copy(
+            Properties.copy(
                 Blocks.OAK_WOOD
             )
         )
@@ -157,40 +156,40 @@ object HAPlatformBlocks {
     }
     val DRIFTWOOD_DOOR = HABlocks.register("driftwood_door") {
         DoorBlock(
-            BlockBehaviour.Properties.copy(Blocks.OAK_DOOR),
+            Properties.copy(Blocks.OAK_DOOR),
             BlockSetType.OAK
         )
     }
     val DRIFTWOOD_TRAPDOOR =
         HABlocks.register("driftwood_trapdoor") {
             TrapDoorBlock(
-                BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR),
+                Properties.copy(Blocks.OAK_TRAPDOOR),
                 BlockSetType.OAK
             )
         }
     val DRIFTWOOD_BUTTON = HABlocks.register(
         "driftwood_button"
     ) {
-        ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON), BlockSetType.OAK, 25, true)
+        ButtonBlock(Properties.copy(Blocks.OAK_BUTTON), BlockSetType.OAK, 25, true)
     }
     val DRIFTWOOD_PRESSURE_PLATE = HABlocks.register(
         "driftwood_pressure_plate"
     ) {
         PressurePlateBlock(
             PressurePlateBlock.Sensitivity.EVERYTHING,
-            BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE),
+            Properties.copy(Blocks.OAK_PRESSURE_PLATE),
             BlockSetType.OAK
         )
     }
 
-    val DUNEGRASS = HABlocks.register("dunegrass") { DunegrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS)) }
+    val DUNEGRASS = HABlocks.register("dunegrass") { DunegrassBlock(Properties.copy(Blocks.GRASS)) }
     val TALL_DUNEGRASS =
-        HABlocks.register("tall_dunegrass") { TallDunegrassBlock(BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)) }
-    val CATTAIL = HABlocks.register("cattail") { CattailBlock(BlockBehaviour.Properties.copy(Blocks.TALL_GRASS)) }
+        HABlocks.register("tall_dunegrass") { TallDunegrassBlock(Properties.copy(Blocks.TALL_GRASS)) }
+    val CATTAIL = HABlocks.register("cattail") { CattailBlock(Properties.copy(Blocks.TALL_GRASS)) }
 
     val HAGSLIME_BLOCK = HABlocks.register("hagslime_block") {
         ForgeHagslimeBlock(
-            BlockBehaviour.Properties.of()
+            Properties.of()
                 .instabreak()
                 .noOcclusion()
                 .sound(SoundType.HONEY_BLOCK)
@@ -203,20 +202,13 @@ object HAPlatformBlocks {
 
     val GLOWSLIME_BLOCK = HABlocks.register("glowslime_block") {
         ForgeGlowslimeBlock(
-            BlockBehaviour.Properties.of()
+            Properties.of()
             .friction(0.8F)
             .instabreak()
             .noOcclusion()
             .sound(SoundType.SLIME_BLOCK)
             .mapColor { MapColor.COLOR_CYAN }
             .lightLevel { 14 }
-        )
-    }
-
-    val BRINE = HABlocks.register("brine") {
-        BrineFluidBlock(
-            HAForgeFluids.BRINE_STILL.get(),
-            BlockBehaviour.Properties.copy(Blocks.WATER)
         )
     }
 }
