@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
-import dev.hybridlabs.aquatic.fluid.HAFluids
+import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.tag.HAFluidTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -13,12 +13,12 @@ class FluidTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
     override fun addTags(p0: HolderLookup.Provider) {
         getOrCreateTagBuilder(HAFluidTags.BRINE)
-            .add(HAFluids.BRINE_STILL.get())
-            .add(HAFluids.BRINE_FLOWING.get())
+            .add(HAPlatformFluids.BRINE_STILL.get())
+            .add(HAPlatformFluids.BRINE_FLOWING.get())
 
 
         getOrCreateTagBuilder(FluidTags.WATER)
-            .add(HAFluids.BRINE_STILL.get())
-            .add(HAFluids.BRINE_FLOWING.get())
+            .add(HAPlatformFluids.BRINE_STILL.get())
+            .add(HAPlatformFluids.BRINE_FLOWING.get())
     }
 }

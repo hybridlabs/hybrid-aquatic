@@ -547,7 +547,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.MAGNETIC_HOOK.get(),
             HAItems.CREEPERMAGNET_HOOK.get(),
             HAItems.OMINOUS_HOOK.get(),
-            HAItems.BRINE_BUCKET.get(),
+            HAPlatformItems.BRINE_BUCKET.get(),
             HAItems.DIVING_HELMET.get(),
             HAItems.DIVING_SUIT.get(),
             HAItems.DIVING_LEGGINGS.get(),

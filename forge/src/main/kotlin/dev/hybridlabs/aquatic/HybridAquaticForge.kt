@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.ForgeSpawnGroupRegistry
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.forge.HybridAquaticEventBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticForgeBusEvents
 import dev.hybridlabs.aquatic.forge.HybridAquaticModBusEvents
@@ -44,7 +43,6 @@ object HybridAquaticForge {
         HAGlobalLootModifier.registerGlobalLootModifiers()
 
         HABlocks
-        HAFluids
         HAPlatformBlocks
         HASoundEvents
         HAEntityTypes

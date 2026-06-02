@@ -250,11 +250,6 @@ object HAItems {
     val CREEPERMAGNET_HOOK = register("creepermagnet_hook") { HookItem(Item.Properties().durability(1)) }
     val OMINOUS_HOOK = register("ominous_hook") { HookItem(Item.Properties().durability(1)) }
 
-    val BRINE_BUCKET = register("brine_bucket") { BucketItem(HAFluids.BRINE_STILL.get(),Item.Properties()
-        .stacksTo(1)
-        .craftRemainder(Items.BUCKET)
-    ) }
-
     //#region Seashell Set
     val SEASHELL_SPEAR = register(
         "seashell_spear"

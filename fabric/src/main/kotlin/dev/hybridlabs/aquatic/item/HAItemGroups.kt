@@ -401,7 +401,7 @@ object HAItemGroups {
                 entries.accept(HAItems.OMINOUS_CONCH.get())
 
                 // tools
-                entries.accept(HAItems.BRINE_BUCKET.get())
+                entries.accept(HAPlatformItems.BRINE_BUCKET.get())
                 entries.accept(HAItems.DIVING_WEIGHT.get())
                 entries.accept(HAItems.SEASHELL_SPEAR.get())
                 entries.accept(HAItems.SEASHELL_PICKAXE.get())
