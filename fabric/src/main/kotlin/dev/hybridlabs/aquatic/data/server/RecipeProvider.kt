@@ -626,6 +626,42 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         //#endregion
 
         // misc recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RED_BRINESTONE.get(), 8)
+            .pattern("TTT")
+            .pattern("TBT")
+            .pattern("TTT")
+            .define('B', HAPlatformItems.BRINE_BUCKET.get())
+            .define('T', Items.RED_TERRACOTTA)
+            .unlockedBy(
+                "has_brine_bucket",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
+            )
+            .save(exporter)
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.ORANGE_BRINESTONE.get(), 8)
+            .pattern("TTT")
+            .pattern("TBT")
+            .pattern("TTT")
+            .define('B', HAPlatformItems.BRINE_BUCKET.get())
+            .define('T', Items.ORANGE_TERRACOTTA)
+            .unlockedBy(
+                "has_brine_bucket",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
+            )
+            .save(exporter)
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.YELLOW_BRINESTONE.get(), 8)
+            .pattern("TTT")
+            .pattern("TBT")
+            .pattern("TTT")
+            .define('B', HAPlatformItems.BRINE_BUCKET.get())
+            .define('T', Items.YELLOW_TERRACOTTA)
+            .unlockedBy(
+                "has_brine_bucket",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, HAItems.ARGONAUT.get())
             .pattern("IBF")
             .pattern("GSC")
