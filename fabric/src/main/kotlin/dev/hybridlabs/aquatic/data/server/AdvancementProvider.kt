@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.FrameType
+import net.minecraft.advancements.RequirementsStrategy
 import net.minecraft.advancements.critereon.*
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -490,6 +491,34 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             )
             .build(ResourceLocation("hybrid-aquatic", "plant_clam"))
         consumer?.accept(plantClamAdvancement)
+
+        val killSirenianAdvancement = Advancement.Builder.advancement()
+            .parent(getClamAdvancement)
+            .display(
+                HAItems.SIRENIAN_STEAK.get(),
+                Component.translatable("advancements.hybrid-aquatic.kill_sirenian.title"),
+                Component.translatable("advancements.hybrid-aquatic.kill_sirenian.description"),
+                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                FrameType.TASK,
+                true,
+                true,
+                true
+            )
+            .addCriterion(
+                "kill_manatee",
+                KilledTrigger.TriggerInstance.playerKilledEntity(
+                    EntityPredicate.Builder.entity().of(HAEntityTypes.MANATEE.get()).build()
+                )
+            )
+            .addCriterion(
+                "kill_dugong",
+                KilledTrigger.TriggerInstance.playerKilledEntity(
+                    EntityPredicate.Builder.entity().of(HAEntityTypes.DUGONG.get()).build()
+                )
+            )
+            .requirements(RequirementsStrategy.OR)
+            .build(ResourceLocation("hybrid-aquatic", "kill_sirenian"))
+        consumer?.accept(killSirenianAdvancement)
 
         //#region Pearl Advancement Tree
         val obtainPearlAdvancement = Advancement.Builder.advancement()

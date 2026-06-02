@@ -53,6 +53,40 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+        export(exporter, HAEntityTypes.MANATEE.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.SIRENIAN_BEEF.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                    ).build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(Items.LEATHER)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.DUGONG.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.SIRENIAN_BEEF.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                    ).build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(Items.LEATHER)
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
         //#region Minibosses
         export(exporter, HAEntityTypes.KARKINOS.get()) {
             pool(

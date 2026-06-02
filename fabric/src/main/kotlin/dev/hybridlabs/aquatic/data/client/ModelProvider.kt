@@ -471,6 +471,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.COOKED_LOBSTER_TAIL.get(),
             HAItems.RAW_FISH_STEAK.get(),
             HAItems.COOKED_FISH_STEAK.get(),
+            HAItems.SIRENIAN_BEEF.get(),
+            HAItems.SIRENIAN_STEAK.get(),
             HAItems.RAW_FISH_MEAT.get(),
             HAItems.COOKED_FISH_MEAT.get(),
             HAItems.RAW_TENTACLE.get(),

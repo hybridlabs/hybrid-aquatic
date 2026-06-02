@@ -1534,6 +1534,13 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
         offerCookingRecipes(
             exporter,
+            HAItems.SIRENIAN_BEEF.get(),
+            HAItems.SIRENIAN_STEAK.get(),
+            0.3f
+        )
+
+        offerCookingRecipes(
+            exporter,
             HAItems.RAW_FISH_MEAT.get(),
             HAItems.COOKED_FISH_MEAT.get(),
             0.15f

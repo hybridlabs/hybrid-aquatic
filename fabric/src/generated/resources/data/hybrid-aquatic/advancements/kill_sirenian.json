@@ -1,0 +1,56 @@
+{
+  "parent": "hybrid-aquatic:get_clam",
+  "criteria": {
+    "kill_dugong": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "hybrid-aquatic:dugong"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "kill_manatee": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "hybrid-aquatic:manatee"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid-aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid-aquatic.kill_sirenian.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "hybrid-aquatic:sirenian_steak"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid-aquatic.kill_sirenian.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_manatee",
+      "kill_dugong"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

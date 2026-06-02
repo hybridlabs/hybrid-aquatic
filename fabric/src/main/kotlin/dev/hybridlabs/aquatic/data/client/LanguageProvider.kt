@@ -84,6 +84,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid-aquatic.plant_clam.title" to "Shell Corporation",
             "advancements.hybrid-aquatic.plant_clam.description" to "Grow your own clams underwater",
 
+            "advancements.hybrid-aquatic.kill_sirenian.title" to "Sea Cow Tipper",
+            "advancements.hybrid-aquatic.kill_sirenian.description" to "They're endangered, you know",
+
             "advancements.hybrid-aquatic.nautilus_shell.title" to "Someone Used To Live Here",
             "advancements.hybrid-aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
 
@@ -502,6 +505,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.UNI.get() to "Uni",
             HAItems.RAW_FISH_STEAK.get() to "Fish Steak",
             HAItems.COOKED_FISH_STEAK.get() to "Cooked Fish Steak",
+            HAItems.SIRENIAN_BEEF.get() to "Sirenian Beef",
+            HAItems.SIRENIAN_STEAK.get() to "Sirenian Steak",
             HAItems.RAW_FISH_MEAT.get() to "Raw Fish Meat",
             HAItems.COOKED_FISH_MEAT.get() to "Cooked Fish Meat",
             HAItems.RAW_TENTACLE.get() to "Raw Tentacle",

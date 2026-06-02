@@ -1048,6 +1048,36 @@ object HAItems {
         )
     }
 
+    val SIRENIAN_STEAK = register(
+        "sirenian_steak"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(8)
+                        .saturationMod(0.8F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
+    val SIRENIAN_BEEF = register(
+        "sirenian_beef"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(3)
+                        .saturationMod(0.6F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val MACKEREL = register(
         "mackerel"
     ) {

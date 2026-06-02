@@ -294,6 +294,8 @@ object HAItemGroups {
                 entries.accept(HAItems.COOKED_FISH_MEAT.get())
                 entries.accept(HAItems.RAW_FISH_STEAK.get())
                 entries.accept(HAItems.COOKED_FISH_STEAK.get())
+                entries.accept(HAItems.SIRENIAN_BEEF.get())
+                entries.accept(HAItems.SIRENIAN_STEAK.get())
                 entries.accept(HAItems.RAW_TENTACLE.get())
                 entries.accept(HAItems.COOKED_TENTACLE.get())
                 entries.accept(HAItems.RAW_SHRIMP.get())
