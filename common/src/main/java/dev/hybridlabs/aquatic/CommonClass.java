@@ -19,8 +19,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.nio.file.Path;
 
@@ -45,8 +43,6 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.SOUND_EVENT, MOD_ID);
     public static final RegistrationProvider<Fluid> FLUIDS =
             RegistrationProvider.get(BuiltInRegistries.FLUID, MOD_ID);
-    public static final RegistrationProvider<FluidType> FLUID_TYPES =
-            RegistrationProvider.get(ForgeRegistries.Keys.FLUID_TYPES, MOD_ID);
     public static final RegistrationProvider<PaintingVariant> PAINTINGS =
             RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
     public static final RegistrationProvider<Potion> POTIONS =
