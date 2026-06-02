@@ -4,7 +4,6 @@ package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.fluid.HAFluids
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.seashell.*
@@ -249,11 +248,6 @@ object HAItems {
     val MAGNETIC_HOOK = register("magnetic_hook") { HookItem(Item.Properties().durability(8)) }
     val CREEPERMAGNET_HOOK = register("creepermagnet_hook") { HookItem(Item.Properties().durability(1)) }
     val OMINOUS_HOOK = register("ominous_hook") { HookItem(Item.Properties().durability(1)) }
-
-    val BRINE_BUCKET = register("brine_bucket") { BucketItem(HAFluids.BRINE_STILL.get(),Item.Properties()
-        .stacksTo(1)
-        .craftRemainder(Items.BUCKET)
-    ) }
 
     //#region Seashell Set
     val SEASHELL_SPEAR = register(

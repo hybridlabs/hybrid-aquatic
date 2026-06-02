@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
@@ -575,7 +576,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get() to "Comically Large Nautilus Shell",
             HAItems.ARGONAUT.get() to "Argonaut",
             HAItems.DIVING_WEIGHT.get() to "Diving Weight",
-            HAItems.BRINE_BUCKET.get() to "Brine Bucket",
+            HAPlatformItems.BRINE_BUCKET.get() to "Brine Bucket",
             HAItems.SULFUR.get() to "Sulfur",
             HAItems.CORAL_CHUNK.get() to "Coral Chunk",
             HAItems.BARBED_HOOK.get() to "Barbed Hook",

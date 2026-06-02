@@ -4,7 +4,7 @@ package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.fluid.HAFluids
+import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*
@@ -98,7 +98,7 @@ class ConfiguredFeatureProvider(
                         HABlocks.RED_BRINESTONE.get()
                     ),
                     BlockStateProvider.simple(
-                        HAFluids.BRINE_STILL.get()
+                        HAPlatformFluids.BRINE_STILL.get()
                             .defaultFluidState()
                             .createLegacyBlock()
                     )
@@ -115,7 +115,7 @@ class ConfiguredFeatureProvider(
                         HABlocks.ORANGE_BRINESTONE.get()
                     ),
                     BlockStateProvider.simple(
-                        HAFluids.BRINE_STILL.get()
+                        HAPlatformFluids.BRINE_STILL.get()
                             .defaultFluidState()
                             .createLegacyBlock()
                     )
@@ -132,7 +132,7 @@ class ConfiguredFeatureProvider(
                         HABlocks.YELLOW_BRINESTONE.get()
                     ),
                     BlockStateProvider.simple(
-                        HAFluids.BRINE_STILL.get()
+                        HAPlatformFluids.BRINE_STILL.get()
                             .defaultFluidState()
                             .createLegacyBlock()
                     )

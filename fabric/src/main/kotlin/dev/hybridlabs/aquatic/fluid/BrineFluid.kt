@@ -1,6 +1,6 @@
-package dev.hybridlabs.aquatic.block
+package dev.hybridlabs.aquatic.fluid
 
-import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.tag.HAFluidTags
 import net.minecraft.core.BlockPos
@@ -29,15 +29,15 @@ import java.util.*
 abstract class BrineFluid : FlowingFluid() {
 
     override fun getFlowing(): Fluid {
-        return HAFluids.BRINE_FLOWING.get()
+        return HAPlatformFluids.BRINE_FLOWING.get()
     }
 
     override fun getSource(): Fluid {
-        return HAFluids.BRINE_STILL.get()
+        return HAPlatformFluids.BRINE_STILL.get()
     }
 
     override fun getBucket(): Item {
-        return HAItems.BRINE_BUCKET.get()
+        return HAPlatformItems.BRINE_BUCKET.get()
     }
 
     public override fun animateTick(level: Level, pos: BlockPos, state: FluidState, random: RandomSource) {
@@ -105,7 +105,7 @@ abstract class BrineFluid : FlowingFluid() {
     }
 
     public override fun createLegacyBlock(state: FluidState): BlockState {
-        return HABlocks.BRINE.get().defaultBlockState()
+        return HAPlatformFluids.BRINE.get().defaultBlockState()
             .setValue(LiquidBlock.LEVEL, getLegacyLevel(state))
     }
 
