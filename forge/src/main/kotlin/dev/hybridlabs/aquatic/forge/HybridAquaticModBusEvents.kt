@@ -25,6 +25,7 @@ import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
+import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.ItemRenderer
@@ -197,6 +198,14 @@ object HybridAquaticModBusEvents {
         registerTrinketRenderer(
             HAItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
+
+        listOf(
+            HAPlatformFluids.BRINE_STILL,
+            HAPlatformFluids.BRINE_FLOWING
+        ).forEach { fluid ->
+            ItemBlockRenderTypes.setRenderLayer(fluid.get(), RenderType.translucent())
+        }
+
     }
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {

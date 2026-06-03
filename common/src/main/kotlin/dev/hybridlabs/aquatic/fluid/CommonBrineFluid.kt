@@ -103,8 +103,6 @@ abstract class CommonBrineFluid : FlowingFluid() {
 
     public override fun createLegacyBlock(state: FluidState): BlockState {
         throw AssertionError("Override createLegacyBlock() in forge/fabric")
-        // return HAPlatformFluids.BRINE.get().defaultBlockState()
-        //            .setValue(LiquidBlock.LEVEL, getLegacyLevel(state))
     }
 
     override fun isSame(fluid: Fluid): Boolean {
