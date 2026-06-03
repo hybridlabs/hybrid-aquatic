@@ -4,6 +4,8 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
@@ -15,6 +17,11 @@ import net.minecraft.world.phys.BlockHitResult
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
@@ -31,6 +38,16 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     ) : super(HAEntityTypes.STARFISH_PROJECTILE.get(), owner, level)
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(
+                this, "thrown_controller",
+                AnimationStateHandler { state: AnimationState<StarfishProjectileEntity> ->
+                    if (!inGround)
+                        return@AnimationStateHandler state.setAndContinue(THROWN_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache? {
@@ -38,7 +55,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     }
 
     override fun canBeCollidedWith(): Boolean {
-        return true
+        return inGround
     }
 
     override fun playerTouch(entity: Player) {
@@ -50,6 +67,21 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
 
     override fun getItem(): ItemStack {
         return ItemStack(HAItems.STARFISH.get())
+    }
+
+    override fun interact(player: Player, hand: InteractionHand): InteractionResult {
+        if (!this.level().isClientSide && this.inGround) {
+            val item = ItemStack(HAItems.STARFISH.get())
+
+            if (!player.addItem(item)) {
+                player.drop(item, false)
+            }
+
+            this.discard()
+            return InteractionResult.SUCCESS
+        }
+
+        return InteractionResult.PASS
     }
 
     override fun getDefaultHitGroundSoundEvent(): SoundEvent {
@@ -67,5 +99,9 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
 
     override fun shouldRender(x: Double, y: Double, z: Double): Boolean {
         return true
+    }
+
+    companion object {
+        val THROWN_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.thrown")
     }
 }
