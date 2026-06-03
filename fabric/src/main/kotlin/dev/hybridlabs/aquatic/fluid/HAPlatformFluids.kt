@@ -12,6 +12,7 @@ import java.util.function.Supplier
 object HAPlatformFluids {
     val BRINE_FLOWING = registerFluid("flowing_brine") { BrineFluid.Flowing() }
     val BRINE_STILL = registerFluid("brine") { BrineFluid.Source() }
+
     val BRINE = registerFluidBlock("brine") {
         LiquidBlock(
             BRINE_STILL.get(),
