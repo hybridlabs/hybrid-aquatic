@@ -11,15 +11,15 @@ class BrineFluidType(properties: Properties) : FluidType(properties) {
     override fun initializeClient(consumer: Consumer<IClientFluidTypeExtensions>) {
         consumer.accept(object : IClientFluidTypeExtensions {
             override fun getStillTexture(): ResourceLocation {
-                return CommonClass.locate("brine_still")
+                return CommonClass.locate("block/brine_still")
             }
 
             override fun getFlowingTexture(): ResourceLocation {
-                return CommonClass.locate("brine_flowing")
+                return CommonClass.locate("block/brine_flowing")
             }
 
             override fun getOverlayTexture(): ResourceLocation {
-                return CommonClass.locate("brine_still")
+                return CommonClass.locate("block/brine_still")
             }
         })
     }
