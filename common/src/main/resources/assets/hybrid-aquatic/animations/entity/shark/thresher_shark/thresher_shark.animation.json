@@ -96,19 +96,28 @@
 			"loop": true,
 			"bones": {
 				"torso_2": {
-					"rotation": [-7.5, 0, 0]
+					"rotation": [-7.5, 0, 0],
+					"position": [0, 0, 0]
 				},
 				"tail": {
-					"rotation": [-5, 0, 0]
+					"rotation": [-5, 0, 0],
+					"position": [0, 0, 0]
 				},
 				"tail_fin": {
-					"rotation": [12.5, 0, 0]
+					"rotation": [12.5, 0, 0],
+					"position": [0, 0, 0]
 				},
 				"head": {
-					"rotation": [10, 0, 0]
+					"rotation": [10, 0, 0],
+					"position": [0, 0, 0]
 				},
 				"torso": {
-					"rotation": [0, 0, 0]
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"body": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
 				}
 			}
 		}
