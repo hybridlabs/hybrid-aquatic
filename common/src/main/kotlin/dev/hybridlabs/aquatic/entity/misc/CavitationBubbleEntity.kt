@@ -9,7 +9,6 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile
 import net.minecraft.world.entity.projectile.ProjectileUtil
-import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
 import net.minecraft.world.phys.HitResult
@@ -26,7 +25,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 class CavitationBubbleEntity : AbstractHurtingProjectile,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
-    private var explosionPower = 1
+    private var explosionPower = 3
     private var fuseDuration = -1
     private val trapBubble = this.deltaMovement.lengthSqr() < 0.0025
 
@@ -83,7 +82,14 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
             val f = this.inertia
 
             this.deltaMovement = vec3.add(this.xPower, this.yPower, this.zPower).scale(f.toDouble())
-            this.level().addParticle(this.trailParticle, d0, d1 + 0.5, d2, 0.0, 0.0, 0.0)
+            this.level().addParticle(
+                this.trailParticle,
+                d0,
+                d1 + 0.5,
+                d2,
+                0.0,
+                0.0,
+                0.0)
             this.setPos(d0, d1, d2)
         } else {
             this.discard()
@@ -103,7 +109,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
                     this.triggerAnim("explode_controller", "explode")
 
                     if (fuseDuration < 0) {
-                        fuseDuration = 20
+                        fuseDuration = 30
                     } else {
                         fuseDuration--
 
@@ -122,15 +128,13 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
 
     private fun explode() {
         if (!this.level().isClientSide) {
-            val flag = this.level().gameRules.getBoolean(GameRules.RULE_MOBGRIEFING)
-
             this.level().explode(
                 this,
                 this.x,
                 this.y,
                 this.z,
-                4.0f,
-                flag,
+                this.explosionPower.toFloat(),
+                false,
                 Level.ExplosionInteraction.NONE
             )
 
@@ -138,20 +142,13 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         }
     }
 
-    override fun onHit(result: HitResult) {
-        super.onHit(result)
-        explode()
-    }
-
     override fun onHitEntity(result: EntityHitResult) {
         super.onHitEntity(result)
         if (!this.level().isClientSide) {
             val entity = result.entity
             val entity1 = this.owner
-            entity.hurt(this.damageSources().explosion(this, entity1), 8.0f)
-            if (entity1 is LivingEntity) {
-                this.doEnchantDamageEffects(entity1, entity)
-            }
+            entity.hurt(this.damageSources().explosion(this, entity1), 4.0f)
+            explode()
         }
     }
 
