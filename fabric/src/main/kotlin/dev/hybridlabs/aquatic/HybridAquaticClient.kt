@@ -9,7 +9,6 @@ import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
 import dev.hybridlabs.aquatic.client.render.block.HABlockRendererRegistry
 import dev.hybridlabs.aquatic.client.render.block.HAModelLayerRegistry
-import dev.hybridlabs.aquatic.client.render.block.HAProjectileRendererRegistry
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.fluid.HAFluidRenderer
 import dev.hybridlabs.aquatic.client.render.item.HAGeoRendererRegistry
@@ -26,7 +25,6 @@ object HybridAquaticClient : ClientModInitializer {
 
         HABlockRendererRegistry
         HAItemRendererRegistry
-        HAProjectileRendererRegistry
         HybridAquaticEntityRenderers
         registerWeatherRenderers()
         HAGeoRendererRegistry
