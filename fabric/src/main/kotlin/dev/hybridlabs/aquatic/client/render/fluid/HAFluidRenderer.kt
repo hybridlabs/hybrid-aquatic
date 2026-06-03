@@ -18,6 +18,7 @@ class HAFluidRenderer {
             still, flowing, SimpleFluidRenderHandler(
                 CommonClass.locate("block/${id}_still"),
                 CommonClass.locate("block/${id}_flowing"),
+                CommonClass.locate("block/${id}_overlay"),
                 0xFFFFFF
             )
         )

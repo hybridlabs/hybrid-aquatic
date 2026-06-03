@@ -19,7 +19,7 @@ class BrineFluidType(properties: Properties) : FluidType(properties) {
             }
 
             override fun getOverlayTexture(): ResourceLocation {
-                return CommonClass.locate("block/brine_still")
+                return CommonClass.locate("block/brine_overlay")
             }
         })
     }
