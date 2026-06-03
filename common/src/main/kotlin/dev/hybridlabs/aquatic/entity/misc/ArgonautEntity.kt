@@ -205,6 +205,7 @@ open class ArgonautEntity(
 
     override fun tick() {
         super.tick()
+
         burnTick()
 
         val passenger = this.firstPassenger
@@ -216,6 +217,7 @@ open class ArgonautEntity(
             tickRidden(passenger, passenger.deltaMovement)
         }
 
+        tickLerp()
         if (this.isControlledByLocalInstance) {
             if (this.firstPassenger !is Player) {
                 setPropellerState(left = false, right = false)
@@ -237,6 +239,25 @@ open class ArgonautEntity(
             this.move(MoverType.SELF, this.deltaMovement)
         } else {
             this.deltaMovement = Vec3.ZERO
+        }
+    }
+
+    private fun tickLerp() {
+        if (this.isControlledByLocalInstance) {
+            this.lerpSteps = 0
+            this.syncPacketPositionCodec(this.x, this.y, this.z)
+        }
+
+        if (this.lerpSteps > 0) {
+            val d = this.x + (this.lerpX - this.x) / this.lerpSteps
+            val e = this.y + (this.lerpY - this.y) / this.lerpSteps
+            val f = this.z + (this.lerpZ - this.z) / this.lerpSteps
+            val g = Mth.wrapDegrees(this.lerpYRot - this.yRot)
+            this.yRot += g.toFloat() / this.lerpSteps
+            this.xRot += (this.lerpXRot - this.xRot).toFloat() / this.lerpSteps
+            this.lerpSteps--
+            this.setPos(d, e, f)
+            this.setRot(this.yRot, this.xRot)
         }
     }
 
