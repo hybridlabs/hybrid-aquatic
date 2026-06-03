@@ -18,6 +18,7 @@ import dev.hybridlabs.aquatic.client.render.block.HABlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
@@ -65,6 +66,8 @@ object HybridAquaticModBusEvents {
                 MOD_BUS.addListener(::onServerSetup)
                 HABiomes.addBiomes()
             })
+
+        HAPlatformFluids.FLUID_TYPES.register(MOD_BUS)
     }
 
     private fun loadSeaMessages(event: DataPackRegistryEvent.NewRegistry) {

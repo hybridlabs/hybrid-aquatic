@@ -1,7 +1,12 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
+import dev.hybridlabs.aquatic.item.HAItems.register
 import dev.hybridlabs.aquatic.item.HAItems.registerBlockItem
+import net.minecraft.world.item.BucketItem
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
 
 object HAPlatformItems {
 
@@ -40,4 +45,10 @@ object HAPlatformItems {
 
     val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HAPlatformBlocks.GLOWSLIME_BLOCK.get() }
     val HAGSLIME_BLOCK = registerBlockItem("hagslime_block") { HAPlatformBlocks.HAGSLIME_BLOCK.get() }
+
+    val BRINE_BUCKET = register("brine_bucket") {
+        BucketItem(HAPlatformFluids.BRINE_STILL.get(),Item.Properties()
+            .stacksTo(1)
+            .craftRemainder(Items.BUCKET)
+        ) }
 }
