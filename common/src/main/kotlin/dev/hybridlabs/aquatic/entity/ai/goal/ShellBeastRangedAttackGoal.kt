@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
-import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
+import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*

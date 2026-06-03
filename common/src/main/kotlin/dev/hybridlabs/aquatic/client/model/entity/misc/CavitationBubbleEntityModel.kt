@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.misc
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
+import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation

@@ -12,7 +12,7 @@ import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.*
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
-import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
+import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.entity.shark.*

@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.client.data.HypnoticEntities
 import dev.hybridlabs.aquatic.entity.ai.goal.HypnotizeTargetGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
-import dev.hybridlabs.aquatic.entity.misc.CavitationBubbleEntity
+import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag

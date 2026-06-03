@@ -1,4 +1,4 @@
-package dev.hybridlabs.aquatic.entity.misc
+package dev.hybridlabs.aquatic.entity.projectile
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.core.particles.ParticleOptions
