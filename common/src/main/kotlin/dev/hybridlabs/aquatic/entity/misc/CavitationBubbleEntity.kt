@@ -25,7 +25,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 class CavitationBubbleEntity : AbstractHurtingProjectile,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
-    private var explosionPower = 3
+    private var explosionPower = 4
     private var fuseDuration = -1
     private val trapBubble = this.deltaMovement.lengthSqr() < 0.0025
 
@@ -142,13 +142,22 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         }
     }
 
+    override fun onHit(result: HitResult) {
+        super.onHit(result)
+        explode()
+    }
+
     override fun onHitEntity(result: EntityHitResult) {
         super.onHitEntity(result)
         if (!this.level().isClientSide) {
             val entity = result.entity
             val entity1 = this.owner
-            entity.hurt(this.damageSources().explosion(this, entity1), 4.0f)
-            explode()
+            entity.hurt(this.damageSources()
+                .explosion(this, entity1), 8.0f)
+
+            if (entity1 is LivingEntity) {
+                this.doEnchantDamageEffects(entity1, entity)
+            }
         }
     }
 
