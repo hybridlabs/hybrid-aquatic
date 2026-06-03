@@ -203,7 +203,7 @@ object HybridAquaticModBusEvents {
             HAPlatformFluids.BRINE_STILL,
             HAPlatformFluids.BRINE_FLOWING
         ).forEach { fluid ->
-            ItemBlockRenderTypes.setRenderLayer(fluid.get(), RenderType.translucent())
+            ItemBlockRenderTypes.setRenderLayer(fluid.get(), RenderType.solid())
         }
 
     }
