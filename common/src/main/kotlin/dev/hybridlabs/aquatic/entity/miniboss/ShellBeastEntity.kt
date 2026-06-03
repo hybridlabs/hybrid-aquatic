@@ -278,7 +278,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             AnimationController(
                 this, "spawn_controller",
                 AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
-                    if (this.tickCount < 120 && this.health >= this.maxHealth * 99f && this.isUnderWater)
+                    if (this.tickCount < 120 && this.health >= this.maxHealth * 95f && this.isUnderWater)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
                 }
