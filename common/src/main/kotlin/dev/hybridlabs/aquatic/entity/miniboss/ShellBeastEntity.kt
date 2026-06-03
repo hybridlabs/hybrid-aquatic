@@ -51,16 +51,11 @@ import java.util.function.Predicate
 @Suppress("unused")
 class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
-    private var explosionPower = 0
     private var summonTimer: Int = 0
     var hypnautilusCooldown: Int = 0
     var beaklingCooldown: Int = 0
     private var summonType = SummonType.NONE
     private val minions = synchronizedList(mutableListOf<WeakReference<Mob>>())
-
-    fun getExplosionPower(): Int {
-        return this.explosionPower
-    }
 
     //#region SFX
     override fun getAmbientSound(): SoundEvent {
@@ -184,7 +179,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
-        compound.putByte("ExplosionPower", this.explosionPower.toByte())
         compound.putBoolean("Summoning", isSummoning())
         compound.putInt("SummonTimer", summonTimer)
         compound.putInt("BeaklingCooldown", beaklingCooldown)
@@ -194,10 +188,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     override fun readAdditionalSaveData(compound: CompoundTag) {
         if (hasCustomName()) {
             bossBar.name = this.displayName
-        }
-
-        if (compound.contains("ExplosionPower", 99)) {
-            this.explosionPower = compound.getByte("ExplosionPower").toInt()
         }
 
         this.setSummoning(compound.getBoolean("Summoning"))
@@ -288,7 +278,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             AnimationController(
                 this, "spawn_controller",
                 AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
-                    if (this.tickCount < 120)
+                    if (this.tickCount < 120 && this.health >= this.maxHealth * 99f && this.isUnderWater)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
                 }

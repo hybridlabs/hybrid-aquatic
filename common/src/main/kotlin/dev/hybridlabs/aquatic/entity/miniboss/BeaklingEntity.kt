@@ -116,7 +116,7 @@ class BeaklingEntity(type: EntityType<out HAMinionEntity>, world: Level) :
                 0.0,
                 0.0,
                 0.0,
-                1
+                2
             )
 
             cavitationBubble.setPos(

@@ -120,7 +120,7 @@ class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goa
                     dxFire,
                     dyFire,
                     dzFire,
-                    shellBeast.getExplosionPower()
+                    1
                 )
 
                 cavitationBubble.setPos(

@@ -133,7 +133,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
                 this.x,
                 this.y,
                 this.z,
-                1.0f,
+                2.0f,
                 false,
                 Level.ExplosionInteraction.NONE
             )
@@ -153,11 +153,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
             val entity = result.entity
             val entity1 = this.owner
             entity.hurt(this.damageSources()
-                .explosion(this, entity1), 10.0f)
-
-            if (entity1 is LivingEntity) {
-                this.doEnchantDamageEffects(entity1, entity)
-            }
+                .explosion(this, entity1), 8.0f)
         }
     }
 
