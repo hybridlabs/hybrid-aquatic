@@ -592,6 +592,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.PRISMARINE_ROD.get() to "Prismarine Rod",
             HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get() to "Diving Armor Upgrade Template",
             HAItems.SHARK_TOOTH.get() to "Shark Tooth",
+            HAItems.STARFISH.get() to "Starfish",
             HAItems.PEARL.get() to "Pearl",
             HAItems.BLACK_PEARL.get() to "Black Pearl",
             HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get() to "Comically Large Nautilus Shell",
@@ -901,6 +902,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAEntityTypes.SMALL_TNT.get() to "Small TNT",
             HAEntityTypes.ARGONAUT.get() to "Argonaut",
             HAEntityTypes.CAVITATION_BUBBLE.get() to "Cavitation Bubble",
+            HAEntityTypes.STARFISH_PROJECTILE.get() to "Thrown Starfish",
         )
 
         // verify display name list is valid

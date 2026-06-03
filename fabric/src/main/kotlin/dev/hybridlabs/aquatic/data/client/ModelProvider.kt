@@ -482,6 +482,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.SHARK_TOOTH.get(),
             HAItems.PRISMARINE_ROD.get(),
             HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(),
+            HAItems.STARFISH.get(),
             HAItems.PEARL.get(),
             HAItems.BLACK_PEARL.get(),
             HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get(),

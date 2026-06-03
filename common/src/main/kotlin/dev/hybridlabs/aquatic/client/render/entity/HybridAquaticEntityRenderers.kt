@@ -10,10 +10,7 @@ import dev.hybridlabs.aquatic.client.render.entity.mammal.ManateeEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.*
-import dev.hybridlabs.aquatic.client.render.entity.misc.ArgonautEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.misc.CavitationBubbleEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.misc.DepthChargeEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.misc.SmallTNTEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.misc.*
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.platform.ClientServices
@@ -851,5 +848,11 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.CAVITATION_BUBBLE,
             ::CavitationBubbleEntityRenderer
+        )
+
+    val STARFISH_PROJECTILE =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.STARFISH_PROJECTILE,
+            ::StarfishProjectileRenderer
         )
 }

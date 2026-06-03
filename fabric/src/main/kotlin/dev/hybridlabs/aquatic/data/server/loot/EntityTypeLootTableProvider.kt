@@ -70,6 +70,15 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
+        export(exporter, HAEntityTypes.STARFISH.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.STARFISH.get())
+                    ).build()
+            )
+        }
+
         export(exporter, HAEntityTypes.DUGONG.get()) {
             pool(
                 LootPool.lootPool()

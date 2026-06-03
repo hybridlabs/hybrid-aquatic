@@ -15,6 +15,7 @@ import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
+import dev.hybridlabs.aquatic.entity.projectile.StarfishProjectileEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
@@ -1004,6 +1005,12 @@ object HAEntityTypes {
         "cavitation_bubble",
         ::CavitationBubbleEntity,
         EntityDimensions.fixed(0.9f, 0.9f)
+    )
+
+    val STARFISH_PROJECTILE = registerMisc(
+        "starfish_projectile",
+        ::StarfishProjectileEntity,
+        EntityDimensions.fixed(0.5f, 0.1f)
     )
 
     val ARGONAUT = registerMisc(

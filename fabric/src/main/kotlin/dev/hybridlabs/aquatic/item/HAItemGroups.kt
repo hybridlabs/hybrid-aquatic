@@ -380,6 +380,7 @@ object HAItemGroups {
                 entries.accept(HAItems.HAGSLIME.get())
                 entries.accept(HAItems.GLOWSLIME.get())
                 entries.accept(HAItems.SHARK_TOOTH.get())
+                entries.accept(HAItems.STARFISH.get())
                 entries.accept(HAItems.PEARL.get())
                 entries.accept(HAItems.BLACK_PEARL.get())
                 entries.accept(HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get())
