@@ -242,6 +242,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HAItems.SEASHELL_AXE.get())
             .add(HAItems.SEASHELL_SHOVEL.get())
             .add(HAItems.SEASHELL_HOE.get())
+            .add(HAItems.NAUTILUS_HELMET.get())
+            .add(HAItems.NAUTILUS_PAULDRONS.get())
 
         getOrCreateTagBuilder(HAItemTags.TURTLE_SET)
             .add(HAItems.TURTLE_CHESTPLATE.get())
