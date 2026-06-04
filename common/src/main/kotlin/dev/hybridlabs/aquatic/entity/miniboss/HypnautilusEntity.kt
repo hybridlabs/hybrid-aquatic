@@ -77,8 +77,13 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         )
 
         controllers.add(
-            AnimationController(this, "hypnosis_controller") { PlayState.STOP }
-                .triggerableAnim("hypnosis", HYPNOSIS_ANIMATION)
+            AnimationController(this, "hypnosis_controller", 0) { state ->
+                if (isHypnotizing()) {
+                    state.setAndContinue(HYPNOSIS_ANIMATION)
+                } else {
+                    PlayState.STOP
+                }
+            }
         )
     }
 
