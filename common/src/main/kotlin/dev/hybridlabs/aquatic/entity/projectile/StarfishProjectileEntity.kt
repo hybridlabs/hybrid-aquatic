@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
@@ -58,6 +59,13 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
         return inGround
     }
 
+    override fun canCollideWith(entity: Entity): Boolean {
+        if (entity is StarfishProjectileEntity) {
+            return false
+        }
+        return super.canCollideWith(entity)
+    }
+
     override fun playerTouch(entity: Player) {
     }
 
@@ -94,11 +102,19 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     }
 
     override fun getWaterInertia(): Float {
-        return 0.99f
+        return 1.0f
     }
 
     override fun shouldRender(x: Double, y: Double, z: Double): Boolean {
         return true
+    }
+
+    override fun tick() {
+        super.tick()
+
+        if (isInWater && !inGround) {
+            deltaMovement = deltaMovement.add(0.0, 0.05, 0.0)
+        }
     }
 
     companion object {
