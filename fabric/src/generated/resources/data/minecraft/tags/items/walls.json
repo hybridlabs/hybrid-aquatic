@@ -10,6 +10,8 @@
     "hybrid-aquatic:yellow_brinestone_wall",
     "hybrid-aquatic:yellow_brinestone_brick_wall",
     "hybrid-aquatic:schist_wall",
-    "hybrid-aquatic:schist_brick_wall"
+    "hybrid-aquatic:schist_brick_wall",
+    "hybrid-aquatic:chimneystone_wall",
+    "hybrid-aquatic:chimneystone_brick_wall"
   ]
 }

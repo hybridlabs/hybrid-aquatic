@@ -15,6 +15,9 @@
     "hybrid-aquatic:yellow_brinestone_brick_stairs",
     "hybrid-aquatic:schist_stairs",
     "hybrid-aquatic:polished_schist_stairs",
-    "hybrid-aquatic:schist_brick_stairs"
+    "hybrid-aquatic:schist_brick_stairs",
+    "hybrid-aquatic:chimneystone_stairs",
+    "hybrid-aquatic:polished_chimneystone_stairs",
+    "hybrid-aquatic:chimneystone_brick_stairs"
   ]
 }

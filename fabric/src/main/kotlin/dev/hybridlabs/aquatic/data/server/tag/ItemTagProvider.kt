@@ -192,6 +192,10 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HABlocks.POLISHED_SCHIST_SLAB.get().asItem())
             .add(HABlocks.SCHIST_BRICK_SLAB.get().asItem())
 
+            .add(HABlocks.CHIMNEYSTONE_SLAB.get().asItem())
+            .add(HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get().asItem())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_SLAB.get().asItem())
+
         getOrCreateTagBuilder(ItemTags.STAIRS)
             .add(HABlocks.BONE_STAIRS.get().asItem())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get().asItem())
@@ -213,6 +217,10 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HABlocks.POLISHED_SCHIST_STAIRS.get().asItem())
             .add(HABlocks.SCHIST_BRICK_STAIRS.get().asItem())
 
+            .add(HABlocks.CHIMNEYSTONE_STAIRS.get().asItem())
+            .add(HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get().asItem())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get().asItem())
+
         getOrCreateTagBuilder(ItemTags.WALLS)
             .add(HABlocks.BONE_WALL.get().asItem())
             .add(HABlocks.WHITE_SANDSTONE_WALL.get().asItem())
@@ -224,6 +232,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get().asItem())
             .add(HABlocks.SCHIST_WALL.get().asItem())
             .add(HABlocks.SCHIST_BRICK_WALL.get().asItem())
+            .add(HABlocks.CHIMNEYSTONE_WALL.get().asItem())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_WALL.get().asItem())
 
         getOrCreateTagBuilder(ItemTags.SAND)
             .add(HABlocks.WHITE_SAND.get().asItem())

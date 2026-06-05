@@ -16,6 +16,9 @@
     "hybrid-aquatic:yellow_brinestone_brick_slab",
     "hybrid-aquatic:schist_slab",
     "hybrid-aquatic:polished_schist_slab",
-    "hybrid-aquatic:schist_brick_slab"
+    "hybrid-aquatic:schist_brick_slab",
+    "hybrid-aquatic:chimneystone_slab",
+    "hybrid-aquatic:polished_chimneystone_slab",
+    "hybrid-aquatic:chimneystone_brick_slab"
   ]
 }

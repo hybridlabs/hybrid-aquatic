@@ -790,6 +790,171 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         )
         //#endregion
 
+        //chimneystone
+        //#region polished chimneystone
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_CHIMNEYSTONE.get(),
+            HAItems.CHIMNEYSTONE.get()
+        )
+
+        polishedBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_CHIMNEYSTONE.get(),
+            Ingredient.of(HAItems.CHIMNEYSTONE.get())
+        )
+        //#endregion
+
+        //#region chiseled chimneystone
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_CHIMNEYSTONE.get(),
+            HAItems.POLISHED_CHIMNEYSTONE.get()
+        )
+
+        chiseledBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_CHIMNEYSTONE.get(),
+            Ingredient.of(HAItems.POLISHED_CHIMNEYSTONE.get())
+        )
+        //#endregion
+
+        //#region chimneystone stairs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_STAIRS.get(),
+            HAItems.CHIMNEYSTONE.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_CHIMNEYSTONE_STAIRS.get(),
+            HAItems.POLISHED_CHIMNEYSTONE.get()
+        )
+
+        stairBuilder(
+            HAItems.CHIMNEYSTONE_STAIRS.get(),
+            Ingredient.of(HABlocks.CHIMNEYSTONE.get())
+        )
+
+        stairBuilder(
+            HAItems.POLISHED_CHIMNEYSTONE_STAIRS.get(),
+            Ingredient.of(HABlocks.POLISHED_CHIMNEYSTONE.get())
+        )
+        //#endregion
+
+        //#region chimneystone slabs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_SLAB.get(),
+            HAItems.CHIMNEYSTONE.get(),
+            2
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_CHIMNEYSTONE_SLAB.get(),
+            HAItems.POLISHED_CHIMNEYSTONE.get(),
+            2
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.CHIMNEYSTONE_SLAB.get(),
+            HABlocks.CHIMNEYSTONE.get(),
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get(),
+            HABlocks.POLISHED_CHIMNEYSTONE.get(),
+        )
+        //#endregion
+
+        //#region chimneystone walls
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_WALL.get(),
+            HAItems.CHIMNEYSTONE.get()
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.CHIMNEYSTONE_WALL.get(),
+            Ingredient.of(HABlocks.CHIMNEYSTONE.get()),
+        )
+        //#endregion
+
+        //#region chimneystone bricks
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_BRICKS.get(),
+            HAItems.POLISHED_CHIMNEYSTONE.get()
+        )
+
+        polishedBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_BRICKS.get(),
+            Ingredient.of(HAItems.POLISHED_CHIMNEYSTONE.get())
+        )
+        //#endregion
+
+        //#region chimneystone brick stairs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_BRICK_STAIRS.get(),
+            HAItems.CHIMNEYSTONE_BRICKS.get()
+        )
+
+        stairBuilder(
+            HAItems.CHIMNEYSTONE_BRICK_STAIRS.get(),
+            Ingredient.of(HABlocks.CHIMNEYSTONE_BRICKS.get())
+        )
+        //#endregion
+
+        //#region chimneystone brick slabs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_BRICK_SLAB.get(),
+            HAItems.CHIMNEYSTONE_BRICKS.get(),
+            2
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.CHIMNEYSTONE_BRICK_SLAB.get(),
+            HABlocks.CHIMNEYSTONE_BRICKS.get(),
+        )
+        //#endregion
+
+        //#region chimneystone brick walls
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHIMNEYSTONE_BRICK_WALL.get(),
+            HAItems.CHIMNEYSTONE_BRICKS.get()
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.CHIMNEYSTONE_BRICK_WALL.get(),
+            Ingredient.of(HABlocks.CHIMNEYSTONE_BRICKS.get()),
+        )
+        //#endregion
+
         // misc recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RED_BRINESTONE.get(), 8)
             .pattern("TTT")
