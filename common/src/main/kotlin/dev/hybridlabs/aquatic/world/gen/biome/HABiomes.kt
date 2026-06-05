@@ -16,7 +16,6 @@ import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.levelgen.SurfaceRules.*
 
-
 object HABiomes {
     val config = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
 
@@ -188,7 +187,7 @@ object HABiomes {
             sequence(
                 ifTrue(ON_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
                 ifTrue(UNDER_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
+                ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
                 ifTrue(VERY_DEEP_UNDER_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
                 ifTrue(ON_CEILING, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
                 ifTrue(UNDER_CEILING, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
