@@ -111,6 +111,60 @@ object HABlockFamilies {
             .family
     }
 
+    //#region Schist
+    val SCHIST: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.SCHIST.get())
+            .stairs(HABlocks.SCHIST_STAIRS.get())
+            .slab(HABlocks.SCHIST_SLAB.get())
+            .polished(HABlocks.POLISHED_SCHIST.get())
+            .wall(HABlocks.SCHIST_WALL.get())
+            .chiseled(HABlocks.CHISELED_SCHIST.get())
+            .mosaic(HABlocks.SCHIST_BRICKS.get())
+            .family
+    }
+
+    val POLISHED_SCHIST: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.POLISHED_SCHIST.get())
+            .stairs(HABlocks.POLISHED_SCHIST_STAIRS.get())
+            .slab(HABlocks.POLISHED_SCHIST_SLAB.get())
+            .family
+    }
+
+    val SCHIST_BRICKS: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.SCHIST_BRICKS.get())
+            .stairs(HABlocks.SCHIST_BRICK_STAIRS.get())
+            .slab(HABlocks.SCHIST_BRICK_SLAB.get())
+            .wall(HABlocks.SCHIST_BRICK_WALL.get())
+            .family
+    }
+
+    //#region Chimneystone
+    val CHIMNEYSTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.CHIMNEYSTONE.get())
+            .stairs(HABlocks.CHIMNEYSTONE_STAIRS.get())
+            .slab(HABlocks.CHIMNEYSTONE_SLAB.get())
+            .polished(HABlocks.POLISHED_CHIMNEYSTONE.get())
+            .wall(HABlocks.CHIMNEYSTONE_WALL.get())
+            .chiseled(HABlocks.CHISELED_CHIMNEYSTONE.get())
+            .mosaic(HABlocks.CHIMNEYSTONE_BRICKS.get())
+            .family
+    }
+
+    val POLISHED_CHIMNEYSTONE: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.POLISHED_CHIMNEYSTONE.get())
+            .stairs(HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get())
+            .slab(HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get())
+            .family
+    }
+
+    val CHIMNEYSTONE_BRICKS: BlockFamily by lazy {
+        BlockFamily.Builder(HABlocks.CHIMNEYSTONE_BRICKS.get())
+            .stairs(HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get())
+            .slab(HABlocks.CHIMNEYSTONE_BRICK_SLAB.get())
+            .wall(HABlocks.CHIMNEYSTONE_BRICK_WALL.get())
+            .family
+    }
+
     //#region Bone Blocks
     val BONE_BLOCK: BlockFamily by lazy {
         BlockFamily.Builder(Blocks.BONE_BLOCK).dontGenerateModel().dontGenerateRecipe()

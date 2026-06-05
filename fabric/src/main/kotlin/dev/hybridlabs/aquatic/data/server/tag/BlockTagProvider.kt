@@ -159,6 +159,10 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.KELP)
             .add(Blocks.KELP_PLANT)
 
+        getOrCreateTagBuilder(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+            .add(HABlocks.SCHIST.get())
+            .add(HABlocks.CHIMNEYSTONE.get())
+
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE.get())
 
@@ -174,6 +178,8 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.RED_BRINESTONE_BRICK_WALL.get())
             .add(HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get())
             .add(HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get())
+            .add(HABlocks.SCHIST_WALL.get())
+            .add(HABlocks.CHIMNEYSTONE_WALL.get())
 
         getOrCreateTagBuilder(BlockTags.SLABS)
             .add(HABlocks.BONE_SLAB.get())
@@ -193,6 +199,14 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get())
             .add(HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get())
 
+            .add(HABlocks.SCHIST_SLAB.get())
+            .add(HABlocks.POLISHED_SCHIST_SLAB.get())
+            .add(HABlocks.SCHIST_BRICK_SLAB.get())
+
+            .add(HABlocks.CHIMNEYSTONE_SLAB.get())
+            .add(HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_SLAB.get())
+
         getOrCreateTagBuilder(BlockTags.STAIRS)
             .add(HABlocks.BONE_STAIRS.get())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
@@ -209,6 +223,14 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.YELLOW_BRINESTONE_STAIRS.get())
             .add(HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get())
             .add(HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get())
+
+            .add(HABlocks.SCHIST_STAIRS.get())
+            .add(HABlocks.POLISHED_SCHIST_STAIRS.get())
+            .add(HABlocks.SCHIST_BRICK_STAIRS.get())
+
+            .add(HABlocks.CHIMNEYSTONE_STAIRS.get())
+            .add(HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get())
 
         getOrCreateTagBuilder(BlockTags.FENCE_GATES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
@@ -331,6 +353,38 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
             .add(HABlocks.YELLOW_BRINESTONE_WALL.get())
             .add(HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get())
+
+            .add(HABlocks.SCHIST.get())
+            .add(HABlocks.POLISHED_SCHIST.get())
+            .add(HABlocks.CHISELED_SCHIST.get())
+            .add(HABlocks.SCHIST_BRICKS.get())
+
+            .add(HABlocks.SCHIST_SLAB.get())
+            .add(HABlocks.POLISHED_SCHIST_SLAB.get())
+            .add(HABlocks.SCHIST_BRICK_SLAB.get())
+
+            .add(HABlocks.SCHIST_STAIRS.get())
+            .add(HABlocks.POLISHED_SCHIST_STAIRS.get())
+            .add(HABlocks.SCHIST_BRICK_STAIRS.get())
+
+            .add(HABlocks.SCHIST_WALL.get())
+            .add(HABlocks.SCHIST_BRICK_WALL.get())
+
+            .add(HABlocks.CHIMNEYSTONE.get())
+            .add(HABlocks.POLISHED_CHIMNEYSTONE.get())
+            .add(HABlocks.CHISELED_CHIMNEYSTONE.get())
+            .add(HABlocks.CHIMNEYSTONE_BRICKS.get())
+
+            .add(HABlocks.CHIMNEYSTONE_SLAB.get())
+            .add(HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_SLAB.get())
+
+            .add(HABlocks.CHIMNEYSTONE_STAIRS.get())
+            .add(HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get())
+
+            .add(HABlocks.CHIMNEYSTONE_WALL.get())
+            .add(HABlocks.CHIMNEYSTONE_BRICK_WALL.get())
 
             .add(HABlocks.BONE_WALL.get())
             .add(HABlocks.BONE_SLAB.get())

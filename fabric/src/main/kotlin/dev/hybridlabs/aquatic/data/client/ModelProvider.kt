@@ -87,6 +87,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.RED_BRINESTONE.get(),
                 HABlocks.ORANGE_BRINESTONE.get(),
                 HABlocks.YELLOW_BRINESTONE.get(),
+                HABlocks.SCHIST.get(),
+                HABlocks.CHIMNEYSTONE.get(),
             ).forEach(generator::createTrivialCube)
 
             setOf(
@@ -101,6 +103,8 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.CHISELED_RED_BRINESTONE.get(),
                 HABlocks.CHISELED_YELLOW_BRINESTONE.get(),
                 HABlocks.CHISELED_ORANGE_BRINESTONE.get(),
+                HABlocks.CHISELED_SCHIST.get(),
+                HABlocks.CHISELED_CHIMNEYSTONE.get(),
                 HABlocks.WHITE_SANDSTONE.get(),
             ).forEach { block ->
                 generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
@@ -126,6 +130,18 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             generator.family(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
                 .generateFor(HABlockFamilies.POLISHED_YELLOW_BRINESTONE)
+
+            generator.family(HABlocks.SCHIST_BRICKS.get())
+                .generateFor(HABlockFamilies.SCHIST_BRICKS)
+
+            generator.family(HABlocks.POLISHED_SCHIST.get())
+                .generateFor(HABlockFamilies.POLISHED_SCHIST)
+
+            generator.family(HABlocks.CHIMNEYSTONE_BRICKS.get())
+                .generateFor(HABlockFamilies.CHIMNEYSTONE_BRICKS)
+
+            generator.family(HABlocks.POLISHED_CHIMNEYSTONE.get())
+                .generateFor(HABlockFamilies.POLISHED_CHIMNEYSTONE)
 
             //#region Crates
             setOf(

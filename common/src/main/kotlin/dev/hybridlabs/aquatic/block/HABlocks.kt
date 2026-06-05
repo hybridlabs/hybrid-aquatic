@@ -69,24 +69,61 @@ object HABlocks {
     val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(14406560, Properties.copy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
     val WHITE_SAND = register("white_sand") { SandBlock(14406560, Properties.copy(Blocks.SAND)) }
 
-    val WHITE_SANDSTONE = register("white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
-    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") { StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
-    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
-    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") { WallBlock(Properties.copy(WHITE_SANDSTONE.get())) }
+    val WHITE_SANDSTONE = register("white_sandstone") {
+        Block(Properties
+            .copy(Blocks.SANDSTONE)) }
+    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") {
+        StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), Properties
+            .copy(WHITE_SANDSTONE.get())
+            .mapColor(DyeColor.WHITE)) }
+    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") {
+        SlabBlock(Properties
+            .copy(WHITE_SANDSTONE.get())
+            .mapColor(DyeColor.WHITE)) }
+    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") {
+        WallBlock(Properties
+            .copy(WHITE_SANDSTONE.get())) }
 
-    val SMOOTH_WHITE_SANDSTONE = register("smooth_white_sandstone") { Block(Properties.copy(Blocks.SANDSTONE)) }
-    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
-    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+    val SMOOTH_WHITE_SANDSTONE = register("smooth_white_sandstone") {
+        Block(Properties
+            .copy(Blocks.SANDSTONE)) }
+    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") {
+        SlabBlock(Properties
+            .copy(WHITE_SANDSTONE.get())
+            .mapColor(DyeColor.WHITE)) }
+    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") {
+        StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), Properties
+            .copy(WHITE_SANDSTONE.get())
+            .mapColor(DyeColor.WHITE)) }
 
-    val CUT_WHITE_SANDSTONE = register("cut_white_sandstone") { Block(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
-    val CUT_WHITE_SANDSTONE_SLAB = register("cut_white_sandstone_slab") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+    val CUT_WHITE_SANDSTONE = register("cut_white_sandstone") {
+        Block(Properties
+            .copy(WHITE_SANDSTONE.get())
+            .mapColor(DyeColor.WHITE)) }
+    val CUT_WHITE_SANDSTONE_SLAB = register("cut_white_sandstone_slab") {
+        SlabBlock(Properties
+            .copy(WHITE_SANDSTONE.get())
+            .mapColor(DyeColor.WHITE)) }
 
-    val CHISELED_WHITE_SANDSTONE = register("chiseled_white_sandstone") { SlabBlock(Properties.copy(WHITE_SANDSTONE.get()).mapColor(DyeColor.WHITE)) }
+    val CHISELED_WHITE_SANDSTONE = register("chiseled_white_sandstone") {
+        SlabBlock(Properties
+            .copy(WHITE_SANDSTONE.get())
+            .mapColor(DyeColor.WHITE)) }
 
-    val BONE_STAIRS = register("bone_stairs") { StairBlock(Blocks.BONE_BLOCK.defaultBlockState(), Properties.copy(Blocks.BONE_BLOCK).mapColor(DyeColor.WHITE)) }
-    val BONE_SLAB = register("bone_slab") { SlabBlock(Properties.copy(Blocks.BONE_BLOCK).mapColor(DyeColor.WHITE)) }
-    val BONE_WALL = register("bone_wall") { WallBlock(Properties.copy(Blocks.BONE_BLOCK)) }
-    val BONE_FENCE = register("bone_fence") { FenceBlock(Properties.copy(Blocks.BONE_BLOCK)) }
+    val BONE_STAIRS = register("bone_stairs") {
+        StairBlock(Blocks.BONE_BLOCK.defaultBlockState(), Properties
+            .copy(Blocks.BONE_BLOCK)
+            .mapColor(DyeColor.WHITE)) }
+    val BONE_SLAB = register("bone_slab") {
+        SlabBlock(Properties
+            .copy(Blocks.BONE_BLOCK)
+            .mapColor(DyeColor.WHITE)) }
+    val BONE_WALL = register("bone_wall") {
+        WallBlock(Properties
+            .copy(Blocks.BONE_BLOCK)) }
+    val BONE_FENCE = register("bone_fence") {
+        FenceBlock(Properties
+            .copy(Blocks.BONE_BLOCK)) }
 
     val SUSPICIOUS_RED_SAND = register("suspicious_red_sand") {
         BrushableBlock(Blocks.RED_SAND,
@@ -103,59 +140,235 @@ object HABlocks {
 
     val MARINE_SNOW = register("marine_snow") { SandBlock(14406560, Properties.copy(Blocks.MUD)) }
 
-    val RED_BRINESTONE = register("red_brinestone") { Block(Properties.copy(Blocks.DEEPSLATE)) }
-    val RED_BRINESTONE_STAIRS = register("red_brinestone_stairs") { StairBlock(RED_BRINESTONE.get().defaultBlockState(), Properties.copy(RED_BRINESTONE.get()).mapColor(DyeColor.RED)) }
-    val RED_BRINESTONE_SLAB = register("red_brinestone_slab") { SlabBlock(Properties.copy(RED_BRINESTONE.get()).mapColor(DyeColor.RED)) }
-    val RED_BRINESTONE_WALL = register("red_brinestone_wall") { WallBlock(Properties.copy(RED_BRINESTONE.get())) }
+    val RED_BRINESTONE = register("red_brinestone") {
+        Block(Properties
+            .copy(Blocks.DEEPSLATE)) }
+    val RED_BRINESTONE_STAIRS = register("red_brinestone_stairs") {
+        StairBlock(RED_BRINESTONE.get().defaultBlockState(), Properties
+            .copy(RED_BRINESTONE.get())
+            .mapColor(DyeColor.RED)) }
+    val RED_BRINESTONE_SLAB = register("red_brinestone_slab") {
+        SlabBlock(Properties
+        .copy(RED_BRINESTONE.get())
+        .mapColor(DyeColor.RED)) }
+    val RED_BRINESTONE_WALL = register("red_brinestone_wall") {
+        WallBlock(Properties
+        .copy(RED_BRINESTONE.get())) }
 
-    val RED_BRINESTONE_BRICKS = register("red_brinestone_bricks") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val RED_BRINESTONE_BRICK_STAIRS = register("red_brinestone_brick_stairs") { StairBlock(RED_BRINESTONE_BRICKS.get().defaultBlockState(), Properties.copy(RED_BRINESTONE.get()).mapColor(DyeColor.RED)) }
-    val RED_BRINESTONE_BRICK_SLAB = register("red_brinestone_brick_slab") { SlabBlock(Properties.copy(RED_BRINESTONE.get()).mapColor(DyeColor.RED)) }
-    val RED_BRINESTONE_BRICK_WALL = register("red_brinestone_brick_wall") { WallBlock(Properties.copy(RED_BRINESTONE.get())) }
+    val RED_BRINESTONE_BRICKS = register("red_brinestone_bricks") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val RED_BRINESTONE_BRICK_STAIRS = register("red_brinestone_brick_stairs") {
+        StairBlock(RED_BRINESTONE_BRICKS.get().defaultBlockState(), Properties
+            .copy(RED_BRINESTONE.get())
+            .mapColor(DyeColor.RED)) }
+    val RED_BRINESTONE_BRICK_SLAB = register("red_brinestone_brick_slab") {
+        SlabBlock(Properties
+            .copy(RED_BRINESTONE.get())
+            .mapColor(DyeColor.RED)) }
+    val RED_BRINESTONE_BRICK_WALL = register("red_brinestone_brick_wall") {
+        WallBlock(Properties
+            .copy(RED_BRINESTONE.get())) }
 
-    val CHISELED_RED_BRINESTONE = register("chiseled_red_brinestone") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val POLISHED_RED_BRINESTONE = register("polished_red_brinestone") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val POLISHED_RED_BRINESTONE_STAIRS = register("polished_red_brinestone_stairs") { StairBlock(POLISHED_RED_BRINESTONE.get().defaultBlockState(), Properties.copy(POLISHED_RED_BRINESTONE.get()).mapColor(DyeColor.RED)) }
-    val POLISHED_RED_BRINESTONE_SLAB = register("polished_red_brinestone_slab") { SlabBlock(Properties.copy(POLISHED_RED_BRINESTONE.get()).mapColor(DyeColor.RED)) }
+    val CHISELED_RED_BRINESTONE = register("chiseled_red_brinestone") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_RED_BRINESTONE = register("polished_red_brinestone") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_RED_BRINESTONE_STAIRS = register("polished_red_brinestone_stairs") {
+        StairBlock(POLISHED_RED_BRINESTONE.get().defaultBlockState(), Properties
+            .copy(POLISHED_RED_BRINESTONE.get())
+            .mapColor(DyeColor.RED)) }
+    val POLISHED_RED_BRINESTONE_SLAB = register("polished_red_brinestone_slab") {
+        SlabBlock(Properties.copy(POLISHED_RED_BRINESTONE.get())
+            .mapColor(DyeColor.RED)) }
 
-    val ORANGE_BRINESTONE = register("orange_brinestone") { Block(Properties.copy(Blocks.DEEPSLATE)) }
-    val ORANGE_BRINESTONE_STAIRS = register("orange_brinestone_stairs") { StairBlock(ORANGE_BRINESTONE.get().defaultBlockState(), Properties.copy(ORANGE_BRINESTONE.get()).mapColor(DyeColor.ORANGE)) }
-    val ORANGE_BRINESTONE_SLAB = register("orange_brinestone_slab") { SlabBlock(Properties.copy(ORANGE_BRINESTONE.get()).mapColor(DyeColor.ORANGE)) }
-    val ORANGE_BRINESTONE_WALL = register("orange_brinestone_wall") { WallBlock(Properties.copy(ORANGE_BRINESTONE.get())) }
+    val ORANGE_BRINESTONE = register("orange_brinestone") {
+        Block(Properties
+            .copy(Blocks.DEEPSLATE)) }
+    val ORANGE_BRINESTONE_STAIRS = register("orange_brinestone_stairs") {
+        StairBlock(ORANGE_BRINESTONE.get().defaultBlockState(), Properties
+            .copy(ORANGE_BRINESTONE.get())
+            .mapColor(DyeColor.ORANGE)) }
+    val ORANGE_BRINESTONE_SLAB = register("orange_brinestone_slab") {
+        SlabBlock(Properties
+            .copy(ORANGE_BRINESTONE.get())
+            .mapColor(DyeColor.ORANGE)) }
+    val ORANGE_BRINESTONE_WALL = register("orange_brinestone_wall") {
+        WallBlock(Properties
+            .copy(ORANGE_BRINESTONE.get())) }
 
-    val ORANGE_BRINESTONE_BRICKS = register("orange_brinestone_bricks") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val ORANGE_BRINESTONE_BRICK_STAIRS = register("orange_brinestone_brick_stairs") { StairBlock(ORANGE_BRINESTONE_BRICKS.get().defaultBlockState(), Properties.copy(ORANGE_BRINESTONE.get()).mapColor(DyeColor.ORANGE)) }
-    val ORANGE_BRINESTONE_BRICK_SLAB = register("orange_brinestone_brick_slab") { SlabBlock(Properties.copy(ORANGE_BRINESTONE.get()).mapColor(DyeColor.ORANGE)) }
-    val ORANGE_BRINESTONE_BRICK_WALL = register("orange_brinestone_brick_wall") { WallBlock(Properties.copy(ORANGE_BRINESTONE.get())) }
+    val ORANGE_BRINESTONE_BRICKS = register("orange_brinestone_bricks") {
+        Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
+    val ORANGE_BRINESTONE_BRICK_STAIRS = register("orange_brinestone_brick_stairs") {
+        StairBlock(ORANGE_BRINESTONE_BRICKS.get().defaultBlockState(), Properties
+            .copy(ORANGE_BRINESTONE.get())
+            .mapColor(DyeColor.ORANGE)) }
+    val ORANGE_BRINESTONE_BRICK_SLAB = register("orange_brinestone_brick_slab") {
+        SlabBlock(Properties
+            .copy(ORANGE_BRINESTONE.get())
+            .mapColor(DyeColor.ORANGE)) }
+    val ORANGE_BRINESTONE_BRICK_WALL = register("orange_brinestone_brick_wall") {
+        WallBlock(Properties
+            .copy(ORANGE_BRINESTONE.get())) }
 
-    val CHISELED_ORANGE_BRINESTONE = register("chiseled_orange_brinestone") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val POLISHED_ORANGE_BRINESTONE = register("polished_orange_brinestone") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val POLISHED_ORANGE_BRINESTONE_STAIRS = register("polished_orange_brinestone_stairs") { StairBlock(POLISHED_ORANGE_BRINESTONE.get().defaultBlockState(), Properties.copy(POLISHED_ORANGE_BRINESTONE.get()).mapColor(DyeColor.ORANGE)) }
-    val POLISHED_ORANGE_BRINESTONE_SLAB = register("polished_orange_brinestone_slab") { SlabBlock(Properties.copy(POLISHED_ORANGE_BRINESTONE.get()).mapColor(DyeColor.ORANGE)) }
+    val CHISELED_ORANGE_BRINESTONE = register("chiseled_orange_brinestone") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_ORANGE_BRINESTONE = register("polished_orange_brinestone") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_ORANGE_BRINESTONE_STAIRS = register("polished_orange_brinestone_stairs") {
+        StairBlock(POLISHED_ORANGE_BRINESTONE.get().defaultBlockState(), Properties
+            .copy(POLISHED_ORANGE_BRINESTONE.get())
+            .mapColor(DyeColor.ORANGE)) }
+    val POLISHED_ORANGE_BRINESTONE_SLAB = register("polished_orange_brinestone_slab") {
+        SlabBlock(Properties.copy(POLISHED_ORANGE_BRINESTONE.get())
+            .mapColor(DyeColor.ORANGE)) }
 
-    val YELLOW_BRINESTONE = register("yellow_brinestone") { Block(Properties.copy(Blocks.DEEPSLATE)) }
-    val YELLOW_BRINESTONE_STAIRS = register("yellow_brinestone_stairs") { StairBlock(YELLOW_BRINESTONE.get().defaultBlockState(), Properties.copy(YELLOW_BRINESTONE.get()).mapColor(DyeColor.YELLOW)) }
-    val YELLOW_BRINESTONE_SLAB = register("yellow_brinestone_slab") { SlabBlock(Properties.copy(YELLOW_BRINESTONE.get()).mapColor(DyeColor.YELLOW)) }
-    val YELLOW_BRINESTONE_WALL = register("yellow_brinestone_wall") { WallBlock(Properties.copy(YELLOW_BRINESTONE.get())) }
+    val YELLOW_BRINESTONE = register("yellow_brinestone") {
+        Block(Properties.copy(Blocks.DEEPSLATE)) }
+    val YELLOW_BRINESTONE_STAIRS = register("yellow_brinestone_stairs") {
+        StairBlock(YELLOW_BRINESTONE.get().defaultBlockState(), Properties
+            .copy(YELLOW_BRINESTONE.get())
+            .mapColor(DyeColor.YELLOW)) }
+    val YELLOW_BRINESTONE_SLAB = register("yellow_brinestone_slab") {
+        SlabBlock(Properties
+            .copy(YELLOW_BRINESTONE.get())
+            .mapColor(DyeColor.YELLOW)) }
+    val YELLOW_BRINESTONE_WALL = register("yellow_brinestone_wall") {
+        WallBlock(Properties
+            .copy(YELLOW_BRINESTONE.get())) }
 
-    val YELLOW_BRINESTONE_BRICKS = register("yellow_brinestone_bricks") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val YELLOW_BRINESTONE_BRICK_STAIRS = register("yellow_brinestone_brick_stairs") { StairBlock(YELLOW_BRINESTONE_BRICKS.get().defaultBlockState(), Properties.copy(YELLOW_BRINESTONE.get()).mapColor(DyeColor.YELLOW)) }
-    val YELLOW_BRINESTONE_BRICK_SLAB = register("yellow_brinestone_brick_slab") { SlabBlock(Properties.copy(YELLOW_BRINESTONE.get()).mapColor(DyeColor.YELLOW)) }
-    val YELLOW_BRINESTONE_BRICK_WALL = register("yellow_brinestone_brick_wall") { WallBlock(Properties.copy(YELLOW_BRINESTONE.get())) }
+    val YELLOW_BRINESTONE_BRICKS = register("yellow_brinestone_bricks") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val YELLOW_BRINESTONE_BRICK_STAIRS = register("yellow_brinestone_brick_stairs") {
+        StairBlock(YELLOW_BRINESTONE_BRICKS.get().defaultBlockState(), Properties
+            .copy(YELLOW_BRINESTONE.get())
+            .mapColor(DyeColor.YELLOW)) }
+    val YELLOW_BRINESTONE_BRICK_SLAB = register("yellow_brinestone_brick_slab") {
+        SlabBlock(Properties.copy(YELLOW_BRINESTONE.get())
+            .mapColor(DyeColor.YELLOW)) }
+    val YELLOW_BRINESTONE_BRICK_WALL = register("yellow_brinestone_brick_wall") {
+        WallBlock(Properties.copy(YELLOW_BRINESTONE.get())) }
 
-    val CHISELED_YELLOW_BRINESTONE = register("chiseled_yellow_brinestone") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val POLISHED_YELLOW_BRINESTONE = register("polished_yellow_brinestone") { Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
-    val POLISHED_YELLOW_BRINESTONE_STAIRS = register("polished_yellow_brinestone_stairs") { StairBlock(POLISHED_YELLOW_BRINESTONE.get().defaultBlockState(), Properties.copy(POLISHED_YELLOW_BRINESTONE.get()).mapColor(DyeColor.YELLOW)) }
-    val POLISHED_YELLOW_BRINESTONE_SLAB = register("polished_yellow_brinestone_slab") { SlabBlock(Properties.copy(POLISHED_YELLOW_BRINESTONE.get()).mapColor(DyeColor.YELLOW)) }
+    val CHISELED_YELLOW_BRINESTONE = register("chiseled_yellow_brinestone") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_YELLOW_BRINESTONE = register("polished_yellow_brinestone") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_YELLOW_BRINESTONE_STAIRS = register("polished_yellow_brinestone_stairs") {
+        StairBlock(POLISHED_YELLOW_BRINESTONE.get().defaultBlockState(), Properties
+            .copy(POLISHED_YELLOW_BRINESTONE.get())
+            .mapColor(DyeColor.YELLOW)) }
+    val POLISHED_YELLOW_BRINESTONE_SLAB = register("polished_yellow_brinestone_slab") {
+        SlabBlock(Properties
+            .copy(POLISHED_YELLOW_BRINESTONE.get())
+            .mapColor(DyeColor.YELLOW)) }
 
-    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
-    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }
-    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL) }
-    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
-    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL) }
-    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL) }
-    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL) }
-    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") { createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val SCHIST = register("schist") {
+        Block(Properties
+            .copy(Blocks.DEEPSLATE)) }
+    val SCHIST_STAIRS = register("schist_stairs") {
+        StairBlock(SCHIST.get().defaultBlockState(), Properties
+        .copy(SCHIST.get())
+        .mapColor(DyeColor.BLACK)) }
+    val SCHIST_SLAB = register("schist_slab") {
+        SlabBlock(Properties
+        .copy(SCHIST.get())
+        .mapColor(DyeColor.BLACK)) }
+    val SCHIST_WALL = register("schist_wall") {
+        WallBlock(Properties
+        .copy(SCHIST.get())) }
+
+    val SCHIST_BRICKS = register("schist_bricks") {
+        Block(Properties
+            .copy(Blocks.POLISHED_DEEPSLATE)) }
+    val SCHIST_BRICK_STAIRS = register("schist_brick_stairs") {
+        StairBlock(SCHIST_BRICKS.get().defaultBlockState(), Properties
+        .copy(SCHIST.get()).mapColor(DyeColor.BLACK)) }
+    val SCHIST_BRICK_SLAB = register("schist_brick_slab") {
+        SlabBlock(Properties.copy(SCHIST.get())
+            .mapColor(DyeColor.BLACK)) }
+    val SCHIST_BRICK_WALL = register("schist_brick_wall") {
+        WallBlock(Properties.copy(SCHIST.get())) }
+
+    val CHISELED_SCHIST = register("chiseled_schist") {
+        Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_SCHIST = register("polished_schist") {
+        Block(Properties.copy(Blocks.POLISHED_DEEPSLATE)) }
+    val POLISHED_SCHIST_STAIRS = register("polished_schist_stairs") {
+        StairBlock(POLISHED_SCHIST.get().defaultBlockState(), Properties
+            .copy(POLISHED_SCHIST.get())
+            .mapColor(DyeColor.BLACK)) }
+    val POLISHED_SCHIST_SLAB = register("polished_schist_slab") {
+        SlabBlock(Properties.copy(POLISHED_SCHIST.get())
+            .mapColor(DyeColor.BLACK)) }
+
+    val CHIMNEYSTONE = register("chimneystone") {
+        Block(Properties
+            .copy(Blocks.TUFF)) }
+    val CHIMNEYSTONE_STAIRS = register("chimneystone_stairs") {
+        StairBlock(CHIMNEYSTONE.get().defaultBlockState(), Properties
+            .copy(CHIMNEYSTONE.get())
+            .mapColor(DyeColor.BROWN)) }
+    val CHIMNEYSTONE_SLAB = register("chimneystone_slab") {
+        SlabBlock(Properties
+            .copy(CHIMNEYSTONE.get())
+            .mapColor(DyeColor.BROWN)) }
+    val CHIMNEYSTONE_WALL = register("chimneystone_wall") {
+        WallBlock(Properties
+            .copy(CHIMNEYSTONE.get())) }
+
+    val CHIMNEYSTONE_BRICKS = register("chimneystone_bricks") {
+        Block(Properties
+            .copy(Blocks.TUFF)) }
+    val CHIMNEYSTONE_BRICK_STAIRS = register("chimneystone_brick_stairs") {
+        StairBlock(CHIMNEYSTONE_BRICKS.get().defaultBlockState(), Properties
+            .copy(CHIMNEYSTONE.get())
+            .mapColor(DyeColor.BROWN)) }
+    val CHIMNEYSTONE_BRICK_SLAB = register("chimneystone_brick_slab") {
+        SlabBlock(Properties
+            .copy(CHIMNEYSTONE.get())
+            .mapColor(DyeColor.BROWN)) }
+    val CHIMNEYSTONE_BRICK_WALL = register("chimneystone_brick_wall") {
+        WallBlock(Properties
+            .copy(CHIMNEYSTONE.get())) }
+
+    val CHISELED_CHIMNEYSTONE = register("chiseled_chimneystone") {
+        Block(Properties
+            .copy(Blocks.TUFF)) }
+    val POLISHED_CHIMNEYSTONE = register("polished_chimneystone") {
+        Block(Properties
+            .copy(Blocks.TUFF)) }
+    val POLISHED_CHIMNEYSTONE_STAIRS = register("polished_chimneystone_stairs") {
+        StairBlock(POLISHED_CHIMNEYSTONE.get().defaultBlockState(), Properties
+            .copy(POLISHED_CHIMNEYSTONE.get())
+            .mapColor(DyeColor.BROWN)) }
+    val POLISHED_CHIMNEYSTONE_SLAB = register("polished_chimneystone_slab") {
+        SlabBlock(Properties
+            .copy(POLISHED_CHIMNEYSTONE.get())
+            .mapColor(DyeColor.BROWN)) }
+
+    val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.BASKING_SHARK, Blocks.GRAY_WOOL) }
+    val BULL_SHARK_PLUSHIE = register("bull_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.BULL_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val FRILLED_SHARK_PLUSHIE = register("frilled_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.FRILLED_SHARK, Blocks.GRAY_WOOL) }
+    val GREAT_WHITE_SHARK_PLUSHIE = register("great_white_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.GREAT_WHITE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val HAMMERHEAD_SHARK_PLUSHIE = register("hammerhead_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.HAMMERHEAD_SHARK, Blocks.LIGHT_GRAY_WOOL) }
+    val THRESHER_SHARK_PLUSHIE = register("thresher_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.THRESHER_SHARK, Blocks.LIGHT_BLUE_WOOL) }
+    val TIGER_SHARK_PLUSHIE = register("tiger_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.TIGER_SHARK, Blocks.BLACK_WOOL) }
+    val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") {
+        createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK, Blocks.LIGHT_GRAY_WOOL) }
 
     val PEARL_BLOCK = register("pearl_block") { Block(Properties.copy(Blocks.QUARTZ_BLOCK)) }
     val BLACK_PEARL_BLOCK = register("black_pearl_block") { Block(Properties.copy(Blocks.QUARTZ_BLOCK)) }

@@ -625,6 +625,171 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         //#endregion
         //#endregion
 
+        //schist
+        //#region polished schist
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_SCHIST.get(),
+            HAItems.SCHIST.get()
+        )
+
+        polishedBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_SCHIST.get(),
+            Ingredient.of(HAItems.SCHIST.get())
+        )
+        //#endregion
+
+        //#region chiseled schist
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_SCHIST.get(),
+            HAItems.POLISHED_SCHIST.get()
+        )
+
+        chiseledBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.CHISELED_SCHIST.get(),
+            Ingredient.of(HAItems.POLISHED_SCHIST.get())
+        )
+        //#endregion
+
+        //#region schist stairs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_STAIRS.get(),
+            HAItems.SCHIST.get()
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_SCHIST_STAIRS.get(),
+            HAItems.POLISHED_SCHIST.get()
+        )
+
+        stairBuilder(
+            HAItems.SCHIST_STAIRS.get(),
+            Ingredient.of(HABlocks.SCHIST.get())
+        )
+
+        stairBuilder(
+            HAItems.POLISHED_SCHIST_STAIRS.get(),
+            Ingredient.of(HABlocks.POLISHED_SCHIST.get())
+        )
+        //#endregion
+
+        //#region schist slabs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_SLAB.get(),
+            HAItems.SCHIST.get(),
+            2
+        )
+
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.POLISHED_SCHIST_SLAB.get(),
+            HAItems.POLISHED_SCHIST.get(),
+            2
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.SCHIST_SLAB.get(),
+            HABlocks.SCHIST.get(),
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.POLISHED_SCHIST_SLAB.get(),
+            HABlocks.POLISHED_SCHIST.get(),
+        )
+        //#endregion
+
+        //#region schist walls
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_WALL.get(),
+            HAItems.SCHIST.get()
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.SCHIST_WALL.get(),
+            Ingredient.of(HABlocks.SCHIST.get()),
+        )
+        //#endregion
+
+        //#region schist bricks
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_BRICKS.get(),
+            HAItems.POLISHED_SCHIST.get()
+        )
+
+        polishedBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_BRICKS.get(),
+            Ingredient.of(HAItems.POLISHED_SCHIST.get())
+        )
+        //#endregion
+
+        //#region schist brick stairs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_BRICK_STAIRS.get(),
+            HAItems.SCHIST_BRICKS.get()
+        )
+
+        stairBuilder(
+            HAItems.SCHIST_BRICK_STAIRS.get(),
+            Ingredient.of(HABlocks.SCHIST_BRICKS.get())
+        )
+        //#endregion
+
+        //#region schist brick slabs
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_BRICK_SLAB.get(),
+            HAItems.SCHIST_BRICKS.get(),
+            2
+        )
+
+        slab(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.SCHIST_BRICK_SLAB.get(),
+            HABlocks.SCHIST_BRICKS.get(),
+        )
+        //#endregion
+
+        //#region schist brick walls
+        stonecutterResultFromBase(
+            exporter,
+            RecipeCategory.BUILDING_BLOCKS,
+            HAItems.SCHIST_BRICK_WALL.get(),
+            HAItems.SCHIST_BRICKS.get()
+        )
+
+        wallBuilder(
+            RecipeCategory.BUILDING_BLOCKS,
+            HABlocks.SCHIST_BRICK_WALL.get(),
+            Ingredient.of(HABlocks.SCHIST_BRICKS.get()),
+        )
+        //#endregion
+
         // misc recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RED_BRINESTONE.get(), 8)
             .pattern("TTT")

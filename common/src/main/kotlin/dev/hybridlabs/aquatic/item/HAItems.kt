@@ -683,6 +683,36 @@ object HAItems {
     val POLISHED_YELLOW_BRINESTONE = registerBlockItem("polished_yellow_brinestone") { HABlocks.POLISHED_YELLOW_BRINESTONE.get() }
     val POLISHED_YELLOW_BRINESTONE_STAIRS = registerBlockItem("polished_yellow_brinestone_stairs") { HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get() }
     val POLISHED_YELLOW_BRINESTONE_SLAB = registerBlockItem("polished_yellow_brinestone_slab") { HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get() }
+
+    val SCHIST = registerBlockItem("schist") { HABlocks.SCHIST.get() }
+    val SCHIST_STAIRS = registerBlockItem("schist_stairs") { HABlocks.SCHIST_STAIRS.get() }
+    val SCHIST_SLAB = registerBlockItem("schist_slab") { HABlocks.SCHIST_SLAB.get() }
+    val SCHIST_WALL = registerBlockItem("schist_wall") { HABlocks.SCHIST_WALL.get() }
+
+    val SCHIST_BRICKS = registerBlockItem("schist_bricks") { HABlocks.SCHIST_BRICKS.get() }
+    val SCHIST_BRICK_STAIRS = registerBlockItem("schist_brick_stairs") { HABlocks.SCHIST_BRICK_STAIRS.get() }
+    val SCHIST_BRICK_SLAB = registerBlockItem("schist_brick_slab") { HABlocks.SCHIST_BRICK_SLAB.get() }
+    val SCHIST_BRICK_WALL = registerBlockItem("schist_brick_wall") { HABlocks.SCHIST_BRICK_WALL.get() }
+
+    val CHISELED_SCHIST = registerBlockItem("chiseled_schist") { HABlocks.CHISELED_SCHIST.get() }
+    val POLISHED_SCHIST = registerBlockItem("polished_schist") { HABlocks.POLISHED_SCHIST.get() }
+    val POLISHED_SCHIST_STAIRS = registerBlockItem("polished_schist_stairs") { HABlocks.POLISHED_SCHIST_STAIRS.get() }
+    val POLISHED_SCHIST_SLAB = registerBlockItem("polished_schist_slab") { HABlocks.POLISHED_SCHIST_SLAB.get() }
+
+    val CHIMNEYSTONE = registerBlockItem("chimneystone") { HABlocks.CHIMNEYSTONE.get() }
+    val CHIMNEYSTONE_STAIRS = registerBlockItem("chimneystone_stairs") { HABlocks.CHIMNEYSTONE_STAIRS.get() }
+    val CHIMNEYSTONE_SLAB = registerBlockItem("chimneystone_slab") { HABlocks.CHIMNEYSTONE_SLAB.get() }
+    val CHIMNEYSTONE_WALL = registerBlockItem("chimneystone_wall") { HABlocks.CHIMNEYSTONE_WALL.get() }
+
+    val CHIMNEYSTONE_BRICKS = registerBlockItem("chimneystone_bricks") { HABlocks.CHIMNEYSTONE_BRICKS.get() }
+    val CHIMNEYSTONE_BRICK_STAIRS = registerBlockItem("chimneystone_brick_stairs") { HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get() }
+    val CHIMNEYSTONE_BRICK_SLAB = registerBlockItem("chimneystone_brick_slab") { HABlocks.CHIMNEYSTONE_BRICK_SLAB.get() }
+    val CHIMNEYSTONE_BRICK_WALL = registerBlockItem("chimneystone_brick_wall") { HABlocks.CHIMNEYSTONE_BRICK_WALL.get() }
+
+    val CHISELED_CHIMNEYSTONE = registerBlockItem("chiseled_chimneystone") { HABlocks.CHISELED_CHIMNEYSTONE.get() }
+    val POLISHED_CHIMNEYSTONE = registerBlockItem("polished_chimneystone") { HABlocks.POLISHED_CHIMNEYSTONE.get() }
+    val POLISHED_CHIMNEYSTONE_STAIRS = registerBlockItem("polished_chimneystone_stairs") { HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get() }
+    val POLISHED_CHIMNEYSTONE_SLAB = registerBlockItem("polished_chimneystone_slab") { HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get() }
     //#endregion
 
     //#region Plushies
