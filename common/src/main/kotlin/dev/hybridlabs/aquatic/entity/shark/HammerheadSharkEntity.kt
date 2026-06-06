@@ -36,7 +36,6 @@ class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: 
                 HAEntityTags.CRAB,
                 HAEntityTags.LOBSTER,
                 HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.SMALL_SHARK,
                 HAEntityTags.RAY,
             ),
             listOf(
