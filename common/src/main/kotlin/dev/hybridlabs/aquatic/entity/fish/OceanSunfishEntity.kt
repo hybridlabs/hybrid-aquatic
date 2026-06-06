@@ -130,7 +130,7 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
+                        biome.`is`(HABiomeTags.SHALLOW_LUKEWARM_OCEANS) -> {
                             HOODWINKER
                         }
 
@@ -138,7 +138,7 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
                             SHARPTAIL
                         }
 
-                        biome.`is`(HABiomeTags.TEMPERATE_OCEANS) -> {
+                        biome.`is`(HABiomeTags.SHALLOW_TEMPERATE_OCEANS) -> {
                             OCEAN
                         }
 
