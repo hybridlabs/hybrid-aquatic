@@ -50,7 +50,7 @@
 					]
 				},
 				{
-					"name": "top_fin",
+					"name": "dorsal_fin",
 					"parent": "torso",
 					"pivot": [-1, 24, 11],
 					"cubes": [
@@ -58,7 +58,7 @@
 					]
 				},
 				{
-					"name": "bottom_fin",
+					"name": "pelvic_fin",
 					"parent": "torso",
 					"pivot": [-1, 0, 11],
 					"cubes": [

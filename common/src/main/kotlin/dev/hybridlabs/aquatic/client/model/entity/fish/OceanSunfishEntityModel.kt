@@ -10,6 +10,7 @@ class OceanSunfishEntityModel : HAFishEntityModel<OceanSunfishEntity>("ocean_sun
             OceanSunfishEntity.Companion.Type.OCEAN -> OCEAN_TEXTURE
             OceanSunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_TEXTURE
             OceanSunfishEntity.Companion.Type.SHARPTAIL -> SHARPTAIL_TEXTURE
+            OceanSunfishEntity.Companion.Type.GIANT -> GIANT_TEXTURE
         }
     }
 
@@ -18,6 +19,7 @@ class OceanSunfishEntityModel : HAFishEntityModel<OceanSunfishEntity>("ocean_sun
             OceanSunfishEntity.Companion.Type.OCEAN -> SUNFISH_MODEL
             OceanSunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_MODEL
             OceanSunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_MODEL
+            OceanSunfishEntity.Companion.Type.GIANT -> GIANT_MODEL
         }
     }
 
@@ -26,6 +28,7 @@ class OceanSunfishEntityModel : HAFishEntityModel<OceanSunfishEntity>("ocean_sun
             OceanSunfishEntity.Companion.Type.OCEAN -> SUNFISH_ANIMATION
             OceanSunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_ANIMATION
             OceanSunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_ANIMATION
+            OceanSunfishEntity.Companion.Type.GIANT -> GIANT_ANIMATION
         }
     }
 

@@ -105,7 +105,8 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             OCEAN(0, "ocean"),
             HOODWINKER(1, "hoodwinker"),
-            SHARPTAIL(2, "sharptail");
+            SHARPTAIL(2, "sharptail"),
+            GIANT(2, "giant");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -139,6 +140,10 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
 
                         biome.`is`(HABiomeTags.TEMPERATE_OCEANS) -> {
                             OCEAN
+                        }
+
+                        biome.`is`(HABiomeTags.DEEP_TEMPERATE_OCEANS) -> {
+                            GIANT
                         }
 
                         else -> {
