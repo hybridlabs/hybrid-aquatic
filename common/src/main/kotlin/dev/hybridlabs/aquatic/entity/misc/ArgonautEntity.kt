@@ -279,16 +279,15 @@ open class ArgonautEntity(
 
     private fun floatArgonaut() {
         if (this.isInWater) {
-            val motion = this.deltaMovement
             val waterFriction = 0.96f
-            this.deltaMovement = Vec3(
-                motion.x * waterFriction,
-                motion.y * waterFriction,
-                motion.z * waterFriction
-            )
+
+            this.deltaMovement = deltaMovement.multiply(waterFriction.toDouble(), waterFriction.toDouble(), waterFriction.toDouble())
             this.deltaRotation *= waterFriction
         } else {
+            val groundFriction = 0.9
+
             if (!this.isNoGravity) {
+                this.deltaMovement = deltaMovement.multiply(groundFriction, 0.0, groundFriction) //ground friction
                 this.deltaMovement = this.deltaMovement.add(0.0, -0.04, 0.0)
             }
             setPropellerState(left = false, right = false)
