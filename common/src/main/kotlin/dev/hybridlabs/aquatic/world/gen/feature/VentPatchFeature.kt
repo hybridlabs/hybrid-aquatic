@@ -89,7 +89,6 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                     candidatePos,
                     random,
                     heightMultiplier,
-                    baseProvider,
                     giantVentProvider
                 )
             ) {
@@ -149,7 +148,6 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         rootPos: BlockPos,
         random: RandomSource,
         heightMultiplier: Double,
-        baseProvider: BlockStateProvider,
         giantVentProvider: BlockStateProvider,
     ): Boolean {
         if (!world.isWaterAt(rootPos)) {
@@ -163,23 +161,16 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
             return false
         }
 
-        val baseThickness = 1 + random.nextInt(3)
+        val minHeight = MAX_VENT_HEIGHT + MIN_VENT_CLEARANCE
 
-        val minHeight = baseThickness + MAX_VENT_HEIGHT + MIN_VENT_CLEARANCE
-
-        mutablePos.move(Vec3i(0, minHeight, 0))
+        mutablePos.move(0, minHeight, 0)
         while (mutablePos.y > rootPos.y) {
             if (!world.isWaterAt(mutablePos)) return false
             mutablePos.move(Direction.DOWN)
         }
 
-        repeat(baseThickness) {
-            val state = baseProvider.getState(random, mutablePos)
-            world.setBlock(mutablePos, state, Block.UPDATE_CLIENTS)
-            mutablePos.move(Direction.UP)
-        }
+        val ventHeight = calculateVentHeight(heightMultiplier) + (1 + random.nextInt(3))
 
-        val ventHeight = calculateVentHeight(heightMultiplier)
         repeat(ventHeight) { cycle ->
             generateGiantVent(world, mutablePos, cycle, ventHeight, state)
             mutablePos.move(Direction.UP)
