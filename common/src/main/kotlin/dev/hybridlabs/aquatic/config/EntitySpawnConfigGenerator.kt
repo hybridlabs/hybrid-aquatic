@@ -50,7 +50,7 @@ class EntitySpawnConfigGenerator {
         addRiverFish(
             HAEntityTypes.PUPFISH.get(),
             listOf(BiomeTags.IS_BADLANDS),
-            1, 0, 1)
+            1, 1, 1)
 
         addRiverFish(
             HAEntityTypes.TIGER_BARB.get(),
