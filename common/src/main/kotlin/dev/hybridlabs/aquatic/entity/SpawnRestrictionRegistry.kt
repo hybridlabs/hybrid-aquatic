@@ -28,7 +28,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.SHINER.get(),
             HAEntityTypes.TROUT.get(),
             HAEntityTypes.SUNFISH.get(),
-            HAEntityTypes.OSCAR.get(),
+            HAEntityTypes.CICHLID.get(),
             HAEntityTypes.GOURAMI.get(),
             HAEntityTypes.PLECO.get(),
             HAEntityTypes.DANIO.get(),

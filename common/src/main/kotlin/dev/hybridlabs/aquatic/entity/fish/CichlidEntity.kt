@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class OscarEntity(type: EntityType<out OscarEntity>, world: Level) :
+class CichlidEntity(type: EntityType<out CichlidEntity>, world: Level) :
     HAFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(

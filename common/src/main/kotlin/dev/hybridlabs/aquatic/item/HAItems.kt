@@ -1421,8 +1421,8 @@ object HAItems {
         )
     }
 
-    val NEON_TETRA = register(
-        "neon_tetra"
+    val TETRA = register(
+        "tetra"
     ) {
         Item(
             Item.Properties()
@@ -1451,8 +1451,8 @@ object HAItems {
         )
     }
 
-    val OSCAR = register(
-        "oscar"
+    val CICHLID = register(
+        "cichlid"
     ) {
         Item(
             Item.Properties()
@@ -1945,8 +1945,8 @@ object HAItems {
         registerSpawnEgg("barracuda_spawn_egg", HAEntityTypes.BARRACUDA, 0x64b2c6, 0x3d4d64)
     val OPAH_SPAWN_EGG =
         registerSpawnEgg("opah_spawn_egg", HAEntityTypes.OPAH, 0x6472a7, 0xea6262)
-    val OSCAR_SPAWN_EGG =
-        registerSpawnEgg("oscar_spawn_egg", HAEntityTypes.OSCAR, 0xd5c97e, 0x836136)
+    val CICHLID_SPAWN_EGG =
+        registerSpawnEgg("cichlid_spawn_egg", HAEntityTypes.CICHLID, 0xd5c97e, 0x836136)
     val PARROTFISH_SPAWN_EGG =
         registerSpawnEgg("parrotfish_spawn_egg", HAEntityTypes.PARROTFISH, 0x728e6b, 0xe5c5c3)
     val PIRANHA_SPAWN_EGG =

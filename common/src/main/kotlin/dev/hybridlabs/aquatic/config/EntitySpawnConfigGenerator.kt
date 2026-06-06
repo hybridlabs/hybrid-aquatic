@@ -110,7 +110,7 @@ class EntitySpawnConfigGenerator {
         )
 
         addRiverFish(
-            HAEntityTypes.OSCAR.get(),
+            HAEntityTypes.CICHLID.get(),
             listOf(
                 HABiomeTags.JUNGLE,
                 HABiomeTags.MANGROVES,

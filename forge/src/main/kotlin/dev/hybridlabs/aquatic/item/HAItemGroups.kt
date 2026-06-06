@@ -341,10 +341,10 @@ object HAItemGroups {
 
                 entries.accept(HAItems.BETTA.get())
                 entries.accept(HAItems.DANIO.get())
-                entries.accept(HAItems.NEON_TETRA.get())
+                entries.accept(HAItems.TETRA.get())
                 entries.accept(HAItems.DISCUS.get())
                 entries.accept(HAItems.TIGER_BARB.get())
-                entries.accept(HAItems.OSCAR.get())
+                entries.accept(HAItems.CICHLID.get())
                 entries.accept(HAItems.GOURAMI.get())
                 entries.accept(HAItems.PIRANHA.get())
                 entries.accept(HAItems.CARP.get())

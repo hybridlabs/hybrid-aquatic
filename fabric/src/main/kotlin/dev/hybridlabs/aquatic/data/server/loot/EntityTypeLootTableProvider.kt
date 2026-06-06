@@ -1296,11 +1296,11 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HAEntityTypes.OSCAR.get()) {
+        export(exporter, HAEntityTypes.CICHLID.get()) {
             pool(
                 LootPool.lootPool()
                     .add(
-                        LootItem.lootTableItem(HAItems.OSCAR.get())
+                        LootItem.lootTableItem(HAItems.CICHLID.get())
                             .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()

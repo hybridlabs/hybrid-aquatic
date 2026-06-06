@@ -12,9 +12,9 @@ import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.miniboss.*
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
-import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
+import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.entity.projectile.StarfishProjectileEntity
 import dev.hybridlabs.aquatic.entity.shark.*
 import dev.hybridlabs.aquatic.platform.Services
@@ -105,11 +105,11 @@ object HAEntityTypes {
         PlecoEntity::createMobAttributes
     )
 
-    val OSCAR = registerRiverFish(
-        "oscar",
-        ::OscarEntity,
+    val CICHLID = registerRiverFish(
+        "cichlid",
+        ::CichlidEntity,
         EntityDimensions.fixed(0.4f, 0.4f),
-        OscarEntity::createMobAttributes
+        CichlidEntity::createMobAttributes
     )
 
     val PIRANHA = registerRiverFish(

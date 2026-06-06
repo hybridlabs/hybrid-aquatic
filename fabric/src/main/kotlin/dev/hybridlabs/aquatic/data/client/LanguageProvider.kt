@@ -228,8 +228,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
                     "A small baitfish known for forming large schools.",
             "journal.description.hybrid-aquatic.moray_eel" to
                     "A snake-like predatory fish that hides in crevices and caves on the coral reef.",
-            "journal.description.hybrid-aquatic.oscar" to
-                    "The Oscar, a large, aggressive freshwater cichlid fish, popular in aquariums for its intelligence and striking patterns.",
+            "journal.description.hybrid-aquatic.cichlid" to
+                    "A freshwater fish, popular in aquariums for its intelligence and striking patterns.",
             "journal.description.hybrid-aquatic.pearlfish" to
                     "A small fish that lives inside sea cucumbers.",
             "journal.description.hybrid-aquatic.piranha" to
@@ -245,7 +245,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "journal.description.hybrid-aquatic.coelacanth" to
                     "A deep-sea fish once thought to be extinct, now considered a living fossil.",
             "journal.description.hybrid-aquatic.oarfish" to
-                    "A deep-sea fish once thought to be extinct, now considered a living fossil.",
+                    "A long deep-sea fish that often appears before earthquakes, thought to be the inspiration behind sea serpents.",
             "journal.description.hybrid-aquatic.damselfish" to
                     "An extremely common reef fish, found in a variety of shapes and colors, often swimming in large schools.",
             "journal.description.hybrid-aquatic.parrotfish" to
@@ -266,7 +266,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
                     "A brightly colored reef fish, often found living in anemones, and popularized by a children's movie.",
             "journal.description.hybrid-aquatic.lionfish" to
                     "A predatory reef fish with venomous spines, considered invasive in some parts of the world.",
-            "journal.description.hybrid-aquatic.neon_tetra" to
+            "journal.description.hybrid-aquatic.tetra" to
                     "The Neon Tetra, a small, brightly colored freshwater fish known for its iridescent blue and red stripes, making it a popular choice for home aquariums.",
             "journal.description.hybrid-aquatic.tiger_barb" to
                     "The Tiger Barb, a lively, freshwater fish recognized by its bold black stripes over an orange-gold body, often kept in groups in community tanks.",
@@ -594,7 +594,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.RAW_CRAYFISH.get() to "Raw Crayfish",
             HAItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
             HAItems.LIONFISH.get() to "Lionfish",
-            HAItems.NEON_TETRA.get() to "Neon Tetra",
+            HAItems.TETRA.get() to "Neon Tetra",
             HAItems.DAMSELFISH.get() to "Damselfish",
             HAItems.DRAGONFISH.get() to "Dragonfish",
             HAItems.BLOBFISH.get() to "Blobfish",
@@ -632,7 +632,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.SURGEONFISH.get() to "Surgeonfish",
             HAItems.CLOWNFISH.get() to "Clownfish",
             HAItems.TIGER_BARB.get() to "Tiger Barb",
-            HAItems.OSCAR.get() to "Oscar",
+            HAItems.CICHLID.get() to "Cichlid",
             HAItems.TRIGGERFISH.get() to "Triggerfish",
             HAItems.TREVALLY.get() to "Trevally",
             HAItems.DANIO.get() to "Danio",
@@ -886,7 +886,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAEntityTypes.UMBRELLA_OCTOPUS.get() to "Umbrella Octopus",
             HAEntityTypes.TRIGGERFISH.get() to "Triggerfish",
             HAEntityTypes.TREVALLY.get() to "Trevally",
-            HAEntityTypes.OSCAR.get() to "Oscar",
+            HAEntityTypes.CICHLID.get() to "Cichlid",
             HAEntityTypes.DANIO.get() to "Danio",
             HAEntityTypes.BLOWFISH.get() to "Blowfish",
             HAEntityTypes.TETRA.get() to "Tetra",

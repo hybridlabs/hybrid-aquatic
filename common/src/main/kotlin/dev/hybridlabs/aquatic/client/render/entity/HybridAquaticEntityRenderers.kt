@@ -266,9 +266,9 @@ object HybridAquaticEntityRenderers {
             ::TrevallyEntityRenderer
         )
 
-    val OSCAR =
+    val CICHLID =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HAEntityTypes.OSCAR, ::OscarEntityRenderer
+            HAEntityTypes.CICHLID, ::CichlidEntityRenderer
         )
 
     val DANIO =
