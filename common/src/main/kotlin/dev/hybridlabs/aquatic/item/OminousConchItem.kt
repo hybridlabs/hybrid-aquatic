@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
@@ -64,7 +65,7 @@ class OminousConchItem(
         if (tag.getBoolean(TAG_HAS_SUMMONED)) return result
 
         val biome = level.getBiome(player.blockPosition())
-        if (!biome.`is`(BiomeTags.IS_DEEP_OCEAN)) return result
+        if (!biome.`is`(BiomeTags.IS_DEEP_OCEAN) || !biome.`is`(HABiomeTags.ALL_TRENCHES)) return result
         if (!player.isUnderWater) return result
 
         tag.putBoolean(TAG_HAS_SUMMONED, true)
