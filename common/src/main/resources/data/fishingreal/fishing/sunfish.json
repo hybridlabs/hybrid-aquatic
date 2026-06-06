@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:ocean_sunfish"
+    "item": "hybrid-aquatic:sunfish"
   },
   "result": {
-    "id": "hybrid-aquatic:ocean_sunfish"
+    "id": "hybrid-aquatic:sunfish"
   }
 }
