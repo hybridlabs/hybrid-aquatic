@@ -350,11 +350,14 @@ object HABiomes {
             0.25
         )
 
-        BiomePlacement.replaceOverworld(
-            Biomes.WARM_OCEAN,
-            RED_MEADOW,
-            0.25
-        )
+
+        if (config.config.biomeConfig.generateDeepReefs) {
+            BiomePlacement.replaceOverworld(
+                Biomes.WARM_OCEAN,
+                RED_MEADOW,
+                0.25
+            )
+        }
 
         if (config.config.biomeConfig.generateDeepReefs) {
             BiomePlacement.replaceOverworld(
