@@ -113,6 +113,16 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 Items.GOLDEN_LEGGINGS,
                 Items.GOLDEN_BOOTS,
 
+                Items.NETHERITE_AXE,
+                Items.NETHERITE_PICKAXE,
+                Items.NETHERITE_SWORD,
+                Items.NETHERITE_SHOVEL,
+                Items.NETHERITE_HOE,
+                Items.NETHERITE_HELMET,
+                Items.NETHERITE_CHESTPLATE,
+                Items.NETHERITE_LEGGINGS,
+                Items.NETHERITE_BOOTS,
+
                 HAItems.REINFORCED_DIVING_HELMET.get(),
                 HAItems.REINFORCED_DIVING_SUIT.get(),
                 HAItems.REINFORCED_DIVING_LEGGINGS.get(),
