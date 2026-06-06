@@ -13,6 +13,7 @@ data class HAConfig(
     val enableVillagerTrades: Boolean = true,
     val addFishingLoot: Boolean = true,
     val biomeConfig: BiomeConfig = BiomeConfig(),
+    val featureConfig: FeatureConfig = FeatureConfig(),
     val entitySpawnConfig: List<EntitySpawnConfig> = EntitySpawnConfigGenerator.generate(),
 ) {
     companion object {
@@ -22,7 +23,8 @@ data class HAConfig(
                 Codec.BOOL.fieldOf("enable_wandering_trader_trades").forGetter(HAConfig::enableWanderingTraderTrades),
                 Codec.BOOL.fieldOf("enable_villager_trades").forGetter(HAConfig::enableVillagerTrades),
                 Codec.BOOL.fieldOf("add_fishing_loot").forGetter(HAConfig::addFishingLoot),
-                BiomeConfig.CODEC.fieldOf("worldgen").forGetter(HAConfig::biomeConfig),
+                BiomeConfig.CODEC.fieldOf("biomes").forGetter(HAConfig::biomeConfig),
+                FeatureConfig.CODEC.fieldOf("worldgen_features").forGetter(HAConfig::featureConfig),
                 EntitySpawnConfig.CODEC.listOf().fieldOf("spawn_configuration").forGetter(HAConfig::entitySpawnConfig),
             ).apply(instance, ::HAConfig)
         }
