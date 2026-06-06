@@ -106,7 +106,7 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
             OCEAN(0, "ocean"),
             HOODWINKER(1, "hoodwinker"),
             SHARPTAIL(2, "sharptail"),
-            GIANT(2, "giant");
+            GIANT(3, "giant");
 
             override fun getSerializedName(): String {
                 return this.key
