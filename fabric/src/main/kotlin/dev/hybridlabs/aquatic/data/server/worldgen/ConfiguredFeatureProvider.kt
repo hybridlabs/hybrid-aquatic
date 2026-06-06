@@ -317,7 +317,12 @@ class ConfiguredFeatureProvider(
                 Feature.DISK,
                 DiskConfiguration(
                     RuleBasedBlockStateProvider.simple(HABlocks.AERATED_SAND.get()),
-                    BlockPredicate.matchesBlocks(listOf<Block>(HABlocks.GRASSY_SAND.get())),
+                    BlockPredicate.matchesBlocks(listOf<Block>(
+                        HABlocks.GRASSY_SAND.get(),
+                        HABlocks.SHORESTONE.get(),
+                        HABlocks.CORALSTONE.get(),
+                        Blocks.SAND)
+                    ),
                     UniformInt.of(1, 3),
                     1
                 )

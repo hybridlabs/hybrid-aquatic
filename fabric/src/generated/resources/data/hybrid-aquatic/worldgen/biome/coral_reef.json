@@ -72,7 +72,8 @@
       "minecraft:sea_pickle"
     ],
     [
-      "minecraft:freeze_top_layer"
+      "minecraft:freeze_top_layer",
+      "hybrid-aquatic:aerated_sand_circle"
     ]
   ],
   "has_precipitation": true,

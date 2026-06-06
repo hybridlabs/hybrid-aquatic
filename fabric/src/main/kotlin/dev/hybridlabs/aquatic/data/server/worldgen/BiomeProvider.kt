@@ -180,6 +180,10 @@ class BiomeProvider(
                     entries.ref(HAPlacedFeatures.CORAL_MOUND)
                 )
                 addFeature(
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    entries.ref(HAPlacedFeatures.AERATED_SAND_CIRCLE)
+                )
+                addFeature(
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     entries.ref(HAPlacedFeatures.CORAL_LAYER)
                 )

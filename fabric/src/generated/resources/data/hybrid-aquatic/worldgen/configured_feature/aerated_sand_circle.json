@@ -20,7 +20,12 @@
     },
     "target": {
       "type": "minecraft:matching_blocks",
-      "blocks": "hybrid-aquatic:grassy_sand"
+      "blocks": [
+        "hybrid-aquatic:grassy_sand",
+        "hybrid-aquatic:shorestone",
+        "hybrid-aquatic:coralstone",
+        "minecraft:sand"
+      ]
     }
   }
 }
