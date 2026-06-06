@@ -100,6 +100,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
 
     override fun onHitBlock(result: BlockHitResult) {
         super.onHitBlock(result)
+        this.syncPacketPositionCodec(x, y, z)
         this.setSoundEvent(SoundEvents.TRIDENT_HIT_GROUND)
     }
 
