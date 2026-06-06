@@ -194,6 +194,8 @@ open class ArgonautEntity(
         if (fuelItemStack.isEmpty) return
 
         litTime = getBurnDuration(fuelItemStack)
+        if (litTime <= 0) return
+
         litDuration = litTime
 
         val itemRemainder = fuelItemStack.item.craftingRemainingItem
