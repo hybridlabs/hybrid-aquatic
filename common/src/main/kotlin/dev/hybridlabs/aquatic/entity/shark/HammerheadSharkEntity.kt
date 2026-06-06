@@ -27,7 +27,7 @@ class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: 
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAItems.BLUE_SPOTTED_STINGRAY.get())
+        return stack.`is`(HAItems.STINGRAY.get())
     }
 
     companion object {

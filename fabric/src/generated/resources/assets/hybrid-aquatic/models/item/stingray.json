@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/blue_spotted_stingray"
+    "layer0": "hybrid-aquatic:item/stingray"
   }
 }

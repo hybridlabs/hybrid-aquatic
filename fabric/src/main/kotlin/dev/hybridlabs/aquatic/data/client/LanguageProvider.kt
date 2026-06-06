@@ -202,35 +202,82 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         //-Sound Events
 
         mapOf(
-            "journal.description.hybrid-aquatic.anglerfish" to "A deep-sea predator that lures unwary prey with a glowing bulb",
-            "journal.description.hybrid-aquatic.barreleye" to "With a transparent head and upward-gazing eyes, it watches the waters above.",
-            "journal.description.hybrid-aquatic.boxfish" to "The Boxfish, a small, square-shaped fish with a rigid, box-like body, known for its ability to release toxins when stressed.",
-            "journal.description.hybrid-aquatic.betta" to "The Betta, also known as the Siamese fighting fish, is a colorful, territorial freshwater fish known for its vibrant fins and aggressive behavior towards other males.",
-            "journal.description.hybrid-aquatic.carp" to "A resilient and adaptable fish, sometimes displaying beautiful patterns and colors",
-            "journal.description.hybrid-aquatic.danio" to "The Danio, a small, colorful freshwater fish known for its active swimming behavior and popularity in home aquariums.",
-            "journal.description.hybrid-aquatic.discus" to "The Discus, a vibrant, round-shaped freshwater fish admired for its striking patterns and colors, often kept in aquariums for its beauty.",
-            "journal.description.hybrid-aquatic.dragonfish" to "The Dragonfish, a deep-sea predator with sharp teeth and bioluminescent photophores, known for its ability to produce light to attract prey and communicate in the dark ocean depths.",
-            "journal.description.hybrid-aquatic.golden_dorado" to "The Golden Dorado, a large, powerful freshwater fish native to South America, prized by anglers for its strength and golden scales.",
-            "journal.description.hybrid-aquatic.gourami" to "The Gourami, a diverse group of freshwater fish, recognized for their labyrinth organ allowing them to breathe air and their peaceful nature in community tanks.",
-            "journal.description.hybrid-aquatic.mackerel" to "The Mackerel, a fast-swimming, pelagic fish with streamlined bodies, valued for its role in the food chain and commercial fishing.",
-            "journal.description.hybrid-aquatic.moray_eel" to "The Moray Eel, a long, slender predator with a snake-like body and sharp teeth, known for hiding in crevices in reefs and ambushing prey.",
-            "journal.description.hybrid-aquatic.oscar" to "The Oscar, a large, aggressive freshwater cichlid fish, popular in aquariums for its intelligence and striking patterns.",
-            "journal.description.hybrid-aquatic.pearlfish" to "A secretive dweller that shelters within living hosts.",
-            "journal.description.hybrid-aquatic.piranha" to "The Piranha, a notorious freshwater fish known for its sharp teeth and powerful bite, often exaggerated for its feeding frenzy behavior.",
-            "journal.description.hybrid-aquatic.rockfish" to "The Rockfish, a long-lived marine fish with venomous spines, known for its camouflage abilities and preference for rocky sea floors.",
-            "journal.description.hybrid-aquatic.sea_bass" to "The Sea Bass, a popular game and commercial fish, recognized for its firm texture and mild flavor, often found in coastal waters.",
-            "journal.description.hybrid-aquatic.snailfish" to "The Snailfish, a soft-bodied, deep-sea fish adapted to extreme pressures, often found clinging to rocks or ice with its pelvic fins.",
-            "journal.description.hybrid-aquatic.squirrelfish" to "The Squirrelfish, a nocturnal reef fish with large eyes and a bright red body, known for its loud vocalizations produced by grinding its teeth.",
-            "journal.description.hybrid-aquatic.blue_spotted_stingray" to "The Blue-Spotted Stingray, a striking marine fish known for its vibrant blue spots and flattened body, often found gliding along sandy sea floors.",
-            "journal.description.hybrid-aquatic.spotted_eagle_ray" to "The Spotted Eagle Ray, a graceful, large ray recognized by its dark body covered in white spots and long, whip-like tail, often seen swimming near the surface in tropical waters.",
-            "journal.description.hybrid-aquatic.stonefish" to "Nearly invisible among rock, armed with venomous spines.",
-            "journal.description.hybrid-aquatic.ocean_sunfish" to "The Ocean Sunfish, also known as the Mola, is one of the heaviest bony fish, recognizable by its flattened, disk-like body and tendency to bask near the ocean surface.",
-            "journal.description.hybrid-aquatic.surgeonfish" to "The Surgeonfish, a vibrant, reef-dwelling fish known for its bright colors, popularized by its role in marine ecosystems as an algae grazer.",
-            "journal.description.hybrid-aquatic.neon_tetra" to "The Neon Tetra, a small, brightly colored freshwater fish known for its iridescent blue and red stripes, making it a popular choice for home aquariums.",
-            "journal.description.hybrid-aquatic.tiger_barb" to "The Tiger Barb, a lively, freshwater fish recognized by its bold black stripes over an orange-gold body, often kept in groups in community tanks.",
-            "journal.description.hybrid-aquatic.toadfish" to "The Toadfish, a small, bottom-dwelling fish with a flattened body and rough skin, commonly found in coastal waters and known for its toxicity.",
-            "journal.description.hybrid-aquatic.triggerfish" to "The Triggerfish, a brightly colored, reef-dwelling fish known for its strong jaws, sharp teeth, and the ability to lock its dorsal fin in an upright position for defense.",
-            "journal.description.hybrid-aquatic.tuna" to "A tireless swimmer built for speed and open water pursuit.",
+            "journal.description.hybrid-aquatic.anglerfish" to
+                    "A deep-sea fish with a glowing lure, used to attract prey.",
+            "journal.description.hybrid-aquatic.barreleye" to
+                    "A deep-sea fish with a transparent head, letting it see far above it.",
+            "journal.description.hybrid-aquatic.boxfish" to
+                    "A small box-shaped fish, capable of releasing powerful toxins when stressed.",
+            "journal.description.hybrid-aquatic.betta" to
+                    "The Betta, also known as the Siamese fighting fish, is a colorful, territorial freshwater fish known for its vibrant fins and aggressive behavior towards other males.",
+            "journal.description.hybrid-aquatic.carp" to
+                    "A hardy freshwater fish, can be bred to produce koi and goldfish.",
+            "journal.description.hybrid-aquatic.danio" to
+                    "The Danio, a small, colorful freshwater fish known for its active swimming behavior and popularity in home aquariums.",
+            "journal.description.hybrid-aquatic.discus" to
+                    "The Discus, a vibrant, round-shaped freshwater fish admired for its striking patterns and colors, often kept in aquariums for its beauty.",
+            "journal.description.hybrid-aquatic.dragonfish" to
+                    "A deep-sea fish with a long glowing lure extending from its jaw, used to attract prey.",
+            "journal.description.hybrid-aquatic.golden_dorado" to
+                    "A large freshwater predator, known for its strong scales and large teeth.",
+            "journal.description.hybrid-aquatic.gourami" to
+                    "The Gourami, a diverse group of freshwater fish, recognized for their labyrinth organ allowing them to breathe air and their peaceful nature in community tanks.",
+            "journal.description.hybrid-aquatic.mackerel" to
+                    "A small baitfish known for forming large schools.",
+            "journal.description.hybrid-aquatic.herring" to
+                    "A small baitfish known for forming large schools.",
+            "journal.description.hybrid-aquatic.moray_eel" to
+                    "A snake-like predatory fish that hides in crevices and caves on the coral reef.",
+            "journal.description.hybrid-aquatic.oscar" to
+                    "The Oscar, a large, aggressive freshwater cichlid fish, popular in aquariums for its intelligence and striking patterns.",
+            "journal.description.hybrid-aquatic.pearlfish" to
+                    "A small fish that lives inside sea cucumbers.",
+            "journal.description.hybrid-aquatic.piranha" to
+                    "A small freshwater fish known for its sharp teeth and voracious appetite.",
+            "journal.description.hybrid-aquatic.rockfish" to
+                    "The Rockfish, a long-lived marine fish with venomous spines, known for its camouflage abilities and preference for rocky sea floors.",
+            "journal.description.hybrid-aquatic.sea_bass" to
+                    "The Sea Bass, a popular game and commercial fish, recognized for its firm texture and mild flavor, often found in coastal waters.",
+            "journal.description.hybrid-aquatic.snailfish" to
+                    "A deep-sea fish with an extremely soft and fragile body",
+            "journal.description.hybrid-aquatic.squirrelfish" to
+                    "A nocturnal reef fish known for its large eyes and sharp spine on its underside",
+            "journal.description.hybrid-aquatic.coelacanth" to
+                    "A deep-sea fish once thought to be extinct, now considered a living fossil.",
+            "journal.description.hybrid-aquatic.oarfish" to
+                    "A deep-sea fish once thought to be extinct, now considered a living fossil.",
+            "journal.description.hybrid-aquatic.damselfish" to
+                    "An extremely common reef fish, found in a variety of shapes and colors, often swimming in large schools.",
+            "journal.description.hybrid-aquatic.parrotfish" to
+                    "An important reef fish, known for its parrot-like beak, as well as its ability to eat corals and produce sand.",
+            "journal.description.hybrid-aquatic.sheepshead_wrasse" to
+                    "A large fish that lives in kelp forests, eating sea urchins and helping keep the kelp alive.",
+            "journal.description.hybrid-aquatic.trevally" to
+                    "A schooling fish that prefers to follow large animals around.",
+            "journal.description.hybrid-aquatic.stingray" to
+                    "The Blue-Spotted Stingray, a striking marine fish known for its vibrant blue spots and flattened body, often found gliding along sandy sea floors.",
+            "journal.description.hybrid-aquatic.stonefish" to
+                    "A bottom-dwelling fish that mimics the appearance of rocks around it, known for its extremely potent venom.",
+            "journal.description.hybrid-aquatic.ocean_sunfish" to
+                    "The largest bony fish in the world, known for its indifference to pain.",
+            "journal.description.hybrid-aquatic.surgeonfish" to
+                    "A reef fish, named after sharp protrusions on either side of its tail.",
+            "journal.description.hybrid-aquatic.clownfish" to
+                    "A brightly colored reef fish, often found living in anemones, and popularized by a children's movie.",
+            "journal.description.hybrid-aquatic.lionfish" to
+                    "A predatory reef fish with venomous spines, considered invasive in some parts of the world.",
+            "journal.description.hybrid-aquatic.neon_tetra" to
+                    "The Neon Tetra, a small, brightly colored freshwater fish known for its iridescent blue and red stripes, making it a popular choice for home aquariums.",
+            "journal.description.hybrid-aquatic.tiger_barb" to
+                    "The Tiger Barb, a lively, freshwater fish recognized by its bold black stripes over an orange-gold body, often kept in groups in community tanks.",
+            "journal.description.hybrid-aquatic.blowfish" to
+                    "A type of pufferfish, known for making intricate designs in the sandy seabed.",
+            "journal.description.hybrid-aquatic.triggerfish" to
+                    "A large reef fish, known for its sharp teeth and aggressive behaviour, named after a sharp spine protruding out of its back.",
+            "journal.description.hybrid-aquatic.tuna" to
+                    "An open-water predatory fish that never stops swimming.",
+            "journal.description.hybrid-aquatic.mahi" to
+                    "An open-water predatory fish, known for its bright colors.",
 
             ).forEach { (key, profile) ->
             builder.add(key, profile)
@@ -562,8 +609,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.OARFISH.get() to "Oarfish",
             HAItems.ROCKFISH.get() to "Rockfish",
             HAItems.SEA_BASS.get() to "Sea Bass",
-            HAItems.BLUE_SPOTTED_STINGRAY.get() to "Blue Spotted Stingray",
-            HAItems.SPOTTED_EAGLE_RAY.get() to "Spotted Eagle Ray",
+            HAItems.STINGRAY.get() to "Stingray",
             HAItems.OCEAN_SUNFISH.get() to "Ocean Sunfish",
             HAItems.BLOWFISH.get() to "Blowfish",
             HAItems.PARROTFISH.get() to "Parrotfish",

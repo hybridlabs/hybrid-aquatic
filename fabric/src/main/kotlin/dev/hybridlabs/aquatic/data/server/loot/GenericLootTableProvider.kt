@@ -388,24 +388,6 @@ class GenericLootTableProvider(output: FabricDataOutput) :
 
         //#region Extra Entity Loot
         exporter.accept(
-            HALootTables.BLUE_SPOTTED_STINGRAY,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HAItems.BLUE_SPOTTED_STINGRAY.get())).build()
-                )
-        )
-
-        exporter.accept(
-            HALootTables.SPOTTED_EAGLE_RAY,
-            LootTable.lootTable()
-                .pool(
-                    LootPool.lootPool()
-                        .add(LootItem.lootTableItem(HAItems.SPOTTED_EAGLE_RAY.get())).build()
-                )
-        )
-
-        exporter.accept(
             HALootTables.CLAWED_LOBSTER,
             LootTable.lootTable()
                 .pool(

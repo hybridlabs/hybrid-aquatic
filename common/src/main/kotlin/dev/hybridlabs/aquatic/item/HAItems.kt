@@ -1650,24 +1650,8 @@ object HAItems {
         )
     }
 
-    val BLUE_SPOTTED_STINGRAY = register(
-        "blue_spotted_stingray"
-    ) {
-        Item(
-            Item.Properties()
-                .food(
-                    FoodProperties.Builder()
-                        .nutrition(2)
-                        .saturationMod(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
-                        .meat()
-                        .build()
-                )
-        )
-    }
-
-    val SPOTTED_EAGLE_RAY = register(
-        "spotted_eagle_ray"
+    val STINGRAY = register(
+        "stingray"
     ) {
         Item(
             Item.Properties()

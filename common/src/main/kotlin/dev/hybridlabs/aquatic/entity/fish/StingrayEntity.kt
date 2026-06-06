@@ -62,13 +62,6 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
     }
     //#endregion
 
-    override fun getDefaultLootTable(): ResourceLocation {
-        return when (variant) {
-            Type.BLUE_SPOTTED -> HALootTables.BLUE_SPOTTED_STINGRAY
-            Type.SPOTTED_EAGLE -> HALootTables.SPOTTED_EAGLE_RAY
-        }
-    }
-
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,

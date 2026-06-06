@@ -39,7 +39,4 @@ object HALootTables {
     val DECORATOR_THORN: ResourceLocation = CommonClass.locate("gameplay/decorator_thorn")
     val DECORATOR_LOPHELIA: ResourceLocation = CommonClass.locate("gameplay/decorator_lophelia")
     //#endregion
-
-    val BLUE_SPOTTED_STINGRAY: ResourceLocation = CommonClass.locate("gameplay/blue_spotted_stingray")
-    val SPOTTED_EAGLE_RAY: ResourceLocation = CommonClass.locate("gameplay/spotted_eagle_ray")
 }
