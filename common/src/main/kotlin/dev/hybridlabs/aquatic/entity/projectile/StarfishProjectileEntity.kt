@@ -43,9 +43,11 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
             AnimationController(
                 this, "thrown_controller",
                 AnimationStateHandler { state: AnimationState<StarfishProjectileEntity> ->
-                    if (!inGround)
-                        return@AnimationStateHandler state.setAndContinue(THROWN_ANIMATION)
-                    PlayState.STOP
+                    if (!inGround) return@AnimationStateHandler state.setAndContinue(THROWN_ANIMATION)
+                    else {
+                        state.setControllerSpeed(0.0f)
+                        PlayState.CONTINUE
+                    }
                 }
             )
         )
