@@ -109,16 +109,10 @@ object HABiomes {
     val TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val TRENCH_SURFACE_RULE: RuleSource =
         ifTrue(
-            isBiome(
-                TRENCH
-            ),
+            isBiome(TRENCH),
             sequence(
                 ifTrue(ON_FLOOR, state(HABlocks.MARINE_SNOW.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(VERY_DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(ON_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(UNDER_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
+                state(HABlocks.SCHIST.get().defaultBlockState())
             )
         )
 
@@ -128,11 +122,7 @@ object HABiomes {
             isBiome(WARM_TRENCH),
             sequence(
                 ifTrue(ON_FLOOR, state(HABlocks.MARINE_SNOW.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(VERY_DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(ON_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(UNDER_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
+                state(HABlocks.SCHIST.get().defaultBlockState())
             )
         )
 
@@ -142,11 +132,7 @@ object HABiomes {
         isBiome(LUKEWARM_TRENCH),
         sequence(
             ifTrue(ON_FLOOR, state(HABlocks.MARINE_SNOW.get().defaultBlockState())),
-            ifTrue(UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(VERY_DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(ON_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(UNDER_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
+            state(HABlocks.SCHIST.get().defaultBlockState())
         )
     )
 
@@ -156,11 +142,7 @@ object HABiomes {
             isBiome(COLD_TRENCH),
             sequence(
                 ifTrue(ON_FLOOR, state(HABlocks.MARINE_SNOW.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(VERY_DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(ON_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
-                ifTrue(UNDER_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
+                state(HABlocks.SCHIST.get().defaultBlockState())
             )
         )
 
@@ -169,30 +151,12 @@ object HABiomes {
         isBiome(FROZEN_TRENCH),
         sequence(
             ifTrue(ON_FLOOR, state(HABlocks.MARINE_SNOW.get().defaultBlockState())),
-            ifTrue(UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(VERY_DEEP_UNDER_FLOOR, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(ON_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
-            ifTrue(UNDER_CEILING, state(HABlocks.SCHIST.get().defaultBlockState())),
+            state(HABlocks.SCHIST.get().defaultBlockState())
         )
     )
 
     val SULFURIC_CAVES: ResourceKey<Biome> =
         ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_caves"))
-    val SULFURIC_CAVES_RULE: RuleSource =
-        ifTrue(
-            isBiome(
-                SULFURIC_CAVES
-            ),
-            sequence(
-                ifTrue(ON_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
-                ifTrue(VERY_DEEP_UNDER_FLOOR, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
-                ifTrue(ON_CEILING, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
-                ifTrue(UNDER_CEILING, state(HABlocks.CHIMNEYSTONE.get().defaultBlockState())),
-            )
-        )
     //#endregion
 
     //#region Deep Reefs
@@ -795,7 +759,6 @@ object HABiomes {
                     WARM_TRENCH_SURFACE_RULE,
                     COLD_TRENCH_SURFACE_RULE,
                     FROZEN_TRENCH_SURFACE_RULE,
-                    SULFURIC_CAVES_RULE,
 
                     SEAGRASS_BED_SURFACE_RULE,
                     RED_MEADOW_SURFACE_RULE,
