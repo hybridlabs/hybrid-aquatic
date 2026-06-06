@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BULL_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.FRILLED_SHARK_PLUSHIE
@@ -206,6 +207,7 @@ object HybridAquaticModBusEvents {
             ItemBlockRenderTypes.setRenderLayer(fluid.get(), RenderType.solid())
         }
 
+        HAMenuScreens
     }
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
