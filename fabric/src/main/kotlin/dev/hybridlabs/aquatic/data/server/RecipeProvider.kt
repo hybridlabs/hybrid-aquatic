@@ -956,6 +956,18 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         //#endregion
 
         // misc recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.CHIMNEYSTONE.get(), 8)
+            .pattern("BBB")
+            .pattern("BSB")
+            .pattern("BBB")
+            .define('S', HAItems.SULFUR.get())
+            .define('B', Items.DRIPSTONE_BLOCK)
+            .unlockedBy(
+                "has_sulfur",
+                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
+            )
+            .save(exporter)
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RED_BRINESTONE.get(), 8)
             .pattern("TTT")
             .pattern("TBT")

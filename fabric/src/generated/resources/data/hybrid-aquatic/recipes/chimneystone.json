@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "minecraft:dripstone_block"
+    },
+    "S": {
+      "item": "hybrid-aquatic:sulfur"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BSB",
+    "BBB"
+  ],
+  "result": {
+    "count": 8,
+    "item": "hybrid-aquatic:chimneystone"
+  },
+  "show_notification": true
+}
