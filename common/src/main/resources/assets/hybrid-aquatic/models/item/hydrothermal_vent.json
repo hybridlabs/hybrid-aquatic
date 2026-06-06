@@ -1,23 +1,23 @@
 {
+	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "hybrid-aquatic:item/hydrothermal_vent",
-		"particle": "hybrid-aquatic:item/hydrothermal_vent"
+		"1": "hybrid-aquatic:block/thermal_vent_tip"
 	},
 	"elements": [
 		{
 			"from": [3, 0, 3],
 			"to": [13, 16, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [3, 14, 3]},
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
-				"north": {"uv": [0, 0, 5, 8], "texture": "#0"},
-				"east": {"uv": [5, 0, 10, 8], "texture": "#0"},
-				"south": {"uv": [0, 8, 5, 16], "texture": "#0"},
-				"west": {"uv": [5, 8, 10, 16], "texture": "#0"},
-				"up": {"uv": [15, 5, 10, 0], "texture": "#0"},
-				"down": {"uv": [15, 5, 10, 10], "texture": "#0"}
+				"north": {"uv": [0, 0, 5, 8], "texture": "#1"},
+				"east": {"uv": [0, 0, 5, 8], "texture": "#1"},
+				"south": {"uv": [0, 0, 5, 8], "texture": "#1"},
+				"west": {"uv": [0, 0, 5, 8], "texture": "#1"},
+				"up": {"uv": [10, 5, 5, 0], "texture": "#1"},
+				"down": {"uv": [10, 5, 5, 10], "texture": "#1"}
 			}
 		}
 	],
@@ -49,7 +49,7 @@
 			"scale": [0.625, 0.625, 0.625]
 		},
 		"head": {
-			"translation": [0, 14.5, 0]
+			"translation": [0, 14.25, 0]
 		},
 		"fixed": {
 			"scale": [0.5, 0.5, 0.5]
