@@ -239,8 +239,7 @@ object HAItems {
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(Item.Properties()) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
-    val OMINOUS_CONCH =
-        register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), HAInstrumentTags.OMINOUS_CONCH) }
+    val OMINOUS_CONCH = register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), HAInstrumentTags.OMINOUS_CONCH) }
     val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties().stacksTo(1)) }
 
     val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
@@ -718,7 +717,8 @@ object HAItems {
     //#region Plushies
     val BASKING_SHARK_PLUSHIE =
         registerBlockItem("basking_shark_plushie") { HABlocks.BASKING_SHARK_PLUSHIE.get() }
-    val BULL_SHARK_PLUSHIE = registerBlockItem("bull_shark_plushie") { HABlocks.BULL_SHARK_PLUSHIE.get() }
+    val BULL_SHARK_PLUSHIE =
+        registerBlockItem("bull_shark_plushie") { HABlocks.BULL_SHARK_PLUSHIE.get() }
     val FRILLED_SHARK_PLUSHIE =
         registerBlockItem("frilled_shark_plushie") { HABlocks.FRILLED_SHARK_PLUSHIE.get() }
     val GREAT_WHITE_SHARK_PLUSHIE =
@@ -727,8 +727,10 @@ object HAItems {
         registerBlockItem("hammerhead_shark_plushie") { HABlocks.HAMMERHEAD_SHARK_PLUSHIE.get() }
     val THRESHER_SHARK_PLUSHIE =
         registerBlockItem("thresher_shark_plushie") { HABlocks.THRESHER_SHARK_PLUSHIE.get() }
-    val TIGER_SHARK_PLUSHIE = registerBlockItem("tiger_shark_plushie") { HABlocks.TIGER_SHARK_PLUSHIE.get() }
-    val WHALE_SHARK_PLUSHIE = registerBlockItem("whale_shark_plushie") { HABlocks.WHALE_SHARK_PLUSHIE.get() }
+    val TIGER_SHARK_PLUSHIE =
+        registerBlockItem("tiger_shark_plushie") { HABlocks.TIGER_SHARK_PLUSHIE.get() }
+    val WHALE_SHARK_PLUSHIE =
+        registerBlockItem("whale_shark_plushie") { HABlocks.WHALE_SHARK_PLUSHIE.get() }
     //#endregion
 
     //#region Crates
