@@ -5,33 +5,34 @@
     "minVersion": "0.8.5",
     "refmap": "hybrid_aquatic.refmap.json",
     "mixins": [
+        "BreathAirGoalMixin",
         "EnchantmentMixin",
         "EntityMixin",
-        "BreathAirGoalMixin",
-        "FlowingFluidMixin",
-        "PistonMovingBlockEntityMixin",
         "FishingBobberEntityMixin",
         "FishingRodItemMixin",
+        "FlowingFluidMixin",
+        "PistonMovingBlockEntityMixin",
         "PlayerEntityMixin",
-        "ServerPlayerEntityMixin",
+        "ResourceLocationMixin",
         "SeagrassBlockMixin",
+        "ServerPlayerEntityMixin",
         "TallSeagrassBlockMixin"
     ],
     "client": [
         "client.BookScreenMixin",
+        "client.CameraMixin",
         "client.ClientPlayNetworkHandlerMixin",
         "client.FishingBobberEntityClientMixin",
         "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
-        "client.PlayerEntityRendererMixin",
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
-        "client.SkullBlockEntityTextureMixin",
-        "client.CameraMixin",
-        "client.WeatherDisplayMixin",
+        "client.MouseHandlerMixin",
         "client.ParticleEngineMixin",
-        "client.MouseHandlerMixin"
+        "client.PlayerEntityRendererMixin",
+        "client.SkullBlockEntityTextureMixin",
+        "client.WeatherDisplayMixin"
     ],
     "injectors": {
         "defaultRequire": 1

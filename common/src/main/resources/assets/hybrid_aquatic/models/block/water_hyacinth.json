@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "hybrid-aquatic:block/water_hyacinth",
-		"particle": "hybrid-aquatic:block/water_hyacinth"
+		"1": "hybrid_aquatic:block/water_hyacinth",
+		"particle": "hybrid_aquatic:block/water_hyacinth"
 	},
 	"elements": [
 		{

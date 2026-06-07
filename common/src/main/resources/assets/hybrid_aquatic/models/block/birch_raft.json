@@ -1,7 +1,7 @@
 {
-  "parent": "hybrid-aquatic:block/raft",
+  "parent": "hybrid_aquatic:block/raft",
   "textures": {
-    "0": "hybrid-aquatic:block/birch_raft",
-    "particle": "hybrid-aquatic:block/birch_raft"
+    "0": "hybrid_aquatic:block/birch_raft",
+    "particle": "hybrid_aquatic:block/birch_raft"
   }
 }

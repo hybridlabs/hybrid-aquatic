@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "hybrid-aquatic:block/polished_chimneystone",
-    "side": "hybrid-aquatic:block/polished_chimneystone",
-    "top": "hybrid-aquatic:block/polished_chimneystone"
+    "bottom": "hybrid_aquatic:block/polished_chimneystone",
+    "side": "hybrid_aquatic:block/polished_chimneystone",
+    "top": "hybrid_aquatic:block/polished_chimneystone"
   }
 }

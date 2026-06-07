@@ -8,16 +8,16 @@ class ShrimpEntityModel : HACrustaceanEntityModel<ShrimpEntity>("shrimp") {
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_black.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_blue.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_brown.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_green.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_lime.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_orange.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_pink.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_red.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_white.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/shrimp/shrimp_yellow.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_black.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_blue.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_brown.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_green.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_lime.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_orange.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_pink.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_red.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_white.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/shrimp/shrimp_yellow.png"),
         )
     }
 

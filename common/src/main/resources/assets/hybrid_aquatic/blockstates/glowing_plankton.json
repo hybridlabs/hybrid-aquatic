@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/glowing_plankton"
+      "model": "hybrid_aquatic:block/glowing_plankton"
     }
   }
 }

@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "hybrid-aquatic:block/bleached_tube_coral_wall_fan",
+      "model": "hybrid_aquatic:block/bleached_tube_coral_wall_fan",
       "y": 90
     },
     "facing=north": {
-      "model": "hybrid-aquatic:block/bleached_tube_coral_wall_fan"
+      "model": "hybrid_aquatic:block/bleached_tube_coral_wall_fan"
     },
     "facing=south": {
-      "model": "hybrid-aquatic:block/bleached_tube_coral_wall_fan",
+      "model": "hybrid_aquatic:block/bleached_tube_coral_wall_fan",
       "y": 180
     },
     "facing=west": {
-      "model": "hybrid-aquatic:block/bleached_tube_coral_wall_fan",
+      "model": "hybrid_aquatic:block/bleached_tube_coral_wall_fan",
       "y": 270
     }
   }

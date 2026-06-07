@@ -1,9 +1,9 @@
 {
   "entity.beakling.ambient": {
     "sounds": [
-      "hybrid-aquatic:entity/beakling_ambient"
+      "hybrid_aquatic:entity/beakling_ambient"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.beakling.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.beakling.ambient"
   },
   "entity.beakling.die": {
     "sounds": [
@@ -12,7 +12,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.beakling.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.beakling.die"
   },
   "entity.beakling.hurt": {
     "sounds": [
@@ -21,37 +21,37 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.beakling.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.beakling.hurt"
   },
   "entity.dugong.ambient": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_ambient"
+      "hybrid_aquatic:entity/sirenian_ambient"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.dugong.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.dugong.ambient"
   },
   "entity.dugong.die": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_hurt"
+      "hybrid_aquatic:entity/sirenian_hurt"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.dugong.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.dugong.die"
   },
   "entity.dugong.hurt": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_die"
+      "hybrid_aquatic:entity/sirenian_die"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.dugong.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.dugong.hurt"
   },
   "entity.dugong.splash": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_splash"
+      "hybrid_aquatic:entity/sirenian_splash"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.dugong.splash"
+    "subtitle": "subtitles.hybrid_aquatic.entity.dugong.splash"
   },
   "entity.dugong.swim": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_swim"
+      "hybrid_aquatic:entity/sirenian_swim"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.dugong.swim"
+    "subtitle": "subtitles.hybrid_aquatic.entity.dugong.swim"
   },
   "entity.hypnautilus.ambient": {
     "sounds": [
@@ -60,7 +60,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.hypnautilus.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.hypnautilus.ambient"
   },
   "entity.hypnautilus.die": {
     "sounds": [
@@ -69,7 +69,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.hypnautilus.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.hypnautilus.die"
   },
   "entity.hypnautilus.hurt": {
     "sounds": [
@@ -78,7 +78,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.hypnautilus.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.hypnautilus.hurt"
   },
   "entity.karcinogen.ambient": {
     "sounds": [
@@ -87,7 +87,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karcinogen.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karcinogen.ambient"
   },
   "entity.karcinogen.die": {
     "sounds": [
@@ -96,7 +96,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karcinogen.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karcinogen.die"
   },
   "entity.karcinogen.hurt": {
     "sounds": [
@@ -105,7 +105,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karcinogen.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karcinogen.hurt"
   },
   "entity.karcinoma.ambient": {
     "sounds": [
@@ -114,7 +114,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karcinoma.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karcinoma.ambient"
   },
   "entity.karcinoma.die": {
     "sounds": [
@@ -123,7 +123,7 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karcinoma.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karcinoma.die"
   },
   "entity.karcinoma.hurt": {
     "sounds": [
@@ -132,90 +132,90 @@
         "name": "minecraft:entity.turtle.egg_crack"
       }
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karcinoma.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karcinoma.hurt"
   },
   "entity.karkinos.ambient": {
     "sounds": [
-      "hybrid-aquatic:entity/karkinos_ambient"
+      "hybrid_aquatic:entity/karkinos_ambient"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karkinos.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karkinos.ambient"
   },
   "entity.karkinos.die": {
     "sounds": [
-      "hybrid-aquatic:entity/karkinos_die"
+      "hybrid_aquatic:entity/karkinos_die"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karkinos.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karkinos.die"
   },
   "entity.karkinos.hurt": {
     "sounds": [
-      "hybrid-aquatic:entity/karkinos_hurt"
+      "hybrid_aquatic:entity/karkinos_hurt"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.karkinos.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.karkinos.hurt"
   },
   "entity.manatee.ambient": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_ambient"
+      "hybrid_aquatic:entity/sirenian_ambient"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.manatee.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.manatee.ambient"
   },
   "entity.manatee.die": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_hurt"
+      "hybrid_aquatic:entity/sirenian_hurt"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.manatee.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.manatee.die"
   },
   "entity.manatee.hurt": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_die"
+      "hybrid_aquatic:entity/sirenian_die"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.manatee.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.manatee.hurt"
   },
   "entity.manatee.splash": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_splash"
+      "hybrid_aquatic:entity/sirenian_splash"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.manatee.splash"
+    "subtitle": "subtitles.hybrid_aquatic.entity.manatee.splash"
   },
   "entity.manatee.swim": {
     "sounds": [
-      "hybrid-aquatic:entity/sirenian_swim"
+      "hybrid_aquatic:entity/sirenian_swim"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.manatee.swim"
+    "subtitle": "subtitles.hybrid_aquatic.entity.manatee.swim"
   },
   "entity.shell_beast.ambient": {
     "sounds": [
-      "hybrid-aquatic:entity/shell_beast_ambient"
+      "hybrid_aquatic:entity/shell_beast_ambient"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.shell_beast.ambient"
+    "subtitle": "subtitles.hybrid_aquatic.entity.shell_beast.ambient"
   },
   "entity.shell_beast.die": {
     "sounds": [
-      "hybrid-aquatic:entity/shell_beast_die"
+      "hybrid_aquatic:entity/shell_beast_die"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.shell_beast.die"
+    "subtitle": "subtitles.hybrid_aquatic.entity.shell_beast.die"
   },
   "entity.shell_beast.hurt": {
     "sounds": [
-      "hybrid-aquatic:entity/shell_beast_hurt"
+      "hybrid_aquatic:entity/shell_beast_hurt"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.shell_beast.hurt"
+    "subtitle": "subtitles.hybrid_aquatic.entity.shell_beast.hurt"
   },
   "entity.shell_beast.roar": {
     "sounds": [
-      "hybrid-aquatic:entity/shell_beast_roar"
+      "hybrid_aquatic:entity/shell_beast_roar"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.shell_beast.roar"
+    "subtitle": "subtitles.hybrid_aquatic.entity.shell_beast.roar"
   },
   "entity.shell_beast.shoot": {
     "sounds": [
-      "hybrid-aquatic:entity/shell_beast_shoot"
+      "hybrid_aquatic:entity/shell_beast_shoot"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.entity.shell_beast.shoot"
+    "subtitle": "subtitles.hybrid_aquatic.entity.shell_beast.shoot"
   },
   "item.ominous_conch.blows": {
     "sounds": [
-      "hybrid-aquatic:item/ominous_conch_blows"
+      "hybrid_aquatic:item/ominous_conch_blows"
     ],
-    "subtitle": "subtitles.hybrid-aquatic.item.ominous_conch.blows"
+    "subtitle": "subtitles.hybrid_aquatic.item.ominous_conch.blows"
   }
 }

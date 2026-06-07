@@ -18,7 +18,7 @@ import net.minecraftforge.registries.ForgeRegistries.Keys.STRUCTURE_MODIFIERS
  * The rest of the generated resources are imported from the output of the Fabric project's runDatagen task.
  */
 @Suppress("Unused")
-@EventBusSubscriber(modid = Constants.FORGE_MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 object DataGenerators {
 
     @SubscribeEvent

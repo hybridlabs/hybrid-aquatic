@@ -17,7 +17,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.material.Fluids
-import java.util.*
+import java.util.Optional
 
 class FishingNetItem(settings: Properties) : Item(settings) {
 
@@ -27,14 +27,14 @@ class FishingNetItem(settings: Properties) : Item(settings) {
         lines: MutableList<Component>,
         options: TooltipFlag
     ) {
-        lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.function").withStyle(ChatFormatting.GRAY))
-        lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.properties").withStyle(ChatFormatting.GRAY))
+        lines.add(Component.translatable("item.hybrid_aquatic.fishing_net.function").withStyle(ChatFormatting.GRAY))
+        lines.add(Component.translatable("item.hybrid_aquatic.fishing_net.properties").withStyle(ChatFormatting.GRAY))
         val nbtCopy = stack.tag?.copy()
         if (nbtCopy != null) {
             val optionalEntity = getEntityFromNBT(nbtCopy)
             if (optionalEntity.isPresent) {
                 val entityName = optionalEntity.get().description
-                lines.add(Component.translatable("item.hybrid-aquatic.fishing_net.description", entityName))
+                lines.add(Component.translatable("item.hybrid_aquatic.fishing_net.description", entityName))
             }
         }
     }

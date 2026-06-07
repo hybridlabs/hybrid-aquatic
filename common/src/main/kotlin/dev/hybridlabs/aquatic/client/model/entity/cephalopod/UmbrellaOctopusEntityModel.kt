@@ -8,12 +8,12 @@ class UmbrellaOctopusEntityModel : HAOctopusEntityModel<UmbrellaOctopusEntity>("
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_yellow.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_brown.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_orange.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_pink.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_purple.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_white.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_yellow.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_brown.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_orange.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_pink.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_purple.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/umbrella_octopus/umbrella_octopus_white.png"),
         )
     }
 

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/basking_shark_plushie"
+      "model": "hybrid_aquatic:block/basking_shark_plushie"
     }
   }
 }

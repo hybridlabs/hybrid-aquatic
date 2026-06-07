@@ -1,0 +1,41 @@
+{
+  "parent": "hybrid_aquatic:ominous_conch",
+  "criteria": {
+    "kill_shell_beast": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "hybrid_aquatic:shell_beast"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.shell_beast.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "hybrid_aquatic:comically_large_nautilus_shell"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid_aquatic.shell_beast.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_shell_beast"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

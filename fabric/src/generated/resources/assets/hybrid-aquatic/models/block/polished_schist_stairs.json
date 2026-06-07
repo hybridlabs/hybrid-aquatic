@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "hybrid-aquatic:block/polished_schist",
-    "side": "hybrid-aquatic:block/polished_schist",
-    "top": "hybrid-aquatic:block/polished_schist"
+    "bottom": "hybrid_aquatic:block/polished_schist",
+    "side": "hybrid_aquatic:block/polished_schist",
+    "top": "hybrid_aquatic:block/polished_schist"
   }
 }

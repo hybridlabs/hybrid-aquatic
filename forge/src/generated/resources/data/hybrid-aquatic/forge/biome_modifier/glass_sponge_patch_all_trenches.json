@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#hybrid-aquatic:all_trenches",
-  "features": "hybrid-aquatic:glass_sponge_patch",
-  "step": "vegetal_decoration"
-}

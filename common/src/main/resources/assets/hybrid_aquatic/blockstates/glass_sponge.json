@@ -1,10 +1,10 @@
 {
   "variants": {
     "waterlogged=false": {
-        "model": "hybrid-aquatic:block/glass_sponge"
+        "model": "hybrid_aquatic:block/glass_sponge"
       },
     "waterlogged=true": {
-      "model": "hybrid-aquatic:block/wet_glass_sponge"
+      "model": "hybrid_aquatic:block/wet_glass_sponge"
     }
   }
 }

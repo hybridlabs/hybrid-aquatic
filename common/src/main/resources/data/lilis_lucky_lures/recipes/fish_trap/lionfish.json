@@ -1,11 +1,11 @@
 {
   "type": "lilis_lucky_lures:fish_trap",
   "bait_item": {
-    "item": "hybrid-aquatic:squirrelfish"
+    "item": "hybrid_aquatic:squirrelfish"
   },
   "catch": {
     "result": {
-      "item": "hybrid-aquatic:lionfish",
+      "item": "hybrid_aquatic:lionfish",
       "count": 1
     }
   },

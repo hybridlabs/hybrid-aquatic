@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:danio"
+    "item": "hybrid_aquatic:danio"
   },
   "result": {
-    "id": "hybrid-aquatic:danio"
+    "id": "hybrid_aquatic:danio"
   }
 }

@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "hybrid-aquatic:item/ominous_conch"
+		"layer0": "hybrid_aquatic:item/ominous_conch"
 	},
   "display": {
     "thirdperson_righthand": {

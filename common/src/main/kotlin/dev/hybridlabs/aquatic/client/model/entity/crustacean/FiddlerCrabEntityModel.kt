@@ -8,9 +8,9 @@ class FiddlerCrabEntityModel : HACrustaceanEntityModel<FiddlerCrabEntity>("fiddl
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_blue.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_purple.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_red.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_blue.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_purple.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/fiddler_crab/fiddler_crab_red.png")
         )
     }
 

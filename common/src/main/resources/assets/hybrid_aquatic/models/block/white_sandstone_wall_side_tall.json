@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side_tall",
   "textures": {
-    "wall": "hybrid-aquatic:block/white_sandstone"
+    "wall": "hybrid_aquatic:block/white_sandstone"
   }
 }

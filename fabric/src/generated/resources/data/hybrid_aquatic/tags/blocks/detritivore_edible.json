@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:marine_snow",
+    "hybrid_aquatic:bone_stairs",
+    "hybrid_aquatic:bone_slab",
+    "hybrid_aquatic:bone_fence",
+    "hybrid_aquatic:bone_wall",
+    "minecraft:bone_block"
+  ]
+}

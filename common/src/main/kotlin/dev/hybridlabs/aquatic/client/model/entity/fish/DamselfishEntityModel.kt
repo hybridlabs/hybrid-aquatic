@@ -11,18 +11,18 @@ class DamselfishEntityModel : HAFishEntityModel<DamselfishEntity>("damselfish") 
 
     companion object {
         private val ONE_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/damselfish/damselfish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/damselfish/damselfish.geo.json")
         private val TWO_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/damselfish/damselfish_two.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/damselfish/damselfish_two.geo.json")
         private val THREE_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/damselfish/damselfish_three.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/damselfish/damselfish_three.geo.json")
 
         private val ONE_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/damselfish/damselfish.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/damselfish/damselfish.animation.json")
         private val TWO_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/damselfish/damselfish_two.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/damselfish/damselfish_two.animation.json")
         private val THREE_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/damselfish/damselfish_three.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/damselfish/damselfish_three.animation.json")
     }
     
     override fun getModelResource(animatable: DamselfishEntity): ResourceLocation {

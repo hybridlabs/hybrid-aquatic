@@ -3,8 +3,8 @@
 	"parent": "minecraft:block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "hybrid-aquatic:block/chimney_base",
-		"particle": "hybrid-aquatic:block/chimney_base"
+		"0": "hybrid_aquatic:block/chimney_base",
+		"particle": "hybrid_aquatic:block/chimney_base"
 	},
 	"elements": [
 		{

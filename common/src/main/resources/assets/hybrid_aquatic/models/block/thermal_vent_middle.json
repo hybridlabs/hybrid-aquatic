@@ -3,8 +3,8 @@
 	"parent": "minecraft:block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "hybrid-aquatic:block/thermal_vent_middle",
-		"particle": "hybrid-aquatic:block/thermal_vent_middle"
+		"0": "hybrid_aquatic:block/thermal_vent_middle",
+		"particle": "hybrid_aquatic:block/thermal_vent_middle"
 	},
 	"elements": [
 		{

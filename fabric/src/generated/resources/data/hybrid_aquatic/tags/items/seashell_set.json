@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:seashell_spear",
+    "hybrid_aquatic:seashell_pickaxe",
+    "hybrid_aquatic:seashell_axe",
+    "hybrid_aquatic:seashell_shovel",
+    "hybrid_aquatic:seashell_hoe",
+    "hybrid_aquatic:nautilus_helmet",
+    "hybrid_aquatic:nautilus_pauldrons"
+  ]
+}

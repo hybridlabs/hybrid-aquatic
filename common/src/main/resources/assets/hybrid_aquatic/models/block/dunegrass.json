@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hybrid-aquatic:block/dunegrass"
+    "cross": "hybrid_aquatic:block/dunegrass"
   }
 }

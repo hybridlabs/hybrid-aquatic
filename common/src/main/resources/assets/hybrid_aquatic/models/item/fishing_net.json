@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"1": "hybrid-aquatic:item/fishing_net"
+		"1": "hybrid_aquatic:item/fishing_net"
 	},
 	"elements": [
 		{

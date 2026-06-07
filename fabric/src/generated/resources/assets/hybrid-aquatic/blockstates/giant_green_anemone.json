@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/giant_green_anemone"
+      "model": "hybrid_aquatic:block/giant_green_anemone"
     }
   }
 }

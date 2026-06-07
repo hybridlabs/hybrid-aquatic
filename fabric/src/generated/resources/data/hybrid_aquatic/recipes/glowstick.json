@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "hybrid_aquatic:glowslime"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "hybrid_aquatic:glowstick"
+  }
+}

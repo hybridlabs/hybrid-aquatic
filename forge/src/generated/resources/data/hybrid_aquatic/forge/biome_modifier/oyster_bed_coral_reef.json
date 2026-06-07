@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:coral_reef",
+  "features": "hybrid_aquatic:oyster_bed",
+  "step": "vegetal_decoration"
+}

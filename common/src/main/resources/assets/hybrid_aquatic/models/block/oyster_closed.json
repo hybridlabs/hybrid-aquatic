@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "hybrid-aquatic:block/oyster",
-		"particle": "hybrid-aquatic:block/oyster"
+		"0": "hybrid_aquatic:block/oyster",
+		"particle": "hybrid_aquatic:block/oyster"
 	},
 	"elements": [
 		{

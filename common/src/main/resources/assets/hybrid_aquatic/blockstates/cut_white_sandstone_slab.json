@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "hybrid-aquatic:block/cut_white_sandstone_slab"
+      "model": "hybrid_aquatic:block/cut_white_sandstone_slab"
     },
     "type=double": {
-      "model": "hybrid-aquatic:block/cut_white_sandstone"
+      "model": "hybrid_aquatic:block/cut_white_sandstone"
     },
     "type=top": {
-      "model": "hybrid-aquatic:block/cut_white_sandstone_slab_top"
+      "model": "hybrid_aquatic:block/cut_white_sandstone_slab_top"
     }
   }
 }

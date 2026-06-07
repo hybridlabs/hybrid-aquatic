@@ -32,18 +32,18 @@ class BoxfishEntityModel : HAFishEntityModel<BoxfishEntity>("boxfish") {
 
     companion object {
         private val LONGHORN_COWFISH_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
         private val WHITESPOTTED_BOXFISH_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
 
         private val COWFISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/boxfish/cowfish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/boxfish/cowfish.geo.json")
         private val BOXFISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/boxfish/boxfish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/boxfish/boxfish.geo.json")
 
         private val COWFISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/boxfish/cowfish.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/boxfish/cowfish.animation.json")
         private val BOXFISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/boxfish/boxfish.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/boxfish/boxfish.animation.json")
     }
 }

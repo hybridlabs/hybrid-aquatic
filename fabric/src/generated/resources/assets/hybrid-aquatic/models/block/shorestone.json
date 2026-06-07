@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "hybrid-aquatic:block/shorestone"
+    "all": "hybrid_aquatic:block/shorestone"
   }
 }

@@ -1,7 +1,7 @@
 {
-  "parent": "hybrid-aquatic:block/raft",
+  "parent": "hybrid_aquatic:block/raft",
   "textures": {
-    "0": "hybrid-aquatic:block/driftwood_raft",
-    "particle": "hybrid-aquatic:block/driftwood_raft"
+    "0": "hybrid_aquatic:block/driftwood_raft",
+    "particle": "hybrid_aquatic:block/driftwood_raft"
   }
 }

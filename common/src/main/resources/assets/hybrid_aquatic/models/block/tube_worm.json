@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "hybrid-aquatic:block/tube_worm",
-		"particle": "hybrid-aquatic:block/tube_worm"
+		"2": "hybrid_aquatic:block/tube_worm",
+		"particle": "hybrid_aquatic:block/tube_worm"
 	},
 	"elements": [
 		{

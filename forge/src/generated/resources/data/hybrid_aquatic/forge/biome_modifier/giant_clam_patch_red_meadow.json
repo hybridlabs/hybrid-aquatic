@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:red_meadow",
+  "features": "hybrid_aquatic:giant_clam_patch",
+  "step": "vegetal_decoration"
+}

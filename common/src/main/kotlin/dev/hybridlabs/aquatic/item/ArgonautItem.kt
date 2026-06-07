@@ -33,16 +33,16 @@ class ArgonautItem(properties: Properties) : Item(properties) {
 
         if (tag.contains("ShellColor")) {
             val color = ArgonautEntity.ShellColor.byId(tag.getInt("ShellColor"))
-            lines.add(Component.translatable("tooltip.hybrid-aquatic.argonaut.shell", color.name.uppercase()))
+            lines.add(Component.translatable("tooltip.hybrid_aquatic.argonaut.shell", color.name.uppercase()))
         }
 
         if (tag.contains("SailColor")) {
             val color = ArgonautEntity.SailColor.byId(tag.getInt("SailColor"))
-            lines.add(Component.translatable("tooltip.hybrid-aquatic.argonaut.sail", color.name.uppercase()))
+            lines.add(Component.translatable("tooltip.hybrid_aquatic.argonaut.sail", color.name.uppercase()))
         }
 
         if (tag.contains("Glowing") && tag.getBoolean("Glowing")) {
-            lines.add(Component.translatable("tooltip.hybrid-aquatic.argonaut.glowing"))
+            lines.add(Component.translatable("tooltip.hybrid_aquatic.argonaut.glowing"))
         }
     }
 

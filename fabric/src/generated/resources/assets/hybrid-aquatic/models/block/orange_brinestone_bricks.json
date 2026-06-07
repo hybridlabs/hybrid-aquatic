@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "hybrid-aquatic:block/orange_brinestone_bricks"
+    "all": "hybrid_aquatic:block/orange_brinestone_bricks"
   }
 }

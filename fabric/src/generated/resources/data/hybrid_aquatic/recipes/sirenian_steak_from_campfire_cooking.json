@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "hybrid_aquatic:sirenian_beef"
+  },
+  "result": "hybrid_aquatic:sirenian_steak"
+}

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/reinforced_diving_suit"
+    "layer0": "hybrid_aquatic:item/reinforced_diving_suit"
   }
 }

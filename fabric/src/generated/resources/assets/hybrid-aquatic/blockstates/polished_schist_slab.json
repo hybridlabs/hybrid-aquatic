@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "hybrid-aquatic:block/polished_schist_slab"
+      "model": "hybrid_aquatic:block/polished_schist_slab"
     },
     "type=double": {
-      "model": "hybrid-aquatic:block/polished_schist"
+      "model": "hybrid_aquatic:block/polished_schist"
     },
     "type=top": {
-      "model": "hybrid-aquatic:block/polished_schist_slab_top"
+      "model": "hybrid_aquatic:block/polished_schist_slab_top"
     }
   }
 }

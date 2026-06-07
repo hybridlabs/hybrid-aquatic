@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/brine"
+      "model": "hybrid_aquatic:block/brine"
     }
   }
 }

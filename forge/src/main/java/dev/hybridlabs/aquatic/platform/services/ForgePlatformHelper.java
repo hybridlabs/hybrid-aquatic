@@ -43,14 +43,14 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     public static IEventBus getEventBus() {
         final ModContainer cont =
-                ModList.get().getModContainerById(Constants.FORGE_MOD_ID).orElseThrow();
+                ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
         if (cont instanceof FMLModContainer fmlModContainer) {
             return fmlModContainer.getEventBus();
         } else if (cont instanceof KotlinModContainer kotlinModContainer) {
             return kotlinModContainer.getEventBus$kfflang();
         } else {
             throw new ClassCastException(
-                    "The container of the mod " + Constants.FORGE_MOD_ID + " is not a FML one!");
+                    "The container of the mod " + Constants.MOD_ID + " is not a FML one!");
         }
     }
 

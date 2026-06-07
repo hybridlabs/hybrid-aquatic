@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:schist",
-    "hybrid-aquatic:chimneystone"
+    "hybrid_aquatic:schist",
+    "hybrid_aquatic:chimneystone"
   ]
 }

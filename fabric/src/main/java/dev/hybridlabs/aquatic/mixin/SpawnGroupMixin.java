@@ -50,7 +50,9 @@ public class SpawnGroupMixin {
             HASpawnGroup haSpawnGroup = haSpawnGroups[i];
             haSpawnGroup.spawnGroup = $VALUES[pos] = createHybridAquaticSpawnGroups(haSpawnGroup.name(), pos, haSpawnGroup);
         }
-        
-        Arrays.stream($VALUES).forEach(value -> HASpawnGroup.BY_NAME.put(value.name(), value));
+
+        for (HASpawnGroup value : haSpawnGroups) {
+            HASpawnGroup.BY_NAME.put(value.location.toString(), value.spawnGroup);
+        }
     }
 }

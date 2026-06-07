@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/cattail"
+    "layer0": "hybrid_aquatic:item/cattail"
   }
 }

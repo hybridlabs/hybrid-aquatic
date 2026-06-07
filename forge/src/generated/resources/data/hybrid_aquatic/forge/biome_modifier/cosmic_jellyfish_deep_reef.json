@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:deep_reef",
+  "spawners": {
+    "type": "hybrid_aquatic:cosmic_jellyfish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

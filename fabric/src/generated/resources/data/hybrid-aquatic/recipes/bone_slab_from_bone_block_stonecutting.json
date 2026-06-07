@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "minecraft:bone_block"
-  },
-  "result": "hybrid-aquatic:bone_slab"
-}

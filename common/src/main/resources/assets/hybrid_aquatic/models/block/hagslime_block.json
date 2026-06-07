@@ -1,7 +1,7 @@
 {   "parent": "block/block",
   "textures": {
-    "particle": "hybrid-aquatic:block/hagslime_block",
-    "texture": "hybrid-aquatic:block/hagslime_block"
+    "particle": "hybrid_aquatic:block/hagslime_block",
+    "texture": "hybrid_aquatic:block/hagslime_block"
   },
   "elements": [
     {   "from": [ 0, 0, 0 ],

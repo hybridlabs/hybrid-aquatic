@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:seagrass_bed",
+  "features": "hybrid_aquatic:oyster_bed",
+  "step": "vegetal_decoration"
+}

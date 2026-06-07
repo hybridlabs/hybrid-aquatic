@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/dead_bamboo_coral_fan"
+      "model": "hybrid_aquatic:block/dead_bamboo_coral_fan"
     }
   }
 }

@@ -17,13 +17,13 @@ class BlobfishEntityModel : HAFishEntityModel<BlobfishEntity>("blobfish") {
 
     companion object {
         private val BLOBFISH_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/blobfish/blobfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/blobfish/blobfish.png")
         private val BLOBBY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/blobfish/blobfish_blobby.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/blobfish/blobfish_blobby.png")
 
         private val BLOBFISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/blobfish/blobfish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/blobfish/blobfish.geo.json")
         private val BLOBBY_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/blobfish/blobfish_blobby.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/blobfish/blobfish_blobby.geo.json")
     }
 }

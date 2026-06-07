@@ -2,12 +2,12 @@
   "multipart": [
     {
       "apply": {
-        "model": "hybrid-aquatic:block/bone_fence_post"
+        "model": "hybrid_aquatic:block/bone_fence_post"
       }
     },
     {
       "apply": {
-        "model": "hybrid-aquatic:block/bone_fence_side",
+        "model": "hybrid_aquatic:block/bone_fence_side",
         "uvlock": true
       },
       "when": {
@@ -16,7 +16,7 @@
     },
     {
       "apply": {
-        "model": "hybrid-aquatic:block/bone_fence_side",
+        "model": "hybrid_aquatic:block/bone_fence_side",
         "uvlock": true,
         "y": 90
       },
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "hybrid-aquatic:block/bone_fence_side",
+        "model": "hybrid_aquatic:block/bone_fence_side",
         "uvlock": true,
         "y": 180
       },
@@ -36,7 +36,7 @@
     },
     {
       "apply": {
-        "model": "hybrid-aquatic:block/bone_fence_side",
+        "model": "hybrid_aquatic:block/bone_fence_side",
         "uvlock": true,
         "y": 270
       },

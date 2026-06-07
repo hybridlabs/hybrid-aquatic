@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "hybrid_aquatic:brine_bucket"
+    },
+    "T": {
+      "item": "minecraft:yellow_terracotta"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "TBT",
+    "TTT"
+  ],
+  "result": {
+    "count": 8,
+    "item": "hybrid_aquatic:yellow_brinestone"
+  },
+  "show_notification": true
+}

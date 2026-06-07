@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/ocean_sunfish"
+    "layer0": "hybrid_aquatic:item/ocean_sunfish"
   }
 }

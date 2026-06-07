@@ -15,18 +15,18 @@ class FlashlightFishEntityModel : HAFishEntityModel<FlashlightFishEntity>("flash
 
     companion object {
         private val ONE_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish/flashlight_fish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish.geo.json")
         private val TWO_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish/flashlight_fish_two.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish_two.geo.json")
         private val THREE_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/flashlight_fish/flashlight_fish_three.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish_three.geo.json")
 
         private val ONE_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json")
         private val TWO_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_two.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_two.animation.json")
         private val THREE_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_three.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_three.animation.json")
     }
 
     override fun getModelResource(animatable: FlashlightFishEntity): ResourceLocation {

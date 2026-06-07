@@ -1,10 +1,10 @@
 {
   "variants": {
     "powered=false": {
-      "model": "hybrid-aquatic:block/driftwood_pressure_plate"
+      "model": "hybrid_aquatic:block/driftwood_pressure_plate"
     },
     "powered=true": {
-      "model": "hybrid-aquatic:block/driftwood_pressure_plate_down"
+      "model": "hybrid_aquatic:block/driftwood_pressure_plate_down"
     }
   }
 }

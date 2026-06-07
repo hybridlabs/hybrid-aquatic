@@ -7,25 +7,25 @@ class OctopusEntityModel : HAOctopusEntityModel<OctopusEntity>("octopus") {
 
     companion object {
         private val OCTOPUS_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/octopus/octopus.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/octopus/octopus.png")
         private val BLUE_RINGED_OCTOPUS_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/octopus/blue_ringed_octopus.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/octopus/blue_ringed_octopus.png")
         private val COCONUT_OCTOPUS_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/cephalopod/octopus/coconut_octopus.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/octopus/coconut_octopus.png")
 
         private val OCTOPUS_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/cephalopod/octopus/octopus.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/cephalopod/octopus/octopus.geo.json")
         private val BLUE_RINGED_OCTOPUS_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/cephalopod/octopus/blue_ringed_octopus.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/cephalopod/octopus/blue_ringed_octopus.geo.json")
         private val COCONUT_OCTOPUS_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/cephalopod/octopus/coconut_octopus.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/cephalopod/octopus/coconut_octopus.geo.json")
 
         private val OCTOPUS_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/cephalopod/octopus/octopus.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/cephalopod/octopus/octopus.animation.json")
         private val BLUE_RINGED_OCTOPUS_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/cephalopod/octopus/blue_ringed_octopus.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/cephalopod/octopus/blue_ringed_octopus.animation.json")
         private val COCONUT_OCTOPUS_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/cephalopod/octopus/coconut_octopus.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/cephalopod/octopus/coconut_octopus.animation.json")
     }
 
     override fun getTextureResource(animatable: OctopusEntity): ResourceLocation {

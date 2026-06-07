@@ -1,0 +1,37 @@
+{
+  "parent": "hybrid_aquatic:root",
+  "criteria": {
+    "has_crab_claw": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "hybrid_aquatic:crab_claw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.crab_claw.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid_aquatic:dungeness_crab_claw"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid_aquatic.crab_claw.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_crab_claw"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

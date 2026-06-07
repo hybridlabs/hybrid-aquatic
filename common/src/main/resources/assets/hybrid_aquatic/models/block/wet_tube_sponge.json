@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "hybrid-aquatic:block/wet_tube_sponge",
-		"particle": "hybrid-aquatic:block/wet_tube_sponge"
+		"2": "hybrid_aquatic:block/wet_tube_sponge",
+		"particle": "hybrid_aquatic:block/wet_tube_sponge"
 	},
 	"elements": [
 		{

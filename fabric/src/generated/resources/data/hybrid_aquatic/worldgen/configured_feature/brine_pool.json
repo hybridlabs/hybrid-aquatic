@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "config": {
+    "features": [
+      "hybrid_aquatic:red_brine_pool",
+      "hybrid_aquatic:orange_brine_pool",
+      "hybrid_aquatic:yellow_brine_pool"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid_aquatic:coral_mound_blocks",
+    "hybrid_aquatic:shorestone",
+    "minecraft:sand"
+  ]
+}

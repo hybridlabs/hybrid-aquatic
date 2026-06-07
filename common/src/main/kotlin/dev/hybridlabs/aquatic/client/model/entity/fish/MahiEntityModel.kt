@@ -25,17 +25,17 @@ class MahiEntityModel : HAFishEntityModel<MahiEntity>("mahi") {
 
     companion object {
         private val POMPANO_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_pompano.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_pompano.png")
 
         private val mahiTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_2.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_3.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_mahi.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_mahi_2.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_mahi_3.png"),
         )
 
         private val MAHI_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/mahi/mahi_mahi.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/mahi/mahi_mahi.geo.json")
         private val POMPANO_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/mahi/mahi_pompano.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/mahi/mahi_pompano.geo.json")
     }
 }

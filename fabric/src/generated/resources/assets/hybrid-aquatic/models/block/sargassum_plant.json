@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hybrid-aquatic:block/sargassum_plant"
+    "cross": "hybrid_aquatic:block/sargassum_plant"
   }
 }

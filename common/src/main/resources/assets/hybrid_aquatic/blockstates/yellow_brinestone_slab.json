@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "hybrid-aquatic:block/yellow_brinestone_slab"
+      "model": "hybrid_aquatic:block/yellow_brinestone_slab"
     },
     "type=double": {
-      "model": "hybrid-aquatic:block/yellow_brinestone"
+      "model": "hybrid_aquatic:block/yellow_brinestone"
     },
     "type=top": {
-      "model": "hybrid-aquatic:block/yellow_brinestone_slab_top"
+      "model": "hybrid_aquatic:block/yellow_brinestone_slab_top"
     }
   }
 }

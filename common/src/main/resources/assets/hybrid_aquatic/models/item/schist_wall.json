@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "hybrid-aquatic:block/schist"
+    "wall": "hybrid_aquatic:block/schist"
   }
 }

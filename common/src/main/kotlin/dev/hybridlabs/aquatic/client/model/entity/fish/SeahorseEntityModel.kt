@@ -34,12 +34,12 @@ class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
 
     companion object {
         private val COMMON_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_common.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_common.png")
         private val PYGMY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_pygmy.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_pygmy.png")
         private val THORNY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_thorny.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_thorny.png")
         private val BIG_BELLY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seahorse/seahorse_big_belly.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_big_belly.png")
     }
 }

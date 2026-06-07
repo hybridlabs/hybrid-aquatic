@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:block/sun_coral_fan"
+    "layer0": "hybrid_aquatic:block/sun_coral_fan"
   }
 }

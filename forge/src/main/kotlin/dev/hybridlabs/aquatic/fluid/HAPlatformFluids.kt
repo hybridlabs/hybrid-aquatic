@@ -16,7 +16,7 @@ import java.util.function.Supplier
 
 object HAPlatformFluids {
     val FLUID_TYPES: DeferredRegister<FluidType> =
-        DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, Constants.FORGE_MOD_ID)
+        DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, Constants.MOD_ID)
 
     val BRINE_FLUIDTYPE = registerFluidType("brine") {
         BrineFluidType(FluidType.Properties.create())

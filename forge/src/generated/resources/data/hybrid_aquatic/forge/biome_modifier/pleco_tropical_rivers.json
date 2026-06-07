@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:tropical_rivers",
+  "spawners": {
+    "type": "hybrid_aquatic:pleco",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

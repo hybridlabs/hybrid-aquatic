@@ -21,7 +21,7 @@ public class ResourceLocationMixin {
     @Inject(method = "<init>(Ljava/lang/String;Ljava/lang/String;)V", at = @At("TAIL"))
     private void onInit(String namespace, String path, CallbackInfo ci) {
         // because DFU can suck my-
-        if (Objects.equals(namespace, "hybrid-aquatic")) {
+        if (Objects.equals(namespace, "hybrid_aquatic")) {
             this.namespace = "hybrid_aquatic";
         }
     }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hybrid-aquatic:block/bleached_brain_coral"
+    "cross": "hybrid_aquatic:block/bleached_brain_coral"
   }
 }

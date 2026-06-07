@@ -48,14 +48,14 @@
     "hybrid_aquatic:triggerfish",
     "hybrid_aquatic:trevally",
     "hybrid_aquatic:john_dory",
-    "hybrid-aquatic:goldfish",
-    "hybrid-aquatic:raw_fish_meat",
-    "hybrid-aquatic:raw_fish_steak",
-    "hybrid-aquatic:raw_tentacle",
-    "hybrid-aquatic:raw_crab",
-    "hybrid-aquatic:raw_shrimp",
-    "hybrid-aquatic:raw_lobster",
-    "hybrid-aquatic:raw_crayfish",
-    "hybrid-aquatic:raw_lobster_tail"
+    "hybrid_aquatic:goldfish",
+    "hybrid_aquatic:raw_fish_meat",
+    "hybrid_aquatic:raw_fish_steak",
+    "hybrid_aquatic:raw_tentacle",
+    "hybrid_aquatic:raw_crab",
+    "hybrid_aquatic:raw_shrimp",
+    "hybrid_aquatic:raw_lobster",
+    "hybrid_aquatic:raw_crayfish",
+    "hybrid_aquatic:raw_lobster_tail"
   ]
 }

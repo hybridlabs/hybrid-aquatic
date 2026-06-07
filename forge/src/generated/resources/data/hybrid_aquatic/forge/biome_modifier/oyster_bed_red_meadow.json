@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:red_meadow",
+  "features": "hybrid_aquatic:oyster_bed",
+  "step": "vegetal_decoration"
+}

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_wall_side_tall",
   "textures": {
-    "wall": "hybrid-aquatic:block/schist_bricks"
+    "wall": "hybrid_aquatic:block/schist_bricks"
   }
 }

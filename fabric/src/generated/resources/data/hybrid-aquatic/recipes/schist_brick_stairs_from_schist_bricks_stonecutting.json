@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "hybrid-aquatic:schist_bricks"
-  },
-  "result": "hybrid-aquatic:schist_brick_stairs"
-}

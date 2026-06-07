@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:stingray"
+    "item": "hybrid_aquatic:stingray"
   },
   "result": {
-    "id": "hybrid-aquatic:stingray"
+    "id": "hybrid_aquatic:stingray"
   }
 }

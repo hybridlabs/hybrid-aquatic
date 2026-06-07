@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "bottom": "hybrid-aquatic:block/grassy_sand_bottom",
-    "side": "hybrid-aquatic:block/grassy_sand_side",
-    "top": "hybrid-aquatic:block/grassy_sand_top"
+    "bottom": "hybrid_aquatic:block/grassy_sand_bottom",
+    "side": "hybrid_aquatic:block/grassy_sand_side",
+    "top": "hybrid_aquatic:block/grassy_sand_top"
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/message_in_a_bottle"
+      "model": "hybrid_aquatic:block/message_in_a_bottle"
     }
   }
 }

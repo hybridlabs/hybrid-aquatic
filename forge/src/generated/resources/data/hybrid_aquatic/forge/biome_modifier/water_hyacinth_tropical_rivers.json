@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:tropical_rivers",
+  "features": "hybrid_aquatic:water_hyacinth",
+  "step": "vegetal_decoration"
+}

@@ -8,17 +8,17 @@ class SeaUrchinEntityModel : HACritterEntityModel<SeaUrchinEntity>("sea_urchin")
 
     companion object {
         private val largeTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_black.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_blue.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_purple.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_red.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_black.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_blue.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_purple.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_long_red.png"),
         )
 
         private val smallTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_black.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_blue.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_purple.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/critter/sea_urchin/sea_urchin_red.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_black.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_blue.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_purple.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/critter/sea_urchin/sea_urchin_red.png"),
         )
     }
 

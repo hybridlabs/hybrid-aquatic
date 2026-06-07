@@ -1,41 +1,41 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes": "#hybrid-aquatic:has_whale_fall",
+  "biomes": "#hybrid_aquatic:has_whale_fall",
   "step": "surface_structures",
   "spawn_overrides": {
-    "hybrid-aquatic:crustacean": {
+    "hybrid_aquatic:crustacean": {
       "bounding_box": "full",
       "spawns": [
         {
-          "type": "hybrid-aquatic:giant_isopod",
+          "type": "hybrid_aquatic:giant_isopod",
           "maxCount": 5,
           "minCount": 1,
           "weight": 1
         },
         {
-          "type": "hybrid-aquatic:spider_crab",
+          "type": "hybrid_aquatic:spider_crab",
           "maxCount": 5,
           "minCount": 1,
           "weight": 1
         }
       ]
     },
-    "hybrid-aquatic:fish": {
+    "hybrid_aquatic:fish": {
       "bounding_box": "full",
       "spawns": [
         {
-          "type": "hybrid-aquatic:hagfish",
+          "type": "hybrid_aquatic:hagfish",
           "maxCount": 5,
           "minCount": 3,
           "weight": 2
         }
       ]
     },
-    "hybrid-aquatic:critter": {
+    "hybrid_aquatic:critter": {
       "bounding_box": "full",
       "spawns": [
         {
-          "type": "hybrid-aquatic:starfish",
+          "type": "hybrid_aquatic:starfish",
           "maxCount": 6,
           "minCount": 2,
           "weight": 1
@@ -44,7 +44,7 @@
     }
   },
   "terrain_adaptation": "beard_thin",
-  "start_pool": "hybrid-aquatic:whale_fall",
+  "start_pool": "hybrid_aquatic:whale_fall",
   "size": 1,
   "start_height": {
     "absolute": 0

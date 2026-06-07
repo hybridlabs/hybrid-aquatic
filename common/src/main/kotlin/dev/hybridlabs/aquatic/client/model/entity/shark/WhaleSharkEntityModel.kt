@@ -8,9 +8,9 @@ class WhaleSharkEntityModel : HASharkEntityModel<WhaleSharkEntity>("whale_shark"
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark_brown.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/shark/whale_shark/whale_shark_gray.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/shark/whale_shark/whale_shark.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/shark/whale_shark/whale_shark_brown.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/shark/whale_shark/whale_shark_gray.png")
         )
     }
 

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_trapdoor_bottom",
   "textures": {
-    "texture": "hybrid-aquatic:block/driftwood_trapdoor"
+    "texture": "hybrid_aquatic:block/driftwood_trapdoor"
   }
 }

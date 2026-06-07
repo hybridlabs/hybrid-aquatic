@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:golden_dorado"
+    "item": "hybrid_aquatic:golden_dorado"
   },
   "result": {
-    "id": "hybrid-aquatic:golden_dorado"
+    "id": "hybrid_aquatic:golden_dorado"
   }
 }

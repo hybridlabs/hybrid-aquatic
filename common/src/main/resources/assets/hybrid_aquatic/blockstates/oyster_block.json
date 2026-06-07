@@ -1,51 +1,51 @@
 {
   "variants": {
     "state=open,facing=east": {
-      "model": "hybrid-aquatic:block/oyster_open",
+      "model": "hybrid_aquatic:block/oyster_open",
       "y": 180
     },
     "state=open,facing=west": {
-      "model": "hybrid-aquatic:block/oyster_open",
+      "model": "hybrid_aquatic:block/oyster_open",
       "y": 0
     },
     "state=open,facing=north": {
-      "model": "hybrid-aquatic:block/oyster_open",
+      "model": "hybrid_aquatic:block/oyster_open",
       "y": 90
     },
     "state=open,facing=south": {
-      "model": "hybrid-aquatic:block/oyster_open",
+      "model": "hybrid_aquatic:block/oyster_open",
       "y": 270
     },
     "state=closed,facing=east": {
-      "model": "hybrid-aquatic:block/oyster_closed",
+      "model": "hybrid_aquatic:block/oyster_closed",
       "y": 180
     },
     "state=closed,facing=west": {
-      "model": "hybrid-aquatic:block/oyster_closed",
+      "model": "hybrid_aquatic:block/oyster_closed",
       "y": 0
     },
     "state=closed,facing=north": {
-      "model": "hybrid-aquatic:block/oyster_closed",
+      "model": "hybrid_aquatic:block/oyster_closed",
       "y": 90
     },
     "state=closed,facing=south": {
-      "model": "hybrid-aquatic:block/oyster_closed",
+      "model": "hybrid_aquatic:block/oyster_closed",
       "y": 270
     },
     "state=dead,facing=east": {
-      "model": "hybrid-aquatic:block/oyster_dead",
+      "model": "hybrid_aquatic:block/oyster_dead",
       "y": 180
     },
     "state=dead,facing=west": {
-      "model": "hybrid-aquatic:block/oyster_dead",
+      "model": "hybrid_aquatic:block/oyster_dead",
       "y": 0
     },
     "state=dead,facing=north": {
-      "model": "hybrid-aquatic:block/oyster_dead",
+      "model": "hybrid_aquatic:block/oyster_dead",
       "y": 90
     },
     "state=dead,facing=south": {
-      "model": "hybrid-aquatic:block/oyster_dead",
+      "model": "hybrid_aquatic:block/oyster_dead",
       "y": 270
     }
   }

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:deep_warm_oceans",
+  "spawners": {
+    "type": "hybrid_aquatic:ocean_sunfish",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

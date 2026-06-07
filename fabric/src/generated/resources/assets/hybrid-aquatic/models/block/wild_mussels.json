@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hybrid-aquatic:block/wild_mussels"
+    "cross": "hybrid_aquatic:block/wild_mussels"
   }
 }

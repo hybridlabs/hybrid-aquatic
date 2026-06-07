@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:diving_helmet",
+    "hybrid_aquatic:reinforced_diving_helmet",
+    "hybrid_aquatic:glowing_diving_helmet",
+    {
+      "id": "create:copper_diving_helmet",
+      "required": false
+    },
+    {
+      "id": "create:netherite_diving_helmet",
+      "required": false
+    },
+    {
+      "id": "aquamirae:three_bolt_helmet",
+      "required": false
+    },
+    {
+      "id": "alexscaves:diving_helmet",
+      "required": false
+    }
+  ]
+}

@@ -9,7 +9,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.data.recipes.*
+import net.minecraft.data.recipes.FinishedRecipe
+import net.minecraft.data.recipes.RecipeCategory
+import net.minecraft.data.recipes.ShapedRecipeBuilder
+import net.minecraft.data.recipes.ShapelessRecipeBuilder
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
+import net.minecraft.data.recipes.SmithingTransformRecipeBuilder
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
@@ -1079,7 +1084,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 "has_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "aerated_sand_from_pearl"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "aerated_sand_from_pearl"))
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.BUILDING_BLOCKS,
@@ -1091,7 +1096,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 "has_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "aerated_sand_from_bubble_geyser"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "aerated_sand_from_bubble_geyser"))
 
         ShapelessRecipeBuilder.shapeless(
             RecipeCategory.BUILDING_BLOCKS,
@@ -1103,7 +1108,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 "has_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "bubble_geyser_from_aerated_sand"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "bubble_geyser_from_aerated_sand"))
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SS ")
@@ -1206,7 +1211,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 "has_glowslime_block",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.GLOWSLIME_BLOCK.get())
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_block"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "glowslime_from_block"))
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAPlatformItems.HAGSLIME_BLOCK.get())
             .pattern("HHH")
@@ -1229,7 +1234,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                 "has_hagslime_block",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.HAGSLIME_BLOCK.get())
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "hagslime_from_block"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "hagslime_from_block"))
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_BLADE.get(), 1)
             .pattern(" C ")
@@ -1566,7 +1571,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_HELMET.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_helmet_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "reinforced_diving_helmet_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1581,7 +1586,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_SUIT.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_suit_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "reinforced_diving_suit_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1596,7 +1601,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_LEGGINGS.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_leggings_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "reinforced_diving_leggings_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1611,7 +1616,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_BOOTS.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "reinforced_diving_boots_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "reinforced_diving_boots_upgrade"))
 
 
         SmithingTransformRecipeBuilder.smithing(
@@ -1627,7 +1632,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_HELMET.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_helmet_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "glowing_diving_helmet_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1642,7 +1647,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_SUIT.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_suit_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "glowing_diving_suit_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1657,7 +1662,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_LEGGINGS.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_leggings_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "glowing_diving_leggings_upgrade"))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1672,7 +1677,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     HAItems.DIVING_BOOTS.get()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowing_diving_boots_upgrade"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "glowing_diving_boots_upgrade"))
 
         //#endregion
 
@@ -1748,7 +1753,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .requires(Items.GLOW_INK_SAC)
             .unlockedBy("has_slime_ball", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SLIME_BALL))
             .unlockedBy("has_glow_ink_sac", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLOW_INK_SAC))
-            .save(exporter, ResourceLocation("hybrid-aquatic", "glowslime_from_slime"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "glowslime_from_slime"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HAItems.GLOWSTICK.get(), 4)
             .requires(Items.STICK)
@@ -1810,7 +1815,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     ItemPredicate.Builder.item().of(HAItemTags.SMALL_FISH).build()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_small"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "raw_fish_meat_small"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_MEAT.get(), 2)
             .requires(HAItemTags.MEDIUM_FISH)
@@ -1819,7 +1824,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
                     ItemPredicate.Builder.item().of(HAItemTags.MEDIUM_FISH).build()
                 )
             )
-            .save(exporter, ResourceLocation("hybrid-aquatic", "raw_fish_meat_medium"))
+            .save(exporter, ResourceLocation("hybrid_aquatic", "raw_fish_meat_medium"))
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_STEAK.get(), 2)
             .requires(HAItemTags.LARGE_FISH)

@@ -34,26 +34,26 @@ class OceanSunfishEntityModel : HAFishEntityModel<OceanSunfishEntity>("ocean_sun
 
     companion object {
         private val OCEAN_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/ocean_sunfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/ocean_sunfish.png")
         private val HOODWINKER_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/hoodwinker_sunfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/hoodwinker_sunfish.png")
         private val SHARPTAIL_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/sharptail_sunfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/sharptail_sunfish.png")
         private val GIANT_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ocean_sunfish/giant_sunfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/giant_sunfish.png")
 
         private val SUNFISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/ocean_sunfish/ocean_sunfish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/ocean_sunfish/ocean_sunfish.geo.json")
         private val HOODWINKER_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/ocean_sunfish/hoodwinker_sunfish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/ocean_sunfish/hoodwinker_sunfish.geo.json")
         private val GIANT_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/ocean_sunfish/giant_sunfish.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/ocean_sunfish/giant_sunfish.geo.json")
 
         private val SUNFISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/ocean_sunfish/ocean_sunfish.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/ocean_sunfish/ocean_sunfish.animation.json")
         private val HOODWINKER_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/ocean_sunfish/hoodwinker_sunfish.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/ocean_sunfish/hoodwinker_sunfish.animation.json")
         private val GIANT_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/ocean_sunfish/giant_sunfish.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/ocean_sunfish/giant_sunfish.animation.json")
     }
 }

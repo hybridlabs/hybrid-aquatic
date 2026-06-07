@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/fence_inventory",
   "textures": {
-    "texture": "hybrid-aquatic:block/driftwood_planks"
+    "texture": "hybrid_aquatic:block/driftwood_planks"
   }
 }

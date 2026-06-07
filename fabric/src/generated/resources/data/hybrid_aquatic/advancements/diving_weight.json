@@ -1,0 +1,39 @@
+{
+  "parent": "hybrid_aquatic:fishing_net",
+  "criteria": {
+    "diving_weight": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid_aquatic:diving_weight"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.diving_weight.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid_aquatic:diving_weight"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid_aquatic.diving_weight.title"
+    }
+  },
+  "requirements": [
+    [
+      "diving_weight"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -9,7 +9,14 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.FrameType
 import net.minecraft.advancements.RequirementsStrategy
-import net.minecraft.advancements.critereon.*
+import net.minecraft.advancements.critereon.BlockPredicate
+import net.minecraft.advancements.critereon.EnterBlockTrigger
+import net.minecraft.advancements.critereon.EntityPredicate
+import net.minecraft.advancements.critereon.InventoryChangeTrigger
+import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger
+import net.minecraft.advancements.critereon.KilledTrigger
+import net.minecraft.advancements.critereon.LocationPredicate
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
@@ -22,9 +29,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         val rootAdvancement = Advancement.Builder.advancement()
             .display(
                 HAItems.TUNA.get(),
-                Component.translatable("advancements.hybrid-aquatic.enter_water.title"),
-                Component.translatable("advancements.hybrid-aquatic.enter_water.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.enter_water.title"),
+                Component.translatable("advancements.hybrid_aquatic.enter_water.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -34,16 +41,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "enter_water",
                 EnterBlockTrigger.TriggerInstance.entersBlock(WATER)
             )
-            .build(ResourceLocation("hybrid-aquatic", "root"))
+            .build(ResourceLocation("hybrid_aquatic", "root"))
         consumer?.accept(rootAdvancement)
 
         val fishingNetAdvancement = Advancement.Builder.advancement()
             .parent(rootAdvancement)
             .display(
                 HAItems.FISHING_NET.get(),
-                Component.translatable("advancements.hybrid-aquatic.fishing_net.title"),
-                Component.translatable("advancements.hybrid-aquatic.fishing_net.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.fishing_net.title"),
+                Component.translatable("advancements.hybrid_aquatic.fishing_net.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -53,16 +60,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "fishing_net",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.FISHING_NET.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "fishing_net"))
+            .build(ResourceLocation("hybrid_aquatic", "fishing_net"))
         consumer?.accept(fishingNetAdvancement)
 
         val divingWeightAdvancement = Advancement.Builder.advancement()
             .parent(fishingNetAdvancement)
             .display(
                 HAItems.DIVING_WEIGHT.get(),
-                Component.translatable("advancements.hybrid-aquatic.diving_weight.title"),
-                Component.translatable("advancements.hybrid-aquatic.diving_weight.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.diving_weight.title"),
+                Component.translatable("advancements.hybrid_aquatic.diving_weight.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -72,16 +79,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "diving_weight",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.DIVING_WEIGHT.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "diving_weight"))
+            .build(ResourceLocation("hybrid_aquatic", "diving_weight"))
         consumer?.accept(divingWeightAdvancement)
 
         val fishingHookAdvancement = Advancement.Builder.advancement()
             .parent(fishingNetAdvancement)
             .display(
                 HAItems.BARBED_HOOK.get(),
-                Component.translatable("advancements.hybrid-aquatic.hook.title"),
-                Component.translatable("advancements.hybrid-aquatic.hook.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.hook.title"),
+                Component.translatable("advancements.hybrid_aquatic.hook.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -93,16 +100,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.LURE_ITEMS).build()
                 )
 
-            ).build(ResourceLocation("hybrid-aquatic", "hook"))
+            ).build(ResourceLocation("hybrid_aquatic", "hook"))
         consumer?.accept(fishingHookAdvancement)
 
         val creeperHookAdvancement = Advancement.Builder.advancement()
             .parent(fishingHookAdvancement)
             .display(
                 HAItems.CREEPERMAGNET_HOOK.get(),
-                Component.translatable("advancements.hybrid-aquatic.creeper_hook.title"),
-                Component.translatable("advancements.hybrid-aquatic.creeper_hook.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.creeper_hook.title"),
+                Component.translatable("advancements.hybrid_aquatic.creeper_hook.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -112,7 +119,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_creeper_hook",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CREEPERMAGNET_HOOK.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "creeper_hook"))
+            .build(ResourceLocation("hybrid_aquatic", "creeper_hook"))
         consumer?.accept(creeperHookAdvancement)
 
         //#region Depth Charge Advancement Tree
@@ -120,9 +127,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 HAItems.GLOWSTICK.get(),
-                Component.translatable("advancements.hybrid-aquatic.glowstick.title"),
-                Component.translatable("advancements.hybrid-aquatic.glowstick.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.glowstick.title"),
+                Component.translatable("advancements.hybrid_aquatic.glowstick.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -132,16 +139,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_glowstick",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSTICK.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "glowstick"))
+            .build(ResourceLocation("hybrid_aquatic", "glowstick"))
         consumer?.accept(glowstickAdvancement)
 
         val buoyAdvancement = Advancement.Builder.advancement()
             .parent(glowstickAdvancement)
             .display(
                 HAItems.BUOY.get(),
-                Component.translatable("advancements.hybrid-aquatic.buoy.title"),
-                Component.translatable("advancements.hybrid-aquatic.buoy.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.buoy.title"),
+                Component.translatable("advancements.hybrid_aquatic.buoy.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -151,16 +158,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_buoy",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BUOY.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "buoy"))
+            .build(ResourceLocation("hybrid_aquatic", "buoy"))
         consumer?.accept(buoyAdvancement)
 
         val sulfurAdvancement = Advancement.Builder.advancement()
             .parent(glowstickAdvancement)
             .display(
                 HAItems.SULFUR.get(),
-                Component.translatable("advancements.hybrid-aquatic.sulfur.title"),
-                Component.translatable("advancements.hybrid-aquatic.sulfur.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.sulfur.title"),
+                Component.translatable("advancements.hybrid_aquatic.sulfur.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -170,16 +177,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_sulfur",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "sulfur"))
+            .build(ResourceLocation("hybrid_aquatic", "sulfur"))
         consumer?.accept(sulfurAdvancement)
 
         val depthChargeAdvancement = Advancement.Builder.advancement()
             .parent(sulfurAdvancement)
             .display(
                 HAItems.DEPTH_CHARGE.get(),
-                Component.translatable("advancements.hybrid-aquatic.depth_charge.title"),
-                Component.translatable("advancements.hybrid-aquatic.depth_charge.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.depth_charge.title"),
+                Component.translatable("advancements.hybrid_aquatic.depth_charge.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -189,7 +196,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_depth_charge",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.DEPTH_CHARGE.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "depth_charge"))
+            .build(ResourceLocation("hybrid_aquatic", "depth_charge"))
         consumer?.accept(depthChargeAdvancement)
         //#endregion
 
@@ -198,9 +205,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 Items.NAUTILUS_SHELL,
-                Component.translatable("advancements.hybrid-aquatic.nautilus_shell.title"),
-                Component.translatable("advancements.hybrid-aquatic.nautilus_shell.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.nautilus_shell.title"),
+                Component.translatable("advancements.hybrid_aquatic.nautilus_shell.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -212,16 +219,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     Items.NAUTILUS_SHELL
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "nautilus_shell"))
+            .build(ResourceLocation("hybrid_aquatic", "nautilus_shell"))
         consumer?.accept(seashellAdvancement)
 
         val seashellToolsAdvancement = Advancement.Builder.advancement()
             .parent(seashellAdvancement)
             .display(
                 HAItems.SEASHELL_SPEAR.get(),
-                Component.translatable("advancements.hybrid-aquatic.seashell_tools.title"),
-                Component.translatable("advancements.hybrid-aquatic.seashell_tools.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.seashell_tools.title"),
+                Component.translatable("advancements.hybrid_aquatic.seashell_tools.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -233,16 +240,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.SEASHELL_SET).build()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "seashell_tools"))
+            .build(ResourceLocation("hybrid_aquatic", "seashell_tools"))
         consumer?.accept(seashellToolsAdvancement)
 
         val obtainConduitAdvancement = Advancement.Builder.advancement()
             .parent(seashellAdvancement)
             .display(
                 Items.CONDUIT,
-                Component.translatable("advancements.hybrid-aquatic.conduit.title"),
-                Component.translatable("advancements.hybrid-aquatic.conduit.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.conduit.title"),
+                Component.translatable("advancements.hybrid_aquatic.conduit.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.CHALLENGE,
                 true,
                 true,
@@ -252,7 +259,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_conduit",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.CONDUIT)
             )
-            .build(ResourceLocation("hybrid-aquatic", "conduit"))
+            .build(ResourceLocation("hybrid_aquatic", "conduit"))
         consumer?.accept(obtainConduitAdvancement)
         //#endregion
 
@@ -261,9 +268,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 HAItems.CORAL_CHUNK.get(),
-                Component.translatable("advancements.hybrid-aquatic.coral_chunk.title"),
-                Component.translatable("advancements.hybrid-aquatic.coral_chunk.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.coral_chunk.title"),
+                Component.translatable("advancements.hybrid_aquatic.coral_chunk.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -275,16 +282,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.CORAL_CHUNK.get()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "coral_chunk"))
+            .build(ResourceLocation("hybrid_aquatic", "coral_chunk"))
         consumer?.accept(coralChunkAdvancement)
 
         val coralToolsAdvancement = Advancement.Builder.advancement()
             .parent(coralChunkAdvancement)
             .display(
                 HAItems.CORAL_BLADE.get(),
-                Component.translatable("advancements.hybrid-aquatic.coral_tools.title"),
-                Component.translatable("advancements.hybrid-aquatic.coral_tools.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.coral_tools.title"),
+                Component.translatable("advancements.hybrid_aquatic.coral_tools.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -296,7 +303,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.CORAL_SET).build()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "coral_tools"))
+            .build(ResourceLocation("hybrid_aquatic", "coral_tools"))
         consumer?.accept(coralToolsAdvancement)
         //#endregion
 
@@ -305,9 +312,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 Items.SCUTE,
-                Component.translatable("advancements.hybrid-aquatic.turtle_scute.title"),
-                Component.translatable("advancements.hybrid-aquatic.turtle_scute.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.turtle_scute.title"),
+                Component.translatable("advancements.hybrid_aquatic.turtle_scute.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -319,16 +326,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     Items.SCUTE
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "turtle_scute"))
+            .build(ResourceLocation("hybrid_aquatic", "turtle_scute"))
         consumer?.accept(turtleScuteAdvancement)
 
         val turtleSetAdvancement = Advancement.Builder.advancement()
             .parent(turtleScuteAdvancement)
             .display(
                 HAItems.TURTLE_CHESTPLATE.get(),
-                Component.translatable("advancements.hybrid-aquatic.turtle_set.title"),
-                Component.translatable("advancements.hybrid-aquatic.turtle_set.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.turtle_set.title"),
+                Component.translatable("advancements.hybrid_aquatic.turtle_set.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -340,7 +347,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.TURTLE_SET).build()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "turtle_set"))
+            .build(ResourceLocation("hybrid_aquatic", "turtle_set"))
         consumer?.accept(turtleSetAdvancement)
         //#endregion
 
@@ -349,9 +356,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(fishingNetAdvancement)
             .display(
                 HAItems.DIVING_HELMET.get(),
-                Component.translatable("advancements.hybrid-aquatic.diving_suit.title"),
-                Component.translatable("advancements.hybrid-aquatic.diving_suit.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.diving_suit.title"),
+                Component.translatable("advancements.hybrid_aquatic.diving_suit.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -366,16 +373,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.DIVING_BOOTS.get()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "diving_suit"))
+            .build(ResourceLocation("hybrid_aquatic", "diving_suit"))
         consumer?.accept(divingSuitAdvancement)
 
         val divingUpgradeAdvancement = Advancement.Builder.advancement()
             .parent(divingSuitAdvancement)
             .display(
                 HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(),
-                Component.translatable("advancements.hybrid-aquatic.diving_upgrade.title"),
-                Component.translatable("advancements.hybrid-aquatic.diving_upgrade.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.diving_upgrade.title"),
+                Component.translatable("advancements.hybrid_aquatic.diving_upgrade.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -387,16 +394,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "diving_upgrade"))
+            .build(ResourceLocation("hybrid_aquatic", "diving_upgrade"))
         consumer?.accept(divingUpgradeAdvancement)
 
         val reinforcedDivingSuitAdvancement = Advancement.Builder.advancement()
             .parent(divingUpgradeAdvancement)
             .display(
                 HAItems.REINFORCED_DIVING_HELMET.get(),
-                Component.translatable("advancements.hybrid-aquatic.reinforced_diving_suit.title"),
-                Component.translatable("advancements.hybrid-aquatic.reinforced_diving_suit.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.reinforced_diving_suit.title"),
+                Component.translatable("advancements.hybrid_aquatic.reinforced_diving_suit.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -411,16 +418,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.REINFORCED_DIVING_BOOTS.get()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "reinforced_diving_suit"))
+            .build(ResourceLocation("hybrid_aquatic", "reinforced_diving_suit"))
         consumer?.accept(reinforcedDivingSuitAdvancement)
 
         val glowingDivingSuitAdvancement = Advancement.Builder.advancement()
             .parent(divingUpgradeAdvancement)
             .display(
                 HAItems.GLOWING_DIVING_HELMET.get(),
-                Component.translatable("advancements.hybrid-aquatic.glowing_diving_suit.title"),
-                Component.translatable("advancements.hybrid-aquatic.glowing_diving_suit.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.glowing_diving_suit.title"),
+                Component.translatable("advancements.hybrid_aquatic.glowing_diving_suit.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -435,7 +442,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.GLOWING_DIVING_BOOTS.get()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "glowing_diving_suit"))
+            .build(ResourceLocation("hybrid_aquatic", "glowing_diving_suit"))
         consumer?.accept(glowingDivingSuitAdvancement)
         //#endregion
 
@@ -443,9 +450,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 HAItems.CLAM.get(),
-                Component.translatable("advancements.hybrid-aquatic.get_clam.title"),
-                Component.translatable("advancements.hybrid-aquatic.get_clam.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.get_clam.title"),
+                Component.translatable("advancements.hybrid_aquatic.get_clam.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -457,16 +464,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.CLAM.get()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "get_clam"))
+            .build(ResourceLocation("hybrid_aquatic", "get_clam"))
         consumer?.accept(getClamAdvancement)
 
         val plantClamAdvancement = Advancement.Builder.advancement()
             .parent(getClamAdvancement)
             .display(
                 HAItems.COOKED_CLAM.get(),
-                Component.translatable("advancements.hybrid-aquatic.plant_clam.title"),
-                Component.translatable("advancements.hybrid-aquatic.plant_clam.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.plant_clam.title"),
+                Component.translatable("advancements.hybrid_aquatic.plant_clam.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -489,16 +496,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                         .of(HAItems.CLAM.get())
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "plant_clam"))
+            .build(ResourceLocation("hybrid_aquatic", "plant_clam"))
         consumer?.accept(plantClamAdvancement)
 
         val killSirenianAdvancement = Advancement.Builder.advancement()
             .parent(getClamAdvancement)
             .display(
                 HAItems.SIRENIAN_STEAK.get(),
-                Component.translatable("advancements.hybrid-aquatic.kill_sirenian.title"),
-                Component.translatable("advancements.hybrid-aquatic.kill_sirenian.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.kill_sirenian.title"),
+                Component.translatable("advancements.hybrid_aquatic.kill_sirenian.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -517,7 +524,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 )
             )
             .requirements(RequirementsStrategy.OR)
-            .build(ResourceLocation("hybrid-aquatic", "kill_sirenian"))
+            .build(ResourceLocation("hybrid_aquatic", "kill_sirenian"))
         consumer?.accept(killSirenianAdvancement)
 
         //#region Pearl Advancement Tree
@@ -525,9 +532,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 HAItems.PEARL.get(),
-                Component.translatable("advancements.hybrid-aquatic.pearl.title"),
-                Component.translatable("advancements.hybrid-aquatic.pearl.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.pearl.title"),
+                Component.translatable("advancements.hybrid_aquatic.pearl.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -537,16 +544,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "pearl"))
+            .build(ResourceLocation("hybrid_aquatic", "pearl"))
         consumer?.accept(obtainPearlAdvancement)
 
         val obtainBlackPearlAdvancement = Advancement.Builder.advancement()
             .parent(obtainPearlAdvancement)
             .display(
                 HAItems.BLACK_PEARL.get(),
-                Component.translatable("advancements.hybrid-aquatic.black_pearl.title"),
-                Component.translatable("advancements.hybrid-aquatic.black_pearl.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.black_pearl.title"),
+                Component.translatable("advancements.hybrid_aquatic.black_pearl.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -556,7 +563,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_black_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BLACK_PEARL.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "black_pearl"))
+            .build(ResourceLocation("hybrid_aquatic", "black_pearl"))
         consumer?.accept(obtainBlackPearlAdvancement)
         //#endregion
 
@@ -565,9 +572,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 HAItems.DUNGENESS_CRAB_CLAW.get(),
-                Component.translatable("advancements.hybrid-aquatic.crab_claw.title"),
-                Component.translatable("advancements.hybrid-aquatic.crab_claw.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.crab_claw.title"),
+                Component.translatable("advancements.hybrid_aquatic.crab_claw.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
                 true,
                 true,
@@ -579,16 +586,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.CRAB_CLAW).build()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "crab_claw"))
+            .build(ResourceLocation("hybrid_aquatic", "crab_claw"))
         consumer?.accept(crabClawAdvancement)
 
         val ominousHookAdvancement = Advancement.Builder.advancement()
             .parent(crabClawAdvancement)
             .display(
                 HAItems.OMINOUS_HOOK.get(),
-                Component.translatable("advancements.hybrid-aquatic.ominous_hook.title"),
-                Component.translatable("advancements.hybrid-aquatic.ominous_hook.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.ominous_hook.title"),
+                Component.translatable("advancements.hybrid_aquatic.ominous_hook.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -598,16 +605,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_ominous_hook",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.OMINOUS_HOOK.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "ominous_hook"))
+            .build(ResourceLocation("hybrid_aquatic", "ominous_hook"))
         consumer?.accept(ominousHookAdvancement)
 
         val killKarkinosAdvancement = Advancement.Builder.advancement()
             .parent(ominousHookAdvancement)
             .display(
                 HAItems.KARKINOS_CLAW.get(),
-                Component.translatable("advancements.hybrid-aquatic.kill_karkinos.title"),
-                Component.translatable("advancements.hybrid-aquatic.kill_karkinos.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.kill_karkinos.title"),
+                Component.translatable("advancements.hybrid_aquatic.kill_karkinos.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.CHALLENGE,
                 true,
                 true,
@@ -619,7 +626,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     EntityPredicate.Builder.entity().of(HAEntityTypes.KARKINOS.get()).build()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "kill_karkinos"))
+            .build(ResourceLocation("hybrid_aquatic", "kill_karkinos"))
         consumer?.accept(killKarkinosAdvancement)
         //#endregion
 
@@ -628,9 +635,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(seashellAdvancement)
             .display(
                 HAItems.OMINOUS_CONCH.get(),
-                Component.translatable("advancements.hybrid-aquatic.ominous_conch.title"),
-                Component.translatable("advancements.hybrid-aquatic.ominous_conch.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.ominous_conch.title"),
+                Component.translatable("advancements.hybrid_aquatic.ominous_conch.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -640,16 +647,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_ominous_conch",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.OMINOUS_CONCH.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "ominous_conch"))
+            .build(ResourceLocation("hybrid_aquatic", "ominous_conch"))
         consumer?.accept(ominousConchAdvancement)
 
         val killShellBeastAdvancement = Advancement.Builder.advancement()
             .parent(ominousConchAdvancement)
             .display(
                 HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get(),
-                Component.translatable("advancements.hybrid-aquatic.shell_beast.title"),
-                Component.translatable("advancements.hybrid-aquatic.shell_beast.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.shell_beast.title"),
+                Component.translatable("advancements.hybrid_aquatic.shell_beast.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.CHALLENGE,
                 true,
                 true,
@@ -661,16 +668,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     EntityPredicate.Builder.entity().of(HAEntityTypes.SHELL_BEAST.get()).build()
                 )
             )
-            .build(ResourceLocation("hybrid-aquatic", "shell_beast"))
+            .build(ResourceLocation("hybrid_aquatic", "shell_beast"))
         consumer?.accept(killShellBeastAdvancement)
 
         val argonautAdvancement = Advancement.Builder.advancement()
             .parent(killShellBeastAdvancement)
             .display(
                 HAItems.ARGONAUT.get(),
-                Component.translatable("advancements.hybrid-aquatic.argonaut.title"),
-                Component.translatable("advancements.hybrid-aquatic.argonaut.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.argonaut.title"),
+                Component.translatable("advancements.hybrid_aquatic.argonaut.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -680,7 +687,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_argonaut",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.ARGONAUT.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "argonaut"))
+            .build(ResourceLocation("hybrid_aquatic", "argonaut"))
         consumer?.accept(argonautAdvancement)
 
         //#endregion
@@ -690,9 +697,9 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .parent(rootAdvancement)
             .display(
                 HAItems.SHARK_TOOTH.get(),
-                Component.translatable("advancements.hybrid-aquatic.bigger_boat.title"),
-                Component.translatable("advancements.hybrid-aquatic.bigger_boat.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.bigger_boat.title"),
+                Component.translatable("advancements.hybrid_aquatic.bigger_boat.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.GOAL,
                 true,
                 true,
@@ -702,16 +709,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_shark_tooth",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SHARK_TOOTH.get())
             )
-            .build(ResourceLocation("hybrid-aquatic", "bigger_boat"))
+            .build(ResourceLocation("hybrid_aquatic", "bigger_boat"))
         consumer?.accept(obtainSharkToothAdvancement)
 
         val obtainTridentAdvancement = Advancement.Builder.advancement()
             .parent(obtainSharkToothAdvancement)
             .display(
                 Items.TRIDENT,
-                Component.translatable("advancements.hybrid-aquatic.trident.title"),
-                Component.translatable("advancements.hybrid-aquatic.trident.description"),
-                ResourceLocation("hybrid-aquatic", "textures/block/coralstone.png"),
+                Component.translatable("advancements.hybrid_aquatic.trident.title"),
+                Component.translatable("advancements.hybrid_aquatic.trident.description"),
+                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.CHALLENGE,
                 true,
                 true,
@@ -721,7 +728,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_trident",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.TRIDENT)
             )
-            .build(ResourceLocation("hybrid-aquatic", "trident"))
+            .build(ResourceLocation("hybrid_aquatic", "trident"))
         consumer?.accept(obtainTridentAdvancement)
         //#endregion
     }

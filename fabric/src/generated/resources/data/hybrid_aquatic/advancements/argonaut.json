@@ -1,0 +1,39 @@
+{
+  "parent": "hybrid_aquatic:shell_beast",
+  "criteria": {
+    "obtain_argonaut": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid_aquatic:argonaut"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.argonaut.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid_aquatic:argonaut"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid_aquatic.argonaut.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_argonaut"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -15,10 +15,10 @@ class RockfishEntityModel : HAFishEntityModel<RockfishEntity>("rockfish") {
 
     companion object {
         private val VERMILION_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/rockfish/vermilion_rockfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/rockfish/vermilion_rockfish.png")
         private val COPPER_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/rockfish/copper_rockfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/rockfish/copper_rockfish.png")
         private val YELLOWEYE_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/rockfish/yelloweye_rockfish.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/rockfish/yelloweye_rockfish.png")
     }
 }

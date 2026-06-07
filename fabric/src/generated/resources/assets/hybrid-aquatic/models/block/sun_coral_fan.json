@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/coral_fan",
   "textures": {
-    "fan": "hybrid-aquatic:block/sun_coral_fan"
+    "fan": "hybrid_aquatic:block/sun_coral_fan"
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/crystalline_sulfur"
+      "model": "hybrid_aquatic:block/crystalline_sulfur"
     }
   }
 }

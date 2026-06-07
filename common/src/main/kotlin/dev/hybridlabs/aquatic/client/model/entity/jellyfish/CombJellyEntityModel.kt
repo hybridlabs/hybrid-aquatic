@@ -11,9 +11,9 @@ class CombJellyEntityModel : HAJellyfishEntityModel<CombJellyEntity>("comb_jelly
 
     companion object {
         private val SEA_WALNUT_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/jellyfish/comb_jelly/comb_jelly.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/comb_jelly/comb_jelly.png")
         private val BLOODYBELLY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/jellyfish/comb_jelly/bloodybelly_comb_jelly.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/comb_jelly/bloodybelly_comb_jelly.png")
     }
 
     override fun getTextureResource(animatable: CombJellyEntity): ResourceLocation {

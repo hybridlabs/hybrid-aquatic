@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/cut_white_sandstone"
+      "model": "hybrid_aquatic:block/cut_white_sandstone"
     }
   }
 }

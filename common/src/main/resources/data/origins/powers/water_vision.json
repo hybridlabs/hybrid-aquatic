@@ -20,7 +20,7 @@
     "entity_action": {
       "type": "origins:apply_effect",
       "effect": {
-        "effect": "hybrid-aquatic:clarity",
+        "effect": "hybrid_aquatic:clarity",
         "duration": 100,
         "amplifier": 0,
         "show_particles": false,

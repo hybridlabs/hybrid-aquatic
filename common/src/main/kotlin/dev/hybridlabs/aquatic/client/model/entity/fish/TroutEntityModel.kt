@@ -28,18 +28,18 @@ class TroutEntityModel : HAFishEntityModel<TroutEntity>("trout") {
 
     companion object {
         private val BULL_TROUT_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/trout/bull_trout.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/trout/bull_trout.png")
         private val REDBAND_TROUT_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/trout/redband_trout.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/trout/redband_trout.png")
 
         private val BULL_TROUT_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/trout/bull_trout.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/trout/bull_trout.geo.json")
         private val REDBAND_TROUT_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/trout/redband_trout.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/trout/redband_trout.geo.json")
 
         private val BULL_TROUT_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/trout/bull_trout.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/trout/bull_trout.animation.json")
         private val REDBAND_TROUT_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/trout/redband_trout.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/trout/redband_trout.animation.json")
     }
 }

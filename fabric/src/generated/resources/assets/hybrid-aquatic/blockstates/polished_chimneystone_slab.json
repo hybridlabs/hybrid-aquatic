@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "hybrid-aquatic:block/polished_chimneystone_slab"
+      "model": "hybrid_aquatic:block/polished_chimneystone_slab"
     },
     "type=double": {
-      "model": "hybrid-aquatic:block/polished_chimneystone"
+      "model": "hybrid_aquatic:block/polished_chimneystone"
     },
     "type=top": {
-      "model": "hybrid-aquatic:block/polished_chimneystone_slab_top"
+      "model": "hybrid_aquatic:block/polished_chimneystone_slab_top"
     }
   }
 }

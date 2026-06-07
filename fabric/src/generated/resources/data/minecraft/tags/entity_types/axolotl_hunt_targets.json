@@ -1,12 +1,12 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:tetra",
-    "hybrid-aquatic:danio",
-    "hybrid-aquatic:tiger_barb",
-    "hybrid-aquatic:betta",
-    "hybrid-aquatic:cichlid",
-    "hybrid-aquatic:discus",
-    "hybrid-aquatic:corydora"
+    "hybrid_aquatic:tetra",
+    "hybrid_aquatic:danio",
+    "hybrid_aquatic:tiger_barb",
+    "hybrid_aquatic:betta",
+    "hybrid_aquatic:cichlid",
+    "hybrid_aquatic:discus",
+    "hybrid_aquatic:corydora"
   ]
 }

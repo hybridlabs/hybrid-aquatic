@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "hybrid-aquatic:item/tube_sponge"
+    "layer0": "hybrid_aquatic:item/tube_sponge"
   }
 }

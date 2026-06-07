@@ -1,0 +1,38 @@
+{
+  "parent": "hybrid_aquatic:fishing_net",
+  "criteria": {
+    "obtain_hook": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "hybrid_aquatic:lure_items"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.hook.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid_aquatic:barbed_hook",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid_aquatic.hook.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_hook"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

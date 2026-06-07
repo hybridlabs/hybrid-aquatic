@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:deep_lukewarm_oceans",
+  "spawners": {
+    "type": "hybrid_aquatic:seadragon",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

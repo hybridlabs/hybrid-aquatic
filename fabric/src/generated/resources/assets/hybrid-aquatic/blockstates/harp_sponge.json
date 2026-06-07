@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/harp_sponge"
+      "model": "hybrid_aquatic:block/harp_sponge"
     }
   }
 }

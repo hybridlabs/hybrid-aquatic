@@ -32,7 +32,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
 import net.minecraftforge.fml.common.Mod
 
 @Suppress("UnusedExpression")
-@Mod(Constants.FORGE_MOD_ID)
+@Mod(Constants.MOD_ID)
 object HybridAquaticForge {
 
     init {

@@ -1,9 +1,9 @@
 {
   "parent": "block/block",
   "textures": {
-    "1": "hybrid-aquatic:block/tall_sea_lettuce_weeds",
-    "particle": "hybrid-aquatic:block/tall_sea_lettuce_bottom",
-    "cross": "hybrid-aquatic:block/tall_sea_lettuce_bottom"
+    "1": "hybrid_aquatic:block/tall_sea_lettuce_weeds",
+    "particle": "hybrid_aquatic:block/tall_sea_lettuce_bottom",
+    "cross": "hybrid_aquatic:block/tall_sea_lettuce_bottom"
   },
   "elements": [
     {

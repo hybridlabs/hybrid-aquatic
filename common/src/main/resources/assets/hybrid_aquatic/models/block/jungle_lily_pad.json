@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"1": "hybrid-aquatic:block/jungle_lily_pad",
-		"particle": "hybrid-aquatic:block/jungle_lily_pad"
+		"1": "hybrid_aquatic:block/jungle_lily_pad",
+		"particle": "hybrid_aquatic:block/jungle_lily_pad"
 	},
 	"elements": [
 		{

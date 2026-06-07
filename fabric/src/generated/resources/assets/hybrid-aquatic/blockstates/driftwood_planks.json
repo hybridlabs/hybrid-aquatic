@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/driftwood_planks"
+      "model": "hybrid_aquatic:block/driftwood_planks"
     }
   }
 }

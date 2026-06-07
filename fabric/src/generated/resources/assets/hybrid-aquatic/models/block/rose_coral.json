@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hybrid-aquatic:block/rose_coral"
+    "cross": "hybrid_aquatic:block/rose_coral"
   }
 }

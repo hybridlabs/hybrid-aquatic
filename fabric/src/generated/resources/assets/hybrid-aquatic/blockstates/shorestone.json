@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/shorestone"
+      "model": "hybrid_aquatic:block/shorestone"
     }
   }
 }

@@ -53,24 +53,24 @@ class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
 
     companion object {
         private val LEAFY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
         private val WEEDY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
         private val RUBY_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
 
         private val LEAFY_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
         private val WEEDY_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
         private val RUBY_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
 
         private val LEAFY_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_leafy.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_leafy.animation.json")
         private val WEEDY_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_weedy.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_weedy.animation.json")
         private val RUBY_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/seadragon/seadragon_ruby.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_ruby.animation.json")
     }
 }

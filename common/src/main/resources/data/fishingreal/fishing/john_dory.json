@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:john_dory"
+    "item": "hybrid_aquatic:john_dory"
   },
   "result": {
-    "id": "hybrid-aquatic:john_dory"
+    "id": "hybrid_aquatic:john_dory"
   }
 }

@@ -30,7 +30,7 @@ abstract class MoonJellyfishHatItem(settings: Properties) :
         isAdvanced: TooltipFlag
     ) {
         val jellyfishHatText =
-            Component.translatable("item.hybrid-aquatic.moon_jellyfish_hat.description").withStyle(ChatFormatting.GRAY)
+            Component.translatable("item.hybrid_aquatic.moon_jellyfish_hat.description").withStyle(ChatFormatting.GRAY)
 
         tooltipComponents.add(jellyfishHatText)
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced)

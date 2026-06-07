@@ -11,18 +11,18 @@ class HerringEntityModel : HAFishEntityModel<HerringEntity>("herring") {
 
     companion object {
         private val ONE_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/herring/herring.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/herring/herring.geo.json")
         private val TWO_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/herring/herring_two.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/herring/herring_two.geo.json")
         private val THREE_FISH_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/herring/herring_three.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/herring/herring_three.geo.json")
 
         private val ONE_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/herring/herring.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/herring/herring.animation.json")
         private val TWO_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/herring/herring_two.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/herring/herring_two.animation.json")
         private val THREE_FISH_ANIMATION =
-            ResourceLocation("hybrid-aquatic", "animations/entity/fish/herring/herring_three.animation.json")
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/herring/herring_three.animation.json")
     }
 
     override fun getModelResource(animatable: HerringEntity): ResourceLocation {

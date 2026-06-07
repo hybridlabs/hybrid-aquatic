@@ -19,9 +19,8 @@ class RatfishEntityModel : HAFishEntityModel<RatfishEntity>("ratfish") {
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
         )
     }
 }
-

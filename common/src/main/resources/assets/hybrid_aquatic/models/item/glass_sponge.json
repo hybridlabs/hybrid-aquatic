@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "hybrid-aquatic:block/glass_sponge",
-		"particle": "hybrid-aquatic:block/glass_sponge"
+		"0": "hybrid_aquatic:block/glass_sponge",
+		"particle": "hybrid_aquatic:block/glass_sponge"
 	},
 	"elements": [
 		{

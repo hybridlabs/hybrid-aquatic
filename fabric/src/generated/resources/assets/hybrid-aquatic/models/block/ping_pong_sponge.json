@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "hybrid-aquatic:block/ping_pong_sponge"
+    "cross": "hybrid_aquatic:block/ping_pong_sponge"
   }
 }

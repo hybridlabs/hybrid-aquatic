@@ -21,13 +21,13 @@ class TunaEntityModel : HAFishEntityModel<TunaEntity>("tuna") {
 
     companion object {
         private val YELLOWFIN_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
         private val BLUEFIN_TEXTURE =
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
 
         private val YELLOWFIN_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_yellowfin.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/tuna/tuna_yellowfin.geo.json")
         private val BLUEFIN_MODEL =
-            ResourceLocation("hybrid-aquatic", "geo/fish/tuna/tuna_bluefin.geo.json")
+            ResourceLocation("hybrid_aquatic", "geo/fish/tuna/tuna_bluefin.geo.json")
     }
 }

@@ -14,8 +14,8 @@ class TrevallyEntityModel : HAFishEntityModel<TrevallyEntity>("trevally") {
 
     companion object {
         private val pilotfishTextures = listOf(
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/trevally/pilotfish_yellow.png"),
-            ResourceLocation("hybrid-aquatic", "textures/entity/fish/trevally/pilotfish_white.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/trevally/pilotfish_yellow.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/trevally/pilotfish_white.png"),
         )
     }
 }

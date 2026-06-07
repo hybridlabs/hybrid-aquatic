@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:waterlogged_vegetation_patch",
+  "config": {
+    "depth": {
+      "type": "minecraft:biased_to_bottom",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 1
+      }
+    },
+    "extra_bottom_block_chance": 0.0,
+    "extra_edge_column_chance": 0.5,
+    "ground_state": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "hybrid_aquatic:shorestone"
+          },
+          "weight": 3
+        },
+        {
+          "data": {
+            "Name": "hybrid_aquatic:barnacle_shorestone"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "replaceable": "#hybrid_aquatic:tide_pool_replaceable",
+    "surface": "floor",
+    "vegetation_chance": 0.2,
+    "vegetation_feature": {
+      "feature": "hybrid_aquatic:anemones",
+      "placement": []
+    },
+    "vertical_range": 5,
+    "xz_radius": {
+      "type": "minecraft:biased_to_bottom",
+      "value": {
+        "max_inclusive": 4,
+        "min_inclusive": 3
+      }
+    }
+  }
+}

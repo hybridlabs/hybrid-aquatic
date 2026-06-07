@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/marine_snow"
+      "model": "hybrid_aquatic:block/marine_snow"
     }
   }
 }

@@ -1,9 +1,9 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "hybrid-aquatic:block/floating_sargassum",
-    "1": "hybrid-aquatic:block/sargassum",
-    "particle": "hybrid-aquatic:block/floating_sargassum"
+    "0": "hybrid_aquatic:block/floating_sargassum",
+    "1": "hybrid_aquatic:block/sargassum",
+    "particle": "hybrid_aquatic:block/floating_sargassum"
   },
   "elements": [
     {

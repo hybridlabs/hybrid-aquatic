@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/cherry_crate"
+      "model": "hybrid_aquatic:block/cherry_crate"
     }
   }
 }

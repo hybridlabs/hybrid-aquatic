@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:blobfish",
+    "hybrid_aquatic:moray_eel",
+    "hybrid_aquatic:triggerfish",
+    "hybrid_aquatic:trevally",
+    "hybrid_aquatic:parrotfish",
+    "hybrid_aquatic:sheepshead_wrasse",
+    "hybrid_aquatic:ratfish",
+    "hybrid_aquatic:stingray",
+    "hybrid_aquatic:lionfish",
+    "hybrid_aquatic:rockfish",
+    "hybrid_aquatic:sea_bass",
+    "hybrid_aquatic:needlefish"
+  ]
+}

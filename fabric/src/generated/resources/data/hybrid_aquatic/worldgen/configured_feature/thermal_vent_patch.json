@@ -1,0 +1,63 @@
+{
+  "type": "hybrid_aquatic:vent_patch",
+  "config": {
+    "base_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hybrid_aquatic:chimneystone"
+      }
+    },
+    "count": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 5,
+        "min_inclusive": 3
+      }
+    },
+    "giant_vent_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hybrid_aquatic:giant_thermal_vent",
+        "Properties": {
+          "thickness": "tip"
+        }
+      }
+    },
+    "spread_radius": 2,
+    "vent_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hybrid_aquatic:hydrothermal_vent_shaft",
+        "Properties": {
+          "thickness": "tip",
+          "waterlogged": "true"
+        }
+      }
+    },
+    "worm_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "hybrid_aquatic:tube_worm",
+        "Properties": {
+          "waterlogged": "true",
+          "worms": "1"
+        }
+      }
+    },
+    "worm_count": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 3,
+        "min_inclusive": 1
+      }
+    },
+    "worm_count_per_block": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 4,
+        "min_inclusive": 1
+      }
+    },
+    "worm_spread_radius": 4
+  }
+}

@@ -4,10 +4,10 @@
 	"parent": "minecraft:block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "hybrid-aquatic:block/giant_thermal_vent_bottom",
-		"2": "hybrid-aquatic:block/giant_thermal_vent_base_side",
-		"3": "hybrid-aquatic:block/giant_thermal_vent_base_bottom",
-		"particle": "hybrid-aquatic:block/giant_thermal_vent_bottom"
+		"0": "hybrid_aquatic:block/giant_thermal_vent_bottom",
+		"2": "hybrid_aquatic:block/giant_thermal_vent_base_side",
+		"3": "hybrid_aquatic:block/giant_thermal_vent_base_bottom",
+		"particle": "hybrid_aquatic:block/giant_thermal_vent_bottom"
 	},
 	"elements": [
 		{

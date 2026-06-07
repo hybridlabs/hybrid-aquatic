@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "hybrid-aquatic:block/chimneystone"
+      "model": "hybrid_aquatic:block/chimneystone"
     }
   }
 }
