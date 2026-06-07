@@ -8,7 +8,7 @@ import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride.Bound
 val BuiltinSpawnModifiers: Set<SpawnModifier> = setOf(
     SpawnModifier(
         "shipwreck", BuiltinStructures.SHIPWRECK, BoundingBoxType.STRUCTURE, mapOf(
-            "HYBRID_AQUATIC_SHARK" to listOf(
+            "shark" to listOf(
                 MobSpawnSettings.SpawnerData(
                     HAEntityTypes.GREAT_WHITE_SHARK.get(), 1, 1, 3
                 )
@@ -17,7 +17,7 @@ val BuiltinSpawnModifiers: Set<SpawnModifier> = setOf(
     ),
     SpawnModifier(
         "shipwreck_beached", BuiltinStructures.SHIPWRECK_BEACHED, BoundingBoxType.STRUCTURE, mapOf(
-            "HYBRID_AQUATIC_CRUSTACEAN" to listOf(
+            "crustacean" to listOf(
                 MobSpawnSettings.SpawnerData(HAEntityTypes.COCONUT_CRAB.get(), 1, 1, 4
                 )
             )
