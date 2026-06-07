@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "hybrid_aquatic:block/chiseled_chimneystone_bottom",
-    "side": "hybrid_aquatic:block/chiseled_chimneystone_side",
-    "top": "hybrid_aquatic:block/chiseled_chimneystone_top"
-  }
-}

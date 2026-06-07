@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "hybrid_aquatic:block/bleached_lophelia_coral_block"
-  }
-}

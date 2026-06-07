@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "hybrid_aquatic:block/mussels_stage0"
+    },
+    "age=1": {
+      "model": "hybrid_aquatic:block/mussels_stage0"
+    },
+    "age=2": {
+      "model": "hybrid_aquatic:block/mussels_stage0"
+    },
+    "age=3": {
+      "model": "hybrid_aquatic:block/mussels_stage1"
+    },
+    "age=4": {
+      "model": "hybrid_aquatic:block/mussels_stage1"
+    },
+    "age=5": {
+      "model": "hybrid_aquatic:block/mussels_stage2"
+    },
+    "age=6": {
+      "model": "hybrid_aquatic:block/mussels_stage2"
+    },
+    "age=7": {
+      "model": "hybrid_aquatic:block/mussels_stage3"
+    }
+  }
+}

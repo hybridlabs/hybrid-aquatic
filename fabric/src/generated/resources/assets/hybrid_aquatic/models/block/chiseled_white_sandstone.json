@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "hybrid_aquatic:block/chiseled_white_sandstone_bottom",
+    "side": "hybrid_aquatic:block/chiseled_white_sandstone_side",
+    "top": "hybrid_aquatic:block/chiseled_white_sandstone_top"
+  }
+}

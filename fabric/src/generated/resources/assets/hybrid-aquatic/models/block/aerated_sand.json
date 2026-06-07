@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_top",
-  "textures": {
-    "side": "hybrid_aquatic:block/aerated_sand_side",
-    "top": "hybrid_aquatic:block/aerated_sand_top"
-  }
-}

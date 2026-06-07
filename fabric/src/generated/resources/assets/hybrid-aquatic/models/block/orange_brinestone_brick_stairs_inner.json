@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "hybrid_aquatic:block/orange_brinestone_bricks",
-    "side": "hybrid_aquatic:block/orange_brinestone_bricks",
-    "top": "hybrid_aquatic:block/orange_brinestone_bricks"
-  }
-}

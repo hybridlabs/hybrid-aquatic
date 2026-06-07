@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hybrid_aquatic:block/schist_brick_slab"
+    },
+    "type=double": {
+      "model": "hybrid_aquatic:block/schist_bricks"
+    },
+    "type=top": {
+      "model": "hybrid_aquatic:block/schist_brick_slab_top"
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "hybrid_aquatic:block/red_brinestone_bricks",
-    "side": "hybrid_aquatic:block/red_brinestone_bricks",
-    "top": "hybrid_aquatic:block/red_brinestone_bricks"
-  }
-}

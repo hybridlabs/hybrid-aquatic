@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.nbt.CompoundTag
@@ -34,7 +35,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
     override fun getDefaultLootTable(): ResourceLocation {
-        return ResourceLocation("hybrid_aquatic", "entities/decorator_crab")
+        return CommonClass.locate("entities/decorator_crab")
     }
 
     var coralTimer: Int
