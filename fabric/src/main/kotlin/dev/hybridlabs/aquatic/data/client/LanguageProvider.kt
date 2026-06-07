@@ -209,19 +209,19 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "journal.description.hybrid-aquatic.boxfish" to
                     "A small box-shaped fish, capable of releasing powerful toxins when stressed.",
             "journal.description.hybrid-aquatic.betta" to
-                    "The Betta, also known as the Siamese fighting fish, is a colorful, territorial freshwater fish known for its vibrant fins and aggressive behavior towards other males.",
+                    "A small freshwater fish, known for its flowing fins, territorial behaviour, and beautiful colors.",
             "journal.description.hybrid-aquatic.carp" to
                     "A hardy freshwater fish, can be bred to produce koi and goldfish.",
             "journal.description.hybrid-aquatic.danio" to
                     "The Danio, a small, colorful freshwater fish known for its active swimming behavior and popularity in home aquariums.",
             "journal.description.hybrid-aquatic.discus" to
-                    "The Discus, a vibrant, round-shaped freshwater fish admired for its striking patterns and colors, often kept in aquariums for its beauty.",
+                    "A disc-shaped freshwater fish, known for being territorial and having colorful scales.",
             "journal.description.hybrid-aquatic.dragonfish" to
                     "A deep-sea fish with a long glowing lure extending from its jaw, used to attract prey.",
             "journal.description.hybrid-aquatic.golden_dorado" to
                     "A large freshwater predator, known for its strong scales and large teeth.",
             "journal.description.hybrid-aquatic.gourami" to
-                    "The Gourami, a diverse group of freshwater fish, recognized for their labyrinth organ allowing them to breathe air and their peaceful nature in community tanks.",
+                    "A small freshwater fish, known for being territorial and having colorful scales.",
             "journal.description.hybrid-aquatic.mackerel" to
                     "A small baitfish known for forming large schools.",
             "journal.description.hybrid-aquatic.herring" to
@@ -235,9 +235,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "journal.description.hybrid-aquatic.piranha" to
                     "A small freshwater fish known for its sharp teeth and voracious appetite.",
             "journal.description.hybrid-aquatic.rockfish" to
-                    "The Rockfish, a long-lived marine fish with venomous spines, known for its camouflage abilities and preference for rocky sea floors.",
+                    "A saltwater fish, known for its large eyes and its tendency to hide among rocks.",
             "journal.description.hybrid-aquatic.sea_bass" to
-                    "The Sea Bass, a popular game and commercial fish, recognized for its firm texture and mild flavor, often found in coastal waters.",
+                    "A predatory saltwater fish, often used as a food source and known for its delicious flavor.",
             "journal.description.hybrid-aquatic.snailfish" to
                     "A deep-sea fish with an extremely soft and fragile body",
             "journal.description.hybrid-aquatic.squirrelfish" to
@@ -255,7 +255,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "journal.description.hybrid-aquatic.trevally" to
                     "A schooling fish that prefers to follow large animals around.",
             "journal.description.hybrid-aquatic.stingray" to
-                    "The Blue-Spotted Stingray, a striking marine fish known for its vibrant blue spots and flattened body, often found gliding along sandy sea floors.",
+                    "A large circular fish that swims along the seafloor, known for having a venomous spine on the end of its tail.",
             "journal.description.hybrid-aquatic.stonefish" to
                     "A bottom-dwelling fish that mimics the appearance of rocks around it, known for its extremely potent venom.",
             "journal.description.hybrid-aquatic.ocean_sunfish" to
@@ -267,9 +267,9 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "journal.description.hybrid-aquatic.lionfish" to
                     "A predatory reef fish with venomous spines, considered invasive in some parts of the world.",
             "journal.description.hybrid-aquatic.tetra" to
-                    "The Neon Tetra, a small, brightly colored freshwater fish known for its iridescent blue and red stripes, making it a popular choice for home aquariums.",
+                    "A small freshwater fish, known for its bright colors and schooling behaviour.",
             "journal.description.hybrid-aquatic.tiger_barb" to
-                    "The Tiger Barb, a lively, freshwater fish recognized by its bold black stripes over an orange-gold body, often kept in groups in community tanks.",
+                    "A small freshwater fish, known for its striped pattern and schooling behaviour.",
             "journal.description.hybrid-aquatic.blowfish" to
                     "A type of pufferfish, known for making intricate designs in the sandy seabed.",
             "journal.description.hybrid-aquatic.triggerfish" to
@@ -278,6 +278,32 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
                     "An open-water predatory fish that never stops swimming.",
             "journal.description.hybrid-aquatic.mahi" to
                     "An open-water predatory fish, known for its bright colors.",
+            "journal.description.hybrid-aquatic.blobfish" to
+                    "A deep-sea fish with a soft gelatinous body, adapted to survive under immense pressure.",
+            "journal.description.hybrid-aquatic.hagfish" to
+                    "A primitive eel-like scavenger, capable of producing large amounts of slime when threatened.",
+            "journal.description.hybrid-aquatic.flashlight_fish" to
+                    "A nocturnal deep-sea fish with glowing organs beneath its eyes, used for communication and attracting prey.",
+            "journal.description.hybrid-aquatic.opah" to
+                    "A large open-ocean fish, notable for being one of the few warm-blooded fish in the world.",
+            "journal.description.hybrid-aquatic.seahorse" to
+                    "A small reef fish that swims upright, known for its curled tail and the male's ability to carry eggs.",
+            "journal.description.hybrid-aquatic.needlefish" to
+                    "A slender predatory fish with a long beak filled with sharp teeth, often found near the water's surface.",
+            "journal.description.hybrid-aquatic.flying_fish" to
+                    "An open-ocean fish capable of gliding above the water using its enlarged fins.",
+            "journal.description.hybrid-aquatic.goldfish" to
+                    "A domesticated freshwater fish bred from carp, known for its bright colors and many varieties.",
+            "journal.description.hybrid-aquatic.trout" to
+                    "A freshwater fish commonly found in rivers and lakes, valued for its speed and ability to swim upstream.",
+            "journal.description.hybrid-aquatic.sunfish" to
+                    "A common freshwater fish known for its rounded body and willingness to bite almost anything.",
+            "journal.description.hybrid-aquatic.pleco" to
+                    "An armored freshwater catfish that feeds on algae and uses its sucker-like mouth to cling to surfaces.",
+            "journal.description.hybrid-aquatic.john_dory" to
+                    "A predatory saltwater fish recognized by the large dark spot on its side and highly protrusible jaws.",
+            "journal.description.hybrid-aquatic.ratfish" to
+                    "A deep-sea relative of sharks, known for its large eyes, long tail, and unusual appearance.",
 
             ).forEach { (key, profile) ->
             builder.add(key, profile)
