@@ -32,7 +32,7 @@ public abstract class FishingRodItemMixin {
             int luckLevel = EnchantmentHelper.getFishingLuckBonus(mainHandItemStack);
             FishingHook customBobber = new FishingHook(user, world, lureLevel, luckLevel);
 
-            ((CustomFishingBobberEntityData) customBobber).hybrid_aquatic$setLureItem(opposingHandItemStack.copyAndClear());
+            ((CustomFishingBobberEntityData) customBobber).setLureItem(opposingHandItemStack.copyAndClear());
             world.addFreshEntity(customBobber);
 
             user.awardStat(Stats.ITEM_USED.get(((FishingRodItem) (Object) this)));

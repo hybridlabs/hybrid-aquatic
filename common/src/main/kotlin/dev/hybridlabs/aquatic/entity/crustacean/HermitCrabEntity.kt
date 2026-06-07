@@ -84,8 +84,8 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun canTakeItem(stack: ItemStack): Boolean {
-        return stack.`is`(HAItemTags.CRAB_WEARABLES)
+    override fun canTakeItem(itemstack: ItemStack): Boolean {
+        return itemstack.`is`(HAItemTags.CRAB_WEARABLES)
     }
 
     override fun getPickupReach(): Vec3i {

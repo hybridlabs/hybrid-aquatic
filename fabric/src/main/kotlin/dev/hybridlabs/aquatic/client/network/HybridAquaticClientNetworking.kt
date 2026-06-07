@@ -19,7 +19,7 @@ object HybridAquaticClientNetworking {
             if (foundEntity == null || foundEntity !is FishingHook) return@execute
                 val additionalBobberData = foundEntity as CustomFishingBobberEntityData
 
-                additionalBobberData.`hybrid_aquatic$setLureItem`(itemStack)
+                additionalBobberData.lureItem = itemStack
             }
         }
     }

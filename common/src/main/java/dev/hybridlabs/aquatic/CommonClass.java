@@ -74,7 +74,7 @@ public class CommonClass {
 
     public static void init() {
         if (Services.PLATFORM.isModLoaded(MOD_ID)) {
-            Constants.LOG.info("{} loaded.", MOD_NAME);
+            Constants.LOGGER.info("{} loaded.", MOD_NAME);
         }
     }
 }

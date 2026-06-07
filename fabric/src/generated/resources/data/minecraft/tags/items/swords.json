@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:seashell_spear",
-    "hybrid-aquatic:coral_blade"
+    "hybrid_aquatic:seashell_spear",
+    "hybrid_aquatic:coral_blade"
   ]
 }

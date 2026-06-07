@@ -9,7 +9,7 @@ object ForgeSpawnGroupRegistry {
         HASpawnGroup.entries.toTypedArray().forEach {
             MobCategory.create(
                 it.name,
-                it.gName,
+                it.name,
                 it.spawnCap,
                 it.peaceful,
                 it.rare,

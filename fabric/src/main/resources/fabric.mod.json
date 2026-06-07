@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "hybrid-aquatic",
+    "id": "hybrid_aquatic",
     "version": "${version}",
 
     "name": "Hybrid Aquatic",
@@ -22,7 +22,7 @@
     },
 
     "license": "ARR",
-    "icon": "assets/hybrid-aquatic/icon.png",
+    "icon": "assets/hybrid_aquatic/icon.png",
 
     "environment": "*",
     "entrypoints": {
@@ -51,10 +51,10 @@
     },
 
     "mixins": [
-        "hybrid-aquatic.fabric.mixins.json"
+        "hybrid_aquatic.fabric.mixins.json"
     ],
 
-    "accessWidener": "hybrid-aquatic.accesswidener",
+    "accessWidener": "hybrid_aquatic.accesswidener",
 
     "depends": {
         "minecraft": "~1.20.1",

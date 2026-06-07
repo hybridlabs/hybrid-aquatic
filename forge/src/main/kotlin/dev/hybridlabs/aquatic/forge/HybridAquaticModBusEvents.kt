@@ -171,7 +171,7 @@ object HybridAquaticModBusEvents {
     }
 
     private fun onClientSetup(event: FMLClientSetupEvent) {
-        Constants.LOG.info("Initializing client...")
+        Constants.LOGGER.info("Initializing client...")
         registerTrinketRenderer(
             HAItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD
         )
@@ -211,7 +211,7 @@ object HybridAquaticModBusEvents {
     }
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
-        Constants.LOG.info("Server starting...")
+        Constants.LOGGER.info("Server starting...")
     }
 
     private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot) {

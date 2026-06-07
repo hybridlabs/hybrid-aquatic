@@ -34,7 +34,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
     override fun getDefaultLootTable(): ResourceLocation {
-        return ResourceLocation("hybrid-aquatic", "entities/decorator_crab")
+        return ResourceLocation("hybrid_aquatic", "entities/decorator_crab")
     }
 
     var coralTimer: Int

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:seashell_axe",
-    "hybrid-aquatic:coral_axe"
+    "hybrid_aquatic:seashell_axe",
+    "hybrid_aquatic:coral_axe"
   ]
 }

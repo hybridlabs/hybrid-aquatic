@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     {
-      "id": "hybrid-aquatic:tropical_river",
+      "id": "hybrid_aquatic:tropical_river",
       "required": false
     }
   ]

@@ -2,11 +2,11 @@
   "replace": false,
   "values": [
     {
-      "id": "hybrid-aquatic:coral_reef",
+      "id": "hybrid_aquatic:coral_reef",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:tide_pools",
+      "id": "hybrid_aquatic:tide_pools",
       "required": false
     }
   ]

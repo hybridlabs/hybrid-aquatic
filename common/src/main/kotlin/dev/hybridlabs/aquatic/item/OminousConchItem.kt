@@ -35,7 +35,7 @@ class OminousConchItem(
         val tag = stack.tag
 
         lines.add(
-            Component.translatable("item.hybrid-aquatic.ominous_conch.function")
+            Component.translatable("item.hybrid_aquatic.ominous_conch.function")
                 .withStyle(ChatFormatting.GRAY)
         )
 
@@ -43,12 +43,12 @@ class OminousConchItem(
 
         if (!hasSummoned) {
             lines.add(
-                Component.translatable("tooltip.hybrid-aquatic.ominous_conch.unused")
+                Component.translatable("tooltip.hybrid_aquatic.ominous_conch.unused")
                     .withStyle(ChatFormatting.DARK_PURPLE)
             )
         } else {
             lines.add(
-                Component.translatable("tooltip.hybrid-aquatic.ominous_conch.used")
+                Component.translatable("tooltip.hybrid_aquatic.ominous_conch.used")
                     .withStyle(ChatFormatting.GRAY)
             )
         }

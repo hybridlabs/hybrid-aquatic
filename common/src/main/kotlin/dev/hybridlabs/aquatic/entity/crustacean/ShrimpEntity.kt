@@ -151,15 +151,15 @@ class ShrimpEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level)
         super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
-        this.setCleaning(nbt.getBoolean("Cleaning"))
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putInt("texture_overlay", this.overlayTexture.id)
+        this.setCleaning(compound.getBoolean("Cleaning"))
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        if(nbt.contains("texture_overlay")) this.overlayTexture = OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        this.setCleaning(nbt.getBoolean("Cleaning"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        if(compound.contains("texture_overlay")) this.overlayTexture = OverlayTextures.byId(compound.getInt("texture_overlay"))
+        this.setCleaning(compound.getBoolean("Cleaning"))
+        super.readAdditionalSaveData(compound)
     }
 }

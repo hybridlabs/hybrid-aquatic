@@ -50,23 +50,23 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
     private boolean isHoldingDivingWeight;
 
     @Override
-    public void hybrid_aquatic$setHurtTime(int value) {
+    public void setHybridHurtTime(int value) {
         haHurtTime = value;
     }
 
     @Override
-    public int hybrid_aquatic$getHurtTime() {
+    public int getHybridHurtTime() {
         return haHurtTime;
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
-        hybrid_aquatic$setHurtTime(nbt.getInt("haHurtTime"));
+        setHybridHurtTime(nbt.getInt("haHurtTime"));
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
-        nbt.putInt("haHurtTime", hybrid_aquatic$getHurtTime());
+        nbt.putInt("haHurtTime", getHybridHurtTime());
     }
 
     @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
@@ -102,15 +102,15 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
                                     object.getEyeY(),
                                     object.getZ(),
                                     object.getBoundingBox().inflate(16));
-            if (foundEntity != null) hybrid_aquatic$setHurtTime(200);
+            if (foundEntity != null) setHybridHurtTime(200);
         }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tickDownCustomHurtTime(CallbackInfo ci) {
-        int cHurtTime = hybrid_aquatic$getHurtTime();
+        int cHurtTime = getHybridHurtTime();
         if (cHurtTime > 0) {
-            hybrid_aquatic$setHurtTime(cHurtTime - 1);
+            setHybridHurtTime(cHurtTime - 1);
         }
         // Gives Water Breathing/Clarity if player has Diving Helmet equipped
         updateDivingHelmet();

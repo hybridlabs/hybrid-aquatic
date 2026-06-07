@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:shorestone",
-    "hybrid-aquatic:barnacle_shorestone",
-    "hybrid-aquatic:coralstone"
+    "hybrid_aquatic:shorestone",
+    "hybrid_aquatic:barnacle_shorestone",
+    "hybrid_aquatic:coralstone"
   ]
 }

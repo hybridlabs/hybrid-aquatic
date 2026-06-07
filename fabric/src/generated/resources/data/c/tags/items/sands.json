@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:white_sand",
-    "hybrid-aquatic:grassy_sand"
+    "hybrid_aquatic:white_sand",
+    "hybrid_aquatic:grassy_sand"
   ]
 }

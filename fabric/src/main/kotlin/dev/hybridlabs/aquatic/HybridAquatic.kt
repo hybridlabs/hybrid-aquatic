@@ -43,7 +43,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
 object HybridAquatic : ModInitializer {
     val DUNEGRASS_PATCH = HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
 
-    private val logger = Constants.LOG
+    private val logger = Constants.LOGGER
 
     @Suppress("UnusedExpression")
     override fun onInitialize() {

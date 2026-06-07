@@ -54,104 +54,104 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         //advancements
         mapOf(
-            "advancements.hybrid-aquatic.enter_water.title" to "Hybrid Aquatic",
-            "advancements.hybrid-aquatic.enter_water.description" to "Discover an expanded world beneath the waves",
+            "advancements.hybrid_aquatic.enter_water.title" to "Hybrid Aquatic",
+            "advancements.hybrid_aquatic.enter_water.description" to "Discover an expanded world beneath the waves",
 
-            "advancements.hybrid-aquatic.fishing_net.title" to "Not Quite A Bucket",
-            "advancements.hybrid-aquatic.fishing_net.description" to "Craft a fishing net to pick up and transport sea creatures",
+            "advancements.hybrid_aquatic.fishing_net.title" to "Not Quite A Bucket",
+            "advancements.hybrid_aquatic.fishing_net.description" to "Craft a fishing net to pick up and transport sea creatures",
 
-            "advancements.hybrid-aquatic.glowstick.title" to "Better Than Torches!",
-            "advancements.hybrid-aquatic.glowstick.description" to "Craft a glowstick to light your way in the deep sea",
+            "advancements.hybrid_aquatic.glowstick.title" to "Better Than Torches!",
+            "advancements.hybrid_aquatic.glowstick.description" to "Craft a glowstick to light your way in the deep sea",
 
-            "advancements.hybrid-aquatic.sulfur.title" to "Not Glowstone Dust",
-            "advancements.hybrid-aquatic.sulfur.description" to "Find sulfur in a sulfuric cave",
+            "advancements.hybrid_aquatic.sulfur.title" to "Not Glowstone Dust",
+            "advancements.hybrid_aquatic.sulfur.description" to "Find sulfur in a sulfuric cave",
 
-            "advancements.hybrid-aquatic.depth_charge.title" to "Mining Fatigue?",
-            "advancements.hybrid-aquatic.depth_charge.description" to "Craft a depth charge",
+            "advancements.hybrid_aquatic.depth_charge.title" to "Mining Fatigue?",
+            "advancements.hybrid_aquatic.depth_charge.description" to "Craft a depth charge",
 
-            "advancements.hybrid-aquatic.buoy.title" to "Oh Buoy!",
-            "advancements.hybrid-aquatic.buoy.description" to "Craft a buoy to guide sailors across the sea",
+            "advancements.hybrid_aquatic.buoy.title" to "Oh Buoy!",
+            "advancements.hybrid_aquatic.buoy.description" to "Craft a buoy to guide sailors across the sea",
 
-            "advancements.hybrid-aquatic.coral_chunk.title" to "That's Not A Sheep",
-            "advancements.hybrid-aquatic.coral_chunk.description" to "Shear a decorator crab to get a coral chunk",
+            "advancements.hybrid_aquatic.coral_chunk.title" to "That's Not A Sheep",
+            "advancements.hybrid_aquatic.coral_chunk.description" to "Shear a decorator crab to get a coral chunk",
 
-            "advancements.hybrid-aquatic.coral_tools.title" to "Who Needs Mending?",
-            "advancements.hybrid-aquatic.coral_tools.description" to "Craft a tool out of coral chunks",
+            "advancements.hybrid_aquatic.coral_tools.title" to "Who Needs Mending?",
+            "advancements.hybrid_aquatic.coral_tools.description" to "Craft a tool out of coral chunks",
 
-            "advancements.hybrid-aquatic.get_clam.title" to "Happy As A Clam",
-            "advancements.hybrid-aquatic.get_clam.description" to "Feed a dugong some sea lettuce to get a clam",
+            "advancements.hybrid_aquatic.get_clam.title" to "Happy As A Clam",
+            "advancements.hybrid_aquatic.get_clam.description" to "Feed a dugong some sea lettuce to get a clam",
 
-            "advancements.hybrid-aquatic.plant_clam.title" to "Shell Corporation",
-            "advancements.hybrid-aquatic.plant_clam.description" to "Grow your own clams underwater",
+            "advancements.hybrid_aquatic.plant_clam.title" to "Shell Corporation",
+            "advancements.hybrid_aquatic.plant_clam.description" to "Grow your own clams underwater",
 
-            "advancements.hybrid-aquatic.kill_sirenian.title" to "Sea Cow Tipper",
-            "advancements.hybrid-aquatic.kill_sirenian.description" to "They're endangered, you know",
+            "advancements.hybrid_aquatic.kill_sirenian.title" to "Sea Cow Tipper",
+            "advancements.hybrid_aquatic.kill_sirenian.description" to "They're endangered, you know",
 
-            "advancements.hybrid-aquatic.nautilus_shell.title" to "Someone Used To Live Here",
-            "advancements.hybrid-aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
+            "advancements.hybrid_aquatic.nautilus_shell.title" to "Someone Used To Live Here",
+            "advancements.hybrid_aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
 
-            "advancements.hybrid-aquatic.seashell_tools.title" to "Shell Yeah!",
-            "advancements.hybrid-aquatic.seashell_tools.description" to "Craft a tool out of nautilus shells",
+            "advancements.hybrid_aquatic.seashell_tools.title" to "Shell Yeah!",
+            "advancements.hybrid_aquatic.seashell_tools.description" to "Craft a tool out of nautilus shells",
 
-            "advancements.hybrid-aquatic.ominous_conch.title" to "If You Listen Closely..",
-            "advancements.hybrid-aquatic.ominous_conch.description" to "Trade with a hermit crab for an Ominous Shell",
+            "advancements.hybrid_aquatic.ominous_conch.title" to "If You Listen Closely..",
+            "advancements.hybrid_aquatic.ominous_conch.description" to "Trade with a hermit crab for an Ominous Shell",
 
-            "advancements.hybrid-aquatic.shell_beast.title" to "Shell-Shocked",
-            "advancements.hybrid-aquatic.shell_beast.description" to "Kill the Shell Beast",
+            "advancements.hybrid_aquatic.shell_beast.title" to "Shell-Shocked",
+            "advancements.hybrid_aquatic.shell_beast.description" to "Kill the Shell Beast",
 
-            "advancements.hybrid-aquatic.argonaut.title" to "This Boat Has Fins",
-            "advancements.hybrid-aquatic.argonaut.description" to "Build the Argonaut",
+            "advancements.hybrid_aquatic.argonaut.title" to "This Boat Has Fins",
+            "advancements.hybrid_aquatic.argonaut.description" to "Build the Argonaut",
 
-            "advancements.hybrid-aquatic.conduit.title" to "Better Than Gills",
-            "advancements.hybrid-aquatic.conduit.description" to "Craft a conduit",
+            "advancements.hybrid_aquatic.conduit.title" to "Better Than Gills",
+            "advancements.hybrid_aquatic.conduit.description" to "Craft a conduit",
 
-            "advancements.hybrid-aquatic.turtle_scute.title" to "They Grow Up So Fast!",
-            "advancements.hybrid-aquatic.turtle_scute.description" to "Obtain a turtle scute",
+            "advancements.hybrid_aquatic.turtle_scute.title" to "They Grow Up So Fast!",
+            "advancements.hybrid_aquatic.turtle_scute.description" to "Obtain a turtle scute",
 
-            "advancements.hybrid-aquatic.turtle_set.title" to "Cowabunga!",
-            "advancements.hybrid-aquatic.turtle_set.description" to "Craft a piece of turtle armor",
+            "advancements.hybrid_aquatic.turtle_set.title" to "Cowabunga!",
+            "advancements.hybrid_aquatic.turtle_set.description" to "Craft a piece of turtle armor",
 
-            "advancements.hybrid-aquatic.diving_weight.title" to "The Fast Way Down",
-            "advancements.hybrid-aquatic.diving_weight.description" to "Craft a diving weight",
+            "advancements.hybrid_aquatic.diving_weight.title" to "The Fast Way Down",
+            "advancements.hybrid_aquatic.diving_weight.description" to "Craft a diving weight",
 
-            "advancements.hybrid-aquatic.diving_suit.title" to "Diving In",
-            "advancements.hybrid-aquatic.diving_suit.description" to "Obtain a full set of diving gear",
+            "advancements.hybrid_aquatic.diving_suit.title" to "Diving In",
+            "advancements.hybrid_aquatic.diving_suit.description" to "Obtain a full set of diving gear",
 
-            "advancements.hybrid-aquatic.diving_upgrade.title" to "Beachcombing",
-            "advancements.hybrid-aquatic.diving_upgrade.description" to "Find a diving suit upgrade template",
+            "advancements.hybrid_aquatic.diving_upgrade.title" to "Beachcombing",
+            "advancements.hybrid_aquatic.diving_upgrade.description" to "Find a diving suit upgrade template",
 
-            "advancements.hybrid-aquatic.reinforced_diving_suit.title" to "Diving Deeper",
-            "advancements.hybrid-aquatic.reinforced_diving_suit.description" to "Reinforce your diving gear",
+            "advancements.hybrid_aquatic.reinforced_diving_suit.title" to "Diving Deeper",
+            "advancements.hybrid_aquatic.reinforced_diving_suit.description" to "Reinforce your diving gear",
 
-            "advancements.hybrid-aquatic.glowing_diving_suit.title" to "The Light In The Abyss",
-            "advancements.hybrid-aquatic.glowing_diving_suit.description" to "Make your diving suit glow in the dark",
+            "advancements.hybrid_aquatic.glowing_diving_suit.title" to "The Light In The Abyss",
+            "advancements.hybrid_aquatic.glowing_diving_suit.description" to "Make your diving suit glow in the dark",
 
-            "advancements.hybrid-aquatic.hook.title" to "Hooked!",
-            "advancements.hybrid-aquatic.hook.description" to "Craft a hook to help you catch fish faster",
+            "advancements.hybrid_aquatic.hook.title" to "Hooked!",
+            "advancements.hybrid_aquatic.hook.description" to "Craft a hook to help you catch fish faster",
 
-            "advancements.hybrid-aquatic.creeper_hook.title" to "An Explosive Catch",
-            "advancements.hybrid-aquatic.creeper_hook.description" to "Also try The Creeper's Code!",
+            "advancements.hybrid_aquatic.creeper_hook.title" to "An Explosive Catch",
+            "advancements.hybrid_aquatic.creeper_hook.description" to "Also try The Creeper's Code!",
 
-            "advancements.hybrid-aquatic.pearl.title" to "Pearly Whites",
-            "advancements.hybrid-aquatic.pearl.description" to "Obtain a pearl from a giant clam",
+            "advancements.hybrid_aquatic.pearl.title" to "Pearly Whites",
+            "advancements.hybrid_aquatic.pearl.description" to "Obtain a pearl from a giant clam",
 
-            "advancements.hybrid-aquatic.black_pearl.title" to "The Black Pearl",
-            "advancements.hybrid-aquatic.black_pearl.description" to "What the Black Pearl really is... is freedom",
+            "advancements.hybrid_aquatic.black_pearl.title" to "The Black Pearl",
+            "advancements.hybrid_aquatic.black_pearl.description" to "What the Black Pearl really is... is freedom",
 
-            "advancements.hybrid-aquatic.crab_claw.title" to "Clawesome",
-            "advancements.hybrid-aquatic.crab_claw.description" to "Obtain any crab claw",
+            "advancements.hybrid_aquatic.crab_claw.title" to "Clawesome",
+            "advancements.hybrid_aquatic.crab_claw.description" to "Obtain any crab claw",
 
-            "advancements.hybrid-aquatic.ominous_hook.title" to "Hook, Line, and Pincher",
-            "advancements.hybrid-aquatic.ominous_hook.description" to "Obtain an Ominous Hook",
+            "advancements.hybrid_aquatic.ominous_hook.title" to "Hook, Line, and Pincher",
+            "advancements.hybrid_aquatic.ominous_hook.description" to "Obtain an Ominous Hook",
 
-            "advancements.hybrid-aquatic.kill_karkinos.title" to "A Herculean Task",
-            "advancements.hybrid-aquatic.kill_karkinos.description" to "Defeat Karkinos",
+            "advancements.hybrid_aquatic.kill_karkinos.title" to "A Herculean Task",
+            "advancements.hybrid_aquatic.kill_karkinos.description" to "Defeat Karkinos",
 
-            "advancements.hybrid-aquatic.bigger_boat.title" to "We're Gonna Need A Bigger Boat",
-            "advancements.hybrid-aquatic.bigger_boat.description" to "Block a shark attack with a shield to get a shark tooth",
+            "advancements.hybrid_aquatic.bigger_boat.title" to "We're Gonna Need A Bigger Boat",
+            "advancements.hybrid_aquatic.bigger_boat.description" to "Block a shark attack with a shield to get a shark tooth",
 
-            "advancements.hybrid-aquatic.trident.title" to "Poseidon Quivers Before Him!",
-            "advancements.hybrid-aquatic.trident.description" to "Obtain a trident",
+            "advancements.hybrid_aquatic.trident.title" to "Poseidon Quivers Before Him!",
+            "advancements.hybrid_aquatic.trident.description" to "Obtain a trident",
         ).forEach { (key, translation) ->
             builder.add(key, translation)
         }
@@ -202,107 +202,107 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         //-Sound Events
 
         mapOf(
-            "journal.description.hybrid-aquatic.anglerfish" to
+            "journal.description.hybrid_aquatic.anglerfish" to
                     "A deep-sea fish with a glowing lure, used to attract prey.",
-            "journal.description.hybrid-aquatic.barreleye" to
+            "journal.description.hybrid_aquatic.barreleye" to
                     "A deep-sea fish with a transparent head, letting it see far above it.",
-            "journal.description.hybrid-aquatic.boxfish" to
+            "journal.description.hybrid_aquatic.boxfish" to
                     "A small box-shaped fish, capable of releasing powerful toxins when stressed.",
-            "journal.description.hybrid-aquatic.betta" to
+            "journal.description.hybrid_aquatic.betta" to
                     "A small freshwater fish, known for its flowing fins, territorial behaviour, and beautiful colors.",
-            "journal.description.hybrid-aquatic.carp" to
+            "journal.description.hybrid_aquatic.carp" to
                     "A hardy freshwater fish, can be bred to produce koi and goldfish.",
-            "journal.description.hybrid-aquatic.danio" to
+            "journal.description.hybrid_aquatic.danio" to
                     "The Danio, a small, colorful freshwater fish known for its active swimming behavior and popularity in home aquariums.",
-            "journal.description.hybrid-aquatic.discus" to
+            "journal.description.hybrid_aquatic.discus" to
                     "A disc-shaped freshwater fish, known for being territorial and having colorful scales.",
-            "journal.description.hybrid-aquatic.dragonfish" to
+            "journal.description.hybrid_aquatic.dragonfish" to
                     "A deep-sea fish with a long glowing lure extending from its jaw, used to attract prey.",
-            "journal.description.hybrid-aquatic.golden_dorado" to
+            "journal.description.hybrid_aquatic.golden_dorado" to
                     "A large freshwater predator, known for its strong scales and large teeth.",
-            "journal.description.hybrid-aquatic.gourami" to
+            "journal.description.hybrid_aquatic.gourami" to
                     "A small freshwater fish, known for being territorial and having colorful scales.",
-            "journal.description.hybrid-aquatic.mackerel" to
+            "journal.description.hybrid_aquatic.mackerel" to
                     "A small baitfish known for forming large schools.",
-            "journal.description.hybrid-aquatic.herring" to
+            "journal.description.hybrid_aquatic.herring" to
                     "A small baitfish known for forming large schools.",
-            "journal.description.hybrid-aquatic.moray_eel" to
+            "journal.description.hybrid_aquatic.moray_eel" to
                     "A snake-like predatory fish that hides in crevices and caves on the coral reef.",
-            "journal.description.hybrid-aquatic.cichlid" to
+            "journal.description.hybrid_aquatic.cichlid" to
                     "A freshwater fish, popular in aquariums for its intelligence and striking patterns.",
-            "journal.description.hybrid-aquatic.pearlfish" to
+            "journal.description.hybrid_aquatic.pearlfish" to
                     "A small fish that lives inside sea cucumbers.",
-            "journal.description.hybrid-aquatic.piranha" to
+            "journal.description.hybrid_aquatic.piranha" to
                     "A small freshwater fish known for its sharp teeth and voracious appetite.",
-            "journal.description.hybrid-aquatic.rockfish" to
+            "journal.description.hybrid_aquatic.rockfish" to
                     "A saltwater fish, known for its large eyes and its tendency to hide among rocks.",
-            "journal.description.hybrid-aquatic.sea_bass" to
+            "journal.description.hybrid_aquatic.sea_bass" to
                     "A predatory saltwater fish, often used as a food source and known for its delicious flavor.",
-            "journal.description.hybrid-aquatic.snailfish" to
+            "journal.description.hybrid_aquatic.snailfish" to
                     "A deep-sea fish with an extremely soft and fragile body",
-            "journal.description.hybrid-aquatic.squirrelfish" to
+            "journal.description.hybrid_aquatic.squirrelfish" to
                     "A nocturnal reef fish known for its large eyes and sharp spine on its underside",
-            "journal.description.hybrid-aquatic.coelacanth" to
+            "journal.description.hybrid_aquatic.coelacanth" to
                     "A deep-sea fish once thought to be extinct, now considered a living fossil.",
-            "journal.description.hybrid-aquatic.oarfish" to
+            "journal.description.hybrid_aquatic.oarfish" to
                     "A long deep-sea fish that often appears before earthquakes, thought to be the inspiration behind sea serpents.",
-            "journal.description.hybrid-aquatic.damselfish" to
+            "journal.description.hybrid_aquatic.damselfish" to
                     "An extremely common reef fish, found in a variety of shapes and colors, often swimming in large schools.",
-            "journal.description.hybrid-aquatic.parrotfish" to
+            "journal.description.hybrid_aquatic.parrotfish" to
                     "An important reef fish, known for its parrot-like beak, as well as its ability to eat corals and produce sand.",
-            "journal.description.hybrid-aquatic.sheepshead_wrasse" to
+            "journal.description.hybrid_aquatic.sheepshead_wrasse" to
                     "A large fish that lives in kelp forests, eating sea urchins and helping keep the kelp alive.",
-            "journal.description.hybrid-aquatic.trevally" to
+            "journal.description.hybrid_aquatic.trevally" to
                     "A schooling fish that prefers to follow large animals around.",
-            "journal.description.hybrid-aquatic.stingray" to
+            "journal.description.hybrid_aquatic.stingray" to
                     "A large circular fish that swims along the seafloor, known for having a venomous spine on the end of its tail.",
-            "journal.description.hybrid-aquatic.stonefish" to
+            "journal.description.hybrid_aquatic.stonefish" to
                     "A bottom-dwelling fish that mimics the appearance of rocks around it, known for its extremely potent venom.",
-            "journal.description.hybrid-aquatic.ocean_sunfish" to
+            "journal.description.hybrid_aquatic.ocean_sunfish" to
                     "The largest bony fish in the world, known for its indifference to pain.",
-            "journal.description.hybrid-aquatic.surgeonfish" to
+            "journal.description.hybrid_aquatic.surgeonfish" to
                     "A reef fish, named after sharp protrusions on either side of its tail.",
-            "journal.description.hybrid-aquatic.clownfish" to
+            "journal.description.hybrid_aquatic.clownfish" to
                     "A brightly colored reef fish, often found living in anemones, and popularized by a children's movie.",
-            "journal.description.hybrid-aquatic.lionfish" to
+            "journal.description.hybrid_aquatic.lionfish" to
                     "A predatory reef fish with venomous spines, considered invasive in some parts of the world.",
-            "journal.description.hybrid-aquatic.tetra" to
+            "journal.description.hybrid_aquatic.tetra" to
                     "A small freshwater fish, known for its bright colors and schooling behaviour.",
-            "journal.description.hybrid-aquatic.tiger_barb" to
+            "journal.description.hybrid_aquatic.tiger_barb" to
                     "A small freshwater fish, known for its striped pattern and schooling behaviour.",
-            "journal.description.hybrid-aquatic.blowfish" to
+            "journal.description.hybrid_aquatic.blowfish" to
                     "A type of pufferfish, known for making intricate designs in the sandy seabed.",
-            "journal.description.hybrid-aquatic.triggerfish" to
+            "journal.description.hybrid_aquatic.triggerfish" to
                     "A large reef fish, known for its sharp teeth and aggressive behaviour, named after a sharp spine protruding out of its back.",
-            "journal.description.hybrid-aquatic.tuna" to
+            "journal.description.hybrid_aquatic.tuna" to
                     "An open-water predatory fish that never stops swimming.",
-            "journal.description.hybrid-aquatic.mahi" to
+            "journal.description.hybrid_aquatic.mahi" to
                     "An open-water predatory fish, known for its bright colors.",
-            "journal.description.hybrid-aquatic.blobfish" to
+            "journal.description.hybrid_aquatic.blobfish" to
                     "A deep-sea fish with a soft gelatinous body, adapted to survive under immense pressure.",
-            "journal.description.hybrid-aquatic.hagfish" to
+            "journal.description.hybrid_aquatic.hagfish" to
                     "A primitive eel-like scavenger, capable of producing large amounts of slime when threatened.",
-            "journal.description.hybrid-aquatic.flashlight_fish" to
+            "journal.description.hybrid_aquatic.flashlight_fish" to
                     "A nocturnal deep-sea fish with glowing organs beneath its eyes, used for communication and attracting prey.",
-            "journal.description.hybrid-aquatic.opah" to
+            "journal.description.hybrid_aquatic.opah" to
                     "A large open-ocean fish, notable for being one of the few warm-blooded fish in the world.",
-            "journal.description.hybrid-aquatic.seahorse" to
+            "journal.description.hybrid_aquatic.seahorse" to
                     "A small reef fish that swims upright, known for its curled tail and the male's ability to carry eggs.",
-            "journal.description.hybrid-aquatic.needlefish" to
+            "journal.description.hybrid_aquatic.needlefish" to
                     "A slender predatory fish with a long beak filled with sharp teeth, often found near the water's surface.",
-            "journal.description.hybrid-aquatic.flying_fish" to
+            "journal.description.hybrid_aquatic.flying_fish" to
                     "An open-ocean fish capable of gliding above the water using its enlarged fins.",
-            "journal.description.hybrid-aquatic.goldfish" to
+            "journal.description.hybrid_aquatic.goldfish" to
                     "A domesticated freshwater fish bred from carp, known for its bright colors and many varieties.",
-            "journal.description.hybrid-aquatic.trout" to
+            "journal.description.hybrid_aquatic.trout" to
                     "A freshwater fish commonly found in rivers and lakes, valued for its speed and ability to swim upstream.",
-            "journal.description.hybrid-aquatic.sunfish" to
+            "journal.description.hybrid_aquatic.sunfish" to
                     "A common freshwater fish known for its rounded body and willingness to bite almost anything.",
-            "journal.description.hybrid-aquatic.pleco" to
+            "journal.description.hybrid_aquatic.pleco" to
                     "An armored freshwater catfish that feeds on algae and uses its sucker-like mouth to cling to surfaces.",
-            "journal.description.hybrid-aquatic.john_dory" to
+            "journal.description.hybrid_aquatic.john_dory" to
                     "A predatory saltwater fish recognized by the large dark spot on its side and highly protrusible jaws.",
-            "journal.description.hybrid-aquatic.ratfish" to
+            "journal.description.hybrid_aquatic.ratfish" to
                     "A deep-sea relative of sharks, known for its large eyes, long tail, and unusual appearance.",
 
             ).forEach { (key, profile) ->
@@ -758,17 +758,17 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         // Item Descriptions
-        builder.add("item.hybrid-aquatic.hook.description_tide", "Apply at an angling table") // Tide specific description
+        builder.add("item.hybrid_aquatic.hook.description_tide", "Apply at an angling table") // Tide specific description
 
-        builder.add("tooltip.hybrid-aquatic.argonaut.shell", "%s Shell")
-        builder.add("tooltip.hybrid-aquatic.argonaut.sail", "%s Sails")
-        builder.add("tooltip.hybrid-aquatic.argonaut.glowing", "Glowing")
+        builder.add("tooltip.hybrid_aquatic.argonaut.shell", "%s Shell")
+        builder.add("tooltip.hybrid_aquatic.argonaut.sail", "%s Sails")
+        builder.add("tooltip.hybrid_aquatic.argonaut.glowing", "Glowing")
 
-        builder.add("tooltip.hybrid-aquatic.ominous_conch.unused", "The deep ocean calls from within..")
-        builder.add("tooltip.hybrid-aquatic.ominous_conch.used", "The conch is silent")
+        builder.add("tooltip.hybrid_aquatic.ominous_conch.unused", "The deep ocean calls from within..")
+        builder.add("tooltip.hybrid_aquatic.ominous_conch.used", "The conch is silent")
 
         mapOf(
-            "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
+            "item.hybrid_aquatic.hook" to "Needs to be put in the offhand",
             HAItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
             HAItems.GLOWING_HOOK.get().descriptionId to "Increases fishing speed at night",
             HAItems.MAGNETIC_HOOK.get().descriptionId to "Increases treasure chance",
@@ -849,14 +849,14 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         }
 
         // Workaround for Jade/WAILA not being able to find the mod display name on Forge
-        builder.add("modmenu.nameTranslation.hybrid-aquatic", "Hybrid Aquatic")
+        builder.add("modmenu.nameTranslation.hybrid_aquatic", "Hybrid Aquatic")
 
 //        mapOf(
 //            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
 //            HybridAquaticPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
 //        ).forEach { (painting, name) ->
-//            builder.add("painting.hybrid-aquatic.${painting.path}.title", name[0])
-//            builder.add("painting.hybrid-aquatic.${painting.path}.author", name[1])
+//            builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
+//            builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])
 //        }
     }
 

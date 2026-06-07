@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "hybrid-aquatic:seashell_shovel",
-    "hybrid-aquatic:coral_shovel"
+    "hybrid_aquatic:seashell_shovel",
+    "hybrid_aquatic:coral_shovel"
   ]
 }

@@ -17,7 +17,7 @@ legacyForge {
     version = "${minecraft_version}-${forge_version}"
 
     mixin {
-        add(sourceSets.main, "${forge_mod_id}.refmap.json")
+        add(sourceSets.main, "${mod_id}.refmap.json")
         config("${mod_id}.forge.mixins.json")
     }
 
@@ -46,7 +46,7 @@ legacyForge {
         }
         data {
             data()
-            programArguments.addAll '--mod', 'hybrid_aquatic', '--all',
+            programArguments.addAll '--mod', mod_id, '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
 		            '--existing', file('../common/src/main/resources/').getAbsolutePath(),
                     '--existing', file('src/main/resources/').getAbsolutePath(),

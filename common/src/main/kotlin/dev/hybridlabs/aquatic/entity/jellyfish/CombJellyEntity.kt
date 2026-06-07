@@ -85,9 +85,9 @@ class CombJellyEntity(entityType: EntityType<out CombJellyEntity>, world: Level)
         super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
     override fun readAdditionalSaveData(nbt: CompoundTag) {
