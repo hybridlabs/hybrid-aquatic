@@ -1902,6 +1902,13 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             0.15f
         )
 
+        offerCookingRecipes(
+            exporter,
+            HAItems.MUSSEL.get(),
+            HAItems.COOKED_MUSSEL.get(),
+            0.15f
+        )
+
         offerKelpCookingRecipes(exporter, HAItemTags.KELPS, Items.DRIED_KELP, 0.15f)
         //#endregion
 

@@ -617,6 +617,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.RAW_SHRIMP.get() to "Raw Shrimp",
             HAItems.COOKED_SHRIMP.get() to "Cooked Shrimp",
             HAItems.COOKED_CLAM.get() to "Cooked Clam",
+            HAItems.COOKED_MUSSEL.get() to "Cooked Mussel",
             HAItems.RAW_CRAYFISH.get() to "Raw Crayfish",
             HAItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
             HAItems.LIONFISH.get() to "Lionfish",

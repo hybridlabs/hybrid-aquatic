@@ -855,6 +855,21 @@ object HAItems {
         )
     }
 
+    val COOKED_MUSSEL = register(
+        "cooked_mussel"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(4)
+                        .saturationMod(0.5F)
+                        .meat()
+                        .build()
+                )
+        )
+    }
+
     val MUSSEL = register(
         "mussel"
     ) {

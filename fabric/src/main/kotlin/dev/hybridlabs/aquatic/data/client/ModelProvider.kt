@@ -480,6 +480,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.RAW_SHRIMP.get(),
             HAItems.COOKED_SHRIMP.get(),
             HAItems.COOKED_CLAM.get(),
+            HAItems.COOKED_MUSSEL.get(),
             HAItems.COOKED_CRAYFISH.get(),
             HAItems.RAW_LOBSTER.get(),
             HAItems.COOKED_LOBSTER.get(),

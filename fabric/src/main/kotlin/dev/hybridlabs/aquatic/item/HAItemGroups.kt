@@ -336,6 +336,7 @@ object HAItemGroups {
                 entries.accept(HAItems.CLAM.get())
                 entries.accept(HAItems.COOKED_CLAM.get())
                 entries.accept(HAItems.MUSSEL.get())
+                entries.accept(HAItems.COOKED_MUSSEL.get())
 
                 entries.accept(HAItems.BETTA.get())
                 entries.accept(HAItems.DANIO.get())
