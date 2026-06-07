@@ -1,8 +1,8 @@
 {
   "type": "forge:add_spawns",
-  "biomes": "#hybrid-aquatic:jungle",
+  "biomes": "#hybrid-aquatic:mangroves",
   "spawners": {
-    "type": "hybrid-aquatic:oscar",
+    "type": "hybrid-aquatic:cichlid",
     "maxCount": 1,
     "minCount": 1,
     "weight": 1
