@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -48,8 +48,8 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
         val y = pos.y.toDouble()
         val z = pos.z.toDouble()
 
-        level.addAlwaysVisibleParticle(HAParticleTypes.WATER_UP_WHIRL.get(), x + 0.5, y, z + 0.5, 0.0, 0.04, 0.0)
-        level.addAlwaysVisibleParticle(HAParticleTypes.WATER_UP_WHIRL.get(), x + random.nextDouble(), y + random.nextDouble(), z + random.nextDouble(), 0.0, 0.04, 0.0)
+        level.addAlwaysVisibleParticle(ParticleTypes.BUBBLE_COLUMN_UP, x + 0.5, y, z + 0.5, 0.0, 0.04, 0.0)
+        level.addAlwaysVisibleParticle(ParticleTypes.BUBBLE_COLUMN_UP, x + random.nextDouble(), y + random.nextDouble(), z + random.nextDouble(), 0.0, 0.04, 0.0)
 
         if (random.nextInt(200) == 0) {
             level.playLocalSound(
