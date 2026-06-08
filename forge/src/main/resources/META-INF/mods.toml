@@ -35,6 +35,18 @@ versionRange = "[4.7.4,)"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
+modId = "biolith"
+mandatory = true
+versionRange = "[1.0.1-alpha.1,)"
+side = "SERVER"
+
+[[dependencies.${mod_id}]]
+modId = "curios"
+mandatory = true
+versionRange = "[5.9.1+1.20.1,)"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
 modId = "lithostitched"
 mandatory = true
 versionRange = "[1.4.11,)"
