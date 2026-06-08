@@ -1,3 +1,7 @@
 {
-  "parent": "hybrid_aquatic:block/zigzag_coral_block"
+  "variants": {
+    "": {
+      "model": "hybrid_aquatic:block/thorn_coral_block"
+    }
+  }
 }
