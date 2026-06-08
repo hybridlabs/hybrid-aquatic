@@ -226,10 +226,6 @@ class BiomeProvider(
                 )
             ) {
                 addFeature(
-                    GenerationStep.Decoration.SURFACE_STRUCTURES,
-                    entries.ref(HAPlacedFeatures.MOUND)
-                )
-                addFeature(
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     entries.ref(HAPlacedFeatures.SAND_CIRCLE)
                 )

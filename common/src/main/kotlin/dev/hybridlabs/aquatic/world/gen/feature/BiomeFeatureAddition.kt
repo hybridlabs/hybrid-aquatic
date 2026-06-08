@@ -314,6 +314,14 @@ data class BiomeFeatureAddition(
                         HAPlacedFeatures.MOUND
                     ),
                 )
+
+                add(
+                    BiomeFeatureAddition(
+                        HABiomeTags.SEAGRASS_BED,
+                        GenerationStep.Decoration.SURFACE_STRUCTURES,
+                        HAPlacedFeatures.MOUND
+                    ),
+                )
             }
 
             if (config.config.featureConfig.generateBottles) {
