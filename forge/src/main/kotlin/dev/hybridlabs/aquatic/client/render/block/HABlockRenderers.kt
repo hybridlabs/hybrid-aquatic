@@ -8,12 +8,19 @@ import net.minecraft.client.renderer.RenderType
 object HABlockRenderers {
     fun registerRenderShapes() {
         ClientServices.PLATFORM.registerBlockRenderers(
+            RenderType.translucent(),
+            HABlocks.ANEMONE.get(),
+            HABlocks.GIANT_GREEN_ANEMONE.get(),
+            HABlocks.STRAWBERRY_ANEMONE.get(),
+            HABlocks.MESSAGE_IN_A_BOTTLE.get(),
+            HAPlatformBlocks.GLOWSLIME_BLOCK.get(),
+            HAPlatformBlocks.HAGSLIME_BLOCK.get(),
+        )
+        ClientServices.PLATFORM.registerBlockRenderers(
             RenderType.cutout(),
             HAPlatformBlocks.DUNEGRASS.get(),
             HAPlatformBlocks.TALL_DUNEGRASS.get(),
             HAPlatformBlocks.CATTAIL.get(),
-            HAPlatformBlocks.HAGSLIME_BLOCK.get(),
-            HAPlatformBlocks.GLOWSLIME_BLOCK.get(),
 
             HABlocks.CLAMS.get(),
             HABlocks.MUSSELS.get(),
