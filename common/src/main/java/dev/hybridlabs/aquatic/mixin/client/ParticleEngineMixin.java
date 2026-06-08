@@ -28,7 +28,7 @@ public abstract class ParticleEngineMixin {
 			method = "registerProviders",
 			at = @At("TAIL"))
 	private void registerHAProviders(CallbackInfo ci) {
-		register(HAParticleTypes.INSTANCE.getWATER_UP_WHIRL().get(), spriteSets -> new WaterUpWhirlParticle.Companion.Provider(spriteSets));
+		// register(HAParticleTypes.INSTANCE.getWATER_UP_WHIRL().get(), spriteSets -> new WaterUpWhirlParticle.Companion.Provider(spriteSets));
 		register(HAParticleTypes.INSTANCE.getSARGASSUM().get(), spriteSets -> new SargassumParticle.Companion.Provider(spriteSets));
 		register(HAParticleTypes.INSTANCE.getBRINE_BUBBLE().get(), spriteSets -> new BrineBubbleParticle.Companion.Provider(spriteSets));
 		register(HAParticleTypes.INSTANCE.getBRINE_BUBBLE_POP().get(), spriteSets -> new BrineBubblePopParticle.Companion.Provider(spriteSets));

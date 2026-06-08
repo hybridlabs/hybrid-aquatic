@@ -952,7 +952,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAEntityTypes.KARCINOGEN.get() to "Karcinogen",
             HAEntityTypes.KARCINOMA.get() to "Karcinoma",
             HAEntityTypes.SHELL_BEAST.get() to "Shell Beast",
-            HAEntityTypes.HYPNAUTILUS.get() to "Hypnautilus",
+            // HAEntityTypes.HYPNAUTILUS.get() to "Hypnautilus",
             HAEntityTypes.BEAKLING.get() to "Beakling",
             HAEntityTypes.DUNGENESS_CRAB.get() to "Dungeness Crab",
             HAEntityTypes.FIDDLER_CRAB.get() to "Fiddler Crab",

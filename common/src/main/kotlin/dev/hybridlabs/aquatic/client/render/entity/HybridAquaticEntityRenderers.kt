@@ -813,11 +813,11 @@ object HybridAquaticEntityRenderers {
             ::ShellBeastEntityRenderer
         )
 
-    val HYPNAUTILUS =
-        ClientServices.PLATFORM.registerEntityRenderer(
-            HAEntityTypes.HYPNAUTILUS,
-            ::HypnautilusEntityRenderer
-        )
+    // val HYPNAUTILUS =
+    //     ClientServices.PLATFORM.registerEntityRenderer(
+    //         HAEntityTypes.HYPNAUTILUS,
+    //        ::HypnautilusEntityRenderer
+    //    )
 
     val BEAKLING =
         ClientServices.PLATFORM.registerEntityRenderer(

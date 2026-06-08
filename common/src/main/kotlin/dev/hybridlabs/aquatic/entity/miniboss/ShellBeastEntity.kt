@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastRangedAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonBeaklingsGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonHypnautilusGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity.Companion.SUMMONING
@@ -99,7 +98,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     override fun registerGoals() {
         goalSelector.addGoal(1, ShellBeastSummonBeaklingsGoal(this))
-        goalSelector.addGoal(1, ShellBeastSummonHypnautilusGoal(this))
+        // goalSelector.addGoal(1, ShellBeastSummonHypnautilusGoal(this))
         goalSelector.addGoal(0, StayInWaterGoal(this))
         goalSelector.addGoal(3, RandomSwimmingGoal(this, 1.0, 2))
         goalSelector.addGoal(1, ShellBeastRangedAttackGoal(this))
@@ -229,7 +228,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 if (this.isUnderWater) {
                     when (summonType) {
                         SummonType.BEAKLINGS -> summonBeaklings()
-                        SummonType.HYPNAUTILUS -> summonHypnautilus()
+                        // SummonType.HYPNAUTILUS -> summonHypnautilus()
                         else -> {}
                     }
                 }
@@ -381,25 +380,25 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         minions.removeAll { ref -> ref.get() == null }
     }
 
-    private fun summonHypnautilus() {
-        val count = 6
+    // private fun summonHypnautilus() {
+    //    val count = 6
 
-        for (i in 0 until count) {
-            val hypnautilus = HAEntityTypes.HYPNAUTILUS.get().create(level())
-            if (hypnautilus != null) {
-                addMinion(hypnautilus)
-                val spawnPos = hypnautilus.calcBeastRelativePos()
-                hypnautilus.moveTo(
-                    spawnPos.x,
-                    spawnPos.y,
-                    spawnPos.z,
-                    0f,
-                    0f
-                )
-                level().addFreshEntity(hypnautilus)
-            }
-        }
-    }
+    //     for (i in 0 until count) {
+    //      val hypnautilus = HAEntityTypes.HYPNAUTILUS.get().create(level())
+    //       if (hypnautilus != null) {
+    //          addMinion(hypnautilus)
+    //         val spawnPos = hypnautilus.calcBeastRelativePos()
+    //         hypnautilus.moveTo(
+    //           spawnPos.x,
+    //            spawnPos.y,
+    //           spawnPos.z,
+    //          0f,
+    //         0f
+    //     )
+    //      level().addFreshEntity(hypnautilus)
+    //     }
+    //  }
+    // }
 
     private fun summonBeaklings() {
         val random = this.random

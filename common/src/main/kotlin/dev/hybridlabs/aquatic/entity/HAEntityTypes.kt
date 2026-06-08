@@ -973,12 +973,12 @@ object HAEntityTypes {
         ShellBeastEntity::createMobAttributes
     )
 
-    val HYPNAUTILUS = registerMinion(
-        "hypnautilus",
-        ::HypnautilusEntity,
-        EntityDimensions.fixed(0.8f, 0.8f),
-        HypnautilusEntity::createMobAttributes
-    )
+    // val HYPNAUTILUS = registerMinion(
+    //     "hypnautilus",
+    //     ::HypnautilusEntity,
+    //     EntityDimensions.fixed(0.8f, 0.8f),
+    //     HypnautilusEntity::createMobAttributes
+    // )
 
     val BEAKLING = registerMinion(
         "beakling",

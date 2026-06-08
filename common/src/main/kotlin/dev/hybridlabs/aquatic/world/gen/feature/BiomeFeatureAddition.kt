@@ -309,7 +309,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateMounds) {
                 add(
                     BiomeFeatureAddition(
-                        BiomeTags.IS_DEEP_OCEAN,
+                        HABiomeTags.HA_DEEP_OCEANS,
                         GenerationStep.Decoration.SURFACE_STRUCTURES,
                         HAPlacedFeatures.MOUND
                     ),

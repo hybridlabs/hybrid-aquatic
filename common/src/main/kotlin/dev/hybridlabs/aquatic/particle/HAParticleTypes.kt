@@ -7,7 +7,7 @@ import net.minecraft.core.particles.SimpleParticleType
 import java.util.function.Supplier
 
 object HAParticleTypes {
-    val WATER_UP_WHIRL = register("water_up_whirl") { SimpleParticleType(true) }
+    // val WATER_UP_WHIRL = register("water_up_whirl") { SimpleParticleType(true) }
     val SARGASSUM = register("sargassum") { SimpleParticleType(true) }
     val VENT_SMOKE = register("vent_smoke") { SimpleParticleType(true) }
     val BRINE_BUBBLE = register("brine_bubble") { SimpleParticleType(true) }
