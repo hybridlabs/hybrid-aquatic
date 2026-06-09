@@ -74,7 +74,7 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(ClownfishEntity::class.java, EntityDataSerializers.INT)
+            SynchedEntityData.defineId(PlecoEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
