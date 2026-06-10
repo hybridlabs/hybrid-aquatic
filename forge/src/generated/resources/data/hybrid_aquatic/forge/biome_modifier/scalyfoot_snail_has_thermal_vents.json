@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:has_thermal_vents",
+  "spawners": {
+    "type": "hybrid_aquatic:scalyfoot_snail",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

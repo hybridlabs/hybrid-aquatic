@@ -141,13 +141,13 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.CARP.get(),
             listOf(
                 HABiomeTags.RIVERS),
-            3, 0, 2
+            3, 1, 2
         )
 
         addRiverFish(
             HAEntityTypes.GOLDFISH.get(),
             listOf(),
-            3, 0, 1
+            3, 1, 1
         )
 
         addRiverFish(
@@ -162,7 +162,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HABiomeTags.COLD_RIVERS,
                 BiomeTags.IS_RIVER),
-            2, 0, 1
+            2, 1, 1
         )
 
         addRiverFish(
@@ -575,7 +575,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HABiomeTags.TEMPERATE_TRENCH,
                 HABiomeTags.TEMPERATE_OCEANS),
-            10, 1, 2
+            11, 1, 2
         )
 
         addCephalopod(
@@ -605,7 +605,7 @@ class EntitySpawnConfigGenerator {
                 HABiomeTags.WARM_OCEANS,
                 HABiomeTags.WARM_TRENCH,
                 HABiomeTags.CORAL_REEF),
-            10, 1, 2
+            11, 1, 2
         )
 
         addCephalopod(
@@ -614,7 +614,7 @@ class EntitySpawnConfigGenerator {
                 HABiomeTags.SHALLOW_WARM_OCEANS,
                 HABiomeTags.CORAL_REEF,
                 HABiomeTags.SHALLOW_TEMPERATE_OCEANS),
-            10, 1, 1
+            11, 1, 1
         )
 
         addCephalopod(
@@ -625,7 +625,7 @@ class EntitySpawnConfigGenerator {
                 HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
                 HABiomeTags.SHALLOW_TEMPERATE_OCEANS
             ),
-            10, 1, 1
+            11, 1, 1
         )
         //#endregion
 
@@ -1105,14 +1105,14 @@ class EntitySpawnConfigGenerator {
                 HABiomeTags.SEAGRASS_BED,
                 HABiomeTags.RED_MEADOW,
                 HABiomeTags.CORAL_REEF),
-            1, 0, 2
+            1, 1, 2
         )
 
         addCritter(
             HAEntityTypes.SCALYFOOT_SNAIL.get(),
             listOf(
                 HABiomeTags.HAS_THERMAL_VENTS),
-            1, 0, 2
+            1, 1, 2
         )
 
         addCritter(
@@ -1122,7 +1122,7 @@ class EntitySpawnConfigGenerator {
                 BiomeTags.IS_DEEP_OCEAN,
                 HABiomeTags.ALL_TRENCHES,
                 HABiomeTags.SANDY_BEACHES),
-            2, 0, 2
+            2, 1, 2
         )
 
         addCritter(
@@ -1142,7 +1142,7 @@ class EntitySpawnConfigGenerator {
                 BiomeTags.IS_DEEP_OCEAN,
                 HABiomeTags.RED_MEADOW,
                 HABiomeTags.ALL_TRENCHES),
-            3, 0, 2
+            3, 1, 2
         )
         //#endregion
     }

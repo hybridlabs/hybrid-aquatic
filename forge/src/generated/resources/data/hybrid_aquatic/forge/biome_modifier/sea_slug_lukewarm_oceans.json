@@ -2,9 +2,9 @@
   "type": "forge:add_spawns",
   "biomes": "#hybrid_aquatic:lukewarm_oceans",
   "spawners": {
-    "type": "hybrid_aquatic:firefly_squid",
+    "type": "hybrid_aquatic:sea_slug",
     "maxCount": 2,
     "minCount": 1,
-    "weight": 11
+    "weight": 1
   }
 }
