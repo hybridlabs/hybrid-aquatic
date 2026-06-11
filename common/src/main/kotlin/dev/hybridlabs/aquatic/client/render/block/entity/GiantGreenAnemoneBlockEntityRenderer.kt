@@ -8,14 +8,13 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.core.Direction
 import net.minecraft.world.level.block.DirectionalBlock
-import net.minecraft.world.level.block.entity.BlockEntity
 import software.bernie.geckolib.renderer.GeoBlockRenderer
 
 class GiantGreenAnemoneBlockEntityRenderer(context: BlockEntityRendererProvider.Context) :
     GeoBlockRenderer<GiantGreenAnemoneBlockEntity>(GiantGreenAnemoneBlockEntityModel()) {
 
     override fun render(
-        animatable: BlockEntity,
+        animatable: GiantGreenAnemoneBlockEntity,
         partialTick: Float,
         poseStack: PoseStack,
         bufferSource: MultiBufferSource,
