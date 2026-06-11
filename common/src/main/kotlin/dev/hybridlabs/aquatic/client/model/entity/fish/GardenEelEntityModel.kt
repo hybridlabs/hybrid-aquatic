@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.GardenEelEntity
 import net.minecraft.util.Mth
-import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.constant.DataTickets
 
 class GardenEelEntityModel : HAFishEntityModel<GardenEelEntity>("garden_eel") {
 
@@ -17,7 +17,7 @@ class GardenEelEntityModel : HAFishEntityModel<GardenEelEntity>("garden_eel") {
         if (head != null) {
             val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+            head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
             head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
     }

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.entity.player.Player
@@ -47,5 +48,13 @@ class DelesseriaPlantBlock(settings: Properties) :
         fluidState: FluidState
     ): Boolean {
         return false
+    }
+
+    override fun codec(): MapCodec<out GrowingPlantBodyBlock> {
+        return CODEC
+    }
+
+    companion object {
+        val CODEC: MapCodec<DelesseriaPlantBlock> = simpleCodec(::DelesseriaPlantBlock)
     }
 }

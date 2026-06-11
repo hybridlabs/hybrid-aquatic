@@ -7,10 +7,8 @@ import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
-import net.minecraft.world.entity.EntityDimensions
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -28,10 +26,6 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
     override fun registerGoals() {
         goalSelector.addGoal(2, WaterAnimalSitGoal(this))
         super.registerGoals()
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 1.1f
     }
 
     override fun getMaxSpawnClusterSize(): Int {

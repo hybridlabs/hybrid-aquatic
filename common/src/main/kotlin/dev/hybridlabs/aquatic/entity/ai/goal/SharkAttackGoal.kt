@@ -152,7 +152,7 @@ open class SharkAttackGoal(
             this.resetAttackCooldown()
             shark.swing(InteractionHand.MAIN_HAND)
             shark.doHurtTarget(enemy)
-            if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), 200, 0), shark) }
+            if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), 200, 0), shark) }
 
             if (enemy.health <= 0) shark.hunger = HAWaterAnimal.MAX_HUNGER
 

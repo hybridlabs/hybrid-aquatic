@@ -35,7 +35,7 @@ class CrystallineSulfurBlock(settings: Properties): Block(settings) {
         cloud.duration = 100
 
         cloud.addEffect(MobEffectInstance(MobEffects.POISON, 100, 1))
-        cloud.addEffect(MobEffectInstance(HAMobEffects.CORROSION.get(), 100, 0))
+        cloud.addEffect(MobEffectInstance(HAMobEffects.CORROSION.asHolder(), 100, 0))
 
         level.addFreshEntity(cloud)
     }
@@ -62,7 +62,7 @@ class CrystallineSulfurBlock(settings: Properties): Block(settings) {
         cloud.duration = 100
 
         cloud.addEffect(MobEffectInstance(MobEffects.POISON, 100, 1))
-        cloud.addEffect(MobEffectInstance(HAMobEffects.CORROSION.get(), 100, 1))
+        cloud.addEffect(MobEffectInstance(HAMobEffects.CORROSION.asHolder(), 100, 1))
 
         level.addFreshEntity(cloud)
     }

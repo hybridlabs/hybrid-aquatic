@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
@@ -21,7 +21,7 @@ import java.util.function.Consumer
  * @see MessageInABottleBlock
  */
 class MessageInABottleItem(settings: Properties) :
-    PlaceableInWaterItem(HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get(), settings), GeoItem {
+    PlaceableInWaterItem(HABlocks.MESSAGE_IN_A_BOTTLE.get(), settings), GeoItem {
 
     private val cache: AnimatableInstanceCache? = GeckoLibUtil.createInstanceCache(this)
 
@@ -53,7 +53,7 @@ class MessageInABottleItem(settings: Properties) :
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache? {
-        return this.cache;
+        return this.cache
     }
 
 }

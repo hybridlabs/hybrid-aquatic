@@ -32,15 +32,11 @@ import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.pathfinder.PathType
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.animation.keyframe.event.ParticleKeyframeEvent
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("DEPRECATION", "LeakingThis", "UNUSED_PARAMETER")
@@ -57,7 +53,6 @@ open class HACrustaceanEntity(
         setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         moveControl = MoveControl(this)
-        setMaxUpStep(1.0f)
 
         return GroundPathNavigation(this, level)
     }

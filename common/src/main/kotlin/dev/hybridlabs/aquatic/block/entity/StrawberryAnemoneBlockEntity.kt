@@ -1,18 +1,14 @@
 package dev.hybridlabs.aquatic.block.entity
 
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.Animation
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtil
 
@@ -41,8 +37,8 @@ class StrawberryAnemoneBlockEntity(pos: BlockPos, state: BlockState) :
         return RenderUtil.getCurrentTick()
     }
 
-    override fun getUpdateTag(): CompoundTag {
-        return saveWithoutMetadata()
+    override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag {
+        return saveWithoutMetadata(registries)
     }
 
     override fun getUpdatePacket(): ClientboundBlockEntityDataPacket {

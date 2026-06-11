@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.PickaxeItem
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 
 class CoralPickaxeItem(settings: Properties) : PickaxeItem(
     HAToolMaterials.SEASHELL,
@@ -15,7 +14,7 @@ class CoralPickaxeItem(settings: Properties) : PickaxeItem(
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,
-        tooltip: MutableList<Component!>,
+        tooltip: MutableList<Component>,
         options: TooltipFlag
     ) {
         val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)

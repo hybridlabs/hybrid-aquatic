@@ -4,12 +4,14 @@ import dev.hybridlabs.aquatic.entity.ai.control.FloatControl
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.AgeableMob
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
@@ -19,12 +21,12 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER", "unused")
@@ -99,10 +101,6 @@ open class HAMammalEntity(type: EntityType<out HAMammalEntity>, world: Level) : 
         goalSelector.addGoal(5, TryFindWaterGoal(this))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
         goalSelector.addGoal(6, MeleeAttackGoal(this, 1.2000000476837158, true))
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return 0.3f
     }
 
     override fun aiStep() {

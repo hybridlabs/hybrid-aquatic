@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ShovelItem
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 
 class CoralShovelItem(settings: Properties) : ShovelItem(
     HAToolMaterials.CORAL,
@@ -15,7 +14,7 @@ class CoralShovelItem(settings: Properties) : ShovelItem(
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,
-        tooltip: MutableList<Component!>,
+        tooltip: MutableList<Component>,
         options: TooltipFlag
     ) {
         val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)

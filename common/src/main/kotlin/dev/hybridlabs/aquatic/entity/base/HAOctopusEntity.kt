@@ -27,13 +27,13 @@ import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "unused")
@@ -217,10 +217,6 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
                 0.1
             )
         }
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
     }
 
     override fun getMaxSpawnClusterSize(): Int {

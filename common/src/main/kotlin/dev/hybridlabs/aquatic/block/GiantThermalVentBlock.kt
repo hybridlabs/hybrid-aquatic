@@ -159,7 +159,7 @@ class GiantThermalVentBlock(
         if (state.getValue(THICKNESS) == GiantThermalVentPosition.TIP) {
             if (entity is Player && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
-                entity.addEffect(MobEffectInstance(HAMobEffects.CORROSION.get(), 200, 0))
+                entity.addEffect(MobEffectInstance(HAMobEffects.CORROSION.asHolder(), 200, 0))
             }
         }
 

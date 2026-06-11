@@ -39,7 +39,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         offsetZ: Double,
         explosionPower: Int,
     ) : super(
-        HAEntityTypes.CAVITATION_BUBBLE.get(), shooter, offsetX, offsetY, offsetZ, level
+        HAEntityTypes.CAVITATION_BUBBLE.get(), offsetX, offsetY, offsetZ, level
     ) {
         this.explosionPower = explosionPower
     }

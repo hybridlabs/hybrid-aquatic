@@ -42,12 +42,12 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
         goalSelector.addGoal(1, UrchinEatKelpGoal(this, HABlockTags.KELP))
     }
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         val scale = when (variant) {
             Type.LARGE -> 2.0f
             else -> 1.0f
         }
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     companion object {

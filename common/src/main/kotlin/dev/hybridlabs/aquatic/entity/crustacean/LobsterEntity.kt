@@ -2,11 +2,12 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.loot.HALootTables
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.ResourceKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -36,10 +38,12 @@ class LobsterEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getDefaultLootTable(): ResourceLocation {
+    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
         return when (variant) {
-            Type.CLAWED -> HALootTables.CLAWED_LOBSTER
-            else -> HALootTables.CLAWLESS_LOBSTER
+            Type.CLAWED -> ResourceKey.create(
+                Registries.LOOT_TABLE, HALootTables.CLAWED_LOBSTER)
+            else -> ResourceKey.create(
+                Registries.LOOT_TABLE, HALootTables.CLAWLESS_LOBSTER)
         }
     }
 

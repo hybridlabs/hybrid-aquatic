@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.entity.fish.SeadragonEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.constant.DataTickets
 
 class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
     override fun getRenderType(animatable: SeadragonEntity, texture: ResourceLocation): RenderType {
@@ -46,7 +46,7 @@ class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
         if (head != null) {
             val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+            head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
             head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
     }

@@ -26,12 +26,12 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         return 2
     }
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         val scale = when (variant) {
             Type.COMPASS -> 0.6f
             else -> 1.0f
         }
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     companion object {

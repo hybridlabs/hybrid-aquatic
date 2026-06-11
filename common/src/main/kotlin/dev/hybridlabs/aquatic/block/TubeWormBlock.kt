@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -32,6 +33,7 @@ import org.jetbrains.annotations.Nullable
 @Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlock, SimpleWaterloggedBlock {
     companion object {
+        val CODEC: MapCodec<TubeWormBlock> = simpleCodec(::TubeWormBlock)
         val WORMS: IntegerProperty = IntegerProperty.create("worms", 1, 4)
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
@@ -133,5 +135,9 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
         return !floor.getCollisionShape(world, pos).getFaceShape(Direction.UP).isEmpty ||
                 floor.isFaceSturdy(world, pos, Direction.UP)
+    }
+
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
     }
 }

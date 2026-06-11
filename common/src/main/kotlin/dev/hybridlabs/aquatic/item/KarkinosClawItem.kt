@@ -1,36 +1,32 @@
 package dev.hybridlabs.aquatic.item
 
-import com.google.common.collect.ImmutableMultimap
-import com.google.common.collect.Multimap
-import dev.hybridlabs.aquatic.platform.Services
-import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.ai.attributes.Attribute
+import dev.hybridlabs.aquatic.CommonClass
+import net.minecraft.world.entity.EquipmentSlotGroup
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
+import net.minecraft.world.entity.ai.attributes.Attributes.BLOCK_INTERACTION_RANGE
 import net.minecraft.world.item.Item
-import java.util.UUID
+import net.minecraft.world.item.component.ItemAttributeModifiers
 
 @Suppress("OVERRIDE_DEPRECATION")
 class KarkinosClawItem(settings: Properties) : Item(settings) {
 
-    private var attributes: Multimap<Attribute, AttributeModifier>
+    private var attributes: ItemAttributeModifiers
 
     init {
-        val builder = ImmutableMultimap.builder<Attribute, AttributeModifier>()
-        builder.put(
-            Services.PLATFORM.reachAttribute,
+        val builder = ItemAttributeModifiers.builder()
+        builder.add(
+            BLOCK_INTERACTION_RANGE,
             AttributeModifier(
-                "Reach modifier",
+                CommonClass.locate("reach_modifier"),
                 3.0,
                 AttributeModifier.Operation.ADD_VALUE
-            )
+            ),
+            EquipmentSlotGroup.OFFHAND
         )
         attributes = builder.build()
     }
 
-    override fun getDefaultAttributeModifiers(
-        slot: EquipmentSlot
-    ): Multimap<Attribute, AttributeModifier> {
-        return if (slot == EquipmentSlot.OFFHAND) attributes
-        else super.getDefaultAttributeModifiers(slot)
+    override fun getDefaultAttributeModifiers(): ItemAttributeModifiers {
+        return attributes
     }
 }

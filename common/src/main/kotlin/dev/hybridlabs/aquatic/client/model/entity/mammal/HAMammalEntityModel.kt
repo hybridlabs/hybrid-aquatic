@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
@@ -45,7 +45,7 @@ abstract class HAMammalEntityModel<T : HAMammalEntity>(private val id: String) :
         if (head != null) {
             val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+            head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
             head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
     }

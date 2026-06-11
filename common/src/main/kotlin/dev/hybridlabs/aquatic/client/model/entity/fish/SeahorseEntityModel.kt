@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.constant.DataTickets
 
 class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
 
@@ -27,7 +27,7 @@ class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
         if (head != null) {
             val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-            head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+            head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
             head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
         }
     }

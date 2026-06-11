@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.FluidTags
@@ -66,7 +67,12 @@ class DelesseriaBlock(settings: Properties) :
         return Fluids.WATER.getSource(false)
     }
 
+    override fun codec(): MapCodec<out GrowingPlantHeadBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<DelesseriaBlock> = simpleCodec(::DelesseriaBlock)
         private val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
     }
 }

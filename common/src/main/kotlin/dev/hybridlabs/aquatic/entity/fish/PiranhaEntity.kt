@@ -43,7 +43,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         targetSelector.addGoal(1, (HurtByTargetGoal(this, *arrayOfNulls<Class<*>>(0))).setAlertOthers(*arrayOfNulls<Class<*>>(0)))
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is PiranhaEntity })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.asHolder()) && it !is PiranhaEntity })
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, true))
     }
 
@@ -103,7 +103,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
                 }
 
                 if (i > 0) {
-                    target.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), i * 20, 0), this)
+                    target.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), i * 20, 0), this)
                 }
             }
 

@@ -27,14 +27,11 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
@@ -168,10 +165,6 @@ abstract class HAFishEntity(type: EntityType<out HAFishEntity>, world: Level) :
 
     override fun getMaxHeadYRot(): Int {
         return 1
-    }
-
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
     }
 
     protected open fun hasSelfControl(): Boolean {

@@ -1,12 +1,14 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.item.HAItems
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.ByIdMap
@@ -15,7 +17,6 @@ import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
@@ -27,6 +28,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
@@ -35,8 +37,12 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
     HACrustaceanEntity(entityType, world, false),
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
-    override fun getDefaultLootTable(): ResourceLocation {
-        return CommonClass.locate("entities/decorator_crab")
+    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
+        return ResourceKey<LootTable?>.create(
+            Registries.LOOT_TABLE,
+            ResourceLocation.fromNamespaceAndPath(
+                Constants.MOD_ID, "entities/decorator_crab")
+        )
     }
 
     var coralTimer: Int

@@ -28,18 +28,18 @@ class OminousConchItem(
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
+        context: TooltipContext,
         lines: MutableList<Component>,
-        context: TooltipFlag
+        tooltipFlag: TooltipFlag
     ) {
-        val tag = stack.tag
+        val tag = stack.tags
 
         lines.add(
             Component.translatable("item.hybrid_aquatic.ominous_conch.function")
                 .withStyle(ChatFormatting.GRAY)
         )
 
-        val hasSummoned = tag?.getBoolean("hasSummoned") == true
+        val hasSummoned = tag.getBoolean("hasSummoned") == true
 
         if (!hasSummoned) {
             lines.add(

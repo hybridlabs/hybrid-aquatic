@@ -177,10 +177,6 @@ open class HADolphinEntity(type: EntityType<out HADolphinEntity>, world: Level) 
         return factory
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return 0.3f
-    }
-
     companion object {
         val WATER_IDLE: RawAnimation = RawAnimation.begin().thenPlay("misc.water_idle")
 

@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -210,10 +211,6 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     //#endregion
 
     //#region Properties
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.5f
-    }
-
     private var attemptAttack: Boolean
         get() = entityData.get(ATTEMPT_ATTACK)
         set(attemptAttack) {
@@ -253,7 +250,7 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
             return !cephalopod.fromFishingNet && super.canUse()
         }
 
-        override fun checkAndPerformAttack(target: LivingEntity, squaredDistance: Double) {
+        override fun checkAndPerformAttack(target: LivingEntity) {
             val d = getAttackReachSqr(target)
             if (squaredDistance <= d && this.isTimeToAttack) {
                 resetAttackCooldown()

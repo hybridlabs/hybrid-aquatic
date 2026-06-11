@@ -204,10 +204,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         return HAEntityTypes.OTTER.get().create(p0)
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.6f
-    }
-
     override fun getWaterline(): Float {
         return 0.125f
     }

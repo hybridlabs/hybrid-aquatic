@@ -1,5 +1,6 @@
-package dev.hybridlabs.aquatic.item.armor
+package dev.hybridlabs.aquatic.item.cosmetic
 
+import dev.hybridlabs.aquatic.client.render.armor.MoonJellyfishArmorRenderer
 import dev.hybridlabs.aquatic.item.HAArmorMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.client.model.HumanoidModel
@@ -17,7 +18,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
-class MoonJellyfishArmorItem(type: Type, settings: Properties) :
+class MoonJellyfishHatItem(type: Type, settings: Properties) :
     ArmorItem(HAArmorMaterials.MOONJELLYFISH, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 

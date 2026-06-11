@@ -24,9 +24,9 @@ class ArgonautSailEntityLayer<T: ArgonautEntity>(
         poseStack: PoseStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -37,6 +37,6 @@ class ArgonautSailEntityLayer<T: ArgonautEntity>(
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, sailRenderType,
             bufferSource.getBuffer(sailRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1f, 1f, 1f, 1f)
+            1)
     }
 }

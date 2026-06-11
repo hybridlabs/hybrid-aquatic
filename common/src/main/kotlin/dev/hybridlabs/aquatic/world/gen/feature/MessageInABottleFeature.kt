@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.world.gen.feature
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.Direction
 import net.minecraft.world.level.block.Block
@@ -21,14 +20,14 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         val world = context.level()
         val origin = context.origin()
         val random = context.random()
-        val pos = context.origin().mutable()
-
         val placedState = config.toPlace.getState(random, origin)
-        val originalState = world.getBlockState(pos)
+        val originalState = world.getBlockState(origin.mutable())
 
-        if (!originalState.canBeReplaced() || placedState.block !is MessageInABottleBlock) {
+        if (originalState.isSolid || placedState.block !is MessageInABottleBlock) {
             return false
         }
+
+        val pos = context.origin().mutable()
 
         if (!placedState.canSurvive(world, pos)) {
             // if it can spawn below, move down
@@ -53,9 +52,7 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
             val registryManager = world.registryAccess()
             val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
             registry.getRandom(random).ifPresent { messageEntry ->
-                val message = messageEntry.value()
-                val stack = SeaMessageBookItem.createItemStack(message, registryManager)
-                blockEntity.messageItemStack = stack
+                blockEntity.messageId = messageEntry.key().location()
             }
         } else {
             return false

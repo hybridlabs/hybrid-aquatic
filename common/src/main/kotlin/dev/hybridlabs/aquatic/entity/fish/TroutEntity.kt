@@ -63,12 +63,12 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
         return spawnData
     }
 
-    override fun getDimensions(pose: Pose): EntityDimensions {
+    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
         val scale = when (variant) {
             Type.BULL_TROUT -> 2.0f
             else -> 1.0f
         }
-        return super.getDimensions(pose).scale(scale)
+        return super.getDefaultDimensions(pose).scale(scale)
     }
 
     companion object {

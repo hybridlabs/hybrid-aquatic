@@ -1,6 +1,9 @@
 package dev.hybridlabs.aquatic.item
 
-import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.CommonClass
+import net.minecraft.core.Holder
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.ItemTags
@@ -8,148 +11,223 @@ import net.minecraft.world.item.ArmorItem
 import net.minecraft.world.item.ArmorMaterial
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Ingredient
+import java.util.*
 import java.util.function.Supplier
 
-enum class HAArmorMaterials(
-    private val id: String,
-    private val durabilityMultiplier: Int,
-    private val protectionAmounts: IntArray,
-    private val enchantability: Int,
-    private val equipSound: SoundEvent,
-    private val toughness: Float,
-    private val knockbackResistance: Float,
-    private val repairIngredient: Supplier<Ingredient>
-) : ArmorMaterial {
-    DIVING(
+object HAArmorMaterials {
+    val DIVING = register(
         "diving",
-        15,
-        intArrayOf(2, 5, 4, 2),
+        mapOf(
+            ArmorItem.Type.HELMET to 2,
+            ArmorItem.Type.CHESTPLATE to 5,
+            ArmorItem.Type.LEGGINGS to 4,
+            ArmorItem.Type.BOOTS to 2,
+            ArmorItem.Type.BODY to 5
+        ),
         9,
-        SoundEvents.ARMOR_EQUIP_IRON,
+        SoundEvents.ARMOR_EQUIP_CHAIN,
+        {
+            Ingredient.of(
+                Items.COPPER_INGOT
+            )
+        },
+        listOf(),
         0.0f,
         0.0f,
-        Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
-    ),
+    )
 
-    GLOWING_DIVING(
+    val GLOWING_DIVING = register(
         "glowing_diving",
-        15,
-        intArrayOf(2, 5, 4, 2),
+        mapOf(
+            ArmorItem.Type.HELMET to 2,
+            ArmorItem.Type.CHESTPLATE to 5,
+            ArmorItem.Type.LEGGINGS to 4,
+            ArmorItem.Type.BOOTS to 2,
+            ArmorItem.Type.BODY to 5
+        ),
         9,
         SoundEvents.ARMOR_EQUIP_GENERIC,
+        {
+            Ingredient.of(
+                Items.COPPER_INGOT
+            )
+        },
+        listOf(),
         0.0f,
         0.0f,
-        Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
-    ),
+    )
 
-    REINFORCED_DIVING(
+    val REINFORCED_DIVING = register(
         "reinforced_diving",
-        25,
-        intArrayOf(3, 7, 5, 3),
+        mapOf(
+            ArmorItem.Type.HELMET to 3,
+            ArmorItem.Type.CHESTPLATE to 7,
+            ArmorItem.Type.LEGGINGS to 5,
+            ArmorItem.Type.BOOTS to 3,
+            ArmorItem.Type.BODY to 5
+        ),
         9,
-        SoundEvents.ARMOR_EQUIP_NETHERITE, 1.0f, 0.0f,
-        Supplier<Ingredient> { Ingredient.of(Items.COPPER_INGOT) }
-    ),
+        SoundEvents.ARMOR_EQUIP_NETHERITE,
+        {
+            Ingredient.of(
+                Items.COPPER_INGOT
+            )
+        },
+        listOf(),
+        0.0f,
+        1.0f,
+    )
 
-    SEASHELL(
+    val SEASHELL = register(
         "seashell",
-        15,
-        intArrayOf(2, 4, 3, 2),
+        mapOf(
+            ArmorItem.Type.HELMET to 2,
+            ArmorItem.Type.CHESTPLATE to 4,
+            ArmorItem.Type.LEGGINGS to 3,
+            ArmorItem.Type.BOOTS to 2,
+            ArmorItem.Type.BODY to 4
+        ),
         22,
         SoundEvents.ARMOR_EQUIP_TURTLE,
+        {
+            Ingredient.of(
+                Items.NAUTILUS_SHELL
+            )
+        },
+        listOf(),
         0.0f,
         0.0f,
-        Supplier<Ingredient> { Ingredient.of(Items.NAUTILUS_SHELL) }
-    ),
+    )
 
-    MANGLERFISH(
+    val MANGLERFISH = register(
         "manglerfish",
+        mapOf(
+            ArmorItem.Type.HELMET to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
+            ArmorItem.Type.LEGGINGS to 1,
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
+        ),
         15,
-        intArrayOf(1, 1, 1, 1),
-        15,
-        SoundEvents.ARMOR_EQUIP_LEATHER,
+        SoundEvents.ARMOR_EQUIP_GENERIC,
+        {
+            Ingredient.of(
+                HAItems.GLOWSLIME.get()
+            )
+        },
+        listOf(),
         0.0f,
-        0.0f,
-        Supplier<Ingredient> { Ingredient.of(HAItems.GLOWSLIME.get()) }
-    ),
+        0.0f
+    )
 
-    EEL(
+    val EEL = register(
         "eel",
+        mapOf(
+            ArmorItem.Type.HELMET to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
+            ArmorItem.Type.LEGGINGS to 1,
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
+        ),
         15,
-        intArrayOf(1, 1, 1, 1),
-        15,
-        SoundEvents.ARMOR_EQUIP_LEATHER,
+        SoundEvents.ARMOR_EQUIP_GENERIC,
+        {
+            Ingredient.of(
+                ItemTags.WOOL
+            )
+        },
+        listOf(),
         0.0f,
-        0.0f,
-        Supplier<Ingredient> { Ingredient.of(ItemTags.WOOL) }
-    ),
+        0.0f
+    )
 
-    HATXOLOTL(
+    val HATXOLOTL = register(
         "hatxolotl",
+        mapOf(
+            ArmorItem.Type.HELMET to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
+            ArmorItem.Type.LEGGINGS to 1,
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
+        ),
         15,
-        intArrayOf(1, 1, 1, 1),
-        15,
-        SoundEvents.ARMOR_EQUIP_LEATHER,
+        SoundEvents.ARMOR_EQUIP_GENERIC,
+        {
+            Ingredient.of(
+                Items.LEATHER
+            )
+        },
+        listOf(),
         0.0f,
-        0.0f,
-        Supplier<Ingredient> { Ingredient.of(ItemTags.WOOL) }
-    ),
+        0.0f
+    )
 
-    MOONJELLYFISH(
+    val MOONJELLYFISH = register(
         "moon_jelly",
+        mapOf(
+            ArmorItem.Type.HELMET to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
+            ArmorItem.Type.LEGGINGS to 1,
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
+        ),
         15,
-        intArrayOf(1, 1, 1, 1),
-        15,
-        SoundEvents.SLIME_BLOCK_PLACE,
+        SoundEvents.ARMOR_EQUIP_GENERIC,
+        {
+            Ingredient.of(
+                Items.SLIME_BALL
+            )
+        },
+        listOf(),
         0.0f,
-        0.0f,
-        Supplier<Ingredient> { Ingredient.of(ItemTags.WOOL) }
-    ),
+        0.0f
+    )
 
-    TURTLE(
+    val TURTLE = register(
         "turtle",
-        25,
-        intArrayOf(2, 6, 5, 2),
+        mapOf(
+            ArmorItem.Type.HELMET to 1,
+            ArmorItem.Type.CHESTPLATE to 1,
+            ArmorItem.Type.LEGGINGS to 1,
+            ArmorItem.Type.BOOTS to 1,
+            ArmorItem.Type.BODY to 1
+        ),
         9,
         SoundEvents.ARMOR_EQUIP_TURTLE,
+        {
+            Ingredient.of(
+                Items.TURTLE_SCUTE
+            )
+        },
+        listOf(),
         1.0f,
         0.3f,
-        Supplier<Ingredient> { Ingredient.of(Items.SCUTE) }
-    );
+    )
 
-    override fun getDurabilityForType(type: ArmorItem.Type): Int {
-        return BASE_DURABILITY[type.ordinal] * this.durabilityMultiplier
-    }
-
-    override fun getDefenseForType(type: ArmorItem.Type): Int {
-        return protectionAmounts[type.ordinal]
-    }
-
-    override fun getEnchantmentValue(): Int {
-        return this.enchantability
-    }
-
-    override fun getEquipSound(): SoundEvent {
-        return this.equipSound
-    }
-
-    override fun getRepairIngredient(): Ingredient {
-        return repairIngredient.get()
-    }
-
-    override fun getName(): String {
-        return Constants.MOD_ID + ":" + this.id
-    }
-
-    override fun getToughness(): Float {
-        return this.toughness
-    }
-
-    override fun getKnockbackResistance(): Float {
-        return this.knockbackResistance
-    }
-
-    companion object {
-        private val BASE_DURABILITY = intArrayOf(11, 16, 15, 13)
+    fun register(
+        name: String,
+        defense: Map<ArmorItem.Type, Int>,
+        enchantmentValue: Int,
+        equipSound: Holder<SoundEvent>,
+        repairIngridient: Supplier<Ingredient>,
+        layers: List<ArmorMaterial.Layer>,
+        toughness: Float,
+        knockbackResistance: Float
+    ): Holder<ArmorMaterial?> {
+        val enummap: EnumMap<ArmorItem.Type?, Int?> = EnumMap(ArmorItem.Type::class.java)
+        for (type in ArmorItem.Type.entries) enummap[type] = defense[type]
+        return Registry.registerForHolder(
+            BuiltInRegistries.ARMOR_MATERIAL,
+            CommonClass.locate(name),
+            ArmorMaterial(
+                enummap,
+                enchantmentValue,
+                equipSound,
+                repairIngridient,
+                layers,
+                toughness,
+                knockbackResistance
+            )
+        )
     }
 }

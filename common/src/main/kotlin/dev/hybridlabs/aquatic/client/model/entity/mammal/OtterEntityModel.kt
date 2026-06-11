@@ -5,8 +5,8 @@ import dev.hybridlabs.aquatic.entity.mammal.OtterEntity.Companion.OtterAction
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.constant.DataTickets
 
 class OtterEntityModel : HAMammalEntityModel<OtterEntity>("otter") {
 
@@ -87,7 +87,7 @@ class OtterEntityModel : HAMammalEntityModel<OtterEntity>("otter") {
             if (head != null) {
                 val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
 
-                head.rotX = entityData.headPitch() * Mth.DEG_TO_RAD
+                head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
                 head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
             }
 

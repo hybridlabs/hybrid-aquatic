@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -26,7 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
+    class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
@@ -111,7 +112,12 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         }
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<FloatingSargassumBlock> = simpleCodec(::FloatingSargassumBlock)
         private val SHAPE: VoxelShape = box(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }

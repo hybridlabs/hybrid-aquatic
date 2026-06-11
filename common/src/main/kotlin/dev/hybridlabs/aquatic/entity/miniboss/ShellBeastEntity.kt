@@ -204,10 +204,6 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         }
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return dimensions.height * 0.4f
-    }
-
     override fun aiStep() {
         if (tickCount < 120) {
             navigation.stop()

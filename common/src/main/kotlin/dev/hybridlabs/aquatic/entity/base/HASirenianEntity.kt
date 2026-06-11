@@ -219,10 +219,6 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
         return factory
     }
 
-    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
-        return 0.3f
-    }
-
     companion object {
         val CLAM_POS: EntityDataAccessor<BlockPos> =
             SynchedEntityData.defineId(HASirenianEntity::class.java, EntityDataSerializers.BLOCK_POS)

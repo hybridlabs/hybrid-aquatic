@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.fish.HAFishEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.fish.HAFishEntityRenderer
-import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -25,9 +25,9 @@ class HAFishEntityLayer<T: HAFishEntity>(
         poseStack: PoseStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -40,6 +40,6 @@ class HAFishEntityLayer<T: HAFishEntity>(
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderType,
             bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1f, 1f, 1f, 1f)
+            1)
     }
 }

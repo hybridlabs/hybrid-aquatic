@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.block
 
-import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -18,7 +17,6 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BushBlock
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
@@ -158,7 +156,7 @@ class ThermalVentBlock(
         if (state.getValue(THICKNESS) == ThermalVentPosition.TIP && state.getValue(WATERLOGGED)) {
             if (entity is Player && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
-                entity.addEffect(MobEffectInstance(HAMobEffects.CORROSION.get(), 200, 0))
+                entity.addEffect(MobEffectInstance(HAMobEffects.CORROSION.asHolder(), 200, 0))
             }
         }
 
@@ -214,12 +212,7 @@ class ThermalVentBlock(
         builder.add(THICKNESS, WATERLOGGED)
     }
 
-    override fun codec(): MapCodec<out ThermalVentBlock> {
-        return CODEC
-    }
-
     companion object {
-        val CODEC: MapCodec<ThermalVentBlock> = simpleCodec(::ThermalVentBlock)
         val THICKNESS: EnumProperty<ThermalVentPosition> = EnumProperty.create(
             "thickness",
             ThermalVentPosition::class.java,

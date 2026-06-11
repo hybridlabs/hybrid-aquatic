@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -34,11 +35,11 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.PathType
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.constant.DefaultAnimations
 
 class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
@@ -287,8 +288,14 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             val player = source.directEntity as Player
             val weapon = player.mainHandItem
             val hasFlipEnchant =
-                EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, weapon) > 1 ||
-                        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.RIPTIDE, weapon) > 1
+                EnchantmentHelper.getItemEnchantmentLevel(
+                    level().registryAccess().registry(Registries.ENCHANTMENT).get()
+                        .getHolder(Enchantments.BANE_OF_ARTHROPODS).get(), weapon
+                ) > 1 ||
+                        EnchantmentHelper.getItemEnchantmentLevel(
+                            level().registryAccess().registry(Registries.ENCHANTMENT).get()
+                                .getHolder(Enchantments.RIPTIDE).get(), weapon
+                        ) > 1
 
             if (hasFlipEnchant) {
                 this.flippedTimer = random.nextInt(60, 100)

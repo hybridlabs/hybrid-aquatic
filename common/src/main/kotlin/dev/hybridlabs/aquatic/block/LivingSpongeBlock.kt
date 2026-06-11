@@ -31,7 +31,6 @@ class LivingSpongeBlock(
 ) : BushBlock(settings), SimpleWaterloggedBlock {
 
     private var bubbleTimer = 0
-    val CODEC: MapCodec<LivingSpongeBlock> = simpleCodec(::LivingSpongeBlock)
 
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
@@ -41,10 +40,6 @@ class LivingSpongeBlock(
         val supportingPos = pos.below()
         val supportingState = world.getBlockState(supportingPos)
         return supportingState.isFaceSturdy(world, supportingPos, Direction.UP)
-    }
-
-    override fun codec(): MapCodec<out BushBlock?> {
-        return CODEC
     }
 
     override fun updateShape(
