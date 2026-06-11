@@ -93,7 +93,6 @@ processResources {
             'mod_name'                     : mod_name,
             'mod_author'                   : mod_author,
             'mod_id'                       : mod_id,
-            'forge_mod_id'                 : forge_mod_id,
             'license'                      : license,
             'description'                  : project.description,
             'neoforge_version'             : neoforge_version,
