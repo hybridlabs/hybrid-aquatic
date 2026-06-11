@@ -1,0 +1,88 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"misc.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"body": {
+					"rotation": ["Math.sin(query.anim_time * 90)*2.5", 0, 0],
+					"position": [0, "Math.sin(query.anim_time * 90)*-0.25", 0]
+				},
+				"tail": {
+					"rotation": ["Math.cos(query.anim_time * 90)*10", 0, 0]
+				},
+				"tail_flipper": {
+					"rotation": ["Math.sin(query.anim_time * 90)*10", 0, 0]
+				},
+				"left_flipper": {
+					"rotation": [0, 0, "Math.cos(query.anim_time*90)*-10"]
+				},
+				"right_flipper": {
+					"rotation": [0, 0, "Math.cos(query.anim_time*90)*10"]
+				}
+			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"body": {
+					"rotation": [0, 0, -90]
+				},
+				"tail": {
+					"rotation": [-38.2047, -15.6065, 13.8753]
+				},
+				"tail_flipper": {
+					"rotation": [0, 0, 45]
+				},
+				"left_flipper": {
+					"rotation": [0, 0, 112.5]
+				},
+				"right_flipper": {
+					"rotation": [0, 0, -45]
+				},
+				"head": {
+					"rotation": [22.6747, 6.9262, 2.8843]
+				}
+			}
+		},
+		"misc.graze": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"head": {
+					"rotation": ["Math.sin(query.anim_time*360)*5", 0, 0]
+				}
+			}
+		},
+		"move.swim": {
+			"loop": true,
+			"bones": {
+				"body": {
+					"rotation": ["0-math.sin(query.anim_time*60*2.5)*8", "0-math.sin(query.anim_time*60*1.25)*3", "0-math.sin(query.anim_time*60*1.25-60)*2"],
+					"position": [0, "0-math.sin(query.anim_time*24*1.25+80)*2", 0]
+				},
+				"body_2": {
+					"rotation": ["0-math.sin(query.anim_time*90*2.5-60)*8", 0, 0]
+				},
+				"tail": {
+					"rotation": ["0-math.sin(query.anim_time*60*2.5-120)*12", "0-math.sin(query.anim_time*60*1.25-60)*3", 0]
+				},
+				"head": {
+					"rotation": ["0-math.sin(query.anim_time*60*2.5+60)*3", "0-math.sin(query.anim_time*60*1.25+60)*2", 0]
+				},
+				"tail_flipper": {
+					"rotation": ["0-math.sin(query.anim_time*60*2.5-160)*16", "0-math.sin(query.anim_time*60*1.25-120)*3", 0]
+				},
+				"left_flipper": {
+					"rotation": [0, 0, "55-math.sin(query.anim_time*60*2.5-60)*10"]
+				},
+				"right_flipper": {
+					"rotation": [0, 0, "-55-math.sin(query.anim_time*60*2.5-60)*-10"]
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

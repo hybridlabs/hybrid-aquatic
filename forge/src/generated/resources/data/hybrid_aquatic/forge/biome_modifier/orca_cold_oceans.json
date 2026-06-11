@@ -1,0 +1,15 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/ratfish_is_deep_ocean.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#minecraft:is_deep_ocean",
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:cold_oceans",
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/orca_cold_oceans.json
+  "spawners": {
+    "type": "hybrid_aquatic:orca",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 5
+  }
+}

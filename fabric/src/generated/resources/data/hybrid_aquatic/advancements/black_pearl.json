@@ -1,0 +1,53 @@
+{
+  "parent": "hybrid_aquatic:pearl",
+  "criteria": {
+    "obtain_black_pearl": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/black_pearl.json
+            "items": "hybrid-aquatic:black_pearl"
+========
+            "items": [
+              "hybrid_aquatic:black_pearl"
+            ]
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/black_pearl.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/black_pearl.json
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+========
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/black_pearl.json
+    "description": {
+      "translate": "advancements.hybrid_aquatic.black_pearl.description"
+    },
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/black_pearl.json
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "hybrid-aquatic:black_pearl"
+========
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid_aquatic:black_pearl"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/black_pearl.json
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.black_pearl.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_black_pearl"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

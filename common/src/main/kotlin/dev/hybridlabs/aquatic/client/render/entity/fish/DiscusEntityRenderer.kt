@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.DiscusEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class DiscusEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<DiscusEntity>(context, DiscusEntityModel(), true, false)
+    HAFishEntityRenderer<DiscusEntity>(context, DiscusEntityModel(), true, false)

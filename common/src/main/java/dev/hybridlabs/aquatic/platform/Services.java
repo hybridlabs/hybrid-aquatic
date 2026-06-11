@@ -16,6 +16,20 @@ public class Services {
     // vs Fabric, or to ask the modloader if another mod is loaded.
     public static final PlatformHelper PLATFORM = load(PlatformHelper.class);
 
+
+    public static final EelArmorProvider EEL_ARMOR_FACTORY = load(EelArmorProvider.class);
+    public static final PinkHatxolotlArmorProvider PINK_HATXOLOTL_ARMOR_FACTORY = load(PinkHatxolotlArmorProvider.class);
+    public static final BrownHatxolotlArmorProvider BROWN_HATXOLOTL_ARMOR_FACTORY = load(BrownHatxolotlArmorProvider.class);
+    public static final GoldHatxolotlArmorProvider GOLD_HATXOLOTL_ARMOR_FACTORY = load(GoldHatxolotlArmorProvider.class);
+    public static final BlueHatxolotlArmorProvider BLUE_HATXOLOTL_ARMOR_FACTORY = load(BlueHatxolotlArmorProvider.class);
+    public static final CyanHatxolotlArmorProvider CYAN_HATXOLOTL_ARMOR_FACTORY = load(CyanHatxolotlArmorProvider.class);    public static final DivingArmorProvider DIVING_ARMOR_FACTORY = load(DivingArmorProvider.class);
+    public static final ReinforcedDivingArmorProvider REINFORCED_DIVING_ARMOR_FACTORY = load(ReinforcedDivingArmorProvider.class);
+    public static final GlowingDivingArmorProvider GLOWING_DIVING_ARMOR_FACTORY = load(GlowingDivingArmorProvider.class);
+    public static final SeashellArmorProvider SEASHELL_ARMOR_FACTORY = load(SeashellArmorProvider.class);
+    public static final ManglerfishCosmeticProvider MANGLERFISH_COSMETIC_PROVIDER = load(ManglerfishCosmeticProvider.class);
+    public static final MoonJellyfishArmorProvider MOON_JELLYFISH_ARMOR_FACTORY = load(MoonJellyfishArmorProvider.class);
+    public static final TurtleArmorProvider TURTLE_ARMOR_FACTORY = load(TurtleArmorProvider.class);
+
     // This code is used to load a service for the current environment. Your implementation of the
     // service must be defined  manually by including a text file in META-INF/services named with
     // the fully qualified class  name of the service.  Inside the file you should write the fully
@@ -25,7 +39,7 @@ public class Services {
 
         final T loadedService = ServiceLoader.load(clazz).findFirst().orElseThrow(() -> new NullPointerException(
                 "Failed to load service for " + clazz.getName()));
-        Constants.LOG.debug("Loaded {} for service {}", loadedService, clazz);
+        Constants.LOGGER.debug("Loaded {} for service {}", loadedService, clazz);
         return loadedService;
     }
 }

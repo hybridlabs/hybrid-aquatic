@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:tide_pools",
+  "features": "hybrid_aquatic:tide_pool_mussel_patch",
+  "step": "vegetal_decoration"
+}

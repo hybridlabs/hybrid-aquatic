@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+<<<<<<<< HEAD:fabric/src/generated/resources/assets/hybrid_aquatic/models/item/pleco.json
+    "layer0": "hybrid-aquatic:item/pleco"
+========
+    "layer0": "hybrid_aquatic:item/sunfish"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/assets/hybrid_aquatic/models/item/sunfish.json
+  }
+}

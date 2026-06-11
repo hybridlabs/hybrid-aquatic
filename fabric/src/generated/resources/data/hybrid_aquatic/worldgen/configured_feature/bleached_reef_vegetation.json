@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "config": {
+    "features": [
+      {
+        "feature": {
+          "type": "hybrid_aquatic:bleached_coral_tree",
+          "config": {}
+        },
+        "placement": []
+      },
+      {
+        "feature": {
+          "type": "hybrid_aquatic:bleached_coral_claw",
+          "config": {}
+        },
+        "placement": []
+      },
+      {
+        "feature": {
+          "type": "hybrid_aquatic:bleached_coral_mushroom",
+          "config": {}
+        },
+        "placement": []
+      },
+      {
+        "feature": {
+          "type": "hybrid_aquatic:bleached_coral_table",
+          "config": {}
+        },
+        "placement": []
+      }
+    ]
+  }
+}

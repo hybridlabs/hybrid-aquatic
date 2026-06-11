@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class StingrayEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<StingrayEntity>(context, StingrayEntityModel(), true, false)
+    HAFishEntityRenderer<StingrayEntity>(context, StingrayEntityModel(), true, false)

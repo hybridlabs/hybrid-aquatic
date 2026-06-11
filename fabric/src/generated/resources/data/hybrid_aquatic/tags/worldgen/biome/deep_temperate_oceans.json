@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:deep_ocean",
+    {
+      "id": "still_life:temperate_deep_ocean",
+      "required": false
+    }
+  ]
+}

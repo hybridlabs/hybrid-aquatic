@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.tag.HABlockTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -23,35 +27,52 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
+class SurgeonfishEntity(type: EntityType<out SurgeonfishEntity>, world: Level) :
+    HASchoolingFishEntity(type, world),
     VariantHolder<SurgeonfishEntity.Companion.Type> {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
+    )
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(3, WaterAnimalGrazeGoal(this, HABlockTags.ALGIVORE_EDIBLE))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(3, StayInWaterGoal(this))
     }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 6
     }
+
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
+    }
+
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
+    }
+    //#endregion
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
 
         val variant = Type.entries.random(Random).id
         this.variant = Type.fromId(variant)
@@ -61,7 +82,7 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Le
             if (fishCount > 0 && !level().isClientSide()) {
                 for (i in 0 until  fishCount) {
                     val distance = 1.5f
-                    val entity = SurgeonfishEntity(HybridAquaticEntityTypes.SURGEONFISH.get(), this.level())
+                    val entity = SurgeonfishEntity(HAEntityTypes.SURGEONFISH.get(), this.level())
                     entity.variant = this.variant
                     entity.moveTo(
                         this.x + this.random.nextFloat() * distance,
@@ -119,21 +140,6 @@ class SurgeonfishEntity(entityType: EntityType<out SurgeonfishEntity>, world: Le
                 }
             }
         }
-    }
-
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
     }
 
     override fun getVariant(): Type {

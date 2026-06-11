@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_block"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "III",
+    "I I",
+    "IBI"
+  ],
+  "result": {
+    "item": "hybrid_aquatic:diving_weight"
+  },
+  "show_notification": true
+}

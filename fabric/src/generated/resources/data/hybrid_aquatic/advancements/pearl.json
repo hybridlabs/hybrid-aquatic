@@ -1,0 +1,49 @@
+{
+  "parent": "hybrid_aquatic:root",
+  "criteria": {
+    "obtain_pearl": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/pearl.json
+            "items": "hybrid-aquatic:pearl"
+========
+            "items": [
+              "hybrid_aquatic:pearl"
+            ]
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/pearl.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/pearl.json
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+========
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/pearl.json
+    "description": {
+      "translate": "advancements.hybrid_aquatic.pearl.description"
+    },
+    "icon": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/pearl.json
+      "count": 1,
+      "id": "hybrid-aquatic:pearl"
+========
+      "item": "hybrid_aquatic:pearl"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/pearl.json
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.pearl.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_pearl"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class HorseshoeCrabEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<HorseshoeCrabEntity>(context, HorseshoeCrabEntityModel(), true, false)
+    HACrustaceanEntityRenderer<HorseshoeCrabEntity>(context, HorseshoeCrabEntityModel(), true, false)

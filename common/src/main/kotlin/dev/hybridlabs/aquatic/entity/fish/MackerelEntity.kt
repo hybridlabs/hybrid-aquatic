@@ -1,9 +1,15 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -13,21 +19,18 @@ import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
-class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class MackerelEntity(type: EntityType<out MackerelEntity>, world: Level) :
+    HASchoolingFishEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
+    )
 
     override fun registerGoals() {
         super.registerGoals()
@@ -60,14 +63,14 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
         refreshDimensions()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt("FishCount", getFishCount())
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("FishCount", getFishCount())
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        setFishCount(nbt.getInt("FishCount").coerceAtMost(THREE_FISH))
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        setFishCount(compound.getInt("FishCount").coerceAtMost(THREE_FISH))
     }
 
     override fun tick() {
@@ -153,8 +156,15 @@ class MackerelEntity(entityType: EntityType<out MackerelEntity>, world: Level) :
                 else -> ONE_FISH
             }
 
-            if (newFishCount in 1..<oldFishCount) {
-                spawnAtLocation(HybridAquaticItems.MACKEREL.get())
+            val attacker = source.directEntity
+
+            if (newFishCount in 1..<oldFishCount &&
+                level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS) &&
+                attacker !is HAFishEntity &&
+                attacker !is HASharkEntity &&
+                attacker !is HACephalopodEntity &&
+                attacker !is HAMammalEntity) {
+                spawnAtLocation(HAItems.MACKEREL.get())
             }
         }
 

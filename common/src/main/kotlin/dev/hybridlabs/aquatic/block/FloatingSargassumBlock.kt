@@ -1,10 +1,16 @@
 package dev.hybridlabs.aquatic.block
 
-import com.mojang.serialization.MapCodec
+import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.ParticleUtils
+import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.vehicle.Boat
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
@@ -19,6 +25,7 @@ import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
+@Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
@@ -39,6 +46,13 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
+    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+        super.entityInside(state, level, pos, entity)
+        if (level is ServerLevel && entity is Boat) {
+            level.destroyBlock(BlockPos(pos), true, entity)
+        }
+    }
+
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         val world = context.level
         val pos = context.clickedPos
@@ -56,7 +70,7 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
         if (state.getValue(WATERLOGGED)) {
             world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
@@ -73,7 +87,7 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
         return SHAPE
     }
@@ -86,12 +100,18 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
         builder.add(WATERLOGGED)
     }
 
-    override fun codec(): MapCodec<out BushBlock> {
-        return CODEC
+    override fun animateTick(state: BlockState, level: Level, pos: BlockPos, random: RandomSource) {
+        super.animateTick(state, level, pos, random)
+        if (random.nextInt(30) == 0) {
+            val blockPos = pos.below()
+            val blockState = level.getBlockState(blockPos)
+            if (!isFaceFull(blockState.getCollisionShape(level, blockPos), Direction.UP)) {
+                ParticleUtils.spawnParticleBelow(level, pos, random, HAParticleTypes.SARGASSUM.get())
+            }
+        }
     }
 
     companion object {
-        val CODEC: MapCodec<FloatingSargassumBlock> = simpleCodec(::FloatingSargassumBlock)
         private val SHAPE: VoxelShape = box(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }

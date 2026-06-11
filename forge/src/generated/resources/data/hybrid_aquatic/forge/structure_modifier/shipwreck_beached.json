@@ -1,0 +1,18 @@
+{
+  "type": "hybrid_aquatic:ha_structure_spawns",
+  "modifier": {
+    "bounding_box_type": "full",
+    "id": "shipwreck_beached",
+    "spawns": {
+      "crustacean": [
+        {
+          "type": "hybrid_aquatic:coconut_crab",
+          "maxCount": 4,
+          "minCount": 1,
+          "weight": 1
+        }
+      ]
+    },
+    "structure": "minecraft:shipwreck_beached"
+  }
+}

@@ -25,7 +25,7 @@ class BullKelpBlock(settings: Properties) :
     }
 
     override fun getBodyBlock(): Block {
-        return HybridAquaticBlocks.BULL_KELP_PLANT.get()
+        return HABlocks.BULL_KELP_PLANT.get()
     }
 
     override fun canAttachTo(state: BlockState): Boolean {

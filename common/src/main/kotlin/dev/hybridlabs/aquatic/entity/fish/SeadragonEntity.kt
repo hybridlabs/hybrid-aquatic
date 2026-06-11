@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -22,21 +24,16 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION", "unused")
-class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD,
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
-    VariantHolder<SeadragonEntity.Companion.Type> {
+class SeadragonEntity(type: EntityType<out SeadragonEntity>, world: Level) :
+    HAFishEntity(type, world), VariantHolder<SeadragonEntity.Companion.Type> {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.SMALL_CREATURES,
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_CEPHALOPODS,
+        HAEntityTags.ALL_SHARKS,
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
@@ -108,14 +105,14 @@ class SeadragonEntity(entityType: EntityType<out SeadragonEntity>, world: Level)
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

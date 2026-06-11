@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "hybrid_aquatic:pearl"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PPP",
+    "PPP"
+  ],
+  "result": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/pearl_block.json
+    "count": 1,
+    "id": "hybrid-aquatic:pearl_block"
+  }
+}
+========
+    "item": "hybrid_aquatic:pearl_block"
+  },
+  "show_notification": true
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/pearl_block.json

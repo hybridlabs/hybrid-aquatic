@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hybrid_aquatic:block/chimneystone_slab"
+    },
+    "type=double": {
+      "model": "hybrid_aquatic:block/chimneystone"
+    },
+    "type=top": {
+      "model": "hybrid_aquatic:block/chimneystone_slab_top"
+    }
+  }
+}

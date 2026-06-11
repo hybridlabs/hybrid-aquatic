@@ -1,0 +1,8 @@
+{
+    "type": "lithostitched:remove_features",
+    "biomes": "minecraft:warm_ocean",
+    "features": [
+      "minecraft:warm_ocean_vegetation"
+    ],
+    "step": "vegetal_decoration"
+}

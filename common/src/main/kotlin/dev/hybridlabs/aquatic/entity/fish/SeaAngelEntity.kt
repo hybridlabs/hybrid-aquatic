@@ -1,24 +1,20 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.NONE
-        )
-    ) {
+class SeaAngelEntity(type: EntityType<out SeaAngelEntity>, world: Level) :
+    HAFishEntity(type, world) {
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 2
+        return 3
+    }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
     }
 
     companion object {
@@ -30,9 +26,5 @@ class SeaAngelEntity(entityType: EntityType<out SeaAngelEntity>, world: Level) :
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
-    }
-
-    override fun shouldFlopOnLand(): Boolean {
-        return false
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "hybrid_aquatic:block/driftwood_planks"
+  }
+}

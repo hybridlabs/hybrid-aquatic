@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.FlashlightFishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class FlashlightFishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<FlashlightFishEntity>(context, FlashlightFishEntityModel(), true, true)
+    HAFishEntityRenderer<FlashlightFishEntity>(context, FlashlightFishEntityModel(), true, true)

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:grassy_sand",
+    "hybrid_aquatic:sea_lettuce",
+    "hybrid_aquatic:tall_sea_lettuce",
+    "minecraft:seagrass",
+    "minecraft:tall_seagrass"
+  ]
+}

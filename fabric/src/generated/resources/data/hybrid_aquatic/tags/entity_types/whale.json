@@ -1,0 +1,89 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsmobs:cachalot_whale",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:humpback_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:beluga_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_beluga_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:bottlenose_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_bottlenose_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:minke_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_minke_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:humpback_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_humpback_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:gray_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_gray_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:right_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_right_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:bowhead_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_bowhead_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:fin_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_fin_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:blue_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_blue_whale",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:ancient_mother",
+      "required": false
+    }
+  ]
+}

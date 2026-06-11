@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class GoldfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<GoldfishEntity>(context, GoldfishEntityModel(), true, false)
+    HAFishEntityRenderer<GoldfishEntity>(context, GoldfishEntityModel(), true, false)

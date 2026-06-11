@@ -1,7 +1,7 @@
   {
   "replace": false,
   "values": [
-    "#hybrid-aquatic:back_fin",
-    "#hybrid-aquatic:scarf"
+    "#hybrid_aquatic:back_fin",
+    "#hybrid_aquatic:scarf"
   ]
 }

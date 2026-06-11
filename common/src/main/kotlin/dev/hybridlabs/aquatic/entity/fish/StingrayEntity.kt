@@ -1,15 +1,17 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.loot.HybridAquaticLootTables
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.loot.HALootTables
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.Holder
-import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceKey
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -23,45 +25,67 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
-import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.CRUSTACEAN),
-        listOf(HybridAquaticEntityTags.SHARK)
-    ),
+class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
+    HAFishEntity(type, world),
     VariantHolder<StingrayEntity.Companion.Type> {
+
+    override fun getTargetConfig() = TARGET_CONFIG
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
+        goalSelector.addGoal(2, WaterAnimalSitGoal(this))
     }
 
-    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
-        return when (variant) {
-            Type.BLUE_SPOTTED -> ResourceKey.create(
-                Registries.LOOT_TABLE,HybridAquaticLootTables.BLUE_SPOTTED_STINGRAY)
-            Type.SPOTTED_EAGLE -> ResourceKey.create(Registries.LOOT_TABLE,HybridAquaticLootTables.SPOTTED_EAGLE_RAY)
-        }
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
     }
+
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
+    }
+    //#endregion
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.ALL_CRUSTACEANS
+            ),
+            listOf(
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
@@ -100,7 +124,7 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 
@@ -111,21 +135,6 @@ class StingrayEntity(entityType: EntityType<out StingrayEntity>, world: Level) :
                 }
             }
         }
-    }
-
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
     }
 
     override fun getVariant(): Type {

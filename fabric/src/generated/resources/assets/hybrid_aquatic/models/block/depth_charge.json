@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "hybrid_aquatic:block/depth_charge_bottom",
+    "side": "hybrid_aquatic:block/depth_charge_side",
+    "top": "hybrid_aquatic:block/depth_charge_top"
+  }
+}

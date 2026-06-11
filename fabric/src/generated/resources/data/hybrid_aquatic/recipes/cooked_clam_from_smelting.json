@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "hybrid_aquatic:clam"
+  },
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/cooked_crab_from_smelting.json
+  "result": {
+    "id": "hybrid-aquatic:cooked_crab"
+  }
+}
+========
+  "result": "hybrid_aquatic:cooked_clam"
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/cooked_clam_from_smelting.json

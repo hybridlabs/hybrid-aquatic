@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:lophelia_coral",
+    "hybrid_aquatic:thorn_coral",
+    "hybrid_aquatic:zigzag_coral",
+    "hybrid_aquatic:bamboo_coral"
+  ]
+}

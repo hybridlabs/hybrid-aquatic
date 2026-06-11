@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.BarreleyeEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BarreleyeEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<BarreleyeEntity>(context, BarreleyeEntityModel(), true, true)
+    HAFishEntityRenderer<BarreleyeEntity>(context, BarreleyeEntityModel(), true, true)

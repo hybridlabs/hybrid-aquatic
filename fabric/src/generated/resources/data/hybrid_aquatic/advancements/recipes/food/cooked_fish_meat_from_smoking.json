@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_fish_meat": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/food/cooked_fish_meat_from_campfire_cooking.json
+            "items": "hybrid-aquatic:raw_fish_meat"
+========
+            "items": [
+              "hybrid_aquatic:raw_fish_meat"
+            ]
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/food/cooked_fish_meat_from_smoking.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid-aquatic:cooked_fish_meat_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_fish_meat"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid-aquatic:cooked_fish_meat_from_campfire_cooking"
+    ]
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/food/cooked_fish_meat_from_campfire_cooking.json
+  }
+}
+========
+  },
+  "sends_telemetry_event": false
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/food/cooked_fish_meat_from_smoking.json

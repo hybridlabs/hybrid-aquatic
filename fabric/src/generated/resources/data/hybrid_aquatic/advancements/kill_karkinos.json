@@ -1,0 +1,49 @@
+{
+  "parent": "hybrid_aquatic:ominous_hook",
+  "criteria": {
+    "kill_karkinos": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "hybrid_aquatic:karkinos"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/kill_karkinos.json
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+========
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/kill_karkinos.json
+    "description": {
+      "translate": "advancements.hybrid_aquatic.kill_karkinos.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/kill_karkinos.json
+      "count": 1,
+      "id": "hybrid-aquatic:karkinos_claw"
+========
+      "item": "hybrid_aquatic:karkinos_claw"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/kill_karkinos.json
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.kill_karkinos.title"
+    }
+  },
+  "requirements": [
+    [
+      "kill_karkinos"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

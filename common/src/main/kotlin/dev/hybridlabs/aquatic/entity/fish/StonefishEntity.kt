@@ -1,6 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -10,24 +13,32 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class StonefishEntity(entityType: EntityType<out StonefishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
+    HAFishEntity(type, world) {
+
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
+    override fun registerGoals() {
+        goalSelector.addGoal(2, WaterAnimalSitGoal(this))
+        super.registerGoals()
+    }
+
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES
+            ),
+            listOf(
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)

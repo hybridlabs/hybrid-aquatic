@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.MackerelEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class MackerelEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<MackerelEntity>(context, MackerelEntityModel(), true, false)
+    HAFishEntityRenderer<MackerelEntity>(context, MackerelEntityModel(), true, false)

@@ -4,18 +4,7 @@ import dev.hybridlabs.aquatic.entity.fish.MahiEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class MahiEntityModel : HybridAquaticFishEntityModel<MahiEntity>("mahi") {
-
-    private val POMPANO_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_pompano.png")
-
-    private val mahiTextures = listOf(
-        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi.png"),
-        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_2.png"),
-        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/mahi/mahi_mahi_3.png"),
-    )
-
-    private val MAHI_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/mahi/mahi_mahi.geo.json")
-    private val POMPANO_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/fish/mahi/mahi_pompano.geo.json")
+class MahiEntityModel : HAFishEntityModel<MahiEntity>("mahi") {
 
     override fun getTextureResource(animatable: MahiEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits
@@ -32,5 +21,21 @@ class MahiEntityModel : HybridAquaticFishEntityModel<MahiEntity>("mahi") {
             MahiEntity.Companion.Type.MAHI -> MAHI_MODEL
             MahiEntity.Companion.Type.POMPANO -> POMPANO_MODEL
         }
+    }
+
+    companion object {
+        private val POMPANO_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_pompano.png")
+
+        private val mahiTextures = listOf(
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_mahi.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_mahi_2.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/mahi/mahi_mahi_3.png"),
+        )
+
+        private val MAHI_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/mahi/mahi_mahi.geo.json")
+        private val POMPANO_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/mahi/mahi_pompano.geo.json")
     }
 }

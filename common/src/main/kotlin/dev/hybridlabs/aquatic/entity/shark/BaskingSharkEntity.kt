@@ -1,51 +1,51 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
-class BaskingSharkEntity(entityType: EntityType<out BaskingSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.NONE), true, false) {
+class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level) :
+    HASharkEntity(type, world) {
 
-    private var isFeeding = false
-
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
-            val animation = when {
-                isFeeding -> MOUTH_OPEN
-                else -> MOUTH_CLOSED
-            }
-            state.setAndContinue(animation)
-        })
-        super.registerControllers(controllers)
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, PassiveFeedingGoal(this))
     }
 
-    override fun tick() {
-        super.tick()
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.RAW_SHRIMP.get())
+    }
 
-        if (hunger < MAX_HUNGER / 4) {
-            isFeeding = true
-        }
-
-        if (isFeeding) {
-            hunger += 10
-
-            if (hunger >= MAX_HUNGER) {
-                hunger = MAX_HUNGER
-                isFeeding = false
-            }
-        }
+    //#region Animations
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        super.registerControllers(controllers)
+        controllers.add(
+            AnimationController(
+                this, "Feeding",
+                AnimationStateHandler { state: AnimationState<HASharkEntity> ->
+                    if (this.isFeeding())
+                        return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 60.0)
+                .add(Attributes.MAX_HEALTH, 40.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.75)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)

@@ -2,4 +2,4 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.PiranhaEntity
 
-class PiranhaEntityModel : HybridAquaticFishEntityModel<PiranhaEntity>("piranha")
+class PiranhaEntityModel : HAFishEntityModel<PiranhaEntity>("piranha")

@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hybrid_aquatic:item/ominous_conch"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "tooting": 1
+      },
+      "model": "hybrid_aquatic:item/ominous_conch_tooting"
+    }
+  ]
+}

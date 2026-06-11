@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diving_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid_aquatic:diving_helmet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:reinforced_diving_helmet_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_diving_helmet",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:reinforced_diving_helmet_upgrade"
+    ]
+  },
+  "sends_telemetry_event": false
+}

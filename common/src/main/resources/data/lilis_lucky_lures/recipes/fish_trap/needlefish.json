@@ -1,11 +1,11 @@
 {
   "type": "lilis_lucky_lures:fish_trap",
   "bait_item": {
-    "item": "hybrid-aquatic:raw_tentacle"
+    "item": "hybrid_aquatic:raw_tentacle"
   },
   "catch": {
     "result": {
-      "item": "hybrid-aquatic:needlefish",
+      "item": "hybrid_aquatic:needlefish",
       "count": 1
     }
   },

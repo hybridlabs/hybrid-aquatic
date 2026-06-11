@@ -1,8 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -19,6 +21,8 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -26,13 +30,11 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.JELLYFISH),
-        listOf(HybridAquaticEntityTags.SHARK)
-    ),
+class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) :
+    HAFishEntity(type, world),
     VariantHolder<OceanSunfishEntity.Companion.Type> {
+
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -42,25 +44,38 @@ class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: 
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 2.0))
+    }
 
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(Items.SLIME_BALL)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.ALL_JELLYFISH
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 12.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MAX_HEALTH, 16.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
@@ -74,7 +89,8 @@ class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: 
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val spawnY = (world.seaLevel - 24) ..< (world.seaLevel - 8)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val spawnY = (seaLevel - 24) ..< (seaLevel - 8)
 
             return pos.y in spawnY &&
                     world.isWaterAt(pos) &&
@@ -89,7 +105,8 @@ class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             OCEAN(0, "ocean"),
             HOODWINKER(1, "hoodwinker"),
-            SHARPTAIL(2, "sharptail");
+            SHARPTAIL(2, "sharptail"),
+            GIANT(3, "giant");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -113,16 +130,20 @@ class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: 
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HABiomeTags.SHALLOW_LUKEWARM_OCEANS) -> {
                             HOODWINKER
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS) -> {
+                        biome.`is`(HABiomeTags.DEEP_LUKEWARM_OCEANS) -> {
                             SHARPTAIL
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                        biome.`is`(HABiomeTags.SHALLOW_TEMPERATE_OCEANS) -> {
                             OCEAN
+                        }
+
+                        biome.`is`(HABiomeTags.DEEP_TEMPERATE_OCEANS) -> {
+                            GIANT
                         }
 
                         else -> {
@@ -134,19 +155,19 @@ class OceanSunfishEntity(entityType: EntityType<out OceanSunfishEntity>, world: 
         }
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

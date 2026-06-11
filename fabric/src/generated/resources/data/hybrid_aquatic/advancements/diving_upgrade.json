@@ -1,0 +1,39 @@
+{
+  "parent": "hybrid_aquatic:diving_suit",
+  "criteria": {
+    "obtain_diving_suit_upgrade_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid_aquatic:diving_armor_upgrade_template"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.diving_upgrade.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid_aquatic:diving_armor_upgrade_template"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid_aquatic.diving_upgrade.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_diving_suit_upgrade_template"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

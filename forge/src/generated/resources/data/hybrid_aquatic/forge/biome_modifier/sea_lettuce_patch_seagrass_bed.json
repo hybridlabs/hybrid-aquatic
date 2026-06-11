@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:seagrass_bed",
+  "features": "hybrid_aquatic:sea_lettuce_patch",
+  "step": "vegetal_decoration"
+}

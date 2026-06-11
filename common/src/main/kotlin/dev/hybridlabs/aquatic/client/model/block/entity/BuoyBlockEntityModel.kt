@@ -20,8 +20,8 @@ class BuoyBlockEntityModel : GeoModel<BuoyBlockEntity>() {
     }
 
     companion object {
-        val ANIMATION_LOCATION = CommonClass.locate("animations/buoy.animation.json")
-        val MODEL_LOCATION = CommonClass.locate("geo/buoy.geo.json")
-        val TEXTURE_LOCATION = CommonClass.locate("textures/block/buoy.png")
+        val ANIMATION_LOCATION: ResourceLocation = CommonClass.locate("animations/buoy.animation.json")
+        val MODEL_LOCATION: ResourceLocation = CommonClass.locate("geo/buoy.geo.json")
+        val TEXTURE_LOCATION: ResourceLocation = CommonClass.locate("textures/block/buoy.png")
     }
 }

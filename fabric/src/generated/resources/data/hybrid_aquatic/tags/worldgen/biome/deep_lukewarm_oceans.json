@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:deep_lukewarm_ocean",
+    {
+      "id": "hybrid_aquatic:tropical_deep_coral_reef",
+      "required": false
+    },
+    {
+      "id": "still_life:subtropical_deep_ocean",
+      "required": false
+    }
+  ]
+}

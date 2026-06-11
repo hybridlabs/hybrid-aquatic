@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -10,24 +12,27 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class LionfishEntity(entityType: EntityType<out LionfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) :
+    HAFishEntity(type, world) {
+
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.ALL_CRUSTACEANS
+            ),
+            listOf(
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)

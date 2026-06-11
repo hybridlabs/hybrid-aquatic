@@ -1,15 +1,19 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
+import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.ByIdMap
+import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.*
@@ -19,20 +23,18 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
+import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ), VariantHolder<TetraEntity.Companion.Type> {
+class TetraEntity(type: EntityType<out TetraEntity>, world: Level) :
+    HASchoolingFishEntity(type, world),
+    VariantHolder<TetraEntity.Companion.Type> {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
+    )
 
     override fun registerGoals() {
         super.registerGoals()
@@ -62,12 +64,13 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
-        val selectedType = Type.fromBiome(biome)
+        val selectedType = Type.fromBiome(biome, Random)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
@@ -80,12 +83,30 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
                 .add(Attributes.FOLLOW_RANGE, 4.0)
         }
 
+        fun canSpawn(
+            type: EntityType<out TetraEntity>,
+            world: ServerLevelAccessor,
+            reason: MobSpawnType,
+            pos: BlockPos,
+            random: RandomSource,
+        ): Boolean {
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            return pos.y in (seaLevel - 256)..<(seaLevel - 1) &&
+                    world.isWaterAt(pos)
+        }
+
         val TYPE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(TetraEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
-            NEON(0, "neon"),
-            CAVE(1, "cave");
+            NEON_TETRA(0, "neon_tetra"),
+            BLACK_NEON_TETRA(1, "black_neon_tetra"),
+            GREEN_NEON_TETRA(2, "green_neon_tetra"),
+            CARDINAL_TETRA(3, "cardinal_tetra"),
+            RUMMYNOSE_TETRA(4, "rummynose_tetra"),
+            EMBER_TETRA(5, "ember_tetra"),
+            GLOWLIGHT_TETRA(6, "glowlight_tetra"),
+            BLIND_CAVE_TETRA(7, "blind_cave_tetra");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -100,21 +121,21 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
                 )
 
                 fun byName(name: String?): Type {
-                    return CODEC.byName(name, NEON) as Type
+                    return CODEC.byName(name, CARDINAL_TETRA) as Type
                 }
 
                 fun fromId(id: Int): Type {
                     return BY_ID.apply(id) as Type
                 }
 
-                fun fromBiome(biome: Holder<Biome>): Type {
+                fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.CAVES) -> {
-                            CAVE
+                        biome.`is`(HABiomeTags.CAVES) -> {
+                            BLIND_CAVE_TETRA
                         }
 
                         else -> {
-                            NEON
+                            Type.fromId(random.nextInt(0, 7))
                         }
                     }
                 }
@@ -122,19 +143,19 @@ class TetraEntity(entityType: EntityType<out TetraEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

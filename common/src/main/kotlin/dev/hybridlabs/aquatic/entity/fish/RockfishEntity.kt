@@ -1,7 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -21,21 +23,18 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK,
-        )
-    ),
+class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) :
+    HASchoolingFishEntity(type, world),
     VariantHolder<RockfishEntity.Companion.Type> {
 
+    override fun getTargetConfig() =
+        MobTargetConfiguration.ofPrey(
+            HAEntityTags.LARGE_CREATURES,
+            HAEntityTags.ALL_SHARKS
+        )
+
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 4
     }
 
     override fun finalizeSpawn(
@@ -54,7 +53,7 @@ class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: Level) :
             if (fishCount > 0 && !level().isClientSide()) {
                 for (i in 0 until  fishCount) {
                     val distance = 1.5f
-                    val entity = RockfishEntity(HybridAquaticEntityTypes.ROCKFISH.get(), this.level())
+                    val entity = RockfishEntity(HAEntityTypes.ROCKFISH.get(), this.level())
                     entity.variant = this.variant
                     entity.moveTo(
                         this.x + this.random.nextFloat() * distance,
@@ -115,14 +114,14 @@ class RockfishEntity(entityType: EntityType<out RockfishEntity>, world: Level) :
         builder.define(TYPE, 0)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

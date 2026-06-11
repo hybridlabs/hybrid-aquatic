@@ -16,19 +16,11 @@ open class HookItem(settings: Properties) : Item(settings) {
     ) {
         val isTideLoaded = Services.PLATFORM.isModLoaded("tide")
 
-        if (isTideLoaded) {
-            val tideComponent = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
-            val hookTideComponent = Component.translatable("item.hybrid-aquatic.hook.description_tide").withStyle(ChatFormatting.GRAY)
+        val hookDescription = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
+        val globalHookDescription = Component.translatable("item.hybrid_aquatic.hook.description${ if (isTideLoaded) "_tide" else "" }").withStyle(ChatFormatting.GRAY)
 
-            tooltip.add(tideComponent)
-            tooltip.add(hookTideComponent)
-        } else {
-            val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
-            val hookComponent = Component.translatable("item.hybrid-aquatic.hook.description").withStyle(ChatFormatting.GRAY)
-
-            tooltip.add(text)
-            tooltip.add(hookComponent)
-        }
+        tooltip.add(hookDescription)
+        tooltip.add(globalHookDescription)
 
         super.appendHoverText(stack, context, tooltip, tooltipFlag)
     }

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.CrayfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class CrayfishEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<CrayfishEntity>(context, CrayfishEntityModel(), true, false)
+    HACrustaceanEntityRenderer<CrayfishEntity>(context, CrayfishEntityModel(), true, false)

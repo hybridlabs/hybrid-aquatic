@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.BoxfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BoxfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<BoxfishEntity>(context, BoxfishEntityModel(), false, false)
+    HAFishEntityRenderer<BoxfishEntity>(context, BoxfishEntityModel(), false, false)

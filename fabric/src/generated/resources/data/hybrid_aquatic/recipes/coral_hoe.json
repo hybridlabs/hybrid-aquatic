@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "hybrid_aquatic:coral_chunk"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " CC",
+    " S ",
+    " S "
+  ],
+  "result": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/coral_hoe.json
+    "count": 1,
+    "id": "hybrid-aquatic:coral_hoe"
+  }
+}
+========
+    "item": "hybrid_aquatic:coral_hoe"
+  },
+  "show_notification": true
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/coral_hoe.json

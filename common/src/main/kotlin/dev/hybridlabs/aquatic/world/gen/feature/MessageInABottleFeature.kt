@@ -3,7 +3,8 @@ package dev.hybridlabs.aquatic.world.gen.feature
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.item.SeaMessageBookItem
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.Direction
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
@@ -20,14 +21,14 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         val world = context.level()
         val origin = context.origin()
         val random = context.random()
-        val placedState = config.toPlace.getState(random, origin)
-        val originalState = world.getBlockState(origin.mutable())
+        val pos = context.origin().mutable()
 
-        if (originalState.isSolid || placedState.block !is MessageInABottleBlock) {
+        val placedState = config.toPlace.getState(random, origin)
+        val originalState = world.getBlockState(pos)
+
+        if (!originalState.canBeReplaced() || placedState.block !is MessageInABottleBlock) {
             return false
         }
-
-        val pos = context.origin().mutable()
 
         if (!placedState.canSurvive(world, pos)) {
             // if it can spawn below, move down
@@ -50,9 +51,11 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
 
             // set random message
             val registryManager = world.registryAccess()
-            val registry = registryManager.registryOrThrow(HybridAquaticRegistryKeys.SEA_MESSAGE)
+            val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
             registry.getRandom(random).ifPresent { messageEntry ->
-                blockEntity.messageId = messageEntry.key().location()
+                val message = messageEntry.value()
+                val stack = SeaMessageBookItem.createItemStack(message, registryManager)
+                blockEntity.messageItemStack = stack
             }
         } else {
             return false

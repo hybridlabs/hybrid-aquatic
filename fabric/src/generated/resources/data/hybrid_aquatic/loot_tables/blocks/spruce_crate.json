@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "items": "#minecraft:axes"
+                  }
+                }
+              ],
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/loot_table/blocks/spruce_crate.json
+              "value": "hybrid-aquatic:gameplay/spruce_crate_treasure"
+========
+              "name": "hybrid_aquatic:gameplay/spruce_crate_treasure"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/loot_tables/blocks/spruce_crate.json
+            },
+            {
+              "type": "minecraft:item",
+              "name": "hybrid_aquatic:spruce_crate"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

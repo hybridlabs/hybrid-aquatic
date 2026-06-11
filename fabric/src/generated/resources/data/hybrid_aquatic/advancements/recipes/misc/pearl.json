@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pearl_block": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/misc/pearl.json
+            "items": "hybrid-aquatic:pearl_block"
+========
+            "items": [
+              "hybrid_aquatic:pearl_block"
+            ]
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/misc/pearl.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:pearl"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pearl_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:pearl"
+    ]
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/misc/pearl.json
+  }
+}
+========
+  },
+  "sends_telemetry_event": false
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/misc/pearl.json

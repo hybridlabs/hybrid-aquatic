@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "hybrid_aquatic:dead_zigzag_coral_block"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CWC",
+    "CCC"
+  ],
+  "result": {
+    "count": 8,
+    "item": "hybrid_aquatic:bleached_zigzag_coral_block"
+  },
+  "show_notification": true
+}

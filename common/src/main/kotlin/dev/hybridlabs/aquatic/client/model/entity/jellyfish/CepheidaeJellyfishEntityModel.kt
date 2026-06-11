@@ -4,16 +4,22 @@ import dev.hybridlabs.aquatic.entity.jellyfish.CepheidaeJellyfishEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class CepheidaeJellyfishEntityModel : HybridAquaticJellyfishEntityModel<CepheidaeJellyfishEntity>("cepheidae_jellyfish") {
+class CepheidaeJellyfishEntityModel : HAJellyfishEntityModel<CepheidaeJellyfishEntity>("cepheidae_jellyfish") {
     override fun getRenderType(animatable: CepheidaeJellyfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }
 
-    private val CAULIFLOWER_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
-    private val FRIED_EGG_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
+    companion object {
+        private val CAULIFLOWER_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
+        private val FRIED_EGG_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
 
-    private val CAULIFLOWER_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
-    private val FRIED_EGG_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
+        private val CAULIFLOWER_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
+        private val FRIED_EGG_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
+    }
 
     override fun getTextureResource(animatable: CepheidaeJellyfishEntity): ResourceLocation {
         return when (animatable.variant) {

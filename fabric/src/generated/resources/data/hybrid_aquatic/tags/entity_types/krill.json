@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "bountiful_critters:krill",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:antarctic_krill",
+      "required": false
+    }
+  ]
+}

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.GouramiEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class GouramiEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<GouramiEntity>(context, GouramiEntityModel(), true, false)
+    HAFishEntityRenderer<GouramiEntity>(context, GouramiEntityModel(), true, false)

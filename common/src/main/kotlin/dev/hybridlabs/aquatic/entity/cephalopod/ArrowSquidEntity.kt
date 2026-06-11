@@ -1,24 +1,31 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class ArrowSquidEntity(entityType: EntityType<out ArrowSquidEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        true,
-        false
-    ) {
+class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+    override fun getTargetConfig() = TARGET_CONFIG
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.ALL_CRUSTACEANS
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
@@ -27,13 +34,5 @@ class ArrowSquidEntity(entityType: EntityType<out ArrowSquidEntity>, world: Leve
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
         }
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
     }
 }

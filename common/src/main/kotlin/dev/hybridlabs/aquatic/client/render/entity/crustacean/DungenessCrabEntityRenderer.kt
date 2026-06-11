@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.crustacean.DungenessCrabEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class DungenessCrabEntityRenderer(context: Context) :
-    HybridAquaticCrustaceanEntityRenderer<DungenessCrabEntity>(context, DungenessCrabEntityModel(), true, false)
+    HACrustaceanEntityRenderer<DungenessCrabEntity>(context, DungenessCrabEntityModel(), true, false)

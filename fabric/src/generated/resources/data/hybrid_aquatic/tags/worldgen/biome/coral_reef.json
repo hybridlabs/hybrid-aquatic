@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "hybrid_aquatic:coral_reef",
+      "required": false
+    },
+    {
+      "id": "regions_unexplored:rocky_reef",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:lush_stacks",
+      "required": false
+    }
+  ]
+}

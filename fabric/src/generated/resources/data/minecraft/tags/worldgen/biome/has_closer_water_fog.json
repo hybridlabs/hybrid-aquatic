@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_deep_ocean",
+    {
+      "id": "hybrid_aquatic:sulfuric_caves",
+      "required": false
+    },
+    {
+      "id": "hybrid_aquatic:tropical_river",
+      "required": false
+    }
+  ]
+}

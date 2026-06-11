@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hybrid_aquatic:block/chimneystone_bricks",
+    "side": "hybrid_aquatic:block/chimneystone_bricks",
+    "top": "hybrid_aquatic:block/chimneystone_bricks"
+  }
+}

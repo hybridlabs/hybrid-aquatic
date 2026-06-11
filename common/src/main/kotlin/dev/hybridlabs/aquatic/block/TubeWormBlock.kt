@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.Codec
-import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -13,7 +12,11 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BonemealableBlock
+import net.minecraft.world.level.block.BushBlock
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -29,7 +32,6 @@ import org.jetbrains.annotations.Nullable
 @Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlock, SimpleWaterloggedBlock {
     companion object {
-        val CODEC: MapCodec<TubeWormBlock> = simpleCodec(::TubeWormBlock)
         val WORMS: IntegerProperty = IntegerProperty.create("worms", 1, 4)
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
@@ -113,7 +115,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
         builder.add(WORMS, WATERLOGGED)
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
         return false
     }
 
@@ -124,16 +126,12 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
     override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
     }
 
-    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
         return false
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
         return !floor.getCollisionShape(world, pos).getFaceShape(Direction.UP).isEmpty ||
                 floor.isFaceSturdy(world, pos, Direction.UP)
-    }
-
-    override fun codec(): MapCodec<out BushBlock> {
-        return CODEC
     }
 }

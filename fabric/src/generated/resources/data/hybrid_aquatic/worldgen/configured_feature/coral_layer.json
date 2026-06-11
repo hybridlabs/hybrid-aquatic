@@ -1,0 +1,1211 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": {
+      "feature": {
+        "type": "minecraft:no_op",
+        "config": {}
+      },
+      "placement": []
+    },
+    "features": [
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:brain_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "minecraft:brain_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:horn_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "minecraft:horn_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:bubble_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "minecraft:bubble_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:fire_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "minecraft:fire_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "minecraft:tube_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "minecraft:tube_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:sun_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "hybrid_aquatic:sun_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:leaf_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "hybrid_aquatic:leaf_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:rose_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "hybrid_aquatic:rose_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      },
+      {
+        "chance": 0.2,
+        "feature": {
+          "feature": {
+            "type": "minecraft:disk",
+            "config": {
+              "half_height": 4,
+              "radius": 8,
+              "state_provider": {
+                "fallback": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "hybrid_aquatic:coralstone"
+                  }
+                },
+                "rules": [
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        },
+                        {
+                          "type": "minecraft:matching_block_tag",
+                          "offset": [
+                            0,
+                            -1,
+                            0
+                          ],
+                          "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:weighted_state_provider",
+                      "entries": [
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:coralstone"
+                          },
+                          "weight": 2
+                        },
+                        {
+                          "data": {
+                            "Name": "hybrid_aquatic:button_coral_block"
+                          },
+                          "weight": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "if_true": {
+                      "type": "minecraft:all_of",
+                      "predicates": [
+                        {
+                          "type": "minecraft:any_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ]
+                            },
+                            {
+                              "type": "minecraft:matching_blocks",
+                              "blocks": "minecraft:water",
+                              "offset": [
+                                0,
+                                2,
+                                0
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "minecraft:all_of",
+                          "predicates": [
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -1,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            },
+                            {
+                              "type": "minecraft:matching_block_tag",
+                              "offset": [
+                                0,
+                                -2,
+                                0
+                              ],
+                              "tag": "hybrid_aquatic:coral_mound_base_blocks"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "then": {
+                      "type": "minecraft:simple_state_provider",
+                      "state": {
+                        "Name": "hybrid_aquatic:button_coral_block"
+                      }
+                    }
+                  }
+                ]
+              },
+              "target": {
+                "type": "minecraft:matching_block_tag",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ],
+                "tag": "hybrid_aquatic:coral_mound_blocks"
+              }
+            }
+          },
+          "placement": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "hybrid_aquatic:bubble_geyser"
+    }
+  ],
+  "result": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/driftwood_button.json
+    "count": 1,
+    "id": "hybrid-aquatic:driftwood_button"
+========
+    "item": "hybrid_aquatic:aerated_sand"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/aerated_sand_from_bubble_geyser.json
+  }
+}

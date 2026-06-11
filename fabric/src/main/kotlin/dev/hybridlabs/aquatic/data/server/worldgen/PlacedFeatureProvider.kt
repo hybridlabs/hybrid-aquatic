@@ -2,23 +2,28 @@
 
 package dev.hybridlabs.aquatic.data.server.worldgen
 
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticConfiguredFeatures
-import dev.hybridlabs.aquatic.world.gen.feature.HybridAquaticPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
+import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.Registries
-import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.placement.PlacementUtils
+import net.minecraft.util.valueproviders.ClampedNormalInt
+import net.minecraft.util.valueproviders.ConstantInt
+import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.levelgen.Heightmap
+import net.minecraft.world.level.levelgen.VerticalAnchor
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
 import net.minecraft.world.level.levelgen.placement.*
+import net.minecraft.world.level.material.Fluids
 import java.util.concurrent.CompletableFuture
 
+@Suppress("DEPRECATION")
 class PlacedFeatureProvider(
     output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
-
-    companion object {
+    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
 
         fun seaweedModifier(count: Int): List<PlacementModifier> {
             return listOf(
@@ -29,12 +34,39 @@ class PlacedFeatureProvider(
             )
         }
 
-        fun bootstrapPlacedFeatures(bootstrap: BootstrapContext<PlacedFeature>) {
-            val reg = bootstrap.lookup(Registries.CONFIGURED_FEATURE)
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.ANEMONES,
-                reg.get(HybridAquaticConfiguredFeatures.ANEMONES).get(), listOf(
+        // tide pools
+        entries.add(
+            HAPlacedFeatures.TIDE_POOLS, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.TIDE_POOLS), listOf(
+                    CountPlacement.of(24),
+                    RandomOffsetPlacement.of(ConstantInt.of(8), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f,3.0f,-10,10),ConstantInt.ZERO),
+                    HeightRangePlacement.triangle(VerticalAnchor.absolute(63), VerticalAnchor.absolute(68)),
+                    CountPlacement.of(3),
+                    RandomOffsetPlacement.of(UniformInt.of(-12,12),ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        // tide pool boulder
+        entries.add(
+            HAPlacedFeatures.BOULDERS, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BOULDER), listOf(
+                    CountPlacement.of(UniformInt.of(4,6)),
+                    HeightRangePlacement.uniform(VerticalAnchor.absolute(53), VerticalAnchor.absolute(53)),
+                    RandomOffsetPlacement.of(ConstantInt.of(8),ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-3,3),UniformInt.of(-3,1)),
+                    SurfaceWaterDepthFilter.forMaxDepth(6),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        // anemone patch
+        entries.add(
+            HAPlacedFeatures.ANEMONES, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.ANEMONES), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     RarityFilter.onAverageOnceEvery(10),
@@ -42,172 +74,420 @@ class PlacedFeatureProvider(
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.DUNEGRASS_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.DUNEGRASS_PATCH).get(), listOf(
+        entries.add(
+            HAPlacedFeatures.DUNEGRASS_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.DUNEGRASS_PATCH), listOf(
                     NoiseBasedCountPlacement.of(150, 80.0, 0.0),
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.BULL_KELP,
-                reg.get(HybridAquaticConfiguredFeatures.BULL_KELP).get(), listOf(
+        //#region Kelp
+        entries.add(
+            HAPlacedFeatures.BULL_KELP, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BULL_KELP), listOf(
                     NoiseBasedCountPlacement.of(120, 80.0, 0.0),
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.SARGASSUM,
-                reg.get(HybridAquaticConfiguredFeatures.SARGASSUM).get(), listOf(
+        entries.add(
+            HAPlacedFeatures.DELESSERIA, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.DELESSERIA), listOf(
+                    NoiseBasedCountPlacement.of(120, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.SARGASSUM, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.SARGASSUM), listOf(
                     NoiseBasedCountPlacement.of(80, 80.0, 0.0),
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome()
                 )
             )
+        )
+        //#endregion
 
-
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.FLOATING_SARGASSUM,
-                reg.get(HybridAquaticConfiguredFeatures.FLOATING_SARGASSUM).get(), listOf(
+        //#region Floating Plants
+        entries.add(
+            HAPlacedFeatures.FLOATING_SARGASSUM, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.FLOATING_SARGASSUM), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     NoiseBasedCountPlacement.of(30, 80.0, 0.0),
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.WATER_LETTUCE,
-                reg.get(HybridAquaticConfiguredFeatures.WATER_LETTUCE).get(), listOf(
+        entries.add(
+            HAPlacedFeatures.WATER_LETTUCE, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.WATER_LETTUCE), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    CountPlacement.of(5),
+                    RarityFilter.onAverageOnceEvery(3),
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD,
-                reg.get(HybridAquaticConfiguredFeatures.JUNGLE_LILY_PAD).get(),
-                listOf(
+        entries.add(
+            HAPlacedFeatures.WATER_HYACINTH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.WATER_HYACINTH), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    CountPlacement.of(5),
+                    RarityFilter.onAverageOnceEvery(3),
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.RED_ALGAE_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH).get(),
-                listOf(
-                    NoiseBasedCountPlacement.of(10, 80.0, 0.0),
+        entries.add(
+            HAPlacedFeatures.JUNGLE_LILY_PAD, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.JUNGLE_LILY_PAD), listOf(
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    RarityFilter.onAverageOnceEvery(1),
                     BiomeFilter.biome()
                 )
             )
+        )
+        //#endregion
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW,
-                reg.get(HybridAquaticConfiguredFeatures.RED_ALGAE_PATCH).get(),
-                listOf(
-                    NoiseBasedCountPlacement.of(120, 100.0, 0.0),
+        entries.add(
+            HAPlacedFeatures.SAND_CIRCLE, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.SAND_CIRCLE), listOf(
+                    RarityFilter.onAverageOnceEvery(2),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.SEA_LETTUCE_PATCH).get(),
-                seaweedModifier(80)
-            )
-
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.GIANT_CLAM_PATCH).get(),
-                listOf(
+        entries.add(
+            HAPlacedFeatures.AERATED_SAND_CIRCLE, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.AERATED_SAND_CIRCLE), listOf(
+                    RarityFilter.onAverageOnceEvery(5),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(1),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+
+                    BlockPredicateFilter.forPredicate(
+                        BlockPredicate.matchesFluids(
+                            BlockPos(0, 1, 0),
+                            Fluids.WATER
+                        )
+                    ),
                     BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.TUBE_SPONGE_PATCH).get(),
-                listOf(
+        entries.add(
+            HAPlacedFeatures.SULFUR_DEPOSIT, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.SULFUR_DEPOSIT), listOf(
+                    CountPlacement.of(16),
                     InSquarePlacement.spread(),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    CountPlacement.of(1),
+                    PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+                    BiomeFilter.biome()
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE,
-                reg.get(HybridAquaticConfiguredFeatures.MESSAGE_IN_A_BOTTLE).get(),
-                listOf(
+        entries.add(
+            HAPlacedFeatures.DISK_SUSPICIOUS_SAND, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.SUSPICIOUS_SAND_DISK), listOf(
+                    InSquarePlacement.spread(),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.SEA_LETTUCE_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.SEA_LETTUCE_PATCH), seaweedModifier(80)
+            )
+        )
+
+        //#region Shellfish
+        entries.add(
+            HAPlacedFeatures.GIANT_CLAM_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.GIANT_CLAM_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    RarityFilter.onAverageOnceEvery(3),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.OYSTER_BED, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.OYSTER_BED), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    RarityFilter.onAverageOnceEvery(3),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+        //#endregion
+
+        //#region Mussels
+        entries.add(
+            HAPlacedFeatures.TIDE_POOL_MUSSEL_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        //#region Sponges
+        entries.add(
+            HAPlacedFeatures.TUBE_SPONGE_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.TUBE_SPONGE_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    RarityFilter.onAverageOnceEvery(3)
+                )
+            )
+        )
+
+         entries.add(
+            HAPlacedFeatures.GLASS_SPONGE_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.GLASS_SPONGE_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                     RarityFilter.onAverageOnceEvery(8)
+                )
+            )
+        )
+
+         entries.add(
+            HAPlacedFeatures.HARP_SPONGE_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.HARP_SPONGE_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                     RarityFilter.onAverageOnceEvery(5)
+                )
+            )
+        )
+
+         entries.add(
+            HAPlacedFeatures.PING_PONG_SPONGE_PATCH, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.PING_PONG_SPONGE_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                     RarityFilter.onAverageOnceEvery(5)
+                )
+            )
+        )
+        //#endregion
+
+        // message in a bottle
+        entries.add(
+            HAPlacedFeatures.MESSAGE_IN_A_BOTTLE, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.MESSAGE_IN_A_BOTTLE), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     RarityFilter.onAverageOnceEvery(150),
                 )
             )
+        )
 
-            PlacementUtils.register(
-                bootstrap,
-                HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH,
-                reg.get(HybridAquaticConfiguredFeatures.THERMAL_VENT_PATCH).get(),
-                listOf(
-                    CountOnEveryLayerPlacement.of(5),
+        //#region Thermal Vents
+        entries.add(
+            HAPlacedFeatures.THERMAL_VENT_CAVES, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    CountOnEveryLayerPlacement.of(3),
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
                 )
             )
-        }
-    }
+        )
 
+        entries.add(
+            HAPlacedFeatures.THERMAL_VENT_TRENCHES, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
+                    InSquarePlacement.spread(),
+                    CountOnEveryLayerPlacement.of(1),
+                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    BiomeFilter.biome()
+                )
+            )
+        )
 
-    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
-        val reg = registries.lookup(Registries.PLACED_FEATURE).get()
+        entries.add(
+            HAPlacedFeatures.TRENCH_BRINE_POOLS,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BRINE_POOL),
+                listOf(
+                    InSquarePlacement.spread(),
+                    CountOnEveryLayerPlacement.of(1),
+                    SurfaceRelativeThresholdFilter.of(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        Int.MIN_VALUE,
+                        -64
+                    ),
+                    BiomeFilter.biome()
+                )
+            )
+        )
 
+        entries.add(
+            HAPlacedFeatures.CAVE_BRINE_POOLS,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BRINE_POOL),
+                listOf(
+                    InSquarePlacement.spread(),
+                    CountOnEveryLayerPlacement.of(3),
+                    SurfaceRelativeThresholdFilter.of(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        Int.MIN_VALUE,
+                        -64
+                    ),
+                    BiomeFilter.biome()
+                )
+            )
+        )
 
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.ANEMONES))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.BULL_KELP))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.DUNEGRASS_PATCH))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.FLOATING_SARGASSUM))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.GIANT_CLAM_PATCH))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.JUNGLE_LILY_PAD))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.MESSAGE_IN_A_BOTTLE))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.RED_ALGAE_MEADOW))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.RED_ALGAE_PATCH))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.SARGASSUM))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.SEA_LETTUCE_PATCH))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.THERMAL_VENT_PATCH))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.TUBE_SPONGE_PATCH))
-        entries.add(reg.getOrThrow(HybridAquaticPlacedFeatures.WATER_LETTUCE))
+        entries.add(
+            HAPlacedFeatures.RED_BRINE_POOL,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.RED_BRINE_POOL),
+                listOf()
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.ORANGE_BRINE_POOL,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.ORANGE_BRINE_POOL),
+                listOf()
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.YELLOW_BRINE_POOL,
+            PlacedFeature(
+                entries.ref(HAConfiguredFeatures.YELLOW_BRINE_POOL),
+                listOf()
+            )
+        )
+        //#endregion
+
+        //#region Red Algae
+        entries.add(
+            HAPlacedFeatures.RED_MEADOW_VEGETATION, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.RED_MEADOW_VEGETATION), seaweedModifier(256)
+            )
+        )
+        //#endregion
+
+        //#region Corals
+        entries.add(
+            HAPlacedFeatures.CORAL_REEF_VEGETATION, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.CORAL_REEF_VEGETATION), listOf(
+                    CountOnEveryLayerPlacement.of(10),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.DEEP_OCEAN_VEGETATION, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.DEEP_OCEAN_VEGETATION), listOf(
+                    CountOnEveryLayerPlacement.of(10),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR_WG),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.BLEACHED_REEF_VEGETATION, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.BLEACHED_REEF_VEGETATION), listOf(
+                    NoiseBasedCountPlacement.of(20, 400.0, 0.0),
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_TOP_SOLID,
+                    BiomeFilter.biome()
+                )
+            )
+        )
+        //#endregion
+
+        //#region Mounds
+        entries.add(
+            HAPlacedFeatures.CORAL_MOUND, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.CORAL_MOUND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    NoiseBasedCountPlacement.of(10, 90.0, 0.0),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.CORAL_LAYER, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.CORAL_LAYER), listOf(
+                    CountPlacement.of(16),
+                    InSquarePlacement(),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    BiomeFilter.biome()
+
+                )
+
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.MOUND, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.MOUND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    NoiseBasedCountPlacement.of(10, 90.0, 0.0),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+
+        entries.add(
+            HAPlacedFeatures.WHITE_MOUND, PlacedFeature(
+                entries.ref(HAConfiguredFeatures.WHITE_MOUND), listOf(
+                    RarityFilter.onAverageOnceEvery(3),
+                    NoiseBasedCountPlacement.of(10, 90.0, 0.0),
+                    HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
+                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    BiomeFilter.biome()
+                )
+            )
+        )
+        //#endregion
     }
 
     override fun getName(): String {

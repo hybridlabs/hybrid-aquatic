@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.BaskingSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BaskingSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<BaskingSharkEntity>(context, BaskingSharkEntityModel(), true)
+    HASharkEntityRenderer<BaskingSharkEntity>(context, BaskingSharkEntityModel(), true)

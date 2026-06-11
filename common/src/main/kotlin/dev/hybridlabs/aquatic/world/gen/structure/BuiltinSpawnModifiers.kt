@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.structure
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.world.level.biome.MobSpawnSettings
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride.BoundingBoxType
@@ -8,22 +8,18 @@ import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride.Bound
 val BuiltinSpawnModifiers: Set<SpawnModifier> = setOf(
     SpawnModifier(
         "shipwreck", BuiltinStructures.SHIPWRECK, BoundingBoxType.STRUCTURE, mapOf(
-            "SHARK" to listOf(
+            "shark" to listOf(
                 MobSpawnSettings.SpawnerData(
-                    HybridAquaticEntityTypes.HOUND_SHARK.get(), 1, 1, 4
+                    HAEntityTypes.GREAT_WHITE_SHARK.get(), 1, 1, 3
                 )
             )
         )
-    ), SpawnModifier(
-        "ruined_portal_ocean", BuiltinStructures.RUINED_PORTAL_OCEAN, BoundingBoxType.STRUCTURE, mapOf(
-            "SHARK" to listOf(
-                MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(), 1, 1, 4)
-            )
-        )
-    ), SpawnModifier(
-        "ocean_ruin_warm", BuiltinStructures.OCEAN_RUIN_WARM, BoundingBoxType.STRUCTURE, mapOf(
-            "SHARK" to listOf(
-                MobSpawnSettings.SpawnerData(HybridAquaticEntityTypes.TIGER_SHARK.get(), 1, 1, 4)
+    ),
+    SpawnModifier(
+        "shipwreck_beached", BuiltinStructures.SHIPWRECK_BEACHED, BoundingBoxType.STRUCTURE, mapOf(
+            "crustacean" to listOf(
+                MobSpawnSettings.SpawnerData(HAEntityTypes.COCONUT_CRAB.get(), 1, 1, 4
+                )
             )
         )
     )

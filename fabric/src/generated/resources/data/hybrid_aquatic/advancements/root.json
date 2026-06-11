@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "enter_water": {
+      "conditions": {
+        "block": "minecraft:water"
+      },
+      "trigger": "minecraft:enter_block"
+    }
+  },
+  "display": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/root.json
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+========
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/root.json
+    "description": {
+      "translate": "advancements.hybrid_aquatic.enter_water.description"
+    },
+    "icon": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/root.json
+      "count": 1,
+      "id": "hybrid-aquatic:tuna"
+========
+      "item": "hybrid_aquatic:tuna"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/root.json
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.enter_water.title"
+    }
+  },
+  "requirements": [
+    [
+      "enter_water"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

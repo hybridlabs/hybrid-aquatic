@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_torch",
+  "textures": {
+    "torch": "hybrid_aquatic:block/glowstick"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:red_meadow",
+  "spawners": {
+    "type": "hybrid_aquatic:sea_slug",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

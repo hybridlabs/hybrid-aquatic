@@ -1,9 +1,8 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects;
+import dev.hybridlabs.aquatic.effect.HAMobEffects;
 import dev.hybridlabs.aquatic.fog.ClarityFogModifier;
-import dev.hybridlabs.aquatic.fog.ConduitPowerFogModifier;
 import dev.hybridlabs.aquatic.fog.ThalassophobiaFogModifier;
 import net.minecraft.client.Camera;
 import net.minecraft.client.player.LocalPlayer;
@@ -17,7 +16,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(FogRenderer.class)
 public class FogRendererMixin {
@@ -30,15 +28,12 @@ public class FogRendererMixin {
 
         if (entity instanceof LocalPlayer clientPlayerEntity && cameraSubmersionType == FogType.WATER) {
             Level world = clientPlayerEntity.level();
-            MobEffectInstance clarityEffect = clientPlayerEntity.getEffect(HybridAquaticMobEffects.INSTANCE.getCLARITY().asHolder());
+            MobEffectInstance clarityEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getCLARITY().get());
             MobEffectInstance conduitEffect = clientPlayerEntity.getEffect(MobEffects.CONDUIT_POWER);
-            MobEffectInstance thalassophobiaEffect = clientPlayerEntity.getEffect(HybridAquaticMobEffects.INSTANCE.getTHALASSOPHOBIA().asHolder());
+            MobEffectInstance thalassophobiaEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getTHALASSOPHOBIA().get());
 
             if (clarityEffect != null) {
                 new ClarityFogModifier().setupFog(fogData, clientPlayerEntity, clarityEffect, viewDistance, tickDelta);
-            } else if (conduitEffect != null) {
-                new ConduitPowerFogModifier().setupFog(fogData, clientPlayerEntity, conduitEffect, viewDistance,
-                        tickDelta);
             } else if (thalassophobiaEffect != null) {
                 new ThalassophobiaFogModifier().setupFog(fogData, clientPlayerEntity, thalassophobiaEffect,
                         viewDistance, tickDelta);

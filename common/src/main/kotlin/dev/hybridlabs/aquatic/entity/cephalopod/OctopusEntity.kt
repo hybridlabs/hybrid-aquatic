@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -25,33 +27,41 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
-    HybridAquaticOctopusEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        HybridAquaticEntityTags.SHARK,
-        true,
-    ), VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
+class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctopusEntity(type, world),
+    VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
+    override fun getTargetConfig() = TARGET_CONFIG
+
+    override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
 
         overlayTexture = when (selectedType) {
-           Type.BLUE_RINGED, Type.COCONUT-> OverlayTextures.NONE
-           Type.OCTOPUS -> OverlayTextures.TINT
+            Type.BLUE_RINGED, Type.COCONUT -> OverlayTextures.NONE
+            Type.OCTOPUS -> OverlayTextures.TINT
         }
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.ALL_CRUSTACEANS
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0)
@@ -115,11 +125,12 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
                 }
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
-                    return when {biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                    return when {
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 2))
                         }
 
@@ -152,23 +163,23 @@ class OctopusEntity(entityType: EntityType<out OctopusEntity>, world: Level) :
         return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        builder.define(OverlayTexture, 0)
-        super.defineSynchedData(builder)
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        entityData.define(OverlayTexture, 0)
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        compound.putInt("texture_overlay", this.overlayTexture.id)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        if (compound.contains("texture_overlay")) this.overlayTexture =
+            OverlayTextures.byId(compound.getInt("texture_overlay"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

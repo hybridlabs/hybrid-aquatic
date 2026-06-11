@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosMeleeAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.KarkinosSummonGoal
-import net.minecraft.core.registries.Registries
+import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -17,6 +18,7 @@ import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
@@ -32,22 +34,22 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.PathType
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.PlayState
-import software.bernie.geckolib.animation.RawAnimation
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.core.`object`.PlayState
 
-class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, world: Level) :
-    HybridAquaticMinibossEntity(entityType, world) {
+class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
+    HAMinibossEntity(type, world) {
     private var flippedTimer: Int = 0
     private var flippedCooldown: Int = 0
     private var summonTimer: Int = 0
     var summonCooldown: Int = 0
 
     init {
-        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
         moveControl = KarkinosMoveControl(this)
         navigation = GroundPathNavigation(this, world)
         lookControl = LookControl(this)
@@ -61,12 +63,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         return false
     }
 
-    override fun isPushedByFluid(): Boolean {
-        return false
-    }
-
     private var bossBar: ServerBossEvent =
-        ServerBossEvent(displayName!!, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
+        ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 
     override fun registerGoals() {
         goalSelector.addGoal(1, KarkinosSummonGoal(this))
@@ -125,6 +123,10 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         }
     }
 
+    override fun getMobType(): MobType {
+        return MobType.WATER
+    }
+
     fun isFlipped(): Boolean {
         return entityData.get(FLIPPED)
     }
@@ -165,7 +167,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             val offsetZ = (random.nextDouble() - 0.5) * 6.0
             val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
 
-            val karcinogen = HybridAquaticEntityTypes.KARCINOGEN.get().create(level())
+            val karcinogen = HAEntityTypes.KARCINOGEN.get().create(level())
             if (karcinogen != null) {
                 karcinogen.moveTo(
                     spawnPos.x.toDouble() + 0.5,
@@ -190,7 +192,7 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             val offsetZ = (random.nextDouble() - 0.5) * 6.0
             val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
 
-            val karcinoma = HybridAquaticEntityTypes.KARCINOMA.get().create(level())
+            val karcinoma = HAEntityTypes.KARCINOMA.get().create(level())
             if (karcinoma != null) {
                 karcinoma.moveTo(
                     spawnPos.x.toDouble() + 0.5,
@@ -206,29 +208,29 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
         }
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        super.defineSynchedData(builder)
-        builder.define(FLIPPED, false)
-        builder.define(SUMMONING, false)
+    override fun defineSynchedData() {
+        super.defineSynchedData()
+        entityData.define(FLIPPED, false)
+        entityData.define(SUMMONING, false)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putBoolean("Flipped", isFlipped())
-        nbt.putBoolean("Summoning", isSummoning())
-        nbt.putInt("SummonTimer", summonTimer)
-        nbt.putInt("SummonCooldown", summonCooldown)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putBoolean("Flipped", isFlipped())
+        compound.putBoolean("Summoning", isSummoning())
+        compound.putInt("SummonTimer", summonTimer)
+        compound.putInt("SummonCooldown", summonCooldown)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
+    override fun readAdditionalSaveData(compound: CompoundTag) {
         if (hasCustomName()) {
-            bossBar.name = this.displayName!!
+            bossBar.name = this.displayName
         }
-        this.setFlipped(nbt.getBoolean("Flipped"))
-        this.setSummoning(nbt.getBoolean("Summoning"))
-        this.summonTimer = nbt.getInt("SummonTimer")
-        this.summonCooldown = nbt.getInt("SummonCooldown")
-        super.readAdditionalSaveData(nbt)
+        this.setFlipped(compound.getBoolean("Flipped"))
+        this.setSummoning(compound.getBoolean("Summoning"))
+        this.summonTimer = compound.getInt("SummonTimer")
+        this.summonCooldown = compound.getInt("SummonCooldown")
+        super.readAdditionalSaveData(compound)
     }
 
     override fun tick() {
@@ -290,14 +292,8 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
             val player = source.directEntity as Player
             val weapon = player.mainHandItem
             val hasFlipEnchant =
-                EnchantmentHelper.getItemEnchantmentLevel(
-                    level().registryAccess().registry(Registries.ENCHANTMENT).get()
-                        .getHolder(Enchantments.BANE_OF_ARTHROPODS).get(), weapon
-                ) > 1 ||
-                        EnchantmentHelper.getItemEnchantmentLevel(
-                            level().registryAccess().registry(Registries.ENCHANTMENT).get()
-                                .getHolder(Enchantments.RIPTIDE).get(), weapon
-                        ) > 1
+                EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, weapon) > 1 ||
+                        EnchantmentHelper.getItemEnchantmentLevel(Enchantments.RIPTIDE, weapon) > 1
 
             if (hasFlipEnchant) {
                 this.flippedTimer = random.nextInt(60, 100)
@@ -310,10 +306,11 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
     override fun setCustomName(name: Component?) {
         super.setCustomName(name)
-        bossBar.name = this.displayName!!
+        bossBar.name = this.displayName
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(AnimationController(this, "flip_controller", 8) { state ->
             if (isFlipped()) {
                 state.setAndContinue(FLIP_ANIMATION)
@@ -330,16 +327,19 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
                 PlayState.STOP
             }
         })
-        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
         controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
     }
 
+    override fun getAmbientSound(): SoundEvent {
+        return HASoundEvents.KARKINOS_AMBIENT.get()
+    }
+
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.TURTLE_EGG_CRACK
+        return HASoundEvents.KARKINOS_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent {
-        return SoundEvents.TURTLE_EGG_BREAK
+        return HASoundEvents.KARKINOS_DIE.get()
     }
 
     companion object {
@@ -348,9 +348,9 @@ class KarkinosEntity(entityType: EntityType<out HybridAquaticMinibossEntity>, wo
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 400.0)
+                .add(Attributes.MAX_HEALTH, 300.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
-                .add(Attributes.ATTACK_DAMAGE, 10.0)
+                .add(Attributes.ATTACK_DAMAGE, 8.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0)

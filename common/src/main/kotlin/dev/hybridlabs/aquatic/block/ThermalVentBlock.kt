@@ -1,19 +1,16 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
+import dev.hybridlabs.aquatic.effect.HAMobEffects
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.core.registries.Registries
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource
+import net.minecraft.util.StringRepresentable
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
-import net.minecraft.world.item.enchantment.EnchantmentHelper
-import net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
@@ -25,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
-import net.minecraft.world.level.block.state.properties.DripstoneThickness
 import net.minecraft.world.level.block.state.properties.EnumProperty
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -34,21 +30,62 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.Shapes
 import net.minecraft.world.phys.shapes.VoxelShape
 
-@Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
+@Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION", "REDUNDANT_ELSE_IN_WHEN")
 class ThermalVentBlock(
-    private val emitsParticles: Boolean,
     private val fireDamage: Int,
-    settings: Properties
+    settings: Properties,
 ) : Block(settings), SimpleWaterloggedBlock {
 
     init {
         this.registerDefaultState(
             stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true)
-                .setValue(THICKNESS, DripstoneThickness.TIP)
+                .setValue(THICKNESS, ThermalVentPosition.TIP)
         )
     }
 
-    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
+    override fun onPlace(state: BlockState, world: Level, pos: BlockPos, oldState: BlockState, movedByPiston: Boolean) {
+        if (!world.isClientSide) {
+            world.scheduleTick(pos, this, 24000)
+        }
+        super.onPlace(state, world, pos, oldState, movedByPiston)
+    }
+
+    override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
+        if (level.isClientSide) return
+
+        level.scheduleTick(pos, this, 24000)
+
+        if (
+            state.getValue(THICKNESS) != ThermalVentPosition.BASE &&
+            state.getValue(THICKNESS) != ThermalVentPosition.TIP
+        ) return
+
+        val below = level.getBlockState(pos.below())
+        if (!below.`is`(Blocks.MAGMA_BLOCK)) return
+
+        var cursor = pos
+        while (level.getBlockState(cursor.above()).`is`(this)) {
+            cursor = cursor.above()
+        }
+
+        val aboveTip = cursor.above()
+
+        if (!level.getFluidState(aboveTip).`is`(Fluids.WATER)) return
+        if (!level.getBlockState(aboveTip).isAir && !level.getBlockState(aboveTip).`is`(Blocks.WATER)) return
+
+        level.setBlock(
+            aboveTip,
+            defaultBlockState().setValue(WATERLOGGED, true),
+            UPDATE_ALL
+        )
+    }
+
+    override fun isPathfindable(
+        state: BlockState,
+        world: BlockGetter,
+        pos: BlockPos,
+        type: PathComputationType,
+    ): Boolean {
         return false
     }
 
@@ -63,7 +100,7 @@ class ThermalVentBlock(
         val pos = ctx.clickedPos
         return defaultBlockState()
             .setValue(THICKNESS, getThickness(world, pos))
-            .setValue(WATERLOGGED, world.getFluidState(pos).`is`(Fluids.WATER))
+            .setValue(WATERLOGGED, world.getFluidState(pos) == Fluids.WATER)
     }
 
     override fun updateShape(
@@ -72,12 +109,8 @@ class ThermalVentBlock(
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos
+        neighborPos: BlockPos,
     ): BlockState {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
-        }
-
         if (!canSurvive(state, world, pos)) {
             return Blocks.AIR.defaultBlockState()
         }
@@ -90,34 +123,34 @@ class ThermalVentBlock(
     }
 
     override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
-        if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED)) {
-            spawnSmokeParticle(world, pos, random)
+        if (state.getValue(THICKNESS) == ThermalVentPosition.TIP) {
+            addVentSmoke(world, pos, random)
         }
     }
 
-    private fun getThickness(world: LevelReader, currentPos: BlockPos): DripstoneThickness {
+    private fun getThickness(world: LevelReader, currentPos: BlockPos): ThermalVentPosition {
         val blockAbove = world.getBlockState(currentPos.relative(Direction.UP))
 
         return if (blockAbove.`is`(this)) {
             val blockBelow = world.getBlockState(currentPos.relative(Direction.DOWN))
             if (blockBelow.`is`(this)) {
-                DripstoneThickness.MIDDLE
+                ThermalVentPosition.MIDDLE
             } else {
-                DripstoneThickness.BASE
+                ThermalVentPosition.BASE
             }
         } else {
-            DripstoneThickness.TIP
+            ThermalVentPosition.TIP
         }
     }
 
-    private fun spawnSmokeParticle(world: Level, pos: BlockPos, random: RandomSource) {
+    private fun addVentSmoke(world: Level, pos: BlockPos, random: RandomSource) {
         world.addParticle(
-            ParticleTypes.CAMPFIRE_SIGNAL_SMOKE,
+            ParticleTypes.CAMPFIRE_COSY_SMOKE,
             pos.x.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
             pos.y.toDouble() + 0.4,
             pos.z.toDouble() + 0.5 + random.nextDouble() / 4.0 * (if (random.nextBoolean()) 1 else -1).toDouble(),
             0.0,
-            0.01,
+            0.03,
             0.0
         )
     }
@@ -125,10 +158,10 @@ class ThermalVentBlock(
     override fun stepOn(world: Level, pos: BlockPos, state: BlockState, entity: Entity) {
         if (world.isClientSide) return
 
-        if (state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(WATERLOGGED)) {
+        if (state.getValue(THICKNESS) == ThermalVentPosition.TIP && state.getValue(WATERLOGGED)) {
             if (entity is Player && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
                 entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
-                entity.addEffect(MobEffectInstance(HybridAquaticMobEffects.CORROSION.asHolder(), 200, 0))
+                entity.addEffect(MobEffectInstance(HAMobEffects.CORROSION.get(), 200, 0))
             }
         }
 
@@ -139,12 +172,12 @@ class ThermalVentBlock(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
-        val voxelShape = when (val thickness = state.getValue(THICKNESS) as DripstoneThickness) {
-            DripstoneThickness.TIP -> TIP_COLLISION_SHAPE
-            DripstoneThickness.MIDDLE -> MIDDLE_COLLISION_SHAPE
-            DripstoneThickness.BASE -> BASE_COLLISION_SHAPE
+        val voxelShape = when (val thickness = state.getValue(THICKNESS) as ThermalVentPosition) {
+            ThermalVentPosition.TIP -> TIP_COLLISION_SHAPE
+            ThermalVentPosition.MIDDLE -> MIDDLE_COLLISION_SHAPE
+            ThermalVentPosition.BASE -> BASE_COLLISION_SHAPE
             else -> throw IllegalStateException("Unexpected thickness: $thickness")
         }
         val vec3d = state.getOffset(world, pos)
@@ -159,12 +192,12 @@ class ThermalVentBlock(
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext
+        context: CollisionContext,
     ): VoxelShape {
-        val voxelShape = when (val thickness = state.getValue(THICKNESS) as DripstoneThickness) {
-            DripstoneThickness.TIP -> TIP_SHAPE
-            DripstoneThickness.MIDDLE -> MIDDLE_SHAPE
-            DripstoneThickness.BASE -> BASE_SHAPE
+        val voxelShape = when (val thickness = state.getValue(THICKNESS) as ThermalVentPosition) {
+            ThermalVentPosition.TIP -> TIP_SHAPE
+            ThermalVentPosition.MIDDLE -> MIDDLE_SHAPE
+            ThermalVentPosition.BASE -> BASE_SHAPE
             else -> throw IllegalStateException("Unexpected thickness: $thickness")
         }
 
@@ -185,13 +218,14 @@ class ThermalVentBlock(
     }
 
     companion object {
-        val THICKNESS: EnumProperty<DripstoneThickness> = EnumProperty.create(
+        val THICKNESS: EnumProperty<ThermalVentPosition> = EnumProperty.create(
             "thickness",
-            DripstoneThickness::class.java,
-            DripstoneThickness.TIP,
-            DripstoneThickness.MIDDLE,
-            DripstoneThickness.BASE
+            ThermalVentPosition::class.java,
+            ThermalVentPosition.TIP,
+            ThermalVentPosition.MIDDLE,
+            ThermalVentPosition.BASE
         )
+
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
         private val TIP_COLLISION_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)
@@ -201,5 +235,13 @@ class ThermalVentBlock(
         private val TIP_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)
         private val MIDDLE_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
         private val BASE_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
+    }
+
+    enum class ThermalVentPosition : StringRepresentable {
+        TIP, MIDDLE, BASE;
+
+        override fun getSerializedName(): String {
+            return name.lowercase()
+        }
     }
 }

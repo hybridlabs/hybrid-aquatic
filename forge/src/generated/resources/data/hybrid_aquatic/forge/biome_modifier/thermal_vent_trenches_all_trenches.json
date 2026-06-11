@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:all_trenches",
+  "features": "hybrid_aquatic:thermal_vent_trenches",
+  "step": "surface_structures"
+}

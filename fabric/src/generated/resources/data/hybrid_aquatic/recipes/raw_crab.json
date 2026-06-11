@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "hybrid_aquatic:crab_claw"
+    }
+  ],
+  "result": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/raw_crab.json
+    "count": 1,
+    "id": "hybrid-aquatic:raw_crab"
+========
+    "item": "hybrid_aquatic:raw_crab"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/raw_crab.json
+  }
+}

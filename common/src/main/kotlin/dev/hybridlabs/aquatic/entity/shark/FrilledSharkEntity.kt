@@ -1,20 +1,21 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
-class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(
-        entityType,
-        world,
-        listOf(HybridAquaticEntityTags.CEPHALOPOD),
-        false,
-        false
-    ) {
+class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level) :
+    HASharkEntity(type, world) {
+
+    override fun getTargetConfig() = TARGET_CONFIG
+
+    override val isPassive: Boolean = false
+    override val closePlayerAttack: Boolean = false
 
     override fun registerGoals() {
         super.registerGoals()
@@ -22,9 +23,19 @@ class FrilledSharkEntity(entityType: EntityType<out FrilledSharkEntity>, world: 
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.SMALL_SHARK,
+                HAEntityTags.OCTOPUS,
+            ),
+            listOf(
+                HAEntityTags.LARGE_SHARK
+            ),
+        )
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 24.0)
+                .add(Attributes.MAX_HEALTH, 20.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.7)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)

@@ -1,0 +1,30 @@
+{   "parent": "block/block",
+  "textures": {
+    "particle": "hybrid_aquatic:block/hagslime_block",
+    "texture": "hybrid_aquatic:block/hagslime_block"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#texture", "cullface": "down" },
+        "up":    { "texture": "#texture", "cullface": "up" },
+        "north": { "texture": "#texture", "cullface": "north" },
+        "south": { "texture": "#texture", "cullface": "south" },
+        "west":  { "texture": "#texture", "cullface": "west" },
+        "east":  { "texture": "#texture", "cullface": "east" }
+      }
+    },
+    {   "from": [ 1, 1, 1 ],
+      "to": [ 15, 15, 15 ],
+      "faces": {
+        "down":  { "uv": [ 1, 1, 15, 15 ], "texture": "#texture"},
+        "up":    { "uv": [ 1, 1, 15, 15 ], "texture": "#texture"},
+        "north": { "uv": [ 1, 1, 15, 15 ], "texture": "#texture"},
+        "south": { "uv": [ 1, 1, 15, 15 ], "texture": "#texture"},
+        "west":  { "uv": [ 1, 1, 15, 15 ], "texture": "#texture"},
+        "east":  { "uv": [ 1, 1, 15, 15 ], "texture": "#texture"}
+      }
+    }
+  ]
+}

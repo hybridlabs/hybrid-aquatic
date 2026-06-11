@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:sulfuric_cave",
+  "features": "hybrid_aquatic:thermal_vent_caves",
+  "step": "surface_structures"
+}

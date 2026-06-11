@@ -4,20 +4,27 @@ import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class SeaNettleEntityModel : HybridAquaticJellyfishEntityModel<SeaNettleEntity>("sea_nettle") {
+class SeaNettleEntityModel : HAJellyfishEntityModel<SeaNettleEntity>("sea_nettle") {
     override fun getRenderType(animatable: SeaNettleEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }
 
-    private val PACIFIC_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/jellyfish/sea_nettle/pacific_sea_nettle.png")
-    private val COMPASS_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/jellyfish/sea_nettle/compass_jellyfish.png")
+    companion object {
+        private val PACIFIC_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/pacific_sea_nettle.png")
+        private val COMPASS_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/compass_jellyfish.png")
 
-    private val PACIFIC_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/jellyfish/sea_nettle/sea_nettle.geo.json")
-    private val COMPASS_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "geo/jellyfish/sea_nettle/compass_jellyfish.geo.json")
+        private val PACIFIC_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/jellyfish/sea_nettle/sea_nettle.geo.json")
+        private val COMPASS_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/jellyfish/sea_nettle/compass_jellyfish.geo.json")
 
-    private val PACIFIC_ANIMATION = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "animations/sea_nettle.animation.json")
-    private val COMPASS_ANIMATION = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "animations/compass_jellyfish.animation.json")
-
+        private val PACIFIC_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/sea_nettle.animation.json")
+        private val COMPASS_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/compass_jellyfish.animation.json")
+    }
     override fun getTextureResource(animatable: SeaNettleEntity): ResourceLocation {
         return when (animatable.variant) {
             SeaNettleEntity.Companion.Type.PACIFIC -> PACIFIC_TEXTURE

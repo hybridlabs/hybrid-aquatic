@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.TroutEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class TroutEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<TroutEntity>(context, TroutEntityModel(), true, false)
+    HAFishEntityRenderer<TroutEntity>(context, TroutEntityModel(), true, false)

@@ -1,12 +1,53 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalDigGoal
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 
-class VampireCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, true) {
+class VampireCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, true) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(5, WaterAnimalDigGoal(this))
+
+    }
+
+    override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
+        super.registerControllers(controllerRegistrar)
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Spawning",
+                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                    if (this.tickCount < 20)
+                        return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
+                    PlayState.STOP
+                }
+            )
+                .setParticleKeyframeHandler { event -> particleEvents(event) }
+        )
+
+        controllerRegistrar.add(
+            AnimationController(
+                this, "Digging",
+                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                    if (this.isDigging())
+                        return@AnimationStateHandler state.setAndContinue(DIG_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
+    }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

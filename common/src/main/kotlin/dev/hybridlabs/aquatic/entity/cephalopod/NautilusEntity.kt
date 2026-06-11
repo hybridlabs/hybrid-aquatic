@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
@@ -14,17 +16,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.NONE,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        false,
-        false
-    ) {
+class NautilusEntity(type: EntityType<out NautilusEntity>, world: Level) : HACephalopodEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
@@ -43,8 +37,9 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.seaLevel - 24)..(world.seaLevel - 8)
-            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val nightSpawn = (seaLevel - 256)..(seaLevel - 8)
+            val daySpawn = (seaLevel - 256)..(seaLevel - 48)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 
@@ -53,18 +48,10 @@ class NautilusEntity(entityType: EntityType<out NautilusEntity>, world: Level) :
     }
 
     override fun getHurtSound(source: DamageSource): SoundEvent {
-        return SoundEvents.SHULKER_CLOSE
+        return SoundEvents.SHULKER_HURT_CLOSED
     }
 
     override fun getDeathSound(): SoundEvent {
         return SoundEvents.SHULKER_HURT_CLOSED
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
     }
 }

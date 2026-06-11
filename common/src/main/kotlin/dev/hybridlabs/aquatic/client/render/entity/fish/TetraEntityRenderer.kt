@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.TetraEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class TetraEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<TetraEntity>(context, TetraEntityModel(), false, false)
+    HAFishEntityRenderer<TetraEntity>(context, TetraEntityModel(), false, false)

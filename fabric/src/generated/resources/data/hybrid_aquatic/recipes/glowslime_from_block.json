@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hybrid_aquatic:glowslime_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/black_pearl.json
+    "id": "hybrid-aquatic:black_pearl"
+========
+    "item": "hybrid_aquatic:glowslime"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/glowslime_from_block.json
+  }
+}

@@ -5,5 +5,5 @@ import dev.hybridlabs.aquatic.entity.fish.StonefishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class StonefishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<StonefishEntity>(context, StonefishEntityModel(), true, false)
+    HAFishEntityRenderer<StonefishEntity>(context, StonefishEntityModel(), true, false)
 

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "thickness=base": {
+      "model": "hybrid_aquatic:block/giant_thermal_vent_base"
+    },
+    "thickness=middle": {
+      "model": "hybrid_aquatic:block/giant_thermal_vent_middle"
+    },
+    "thickness=tip": {
+      "model": "hybrid_aquatic:block/giant_thermal_vent_tip"
+    }
+  }
+}

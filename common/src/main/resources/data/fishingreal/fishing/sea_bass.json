@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:sea_bass"
+    "item": "hybrid_aquatic:sea_bass"
   },
   "result": {
-    "id": "hybrid-aquatic:sea_bass"
+    "id": "hybrid_aquatic:sea_bass"
   }
 }

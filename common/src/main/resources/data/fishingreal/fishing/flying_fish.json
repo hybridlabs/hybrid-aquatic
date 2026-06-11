@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:flying_fish"
+    "item": "hybrid_aquatic:flying_fish"
   },
   "result": {
-    "id": "hybrid-aquatic:flying_fish"
+    "id": "hybrid_aquatic:flying_fish"
   }
 }

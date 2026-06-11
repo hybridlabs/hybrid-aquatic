@@ -1,0 +1,47 @@
+{
+    "required": true,
+    "package": "dev.hybridlabs.aquatic.mixin",
+    "compatibilityLevel": "JAVA_17",
+    "minVersion": "0.8.5",
+    "refmap": "hybrid_aquatic.refmap.json",
+    "mixins": [
+        "BreathAirGoalMixin",
+        "EnchantmentMixin",
+        "FishingBobberEntityMixin",
+        "FishingRodItemMixin",
+        "FlowingFluidMixin",
+        "PistonMovingBlockEntityMixin",
+        "PlayerEntityMixin",
+        "ResourceLocationMixin",
+        "SeagrassBlockMixin",
+        "ServerPlayerEntityMixin",
+        "TallSeagrassBlockMixin"
+    ],
+    "client": [
+<<<<<<<< HEAD:neoforge/src/main/resources/hybrid-aquatic.forge.mixins.json
+========
+        "client.BookScreenMixin",
+        "client.CameraMixin",
+        "client.ClientPlayNetworkHandlerMixin",
+>>>>>>>> 1.20.1-biomes:neoforge/src/main/resources/hybrid_aquatic.forge.mixins.json
+        "client.FishingBobberEntityClientMixin",
+        "client.FishingBobberEntityRendererMixin",
+        "client.FogRendererMixin",
+        "client.HeadFeatureRendererMixin",
+<<<<<<<< HEAD:neoforge/src/main/resources/hybrid-aquatic.forge.mixins.json
+        "client.SkullBlockEntityTextureMixin",
+        "client.InGameHudMixin"
+========
+        "client.LivingEntityRendererMixin",
+        "client.LocalPlayerMixin",
+        "client.MouseHandlerMixin",
+        "client.ParticleEngineMixin",
+        "client.PlayerEntityRendererMixin",
+        "client.SkullBlockEntityTextureMixin",
+        "client.WeatherDisplayMixin"
+>>>>>>>> 1.20.1-biomes:neoforge/src/main/resources/hybrid_aquatic.forge.mixins.json
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

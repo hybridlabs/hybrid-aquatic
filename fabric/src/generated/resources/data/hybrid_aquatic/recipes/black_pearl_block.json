@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "hybrid_aquatic:black_pearl"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PPP",
+    "PPP"
+  ],
+  "result": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/black_pearl_block.json
+    "count": 1,
+    "id": "hybrid-aquatic:black_pearl_block"
+  }
+}
+========
+    "item": "hybrid_aquatic:black_pearl_block"
+  },
+  "show_notification": true
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/black_pearl_block.json

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:cold_trench",
+  "spawners": {
+    "type": "hybrid_aquatic:big_red_jellyfish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

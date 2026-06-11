@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.MoonJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class MoonJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<MoonJellyfishEntity>(context, MoonJellyfishEntityModel(), true, false)
+    HAJellyfishEntityRenderer<MoonJellyfishEntity>(context, MoonJellyfishEntityModel(), true, false)

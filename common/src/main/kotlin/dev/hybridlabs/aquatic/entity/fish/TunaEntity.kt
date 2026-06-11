@@ -1,8 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -17,6 +23,7 @@ import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -24,21 +31,14 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD,
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
+class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
+    HASchoolingFishEntity(type, world),
     VariantHolder<TunaEntity.Companion.Type> {
 
+    override fun getTargetConfig() = TARGET_CONFIG
+
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 4
     }
 
     override fun finalizeSpawn(
@@ -48,21 +48,38 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
-        val selectedType = Type.fromBiome(biome, Random.Default)
+        val selectedType = Type.fromBiome(biome, Random)
         this.variant = selectedType
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
+        goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.RAW_TENTACLE.get()) ||
+                stack.`is`(HAItemTags.SMALL_FISH)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.ALL_CEPHALOPODS
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.8)
+                .add(Attributes.MOVEMENT_SPEED, 0.7)
                 .add(Attributes.ATTACK_DAMAGE, 5.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 8.0)
@@ -97,11 +114,11 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HybridAquaticBiomeTags.TEMPERATE_OCEANS) -> {
+                        biome.`is`(HABiomeTags.TEMPERATE_OCEANS) -> {
                             BLUEFIN
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
                             YELLOWFIN
                         }
 
@@ -119,14 +136,14 @@ class TunaEntity(entityType: EntityType<out TunaEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

@@ -1,13 +1,17 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalPerformTrickGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.BiomeTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -21,14 +25,22 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 
-class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
-        listOf(HybridAquaticEntityTags.NONE), listOf(HybridAquaticEntityTags.SHARK)), OverlayTextureFeature {
+class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
+    HAFishEntity(type, world), OverlayTextureFeature {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.ALL_SHARKS
+    )
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
         goalSelector.addGoal(1, HurtByTargetGoal(this))
+        goalSelector.addGoal(1, WaterAnimalPerformTrickGoal(this))
+    }
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
     }
 
     companion object {
@@ -83,14 +95,6 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun getMaxSize(): Int {
-        return 3
-    }
-
-    override fun getMinSize(): Int {
-        return -3
-    }
-
     private var overlayTexture
         get() = OverlayTextures.byId(entityData.get(OverlayTexture))
         set(value) {
@@ -106,18 +110,33 @@ class MantaRayEntity(entityType: EntityType<out MantaRayEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putInt("texture_overlay", this.overlayTexture.id)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        if (compound.contains("texture_overlay")) this.overlayTexture =
+            OverlayTextures.byId(compound.getInt("texture_overlay"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun shouldFlopOnLand(): Boolean {
         return false
+    }
+
+    override fun getMaxSize(): Int {
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
+            10
+        } else {
+            3
+        }
+    }
+
+    override fun getMinSize(): Int {
+        return -3
     }
 }

@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.tag.HybridAquaticBlockTags
-import net.minecraft.core.BlockPos
+import dev.hybridlabs.aquatic.entity.ai.goal.UrchinEatKelpGoal
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
+import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -18,34 +18,37 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.block.Blocks
 import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world),
+class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
+    HACritterEntity(type, world),
     VariantHolder<SeaUrchinEntity.Companion.Type> {
-
-    private var timeUntilNextBreak = 0
-    private var spawnUrchinOnNextBreak = false
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        this.refreshDimensions()
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, UrchinEatKelpGoal(this, HABlockTags.KELP))
+    }
+
+    override fun getDimensions(pose: Pose): EntityDimensions {
         val scale = when (variant) {
             Type.LARGE -> 2.0f
             else -> 1.0f
         }
-        return super.getDefaultDimensions(pose).scale(scale)
+        return super.getDimensions(pose).scale(scale)
     }
 
     companion object {
@@ -97,41 +100,6 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         }
     }
 
-    override fun tick() {
-        super.tick()
-
-        if (level().isClientSide) {
-            return
-        }
-
-        if (timeUntilNextBreak > 0) {
-            timeUntilNextBreak--
-            return
-        }
-
-        if (level().random.nextInt(6000) < 300) {
-            breakKelpUnderneath()
-            timeUntilNextBreak = 2400 + level().random.nextInt(1200)
-        }
-    }
-
-    private fun breakKelpUnderneath() {
-        val posUnderneath = BlockPos(this.x.toInt(), (this.y + 1).toInt(), this.z.toInt())
-        if (level().getBlockState(posUnderneath).`is`(HybridAquaticBlockTags.KELP)) {
-            level().setBlockAndUpdate(posUnderneath, Blocks.AIR.defaultBlockState())
-            if (spawnUrchinOnNextBreak) {
-                val newUrchin = HybridAquaticEntityTypes.SEA_URCHIN.get().create(level())
-                newUrchin?.moveTo(this.x, this.y, this.z, this.xRot, 0.0f)
-                if (newUrchin != null) {
-                    level().addFreshEntity(newUrchin)
-                }
-                spawnUrchinOnNextBreak = false
-            } else {
-                spawnUrchinOnNextBreak = true
-            }
-        }
-    }
-
     override fun getMaxSize(): Int {
         return 5
     }
@@ -140,19 +108,19 @@ class SeaUrchinEntity(entityType: EntityType<out SeaUrchinEntity>, world: Level)
         return -5
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

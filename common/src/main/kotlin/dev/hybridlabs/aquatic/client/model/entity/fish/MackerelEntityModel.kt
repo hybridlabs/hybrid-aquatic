@@ -1,38 +1,50 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.MackerelEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.core.animation.AnimationState
 import kotlin.math.abs
 
-class MackerelEntityModel : HybridAquaticFishEntityModel<MackerelEntity>("mackerel") {
+class MackerelEntityModel : HAFishEntityModel<MackerelEntity>("mackerel") {
+
+    companion object {
+        private val ONE_FISH_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/mackerel/mackerel.geo.json")
+        private val TWO_FISH_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/mackerel/mackerel_two.geo.json")
+        private val THREE_FISH_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/mackerel/mackerel_three.geo.json")
+
+        private val ONE_FISH_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel.animation.json")
+        private val TWO_FISH_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel_two.animation.json")
+        private val THREE_FISH_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel_three.animation.json")
+    }
 
     override fun getModelResource(animatable: MackerelEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val modelPath = when (fish) {
-            1 -> "geo/fish/mackerel/mackerel.geo.json"
-            2 -> "geo/fish/mackerel/mackerel_two.geo.json"
-            3 -> "geo/fish/mackerel/mackerel_three.geo.json"
-            else -> "geo/fish/mackerel/mackerel.geo.json"
+        return when (fish) {
+            1 -> ONE_FISH_MODEL
+            2 -> TWO_FISH_MODEL
+            3 -> THREE_FISH_MODEL
+            else -> ONE_FISH_MODEL
         }
-        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: MackerelEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val animationPath = when (fish) {
-            1 -> "animations/mackerel.animation.json"
-            2 -> "animations/mackerel_two.animation.json"
-            3 -> "animations/mackerel_three.animation.json"
-            else -> "animations/mackerel.animation.json"
+        return when (fish) {
+            1 -> ONE_FISH_ANIMATION
+            2 -> TWO_FISH_ANIMATION
+            3 -> THREE_FISH_ANIMATION
+            else -> ONE_FISH_ANIMATION
         }
-        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(
@@ -41,11 +53,11 @@ class MackerelEntityModel : HybridAquaticFishEntityModel<MackerelEntity>("macker
         animationState: AnimationState<MackerelEntity>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().timer.gameTimeDeltaTicks
+        val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone(PartNames.BODY)
-        val body2 = animationProcessor.getBone("body2")
-        val body3 = animationProcessor.getBone("body3")
+        val body2 = animationProcessor.getBone("body_2")
+        val body3 = animationProcessor.getBone("body_3")
         val tail2 = animationProcessor.getBone("tail2")
         val tail3 = animationProcessor.getBone("tail3")
         val tailFin2 = animationProcessor.getBone("tail_fin2")

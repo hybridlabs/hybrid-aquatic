@@ -12,7 +12,11 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
-import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BonemealableBlock
+import net.minecraft.world.level.block.BushBlock
+import net.minecraft.world.level.block.LiquidBlockContainer
+import net.minecraft.world.level.block.TallSeagrassBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.level.material.Fluid
@@ -32,7 +36,7 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
     }
 
     override fun mayPlaceOn(floor: BlockState, world: BlockGetter, pos: BlockPos): Boolean {
-        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK)
+        return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HABlocks.AERATED_SAND.get()) && !floor.`is`(HABlocks.BUBBLE_GEYSER.get())
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState? {
@@ -70,7 +74,7 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
     }
 
     override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
-        val blockState = HybridAquaticBlocks.TALL_SEA_LETTUCE.get().defaultBlockState()
+        val blockState = HABlocks.TALL_SEA_LETTUCE.get().defaultBlockState()
         val blockState2 = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
         val blockPos = pos.above()
         if (world.getBlockState(blockPos).`is`(Blocks.WATER)) {

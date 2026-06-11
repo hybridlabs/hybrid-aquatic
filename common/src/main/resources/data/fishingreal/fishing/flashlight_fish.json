@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:flashlight_fish"
+    "item": "hybrid_aquatic:flashlight_fish"
   },
   "result": {
-    "id": "hybrid-aquatic:flashlight_fish"
+    "id": "hybrid_aquatic:flashlight_fish"
   }
 }

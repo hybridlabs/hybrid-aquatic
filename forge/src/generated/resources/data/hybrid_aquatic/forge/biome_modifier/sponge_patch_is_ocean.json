@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_ocean",
+  "features": "hybrid_aquatic:sponge_patch",
+  "step": "vegetal_decoration"
+}

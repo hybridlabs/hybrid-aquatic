@@ -1,6 +1,9 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -21,15 +24,17 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(
-        entityType,
-        world,
-        listOf(HybridAquaticEntityTags.SMALL_PREY, HybridAquaticEntityTags.CRUSTACEAN),
-        false,
-        false
-    ),
-    VariantHolder<HoundSharkEntity.Type> {
+class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) :
+    HASharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
+
+    override fun getTargetConfig() = TARGET_CONFIG
+
+    override val isPassive: Boolean = false
+    override val closePlayerAttack: Boolean = false
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
@@ -43,10 +48,23 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(1, HurtByTargetGoal(this))
+        goalSelector.addGoal(0, HurtByTargetGoal(this))
+        goalSelector.addGoal(1, WaterAnimalSitGoal(this))
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES
+            ),
+            listOf(
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.MEDIUM_SHARK,
+                HAEntityTags.LARGE_SHARK
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 12.0)
@@ -65,14 +83,14 @@ class HoundSharkEntity(entityType: EntityType<out HoundSharkEntity>, world: Leve
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     enum class Type(val id: Int, private val key: String) : StringRepresentable {

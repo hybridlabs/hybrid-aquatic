@@ -5,7 +5,6 @@ import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.phys.Vec3
 
-
 class StayInWaterGoal(private val mob: Mob) : Goal() {
     override fun canUse(): Boolean {
         return mob.isUnderWater

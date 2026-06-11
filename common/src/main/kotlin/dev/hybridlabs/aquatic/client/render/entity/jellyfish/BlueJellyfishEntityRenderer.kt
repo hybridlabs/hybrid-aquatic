@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.BlueJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BlueJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<BlueJellyfishEntity>(context, BlueJellyfishEntityModel(), true, false)
+    HAJellyfishEntityRenderer<BlueJellyfishEntity>(context, BlueJellyfishEntityModel(), true, false)

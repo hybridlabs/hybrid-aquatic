@@ -1,30 +1,42 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HABlockTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
-import net.minecraft.tags.BlockTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
-class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
+class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) :
+    HAFishEntity(type, world) {
+
+    override fun getTargetConfig() =
+        MobTargetConfiguration.ofPrey(
+            HAEntityTags.LARGE_CREATURES,
+            HAEntityTags.ALL_SHARKS
         )
-    ) {
+
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(3, WaterAnimalGrazeGoal(this, HABlockTags.CORALLIVORE_EDIBLE))
+    }
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 3
+        return 2
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.CORAL_CHUNK.get())
     }
 
     companion object {
@@ -46,7 +58,7 @@ class ParrotfishEntity(entityType: EntityType<out ParrotfishEntity>, world: Leve
         ): Boolean {
             return world.isWaterAt(pos) &&
                     world.level.isDay &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
     }
 }

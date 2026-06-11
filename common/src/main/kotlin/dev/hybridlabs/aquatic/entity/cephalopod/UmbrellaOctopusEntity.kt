@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -11,14 +13,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("unused", "DEPRECATION")
-class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, world: Level) :
-    HybridAquaticOctopusEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.NONE,
-        HybridAquaticEntityTags.SHARK,
-        false
-    ) {
+class UmbrellaOctopusEntity(type: EntityType<out UmbrellaOctopusEntity>, world: Level) : HAOctopusEntity(type, world) {
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
@@ -37,9 +33,8 @@ class UmbrellaOctopusEntity(entityType: EntityType<out UmbrellaOctopusEntity>, w
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-
-            return pos.y in (world.seaLevel - 128)..(world.seaLevel - 48) &&
-                    world.isWaterAt(pos)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            return pos.y in (seaLevel - 256)..(seaLevel - 48) && world.isWaterAt(pos)
         }
     }
 }

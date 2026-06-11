@@ -1,0 +1,15 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/betta_mangroves.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:mangroves",
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:mangroves",
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/betta_mangroves.json
+  "spawners": {
+    "type": "hybrid_aquatic:betta",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

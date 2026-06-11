@@ -1,0 +1,61 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_prismarine_rod": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/tools/trident.json
+            "items": "hybrid-aquatic:prismarine_rod"
+========
+            "items": [
+              "hybrid_aquatic:prismarine_rod"
+            ]
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/tools/trident.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_shark_tooth": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/tools/trident.json
+            "items": "hybrid-aquatic:shark_tooth"
+========
+            "items": [
+              "hybrid_aquatic:shark_tooth"
+            ]
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/tools/trident.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid-aquatic:trident"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shark_tooth",
+      "has_prismarine_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid-aquatic:trident"
+    ]
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/tools/trident.json
+  }
+}
+========
+  },
+  "sends_telemetry_event": false
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/tools/trident.json

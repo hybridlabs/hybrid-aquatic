@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -11,20 +13,31 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)) {
+class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
+    HAFishEntity(type, world) {
+
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 4
+        return 2
+    }
+
+    override fun shouldFlopOnLand(): Boolean {
+        return false
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES
+            ),
+            listOf(
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.LARGE_CREATURES,
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 3.0)
@@ -41,8 +54,9 @@ class DragonfishEntity(entityType: EntityType<out DragonfishEntity>, world: Leve
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.seaLevel - 16)..<world.seaLevel
-            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val nightSpawn = (seaLevel - 16)..<seaLevel
+            val daySpawn = (seaLevel - 256)..(seaLevel - 48)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 

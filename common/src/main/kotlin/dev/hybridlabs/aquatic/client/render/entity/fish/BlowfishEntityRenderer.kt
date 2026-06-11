@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.BlowfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BlowfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<BlowfishEntity>(context, BlowfishEntityModel(), true, false)
+    HAFishEntityRenderer<BlowfishEntity>(context, BlowfishEntityModel(), true, false)

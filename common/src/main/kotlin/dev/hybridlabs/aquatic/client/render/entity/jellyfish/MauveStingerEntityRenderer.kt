@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.MauveStingerEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class MauveStingerEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<MauveStingerEntity>(context, MauveStingerEntityModel(), true, false)
+    HAJellyfishEntityRenderer<MauveStingerEntity>(context, MauveStingerEntityModel(), true, false)

@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:clownfish"
+    "item": "hybrid_aquatic:clownfish"
   },
   "result": {
-    "id": "hybrid-aquatic:clownfish"
+    "id": "hybrid_aquatic:clownfish"
   }
 }

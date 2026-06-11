@@ -1,8 +1,15 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
+import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
+import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -25,44 +32,68 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl
 import net.minecraft.world.entity.ai.goal.*
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
+import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.util.DefaultRandomPos
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.levelgen.Heightmap
-import net.minecraft.world.level.pathfinder.PathType
+import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.RawAnimation
 import java.util.*
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
-    HybridAquaticMammalEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.KELP_PREY
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
+class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMammalEntity(entityType, world),
     VariantHolder<OtterEntity.Companion.Type> {
-    private val swimControl = OtterMoveControl(this, 45, 3, 0.02F, 1.0F, true)
+    override fun getTargetConfig() = TARGET_CONFIG
 
-    var hunger: Int
-        get() = entityData.get(HUNGER)
-        set(hunger) {
-            entityData.set(HUNGER, hunger)
-        }
+    private val swimControl = OtterMoveControl(
+        this,
+        45,
+        3,
+        0.02F,
+        1.0F,
+        true
+    )
+
+    init {
+        setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+
+        moveControl = swimControl
+        lookControl = OtterLookControl(this)
+    }
+
+    override fun createNavigation(level: Level): PathNavigation {
+        return AmphibiousPathNavigation(this, level)
+    }
+
+    override fun registerGoals() {
+        goalSelector.addGoal(1, OtterBreatheAirGoal(this))
+        goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
+        goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
+        goalSelector.addGoal(2, OtterFloatGoal(this))
+        goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
+        goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
+        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
+        goalSelector.addGoal(4, RandomLookAroundGoal(this))
+        goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
+        goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
+        getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
+    }
 
     override fun tick() {
         super.tick()
@@ -70,14 +101,9 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         if (hunger > 0) hunger -= 1
     }
 
-    init {
-        moveControl = swimControl
-        lookControl = OtterLookControl(this)
-        navigation = AmphibiousPathNavigation(this, this.level())
-
-        // Setting WATER_BORDER to zero makes surface water blocks preferred
-        setPathfindingMalus(PathType.WATER_BORDER, 0.0f)
-        setPathfindingMalus(PathType.WATER, 0.0f)
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.CLAM.get()) ||
+                stack.`is`(HAItemTags.SMALL_FISH)
     }
 
     /**
@@ -95,26 +121,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return 1.0f
     }
 
-    override fun registerGoals() {
-        goalSelector.addGoal(1, OtterBreathAirGoal(this))
-        goalSelector.addGoal(2, OtterDiveGoal(this, 1.0))
-        goalSelector.addGoal(2, OtterFloatGoal(this))
-        goalSelector.addGoal(2, OtterSwimmingGoal(this, 0.8, 20))
-        goalSelector.addGoal(3, OtterWalkingGoal(this, 0.7, 20))
-        goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
-        goalSelector.addGoal(4, RandomLookAroundGoal(this))
-        goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
-        targetSelector.addGoal(
-            1,
-            NearestAttackableTargetGoal(
-                this,
-                LivingEntity::class.java,
-                10,
-                true,
-                true
-            ) { entity: LivingEntity -> prey.any { preyType -> entity.type.`is`(preyType) } && hunger < MAX_HUNGER / 4 })
-    }
-
+    //#region Air & Moistness
     /* Make otters seek air every 40 secs or so */
     override fun getMaxAirSupply(): Int {
         return 800
@@ -124,9 +131,15 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         return this.maxAirSupply
     }
 
+    /* Can't breathe underwater, but can't drown, either. */
+    override fun canBreatheUnderwater(): Boolean {
+        return false
+    }
+
     override fun isPushedByFluid(): Boolean {
         return false
     }
+    //#endregion
 
     /* Override to lock head X rotation when underwater so that the otter's head follows its body */
     override fun getMaxHeadXRot(): Int {
@@ -157,12 +170,18 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+
+        if (this.random.nextFloat() < 0.1f) {
+            this.setAge(-6000)
+        }
+
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     //#region SFX
@@ -185,18 +204,21 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     override fun getSwimSound(): SoundEvent {
         return SoundEvents.DOLPHIN_SWIM
     }
-
     //#endregion
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OtterEntity? {
-        return HybridAquaticEntityTypes.OTTER.get().create(p0)
+        return HAEntityTypes.OTTER.get().create(p0)
+    }
+
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.6f
     }
 
     override fun getWaterline(): Float {
         return 0.125f
     }
 
-
+    //#region Animations
     /* Animation controller triggers based on the OtterAction enum in otter.action, which is set by various goals */
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
@@ -222,12 +244,22 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
             }
         )
     }
+    //#endregion
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.OTTER_PREY
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.MOVEMENT_SPEED, 0.35)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
@@ -307,11 +339,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                             SEA
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.ROCKY_BEACHES) -> {
+                        biome.`is`(HABiomeTags.ROCKY_BEACHES) -> {
                             SEA
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.SANDY_BEACHES) -> {
+                        biome.`is`(HABiomeTags.SANDY_BEACHES) -> {
                             SEA
                         }
 
@@ -328,26 +360,26 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        builder.define(HUNGER, MAX_HUNGER)
-        builder.define(ACTION, 0) // OtterAction.IDLE
-        super.defineSynchedData(builder)
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        entityData.define(HUNGER, MAX_HUNGER)
+        entityData.define(ACTION, 0) // OtterAction.IDLE
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        nbt.putInt(HUNGER_KEY, hunger)
-        nbt.putString("Action", this.getAction().serializedName)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        compound.putInt(HUNGER_KEY, hunger)
+        compound.putString("Action", this.getAction().serializedName)
 
-        super.addAdditionalSaveData(nbt)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        hunger = nbt.getInt(HUNGER_KEY)
-        this.setAction(OtterAction.byName(nbt.getString("Action")))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        hunger = compound.getInt(HUNGER_KEY)
+        this.setAction(OtterAction.byName(compound.getString("Action")))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {
@@ -380,14 +412,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     internal class OtterAttackGoal(
         val otter: OtterEntity,
         speedModifier: Double,
-        followingTargetEvenIfNotSeen: Boolean
+        followingTargetEvenIfNotSeen: Boolean,
     ) : MeleeAttackGoal(
         otter,
         speedModifier, followingTargetEvenIfNotSeen
     ) {
-        override fun checkAndPerformAttack(enemy: LivingEntity) {
-            if (canPerformAttack(enemy))
-            {
+        override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
+            val d0 = this.getAttackReachSqr(enemy)
+            if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
                 this.resetAttackCooldown()
                 otter.swing(InteractionHand.MAIN_HAND)
                 otter.doHurtTarget(enemy)
@@ -395,12 +427,12 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
                 if (enemy.health <= 0) otter.hunger = MAX_HUNGER
                 otter.health = otter.maxHealth
             }
-            super.checkAndPerformAttack(enemy)
+            super.checkAndPerformAttack(enemy, distToEnemySqr)
         }
     }
 
     /** Extend vanilla BreathAirGoal to add animation hints */
-    internal class OtterBreathAirGoal(val otter: OtterEntity) : BreathAirGoal(otter) {
+    internal class OtterBreatheAirGoal(val otter: OtterEntity) : BreathAirGoal(otter) {
         override fun start() {
             super.start()
             otter.setAction(OtterAction.SWIMMING)
@@ -571,7 +603,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     * Also allow toggling gravity at runtime. */
     internal class OtterMoveControl(
         val otter: OtterEntity, maxTurnX: Int, maxTurnY: Int, inWaterSpeedModifier: Float,
-        outsideWaterSpeedModifier: Float, var applyGravity: Boolean
+        outsideWaterSpeedModifier: Float, var applyGravity: Boolean,
     ) : SmoothSwimmingMoveControl(otter, maxTurnX, maxTurnY, inWaterSpeedModifier, outsideWaterSpeedModifier, false) {
 
         override fun tick() {
@@ -600,7 +632,9 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) :
     /* Extend LookControl to prevent the otter's xRot from being reset to zero every tick when underwater */
     internal class OtterLookControl(val otter: OtterEntity) : LookControl(otter) {
         override fun resetXRotOnTick(): Boolean {
-            if (otter.isUnderWater && otter.y < otter.level().seaLevel - 1) return false
+            // TODO: Might crash on servers? needs checking
+            val seaLevel = (otter.level() as ServerLevel).chunkSource.generator.seaLevel
+            if (otter.isUnderWater && otter.y < seaLevel - 1) return false
             return super.resetXRotOnTick()
         }
 

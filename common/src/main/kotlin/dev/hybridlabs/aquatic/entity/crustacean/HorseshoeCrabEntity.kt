@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -10,8 +12,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false) {
+class HorseshoeCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, false) {
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
@@ -29,8 +31,9 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val shallowSpawn = (world.seaLevel - 8)..(world.seaLevel + 4)
-            val deepSpawn = (world.seaLevel - 128)..(world.seaLevel - 16)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val shallowSpawn = (seaLevel - 8)..(seaLevel + 4)
+            val deepSpawn = (seaLevel - 256)..(seaLevel - 16)
 
             val fullMoon = world.moonPhase == 0
             val newMoon = world.moonPhase == 4
@@ -39,7 +42,8 @@ class HorseshoeCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
 
             return pos.y in spawnY &&
                     world.getBlockState(pos.below()).isSolid &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    world.isWaterAt(pos) &&
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
     }
 

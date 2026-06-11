@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_red_brinestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid_aquatic:polished_red_brinestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:polished_red_brinestone_stairs_from_polished_red_brinestone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_polished_red_brinestone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:polished_red_brinestone_stairs_from_polished_red_brinestone_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

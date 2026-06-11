@@ -1,0 +1,18 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/octopus_reef.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:reef",
+  "spawners": {
+    "type": "hybrid-aquatic:octopus",
+    "maxCount": 1,
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:rivers",
+  "spawners": {
+    "type": "hybrid_aquatic:otter",
+    "maxCount": 2,
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/otter_rivers.json
+    "minCount": 1,
+    "weight": 3
+  }
+}

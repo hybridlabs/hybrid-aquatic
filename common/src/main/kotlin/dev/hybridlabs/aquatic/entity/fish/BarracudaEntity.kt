@@ -1,7 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.effect.HAMobEffects
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.Difficulty
@@ -16,29 +20,38 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
 import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import java.util.*
 
-class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ), NeutralMob {
+class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
+    HAFishEntity(type, world),
+    NeutralMob {
 
     private var angerTime = 0
     private var angryAt: UUID? = null
+
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
     }
 
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItemTags.SMALL_FISH) ||
+                stack.`is`(HAItemTags.MEDIUM_FISH)
+    }
+
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.MEDIUM_CREATURES,
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
 
         val ANGER_TIME_RANGE: IntProvider = TimeUtil.rangeOfSeconds(10, 30)
         fun createMobAttributes(): AttributeSupplier.Builder {
@@ -54,9 +67,10 @@ class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level)
     override fun registerGoals() {
         super.registerGoals()
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HybridAquaticMobEffects.BLEEDING.asHolder()) && it !is BarracudaEntity })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.get()) && it !is BarracudaEntity })
     }
 
     override fun doHurtTarget(target: Entity): Boolean {
@@ -70,7 +84,7 @@ class BarracudaEntity(entityType: EntityType<out BarracudaEntity>, world: Level)
                 }
 
                 if (i > 0) {
-                    target.addEffect(MobEffectInstance(HybridAquaticMobEffects.BLEEDING.asHolder(), i * 20, 0), this)
+                    target.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), i * 20, 0), this)
                 }
             }
 

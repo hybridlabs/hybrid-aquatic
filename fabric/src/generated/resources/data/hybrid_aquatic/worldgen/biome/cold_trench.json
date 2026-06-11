@@ -1,0 +1,299 @@
+{
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "downfall": 0.5,
+  "effects": {
+    "fog_color": 12638463,
+    "sky_color": 7907327,
+    "water_color": 1912455,
+    "water_fog_color": 131607
+  },
+  "features": [
+    [],
+    [
+      "minecraft:lake_lava_underground",
+      "minecraft:lake_lava_surface"
+    ],
+    [
+      "minecraft:amethyst_geode"
+    ],
+    [
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    [],
+    [
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_iron_upper",
+      "minecraft:ore_iron_middle",
+      "minecraft:ore_iron_small",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper",
+      "minecraft:underwater_magma",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [],
+    [
+      "minecraft:spring_water",
+      "minecraft:spring_lava"
+    ],
+    [
+      "minecraft:glow_lichen"
+    ],
+    [
+      "minecraft:freeze_top_layer"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {
+    "hybrid_aquatic:anglerfish": {
+      "charge": 0.1,
+      "energy_budget": 0.3
+    },
+    "hybrid_aquatic:colossal_squid": {
+      "charge": 1.0,
+      "energy_budget": 0.1
+    },
+    "hybrid_aquatic:fangtooth": {
+      "charge": 0.15,
+      "energy_budget": 0.6
+    },
+    "hybrid_aquatic:giant_squid": {
+      "charge": 0.9,
+      "energy_budget": 0.1
+    },
+    "hybrid_aquatic:goblin_shark": {
+      "charge": 0.5,
+      "energy_budget": 0.8
+    },
+    "hybrid_aquatic:hatchetfish": {
+      "charge": 0.1,
+      "energy_budget": 0.6
+    },
+    "hybrid_aquatic:ratfish": {
+      "charge": 0.1,
+      "energy_budget": 0.2
+    },
+    "hybrid_aquatic:sleeper_shark": {
+      "charge": 0.5,
+      "energy_budget": 0.8
+    },
+    "hybrid_aquatic:slickhead": {
+      "charge": 0.1,
+      "energy_budget": 0.3
+    },
+    "hybrid_aquatic:snailfish": {
+      "charge": 0.1,
+      "energy_budget": 0.5
+    },
+    "hybrid_aquatic:tripod_fish": {
+      "charge": 0.1,
+      "energy_budget": 0.6
+    },
+    "hybrid_aquatic:umbrella_octopus": {
+      "charge": 0.8,
+      "energy_budget": 0.15
+    },
+    "hybrid_aquatic:viperfish": {
+      "charge": 0.15,
+      "energy_budget": 0.6
+    }
+  },
+  "spawners": {
+    "ambient": [
+      {
+        "type": "minecraft:bat",
+        "maxCount": 8,
+        "minCount": 8,
+        "weight": 10
+      }
+    ],
+    "axolotls": [],
+    "creature": [],
+    "hybrid_aquatic:cephalopod": [
+      {
+        "type": "hybrid_aquatic:colossal_squid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "hybrid_aquatic:giant_squid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "hybrid_aquatic:umbrella_octopus",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 7
+      }
+    ],
+    "hybrid_aquatic:critter": [],
+    "hybrid_aquatic:crustacean": [],
+    "hybrid_aquatic:fish": [
+      {
+        "type": "hybrid_aquatic:ratfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid_aquatic:snailfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid_aquatic:anglerfish",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:fangtooth",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:viperfish",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:hatchetfish",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:tripod_fish",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:sea_angel",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "hybrid_aquatic:slickhead",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "hybrid_aquatic:jelly": [],
+    "hybrid_aquatic:mammal": [],
+    "hybrid_aquatic:miniboss": [],
+    "hybrid_aquatic:minion": [],
+    "hybrid_aquatic:river_fish": [],
+    "hybrid_aquatic:shark": [
+      {
+        "type": "hybrid_aquatic:sleeper_shark",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "hybrid_aquatic:goblin_shark",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:spider",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:zombie",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 95
+      },
+      {
+        "type": "minecraft:zombie_villager",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "minecraft:skeleton",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:creeper",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:slime",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:enderman",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "minecraft:witch",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      }
+    ],
+    "underground_water_creature": [
+      {
+        "type": "minecraft:glow_squid",
+        "maxCount": 5,
+        "minCount": 2,
+        "weight": 5
+      }
+    ],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

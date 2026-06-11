@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CGC",
+    "CCC"
+  ],
+  "result": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/diving_helmet.json
+    "count": 1,
+    "id": "hybrid-aquatic:diving_helmet"
+  }
+}
+========
+    "item": "hybrid_aquatic:diving_helmet"
+  },
+  "show_notification": true
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/diving_helmet.json

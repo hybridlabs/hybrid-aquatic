@@ -1,44 +1,47 @@
 package dev.hybridlabs.aquatic.data.client
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
-import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
+import dev.hybridlabs.aquatic.effect.HAMobEffects
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.item.HAItemGroups
+import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
-import net.minecraft.core.HolderLookup
+import net.minecraft.Util
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
-import java.util.concurrent.CompletableFuture
 
-class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) : FabricLanguageProvider(output,lookupProvider) {
-    override fun generateTranslations(lookupProvider: HolderLookup.Provider, builder: TranslationBuilder) {
+class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
+    override fun generateTranslations(builder: TranslationBuilder) {
         // item group
         builder.add(
-            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HybridAquaticItemGroups.BLOCKS.get())
+            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HAItemGroups.BLOCKS.get())
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Blocks"
         )
 
         builder.add(
-            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HybridAquaticItemGroups.ITEMS.get())
+            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HAItemGroups.ITEMS.get())
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Items"
         )
 
         builder.add(
-            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HybridAquaticItemGroups.SPAWN_EGGS.get())
+            BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HAItemGroups.SPAWN_EGGS.get())
                 .orElseThrow { IllegalStateException("Item group not registered") }, "Hybrid Aquatic Spawn Eggs"
         )
 
         // message in a bottle
-        HybridAquaticBlocks.MESSAGE_IN_A_BOTTLE.get().descriptionId.let { key ->
+        HABlocks.MESSAGE_IN_A_BOTTLE.get().descriptionId.let { key ->
             builder.add(key, "Message in a Bottle")
             builder.add("$key.jar", "Message in a Jar")
             builder.add("$key.longneck", "Message in a Longneck Bottle")
+            builder.add("$key.potion", "Message in a Potion Bottle")
+            builder.add("$key.wine", "Message in a Wine Bottle")
         }
 
         // sea messages
@@ -47,86 +50,260 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             message.englishTitle?.let { title -> builder.add(message.titleTranslationKey, title) }
         }
 
-        builder.add(HybridAquaticItems.SEA_MESSAGE_BOOK.get(), "Sea Message")
+        builder.add(HAItems.SEA_MESSAGE_BOOK.get(), "Sea Message")
 
         //advancements
         mapOf(
-            "advancements.hybrid-aquatic.enter_water.title" to "Hybrid Aquatic",
-            "advancements.hybrid-aquatic.enter_water.description" to "Discover an expanded world beneath the waves",
+            "advancements.hybrid_aquatic.enter_water.title" to "Hybrid Aquatic",
+            "advancements.hybrid_aquatic.enter_water.description" to "Discover an expanded world beneath the waves",
 
-            "advancements.hybrid-aquatic.fishing_net.title" to "Not Quite A Bucket",
-            "advancements.hybrid-aquatic.fishing_net.description" to "Craft a fishing net to pick up and transport sea creatures",
+            "advancements.hybrid_aquatic.fishing_net.title" to "Not Quite A Bucket",
+            "advancements.hybrid_aquatic.fishing_net.description" to "Craft a fishing net to pick up and transport sea creatures",
 
-            "advancements.hybrid-aquatic.glowstick.title" to "Better Than Torches!",
-            "advancements.hybrid-aquatic.glowstick.description" to "Craft a glowstick to light your way in the deep sea",
+            "advancements.hybrid_aquatic.glowstick.title" to "Better Than Torches!",
+            "advancements.hybrid_aquatic.glowstick.description" to "Craft a glowstick to light your way in the deep sea",
 
-            "advancements.hybrid-aquatic.buoy.title" to "Oh Buoy!",
-            "advancements.hybrid-aquatic.buoy.description" to "Craft a buoy to guide sailors across the sea",
+            "advancements.hybrid_aquatic.sulfur.title" to "Not Glowstone Dust",
+            "advancements.hybrid_aquatic.sulfur.description" to "Find sulfur in a sulfuric cave",
 
-            "advancements.hybrid-aquatic.diving_suit.title" to "Diving In",
-            "advancements.hybrid-aquatic.diving_suit.description" to "Obtain a full set of diving gear",
+            "advancements.hybrid_aquatic.depth_charge.title" to "Mining Fatigue?",
+            "advancements.hybrid_aquatic.depth_charge.description" to "Craft a depth charge",
 
-            "advancements.hybrid-aquatic.hook.title" to "Hooked!",
-            "advancements.hybrid-aquatic.hook.description" to "Craft a hook to help you catch fish faster",
+            "advancements.hybrid_aquatic.buoy.title" to "Oh Buoy!",
+            "advancements.hybrid_aquatic.buoy.description" to "Craft a buoy to guide sailors across the sea",
 
-            "advancements.hybrid-aquatic.creeper_hook.title" to "An Explosive Catch",
-            "advancements.hybrid-aquatic.creeper_hook.description" to "Also try The Creeper's Code!",
+            "advancements.hybrid_aquatic.coral_chunk.title" to "That's Not A Sheep",
+            "advancements.hybrid_aquatic.coral_chunk.description" to "Shear a decorator crab to get a coral chunk",
 
-            "advancements.hybrid-aquatic.pearl.title" to "Pearly Whites",
-            "advancements.hybrid-aquatic.pearl.description" to "Obtain a pearl from a giant clam",
+            "advancements.hybrid_aquatic.coral_tools.title" to "Who Needs Mending?",
+            "advancements.hybrid_aquatic.coral_tools.description" to "Craft a tool out of coral chunks",
 
-            "advancements.hybrid-aquatic.black_pearl.title" to "The Black Pearl",
-            "advancements.hybrid-aquatic.black_pearl.description" to "What the Black Pearl really is... is freedom",
+            "advancements.hybrid_aquatic.get_clam.title" to "Happy As A Clam",
+            "advancements.hybrid_aquatic.get_clam.description" to "Feed a dugong some sea lettuce to get a clam",
 
-            "advancements.hybrid-aquatic.crab_claw.title" to "Clawesome",
-            "advancements.hybrid-aquatic.crab_claw.description" to "Obtain any crab claw",
+            "advancements.hybrid_aquatic.plant_clam.title" to "Shell Corporation",
+            "advancements.hybrid_aquatic.plant_clam.description" to "Grow your own clams underwater",
 
-            "advancements.hybrid-aquatic.ominous_hook.title" to "Hook, Line, and Pincher",
-            "advancements.hybrid-aquatic.ominous_hook.description" to "Obtain an Ominous Hook",
+            "advancements.hybrid_aquatic.kill_sirenian.title" to "Sea Cow Tipper",
+            "advancements.hybrid_aquatic.kill_sirenian.description" to "They're endangered, you know",
 
-            "advancements.hybrid-aquatic.kill_karkinos.title" to "A Herculean Task",
-            "advancements.hybrid-aquatic.kill_karkinos.description" to "Defeat Karkinos",
+            "advancements.hybrid_aquatic.nautilus_shell.title" to "Someone Used To Live Here",
+            "advancements.hybrid_aquatic.nautilus_shell.description" to "Obtain a nautilus shell",
 
-            "advancements.hybrid-aquatic.boat.title" to "Set Sail",
-            "advancements.hybrid-aquatic.boat.description" to "Craft a boat and explore the oceans of Minecraft",
+            "advancements.hybrid_aquatic.seashell_tools.title" to "Shell Yeah!",
+            "advancements.hybrid_aquatic.seashell_tools.description" to "Craft a tool out of nautilus shells",
 
-            "advancements.hybrid-aquatic.bigger_boat.title" to "We're Gonna Need A Bigger Boat",
-            "advancements.hybrid-aquatic.bigger_boat.description" to "Kill a shark",
+            "advancements.hybrid_aquatic.ominous_conch.title" to "If You Listen Closely..",
+            "advancements.hybrid_aquatic.ominous_conch.description" to "Trade with a hermit crab for an Ominous Shell",
+
+            "advancements.hybrid_aquatic.shell_beast.title" to "Shell-Shocked",
+            "advancements.hybrid_aquatic.shell_beast.description" to "Kill the Shell Beast",
+
+            "advancements.hybrid_aquatic.argonaut.title" to "This Boat Has Fins",
+            "advancements.hybrid_aquatic.argonaut.description" to "Build the Argonaut",
+
+            "advancements.hybrid_aquatic.conduit.title" to "Better Than Gills",
+            "advancements.hybrid_aquatic.conduit.description" to "Craft a conduit",
+
+            "advancements.hybrid_aquatic.turtle_scute.title" to "They Grow Up So Fast!",
+            "advancements.hybrid_aquatic.turtle_scute.description" to "Obtain a turtle scute",
+
+            "advancements.hybrid_aquatic.turtle_set.title" to "Cowabunga!",
+            "advancements.hybrid_aquatic.turtle_set.description" to "Craft a piece of turtle armor",
+
+            "advancements.hybrid_aquatic.diving_weight.title" to "The Fast Way Down",
+            "advancements.hybrid_aquatic.diving_weight.description" to "Craft a diving weight",
+
+            "advancements.hybrid_aquatic.diving_suit.title" to "Diving In",
+            "advancements.hybrid_aquatic.diving_suit.description" to "Obtain a full set of diving gear",
+
+            "advancements.hybrid_aquatic.diving_upgrade.title" to "Beachcombing",
+            "advancements.hybrid_aquatic.diving_upgrade.description" to "Find a diving suit upgrade template",
+
+            "advancements.hybrid_aquatic.reinforced_diving_suit.title" to "Diving Deeper",
+            "advancements.hybrid_aquatic.reinforced_diving_suit.description" to "Reinforce your diving gear",
+
+            "advancements.hybrid_aquatic.glowing_diving_suit.title" to "The Light In The Abyss",
+            "advancements.hybrid_aquatic.glowing_diving_suit.description" to "Make your diving suit glow in the dark",
+
+            "advancements.hybrid_aquatic.hook.title" to "Hooked!",
+            "advancements.hybrid_aquatic.hook.description" to "Craft a hook to help you catch fish faster",
+
+            "advancements.hybrid_aquatic.creeper_hook.title" to "An Explosive Catch",
+            "advancements.hybrid_aquatic.creeper_hook.description" to "Also try The Creeper's Code!",
+
+            "advancements.hybrid_aquatic.pearl.title" to "Pearly Whites",
+            "advancements.hybrid_aquatic.pearl.description" to "Obtain a pearl from a giant clam",
+
+            "advancements.hybrid_aquatic.black_pearl.title" to "The Black Pearl",
+            "advancements.hybrid_aquatic.black_pearl.description" to "What the Black Pearl really is... is freedom",
+
+            "advancements.hybrid_aquatic.crab_claw.title" to "Clawesome",
+            "advancements.hybrid_aquatic.crab_claw.description" to "Obtain any crab claw",
+
+            "advancements.hybrid_aquatic.ominous_hook.title" to "Hook, Line, and Pincher",
+            "advancements.hybrid_aquatic.ominous_hook.description" to "Obtain an Ominous Hook",
+
+            "advancements.hybrid_aquatic.kill_karkinos.title" to "A Herculean Task",
+            "advancements.hybrid_aquatic.kill_karkinos.description" to "Defeat Karkinos",
+
+            "advancements.hybrid_aquatic.bigger_boat.title" to "We're Gonna Need A Bigger Boat",
+            "advancements.hybrid_aquatic.bigger_boat.description" to "Block a shark attack with a shield to get a shark tooth",
+
+            "advancements.hybrid_aquatic.trident.title" to "Poseidon Quivers Before Him!",
+            "advancements.hybrid_aquatic.trident.description" to "Obtain a trident",
         ).forEach { (key, translation) ->
             builder.add(key, translation)
         }
+        //-advancements
+
+        //Sound Events
+        mapOf(
+            HASoundEvents.MANATEE_AMBIENT to "Manatee snorts",
+            HASoundEvents.MANATEE_HURT to "Manatee hurts",
+            HASoundEvents.MANATEE_DIE to "Manatee dies",
+            HASoundEvents.MANATEE_SWIM to "Manatee swims",
+            HASoundEvents.MANATEE_SPLASH to "Manatee splashes",
+
+            HASoundEvents.DUGONG_AMBIENT to "Dugong chirps",
+            HASoundEvents.DUGONG_HURT to "Dugong hurts",
+            HASoundEvents.DUGONG_DIE to "Dugong dies",
+            HASoundEvents.DUGONG_SWIM to "Dugong swims",
+            HASoundEvents.DUGONG_SPLASH to "Dugong splashes",
+
+            HASoundEvents.SIRENIAN_EAT to "Sirenian eats",
+
+            HASoundEvents.KARKINOS_AMBIENT to "Karkinos chitters",
+            HASoundEvents.KARKINOS_HURT to "Karkinos hurts",
+            HASoundEvents.KARKINOS_DIE to "Karkinos dies",
+
+            HASoundEvents.KARCINOMA_AMBIENT to "Karcinoma chitters",
+            HASoundEvents.KARCINOMA_HURT to "Karcinoma hurts",
+            HASoundEvents.KARCINOMA_DIE to "Karcinoma dies",
+
+            HASoundEvents.KARCINOGEN_AMBIENT to "Karcinogen chitters",
+            HASoundEvents.KARCINOGEN_HURT to "Karcinogen hurts",
+            HASoundEvents.KARCINOGEN_DIE to "Karcinogen dies",
+
+            HASoundEvents.SHELL_BEAST_SHOOT to "Shell Beast fires",
+            HASoundEvents.SHELL_BEAST_AMBIENT to "Shell Beast chitters",
+            HASoundEvents.SHELL_BEAST_HURT to "Shell Beast hurts",
+            HASoundEvents.SHELL_BEAST_DIE to "Shell Beast dies",
+            HASoundEvents.SHELL_BEAST_ROAR to "Shell Beast roars",
+
+            HASoundEvents.HYPNAUTILUS_AMBIENT to "Hypnautilus spirals",
+            HASoundEvents.HYPNAUTILUS_HURT to "Hypnautilus hurts",
+            HASoundEvents.HYPNAUTILUS_DIE to "Hypnautilus dies",
+
+            HASoundEvents.OMINOUS_CONCH_BLOWS to "Ominous Conch plays"
+        ).forEach { (soundEvent, translation) ->
+            builder.add(Util.makeDescriptionId("subtitles", soundEvent.get().location), translation)
+        }
+        //-Sound Events
 
         mapOf(
-            "profile.item.hybrid-aquatic.anglerfish" to "The Anglerfish, a deep sea predator known for its bioluminescent lure, which it uses to attract prey in the dark ocean depths.",
-            "profile.item.hybrid-aquatic.barreleye" to "The Barreleye, a deep-sea fish known for its transparent head and tubular eyes, which allow it to look upward to detect prey and predators above.",
-            "profile.item.hybrid-aquatic.boxfish" to "The Boxfish, a small, square-shaped fish with a rigid, box-like body, known for its ability to release toxins when stressed.",
-            "profile.item.hybrid-aquatic.betta" to "The Betta, also known as the Siamese fighting fish, is a colorful, territorial freshwater fish known for its vibrant fins and aggressive behavior towards other males.",
-            "profile.item.hybrid-aquatic.carp" to "The Carp, a hardy, freshwater fish widely distributed and valued for its adaptability, playing a significant role in aquaculture and recreational fishing.",
-            "profile.item.hybrid-aquatic.danio" to "The Danio, a small, colorful freshwater fish known for its active swimming behavior and popularity in home aquariums.",
-            "profile.item.hybrid-aquatic.discus" to "The Discus, a vibrant, round-shaped freshwater fish admired for its striking patterns and colors, often kept in aquariums for its beauty.",
-            "profile.item.hybrid-aquatic.dragonfish" to "The Dragonfish, a deep-sea predator with sharp teeth and bioluminescent photophores, known for its ability to produce light to attract prey and communicate in the dark ocean depths.",
-            "profile.item.hybrid-aquatic.golden_dorado" to "The Golden Dorado, a large, powerful freshwater fish native to South America, prized by anglers for its strength and golden scales.",
-            "profile.item.hybrid-aquatic.goldfish" to "The Goldfish, a domesticated freshwater fish, well-known for its bright orange color and common presence in ponds and aquariums.",
-            "profile.item.hybrid-aquatic.gourami" to "The Gourami, a diverse group of freshwater fish, recognized for their labyrinth organ allowing them to breathe air and their peaceful nature in community tanks.",
-            "profile.item.hybrid-aquatic.mackerel" to "The Mackerel, a fast-swimming, pelagic fish with streamlined bodies, valued for its role in the food chain and commercial fishing.",
-            "profile.item.hybrid-aquatic.moray_eel" to "The Moray Eel, a long, slender predator with a snake-like body and sharp teeth, known for hiding in crevices in reefs and ambushing prey.",
-            "profile.item.hybrid-aquatic.oscar" to "The Oscar, a large, aggressive freshwater cichlid fish, popular in aquariums for its intelligence and striking patterns.",
-            "profile.item.hybrid-aquatic.pearlfish" to "The Pearlfish, a slender fish that often lives symbiotically within the body cavities of sea cucumbers, known for its unusual habitat choice.",
-            "profile.item.hybrid-aquatic.piranha" to "The Piranha, a notorious freshwater fish known for its sharp teeth and powerful bite, often exaggerated for its feeding frenzy behavior.",
-            "profile.item.hybrid-aquatic.rockfish" to "The Rockfish, a long-lived marine fish with venomous spines, known for its camouflage abilities and preference for rocky sea floors.",
-            "profile.item.hybrid-aquatic.sea_bass" to "The Sea Bass, a popular game and commercial fish, recognized for its firm texture and mild flavor, often found in coastal waters.",
-            "profile.item.hybrid-aquatic.snailfish" to "The Snailfish, a soft-bodied, deep-sea fish adapted to extreme pressures, often found clinging to rocks or ice with its pelvic fins.",
-            "profile.item.hybrid-aquatic.squirrelfish" to "The Squirrelfish, a nocturnal reef fish with large eyes and a bright red body, known for its loud vocalizations produced by grinding its teeth.",
-            "profile.item.hybrid-aquatic.blue_spotted_stingray" to "The Blue-Spotted Stingray, a striking marine fish known for its vibrant blue spots and flattened body, often found gliding along sandy sea floors.",
-            "profile.item.hybrid-aquatic.spotted_eagle_ray" to "The Spotted Eagle Ray, a graceful, large ray recognized by its dark body covered in white spots and long, whip-like tail, often seen swimming near the surface in tropical waters.",
-            "profile.item.hybrid-aquatic.stonefish" to "The Stonefish, a venomous, camouflaged fish that blends into the seafloor, equipped with potent spines capable of delivering a dangerous sting.",
-            "profile.item.hybrid-aquatic.ocean_sunfish" to "The Ocean Sunfish, also known as the Mola, is one of the heaviest bony fish, recognizable by its flattened, disk-like body and tendency to bask near the ocean surface.",
-            "profile.item.hybrid-aquatic.surgeonfish" to "The Surgeonfish, a vibrant, reef-dwelling fish known for its bright colors, popularized by its role in marine ecosystems as an algae grazer.",
-            "profile.item.hybrid-aquatic.neon_tetra" to "The Neon Tetra, a small, brightly colored freshwater fish known for its iridescent blue and red stripes, making it a popular choice for home aquariums.",
-            "profile.item.hybrid-aquatic.tiger_barb" to "The Tiger Barb, a lively, freshwater fish recognized by its bold black stripes over an orange-gold body, often kept in groups in community tanks.",
-            "profile.item.hybrid-aquatic.toadfish" to "The Toadfish, a small, bottom-dwelling fish with a flattened body and rough skin, commonly found in coastal waters and known for its toxicity.",
-            "profile.item.hybrid-aquatic.triggerfish" to "The Triggerfish, a brightly colored, reef-dwelling fish known for its strong jaws, sharp teeth, and the ability to lock its dorsal fin in an upright position for defense.",
-            "profile.item.hybrid-aquatic.tuna" to "The Tuna, a fast-swimming, large, pelagic fish with a streamlined body and yellow-colored fins, highly valued in commercial and sport fishing.",
+            "journal.description.hybrid_aquatic.anglerfish" to
+                    "A deep-sea fish with a glowing lure, used to attract prey.",
+            "journal.description.hybrid_aquatic.barreleye" to
+                    "A deep-sea fish with a transparent head, letting it see far above it.",
+            "journal.description.hybrid_aquatic.boxfish" to
+                    "A small box-shaped fish, capable of releasing powerful toxins when stressed.",
+            "journal.description.hybrid_aquatic.betta" to
+                    "A small freshwater fish, known for its flowing fins, territorial behaviour, and beautiful colors.",
+            "journal.description.hybrid_aquatic.carp" to
+                    "A hardy freshwater fish, can be bred to produce koi and goldfish.",
+            "journal.description.hybrid_aquatic.danio" to
+                    "The Danio, a small, colorful freshwater fish known for its active swimming behavior and popularity in home aquariums.",
+            "journal.description.hybrid_aquatic.discus" to
+                    "A disc-shaped freshwater fish, known for being territorial and having colorful scales.",
+            "journal.description.hybrid_aquatic.dragonfish" to
+                    "A deep-sea fish with a long glowing lure extending from its jaw, used to attract prey.",
+            "journal.description.hybrid_aquatic.golden_dorado" to
+                    "A large freshwater predator, known for its strong scales and large teeth.",
+            "journal.description.hybrid_aquatic.gourami" to
+                    "A small freshwater fish, known for being territorial and having colorful scales.",
+            "journal.description.hybrid_aquatic.mackerel" to
+                    "A small baitfish known for forming large schools.",
+            "journal.description.hybrid_aquatic.herring" to
+                    "A small baitfish known for forming large schools.",
+            "journal.description.hybrid_aquatic.moray_eel" to
+                    "A snake-like predatory fish that hides in crevices and caves on the coral reef.",
+            "journal.description.hybrid_aquatic.cichlid" to
+                    "A freshwater fish, popular in aquariums for its intelligence and striking patterns.",
+            "journal.description.hybrid_aquatic.pearlfish" to
+                    "A small fish that lives inside sea cucumbers.",
+            "journal.description.hybrid_aquatic.piranha" to
+                    "A small freshwater fish known for its sharp teeth and voracious appetite.",
+            "journal.description.hybrid_aquatic.rockfish" to
+                    "A saltwater fish, known for its large eyes and its tendency to hide among rocks.",
+            "journal.description.hybrid_aquatic.sea_bass" to
+                    "A predatory saltwater fish, often used as a food source and known for its delicious flavor.",
+            "journal.description.hybrid_aquatic.snailfish" to
+                    "A deep-sea fish with an extremely soft and fragile body",
+            "journal.description.hybrid_aquatic.squirrelfish" to
+                    "A nocturnal reef fish known for its large eyes and sharp spine on its underside",
+            "journal.description.hybrid_aquatic.coelacanth" to
+                    "A deep-sea fish once thought to be extinct, now considered a living fossil.",
+            "journal.description.hybrid_aquatic.oarfish" to
+                    "A long deep-sea fish that often appears before earthquakes, thought to be the inspiration behind sea serpents.",
+            "journal.description.hybrid_aquatic.damselfish" to
+                    "An extremely common reef fish, found in a variety of shapes and colors, often swimming in large schools.",
+            "journal.description.hybrid_aquatic.parrotfish" to
+                    "An important reef fish, known for its parrot-like beak, as well as its ability to eat corals and produce sand.",
+            "journal.description.hybrid_aquatic.sheepshead_wrasse" to
+                    "A large fish that lives in kelp forests, eating sea urchins and helping keep the kelp alive.",
+            "journal.description.hybrid_aquatic.trevally" to
+                    "A schooling fish that prefers to follow large animals around.",
+            "journal.description.hybrid_aquatic.stingray" to
+                    "A large circular fish that swims along the seafloor, known for having a venomous spine on the end of its tail.",
+            "journal.description.hybrid_aquatic.stonefish" to
+                    "A bottom-dwelling fish that mimics the appearance of rocks around it, known for its extremely potent venom.",
+            "journal.description.hybrid_aquatic.ocean_sunfish" to
+                    "The largest bony fish in the world, known for its indifference to pain.",
+            "journal.description.hybrid_aquatic.surgeonfish" to
+                    "A reef fish, named after sharp protrusions on either side of its tail.",
+            "journal.description.hybrid_aquatic.clownfish" to
+                    "A brightly colored reef fish, often found living in anemones, and popularized by a children's movie.",
+            "journal.description.hybrid_aquatic.lionfish" to
+                    "A predatory reef fish with venomous spines, considered invasive in some parts of the world.",
+            "journal.description.hybrid_aquatic.tetra" to
+                    "A small freshwater fish, known for its bright colors and schooling behaviour.",
+            "journal.description.hybrid_aquatic.tiger_barb" to
+                    "A small freshwater fish, known for its striped pattern and schooling behaviour.",
+            "journal.description.hybrid_aquatic.blowfish" to
+                    "A type of pufferfish, known for making intricate designs in the sandy seabed.",
+            "journal.description.hybrid_aquatic.triggerfish" to
+                    "A large reef fish, known for its sharp teeth and aggressive behaviour, named after a sharp spine protruding out of its back.",
+            "journal.description.hybrid_aquatic.tuna" to
+                    "An open-water predatory fish that never stops swimming.",
+            "journal.description.hybrid_aquatic.mahi" to
+                    "An open-water predatory fish, known for its bright colors.",
+            "journal.description.hybrid_aquatic.blobfish" to
+                    "A deep-sea fish with a soft gelatinous body, adapted to survive under immense pressure.",
+            "journal.description.hybrid_aquatic.hagfish" to
+                    "A primitive eel-like scavenger, capable of producing large amounts of slime when threatened.",
+            "journal.description.hybrid_aquatic.flashlight_fish" to
+                    "A nocturnal deep-sea fish with glowing organs beneath its eyes, used for communication and attracting prey.",
+            "journal.description.hybrid_aquatic.opah" to
+                    "A large open-ocean fish, notable for being one of the few warm-blooded fish in the world.",
+            "journal.description.hybrid_aquatic.seahorse" to
+                    "A small reef fish that swims upright, known for its curled tail and the male's ability to carry eggs.",
+            "journal.description.hybrid_aquatic.needlefish" to
+                    "A slender predatory fish with a long beak filled with sharp teeth, often found near the water's surface.",
+            "journal.description.hybrid_aquatic.flying_fish" to
+                    "An open-ocean fish capable of gliding above the water using its enlarged fins.",
+            "journal.description.hybrid_aquatic.goldfish" to
+                    "A domesticated freshwater fish bred from carp, known for its bright colors and many varieties.",
+            "journal.description.hybrid_aquatic.trout" to
+                    "A freshwater fish commonly found in rivers and lakes, valued for its speed and ability to swim upstream.",
+            "journal.description.hybrid_aquatic.sunfish" to
+                    "A common freshwater fish known for its rounded body and willingness to bite almost anything.",
+            "journal.description.hybrid_aquatic.pleco" to
+                    "An armored freshwater catfish that feeds on algae and uses its sucker-like mouth to cling to surfaces.",
+            "journal.description.hybrid_aquatic.john_dory" to
+                    "A predatory saltwater fish recognized by the large dark spot on its side and highly protrusible jaws.",
+            "journal.description.hybrid_aquatic.ratfish" to
+                    "A deep-sea relative of sharks, known for its large eyes, long tail, and unusual appearance.",
 
             ).forEach { (key, profile) ->
             builder.add(key, profile)
@@ -137,266 +314,519 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
 
         // blocks
         mapOf(
-            HybridAquaticBlocks.BASKING_SHARK_PLUSHIE.get() to "Basking Shark Plushie",
-            HybridAquaticBlocks.BULL_SHARK_PLUSHIE.get() to "Bull Shark Plushie",
-            HybridAquaticBlocks.FRILLED_SHARK_PLUSHIE.get() to "Frilled Shark Plushie",
-            HybridAquaticBlocks.GREAT_WHITE_SHARK_PLUSHIE.get() to "Great White Shark Plushie",
-            HybridAquaticBlocks.HAMMERHEAD_SHARK_PLUSHIE.get() to "Hammerhead Shark Plushie",
-            HybridAquaticBlocks.THRESHER_SHARK_PLUSHIE.get() to "Thresher Shark Plushie",
-            HybridAquaticBlocks.TIGER_SHARK_PLUSHIE.get() to "Tiger Shark Plushie",
-            HybridAquaticBlocks.WHALE_SHARK_PLUSHIE.get() to "Whale Shark Plushie",
-            HybridAquaticBlocks.ANEMONE.get() to "Anemone",
-            HybridAquaticBlocks.GIANT_GREEN_ANEMONE.get() to "Giant Green Anemone",
-            HybridAquaticBlocks.STRAWBERRY_ANEMONE.get() to "Strawberry Anemone",
-            HybridAquaticBlocks.TUBE_SPONGE.get() to "Tube Sponge",
-            HybridAquaticBlocks.CRAB_POT.get() to "Crab Pot",
-            HybridAquaticBlocks.HYBRID_CRATE.get() to "Hybrid Crate",
-            HybridAquaticBlocks.OAK_CRATE.get() to "Oak Crate",
-            HybridAquaticBlocks.SPRUCE_CRATE.get() to "Spruce Crate",
-            HybridAquaticBlocks.BIRCH_CRATE.get() to "Birch Crate",
-            HybridAquaticBlocks.DARK_OAK_CRATE.get() to "Dark Oak Crate",
-            HybridAquaticBlocks.JUNGLE_CRATE.get() to "Jungle Crate",
-            HybridAquaticBlocks.ACACIA_CRATE.get() to "Acacia Crate",
-            HybridAquaticBlocks.MANGROVE_CRATE.get() to "Mangrove Crate",
-            HybridAquaticBlocks.CHERRY_CRATE.get() to "Cherry Crate",
-            HybridAquaticBlocks.BAMBOO_CRATE.get() to "Bamboo Crate",
-            HybridAquaticBlocks.BUOY.get() to "Buoy",
-            HybridAquaticBlocks.GIANT_CLAM.get() to "Giant Clam",
+            HABlocks.BASKING_SHARK_PLUSHIE.get() to "Basking Shark Plushie",
+            HABlocks.BULL_SHARK_PLUSHIE.get() to "Bull Shark Plushie",
+            HABlocks.FRILLED_SHARK_PLUSHIE.get() to "Frilled Shark Plushie",
+            HABlocks.GREAT_WHITE_SHARK_PLUSHIE.get() to "Great White Shark Plushie",
+            HABlocks.HAMMERHEAD_SHARK_PLUSHIE.get() to "Hammerhead Shark Plushie",
+            HABlocks.THRESHER_SHARK_PLUSHIE.get() to "Thresher Shark Plushie",
+            HABlocks.TIGER_SHARK_PLUSHIE.get() to "Tiger Shark Plushie",
+            HABlocks.WHALE_SHARK_PLUSHIE.get() to "Whale Shark Plushie",
+            HABlocks.ANEMONE.get() to "Anemone",
+            HABlocks.GIANT_GREEN_ANEMONE.get() to "Giant Green Anemone",
+            HABlocks.STRAWBERRY_ANEMONE.get() to "Strawberry Anemone",
+            HABlocks.TUBE_SPONGE.get() to "Tube Sponge",
+            HABlocks.HARP_SPONGE.get() to "Harp Sponge",
+            HABlocks.PING_PONG_SPONGE.get() to "Ping Pong Sponge",
+            HABlocks.GLASS_SPONGE.get() to "Glass Sponge",
+            HABlocks.CRAB_POT.get() to "Crab Pot",
+            HABlocks.HYBRID_CRATE.get() to "Hybrid Crate",
+            HABlocks.OAK_CRATE.get() to "Oak Crate",
+            HABlocks.SPRUCE_CRATE.get() to "Spruce Crate",
+            HABlocks.BIRCH_CRATE.get() to "Birch Crate",
+            HABlocks.DARK_OAK_CRATE.get() to "Dark Oak Crate",
+            HABlocks.JUNGLE_CRATE.get() to "Jungle Crate",
+            HABlocks.ACACIA_CRATE.get() to "Acacia Crate",
+            HABlocks.MANGROVE_CRATE.get() to "Mangrove Crate",
+            HABlocks.CHERRY_CRATE.get() to "Cherry Crate",
+            HABlocks.BAMBOO_CRATE.get() to "Bamboo Crate",
+            HABlocks.GRASSY_SAND.get() to "Grassy Sand",
+            HABlocks.AERATED_SAND.get() to "Aerated Sand",
+            HABlocks.BUBBLE_GEYSER.get() to "Bubble Geyser",
+            HABlocks.WHITE_SAND.get() to "White Sand",
+            HABlocks.WHITE_SANDSTONE.get() to "White Sandstone",
+            HABlocks.WHITE_SANDSTONE_STAIRS.get() to "White Sandstone Stairs",
+            HABlocks.WHITE_SANDSTONE_SLAB.get() to "White Sandstone Slab",
+            HABlocks.WHITE_SANDSTONE_WALL.get() to "White Sandstone Wall",
+            HABlocks.SMOOTH_WHITE_SANDSTONE.get() to "Smooth White Sandstone",
+            HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get() to "Smooth White Sandstone Slab",
+            HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get() to "Smooth White Sandstone Stairs",
+            HABlocks.CUT_WHITE_SANDSTONE.get() to "Cut White Sandstone",
+            HABlocks.CUT_WHITE_SANDSTONE_SLAB.get() to "Cut White Sandstone Slab",
+            HABlocks.CHISELED_WHITE_SANDSTONE.get() to "Chiseled White Sandstone",
+            HABlocks.BONE_STAIRS.get() to "Bone Stairs",
+            HABlocks.BONE_SLAB.get() to "Bone Slab",
+            HABlocks.BONE_WALL.get() to "Bone Wall",
+            HABlocks.BONE_FENCE.get() to "Bone Fence",
+            HABlocks.SUSPICIOUS_RED_SAND.get() to "Suspicious Red Sand",
+            HABlocks.CORALSTONE.get() to "Coralstone",
+            HABlocks.SHORESTONE.get() to "Shorestone",
+            HABlocks.BARNACLE_SHORESTONE.get() to "Barnacle Shorestone",
+            HABlocks.MARINE_SNOW.get() to "Marine Snow",
+            HABlocks.RED_BRINESTONE.get() to "Red Brinestone",
+            HABlocks.RED_BRINESTONE_STAIRS.get() to "Red Brinestone Stairs",
+            HABlocks.RED_BRINESTONE_SLAB.get() to "Red Brinestone Slab",
+            HABlocks.RED_BRINESTONE_WALL.get() to "Red Brinestone Wall",
+            HABlocks.RED_BRINESTONE_BRICKS.get() to "Red Brinestone Bricks",
+            HABlocks.RED_BRINESTONE_BRICK_STAIRS.get() to "Red Brinestone Brick Stairs",
+            HABlocks.RED_BRINESTONE_BRICK_SLAB.get() to "Red Brinestone Brick Slab",
+            HABlocks.RED_BRINESTONE_BRICK_WALL.get() to "Red Brinestone Brick Wall",
+            HABlocks.CHISELED_RED_BRINESTONE.get() to "Chiseled Red Brinestone",
+            HABlocks.POLISHED_RED_BRINESTONE.get() to "Polished Red Brinestone",
+            HABlocks.POLISHED_RED_BRINESTONE_STAIRS.get() to "Polished Red Brinestone Stairs",
+            HABlocks.POLISHED_RED_BRINESTONE_SLAB.get() to "Polished Red Brinestone Slab",
+            HABlocks.ORANGE_BRINESTONE.get() to "Orange Brinestone",
+            HABlocks.ORANGE_BRINESTONE_STAIRS.get() to "Orange Brinestone Stairs",
+            HABlocks.ORANGE_BRINESTONE_SLAB.get() to "Orange Brinestone Slab",
+            HABlocks.ORANGE_BRINESTONE_WALL.get() to "Orange Brinestone Wall",
+            HABlocks.ORANGE_BRINESTONE_BRICKS.get() to "Orange Brinestone Bricks",
+            HABlocks.ORANGE_BRINESTONE_BRICK_STAIRS.get() to "Orange Brinestone Brick Stairs",
+            HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get() to "Orange Brinestone Brick Slab",
+            HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get() to "Orange Brinestone Brick Wall",
+            HABlocks.CHISELED_ORANGE_BRINESTONE.get() to "Chiseled Orange Brinestone",
+            HABlocks.POLISHED_ORANGE_BRINESTONE.get() to "Polished Orange Brinestone",
+            HABlocks.POLISHED_ORANGE_BRINESTONE_STAIRS.get() to "Polished Orange Brinestone Stairs",
+            HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get() to "Polished Orange Brinestone Slab",
+            HABlocks.YELLOW_BRINESTONE.get() to "Yellow Brinestone",
+            HABlocks.YELLOW_BRINESTONE_STAIRS.get() to "Yellow Brinestone Stairs",
+            HABlocks.YELLOW_BRINESTONE_SLAB.get() to "Yellow Brinestone Slab",
+            HABlocks.YELLOW_BRINESTONE_WALL.get() to "Yellow Brinestone Wall",
+            HABlocks.YELLOW_BRINESTONE_BRICKS.get() to "Yellow Brinestone Bricks",
+            HABlocks.YELLOW_BRINESTONE_BRICK_STAIRS.get() to "Yellow Brinestone Brick Stairs",
+            HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get() to "Yellow Brinestone Brick Slab",
+            HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get() to "Yellow Brinestone Brick Wall",
+            HABlocks.CHISELED_YELLOW_BRINESTONE.get() to "Chiseled Yellow Brinestone",
+            HABlocks.POLISHED_YELLOW_BRINESTONE.get() to "Polished Yellow Brinestone",
+            HABlocks.POLISHED_YELLOW_BRINESTONE_STAIRS.get() to "Polished Yellow Brinestone Stairs",
+            HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get() to "Polished Yellow Brinestone Slab",
+            HABlocks.SCHIST.get() to "Schist",
+            HABlocks.SCHIST_STAIRS.get() to "Schist Stairs",
+            HABlocks.SCHIST_SLAB.get() to "Schist Slab",
+            HABlocks.SCHIST_WALL.get() to "Schist Wall",
+            HABlocks.SCHIST_BRICKS.get() to "Schist Bricks",
+            HABlocks.SCHIST_BRICK_STAIRS.get() to "Schist Brick Stairs",
+            HABlocks.SCHIST_BRICK_SLAB.get() to "Schist Brick Slab",
+            HABlocks.SCHIST_BRICK_WALL.get() to "Schist Brick Wall",
+            HABlocks.CHISELED_SCHIST.get() to "Chiseled Schist",
+            HABlocks.POLISHED_SCHIST.get() to "Polished Schist",
+            HABlocks.POLISHED_SCHIST_STAIRS.get() to "Polished Schist Stairs",
+            HABlocks.POLISHED_SCHIST_SLAB.get() to "Polished Schist Slab",
+            HABlocks.CHIMNEYSTONE.get() to "Chimneystone",
+            HABlocks.CHIMNEYSTONE_STAIRS.get() to "Chimneystone Stairs",
+            HABlocks.CHIMNEYSTONE_SLAB.get() to "Chimneystone Slab",
+            HABlocks.CHIMNEYSTONE_WALL.get() to "Chimneystone Wall",
+            HABlocks.CHIMNEYSTONE_BRICKS.get() to "Chimneystone Bricks",
+            HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get() to "Chimneystone Brick Stairs",
+            HABlocks.CHIMNEYSTONE_BRICK_SLAB.get() to "Chimneystone Brick Slab",
+            HABlocks.CHIMNEYSTONE_BRICK_WALL.get() to "Chimneystone Brick Wall",
+            HABlocks.CHISELED_CHIMNEYSTONE.get() to "Chiseled Chimneystone",
+            HABlocks.POLISHED_CHIMNEYSTONE.get() to "Polished Chimneystone",
+            HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get() to "Polished Chimneystone Stairs",
+            HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get() to "Polished Chimneystone Slab",
+            HABlocks.BUOY.get() to "Buoy",
+            HABlocks.BELL_BUOY.get() to "Bell Buoy",
+            HABlocks.GIANT_CLAM.get() to "Giant Clam",
+            HABlocks.OYSTER.get() to "Oyster",
+            HABlocks.CLAMS.get() to "Clam",
+            HABlocks.MUSSELS.get() to "Mussel",
+            HABlocks.WILD_MUSSELS.get() to "Wild Mussels",
+            HABlocks.CRYSTALLINE_SULFUR.get() to "Crystalline Sulfur",
+            HABlocks.DEPTH_CHARGE.get() to "Depth Charge",
 
-            HybridAquaticBlocks.RED_ALGAE.get() to "Red Algae",
-            HybridAquaticBlocks.TALL_RED_ALGAE.get() to "Tall Red Algae",
+            HABlocks.SHORT_RED_ALGAE.get() to "Short Red Algae",
+            HABlocks.RED_ALGAE.get() to "Red Algae",
+            HABlocks.TALL_RED_ALGAE.get() to "Tall Red Algae",
 
-            HybridAquaticPlatformBlocks.DUNEGRASS.get() to "Dunegrass",
-            HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get() to "Tall Dunegrass",
+            HAPlatformBlocks.DUNEGRASS.get() to "Dunegrass",
+            HAPlatformBlocks.TALL_DUNEGRASS.get() to "Tall Dunegrass",
 
-            HybridAquaticPlatformBlocks.CATTAIL.get() to "Cattail",
+            HAPlatformBlocks.CATTAIL.get() to "Cattail",
 
-            HybridAquaticBlocks.SARGASSUM.get() to "Sargassum",
-            HybridAquaticBlocks.SARGASSUM_PLANT.get() to "Sargassum Plant",
-            HybridAquaticBlocks.BULL_KELP.get() to "Bull Kelp",
-            HybridAquaticBlocks.BULL_KELP_PLANT.get() to "Bull Kelp Plant",
-            HybridAquaticBlocks.FLOATING_SARGASSUM.get() to "Floating Sargassum",
-            HybridAquaticBlocks.WATER_LETTUCE.get() to "Water Lettuce",
-            HybridAquaticBlocks.JUNGLE_LILY_PAD.get() to "Jungle Lily Pad",
-            HybridAquaticBlocks.RAFT.get() to "Raft",
+            HABlocks.SARGASSUM.get() to "Sargassum",
+            HABlocks.SARGASSUM_PLANT.get() to "Sargassum Plant",
+            HABlocks.BULL_KELP.get() to "Bull Kelp",
+            HABlocks.BULL_KELP_PLANT.get() to "Bull Kelp Plant",
+            HABlocks.DELESSERIA.get() to "Delesseria",
+            HABlocks.DELESSERIA_PLANT.get() to "Delesseria Plant",
+            HABlocks.FLOATING_SARGASSUM.get() to "Floating Sargassum",
+            HABlocks.WATER_LETTUCE.get() to "Water Lettuce",
+            HABlocks.WATER_HYACINTH.get() to "Water Hyacinth",
+            HABlocks.JUNGLE_LILY_PAD.get() to "Jungle Lily Pad",
+            HABlocks.RAFT.get() to "Raft",
+            HABlocks.OAK_RAFT.get() to "Oak Raft",
+            HABlocks.SPRUCE_RAFT.get() to "Spruce Raft",
+            HABlocks.BIRCH_RAFT.get() to "Birch Raft",
+            HABlocks.DARK_OAK_RAFT.get() to "Dark Oak Raft",
+            HABlocks.JUNGLE_RAFT.get() to "Jungle Raft",
+            HABlocks.ACACIA_RAFT.get() to "Acacia Raft",
+            HABlocks.MANGROVE_RAFT.get() to "Mangrove Raft",
+            HABlocks.CHERRY_RAFT.get() to "Cherry Raft",
+            HABlocks.DRIFTWOOD_RAFT.get() to "Driftwood Raft",
 
-            HybridAquaticBlocks.GLOWING_PLANKTON.get() to "Glowing Plankton",
+            HABlocks.GLOWING_PLANKTON.get() to "Glowing Plankton",
 
-            HybridAquaticBlocks.SEA_LETTUCE.get() to "Sea Lettuce",
-            HybridAquaticBlocks.TALL_SEA_LETTUCE.get() to "Tall Sea Lettuce",
+            HABlocks.SEA_LETTUCE.get() to "Sea Lettuce",
+            HABlocks.TALL_SEA_LETTUCE.get() to "Tall Sea Lettuce",
 
-            HybridAquaticBlocks.LOPHELIA_CORAL_BLOCK.get() to "Lophelia Coral Block",
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_BLOCK.get() to "Dead Lophelia Coral Block",
-            HybridAquaticBlocks.LOPHELIA_CORAL.get() to "Lophelia Coral",
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL.get() to "Dead Lophelia Coral",
-            HybridAquaticBlocks.LOPHELIA_CORAL_FAN.get() to "Lophelia Coral Fan",
-            HybridAquaticBlocks.DEAD_LOPHELIA_CORAL_FAN.get() to "Dead Lophelia Coral Fan",
-            HybridAquaticBlocks.ROSE_CORAL_BLOCK.get() to "Rose Coral Block",
-            HybridAquaticBlocks.DEAD_ROSE_CORAL_BLOCK.get() to "Dead Rose Coral Block",
-            HybridAquaticBlocks.ROSE_CORAL.get() to "Rose Coral",
-            HybridAquaticBlocks.DEAD_ROSE_CORAL.get() to "Dead Rose Coral",
-            HybridAquaticBlocks.ROSE_CORAL_FAN.get() to "Rose Coral Fan",
-            HybridAquaticBlocks.DEAD_ROSE_CORAL_FAN.get() to "Dead Rose Coral Fan",
-            HybridAquaticBlocks.LEAF_CORAL_BLOCK.get() to "Leaf Coral Block",
-            HybridAquaticBlocks.DEAD_LEAF_CORAL_BLOCK.get() to "Dead Leaf Coral Block",
-            HybridAquaticBlocks.LEAF_CORAL.get() to "Leaf Coral",
-            HybridAquaticBlocks.DEAD_LEAF_CORAL.get() to "Dead Leaf Coral",
-            HybridAquaticBlocks.LEAF_CORAL_FAN.get() to "Leaf Coral Fan",
-            HybridAquaticBlocks.DEAD_LEAF_CORAL_FAN.get() to "Dead Leaf Coral Fan",
-            HybridAquaticBlocks.BUTTON_CORAL_BLOCK.get() to "Button Coral Block",
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_BLOCK.get() to "Dead Button Coral Block",
-            HybridAquaticBlocks.BUTTON_CORAL.get() to "Button Coral",
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL.get() to "Dead Button Coral",
-            HybridAquaticBlocks.BUTTON_CORAL_FAN.get() to "Button Coral Fan",
-            HybridAquaticBlocks.DEAD_BUTTON_CORAL_FAN.get() to "Dead Button Coral Fan",
-            HybridAquaticBlocks.SUN_CORAL_BLOCK.get() to "Sun Coral Block",
-            HybridAquaticBlocks.DEAD_SUN_CORAL_BLOCK.get() to "Dead Sun Coral Block",
-            HybridAquaticBlocks.SUN_CORAL.get() to "Sun Coral",
-            HybridAquaticBlocks.DEAD_SUN_CORAL.get() to "Dead Sun Coral",
-            HybridAquaticBlocks.SUN_CORAL_FAN.get() to "Sun Coral Fan",
-            HybridAquaticBlocks.DEAD_SUN_CORAL_FAN.get() to "Dead Sun Coral Fan",
-            HybridAquaticBlocks.THORN_CORAL_BLOCK.get() to "Thorn Coral Block",
-            HybridAquaticBlocks.DEAD_THORN_CORAL_BLOCK.get() to "Dead Thorn Coral Block",
-            HybridAquaticBlocks.THORN_CORAL.get() to "Thorn Coral",
-            HybridAquaticBlocks.DEAD_THORN_CORAL.get() to "Dead Thorn Coral",
-            HybridAquaticBlocks.THORN_CORAL_FAN.get() to "Thorn Coral Fan",
-            HybridAquaticBlocks.DEAD_THORN_CORAL_FAN.get() to "Dead Thorn Coral Fan",
-            HybridAquaticBlocks.GLOWSTICK.get() to "Glowstick",
-            HybridAquaticBlocks.GLOWSLIME_BLOCK.get() to "Glowslime Block",
-            HybridAquaticBlocks.PEARL_BLOCK.get() to "Pearl Block",
-            HybridAquaticBlocks.BLACK_PEARL_BLOCK.get() to "Black Pearl Block",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get() to "Driftwood Log",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get() to "Driftwood Wood",
-            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get() to "Stripped Driftwood Log",
-            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get() to "Stripped Driftwood Wood",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get() to "Driftwood Planks",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_STAIRS.get() to "Driftwood Stairs",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get() to "Driftwood Slab",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get() to "Driftwood Fence",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get() to "Driftwood Fence Gate",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_DOOR.get() to "Driftwood Door",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_TRAPDOOR.get() to "Driftwood Trapdoor",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get() to "Driftwood Pressure Plate",
-            HybridAquaticPlatformBlocks.DRIFTWOOD_BUTTON.get() to "Driftwood Button",
-            HybridAquaticBlocks.THERMAL_VENT.get() to "Thermal Vent",
-            HybridAquaticBlocks.TUBE_WORM.get() to "Tube Worm",
+            HABlocks.BONE_WORMS.get() to "Bone Worms",
+
+            //#region Corals
+            HABlocks.LOPHELIA_CORAL_BLOCK.get() to "Lophelia Coral Block",
+            HABlocks.DEAD_LOPHELIA_CORAL_BLOCK.get() to "Dead Lophelia Coral Block",
+            HABlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get() to "Bleached Lophelia Coral Block",
+            HABlocks.LOPHELIA_CORAL.get() to "Lophelia Coral",
+            HABlocks.DEAD_LOPHELIA_CORAL.get() to "Dead Lophelia Coral",
+            HABlocks.BLEACHED_LOPHELIA_CORAL.get() to "Bleached Lophelia Coral",
+            HABlocks.LOPHELIA_CORAL_FAN.get() to "Lophelia Coral Fan",
+            HABlocks.DEAD_LOPHELIA_CORAL_FAN.get() to "Dead Lophelia Coral Fan",
+            HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get() to "Bleached Lophelia Coral Fan",
+            
+            HABlocks.BAMBOO_CORAL_BLOCK.get() to "Bamboo Coral Block",
+            HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get() to "Dead Bamboo Coral Block",
+            HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get() to "Bleached Bamboo Coral Block",
+            HABlocks.BAMBOO_CORAL.get() to "Bamboo Coral",
+            HABlocks.DEAD_BAMBOO_CORAL.get() to "Dead Bamboo Coral",
+            HABlocks.BLEACHED_BAMBOO_CORAL.get() to "Bleached Bamboo Coral",
+            HABlocks.BAMBOO_CORAL_FAN.get() to "Bamboo Coral Fan",
+            HABlocks.DEAD_BAMBOO_CORAL_FAN.get() to "Dead Bamboo Coral Fan",
+            HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get() to "Bleached Bamboo Coral Fan",
+
+            HABlocks.ROSE_CORAL_BLOCK.get() to "Rose Coral Block",
+            HABlocks.DEAD_ROSE_CORAL_BLOCK.get() to "Dead Rose Coral Block",
+            HABlocks.BLEACHED_ROSE_CORAL_BLOCK.get() to "Bleached Rose Coral Block",
+            HABlocks.ROSE_CORAL.get() to "Rose Coral",
+            HABlocks.DEAD_ROSE_CORAL.get() to "Dead Rose Coral",
+            HABlocks.BLEACHED_ROSE_CORAL.get() to "Bleached Rose Coral",
+            HABlocks.ROSE_CORAL_FAN.get() to "Rose Coral Fan",
+            HABlocks.DEAD_ROSE_CORAL_FAN.get() to "Dead Rose Coral Fan",
+            HABlocks.BLEACHED_ROSE_CORAL_FAN.get() to "Bleached Rose Coral Fan",
+
+            HABlocks.LEAF_CORAL_BLOCK.get() to "Leaf Coral Block",
+            HABlocks.DEAD_LEAF_CORAL_BLOCK.get() to "Dead Leaf Coral Block",
+            HABlocks.BLEACHED_LEAF_CORAL_BLOCK.get() to "Bleached Leaf Coral Block",
+            HABlocks.LEAF_CORAL.get() to "Leaf Coral",
+            HABlocks.DEAD_LEAF_CORAL.get() to "Dead Leaf Coral",
+            HABlocks.BLEACHED_LEAF_CORAL.get() to "Bleached Leaf Coral",
+            HABlocks.LEAF_CORAL_FAN.get() to "Leaf Coral Fan",
+            HABlocks.DEAD_LEAF_CORAL_FAN.get() to "Dead Leaf Coral Fan",
+            HABlocks.BLEACHED_LEAF_CORAL_FAN.get() to "Bleached Leaf Coral Fan",
+
+            HABlocks.BUTTON_CORAL_BLOCK.get() to "Button Coral Block",
+            HABlocks.DEAD_BUTTON_CORAL_BLOCK.get() to "Dead Button Coral Block",
+            HABlocks.BLEACHED_BUTTON_CORAL_BLOCK.get() to "Bleached Button Coral Block",
+            HABlocks.BUTTON_CORAL.get() to "Button Coral",
+            HABlocks.DEAD_BUTTON_CORAL.get() to "Dead Button Coral",
+            HABlocks.BLEACHED_BUTTON_CORAL.get() to "Bleached Button Coral",
+            HABlocks.BUTTON_CORAL_FAN.get() to "Button Coral Fan",
+            HABlocks.DEAD_BUTTON_CORAL_FAN.get() to "Dead Button Coral Fan",
+            HABlocks.BLEACHED_BUTTON_CORAL_FAN.get() to "Bleached Button Coral Fan",
+
+            HABlocks.ZIGZAG_CORAL_BLOCK.get() to "Zigzag Coral Block",
+            HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get() to "Dead Zigzag Coral Block",
+            HABlocks.BLEACHED_ZIGZAG_CORAL_BLOCK.get() to "Bleached Zigzag Coral Block",
+            HABlocks.ZIGZAG_CORAL.get() to "Zigzag Coral",
+            HABlocks.DEAD_ZIGZAG_CORAL.get() to "Dead Zigzag Coral",
+            HABlocks.BLEACHED_ZIGZAG_CORAL.get() to "Bleached Zigzag Coral",
+            HABlocks.ZIGZAG_CORAL_FAN.get() to "Zigzag Coral Fan",
+            HABlocks.DEAD_ZIGZAG_CORAL_FAN.get() to "Dead Zigzag Coral Fan",
+            HABlocks.BLEACHED_ZIGZAG_CORAL_FAN.get() to "Bleached Zigzag Coral Fan",
+
+            HABlocks.SUN_CORAL_BLOCK.get() to "Sun Coral Block",
+            HABlocks.DEAD_SUN_CORAL_BLOCK.get() to "Dead Sun Coral Block",
+            HABlocks.BLEACHED_SUN_CORAL_BLOCK.get() to "Bleached Sun Coral Block",
+            HABlocks.SUN_CORAL.get() to "Sun Coral",
+            HABlocks.DEAD_SUN_CORAL.get() to "Dead Sun Coral",
+            HABlocks.BLEACHED_SUN_CORAL.get() to "Bleached Sun Coral",
+            HABlocks.SUN_CORAL_FAN.get() to "Sun Coral Fan",
+            HABlocks.DEAD_SUN_CORAL_FAN.get() to "Dead Sun Coral Fan",
+            HABlocks.BLEACHED_SUN_CORAL_FAN.get() to "Bleached Sun Coral Fan",
+
+            HABlocks.THORN_CORAL_BLOCK.get() to "Thorn Coral Block",
+            HABlocks.DEAD_THORN_CORAL_BLOCK.get() to "Dead Thorn Coral Block",
+            HABlocks.BLEACHED_THORN_CORAL_BLOCK.get() to "Bleached Thorn Coral Block",
+            HABlocks.THORN_CORAL.get() to "Thorn Coral",
+            HABlocks.DEAD_THORN_CORAL.get() to "Dead Thorn Coral",
+            HABlocks.BLEACHED_THORN_CORAL.get() to "Bleached Thorn Coral",
+            HABlocks.THORN_CORAL_FAN.get() to "Thorn Coral Fan",
+            HABlocks.DEAD_THORN_CORAL_FAN.get() to "Dead Thorn Coral Fan",
+            HABlocks.BLEACHED_THORN_CORAL_FAN.get() to "Bleached Thorn Coral Fan",
+
+            HABlocks.BLEACHED_FIRE_CORAL_BLOCK.get() to "Bleached Fire Coral Block",
+            HABlocks.BLEACHED_FIRE_CORAL.get() to "Bleached Fire Coral",
+            HABlocks.BLEACHED_FIRE_CORAL_FAN.get() to "Bleached Fire Coral Fan",
+
+            HABlocks.BLEACHED_TUBE_CORAL_BLOCK.get() to "Bleached Tube Coral Block",
+            HABlocks.BLEACHED_TUBE_CORAL.get() to "Bleached Tube Coral",
+            HABlocks.BLEACHED_TUBE_CORAL_FAN.get() to "Bleached Tube Coral Fan",
+
+            HABlocks.BLEACHED_HORN_CORAL_BLOCK.get() to "Bleached Horn Coral Block",
+            HABlocks.BLEACHED_HORN_CORAL.get() to "Bleached Horn Coral",
+            HABlocks.BLEACHED_HORN_CORAL_FAN.get() to "Bleached Horn Coral Fan",
+
+            HABlocks.BLEACHED_BUBBLE_CORAL_BLOCK.get() to "Bleached Bubble Coral Block",
+            HABlocks.BLEACHED_BUBBLE_CORAL.get() to "Bleached Bubble Coral",
+            HABlocks.BLEACHED_BUBBLE_CORAL_FAN.get() to "Bleached Bubble Coral Fan",
+
+            HABlocks.BLEACHED_BRAIN_CORAL_BLOCK.get() to "Bleached Brain Coral Block",
+            HABlocks.BLEACHED_BRAIN_CORAL.get() to "Bleached Brain Coral",
+            HABlocks.BLEACHED_BRAIN_CORAL_FAN.get() to "Bleached Brain Coral Fan",
+            //#endregion
+
+            HABlocks.GLOWSTICK.get() to "Glowstick",
+            HAPlatformBlocks.GLOWSLIME_BLOCK.get() to "Glowslime Block",
+            HAPlatformBlocks.HAGSLIME_BLOCK.get() to "Hagslime Block",
+            HABlocks.PEARL_BLOCK.get() to "Pearl Block",
+            HABlocks.BLACK_PEARL_BLOCK.get() to "Black Pearl Block",
+            HAPlatformBlocks.DRIFTWOOD_LOG.get() to "Driftwood Log",
+            HAPlatformBlocks.DRIFTWOOD_WOOD.get() to "Driftwood Wood",
+            HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get() to "Stripped Driftwood Log",
+            HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get() to "Stripped Driftwood Wood",
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get() to "Driftwood Planks",
+            HAPlatformBlocks.DRIFTWOOD_STAIRS.get() to "Driftwood Stairs",
+            HAPlatformBlocks.DRIFTWOOD_SLAB.get() to "Driftwood Slab",
+            HAPlatformBlocks.DRIFTWOOD_FENCE.get() to "Driftwood Fence",
+            HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get() to "Driftwood Fence Gate",
+            HAPlatformBlocks.DRIFTWOOD_DOOR.get() to "Driftwood Door",
+            HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get() to "Driftwood Trapdoor",
+            HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get() to "Driftwood Pressure Plate",
+            HAPlatformBlocks.DRIFTWOOD_BUTTON.get() to "Driftwood Button",
+            HABlocks.THERMAL_VENT.get() to "Thermal Vent",
+            HABlocks.GIANT_THERMAL_VENT.get() to "Giant Thermal Vent",
+            HABlocks.TUBE_WORM.get() to "Tube Worm",
         ).forEach { (block, translation) ->
             builder.add(block, translation)
         }
 
         // items
         mapOf(
-            HybridAquaticItems.UNI.get() to "Uni",
-            HybridAquaticItems.RAW_FISH_STEAK.get() to "Fish Steak",
-            HybridAquaticItems.COOKED_FISH_STEAK.get() to "Cooked Fish Steak",
-            HybridAquaticItems.RAW_FISH_MEAT.get() to "Raw Fish Meat",
-            HybridAquaticItems.COOKED_FISH_MEAT.get() to "Cooked Fish Meat",
-            HybridAquaticItems.RAW_TENTACLE.get() to "Raw Tentacle",
-            HybridAquaticItems.COOKED_TENTACLE.get() to "Cooked Tentacle",
-            HybridAquaticItems.RAW_CRAB.get() to "Raw Crab",
-            HybridAquaticItems.COOKED_CRAB.get() to "Cooked Crab",
-            HybridAquaticItems.RAW_LOBSTER.get() to "Raw Lobster",
-            HybridAquaticItems.COOKED_LOBSTER.get() to "Cooked Lobster",
-            HybridAquaticItems.RAW_LOBSTER_TAIL.get() to "Raw Lobster Tail",
-            HybridAquaticItems.COOKED_LOBSTER_TAIL.get() to "Cooked Lobster Tail",
-            HybridAquaticItems.RAW_SHRIMP.get() to "Raw Shrimp",
-            HybridAquaticItems.COOKED_SHRIMP.get() to "Cooked Shrimp",
-            HybridAquaticItems.RAW_CRAYFISH.get() to "Raw Crayfish",
-            HybridAquaticItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
-            HybridAquaticItems.LIONFISH.get() to "Lionfish",
-            HybridAquaticItems.NEON_TETRA.get() to "Neon Tetra",
-            HybridAquaticItems.DAMSELFISH.get() to "Damselfish",
-            HybridAquaticItems.DRAGONFISH.get() to "Dragonfish",
-            HybridAquaticItems.FLASHLIGHT_FISH.get() to "Flashlight Fish",
-            HybridAquaticItems.SQUIRRELFISH.get() to "Squirrel Fish",
-            HybridAquaticItems.COELACANTH.get() to "Coelacanth",
-            HybridAquaticItems.GOLDEN_DORADO.get() to "Golden Dorado",
-            HybridAquaticItems.MAHI.get() to "Mahi",
-            HybridAquaticItems.TUNA.get() to "Tuna",
-            HybridAquaticItems.OPAH.get() to "Opah",
-            HybridAquaticItems.OARFISH.get() to "Oarfish",
-            HybridAquaticItems.ROCKFISH.get() to "Rockfish",
-            HybridAquaticItems.SEA_BASS.get() to "Sea Bass",
-            HybridAquaticItems.BLUE_SPOTTED_STINGRAY.get() to "Blue Spotted Stingray",
-            HybridAquaticItems.SPOTTED_EAGLE_RAY.get() to "Spotted Eagle Ray",
-            HybridAquaticItems.OCEAN_SUNFISH.get() to "Ocean Sunfish",
-            HybridAquaticItems.BLOWFISH.get() to "Blowfish",
-            HybridAquaticItems.PARROTFISH.get() to "Parrotfish",
-            HybridAquaticItems.SHEEPSHEAD_WRASSE.get() to "Sheepshead Wrasse",
-            HybridAquaticItems.STONEFISH.get() to "Stonefish",
-            HybridAquaticItems.SEAHORSE.get() to "Seahorse",
-            HybridAquaticItems.GOLDFISH.get() to "Goldfish",
-            HybridAquaticItems.MORAY_EEL.get() to "Moray Eel",
-            HybridAquaticItems.NEEDLEFISH.get() to "Needlefish",
-            HybridAquaticItems.MACKEREL.get() to "Mackerel",
-            HybridAquaticItems.HERRING.get() to "Herring",
-            HybridAquaticItems.FLYING_FISH.get() to "Flying Fish",
-            HybridAquaticItems.PIRANHA.get() to "Piranha",
-            HybridAquaticItems.ANGLERFISH.get() to "Anglerfish",
-            HybridAquaticItems.CARP.get() to "Carp",
-            HybridAquaticItems.PLECO.get() to "Pleco",
-            HybridAquaticItems.BARRELEYE.get() to "Barreleye",
-            HybridAquaticItems.SURGEONFISH.get() to "Surgeonfish",
-            HybridAquaticItems.CLOWNFISH.get() to "Clownfish",
-            HybridAquaticItems.TIGER_BARB.get() to "Tiger Barb",
-            HybridAquaticItems.OSCAR.get() to "Oscar",
-            HybridAquaticItems.TRIGGERFISH.get() to "Triggerfish",
-            HybridAquaticItems.DANIO.get() to "Danio",
-            HybridAquaticItems.BETTA.get() to "Betta",
-            HybridAquaticItems.PEARLFISH.get() to "Pearlfish",
-            HybridAquaticItems.SNAILFISH.get() to "Snailfish",
-            HybridAquaticItems.JOHN_DORY.get() to "John Dory",
-            HybridAquaticItems.DISCUS.get() to "Discus",
-            HybridAquaticItems.GOURAMI.get() to "Gourami",
-            HybridAquaticItems.RATFISH.get() to "Ratfish",
-            HybridAquaticItems.BOXFISH.get() to "Boxfish",
-            HybridAquaticItems.LOBSTER_CLAW.get() to "Lobster Claw",
-            HybridAquaticItems.DUNGENESS_CRAB_CLAW.get() to "Dungeness Crab Claw",
-            HybridAquaticItems.COCONUT_CRAB_CLAW.get() to "Coconut Crab Claw",
-            HybridAquaticItems.FIDDLER_CRAB_CLAW.get() to "Fiddler Crab Claw",
-            HybridAquaticItems.YETI_CRAB_CLAW.get() to "Yeti Crab Claw",
-            HybridAquaticItems.LIGHTFOOT_CRAB_CLAW.get() to "Lightfoot Crab Claw",
-            HybridAquaticItems.GHOST_CRAB_CLAW.get() to "Ghost Crab Claw",
-            HybridAquaticItems.FLOWER_CRAB_CLAW.get() to "Flower Crab Claw",
-            HybridAquaticItems.VAMPIRE_CRAB_CLAW.get() to "Vampire Crab Claw",
-            HybridAquaticItems.SPIDER_CRAB_CLAW.get() to "Spider Crab Claw",
-            HybridAquaticItems.GLOWSLIME.get() to "Glowslime",
-            HybridAquaticItems.CUTTLEBONE.get() to "Cuttlebone",
-            HybridAquaticItems.SEA_URCHIN_SPINE.get() to "Sea Urchin Spine",
-            HybridAquaticItems.PRISMARINE_ROD.get() to "Prismarine Rod",
-            HybridAquaticItems.SHARK_TOOTH.get() to "Shark Tooth",
-            HybridAquaticItems.PEARL.get() to "Pearl",
-            HybridAquaticItems.BLACK_PEARL.get() to "Black Pearl",
-            HybridAquaticItems.SULFUR.get() to "Sulfur",
-            HybridAquaticItems.CORAL_CHUNK.get() to "Coral Chunk",
-            HybridAquaticItems.BARBED_HOOK.get() to "Barbed Hook",
-            HybridAquaticItems.GLOWING_HOOK.get() to "Glowing Hook",
-            HybridAquaticItems.MAGNETIC_HOOK.get() to "Magnetic Hook",
-            HybridAquaticItems.CREEPERMAGNET_HOOK.get() to "CreeperMagnet Hook",
-            HybridAquaticItems.OMINOUS_HOOK.get() to "Ominous Hook",
-            HybridAquaticItems.FISHING_NET.get() to "Fishing Net",
-            HybridAquaticItems.KARKINOS_CLAW.get() to "Karkinos Claw",
-            HybridAquaticItems.SEASHELL_SPEAR.get() to "Seashell Spear",
-            HybridAquaticItems.SEASHELL_PICKAXE.get() to "Seashell Pickaxe",
-            HybridAquaticItems.SEASHELL_AXE.get() to "Seashell Axe",
-            HybridAquaticItems.SEASHELL_SHOVEL.get() to "Seashell Shovel",
-            HybridAquaticItems.SEASHELL_HOE.get() to "Seashell Hoe",
-            HybridAquaticItems.CORAL_BLADE.get() to "Coral Blade",
-            HybridAquaticItems.CORAL_PICKAXE.get() to "Coral Pickaxe",
-            HybridAquaticItems.CORAL_AXE.get() to "Coral Axe",
-            HybridAquaticItems.CORAL_SHOVEL.get() to "Coral Shovel",
-            HybridAquaticItems.CORAL_HOE.get() to "Coral Hoe",
-            HybridAquaticItems.DIVING_HELMET.get() to "Diving Helmet",
-            HybridAquaticItems.DIVING_SUIT.get() to "Diving Suit",
-            HybridAquaticItems.DIVING_LEGGINGS.get() to "Diving Leggings",
-            HybridAquaticItems.DIVING_BOOTS.get() to "Diving Boots",
-            HybridAquaticItems.NAUTILUS_HELMET.get() to "Nautilus Helmet",
-            HybridAquaticItems.NAUTILUS_PAULDRONS.get() to "Nautilus Pauldrons",
-            HybridAquaticItems.MANGLERFISH_LURE.get() to "Manglerfish Lure",
-            HybridAquaticItems.MANGLERFISH_FIN.get() to "Manglerfish Fin",
-            HybridAquaticItems.EEL_SCARF.get() to "Eel Scarf",
-            HybridAquaticItems.TURTLE_CHESTPLATE.get() to "Turtle Chestplate",
-            HybridAquaticItems.MOON_JELLYFISH_HAT.get() to "Moon Jellyfish Hat",
+            HAItems.UNI.get() to "Uni",
+            HAItems.RAW_FISH_STEAK.get() to "Fish Steak",
+            HAItems.COOKED_FISH_STEAK.get() to "Cooked Fish Steak",
+            HAItems.SIRENIAN_BEEF.get() to "Sirenian Beef",
+            HAItems.SIRENIAN_STEAK.get() to "Sirenian Steak",
+            HAItems.RAW_FISH_MEAT.get() to "Raw Fish Meat",
+            HAItems.COOKED_FISH_MEAT.get() to "Cooked Fish Meat",
+            HAItems.RAW_TENTACLE.get() to "Raw Tentacle",
+            HAItems.COOKED_TENTACLE.get() to "Cooked Tentacle",
+            HAItems.RAW_CRAB.get() to "Raw Crab",
+            HAItems.COOKED_CRAB.get() to "Cooked Crab",
+            HAItems.RAW_LOBSTER.get() to "Raw Lobster",
+            HAItems.COOKED_LOBSTER.get() to "Cooked Lobster",
+            HAItems.RAW_LOBSTER_TAIL.get() to "Raw Lobster Tail",
+            HAItems.COOKED_LOBSTER_TAIL.get() to "Cooked Lobster Tail",
+            HAItems.RAW_SHRIMP.get() to "Raw Shrimp",
+            HAItems.COOKED_SHRIMP.get() to "Cooked Shrimp",
+            HAItems.COOKED_CLAM.get() to "Cooked Clam",
+            HAItems.COOKED_MUSSEL.get() to "Cooked Mussel",
+            HAItems.RAW_CRAYFISH.get() to "Raw Crayfish",
+            HAItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
+            HAItems.LIONFISH.get() to "Lionfish",
+            HAItems.TETRA.get() to "Neon Tetra",
+            HAItems.DAMSELFISH.get() to "Damselfish",
+            HAItems.DRAGONFISH.get() to "Dragonfish",
+            HAItems.BLOBFISH.get() to "Blobfish",
+            HAItems.HAGFISH.get() to "Hagfish",
+            HAItems.FLASHLIGHT_FISH.get() to "Flashlight Fish",
+            HAItems.SQUIRRELFISH.get() to "Squirrel Fish",
+            HAItems.COELACANTH.get() to "Coelacanth",
+            HAItems.GOLDEN_DORADO.get() to "Golden Dorado",
+            HAItems.MAHI.get() to "Mahi",
+            HAItems.TUNA.get() to "Tuna",
+            HAItems.OPAH.get() to "Opah",
+            HAItems.OARFISH.get() to "Oarfish",
+            HAItems.ROCKFISH.get() to "Rockfish",
+            HAItems.SEA_BASS.get() to "Sea Bass",
+            HAItems.STINGRAY.get() to "Stingray",
+            HAItems.OCEAN_SUNFISH.get() to "Ocean Sunfish",
+            HAItems.BLOWFISH.get() to "Blowfish",
+            HAItems.PARROTFISH.get() to "Parrotfish",
+            HAItems.SHEEPSHEAD_WRASSE.get() to "Sheepshead Wrasse",
+            HAItems.STONEFISH.get() to "Stonefish",
+            HAItems.SEAHORSE.get() to "Seahorse",
+            HAItems.MORAY_EEL.get() to "Moray Eel",
+            HAItems.NEEDLEFISH.get() to "Needlefish",
+            HAItems.MACKEREL.get() to "Mackerel",
+            HAItems.HERRING.get() to "Herring",
+            HAItems.FLYING_FISH.get() to "Flying Fish",
+            HAItems.PIRANHA.get() to "Piranha",
+            HAItems.ANGLERFISH.get() to "Anglerfish",
+            HAItems.CARP.get() to "Carp",
+            HAItems.GOLDFISH.get() to "Goldfish",
+            HAItems.TROUT.get() to "Trout",
+            HAItems.SUNFISH.get() to "Sunfish",
+            HAItems.PLECO.get() to "Pleco",
+            HAItems.BARRELEYE.get() to "Barreleye",
+            HAItems.SURGEONFISH.get() to "Surgeonfish",
+            HAItems.CLOWNFISH.get() to "Clownfish",
+            HAItems.TIGER_BARB.get() to "Tiger Barb",
+            HAItems.CICHLID.get() to "Cichlid",
+            HAItems.TRIGGERFISH.get() to "Triggerfish",
+            HAItems.TREVALLY.get() to "Trevally",
+            HAItems.DANIO.get() to "Danio",
+            HAItems.BETTA.get() to "Betta",
+            HAItems.PEARLFISH.get() to "Pearlfish",
+            HAItems.SNAILFISH.get() to "Snailfish",
+            HAItems.JOHN_DORY.get() to "John Dory",
+            HAItems.DISCUS.get() to "Discus",
+            HAItems.GOURAMI.get() to "Gourami",
+            HAItems.RATFISH.get() to "Ratfish",
+            HAItems.BOXFISH.get() to "Boxfish",
+            HAItems.LOBSTER_CLAW.get() to "Lobster Claw",
+            HAItems.DUNGENESS_CRAB_CLAW.get() to "Dungeness Crab Claw",
+            HAItems.COCONUT_CRAB_CLAW.get() to "Coconut Crab Claw",
+            HAItems.FIDDLER_CRAB_CLAW.get() to "Fiddler Crab Claw",
+            HAItems.YETI_CRAB_CLAW.get() to "Yeti Crab Claw",
+            HAItems.LIGHTFOOT_CRAB_CLAW.get() to "Lightfoot Crab Claw",
+            HAItems.GHOST_CRAB_CLAW.get() to "Ghost Crab Claw",
+            HAItems.FLOWER_CRAB_CLAW.get() to "Flower Crab Claw",
+            HAItems.VAMPIRE_CRAB_CLAW.get() to "Vampire Crab Claw",
+            HAItems.SPIDER_CRAB_CLAW.get() to "Spider Crab Claw",
+            HAItems.GLOWSLIME.get() to "Glowslime",
+            HAItems.HAGSLIME.get() to "Hagslime",
+            HAItems.CUTTLEBONE.get() to "Cuttlebone",
+            HAItems.FISH_FOOD.get() to "Fish Food",
+            HAItems.SEA_URCHIN_SPINE.get() to "Sea Urchin Spine",
+            HAItems.PRISMARINE_ROD.get() to "Prismarine Rod",
+            HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get() to "Diving Armor Upgrade Template",
+            HAItems.SHARK_TOOTH.get() to "Shark Tooth",
+            HAItems.STARFISH.get() to "Starfish",
+            HAItems.PEARL.get() to "Pearl",
+            HAItems.BLACK_PEARL.get() to "Black Pearl",
+            HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get() to "Comically Large Nautilus Shell",
+            HAItems.ARGONAUT.get() to "Argonaut",
+            HAItems.DIVING_WEIGHT.get() to "Diving Weight",
+            HAPlatformItems.BRINE_BUCKET.get() to "Brine Bucket",
+            HAItems.SULFUR.get() to "Sulfur",
+            HAItems.CORAL_CHUNK.get() to "Coral Chunk",
+            HAItems.BARBED_HOOK.get() to "Barbed Hook",
+            HAItems.GLOWING_HOOK.get() to "Glowing Hook",
+            HAItems.MAGNETIC_HOOK.get() to "Magnetic Hook",
+            HAItems.CREEPERMAGNET_HOOK.get() to "CreeperMagnet Hook",
+            HAItems.OMINOUS_HOOK.get() to "Ominous Hook",
+            HAItems.OMINOUS_CONCH.get() to "Ominous Conch",
+            HAItems.FISHING_NET.get() to "Fishing Net",
+            HAItems.KARKINOS_CLAW.get() to "Karkinos Claw",
+            HAItems.SEASHELL_SPEAR.get() to "Seashell Spear",
+            HAItems.SEASHELL_PICKAXE.get() to "Seashell Pickaxe",
+            HAItems.SEASHELL_AXE.get() to "Seashell Axe",
+            HAItems.SEASHELL_SHOVEL.get() to "Seashell Shovel",
+            HAItems.SEASHELL_HOE.get() to "Seashell Hoe",
+            HAItems.CORAL_BLADE.get() to "Coral Blade",
+            HAItems.CORAL_PICKAXE.get() to "Coral Pickaxe",
+            HAItems.CORAL_AXE.get() to "Coral Axe",
+            HAItems.CORAL_SHOVEL.get() to "Coral Shovel",
+            HAItems.CORAL_HOE.get() to "Coral Hoe",
+            HAItems.DIVING_HELMET.get() to "Diving Helmet",
+            HAItems.DIVING_SUIT.get() to "Diving Suit",
+            HAItems.DIVING_LEGGINGS.get() to "Diving Leggings",
+            HAItems.DIVING_BOOTS.get() to "Diving Boots",
+            HAItems.REINFORCED_DIVING_HELMET.get() to "Reinforced Diving Helmet",
+            HAItems.REINFORCED_DIVING_SUIT.get() to "Reinforced Diving Suit",
+            HAItems.REINFORCED_DIVING_LEGGINGS.get() to "Reinforced Diving Leggings",
+            HAItems.REINFORCED_DIVING_BOOTS.get() to "Reinforced Diving Boots",
+            HAItems.GLOWING_DIVING_HELMET.get() to "Glowing Diving Helmet",
+            HAItems.GLOWING_DIVING_SUIT.get() to "Glowing Diving Suit",
+            HAItems.GLOWING_DIVING_LEGGINGS.get() to "Glowing Diving Leggings",
+            HAItems.GLOWING_DIVING_BOOTS.get() to "Glowing Diving Boots",
+            HAItems.NAUTILUS_HELMET.get() to "Nautilus Helmet",
+            HAItems.NAUTILUS_PAULDRONS.get() to "Nautilus Pauldrons",
+            HAItems.MANGLERFISH_LURE.get() to "Manglerfish Lure",
+            HAItems.MANGLERFISH_FIN.get() to "Manglerfish Fin",
+            HAItems.EEL_SCARF.get() to "Eel Scarf",
+            HAItems.PINK_HATXOLOTL.get() to "Pink Hatxolotl",
+            HAItems.GOLD_HATXOLOTL.get() to "Gold Hatxolotl",
+            HAItems.BROWN_HATXOLOTL.get() to "Brown Hatxolotl",
+            HAItems.BLUE_HATXOLOTL.get() to "Blue Hatxolotl",
+            HAItems.CYAN_HATXOLOTL.get() to "Cyan Hatxolotl",
+            HAItems.TURTLE_CHESTPLATE.get() to "Turtle Chestplate",
+            HAItems.MOON_JELLYFISH_HAT.get() to "Moon Jellyfish Hat",
         ).forEach { (item, translation) ->
             builder.add(item, translation)
         }
 
         // effects
         mapOf(
-            HybridAquaticMobEffects.BLEEDING.get() to "Bleeding",
-            HybridAquaticMobEffects.CLARITY.get() to "Clarity",
-            HybridAquaticMobEffects.CORROSION.get() to "Corrosion",
-            HybridAquaticMobEffects.THALASSOPHOBIA.get() to "Thalassophobia",
-            HybridAquaticMobEffects.BUOYANCY.get() to "Buoyancy",
-            HybridAquaticMobEffects.THORNS.get() to "Thorns",
+            HAMobEffects.BLEEDING.get() to "Bleeding",
+            HAMobEffects.CLARITY.get() to "Clarity",
+            HAMobEffects.CORROSION.get() to "Corrosion",
+            HAMobEffects.THALASSOPHOBIA.get() to "Thalassophobia",
+            HAMobEffects.BUOYANCY.get() to "Buoyancy",
+            HAMobEffects.THORNS.get() to "Thorns",
         ).forEach { (effect, translation) ->
             val identifier = BuiltInRegistries.MOB_EFFECT.getKey(effect)
             builder.add("effect.${identifier?.namespace}.${identifier?.path}", translation)
         }
 
-        // Item descriptions
+        // Item Descriptions
+        builder.add("item.hybrid_aquatic.hook.description_tide", "Apply at an angling table") // Tide specific description
+
+        builder.add("tooltip.hybrid_aquatic.argonaut.shell", "%s Shell")
+        builder.add("tooltip.hybrid_aquatic.argonaut.sail", "%s Sails")
+        builder.add("tooltip.hybrid_aquatic.argonaut.glowing", "Glowing")
+
+        builder.add("tooltip.hybrid_aquatic.ominous_conch.unused", "The deep ocean calls from within..")
+        builder.add("tooltip.hybrid_aquatic.ominous_conch.used", "The conch is silent")
+
         mapOf(
-            "item.hybrid-aquatic.hook" to "Needs to be put in the offhand",
-            HybridAquaticItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
-            HybridAquaticItems.GLOWING_HOOK.get().descriptionId to "Increases fishing speed at night",
-            HybridAquaticItems.MAGNETIC_HOOK.get().descriptionId to "Increases treasure chance",
-            HybridAquaticItems.CREEPERMAGNET_HOOK.get().descriptionId to "Don't use indoors",
-            HybridAquaticItems.OMINOUS_HOOK.get().descriptionId to "Summons Karkinos",
-            HybridAquaticBlocks.CRAB_POT.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.HYBRID_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.OAK_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.SPRUCE_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.BIRCH_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.DARK_OAK_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.JUNGLE_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.MANGROVE_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.ACACIA_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.CHERRY_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticBlocks.BAMBOO_CRATE.get().descriptionId to "Break with an axe to open",
-            HybridAquaticItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
-            HybridAquaticItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
+            "item.hybrid_aquatic.hook" to "Needs to be put in the offhand",
+            HAItems.BARBED_HOOK.get().descriptionId to "Increases fishing speed during the day",
+            HAItems.GLOWING_HOOK.get().descriptionId to "Increases fishing speed at night",
+            HAItems.MAGNETIC_HOOK.get().descriptionId to "Increases treasure chance",
+            HAItems.CREEPERMAGNET_HOOK.get().descriptionId to "Don't use indoors",
+            HAItems.OMINOUS_HOOK.get().descriptionId to "Summons Karkinos",
+            HABlocks.CRAB_POT.get().descriptionId to "Break with an axe to open",
+            HABlocks.HYBRID_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.OAK_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.SPRUCE_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.BIRCH_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.DARK_OAK_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.JUNGLE_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.MANGROVE_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.ACACIA_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.CHERRY_CRATE.get().descriptionId to "Break with an axe to open",
+            HABlocks.BAMBOO_CRATE.get().descriptionId to "Break with an axe to open",
+
+            HAItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
+            HAItems.DIVING_WEIGHT.get().descriptionId to "Quite heavy",
+
+            HAItems.CORAL_AXE.get().descriptionId to "Repairs itself when underwater",
+            HAItems.CORAL_BLADE.get().descriptionId to "Repairs itself when underwater",
+            HAItems.CORAL_HOE.get().descriptionId to "Repairs itself when underwater",
+            HAItems.CORAL_PICKAXE.get().descriptionId to "Repairs itself when underwater",
+            HAItems.CORAL_SHOVEL.get().descriptionId to "Repairs itself when underwater",
+
+            HAItems.SEASHELL_AXE.get().descriptionId to "Increased mining speed underwater",
+            HAItems.SEASHELL_SPEAR.get().descriptionId to "Increased mining speed underwater",
+            HAItems.SEASHELL_HOE.get().descriptionId to "Increased mining speed underwater",
+            HAItems.SEASHELL_PICKAXE.get().descriptionId to "Increased mining speed underwater",
+            HAItems.SEASHELL_SHOVEL.get().descriptionId to "Increased mining speed underwater",
+
+            HAItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
+
+            HAItems.GREAT_WHITE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HAItems.BULL_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HAItems.TIGER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HAItems.THRESHER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HAItems.BASKING_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HAItems.WHALE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HAItems.HAMMERHEAD_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HAItems.FRILLED_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
+        }
+
+        // Item Functions
+        mapOf(
+            HAItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures",
+            HAItems.OMINOUS_CONCH.get().descriptionId to "Summons the Shell Beast",
+        ).forEach { (itemTranslationKey, translation) ->
+            builder.add(itemTranslationKey.plus(".function"), translation)
+        }
+
+        mapOf(
+            HAItems.FISHING_NET.get().descriptionId to "Placed creatures become passive and don't despawn",
+        ).forEach { (itemTranslationKey, translation) ->
+            builder.add(itemTranslationKey.plus(".properties"), translation)
         }
 
         mapOf(
@@ -418,131 +848,158 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             builder.add("item.minecraft.tipped_arrow.effect.$potion", "Arrow of $translation")
         }
 
-
         // Workaround for Jade/WAILA not being able to find the mod display name on Forge
-        builder.add("modmenu.nameTranslation.hybrid-aquatic", "Hybrid Aquatic")
+        builder.add("modmenu.nameTranslation.hybrid_aquatic", "Hybrid Aquatic")
 
 //        mapOf(
 //            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
 //            HybridAquaticPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
 //        ).forEach { (painting, name) ->
-//            builder.add("painting.hybrid-aquatic.${painting.path}.title", name[0])
-//            builder.add("painting.hybrid-aquatic.${painting.path}.author", name[1])
+//            builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
+//            builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])
 //        }
     }
 
     private fun generateEntities(builder: TranslationBuilder) {
         // create map of entities to their display names
         val entityNameMap = mapOf(
-            HybridAquaticEntityTypes.CLOWNFISH.get() to "Clownfish",
-            HybridAquaticEntityTypes.DAMSELFISH.get() to "Damselfish",
-            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get() to "African Butterflyfish",
-            HybridAquaticEntityTypes.ANGLERFISH.get() to "Anglerfish",
-            HybridAquaticEntityTypes.JOHN_DORY.get() to "John Dory",
-            HybridAquaticEntityTypes.SNAILFISH.get() to "Snailfish",
-            HybridAquaticEntityTypes.PEARLFISH.get() to "Pearlfish",
-            HybridAquaticEntityTypes.DRAGONFISH.get() to "Dragonfish",
-            HybridAquaticEntityTypes.BARRELEYE.get() to "Barreleye",
-            HybridAquaticEntityTypes.TUNA.get() to "Tuna",
-            HybridAquaticEntityTypes.CUTTLEFISH.get() to "Cuttlefish",
-            HybridAquaticEntityTypes.FLASHLIGHT_FISH.get() to "Flashlight Fish",
-            HybridAquaticEntityTypes.SQUIRRELFISH.get() to "Squirrelfish",
-            HybridAquaticEntityTypes.FLYING_FISH.get() to "Flying Fish",
-            HybridAquaticEntityTypes.LIONFISH.get() to "Lionfish",
-            HybridAquaticEntityTypes.COELACANTH.get() to "Coelacanth",
-            HybridAquaticEntityTypes.OARFISH.get() to "Oarfish",
-            HybridAquaticEntityTypes.OPAH.get() to "Opah",
-            HybridAquaticEntityTypes.PIRANHA.get() to "Piranha",
-            HybridAquaticEntityTypes.SEA_ANGEL.get() to "Sea Angel",
-            HybridAquaticEntityTypes.OCEAN_SUNFISH.get() to "Ocean Sunfish",
-            HybridAquaticEntityTypes.PARROTFISH.get() to "Parrotfish",
-            HybridAquaticEntityTypes.VAMPIRE_SQUID.get() to "Vampire Squid",
-            HybridAquaticEntityTypes.MAHI.get() to "Mahi",
-            HybridAquaticEntityTypes.GOLDEN_DORADO.get() to "Golden Dorado",
-            HybridAquaticEntityTypes.MORAY_EEL.get() to "Moray Eel",
-            HybridAquaticEntityTypes.ROCKFISH.get() to "Rockfish",
-            HybridAquaticEntityTypes.SEA_BASS.get() to "Sea Bass",
-            HybridAquaticEntityTypes.TIGER_BARB.get() to "Tiger Barb",
-            HybridAquaticEntityTypes.CARP.get() to "Carp",
-            HybridAquaticEntityTypes.TROUT.get() to "Trout",
-            HybridAquaticEntityTypes.SUNFISH.get() to "Sunfish",
-            HybridAquaticEntityTypes.NEEDLEFISH.get() to "Needlefish",
-            HybridAquaticEntityTypes.BARRACUDA.get() to "Barracuda",
-            HybridAquaticEntityTypes.MACKEREL.get() to "Mackerel",
-            HybridAquaticEntityTypes.HERRING.get() to "Herring",
-            HybridAquaticEntityTypes.RATFISH.get() to "Ratfish",
-            HybridAquaticEntityTypes.NAUTILUS.get() to "Nautilus",
-            HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get() to "Umbrella Octopus",
-            HybridAquaticEntityTypes.TRIGGERFISH.get() to "Triggerfish",
-            HybridAquaticEntityTypes.OSCAR.get() to "Oscar",
-            HybridAquaticEntityTypes.DANIO.get() to "Danio",
-            HybridAquaticEntityTypes.BLOWFISH.get() to "Blowfish",
-            HybridAquaticEntityTypes.TETRA.get() to "Tetra",
-            HybridAquaticEntityTypes.PUPFISH.get() to "Pupfish",
-            HybridAquaticEntityTypes.STONEFISH.get() to "Stonefish",
-            HybridAquaticEntityTypes.SHINER.get() to "Shiner",
-            HybridAquaticEntityTypes.BETTA.get() to "Betta",
-            HybridAquaticEntityTypes.GOLDFISH.get() to "Goldfish",
-            HybridAquaticEntityTypes.SEAHORSE.get() to "Seahorse",
-            HybridAquaticEntityTypes.MOON_JELLYFISH.get() to "Moon Jellyfish",
-            HybridAquaticEntityTypes.GOURAMI.get() to "Gourami",
-            HybridAquaticEntityTypes.PLECO.get() to "Pleco",
-            HybridAquaticEntityTypes.BOXFISH.get() to "Boxfish",
-            HybridAquaticEntityTypes.OCTOPUS.get() to "Octopus",
-            HybridAquaticEntityTypes.DISCUS.get() to "Discus",
-            HybridAquaticEntityTypes.ARROW_SQUID.get() to "Arrow Squid",
-            HybridAquaticEntityTypes.FIREFLY_SQUID.get() to "Firefly Squid",
-            HybridAquaticEntityTypes.STINGRAY.get() to "Stingray",
-            HybridAquaticEntityTypes.MANTA_RAY.get() to "Manta Ray",
-            HybridAquaticEntityTypes.SURGEONFISH.get() to "Surgeonfish",
-            HybridAquaticEntityTypes.BULL_SHARK.get() to "Bull Shark",
-            HybridAquaticEntityTypes.BASKING_SHARK.get() to "Basking Shark",
-            HybridAquaticEntityTypes.THRESHER_SHARK.get() to "Thresher Shark",
-            HybridAquaticEntityTypes.FRILLED_SHARK.get() to "Frilled Shark",
-            HybridAquaticEntityTypes.LANTERN_SHARK.get() to "Lantern Shark",
-            HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get() to "Great White Shark",
-            HybridAquaticEntityTypes.TIGER_SHARK.get() to "Tiger Shark",
-            HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get() to "Hammerhead Shark",
-            HybridAquaticEntityTypes.WHALE_SHARK.get() to "Whale Shark",
-            HybridAquaticEntityTypes.KARKINOS.get() to "Karkinos",
-            HybridAquaticEntityTypes.KARCINOGEN.get() to "Karcinogen",
-            HybridAquaticEntityTypes.KARCINOMA.get() to "Karcinoma",
-            HybridAquaticEntityTypes.DUNGENESS_CRAB.get() to "Dungeness Crab",
-            HybridAquaticEntityTypes.FIDDLER_CRAB.get() to "Fiddler Crab",
-            HybridAquaticEntityTypes.HERMIT_CRAB.get() to "Hermit Crab",
-            HybridAquaticEntityTypes.GHOST_CRAB.get() to "Ghost Crab",
-            HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get() to "Lightfoot Crab",
-            HybridAquaticEntityTypes.FLOWER_CRAB.get() to "Flower Crab",
-            HybridAquaticEntityTypes.VAMPIRE_CRAB.get() to "Vampire Crab",
-            HybridAquaticEntityTypes.SPIDER_CRAB.get() to "Spider Crab",
-            HybridAquaticEntityTypes.YETI_CRAB.get() to "Yeti Crab",
-            HybridAquaticEntityTypes.DECORATOR_CRAB.get() to "Decorator Crab",
-            HybridAquaticEntityTypes.COCONUT_CRAB.get() to "Coconut Crab",
-            HybridAquaticEntityTypes.HORSESHOE_CRAB.get() to "Horseshoe Crab",
-            HybridAquaticEntityTypes.GIANT_ISOPOD.get() to "Giant Isopod",
-            HybridAquaticEntityTypes.SHRIMP.get() to "Shrimp",
-            HybridAquaticEntityTypes.CRAYFISH.get() to "Crayfish",
-            HybridAquaticEntityTypes.LOBSTER.get() to "Lobster",
-            HybridAquaticEntityTypes.SEA_SLUG.get() to "Sea Slug",
-            HybridAquaticEntityTypes.SEA_CUCUMBER.get() to "Sea Cucumber",
-            HybridAquaticEntityTypes.SEA_URCHIN.get() to "Sea Urchin",
-            HybridAquaticEntityTypes.STARFISH.get() to "Starfish",
-            HybridAquaticEntityTypes.SEA_NETTLE.get() to "Sea Nettle",
-            HybridAquaticEntityTypes.BOX_JELLYFISH.get() to "Box Jellyfish",
-            HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get() to "Cepheidae Jellyfish",
-            HybridAquaticEntityTypes.NOMURA_JELLYFISH.get() to "Nomura Jellyfish",
-            HybridAquaticEntityTypes.BARREL_JELLYFISH.get() to "Barrel Jellyfish",
-            HybridAquaticEntityTypes.MAUVE_STINGER.get() to "Mauve Stinger",
-            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get() to "Lion's Mane Jellyfish",
-            HybridAquaticEntityTypes.CROWN_JELLYFISH.get() to "Crown Jellyfish",
-            HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get() to "Big Red Jellyfish",
-            HybridAquaticEntityTypes.COSMIC_JELLYFISH.get() to "Cosmic Jellyfish",
-            HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get() to "Firework Jellyfish",
-            HybridAquaticEntityTypes.BLUE_JELLYFISH.get() to "Blue Jellyfish",
-            HybridAquaticEntityTypes.SEADRAGON.get() to "Seadragon",
-            HybridAquaticEntityTypes.WRASSE.get() to "Wrasse",
-            HybridAquaticEntityTypes.HOUND_SHARK.get() to "Hound Shark",
-            HybridAquaticEntityTypes.OTTER.get() to "Otter",
+            HAEntityTypes.CLOWNFISH.get() to "Clownfish",
+            HAEntityTypes.DAMSELFISH.get() to "Damselfish",
+            HAEntityTypes.AFRICAN_BUTTERFLYFISH.get() to "African Butterflyfish",
+            HAEntityTypes.ANGLERFISH.get() to "Anglerfish",
+            HAEntityTypes.VIPERFISH.get() to "Viperfish",
+            HAEntityTypes.HATCHETFISH.get() to "Hatchetfish",
+            HAEntityTypes.BLOBFISH.get() to "Blobfish",
+            HAEntityTypes.TRIPOD_FISH.get() to "Tripod Fish",
+            HAEntityTypes.FANGTOOTH.get() to "Fangtooth",
+            HAEntityTypes.JOHN_DORY.get() to "John Dory",
+            HAEntityTypes.SNAILFISH.get() to "Snailfish",
+            HAEntityTypes.PEARLFISH.get() to "Pearlfish",
+            HAEntityTypes.DRAGONFISH.get() to "Dragonfish",
+            HAEntityTypes.HAGFISH.get() to "Hagfish",
+            HAEntityTypes.BARRELEYE.get() to "Barreleye",
+            HAEntityTypes.TUNA.get() to "Tuna",
+            HAEntityTypes.CUTTLEFISH.get() to "Cuttlefish",
+            HAEntityTypes.FLASHLIGHT_FISH.get() to "Flashlight Fish",
+            HAEntityTypes.SQUIRRELFISH.get() to "Squirrelfish",
+            HAEntityTypes.FLYING_FISH.get() to "Flying Fish",
+            HAEntityTypes.LIONFISH.get() to "Lionfish",
+            HAEntityTypes.COELACANTH.get() to "Coelacanth",
+            HAEntityTypes.SLICKHEAD.get() to "Slickhead",
+            HAEntityTypes.OARFISH.get() to "Oarfish",
+            HAEntityTypes.OPAH.get() to "Opah",
+            HAEntityTypes.PIRANHA.get() to "Piranha",
+            HAEntityTypes.SEA_ANGEL.get() to "Sea Angel",
+            HAEntityTypes.OCEAN_SUNFISH.get() to "Ocean Sunfish",
+            HAEntityTypes.PARROTFISH.get() to "Parrotfish",
+            HAEntityTypes.VAMPIRE_SQUID.get() to "Vampire Squid",
+            HAEntityTypes.MAHI.get() to "Mahi",
+            HAEntityTypes.GOLDEN_DORADO.get() to "Golden Dorado",
+            HAEntityTypes.MORAY_EEL.get() to "Moray Eel",
+            HAEntityTypes.ROCKFISH.get() to "Rockfish",
+            HAEntityTypes.SEA_BASS.get() to "Sea Bass",
+            HAEntityTypes.TIGER_BARB.get() to "Tiger Barb",
+            HAEntityTypes.CARP.get() to "Carp",
+            HAEntityTypes.GOLDFISH.get() to "Goldfish",
+            HAEntityTypes.TROUT.get() to "Trout",
+            HAEntityTypes.SUNFISH.get() to "Sunfish",
+            HAEntityTypes.NEEDLEFISH.get() to "Needlefish",
+            HAEntityTypes.BARRACUDA.get() to "Barracuda",
+            HAEntityTypes.GARDEN_EEL.get() to "Garden Eel",
+            HAEntityTypes.MACKEREL.get() to "Mackerel",
+            HAEntityTypes.HERRING.get() to "Herring",
+            HAEntityTypes.RATFISH.get() to "Ratfish",
+            HAEntityTypes.NAUTILUS.get() to "Nautilus",
+            HAEntityTypes.UMBRELLA_OCTOPUS.get() to "Umbrella Octopus",
+            HAEntityTypes.TRIGGERFISH.get() to "Triggerfish",
+            HAEntityTypes.TREVALLY.get() to "Trevally",
+            HAEntityTypes.CICHLID.get() to "Cichlid",
+            HAEntityTypes.DANIO.get() to "Danio",
+            HAEntityTypes.BLOWFISH.get() to "Blowfish",
+            HAEntityTypes.TETRA.get() to "Tetra",
+            HAEntityTypes.PUPFISH.get() to "Pupfish",
+            HAEntityTypes.STONEFISH.get() to "Stonefish",
+            HAEntityTypes.SHINER.get() to "Shiner",
+            HAEntityTypes.BETTA.get() to "Betta",
+            HAEntityTypes.SEAHORSE.get() to "Seahorse",
+            HAEntityTypes.MOON_JELLYFISH.get() to "Moon Jellyfish",
+            HAEntityTypes.GOURAMI.get() to "Gourami",
+            HAEntityTypes.PLECO.get() to "Pleco",
+            HAEntityTypes.BOXFISH.get() to "Boxfish",
+            HAEntityTypes.OCTOPUS.get() to "Octopus",
+            HAEntityTypes.DISCUS.get() to "Discus",
+            HAEntityTypes.CORYDORA.get() to "Corydora",
+            HAEntityTypes.ARROW_SQUID.get() to "Arrow Squid",
+            HAEntityTypes.COLOSSAL_SQUID.get() to "Colossal Squid",
+            HAEntityTypes.GIANT_SQUID.get() to "Giant Squid",
+            HAEntityTypes.FIREFLY_SQUID.get() to "Firefly Squid",
+            HAEntityTypes.STINGRAY.get() to "Stingray",
+            HAEntityTypes.MANTA_RAY.get() to "Manta Ray",
+            HAEntityTypes.SURGEONFISH.get() to "Surgeonfish",
+            HAEntityTypes.BULL_SHARK.get() to "Bull Shark",
+            HAEntityTypes.BASKING_SHARK.get() to "Basking Shark",
+            HAEntityTypes.THRESHER_SHARK.get() to "Thresher Shark",
+            HAEntityTypes.FRILLED_SHARK.get() to "Frilled Shark",
+            HAEntityTypes.SIXGILL_SHARK.get() to "Sixgill Shark",
+            HAEntityTypes.SLEEPER_SHARK.get() to "Sleeper Shark",
+            HAEntityTypes.GOBLIN_SHARK.get() to "Goblin Shark",
+            HAEntityTypes.LANTERN_SHARK.get() to "Lantern Shark",
+            HAEntityTypes.GREAT_WHITE_SHARK.get() to "Great White Shark",
+            HAEntityTypes.SAND_TIGER_SHARK.get() to "Sand Tiger Shark",
+            HAEntityTypes.HAMMERHEAD_SHARK.get() to "Hammerhead Shark",
+            HAEntityTypes.WHALE_SHARK.get() to "Whale Shark",
+            HAEntityTypes.KARKINOS.get() to "Karkinos",
+            HAEntityTypes.KARCINOGEN.get() to "Karcinogen",
+            HAEntityTypes.KARCINOMA.get() to "Karcinoma",
+            HAEntityTypes.SHELL_BEAST.get() to "Shell Beast",
+            // HAEntityTypes.HYPNAUTILUS.get() to "Hypnautilus",
+            HAEntityTypes.BEAKLING.get() to "Beakling",
+            HAEntityTypes.DUNGENESS_CRAB.get() to "Dungeness Crab",
+            HAEntityTypes.FIDDLER_CRAB.get() to "Fiddler Crab",
+            HAEntityTypes.HERMIT_CRAB.get() to "Hermit Crab",
+            HAEntityTypes.GHOST_CRAB.get() to "Ghost Crab",
+            HAEntityTypes.LIGHTFOOT_CRAB.get() to "Lightfoot Crab",
+            HAEntityTypes.FLOWER_CRAB.get() to "Flower Crab",
+            HAEntityTypes.VAMPIRE_CRAB.get() to "Vampire Crab",
+            HAEntityTypes.SPIDER_CRAB.get() to "Spider Crab",
+            HAEntityTypes.YETI_CRAB.get() to "Yeti Crab",
+            HAEntityTypes.DECORATOR_CRAB.get() to "Decorator Crab",
+            HAEntityTypes.COCONUT_CRAB.get() to "Coconut Crab",
+            HAEntityTypes.HORSESHOE_CRAB.get() to "Horseshoe Crab",
+            HAEntityTypes.GIANT_ISOPOD.get() to "Giant Isopod",
+            HAEntityTypes.SHRIMP.get() to "Shrimp",
+            HAEntityTypes.CRAYFISH.get() to "Crayfish",
+            HAEntityTypes.LOBSTER.get() to "Lobster",
+            HAEntityTypes.SEA_SLUG.get() to "Sea Slug",
+            HAEntityTypes.SCALYFOOT_SNAIL.get() to "Scalyfoot Snail",
+            HAEntityTypes.SEA_CUCUMBER.get() to "Sea Cucumber",
+            HAEntityTypes.SEA_URCHIN.get() to "Sea Urchin",
+            HAEntityTypes.STARFISH.get() to "Starfish",
+            HAEntityTypes.SEA_NETTLE.get() to "Sea Nettle",
+            HAEntityTypes.BOX_JELLYFISH.get() to "Box Jellyfish",
+            HAEntityTypes.CEPHEIDAE_JELLYFISH.get() to "Cepheidae Jellyfish",
+            HAEntityTypes.NOMURA_JELLYFISH.get() to "Nomura Jellyfish",
+            HAEntityTypes.BARREL_JELLYFISH.get() to "Barrel Jellyfish",
+            HAEntityTypes.MAUVE_STINGER.get() to "Mauve Stinger",
+            HAEntityTypes.LIONS_MANE_JELLYFISH.get() to "Lion's Mane Jellyfish",
+            HAEntityTypes.CROWN_JELLYFISH.get() to "Crown Jellyfish",
+            HAEntityTypes.BIG_RED_JELLYFISH.get() to "Big Red Jellyfish",
+            HAEntityTypes.COSMIC_JELLYFISH.get() to "Cosmic Jellyfish",
+            HAEntityTypes.COMB_JELLY.get() to "Comb Jelly",
+            HAEntityTypes.FIREWORK_JELLYFISH.get() to "Firework Jellyfish",
+            HAEntityTypes.BLUE_JELLYFISH.get() to "Blue Jellyfish",
+            HAEntityTypes.SEADRAGON.get() to "Seadragon",
+            HAEntityTypes.WRASSE.get() to "Wrasse",
+            HAEntityTypes.HOUND_SHARK.get() to "Hound Shark",
+            HAEntityTypes.OTTER.get() to "Otter",
+            HAEntityTypes.DUGONG.get() to "Dugong",
+            HAEntityTypes.MANATEE.get() to "Manatee",
+            HAEntityTypes.ORCA.get() to "Orca",
+            HAEntityTypes.DEPTH_CHARGE.get() to "Depth Charge",
+            HAEntityTypes.SMALL_TNT.get() to "Small TNT",
+            HAEntityTypes.ARGONAUT.get() to "Argonaut",
+            HAEntityTypes.CAVITATION_BUBBLE.get() to "Cavitation Bubble",
+            HAEntityTypes.STARFISH_PROJECTILE.get() to "Thrown Starfish",
         )
 
         // verify display name list is valid

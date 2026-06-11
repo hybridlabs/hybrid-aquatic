@@ -1,7 +1,0 @@
-{
-  "type": "lithostitched:replace_effects",
-  "biomes": "minecraft:deep_ocean",
-  "effects": {
-    "water_fog_color": 792107
-  }
-}

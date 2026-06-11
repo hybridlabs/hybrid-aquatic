@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.PiranhaEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class PiranhaEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<PiranhaEntity>(context, PiranhaEntityModel(), true, false)
+    HAFishEntityRenderer<PiranhaEntity>(context, PiranhaEntityModel(), true, false)

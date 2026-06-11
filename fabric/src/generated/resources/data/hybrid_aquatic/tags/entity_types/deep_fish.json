@@ -1,0 +1,50 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:anglerfish",
+    "hybrid_aquatic:barreleye",
+    "hybrid_aquatic:coelacanth",
+    "hybrid_aquatic:slickhead",
+    "hybrid_aquatic:dragonfish",
+    "hybrid_aquatic:fangtooth",
+    "hybrid_aquatic:flashlight_fish",
+    "hybrid_aquatic:hatchetfish",
+    "hybrid_aquatic:blobfish",
+    "hybrid_aquatic:hagfish",
+    "hybrid_aquatic:tripod_fish",
+    "hybrid_aquatic:john_dory",
+    "hybrid_aquatic:oarfish",
+    "hybrid_aquatic:ratfish",
+    "hybrid_aquatic:sea_angel",
+    "hybrid_aquatic:snailfish",
+    "hybrid_aquatic:viperfish",
+    {
+      "id": "spawn:angler_fish",
+      "required": false
+    },
+    {
+      "id": "fintastic:coelacanth",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:blobfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:gossamer_worm",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:barreleye",
+      "required": false
+    }
+  ]
+}

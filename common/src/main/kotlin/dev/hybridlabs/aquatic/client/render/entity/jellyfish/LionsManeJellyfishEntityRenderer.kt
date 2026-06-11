@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.LionsManeJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class LionsManeJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<LionsManeJellyfishEntity>(context, LionsManeJellyfishEntityModel(), true, false)
+    HAJellyfishEntityRenderer<LionsManeJellyfishEntity>(context, LionsManeJellyfishEntityModel(), true, false)

@@ -1,0 +1,15 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/lionfish_reef.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:reef",
+========
+  "type": "forge:add_spawns",
+  "biomes": "#minecraft:is_river",
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/shiner_is_river.json
+  "spawners": {
+    "type": "hybrid_aquatic:shiner",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

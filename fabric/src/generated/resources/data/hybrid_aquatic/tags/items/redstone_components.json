@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:note_block",
+    "minecraft:redstone_lamp",
+    "minecraft:tnt"
+  ]
+}

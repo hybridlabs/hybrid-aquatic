@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.NomuraJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class NomuraJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<NomuraJellyfishEntity>(context, NomuraJellyfishEntityModel(), true, false)
+    HAJellyfishEntityRenderer<NomuraJellyfishEntity>(context, NomuraJellyfishEntityModel(), true, false)

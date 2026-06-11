@@ -4,7 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import net.minecraft.client.model.geom.ModelPart
-import net.minecraft.client.model.geom.PartNames.*
+import net.minecraft.client.model.geom.PartNames.BODY
+import net.minecraft.client.model.geom.PartNames.JAW
+import net.minecraft.client.model.geom.PartNames.LEFT_FIN
+import net.minecraft.client.model.geom.PartNames.RIGHT_FIN
+import net.minecraft.client.model.geom.PartNames.TAIL_FIN
 import net.minecraft.client.model.geom.PartPose
 import net.minecraft.client.model.geom.builders.CubeListBuilder
 import net.minecraft.client.model.geom.builders.LayerDefinition

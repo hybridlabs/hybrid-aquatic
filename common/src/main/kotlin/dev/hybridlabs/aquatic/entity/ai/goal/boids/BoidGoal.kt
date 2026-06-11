@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal.boids
 
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import net.minecraft.commands.arguments.EntityAnchorArgument
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.Mob
@@ -9,9 +10,8 @@ import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.phys.Vec3
 import java.util.function.Predicate
 
-
 class BoidGoal(
-    private val mob: Mob,
+    private val fish: HAFishEntity,
     private val separationInfluence: Float,
     private val separationRange: Float,
     private val alignmentInfluence: Float,
@@ -20,16 +20,20 @@ class BoidGoal(
     Goal() {
     private var timeToFindNearbyEntities = 0
     private var nearbyMobs: MutableList<out Mob> = mutableListOf()
-    private val maxSpeed: Float = mob.getAttributeValue(MOVEMENT_SPEED).toFloat()
+    private val maxSpeed: Float = fish.getAttributeValue(MOVEMENT_SPEED).toFloat()
 
     override fun canUse(): Boolean {
-        if (!mob.isUnderWater) {
+        if (fish.isGrazing()) {
+            return false
+        }
+
+        if (!fish.isUnderWater) {
             return false
         }
 
         if (--this.timeToFindNearbyEntities <= 0) {
             this.timeToFindNearbyEntities = this.adjustedTickDelay(40)
-            nearbyMobs = getNearbyEntitiesOfSameClass(mob)
+            nearbyMobs = getNearbyEntitiesOfSameClass(fish)
         } else {
             nearbyMobs.removeIf { obj: LivingEntity -> obj.isDeadOrDying }
         }
@@ -40,42 +44,67 @@ class BoidGoal(
         return true
     }
 
+    override fun canContinueToUse(): Boolean {
+        if (!fish.isUnderWater) {
+            return false
+        }
+
+        if (fish.isGrazing()) {
+            return false
+        }
+
+        nearbyMobs.removeIf { it.isDeadOrDying }
+
+        return nearbyMobs.isNotEmpty()
+    }
+
     private fun getMaxDelta(): Double {
         return maxSpeed * 0.075
     }
 
     override fun tick() {
 
-        var boidVec = cohesion().add(alignment().add(separation().add(random())))
+        val hasTarget = fish.target != null
+
+        val sep = if (hasTarget) separation().scale(0.2) else separation()
+        val ali = if (hasTarget) alignment().scale(0.5) else alignment()
+        val coh = if (hasTarget) cohesion().scale(0.4) else cohesion()
+
+        var boidVec = coh
+            .add(ali)
+            .add(sep)
+            .add(random())
+            .add(targetAttraction())
+
         if (boidVec.length() > getMaxDelta()) {
             boidVec = boidVec.normalize().scale(getMaxDelta())
         }
 
-        mob.addDeltaMovement(boidVec)
+        fish.addDeltaMovement(boidVec)
 
-        val target = mob.position().add(mob.deltaMovement)
-        mob.lookAt(
+        val targetPos = fish.position().add(fish.deltaMovement)
+        fish.lookAt(
             EntityAnchorArgument.Anchor.EYES,
-            Vec3(target.x, target.y + mob.eyeHeight, target.z)
+            Vec3(targetPos.x, targetPos.y + fish.eyeHeight, targetPos.z)
         )
     }
 
     fun random(): Vec3 {
-        val velocity = mob.deltaMovement
+        val velocity = fish.deltaMovement
         if (velocity.length() < maxSpeed * 0.001) {
-            val yaw = (mob.random.nextGaussian() * 40) - 20
-            val pitch = (mob.random.nextGaussian() * 2) - 1
+            val yaw = (fish.random.nextGaussian() * 40) - 20
+            val pitch = (fish.random.nextGaussian() * 2) - 1
             return Vec3.directionFromRotation(pitch.toFloat(), yaw.toFloat()).scale(0.1)
         }
-        return mob.forward.scale(0.1)
+        return fish.forward.scale(0.1)
     }
 
     private fun separation(): Vec3 {
         var c = Vec3.ZERO
 
         for (nearbyMob in nearbyMobs) {
-            if ((nearbyMob.position().subtract(mob.position()).length()) < separationRange) {
-                c = c.subtract(nearbyMob.position().subtract(mob.position()))
+            if ((nearbyMob.position().subtract(fish.position()).length()) < separationRange) {
+                c = c.subtract(nearbyMob.position().subtract(fish.position()))
             }
         }
 
@@ -90,7 +119,7 @@ class BoidGoal(
         }
 
         c = c.scale((1f / nearbyMobs.size).toDouble())
-        c = c.subtract(mob.deltaMovement)
+        c = c.subtract(fish.deltaMovement)
         return c.scale(alignmentInfluence.toDouble())
     }
 
@@ -102,8 +131,16 @@ class BoidGoal(
         }
 
         c = c.scale((1f / nearbyMobs.size).toDouble())
-        c = c.subtract(mob.position())
+        c = c.subtract(fish.position())
         return c.scale(cohesionInfluence.toDouble())
+    }
+
+    private fun targetAttraction(): Vec3 {
+        val target = fish.target ?: return Vec3.ZERO
+        if (!target.isAlive) return Vec3.ZERO
+
+        val targetPos = target.position().subtract(fish.position())
+        return targetPos.normalize().scale(maxSpeed * 0.15)
     }
 
     companion object {

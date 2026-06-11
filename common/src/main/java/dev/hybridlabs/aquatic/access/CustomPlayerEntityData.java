@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.access;
 
 public interface CustomPlayerEntityData {
-    default void hybrid_aquatic$setHurtTime(int value) {
+    default void setHybridHurtTime(int value) {
         throw new AssertionError();
     }
 
-    default int hybrid_aquatic$getHurtTime() {
+    default int getHybridHurtTime() {
         throw new AssertionError();
     }
 }

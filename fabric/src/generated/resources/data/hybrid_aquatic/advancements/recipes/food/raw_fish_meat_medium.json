@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_medium_fish": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/food/raw_fish_meat_medium.json
+            "items": "#hybrid-aquatic:medium_fish"
+========
+            "tag": "hybrid_aquatic:medium_fish"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/food/raw_fish_meat_medium.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:raw_fish_meat_medium"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_medium_fish"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:raw_fish_meat_medium"
+    ]
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/food/raw_fish_meat_medium.json
+  }
+}
+========
+  },
+  "sends_telemetry_event": false
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/food/raw_fish_meat_medium.json

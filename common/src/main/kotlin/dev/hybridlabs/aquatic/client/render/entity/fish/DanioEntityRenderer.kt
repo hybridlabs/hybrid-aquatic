@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.DanioEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class DanioEntityRenderer(context: Context)
-    : HybridAquaticFishEntityRenderer<DanioEntity>(context, DanioEntityModel(), false, false)
+    : HAFishEntityRenderer<DanioEntity>(context, DanioEntityModel(), false, false)

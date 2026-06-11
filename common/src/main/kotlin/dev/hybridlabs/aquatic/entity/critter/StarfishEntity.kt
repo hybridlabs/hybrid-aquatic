@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -26,9 +27,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
-    HybridAquaticCritterEntity(
-        entityType, world
-    ),
+    HACritterEntity(entityType, world),
     VariantHolder<StarfishEntity.Companion.Type>, OverlayTextureFeature {
 
     override fun getDefaultDimensions(pose: Pose): EntityDimensions {
@@ -125,7 +124,11 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                             BRITTLESTAR
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                        biome.`is`(HABiomeTags.ALL_TRENCHES) -> {
+                            BRITTLESTAR
+                        }
+
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                         }
 
@@ -157,6 +160,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
+        this.refreshDimensions()
         this.overlayColor = this.overlayColor
         this.starfishColor = this.starfishColor
 
@@ -226,30 +230,30 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        nbt.putInt("Overlay", this.overlayTexture.id)
-        nbt.putInt("Starfish_Color", starfishColor)
-        nbt.putInt("Overlay_Color", overlayColor)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        compound.putInt("Overlay", this.overlayTexture.id)
+        compound.putInt("Starfish_Color", starfishColor)
+        compound.putInt("Overlay_Color", overlayColor)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
 
-        if (nbt.contains("Overlay")) {
-            this.overlayTexture = OverlayTextures.byId(nbt.getInt("Overlay"))
+        if (compound.contains("Overlay")) {
+            this.overlayTexture = OverlayTextures.byId(compound.getInt("Overlay"))
         }
 
-        if (nbt.contains("Overlay_Color")) {
-            this.overlayColor = nbt.getInt("Overlay_Color")
+        if (compound.contains("Overlay_Color")) {
+            this.overlayColor = compound.getInt("Overlay_Color")
         }
 
-        if (nbt.contains("Starfish_Color")) {
-            this.starfishColor = nbt.getInt("Starfish_Color")
+        if (compound.contains("Starfish_Color")) {
+            this.starfishColor = compound.getInt("Starfish_Color")
         }
 
-        super.readAdditionalSaveData(nbt)
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

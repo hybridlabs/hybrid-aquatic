@@ -2,4 +2,4 @@ package dev.hybridlabs.aquatic.client.model.entity.shark
 
 import dev.hybridlabs.aquatic.entity.shark.BaskingSharkEntity
 
-class BaskingSharkEntityModel : HybridAquaticSharkEntityModel<BaskingSharkEntity>("basking_shark")
+class BaskingSharkEntityModel : HASharkEntityModel<BaskingSharkEntity>("basking_shark")

@@ -3,11 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.RockfishEntity
 import net.minecraft.resources.ResourceLocation
 
-class RockfishEntityModel : HybridAquaticFishEntityModel<RockfishEntity>("rockfish") {
-
-    private val VERMILION_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/rockfish/vermilion_rockfish.png")
-    private val COPPER_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/rockfish/copper_rockfish.png")
-    private val YELLOWEYE_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/rockfish/yelloweye_rockfish.png")
+class RockfishEntityModel : HAFishEntityModel<RockfishEntity>("rockfish") {
 
     override fun getTextureResource(animatable: RockfishEntity): ResourceLocation {
         return when (animatable.variant) {
@@ -15,5 +11,14 @@ class RockfishEntityModel : HybridAquaticFishEntityModel<RockfishEntity>("rockfi
             RockfishEntity.Companion.Type.COPPER -> COPPER_TEXTURE
             RockfishEntity.Companion.Type.YELLOWEYE -> YELLOWEYE_TEXTURE
         }
+    }
+
+    companion object {
+        private val VERMILION_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/rockfish/vermilion_rockfish.png")
+        private val COPPER_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/rockfish/copper_rockfish.png")
+        private val YELLOWEYE_TEXTURE =
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/rockfish/yelloweye_rockfish.png")
     }
 }

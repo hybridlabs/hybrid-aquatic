@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.cephalopod.FireflySquidEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class FireflySquidEntityRenderer(context: Context) :
-    HybridAquaticCephalopodEntityRenderer<FireflySquidEntity>(context, FireflySquidEntityModel(), true, true)
+    HACephalopodEntityRenderer<FireflySquidEntity>(context, FireflySquidEntityModel(), true, true)

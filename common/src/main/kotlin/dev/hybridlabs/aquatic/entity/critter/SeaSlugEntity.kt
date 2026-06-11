@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -21,8 +22,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world),
+class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : HACritterEntity(type, world),
     VariantHolder<SeaSlugEntity.Companion.Type> {
 
     companion object {
@@ -65,11 +65,11 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
                 fun fromBiome(biome: Holder<Biome>): Type {
                     return when {
 
-                        biome.`is`(HybridAquaticBiomeTags.REEF) -> {
+                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
                             NUDIBRANCH
                         }
 
-                        biome.`is`(HybridAquaticBiomeTags.TROPICAL_OCEANS) -> {
+                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
                             NUDIBRANCH
                             SEA_HARE
                         }
@@ -108,14 +108,14 @@ class SeaSlugEntity(entityType: EntityType<out SeaSlugEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

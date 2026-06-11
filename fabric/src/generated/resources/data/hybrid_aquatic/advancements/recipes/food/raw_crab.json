@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crab_claw": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/food/raw_crab.json
+            "items": "#hybrid-aquatic:claw"
+========
+            "tag": "hybrid_aquatic:crab_claw"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/food/raw_crab.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:raw_crab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crab_claw"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:raw_crab"
+    ]
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/recipes/food/raw_crab.json
+  }
+}
+========
+  },
+  "sends_telemetry_event": false
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/recipes/food/raw_crab.json

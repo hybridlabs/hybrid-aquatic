@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.CrownJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class CrownJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<CrownJellyfishEntity>(context, CrownJellyfishEntityModel(), true, true)
+    HAJellyfishEntityRenderer<CrownJellyfishEntity>(context, CrownJellyfishEntityModel(), true, true)

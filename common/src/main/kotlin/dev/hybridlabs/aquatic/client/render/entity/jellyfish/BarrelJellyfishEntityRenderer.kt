@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.BarrelJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BarrelJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<BarrelJellyfishEntity>(context, BarrelJellyfishEntityModel(), true, false)
+    HAJellyfishEntityRenderer<BarrelJellyfishEntity>(context, BarrelJellyfishEntityModel(), true, false)

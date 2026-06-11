@@ -1,15 +1,18 @@
 package dev.hybridlabs.aquatic.platform.services;
 
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -50,26 +53,22 @@ public interface PlatformHelper {
         return isDevelopmentEnvironment() ? "development" : "production";
     }
 
-    <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(
-            @NotNull String name,
-            Supplier<EntityType<T>> entityType,
-            int backgroundColor,
-            int highlightColor);
+    <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(@NotNull String name,
+                                                                Supplier<EntityType<T>> entityType,
+                                                                int backgroundColor, int highlightColor);
 
     Path getConfigDir();
 
-    <T extends Mob> void registerSpawnPlacement(
-            RegistryObject<EntityType<T>> entityType,
-            SpawnPlacementType decoratorType,
-            Heightmap.Types heightMapType,
-            SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
+    <T extends Mob> void registerSpawnPlacement(RegistryObject<EntityType<T>> entityType,
+                                                SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType,
+                                                SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
 
-    <T extends LivingEntity> void registerAttributes(
-            @NotNull String id,
-            EntityType<T> entityType,
-            Callable<AttributeSupplier.Builder> attributeContainer);
+    <T extends LivingEntity> void registerAttributes(@NotNull String id, EntityType<T> entityType,
+                                                     Callable<AttributeSupplier.Builder> attributeContainer);
 
-    MobCategory getMobCategoryByName(String name);
+    Attribute getReachAttribute();
+
+    MobCategory getHybridMobCategoryByName(String name);
 
     Item createBlockItem(Block block, Item.Properties properties);
 

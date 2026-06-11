@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:marshes",
+  "spawners": {
+    "type": "hybrid_aquatic:gourami",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

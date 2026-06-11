@@ -1,18 +1,25 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class RatfishEntity(entityType: EntityType<out RatfishEntity>, world: Level) :
-    HybridAquaticFishEntity(entityType, world,
+class RatfishEntity(type: EntityType<out RatfishEntity>, world: Level) :
+    HAFishEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.create(
         listOf(
-            HybridAquaticEntityTags.CRUSTACEAN),
+            HAEntityTags.ALL_CRUSTACEANS
+        ),
         listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK)) {
+            HAEntityTags.LARGE_CREATURES,
+            HAEntityTags.ALL_SHARKS
+        ),
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3

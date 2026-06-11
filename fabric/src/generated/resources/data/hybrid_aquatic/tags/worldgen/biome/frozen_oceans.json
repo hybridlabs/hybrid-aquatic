@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:frozen_ocean",
+    "minecraft:deep_frozen_ocean",
+    {
+      "id": "still_life:arctic_deep_ocean",
+      "required": false
+    },
+    {
+      "id": "still_life:arctic_shallow_ocean",
+      "required": false
+    }
+  ]
+}

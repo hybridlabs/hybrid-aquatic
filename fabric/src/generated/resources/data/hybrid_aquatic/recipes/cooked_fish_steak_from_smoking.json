@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "hybrid_aquatic:raw_fish_steak"
+  },
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/cooked_lobster_tail_from_smoking.json
+  "result": {
+    "id": "hybrid-aquatic:cooked_lobster_tail"
+  }
+}
+========
+  "result": "hybrid_aquatic:cooked_fish_steak"
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/cooked_fish_steak_from_smoking.json

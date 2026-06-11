@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.SnailfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SnailfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<SnailfishEntity>(context, SnailfishEntityModel(), true, false)
+    HAFishEntityRenderer<SnailfishEntity>(context, SnailfishEntityModel(), true, false)

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.MahiEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class MahiEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<MahiEntity>(context, MahiEntityModel(), true, false)
+    HAFishEntityRenderer<MahiEntity>(context, MahiEntityModel(), true, false)

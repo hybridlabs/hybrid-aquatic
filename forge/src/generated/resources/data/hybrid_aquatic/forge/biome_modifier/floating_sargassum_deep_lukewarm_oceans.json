@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:deep_lukewarm_oceans",
+  "features": "hybrid_aquatic:floating_sargassum",
+  "step": "vegetal_decoration"
+}

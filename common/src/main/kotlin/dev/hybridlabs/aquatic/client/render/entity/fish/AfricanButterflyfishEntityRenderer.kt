@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.AfricanButterflyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class AfricanButterflyfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<AfricanButterflyfishEntity>(context, AfricanButterflyfishEntityModel(), false, false)
+    HAFishEntityRenderer<AfricanButterflyfishEntity>(context, AfricanButterflyfishEntityModel(), false, false)

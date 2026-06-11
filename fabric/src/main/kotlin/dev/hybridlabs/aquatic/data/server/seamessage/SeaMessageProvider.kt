@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.data.server.seamessage
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.SeaMessage
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
@@ -15,7 +15,7 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
         BUILT_IN.forEach { message ->
             val key = ResourceKey.create(
-                HybridAquaticRegistryKeys.SEA_MESSAGE,
+                HARegistryKeys.SEA_MESSAGE,
                 CommonClass.locate(message.id)
             )
             entries.add(key, SeaMessage(message.translationKey, message.englishTitle != null, message.infinite, Optional.ofNullable(message.author)))
@@ -58,6 +58,8 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
             GeneratedSeaMessageData("unusual_fish", "I saw some Unusual Fish in the Ocean", englishTitle = "Unusual Fish"),
             GeneratedSeaMessageData("tide", "I hope Tide carries this message to someone", englishTitle = "Tide"),
             GeneratedSeaMessageData("ben", "My friend Ben caught a shark the other day", englishTitle = "Ben"),
+            GeneratedSeaMessageData("disaster", "Don't live in regret, take it as a mistake and learn from it, thrive and dive.", author = "Disaster", englishTitle = "Thrive"),
+            GeneratedSeaMessageData("dory", "Just keep swimming, just keep swimming", author = "Dory"),
             GeneratedSeaMessageData("control_oop", "Objects of Power shape reality around us. Handle with care.", author = "FBC", englishTitle = "Object of Power: Sea Message"),
             GeneratedSeaMessageData("dylan", """
                 You are a worm through time.

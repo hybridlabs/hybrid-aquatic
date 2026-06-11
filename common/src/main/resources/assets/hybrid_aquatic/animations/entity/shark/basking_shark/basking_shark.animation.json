@@ -1,0 +1,160 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"move.swim": {
+			"loop": true,
+			"bones": {
+				"torso": {
+					"rotation": ["0-math.sin(query.anim_time*22.5*1.25)*3", "0-math.sin(query.anim_time*22.5*2.5)*8", "0-math.sin(query.anim_time*22.5*1.25-60)*2"],
+					"position": ["0-math.sin(query.anim_time*22.5*2.5+80)*3", "0-math.sin(query.anim_time*22.5*1.25+80)*2", 0]
+				},
+				"torso_2": {
+					"rotation": [0, "0-math.sin(query.anim_time*22.5*2.5-60)*4", 0]
+				},
+				"tail": {
+					"rotation": ["0-math.sin(query.anim_time*22.5*1.25-60)*3", "0-math.sin(query.anim_time*22.5*2.5-120)*8", 0]
+				},
+				"tail_fin": {
+					"rotation": ["0-math.sin(query.anim_time*22.5*1.25-120)*3", "0-math.sin(query.anim_time*22.5*2.5-160)*16", 0]
+				},
+				"left_fin": {
+					"rotation": [0, "-10-math.sin(query.anim_time*22.5*2.5-60)*3", "0+math.sin(query.anim_time*22.5*1.25-60)*6"]
+				},
+				"right_fin": {
+					"rotation": [0, "10-math.sin(query.anim_time*22.5*2.5-60)*3", "0-math.sin(query.anim_time*22.5*1.25-60)*6"]
+				},
+				"head": {
+					"rotation": ["0-math.sin(query.anim_time*22.5*1.25+60)*2", "0-math.sin(query.anim_time*22.5*2.5+60)*3", 0]
+				},
+				"body_3": {
+					"rotation": [0, "0-math.sin(query.anim_time*22.5*2.5-60)*6", 0]
+				},
+				"mouth_open": {
+					"scale": 0
+				},
+				"mouth": {
+					"scale": 1
+				}
+			}
+		},
+		"move.run": {
+			"loop": true,
+			"bones": {
+				"torso": {
+					"rotation": ["0-math.sin(query.anim_time*45*2.5)*3", "0-math.sin(query.anim_time*45*5)*8", "0-math.sin(query.anim_time*45*2.5-60)*2"],
+					"position": ["0-math.sin(query.anim_time*45*5+80)*5", "0-math.sin(query.anim_time*45*2.5+80)*2", 0]
+				},
+				"torso_2": {
+					"rotation": [0, "0-math.sin(query.anim_time*45*5-60)*8", 0]
+				},
+				"tail": {
+					"rotation": ["0-math.sin(query.anim_time*45*2.5-60)*3", "0-math.sin(query.anim_time*45*5-120)*12", 0]
+				},
+				"tail_fin": {
+					"rotation": ["0-math.sin(query.anim_time*45*2.5+60)*2", "0-math.sin(query.anim_time*45*5-160)*16", 0]
+				},
+				"left_fin": {
+					"rotation": [0, "-10-math.sin(query.anim_time*45*5-60)*3", "0+math.sin(query.anim_time*45*2.5-60)*6"]
+				},
+				"right_fin": {
+					"rotation": [0, "10-math.sin(query.anim_time*45*5-60)*3", "0-math.sin(query.anim_time*45*2.5-60)*6"]
+				},
+				"head": {
+					"rotation": ["0-math.sin(query.anim_time*45*2.5+60)*2", "0-math.sin(query.anim_time*45*5+60)*3", 0]
+				},
+				"mouth": {
+					"scale": 1
+				},
+				"mouth_open": {
+					"scale": 0
+				}
+			}
+		},
+		"attack.bite": {
+			"animation_length": 0.625,
+			"bones": {
+				"head": {
+					"rotation": {
+						"0.0": {
+							"post": [0, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.125": {
+							"post": [-5.78657, -13.36898, -7.6438],
+							"lerp_mode": "catmullrom"
+						},
+						"0.2083": {
+							"post": [9.98959, 4.31398, 5.47401],
+							"lerp_mode": "catmullrom"
+						},
+						"0.3333": {
+							"post": [0, 0, 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"mouth_open": {
+					"scale": 0
+				}
+			}
+		},
+		"misc.mouth_open": {
+			"loop": true,
+			"bones": {
+				"mouth": {
+					"scale": 0
+				},
+				"mouth_open": {
+					"scale": 1
+				}
+			}
+		},
+		"misc.feed": {
+			"loop": true,
+			"bones": {
+				"mouth": {
+					"scale": 0
+				},
+				"mouth_open": {
+					"scale": 1
+				}
+			}
+		},
+		"misc.flop": {
+			"loop": true,
+			"bones": {
+				"torso_2": {
+					"rotation": [-5, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"tail": {
+					"rotation": [-12.5, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"tail_fin": {
+					"rotation": [15, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"head": {
+					"rotation": [10, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"torso": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"mouth_open": {
+					"scale": 0
+				},
+				"mouth": {
+					"scale": 1
+				},
+				"body": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

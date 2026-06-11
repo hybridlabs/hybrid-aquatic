@@ -1,0 +1,34 @@
+{
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid_aquatic/worldgen/placed_feature/anemones.json
+  "feature": "hybrid-aquatic:anemones",
+========
+  "feature": "hybrid_aquatic:coral_layer",
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/worldgen/placed_feature/coral_layer.json
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 16
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid_aquatic/worldgen/placed_feature/anemones.json
+      "type": "minecraft:rarity_filter",
+      "chance": 10
+    },
+    {
+      "type": "minecraft:count",
+      "count": 1
+    },
+    {
+========
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/worldgen/placed_feature/coral_layer.json
+      "type": "minecraft:biome"
+    }
+  ]
+}

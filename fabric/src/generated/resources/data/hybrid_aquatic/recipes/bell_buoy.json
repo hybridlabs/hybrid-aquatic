@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    " G ",
+    " S ",
+    " W "
+  ],
+  "result": {
+    "count": 2,
+    "item": "hybrid_aquatic:bell_buoy"
+  },
+  "show_notification": true
+}

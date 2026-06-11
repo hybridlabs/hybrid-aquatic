@@ -1,17 +1,20 @@
 package dev.hybridlabs.aquatic.platform.services;
 
-
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.Constants;
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks;
+import dev.hybridlabs.aquatic.block.HABlocks;
 import dev.hybridlabs.aquatic.item.AnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.MessageInABottleItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge;
+import dev.hybridlabs.aquatic.network.HANetworking;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -19,16 +22,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
-
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.javafmlmod.FMLModContainer;
+import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.jetbrains.annotations.NotNull;
+import thedarkcolour.kotlinforforge.KotlinModContainer;
 
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
@@ -38,8 +43,15 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     public static IEventBus getEventBus() {
         final ModContainer cont =
-                ModList.get().getModContainerById(Constants.FORGE_MOD_ID).orElseThrow();
-        return cont.getEventBus();
+                ModList.get().getModContainerById(Constants.MOD_ID).orElseThrow();
+        if (cont instanceof FMLModContainer fmlModContainer) {
+            return fmlModContainer.getEventBus();
+        } else if (cont instanceof KotlinModContainer kotlinModContainer) {
+            return kotlinModContainer.getEventBus$kfflang();
+        } else {
+            throw new ClassCastException(
+                    "The container of the mod " + Constants.MOD_ID + " is not a FML one!");
+        }
     }
 
     @Override
@@ -69,7 +81,7 @@ public class ForgePlatformHelper implements PlatformHelper {
         return CommonClass.ITEMS.register(
                 name,
                 () ->
-                        new DeferredSpawnEggItem(
+                        new ForgeSpawnEggItem(
                                 entityType,
                                 backgroundColor,
                                 highlightColor,
@@ -84,7 +96,7 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public <T extends Mob> void registerSpawnPlacement(
             RegistryObject<EntityType<T>> entityType,
-            SpawnPlacementType decoratorType,
+            SpawnPlacements.Type decoratorType,
             Heightmap.Types heightMapType,
             SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
 
@@ -104,45 +116,23 @@ public class ForgePlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public MobCategory getMobCategoryByName(String name) {
-        return MobCategory.valueOf(name);
-    }
-
-    @Override
-    public Item createBlockItem(Block block, Item.Properties properties) {
-        if (block.equals(HybridAquaticBlocks.INSTANCE.getANEMONE().get())) {
-            return new AnemoneBlockItem(block, properties);
-        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getSTRAWBERRY_ANEMONE().get())) {
-            return new StrawberryAnemoneBlockItem(block, properties);
-        } else if (block.equals(HybridAquaticBlocks.INSTANCE.getGIANT_GREEN_ANEMONE().get())) {
-            return new GiantGreenAnemoneBlockItem(block, properties);
-        }
-        return new BlockItem(block, properties);
-    }
-
-    @Override
-    public Item createMessageInABottleItem(Item.Properties properties) {
-        return new MessageInABottleItem(properties);
-    }
-
-    @Override
-    public void sendHookToServer(int entityId, ItemStack entityData) {
-        HybridAquaticNetworkingForge.INSTANCE.sendHookPacket(entityId, entityData);
+    public Attribute getReachAttribute() {
+        return ForgeMod.BLOCK_REACH.get();
     }
 
     private record SpawnPlacementRegistrationHandler<T extends LivingEntity>(
             RegistryObject<EntityType<T>> type,
-            SpawnPlacementType decoratorType,
+            SpawnPlacements.Type decoratorType,
             Heightmap.Types heightMapType,
             SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
 
-        private void handleEvent(RegisterSpawnPlacementsEvent event) {
+        private void handleEvent(SpawnPlacementRegisterEvent event) {
             event.register(
                     type.get(),
                     decoratorType,
                     heightMapType,
                     decoratorPredicate,
-                    RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                    SpawnPlacementRegisterEvent.Operation.REPLACE);
         }
     }
 
@@ -160,4 +150,30 @@ public class ForgePlatformHelper implements PlatformHelper {
         }
     }
 
+    @Override
+    public MobCategory getHybridMobCategoryByName(String name) {
+        return MobCategory.valueOf(name);
+    }
+
+    @Override
+    public Item createBlockItem(Block block, Item.Properties properties) {
+        if (block.equals(HABlocks.INSTANCE.getANEMONE().get())) {
+            return new AnemoneBlockItem(block, properties);
+        } else if (block.equals(HABlocks.INSTANCE.getSTRAWBERRY_ANEMONE().get())) {
+            return new StrawberryAnemoneBlockItem(block, properties);
+        } else if (block.equals(HABlocks.INSTANCE.getGIANT_GREEN_ANEMONE().get())) {
+            return new GiantGreenAnemoneBlockItem(block, properties);
+        }
+        return new BlockItem(block, properties);
+    }
+
+    @Override
+    public Item createMessageInABottleItem(Item.Properties properties) {
+        return new MessageInABottleItem(properties);
+    }
+
+    @Override
+    public void sendHookToServer(int entityId, ItemStack entityData) {
+        HANetworking.INSTANCE.sendHookPacket(entityId, entityData);
+    }
 }

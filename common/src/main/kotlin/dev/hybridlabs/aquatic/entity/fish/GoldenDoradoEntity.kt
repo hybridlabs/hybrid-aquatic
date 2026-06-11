@@ -1,32 +1,20 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.NeutralMob
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
-import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
-import net.minecraft.world.entity.player.Player
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import java.util.*
 
-class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.CRUSTACEAN
-        ),
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        )
-    ), NeutralMob {
+class GoldenDoradoEntity(type: EntityType<out GoldenDoradoEntity>, world: Level) :
+    HAFishEntity(type, world) {
 
-    private var angerTime = 0
-    private var angryAt: UUID? = null
+    override fun getTargetConfig() = TARGET_CONFIG
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1
@@ -34,12 +22,27 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
 
     override fun registerGoals() {
         super.registerGoals()
-        targetSelector.addGoal(1, HurtByTargetGoal(this))
-        targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
+        goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItemTags.SMALL_FISH) ||
+                stack.`is`(HAItemTags.MEDIUM_FISH) ||
+                stack.`is`(HAItemTags.CRUSTACEAN_MEAT)
     }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.SMALL_CREATURES,
+                HAEntityTags.MEDIUM_CREATURES,
+                HAEntityTags.ALL_CRUSTACEANS
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0)
@@ -48,27 +51,6 @@ class GoldenDoradoEntity(entityType: EntityType<out GoldenDoradoEntity>, world: 
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
-    }
-
-    //#region Angerable Implementation Details
-    override fun getRemainingPersistentAngerTime(): Int {
-        return angerTime
-    }
-
-    override fun setRemainingPersistentAngerTime(angerTime: Int) {
-        this.angerTime = angerTime
-    }
-
-    override fun getPersistentAngerTarget(): UUID? {
-        return angryAt
-    }
-
-    override fun setPersistentAngerTarget(angryAt: UUID?) {
-        this.angryAt = angryAt
-    }
-
-    override fun startPersistentAngerTimer() {
-        this.remainingPersistentAngerTime = PiranhaEntity.ANGER_TIME_RANGE.sample(this.random)
     }
     //#endregion
 }

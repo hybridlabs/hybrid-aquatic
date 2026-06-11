@@ -1,0 +1,44 @@
+{
+  "values": [
+    {
+      "id": "regions_unexplored:marsh",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:marsh",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:wetland",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:floodplain",
+      "required": false
+    },
+    {
+      "id": "still_life:bog",
+      "required": false
+    },
+    {
+      "id": "still_life:temperate_marsh",
+      "required": false
+    },
+    {
+      "id": "still_life:fen",
+      "required": false
+    },
+    {
+      "id": "still_life:mire",
+      "required": false
+    },
+    {
+      "id": "still_life:flooded_grasslands",
+      "required": false
+    },
+    {
+      "id": "still_life:mediterranean_marsh",
+      "required": false
+    }
+  ]
+}

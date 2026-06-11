@@ -1,12 +1,13 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.tags.BlockTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
@@ -20,34 +21,52 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.SMALL_PREY,
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.CEPHALOPOD,
-            HybridAquaticEntityTags.SHARK
-        )
-    ),
+class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) :
+    HASchoolingFishEntity(type, world),
     VariantHolder<SeahorseEntity.Companion.Type> {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.SMALL_CREATURES,
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_CEPHALOPODS,
+        HAEntityTags.ALL_SHARKS,
+    )
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
+    override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
+        return dimensions.height * 0.8f
+    }
+
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
+    }
+
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
+    }
+    //#endregion
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
@@ -100,21 +119,6 @@ class SeahorseEntity(entityType: EntityType<out SeahorseEntity>, world: Level) :
                 }
             }
         }
-    }
-
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
-    }
-
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
     }
 
     override fun getVariant(): Type {

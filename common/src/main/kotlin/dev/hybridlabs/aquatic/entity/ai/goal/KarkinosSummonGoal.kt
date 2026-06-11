@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import net.minecraft.world.entity.ai.goal.Goal
-import java.util.*
+import java.util.EnumSet
 
 class KarkinosSummonGoal(
     private val karkinos: KarkinosEntity,

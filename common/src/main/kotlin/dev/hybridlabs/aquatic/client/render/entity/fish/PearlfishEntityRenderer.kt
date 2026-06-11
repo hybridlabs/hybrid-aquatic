@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.PearlfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class PearlfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<PearlfishEntity>(context, PearlfishEntityModel(), true, false)
+    HAFishEntityRenderer<PearlfishEntity>(context, PearlfishEntityModel(), true, false)

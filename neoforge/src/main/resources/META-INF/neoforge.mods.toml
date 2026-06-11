@@ -2,43 +2,51 @@ modLoader = "kotlinforforge"
 
 loaderVersion = "[4,)"
 license = "${license}"
-issueTrackerURL="https://github.com/hybridlabs/hybrid-aquatic/issues"
+issueTrackerURL="https://github.com/hybridlabs/hybrid_aquatic/issues"
 
 [[mods]]
-modId = "${forge_mod_id}"
+modId = "${mod_id}"
 version = "${version}"
 displayName = "${mod_name}"
-displayURL= "https://github.com/hybridlabs/hybrid-aquatic"
+displayURL= "https://github.com/hybridlabs/hybrid_aquatic"
 logoFile = "${mod_id}.png"
 credits = '''${credits}'''
 authors = "${mod_author}"
 description = '''${description}'''
-enumExtensions="META-INF/enumextensions.json"
 
-[[mixins]]
-config="${mod_id}.forge.mixins.json"
-
-[[dependencies.${forge_mod_id}]]
-modId = "neoforge"
+[[dependencies.${mod_id}]]
+modId = "forge"
 mandatory = true
-versionRange = "[${neoforge_version},)"
+versionRange = "[${forge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${forge_mod_id}]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${forge_mod_id}]]
+[[dependencies.${mod_id}]]
 modId = "geckolib"
 mandatory = true
 versionRange = "[4.7.4,)"
 side = "BOTH"
 
-[[dependencies.${forge_mod_id}]]
+[[dependencies.${mod_id}]]
+modId = "biolith"
+mandatory = true
+versionRange = "[1.0.1-alpha.1,)"
+side = "SERVER"
+
+[[dependencies.${mod_id}]]
+modId = "curios"
+mandatory = true
+versionRange = "[5.9.1+1.20.1,)"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
 modId = "lithostitched"
 mandatory = true
 versionRange = "[1.4.11,)"

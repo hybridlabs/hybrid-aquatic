@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:piranha"
+    "item": "hybrid_aquatic:piranha"
   },
   "result": {
-    "id": "hybrid-aquatic:piranha"
+    "id": "hybrid_aquatic:piranha"
   }
 }

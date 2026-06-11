@@ -2,29 +2,19 @@
 
 package dev.hybridlabs.aquatic
 
-import com.mojang.brigadier.CommandDispatcher
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
-import dev.hybridlabs.aquatic.client.command.RandomFishCommand
-import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BASKING_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.BULL_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.FRILLED_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.GREAT_WHITE_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.HAMMERHEAD_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.THRESHER_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.TIGER_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.HybridAquaticEntityModelLayers.WHALE_SHARK_PLUSHIE
-import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
+import dev.hybridlabs.aquatic.client.data.HypnoticEntities
+import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
+import dev.hybridlabs.aquatic.client.item.HAItemProperties
+import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
 import dev.hybridlabs.aquatic.client.network.HybridAquaticClientNetworking
+import dev.hybridlabs.aquatic.client.render.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.client.render.armor.*
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.GiantGreenAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.client.render.item.MessageInABottleBlockItemRenderer
-import dev.hybridlabs.aquatic.client.render.item.StrawberryAnemoneBlockItemRenderer
+import dev.hybridlabs.aquatic.client.renderer.item.StrawberryAnemoneBlockItemRenderer
 import dev.hybridlabs.aquatic.item.HybridAquaticItems
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
@@ -33,27 +23,38 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
+import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 import net.minecraft.commands.CommandBuildContext
+import net.minecraft.world.entity.EquipmentSlot
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.ItemStack
+import software.bernie.geckolib.animatable.client.RenderProvider
+import software.bernie.geckolib.renderer.GeoArmorRenderer
 
-@Suppress("UnusedExpression")
+@Suppress("UnusedExpression", "DEPRECATION")
 object HybridAquaticClient : ClientModInitializer {
     override fun onInitializeClient() {
-        HybridAquaticEntityModelLayers
+        HAEntityModelLayers
         HybridAquaticClientNetworking
 
-        registerRenderShapes()
-        registerBlockEntityRenderers()
-        //registerBuiltinItemRenderers()
-        registerEntityRenderers()
+        HABlockRendererRegistry
+        HAItemRendererRegistry
+        HybridAquaticEntityRenderers
         registerWeatherRenderers()
-        registerTooltips()
-        registerModelLayers()
+        HAGeoRendererRegistry
+        HATrinketRendererRegistry
+        HAModelLayerRegistry
+        HAItemProperties
+        HAFluidRenderer()
 
-        ClientCommandRegistrationCallback.EVENT.register(::registerCommands)
+        HAMenuScreens
+
+        ClientTickEvents.END_CLIENT_TICK.register { client ->
+            HypnoticEntities.mobs.clear()
+        }
     }
-
 
     private fun registerWeatherRenderers() {
         // TODO: hook up renderer to make this thing easier

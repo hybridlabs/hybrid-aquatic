@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -11,19 +13,26 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: Level) :
-    HybridAquaticCephalopodEntity(
-        entityType,
-        world,
-        HybridAquaticEntityTags.CRUSTACEAN,
-        listOf(
-            HybridAquaticEntityTags.SHARK
-        ),
-        true,
-        true
-    ) {
+class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+
+    override fun getTargetConfig() = TARGET_CONFIG
+
+    override val inkConfig: InkConfiguration = InkConfiguration.GLOW
+
+    override fun getMaxSpawnClusterSize(): Int {
+        return 2
+    }
 
     companion object {
+        private val TARGET_CONFIG = MobTargetConfiguration.create(
+            listOf(
+                HAEntityTags.ALL_CRUSTACEANS
+            ),
+            listOf(
+                HAEntityTags.ALL_SHARKS
+            ),
+        )
+
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 6.0)
@@ -40,8 +49,9 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.seaLevel - 16)..<world.seaLevel
-            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val nightSpawn = (seaLevel - 16)..<seaLevel
+            val daySpawn = (seaLevel - 256)..(seaLevel - 48)
 
             val newMoon = world.moonPhase == 4
 
@@ -49,13 +59,5 @@ class FireflySquidEntity(entityType: EntityType<out FireflySquidEntity>, world: 
 
             return pos.y in spawnY && world.isWaterAt(pos)
         }
-    }
-
-    override fun getMaxSize(): Int {
-        return 5
-    }
-
-    override fun getMinSize(): Int {
-        return -5
     }
 }

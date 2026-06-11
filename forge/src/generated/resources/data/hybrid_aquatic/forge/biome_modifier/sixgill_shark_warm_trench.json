@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:warm_trench",
+  "spawners": {
+    "type": "hybrid_aquatic:sixgill_shark",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

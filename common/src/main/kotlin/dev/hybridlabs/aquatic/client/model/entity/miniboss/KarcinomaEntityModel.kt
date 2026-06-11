@@ -1,13 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.core.animation.AnimationState
 
-class KarcinomaEntityModel : HybridAquaticMinionEntityModel<KarcinomaEntity>("karcinoma") {
-
+class KarcinomaEntityModel : HAMinionEntityModel<KarcinomaEntity>("karcinoma") {
 
     override fun setCustomAnimations(
         animatable: KarcinomaEntity,
@@ -15,7 +13,7 @@ class KarcinomaEntityModel : HybridAquaticMinionEntityModel<KarcinomaEntity>("ka
         animationState: AnimationState<KarcinomaEntity>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().timer.gameTimeDeltaTicks
+        val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone(PartNames.BODY)
 

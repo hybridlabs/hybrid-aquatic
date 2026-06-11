@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.block.Block
 
-
 class CrateBlock(settings: Properties): Block(settings) {
     override fun appendHoverText(
         stack: ItemStack,

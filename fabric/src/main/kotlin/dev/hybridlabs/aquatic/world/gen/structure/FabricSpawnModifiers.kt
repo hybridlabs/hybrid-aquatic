@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.world.gen.structure
 
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.platform.Services
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.server.MinecraftServer
@@ -23,11 +23,11 @@ object FabricSpawnModifiers {
 
     fun load(server: MinecraftServer) {
         val modifierRegistry =
-            server.registryAccess().registryOrThrow(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER)
+            server.registryAccess().registryOrThrow(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER)
         val structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE)
         modifierRegistry.forEach {
             structureRegistry.getHolder(it.structure).ifPresent { structure ->
-                Constants.LOG.info("Loaded structure spawn modifier for: {}", it.structure)
+                Constants.LOGGER.info("Loaded structure spawn modifier for: {}", it.structure)
                 modify(structure.value(), it)
             }
         }
@@ -38,7 +38,7 @@ object FabricSpawnModifiers {
         val overrides = structure.spawnOverrides().toMutableMap()
 
         modifier.spawns.forEach { (categoryName, spawns) ->
-            val category = Services.PLATFORM.getMobCategoryByName(categoryName)
+            val category = Services.PLATFORM.getHybridMobCategoryByName(categoryName)
             if (category != null) {
                 var oSpawns = overrides[category]?.spawns?.unwrap()
                 if (oSpawns.isNullOrEmpty()) {

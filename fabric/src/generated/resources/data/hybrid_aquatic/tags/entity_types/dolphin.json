@@ -1,0 +1,215 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:dolphin",
+    "hybrid_aquatic:orca",
+    {
+      "id": "alexsmobs:orca",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:bottlenose_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_bottlenose_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:burmeister_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_burmeister_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:chilean_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_chilean_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:clymene_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_clymene_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:commersons_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_commersons_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:common_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_common_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:dalls_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_dalls_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:dusky_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_dusky_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:finless_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_finless_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:harbor_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_harbor_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:heavisides_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_heavisides_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:hectors_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_hectors_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:hourglass_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_hourglass_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:narwhal",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_narwhal",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pacific_white_sided_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_pacific_white_sided_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:peales_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_peales_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:rissos_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_rissos_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:southern_right_whale_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_southern_right_whale_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:spectacled_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_spectacled_porpoise",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:spinner_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_spinner_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:spotted_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_spotted_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_spotted_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:striped_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_striped_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:tucuxi",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_tucuxi",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:vaquita",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_vaquita",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:white_beaked_dolphin",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:baby_white_beaked_dolphin",
+      "required": false
+    }
+  ]
+}

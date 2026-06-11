@@ -2,7 +2,9 @@ package dev.hybridlabs.aquatic.client.model.block.entity.plushie
 
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import net.minecraft.client.model.geom.ModelPart
-import net.minecraft.client.model.geom.PartNames.*
+import net.minecraft.client.model.geom.PartNames.BODY
+import net.minecraft.client.model.geom.PartNames.JAW
+import net.minecraft.client.model.geom.PartNames.TAIL_FIN
 import net.minecraft.client.model.geom.PartPose
 import net.minecraft.client.model.geom.builders.CubeListBuilder
 import net.minecraft.client.model.geom.builders.LayerDefinition

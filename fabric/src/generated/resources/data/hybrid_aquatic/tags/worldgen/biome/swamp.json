@@ -1,0 +1,37 @@
+{
+  "values": [
+    "minecraft:swamp",
+    {
+      "id": "regions_unexplored:bayou",
+      "required": false
+    },
+    {
+      "id": "wythers:waterlily_swamp",
+      "required": false
+    },
+    {
+      "id": "terralith:orchid_swamp",
+      "required": false
+    },
+    {
+      "id": "biomesoplenty:bayou",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:cypress_swamplands",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:bayou",
+      "required": false
+    },
+    {
+      "id": "terrestria:cypress_swamp",
+      "required": false
+    },
+    {
+      "id": "still_life:temperate_swamp",
+      "required": false
+    }
+  ]
+}

@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.jellyfish.CosmicJellyfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class CosmicJellyfishEntityRenderer(context: Context) :
-    HybridAquaticJellyfishEntityRenderer<CosmicJellyfishEntity>(context, CosmicJellyfishEntityModel(), true, false)
+    HAJellyfishEntityRenderer<CosmicJellyfishEntity>(context, CosmicJellyfishEntityModel(), true, false)

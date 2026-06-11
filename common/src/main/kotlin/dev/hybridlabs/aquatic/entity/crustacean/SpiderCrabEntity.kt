@@ -1,5 +1,8 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -10,8 +13,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false) {
+class SpiderCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, false) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
@@ -30,8 +33,9 @@ class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val shallowSpawn = (world.seaLevel - 24)..(world.seaLevel - 4)
-            val deepSpawn = (world.seaLevel - 128)..(world.seaLevel - 25)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val shallowSpawn = (seaLevel - 24)..(seaLevel - 4)
+            val deepSpawn = (seaLevel - 256)..(seaLevel - 25)
 
             val fullMoon = world.moonPhase == 0
             val newMoon = world.moonPhase == 4
@@ -39,16 +43,31 @@ class SpiderCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>
             val spawnY = if ((fullMoon || newMoon) && !world.level.isDay) shallowSpawn else deepSpawn
 
             return pos.y in spawnY &&
+                    world.isWaterAt(pos) &&
                     world.getBlockState(pos.below()).isSolid &&
-                    world.canSeeSkyFromBelowWater(pos)
+                    WorldHelper.canSeeSkyFromBelowWater(world, pos)
         }
     }
 
     override fun getMaxSize(): Int {
-        return 5
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+            8
+        } else {
+            3
+        }
     }
 
     override fun getMinSize(): Int {
-        return -5
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+            0
+        } else {
+            -3
+        }
     }
 }

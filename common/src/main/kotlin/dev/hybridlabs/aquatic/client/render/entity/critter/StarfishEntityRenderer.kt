@@ -7,7 +7,7 @@ import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class StarfishEntityRenderer(context: Context) :
-    HybridAquaticCritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel(), true) {
+    HACritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel(), true) {
     init {
         addRenderLayer(StarfishColorLayer(this))
         addRenderLayer(StarfishOverlayLayer(this))

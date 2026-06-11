@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "hybrid_aquatic:dead_bamboo_coral"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CWC",
+    "CCC"
+  ],
+  "result": {
+    "count": 8,
+    "item": "hybrid_aquatic:bleached_bamboo_coral"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,18 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/giant_isopod_cold_oceans.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:cold_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:giant_isopod",
+    "maxCount": 2,
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:deep_reef",
+  "spawners": {
+    "type": "hybrid_aquatic:sea_bass",
+    "maxCount": 3,
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/sea_bass_deep_reef.json
+    "minCount": 1,
+    "weight": 1
+  }
+}

@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import net.minecraft.core.registries.Registries
+import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.ByIdMap
@@ -26,20 +26,16 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.gameevent.GameEvent
-import net.minecraft.world.level.storage.loot.LootTable
 import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEntity>, world: Level) :
-    HybridAquaticCrustaceanEntity(entityType, world, false),
+class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
+    HACrustaceanEntity(entityType, world, false),
     VariantHolder<DecoratorCrabEntity.Companion.Type> {
 
-    override fun getDefaultLootTable(): ResourceKey<LootTable?> {
-        return ResourceKey<LootTable?>.create(
-            Registries.LOOT_TABLE,
-            ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "entities/decorator_crab")
-        )
+    override fun getDefaultLootTable(): ResourceLocation {
+        return CommonClass.locate("entities/decorator_crab")
     }
 
     var coralTimer: Int
@@ -53,8 +49,8 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
                 this.coralTimer = 3600
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
                 this.gameEvent(GameEvent.SHEAR, player)
-                itemStack.hurtAndBreak(1, player,getSlotForHand(hand))
-                spawnAtLocation(ItemStack(HybridAquaticItems.CORAL_CHUNK.get()))
+                itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
+                spawnAtLocation(ItemStack(HAItems.CORAL_CHUNK.get()))
                 return InteractionResult.SUCCESS
             }
             return InteractionResult.CONSUME
@@ -74,10 +70,11 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
@@ -129,23 +126,25 @@ class DecoratorCrabEntity(entityType: EntityType<out HybridAquaticCrustaceanEnti
         return -5
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        builder.define(CORAL_TIMER, 0)
-        super.defineSynchedData(builder)
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        entityData.define(CORAL_TIMER, 0)
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        nbt.putInt("CoralTimer", coralTimer)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        compound.putInt("CoralTimer", coralTimer)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        this.coralTimer = nbt.getInt("CoralTimer")
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        this.coralTimer = compound.getInt("CoralTimer")
+        super.readAdditionalSaveData(compound)
     }
+    //#endregion
 
     override fun getVariant(): Type {
         return Type.fromId((entityData.get(TYPE) as Int))

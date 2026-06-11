@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hybrid_aquatic:block/smooth_white_sandstone_slab"
+    },
+    "type=double": {
+      "model": "hybrid_aquatic:block/smooth_white_sandstone"
+    },
+    "type=top": {
+      "model": "hybrid_aquatic:block/smooth_white_sandstone_slab_top"
+    }
+  }
+}

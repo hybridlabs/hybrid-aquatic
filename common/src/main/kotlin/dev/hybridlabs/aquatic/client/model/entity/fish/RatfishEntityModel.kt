@@ -5,20 +5,22 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class RatfishEntityModel : HybridAquaticFishEntityModel<RatfishEntity>("ratfish") {
+class RatfishEntityModel : HAFishEntityModel<RatfishEntity>("ratfish") {
     override fun getRenderType(animatable: RatfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }
 
-    private val commonTextures = listOf(
-        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
-        ResourceLocation.fromNamespaceAndPath("hybrid-aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
-        )
 
     override fun getTextureResource(animatable: RatfishEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits
         val random = Random(seed)
         return commonTextures[random.nextInt(commonTextures.size)]
     }
-}
 
+    companion object {
+        private val commonTextures = listOf(
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ratfish/ratfish_brown.png"),
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/ratfish/ratfish_silver.png"),
+        )
+    }
+}

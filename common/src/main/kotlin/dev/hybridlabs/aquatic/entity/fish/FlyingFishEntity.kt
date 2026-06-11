@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
@@ -15,35 +19,32 @@ import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
+    HASchoolingFishEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
+    )
 
     private var isGliding = false
 
     override fun getMaxSpawnClusterSize(): Int {
-        return 6
+        return 12
     }
 
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(0, BreathAirGoal(this))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
-        goalSelector.addGoal(4, HybridAquaticJumpGoal(this, 10))
-    }
+        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 10, 1.5))    }
 
     override fun tick() {
         super.tick()
@@ -60,20 +61,6 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
         } else if (isGliding) {
             stopGliding()
         }
-    }
-
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(
-                this, "Fly/Swim/Idle", 5
-            ) { state: AnimationState<HybridAquaticFishEntity> ->
-                when {
-                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
-                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
-                    else -> state.setAndContinue(DefaultAnimations.IDLE)
-                }
-            }
-        )
     }
 
     private fun startGliding() {
@@ -112,14 +99,29 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
         return this.maxAirSupply
     }
 
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(
+                this, "Fly/Swim/Idle", 5
+            ) { state: AnimationState<HAFishEntity> ->
+                when {
+                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
+                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                }
+            }
+        )
+    }
+
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.airSupply = this.maxAirSupply
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
@@ -139,7 +141,8 @@ class FlyingFishEntity(entityType: EntityType<out FlyingFishEntity>, world: Leve
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val spawnY = (world.seaLevel - 8) ..< world.seaLevel
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val spawnY = (seaLevel - 8) ..< seaLevel
 
             return pos.y in spawnY &&
                     world.isWaterAt(pos) &&

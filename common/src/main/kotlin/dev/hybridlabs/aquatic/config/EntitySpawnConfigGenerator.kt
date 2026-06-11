@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.config
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.platform.Services
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
@@ -17,848 +17,1131 @@ class EntitySpawnConfigGenerator {
     private val list: MutableList<EntitySpawnConfig> = mutableListOf()
 
     fun finalizeSpawn() {
-        //#region Fish
+        //#region River Fish
         addRiverFish(
-            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
+            HAEntityTypes.AFRICAN_BUTTERFLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.MARSHES,
-                HybridAquaticBiomeTags.MANGROVES),
+                HABiomeTags.TROPICAL_RIVERS,
+                HABiomeTags.JUNGLE,
+                HABiomeTags.MARSHES,
+                HABiomeTags.MANGROVES),
             2, 1, 1
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.GOLDEN_DORADO.get(),
+            HAEntityTypes.GOLDEN_DORADO.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_RIVERS,
-                HybridAquaticBiomeTags.RIVERS,
-                HybridAquaticBiomeTags.JUNGLE),
+                HABiomeTags.TROPICAL_RIVERS,
+                HABiomeTags.JUNGLE),
             1, 1, 1
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.TETRA.get(),
+            HAEntityTypes.TETRA.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.MARSHES,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS,
-                HybridAquaticBiomeTags.CAVES),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.MARSHES,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.TROPICAL_RIVERS,
+                HABiomeTags.CAVES),
             3, 2, 3
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.PUPFISH.get(),
+            HAEntityTypes.PUPFISH.get(),
             listOf(BiomeTags.IS_BADLANDS),
             1, 1, 1)
 
         addRiverFish(
-            HybridAquaticEntityTypes.TIGER_BARB.get(),
+            HAEntityTypes.TIGER_BARB.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.SWAMP,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.MARSHES,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.SWAMP,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.MARSHES,
+                HABiomeTags.TROPICAL_RIVERS),
             3, 2, 3
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.GOURAMI.get(),
+            HAEntityTypes.GOURAMI.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.MARSHES,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.MARSHES,
+                HABiomeTags.TROPICAL_RIVERS),
             1, 1, 1
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.PLECO.get(),
+            HAEntityTypes.PLECO.get(),
             listOf(
-                HybridAquaticBiomeTags.SWAMP,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.MARSHES),
+                HABiomeTags.SWAMP,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.JUNGLE,
+                HABiomeTags.TROPICAL_RIVERS,
+                HABiomeTags.MARSHES),
             1, 1, 2
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.DISCUS.get(),
+            HAEntityTypes.DISCUS.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.TROPICAL_RIVERS),
             1, 1, 1
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.PIRANHA.get(),
+            HAEntityTypes.CORYDORA.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.TROPICAL_RIVERS),
+            2, 1, 3
+        )
+
+        addRiverFish(
+            HAEntityTypes.PIRANHA.get(),
+            listOf(
+                HABiomeTags.JUNGLE,
+                HABiomeTags.TROPICAL_RIVERS),
             2, 4, 8
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.OSCAR.get(),
+            HAEntityTypes.CICHLID.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.TROPICAL_RIVERS),
             1, 1, 1
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.DANIO.get(),
+            HAEntityTypes.DANIO.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.MARSHES,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.MARSHES,
+                HABiomeTags.TROPICAL_RIVERS),
             3, 2, 3
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.BETTA.get(),
+            HAEntityTypes.BETTA.get(),
             listOf(
-                HybridAquaticBiomeTags.SWAMP,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.MARSHES),
+                HABiomeTags.SWAMP,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.MARSHES),
             1, 1, 1
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.GOLDFISH.get(),
+            HAEntityTypes.CARP.get(),
             listOf(
-                HybridAquaticBiomeTags.CHERRY),
-            3, 1, 2)
-
-        addRiverFish(
-            HybridAquaticEntityTypes.CARP.get(),
-            listOf(
-                HybridAquaticBiomeTags.CHERRY,
-                HybridAquaticBiomeTags.RIVERS),
+                HABiomeTags.RIVERS),
             3, 1, 2
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.SUNFISH.get(),
+            HAEntityTypes.GOLDFISH.get(),
+            listOf(),
+            3, 1, 1
+        )
+
+        addRiverFish(
+            HAEntityTypes.SUNFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.RIVERS),
+                HABiomeTags.RIVERS),
             3, 1, 2
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.TROUT.get(),
+            HAEntityTypes.TROUT.get(),
             listOf(
-                HybridAquaticBiomeTags.RIVERS),
+                HABiomeTags.COLD_RIVERS,
+                BiomeTags.IS_RIVER),
             2, 1, 1
         )
 
         addRiverFish(
-            HybridAquaticEntityTypes.SHINER.get(),
+            HAEntityTypes.SHINER.get(),
             listOf(
-                HybridAquaticBiomeTags.RIVERS),
+                HABiomeTags.COLD_RIVERS,
+                BiomeTags.IS_RIVER),
             3, 1, 2
         )
+        //#endregion
 
+        //#region Marine Fish
         addFish(
-            HybridAquaticEntityTypes.MANTA_RAY.get(),
+            HAEntityTypes.MANTA_RAY.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
-            1, 1, 2
+                HABiomeTags.TEMPERATE_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.WARM_OCEANS),
+            1, 1, 3
         )
 
         addFish(
-            HybridAquaticEntityTypes.FLASHLIGHT_FISH.get(),
+            HAEntityTypes.FLASHLIGHT_FISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.CORAL_REEF),
             5, 4, 12
         )
 
         addFish(
-            HybridAquaticEntityTypes.SQUIRRELFISH.get(),
+            HAEntityTypes.SQUIRRELFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.CORAL_REEF),
             5, 4, 12
         )
 
         addFish(
-            HybridAquaticEntityTypes.FLYING_FISH.get(),
+            HAEntityTypes.FLYING_FISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS,),
             5, 4, 12
         )
 
         addFish(
-            HybridAquaticEntityTypes.DAMSELFISH.get(),
+            HAEntityTypes.DAMSELFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.LUKEWARM_OCEANS),
             5, 4, 12
         )
 
         addFish(
-            HybridAquaticEntityTypes.MACKEREL.get(),
+            HAEntityTypes.MACKEREL.get(),
             listOf(
-                HybridAquaticBiomeTags.COLD_OCEANS,
-                HybridAquaticBiomeTags.TEMPERATE_OCEANS),
+                HABiomeTags.COLD_OCEANS,
+                HABiomeTags.TEMPERATE_OCEANS),
             5, 4, 12
         )
 
         addFish(
-            HybridAquaticEntityTypes.HERRING.get(),
+            HAEntityTypes.HERRING.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
+                HABiomeTags.SHALLOW_COLD_OCEANS,
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS),
             5, 4, 12
         )
 
-        addFish(HybridAquaticEntityTypes.RATFISH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            5, 1, 3
-        )
-
         addFish(
-            HybridAquaticEntityTypes.SNAILFISH.get(),
+            HAEntityTypes.NEEDLEFISH.get(),
             listOf(
-                BiomeTags.IS_DEEP_OCEAN),
-            5, 1, 3
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.NEEDLEFISH.get(),
-            listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.SEAGRASS_BED),
             4, 1, 4
         )
 
         addFish(
-            HybridAquaticEntityTypes.MAHI.get(),
+            HAEntityTypes.MAHI.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             3, 1, 4
         )
 
         addFish(
-            HybridAquaticEntityTypes.TUNA.get(),
+            HAEntityTypes.TUNA.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             3, 1, 4
         )
 
         addFish(
-            HybridAquaticEntityTypes.ROCKFISH.get(),
+            HAEntityTypes.ROCKFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.LUKEWARM_OCEANS),
             3, 1, 4
         )
 
         addFish(
-            HybridAquaticEntityTypes.SEA_BASS.get(),
+            HAEntityTypes.SEA_BASS.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.LUKEWARM_OCEANS),
             3, 1, 3
         )
 
         addFish(
-            HybridAquaticEntityTypes.BARRACUDA.get(),
+            HAEntityTypes.BARRACUDA.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS),
             3, 1, 1
         )
 
         addFish(
-            HybridAquaticEntityTypes.OPAH.get(),
+            HAEntityTypes.GARDEN_EEL.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.SEAGRASS_BED),
+            5, 3, 8
+        )
+
+        addFish(
+            HAEntityTypes.OPAH.get(),
+            listOf(
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             2, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.WRASSE.get(),
+            HAEntityTypes.WRASSE.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS),
             3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.SEAHORSE.get(),
+            HAEntityTypes.SEAHORSE.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SEAGRASS_BED),
             1, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.SEADRAGON.get(),
+            HAEntityTypes.SEADRAGON.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.SEAGRASS_BED),
             1, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.LIONFISH.get(),
+            HAEntityTypes.LIONFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.CORAL_REEF),
             3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.STONEFISH.get(),
+            HAEntityTypes.STONEFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SEAGRASS_BED),
             3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.STINGRAY.get(),
+            HAEntityTypes.STINGRAY.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED),
             2, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.BLOWFISH.get(),
+            HAEntityTypes.BLOWFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SEAGRASS_BED),
             3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.SURGEONFISH.get(),
+            HAEntityTypes.SURGEONFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.CORAL_REEF),
             4, 1, 4
         )
 
         addFish(
-            HybridAquaticEntityTypes.CLOWNFISH.get(),
+            HAEntityTypes.CLOWNFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.CORAL_REEF),
             3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.BOXFISH.get(),
+            HAEntityTypes.BOXFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF),
             2, 1, 1
         )
 
         addFish(
-            HybridAquaticEntityTypes.TRIGGERFISH.get(),
+            HAEntityTypes.TRIGGERFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SEAGRASS_BED),
             3, 1, 1
         )
 
         addFish(
-            HybridAquaticEntityTypes.PARROTFISH.get(),
+            HAEntityTypes.TREVALLY.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SEAGRASS_BED),
+            3, 1, 1
+        )
+
+        addFish(
+            HAEntityTypes.PARROTFISH.get(),
+            listOf(
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF),
             4, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.MORAY_EEL.get(),
+            HAEntityTypes.MORAY_EEL.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SEAGRASS_BED),
             3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.OCEAN_SUNFISH.get(),
+            HAEntityTypes.OCEAN_SUNFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
+            1, 1, 2
+        )
+
+        addFish(HAEntityTypes.RATFISH.get(),
+            listOf(
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.ALL_TRENCHES),
+            5, 1, 3
+        )
+
+        addFish(
+            HAEntityTypes.SNAILFISH.get(),
+            listOf(
+                HABiomeTags.ALL_TRENCHES),
+            5, 1, 3
+        )
+
+        addFish(
+            HAEntityTypes.OARFISH.get(),
+            listOf(
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             1, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.OARFISH.get(),
+            HAEntityTypes.ANGLERFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
-            1, 1, 2
-        )
-
-        addFish(
-            HybridAquaticEntityTypes.ANGLERFISH.get(),
-            listOf(
-                BiomeTags.IS_DEEP_OCEAN),
+                HABiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.JOHN_DORY.get(),
+            HAEntityTypes.FANGTOOTH.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
+                HABiomeTags.ALL_TRENCHES),
+            3, 1, 2
+        )
+
+        addFish(
+            HAEntityTypes.VIPERFISH.get(),
+            listOf(
+                HABiomeTags.ALL_TRENCHES),
+            3, 1, 2
+        )
+
+        addFish(
+            HAEntityTypes.HATCHETFISH.get(),
+            listOf(
+                HABiomeTags.ALL_TRENCHES),
+            3, 1, 2
+        )
+
+        addFish(
+            HAEntityTypes.BLOBFISH.get(),
+            listOf(
+                HABiomeTags.ALL_TRENCHES),
+            3, 1, 2
+        )
+
+        addFish(
+            HAEntityTypes.HAGFISH.get(),
+            listOf(),
+            2, 2, 6
+        )
+
+        addFish(
+            HAEntityTypes.TRIPOD_FISH.get(),
+            listOf(
+                HABiomeTags.ALL_TRENCHES),
+            3, 1, 2
+        )
+
+        addFish(
+            HAEntityTypes.JOHN_DORY.get(),
+            listOf(
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.DEEP_WARM_OCEANS,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.DEEP_TEMPERATE_OCEANS),
             4, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.BARRELEYE.get(),
+            HAEntityTypes.BARRELEYE.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH),
             1, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.DRAGONFISH.get(),
+            HAEntityTypes.DRAGONFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH),
             2, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.SEA_ANGEL.get(),
+            HAEntityTypes.SEA_ANGEL.get(),
             listOf(
-                HybridAquaticBiomeTags.ARCTIC_OCEANS,
-                HybridAquaticBiomeTags.DEEP_COLD_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
+                HABiomeTags.FROZEN_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH),
             1, 1, 2
         )
 
         addFish(
-            HybridAquaticEntityTypes.COELACANTH.get(),
+            HAEntityTypes.COELACANTH.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS),
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH),
+            1, 1, 2
+        )
+
+        addFish(
+            HAEntityTypes.SLICKHEAD.get(),
+            listOf(
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH),
             1, 1, 1
         )
         //#endregion
 
         //#region Cephalopods
         addCephalopod(
-            HybridAquaticEntityTypes.ARROW_SQUID.get(),
+            HAEntityTypes.ARROW_SQUID.get(),
             listOf(
-                HybridAquaticBiomeTags.COLD_OCEANS,
-                HybridAquaticBiomeTags.ARCTIC_OCEANS),
-            3, 1, 2
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.TEMPERATE_OCEANS),
+            11, 1, 2
         )
 
         addCephalopod(
-            HybridAquaticEntityTypes.FIREFLY_SQUID.get(),
+            HAEntityTypes.GIANT_SQUID.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.REEF),
-            3, 1, 2
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH,),
+            1, 1, 1
         )
 
         addCephalopod(
-            HybridAquaticEntityTypes.CUTTLEFISH.get(),
+            HAEntityTypes.COLOSSAL_SQUID.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF,
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
-            3, 1, 1
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.FROZEN_TRENCH),
+            1, 1, 1
         )
 
         addCephalopod(
-            HybridAquaticEntityTypes.OCTOPUS.get(),
+            HAEntityTypes.FIREFLY_SQUID.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_OCEANS,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.CORAL_REEF),
+            11, 1, 2
+        )
+
+        addCephalopod(
+            HAEntityTypes.CUTTLEFISH.get(),
+            listOf(
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS),
+            11, 1, 1
+        )
+
+        addCephalopod(
+            HAEntityTypes.OCTOPUS.get(),
+            listOf(
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS
             ),
-            3, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.NAUTILUS.get(),
-            listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.UMBRELLA_OCTOPUS.get(),
-            listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
-        )
-
-        addCephalopod(
-            HybridAquaticEntityTypes.VAMPIRE_SQUID.get(),
-            listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
-            3, 1, 1
+            11, 1, 1
         )
         //#endregion
 
         //#region Jellyfish
         addJelly(
-            HybridAquaticEntityTypes.BARREL_JELLYFISH.get(),
+            HAEntityTypes.BARREL_JELLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.LUKEWARM_OCEANS),
             3, 1, 2
         )
 
         addJelly(
-            HybridAquaticEntityTypes.MOON_JELLYFISH.get(),
+            HAEntityTypes.MOON_JELLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.REEF,
-                HybridAquaticBiomeTags.SANDY_BEACHES
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SANDY_BEACHES
             ),
             5, 2, 5
         )
 
         addJelly(
-            HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH.get(),
+            HAEntityTypes.CEPHEIDAE_JELLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS),
             3, 1, 2
         )
 
         addJelly(
-            HybridAquaticEntityTypes.BLUE_JELLYFISH.get(),
+            HAEntityTypes.BLUE_JELLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.COLD_OCEANS,
-                HybridAquaticBiomeTags.TEMPERATE_OCEANS),
+                HABiomeTags.COLD_OCEANS,
+                HABiomeTags.TEMPERATE_OCEANS),
             3, 1, 2
         )
 
         addJelly(
-            HybridAquaticEntityTypes.SEA_NETTLE.get(),
+            HAEntityTypes.SEA_NETTLE.get(),
             listOf(
-                HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.TEMPERATE_OCEANS),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.TEMPERATE_OCEANS),
             3, 1, 4
         )
 
         addJelly(
-            HybridAquaticEntityTypes.NOMURA_JELLYFISH.get(),
+            HAEntityTypes.NOMURA_JELLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.ARCTIC_OCEANS,
-                HybridAquaticBiomeTags.COLD_OCEANS),
+                HABiomeTags.FROZEN_OCEANS,
+                HABiomeTags.COLD_OCEANS),
             1, 1, 1
         )
 
         addJelly(
-            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH.get(),
+            HAEntityTypes.LIONS_MANE_JELLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.ARCTIC_OCEANS,
-                HybridAquaticBiomeTags.COLD_OCEANS),
+                HABiomeTags.FROZEN_OCEANS,
+                HABiomeTags.COLD_OCEANS),
             1, 1, 1
         )
 
         addJelly(
-            HybridAquaticEntityTypes.BOX_JELLYFISH.get(),
+            HAEntityTypes.BOX_JELLYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.REEF,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.SANDY_BEACHES
+                HABiomeTags.MANGROVES,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.SANDY_BEACHES
             ),
             1, 1, 1
         )
 
         addJelly(
-            HybridAquaticEntityTypes.CROWN_JELLYFISH.get(),
+            HAEntityTypes.CROWN_JELLYFISH.get(),
             listOf(
-                BiomeTags.IS_DEEP_OCEAN),
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.FROZEN_TRENCH),
             1, 1, 1
         )
 
         addJelly(
-            HybridAquaticEntityTypes.BIG_RED_JELLYFISH.get(),
+            HAEntityTypes.BIG_RED_JELLYFISH.get(),
             listOf(
-                BiomeTags.IS_DEEP_OCEAN),
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.FROZEN_TRENCH),
             1, 1, 1
         )
 
         addJelly(
-            HybridAquaticEntityTypes.COSMIC_JELLYFISH.get(),
+            HAEntityTypes.COSMIC_JELLYFISH.get(),
             listOf(
-                BiomeTags.IS_DEEP_OCEAN),
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.FROZEN_TRENCH),
             1, 1, 1
         )
 
         addJelly(
-            HybridAquaticEntityTypes.FIREWORK_JELLYFISH.get(),
+            HAEntityTypes.COMB_JELLY.get(),
             listOf(
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.ALL_TRENCHES,
                 BiomeTags.IS_DEEP_OCEAN),
+            2, 1, 2
+        )
+
+        addJelly(
+            HAEntityTypes.FIREWORK_JELLYFISH.get(),
+            listOf(
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.FROZEN_TRENCH),
             1, 1, 1
         )
 
         addJelly(
-            HybridAquaticEntityTypes.MAUVE_STINGER.get(),
+            HAEntityTypes.MAUVE_STINGER.get(),
             listOf(
-                BiomeTags.IS_DEEP_OCEAN),
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.FROZEN_TRENCH),
             2, 1, 3
         )
         //#endregion
 
         //#region Sharks
         addShark(
-            HybridAquaticEntityTypes.GREAT_WHITE_SHARK.get(),
+            HAEntityTypes.GREAT_WHITE_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             1, 1, 1
         )
 
         addShark(
-            HybridAquaticEntityTypes.TIGER_SHARK.get(),
+            HAEntityTypes.SAND_TIGER_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS),
             2, 1, 1
         )
 
         addShark(
-            HybridAquaticEntityTypes.HAMMERHEAD_SHARK.get(),
+            HAEntityTypes.HAMMERHEAD_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
+                HABiomeTags.TEMPERATE_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS),
             3, 1, 2
         )
 
         addShark(
-            HybridAquaticEntityTypes.HOUND_SHARK.get(),
+            HAEntityTypes.HOUND_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS),
             3, 1, 2
         )
 
         addShark(
-            HybridAquaticEntityTypes.THRESHER_SHARK.get(),
+            HAEntityTypes.THRESHER_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.DEEP_WARM_OCEANS),
             2, 1, 1
         )
 
         addShark(
-            HybridAquaticEntityTypes.BULL_SHARK.get(),
+            HAEntityTypes.BULL_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.WARM_OCEANS),
             2, 1, 2
         )
 
         addShark(
-            HybridAquaticEntityTypes.WHALE_SHARK.get(),
+            HAEntityTypes.WHALE_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.WARM_OCEANS),
             1, 1, 1
         )
 
         addShark(
-            HybridAquaticEntityTypes.BASKING_SHARK.get(),
+            HAEntityTypes.BASKING_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.COLD_OCEANS,
-                HybridAquaticBiomeTags.ARCTIC_OCEANS
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.DEEP_COLD_OCEANS,
+                HABiomeTags.FROZEN_OCEANS
             ),
             1, 1, 1
         )
 
         addShark(
-            HybridAquaticEntityTypes.FRILLED_SHARK.get(),
+            HAEntityTypes.FRILLED_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH),
             1, 1, 1
         )
 
         addShark(
-            HybridAquaticEntityTypes.LANTERN_SHARK.get(),
+            HAEntityTypes.SIXGILL_SHARK.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.DEEP_TROPICAL_OCEANS),
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH),
+            1, 1, 1
+        )
+
+        addShark(
+            HAEntityTypes.SLEEPER_SHARK.get(),
+            listOf(
+                HABiomeTags.FROZEN_TRENCH,
+                HABiomeTags.COLD_TRENCH),
+            1, 1, 1
+        )
+
+        addShark(
+            HAEntityTypes.GOBLIN_SHARK.get(),
+            listOf(
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.WARM_TRENCH),
+            1, 1, 1
+        )
+
+        addShark(
+            HAEntityTypes.LANTERN_SHARK.get(),
+            listOf(
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.DEEP_TEMPERATE_OCEANS,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                HABiomeTags.LUKEWARM_TRENCH,
+                HABiomeTags.DEEP_WARM_OCEANS),
             2, 1, 2
         )
         //#endregion
 
         //#region Mammal
         addMammal(
-            HybridAquaticEntityTypes.OTTER.get(),
+            HAEntityTypes.OTTER.get(),
             listOf(
-                HybridAquaticBiomeTags.RIVERS,
-                HybridAquaticBiomeTags.SANDY_BEACHES,
-                HybridAquaticBiomeTags.ROCKY_BEACHES
+                HABiomeTags.RIVERS,
+                HABiomeTags.SANDY_BEACHES,
+                HABiomeTags.ROCKY_BEACHES
             ),
             1, 1, 2
+        )
+
+        addSirenian(
+            HAEntityTypes.DUGONG.get(),
+            listOf(
+                HABiomeTags.SEAGRASS_BED
+            ),
+            1, 1, 2
+        )
+
+        addSirenian(
+            HAEntityTypes.MANATEE.get(),
+            listOf(
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.TROPICAL_RIVERS
+            ),
+            1, 1, 2
+        )
+
+        addDolphin(
+            HAEntityTypes.ORCA.get(),
+            listOf(
+                HABiomeTags.FROZEN_OCEANS,
+                HABiomeTags.COLD_OCEANS,
+                HABiomeTags.TEMPERATE_OCEANS,
+            ),
+            1, 1, 3
         )
         //#endregion
 
         //#region Crustaceans
         addCrustacean(
-            HybridAquaticEntityTypes.DUNGENESS_CRAB.get(),
+            HAEntityTypes.DUNGENESS_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.SANDY_BEACHES),
+                HABiomeTags.SANDY_BEACHES),
             3, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.FIDDLER_CRAB.get(),
+            HAEntityTypes.FIDDLER_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.SWAMP,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.MARSHES),
+                HABiomeTags.SWAMP,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.MARSHES),
             3, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.GHOST_CRAB.get(),
+            HAEntityTypes.GHOST_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.SANDY_BEACHES),
+                HABiomeTags.SANDY_BEACHES),
             3, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.HORSESHOE_CRAB.get(),
+            HAEntityTypes.HORSESHOE_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.SANDY_BEACHES),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                HABiomeTags.SANDY_BEACHES),
             3, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.LIGHTFOOT_CRAB.get(),
+            HAEntityTypes.LIGHTFOOT_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.ROCKY_BEACHES),
+                HABiomeTags.ROCKY_BEACHES),
             3, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.FLOWER_CRAB.get(),
+            HAEntityTypes.FLOWER_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.MANGROVES,
-                HybridAquaticBiomeTags.MARSHES),
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                HABiomeTags.MANGROVES,
+                HABiomeTags.MARSHES),
             3, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.VAMPIRE_CRAB.get(),
+            HAEntityTypes.VAMPIRE_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.JUNGLE,
-                HybridAquaticBiomeTags.TROPICAL_RIVERS),
+                HABiomeTags.JUNGLE,
+                HABiomeTags.TROPICAL_RIVERS),
             1, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.SHRIMP.get(),
+            HAEntityTypes.SHRIMP.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.TROPICAL_RIVERS,
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.CORAL_REEF),
             3, 2, 3
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.LOBSTER.get(),
+            HAEntityTypes.LOBSTER.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS),
             2, 1, 2
         )
         addCrustacean(
-            HybridAquaticEntityTypes.DECORATOR_CRAB.get(),
+            HAEntityTypes.DECORATOR_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.REEF),
-            2, 1, 2
-        )
-
-        addCrustacean(
-            HybridAquaticEntityTypes.CRAYFISH.get(),
-            listOf(
-                HybridAquaticBiomeTags.RIVERS),
-            2, 1, 2
-        )
-
-        addCrustacean(
-            HybridAquaticEntityTypes.COCONUT_CRAB.get(),
-            listOf(
-                HybridAquaticBiomeTags.SANDY_BEACHES),
+                HABiomeTags.CORAL_REEF,
+                HABiomeTags.RED_MEADOW),
             2, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.HERMIT_CRAB.get(),
+            HAEntityTypes.CRAYFISH.get(),
             listOf(
-                HybridAquaticBiomeTags.SANDY_BEACHES,
-                HybridAquaticBiomeTags.SHALLOW_TROPICAL_OCEANS),
+                HABiomeTags.TROPICAL_RIVERS,
+                HABiomeTags.COLD_RIVERS,
+                HABiomeTags.RIVERS),
+            2, 1, 2
+        )
+
+        addCrustacean(
+            HAEntityTypes.COCONUT_CRAB.get(),
+            listOf(
+                HABiomeTags.SANDY_BEACHES),
+            2, 1, 2
+        )
+
+        addCrustacean(
+            HAEntityTypes.HERMIT_CRAB.get(),
+            listOf(
+                HABiomeTags.SANDY_BEACHES,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.SHALLOW_LUKEWARM_OCEANS),
             1, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.YETI_CRAB.get(),
+            HAEntityTypes.YETI_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.DEEP_COLD_OCEANS,
-                HybridAquaticBiomeTags.DEEP_ARCTIC_OCEANS),
+                HABiomeTags.HAS_THERMAL_VENTS,
+                HABiomeTags.FROZEN_TRENCH,
+                HABiomeTags.COLD_TRENCH),
             2, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.GIANT_ISOPOD.get(),
+            HAEntityTypes.GIANT_ISOPOD.get(),
             listOf(
-                HybridAquaticBiomeTags.COLD_OCEANS,
-                HybridAquaticBiomeTags.TEMPERATE_OCEANS),
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.TEMPERATE_OCEANS,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.COLD_OCEANS),
             1, 1, 2
         )
 
         addCrustacean(
-            HybridAquaticEntityTypes.SPIDER_CRAB.get(),
+            HAEntityTypes.SPIDER_CRAB.get(),
             listOf(
-                HybridAquaticBiomeTags.TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.COLD_OCEANS),
+                HABiomeTags.DEEP_REEF,
+                HABiomeTags.WARM_TRENCH,
+                HABiomeTags.TEMPERATE_OCEANS,
+                HABiomeTags.TEMPERATE_TRENCH,
+                HABiomeTags.COLD_TRENCH,
+                HABiomeTags.COLD_OCEANS),
             2, 1, 2
         )
         //#endregion
 
         //#region Critters
         addCritter(
-            HybridAquaticEntityTypes.SEA_SLUG.get(),
+            HAEntityTypes.SEA_SLUG.get(),
             listOf(
-                HybridAquaticBiomeTags.SHALLOW_COLD_OCEANS,
-                HybridAquaticBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                HybridAquaticBiomeTags.TROPICAL_OCEANS,
-                HybridAquaticBiomeTags.REEF),
+                HABiomeTags.SHALLOW_COLD_OCEANS,
+                HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                HABiomeTags.LUKEWARM_OCEANS,
+                HABiomeTags.SHALLOW_WARM_OCEANS,
+                HABiomeTags.SEAGRASS_BED,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.CORAL_REEF),
             1, 1, 2
         )
 
         addCritter(
-            HybridAquaticEntityTypes.STARFISH.get(),
+            HAEntityTypes.SCALYFOOT_SNAIL.get(),
+            listOf(
+                HABiomeTags.HAS_THERMAL_VENTS),
+            1, 1, 2
+        )
+
+        addCritter(
+            HAEntityTypes.STARFISH.get(),
             listOf(
                 BiomeTags.IS_OCEAN,
                 BiomeTags.IS_DEEP_OCEAN,
-                HybridAquaticBiomeTags.SANDY_BEACHES),
+                HABiomeTags.ALL_TRENCHES,
+                HABiomeTags.SANDY_BEACHES),
             2, 1, 2
         )
 
         addCritter(
-            HybridAquaticEntityTypes.SEA_CUCUMBER.get(),
+            HAEntityTypes.SEA_CUCUMBER.get(),
             listOf(
                 BiomeTags.IS_OCEAN,
-                BiomeTags.IS_DEEP_OCEAN),
+                BiomeTags.IS_DEEP_OCEAN,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
 
         addCritter(
-            HybridAquaticEntityTypes.SEA_URCHIN.get(),
+            HAEntityTypes.SEA_URCHIN.get(),
             listOf(
                 BiomeTags.IS_OCEAN,
-                BiomeTags.IS_DEEP_OCEAN),
+                BiomeTags.IS_DEEP_OCEAN,
+                HABiomeTags.RED_MEADOW,
+                HABiomeTags.ALL_TRENCHES),
             3, 1, 2
         )
         //#endregion
@@ -874,7 +1157,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_FISH"),
+            Services.PLATFORM.getHybridMobCategoryByName("fish"),
             weight,
             minGroup,
             maxGroup
@@ -891,7 +1174,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_RIVER_FISH"),
+            Services.PLATFORM.getHybridMobCategoryByName("river_fish"),
             weight,
             minGroup,
             maxGroup
@@ -907,7 +1190,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CEPHALOPOD"),
+            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
             weight, minGroup, maxGroup
         )
     }
@@ -921,7 +1204,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_SHARK"),
+            Services.PLATFORM.getHybridMobCategoryByName("shark"),
             weight, minGroup, maxGroup
         )
     }
@@ -936,7 +1219,41 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_MAMMAL"),
+            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            weight,
+            minGroup,
+            maxGroup
+        )
+    }
+
+    private fun addSirenian(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int,
+    ) {
+        add(
+            entityType,
+            spawnTags,
+            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            weight,
+            minGroup,
+            maxGroup
+        )
+    }
+
+    private fun addDolphin(
+        entityType: EntityType<*>,
+        spawnTags: List<TagKey<Biome>>,
+        weight: Int,
+        minGroup: Int,
+        maxGroup: Int,
+    ) {
+        add(
+            entityType,
+            spawnTags,
+            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
             weight,
             minGroup,
             maxGroup
@@ -952,7 +1269,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_JELLY"),
+            Services.PLATFORM.getHybridMobCategoryByName("jelly"),
             weight, minGroup, maxGroup
         )
     }
@@ -966,7 +1283,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRUSTACEAN"),
+            Services.PLATFORM.getHybridMobCategoryByName("crustacean"),
             weight, minGroup, maxGroup
         )
     }
@@ -980,7 +1297,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getMobCategoryByName("HYBRID_AQUATIC_CRITTER"),
+            Services.PLATFORM.getHybridMobCategoryByName("critter"),
             weight, minGroup, maxGroup
         )
     }

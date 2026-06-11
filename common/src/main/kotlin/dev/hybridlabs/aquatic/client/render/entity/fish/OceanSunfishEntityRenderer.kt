@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class OceanSunfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<OceanSunfishEntity>(context, OceanSunfishEntityModel(), true, false)
+    HAFishEntityRenderer<OceanSunfishEntity>(context, OceanSunfishEntityModel(), true, false)

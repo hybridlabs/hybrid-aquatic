@@ -1,0 +1,18 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/coelacanth_deep_temperate_oceans.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:deep_temperate_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:coelacanth",
+    "maxCount": 1,
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:has_thermal_vents",
+  "spawners": {
+    "type": "hybrid_aquatic:scalyfoot_snail",
+    "maxCount": 2,
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/scalyfoot_snail_has_thermal_vents.json
+    "minCount": 1,
+    "weight": 1
+  }
+}

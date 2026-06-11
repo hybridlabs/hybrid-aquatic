@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#hybrid_aquatic:ha_deep_oceans",
+  "features": "hybrid_aquatic:mound",
+  "step": "surface_structures"
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "bark",
+  "key": {
+    "#": {
+      "item": "hybrid_aquatic:driftwood_log"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 3,
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/driftwood_wood.json
+    "id": "hybrid-aquatic:driftwood_wood"
+  }
+}
+========
+    "item": "hybrid_aquatic:driftwood_wood"
+  },
+  "show_notification": true
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/driftwood_wood.json

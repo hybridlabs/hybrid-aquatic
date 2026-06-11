@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#hybrid_aquatic:all_fish",
+    "#hybrid_aquatic:all_sharks",
+    "#hybrid_aquatic:all_crustaceans",
+    "#hybrid_aquatic:all_cephalopods",
+    "#hybrid_aquatic:all_mammals",
+    "#hybrid_aquatic:all_amphibians",
+    "#hybrid_aquatic:all_jellyfish",
+    "#hybrid_aquatic:all_critters",
+    "#hybrid_aquatic:turtle"
+  ]
+}

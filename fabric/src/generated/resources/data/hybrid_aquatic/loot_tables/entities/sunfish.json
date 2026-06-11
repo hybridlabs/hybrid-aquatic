@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 1.0
+              },
+              "enchantment": "minecraft:looting",
+              "function": "minecraft:enchanted_count_increase"
+            },
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/loot_table/entities/trout.json
+          "name": "hybrid-aquatic:goldfish"
+========
+          "name": "hybrid_aquatic:sunfish"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/loot_tables/entities/sunfish.json
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

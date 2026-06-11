@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:neon_tetra"
+    "item": "hybrid_aquatic:tetra"
   },
   "result": {
-    "id": "hybrid-aquatic:tetra"
+    "id": "hybrid_aquatic:tetra"
   }
 }

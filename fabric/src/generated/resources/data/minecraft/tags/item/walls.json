@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:bone_wall",
+    "hybrid_aquatic:white_sandstone_wall",
+    "hybrid_aquatic:red_brinestone_wall",
+    "hybrid_aquatic:red_brinestone_brick_wall",
+    "hybrid_aquatic:orange_brinestone_wall",
+    "hybrid_aquatic:orange_brinestone_brick_wall",
+    "hybrid_aquatic:yellow_brinestone_wall",
+    "hybrid_aquatic:yellow_brinestone_brick_wall",
+    "hybrid_aquatic:schist_wall",
+    "hybrid_aquatic:schist_brick_wall",
+    "hybrid_aquatic:chimneystone_wall",
+    "hybrid_aquatic:chimneystone_brick_wall"
+  ]
+}

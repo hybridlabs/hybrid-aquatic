@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.RockfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class RockfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<RockfishEntity>(context, RockfishEntityModel(), true, false)
+    HAFishEntityRenderer<RockfishEntity>(context, RockfishEntityModel(), true, false)

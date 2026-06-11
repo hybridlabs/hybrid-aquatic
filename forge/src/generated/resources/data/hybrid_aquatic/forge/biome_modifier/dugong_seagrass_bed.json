@@ -1,0 +1,15 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/decorator_crab_reef.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:reef",
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:seagrass_bed",
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/dugong_seagrass_bed.json
+  "spawners": {
+    "type": "hybrid_aquatic:dugong",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 2
+  }
+}

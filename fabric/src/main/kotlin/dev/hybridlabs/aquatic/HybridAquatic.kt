@@ -1,36 +1,40 @@
 package dev.hybridlabs.aquatic
 
-import dev.hybridlabs.aquatic.block.HybridAquaticBlocks
-import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
-import dev.hybridlabs.aquatic.block.entity.HybridAquaticBlockEntityTypes
-import dev.hybridlabs.aquatic.block.wood.HybridAquaticPlatformBlocks
+import dev.hybridlabs.aquatic.block.*
+import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.block.property.FlammableProperty
+import dev.hybridlabs.aquatic.block.property.StrippableProperty
 import dev.hybridlabs.aquatic.config.ConfigHelper
-import dev.hybridlabs.aquatic.config.HybridAquaticConfig
-import dev.hybridlabs.aquatic.effect.HybridAquaticMobEffects
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.config.HAConfig
+import dev.hybridlabs.aquatic.effect.HAMobEffects
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.aquatic.item.HybridAquaticItemGroups
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.item.HybridAquaticPlatformItems
+import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
+import dev.hybridlabs.aquatic.item.HAItemGroups
+import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.item.HAPlatformItems
+import dev.hybridlabs.aquatic.item.instrument.HAInstruments
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
-import dev.hybridlabs.aquatic.network.HybridAquaticFabricNetworking
-import dev.hybridlabs.aquatic.painting.HybridAquaticPaintings
-import dev.hybridlabs.aquatic.potions.HybridAquaticPotions
-import dev.hybridlabs.aquatic.registry.HybridAquaticRegistryKeys
-import dev.hybridlabs.aquatic.tag.HybridAquaticBiomeTags
-import dev.hybridlabs.aquatic.utils.HybridAquaticCustomTrades.registerCustomTrades
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.painting.HAPaintings
+import dev.hybridlabs.aquatic.particle.HAParticleTypes
+import dev.hybridlabs.aquatic.potions.HAPotions
+import dev.hybridlabs.aquatic.registry.HARegistryKeys
+import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.utils.HACustomTrades.registerCustomTrades
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.structure.FabricSpawnModifiers
 import dev.hybridlabs.aquatic.world.gen.structure.SpawnModifier
+import dev.hybridlabs.aquatic.world.inventory.HAMenuTypes
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STARTING
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import net.minecraft.core.registries.BuiltInRegistries
@@ -40,35 +44,44 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
 object HybridAquatic : ModInitializer {
-    val DUNEGRASS_PATCH =
-        HybridAquaticFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
+    val DUNEGRASS_PATCH = HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
 
-    private val logger = Constants.LOG
+    private val logger = Constants.LOGGER
 
     @Suppress("UnusedExpression")
     override fun onInitialize() {
+        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
         logger.info("Initializing ${Constants.MOD_NAME}")
         CommonClass.init()
 
-        HybridAquaticBlocks
-        HybridAquaticPlatformBlocks
-        HybridAquaticEntityTypes
-        HybridAquaticBlockEntityTypes
-        HybridAquaticPaintings
+        HABlocks
+        HAPlatformFluids
+        HAPlatformBlocks
+        HASoundEvents
+        HAInstruments
+        HAEntityTypes
+        HABlockEntityTypes
+        HAPaintings
+        HAParticleTypes
 
-        HybridAquaticBiomeTags
+        if (configHandler.config.biomeConfig.enableBiomes) {
+            HABiomes.addBiomes()
+        }
 
-        HybridAquaticMobEffects
+        HABiomeTags
 
-        HybridAquaticItems
-        HybridAquaticPlatformItems
-        HybridAquaticItemGroups
-        HybridAquaticPotions
-        registerBrewingRecipes()
+        HAMobEffects
+        HAPotions.registerPotionRecipes()
 
-        HybridAquaticFeatures
-        HybridAquaticPlacedFeatures
-        HybridAquaticConfiguredFeatures
+        HAItems
+        HAPlatformItems
+        HAItemGroups
+
+        HAFeatures
+        HAPlacedFeatures
+        HAConfiguredFeatures
+
+        HAMenuTypes
 
         HybridAquaticFabricNetworking.registerNetworking()
 
@@ -81,12 +94,16 @@ object HybridAquatic : ModInitializer {
 
 
         registerDynamicRegistries()
-        registerWanderingTraderTrades()
-        registerCustomTrades()
-        registerFlammables(FlammableBlockRegistry.getDefaultInstance())
-        registerStrippables()
+        if (configHandler.config.enableWanderingTraderTrades) {
+            registerWanderingTraderTrades()
+        }
+        if (configHandler.config.enableWanderingTraderTrades) {
+            registerCustomTrades()
+        }
 
-        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
+        FlammableProperty
+        StrippableProperty
+
         registerBiomeModifications(configHandler.config)
 
         SERVER_STARTING.register { server ->
@@ -95,8 +112,8 @@ object HybridAquatic : ModInitializer {
     }
 
     private fun registerDynamicRegistries() {
-        DynamicRegistries.registerSynced(HybridAquaticRegistryKeys.SEA_MESSAGE, SeaMessage.CODEC)
-        DynamicRegistries.register(HybridAquaticRegistryKeys.STRUCTURE_SPAWN_MODIFIER, SpawnModifier.CODEC)
+        DynamicRegistries.registerSynced(HARegistryKeys.SEA_MESSAGE, SeaMessage.CODEC)
+        DynamicRegistries.register(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER, SpawnModifier.CODEC)
     }
 
     private fun registerWanderingTraderTrades() {

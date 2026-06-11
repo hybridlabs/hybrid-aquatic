@@ -1,42 +1,54 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
-import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.core.animation.AnimationState
 import kotlin.math.abs
 
-class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>("squirrelfish") {
+class SquirrelfishEntityModel : HAFishEntityModel<SquirrelfishEntity>("squirrelfish") {
     override fun getRenderType(animatable: SquirrelfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
+    }
+
+    companion object {
+        private val ONE_FISH_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/squirrelfish/squirrelfish.geo.json")
+        private val TWO_FISH_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/squirrelfish/squirrelfish_two.geo.json")
+        private val THREE_FISH_MODEL =
+            ResourceLocation("hybrid_aquatic", "geo/fish/squirrelfish/squirrelfish_three.geo.json")
+
+        private val ONE_FISH_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/squirrelfish/squirrelfish.animation.json")
+        private val TWO_FISH_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/squirrelfish/squirrelfish_two.animation.json")
+        private val THREE_FISH_ANIMATION =
+            ResourceLocation("hybrid_aquatic", "animations/entity/fish/squirrelfish/squirrelfish_three.animation.json")
     }
 
     override fun getModelResource(animatable: SquirrelfishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val modelPath = when (fish) {
-            1 -> "geo/fish/squirrelfish/squirrelfish.geo.json"
-            2 -> "geo/fish/squirrelfish/squirrelfish_two.geo.json"
-            3 -> "geo/fish/squirrelfish/squirrelfish_three.geo.json"
-            else -> "geo/fish/squirrelfish/squirrelfish.geo.json"
+        return when (fish) {
+            1 -> ONE_FISH_MODEL
+            2 -> TWO_FISH_MODEL
+            3 -> THREE_FISH_MODEL
+            else -> ONE_FISH_MODEL
         }
-        return CommonClass.locate(modelPath)
     }
 
     override fun getAnimationResource(animatable: SquirrelfishEntity): ResourceLocation {
         val fish = animatable.getFishCount()
 
-        val animationPath = when (fish) {
-            1 -> "animations/squirrelfish.animation.json"
-            2 -> "animations/squirrelfish_two.animation.json"
-            3 -> "animations/squirrelfish_three.animation.json"
-            else -> "animations/squirrelfish.animation.json"
+        return when (fish) {
+            1 -> ONE_FISH_ANIMATION
+            2 -> TWO_FISH_ANIMATION
+            3 -> THREE_FISH_ANIMATION
+            else -> ONE_FISH_ANIMATION
         }
-        return CommonClass.locate(animationPath)
     }
 
     override fun setCustomAnimations(
@@ -45,11 +57,11 @@ class SquirrelfishEntityModel : HybridAquaticFishEntityModel<SquirrelfishEntity>
         animationState: AnimationState<SquirrelfishEntity>
     ) {
         super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = Minecraft.getInstance().timer.gameTimeDeltaTicks
+        val deltaTime: Float = animationState.partialTick
 
         val body = animationProcessor.getBone(PartNames.BODY)
-        val body2 = animationProcessor.getBone("body2")
-        val body3 = animationProcessor.getBone("body3")
+        val body2 = animationProcessor.getBone("body_2")
+        val body3 = animationProcessor.getBone("body_3")
         val tail2 = animationProcessor.getBone("tail2")
         val tail3 = animationProcessor.getBone("tail3")
         val tailFin2 = animationProcessor.getBone("tail_fin2")

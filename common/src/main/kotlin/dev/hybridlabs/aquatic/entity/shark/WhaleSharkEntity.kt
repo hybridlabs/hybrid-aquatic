@@ -1,12 +1,15 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import com.mojang.serialization.Codec
+import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
+import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
+import net.minecraft.tags.BiomeTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
@@ -15,59 +18,69 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.core.`object`.PlayState
 import java.util.function.IntFunction
 
-class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Level) :
-    HybridAquaticSharkEntity(entityType, world, listOf(HybridAquaticEntityTags.NONE), true, false),
-    OverlayTextureFeature {
+class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
+    HASharkEntity(type, world), OverlayTextureFeature {
 
-    private var isFeeding = false
-
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(AnimationController(this, "Open/Closed", 0) { state ->
-            val animation = when {
-                isFeeding -> MOUTH_OPEN
-                else -> MOUTH_CLOSED
-            }
-            state.setAndContinue(animation)
-        })
-        super.registerControllers(controllers)
+    override fun registerGoals() {
+        super.registerGoals()
+        goalSelector.addGoal(1, PassiveFeedingGoal(this))
     }
 
-    override fun tick() {
-        super.tick()
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.RAW_SHRIMP.get())
+    }
 
-        if (hunger < MAX_HUNGER / 4) {
-            isFeeding = true
-        }
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(OverlayTexture, 0)
+        super.defineSynchedData()
+    }
 
-        if (isFeeding) {
-            hunger += 10
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putInt("texture_overlay", this.overlayTexture.id)
+        super.addAdditionalSaveData(compound)
+    }
 
-            if (hunger >= MAX_HUNGER) {
-                hunger = MAX_HUNGER
-                isFeeding = false
-            }
-        }
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        if (compound.contains("texture_overlay")) this.overlayTexture =
+            OverlayTextures.byId(compound.getInt("texture_overlay"))
+        super.readAdditionalSaveData(compound)
+    }
+
+    //#region Animations
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        super.registerControllers(controllers)
+        controllers.add(
+            AnimationController(
+                this, "Feeding",
+                AnimationStateHandler { state: AnimationState<HASharkEntity> ->
+                    if (this.isFeeding())
+                        return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
+                    PlayState.STOP
+                }
+            )
+        )
     }
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 60.0)
+                .add(Attributes.MAX_HEALTH, 40.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.75)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
         }
-
-        val MOUTH_OPEN: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_open")
-        val MOUTH_CLOSED: RawAnimation = RawAnimation.begin().thenPlay("misc.mouth_closed")
 
         val OverlayTexture: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(WhaleSharkEntity::class.java, EntityDataSerializers.INT)
@@ -100,12 +113,13 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
         val overlayID = world.random.nextIntBetweenInclusive(0, OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     private var overlayTexture
@@ -118,19 +132,18 @@ class WhaleSharkEntity(entityType: EntityType<out WhaleSharkEntity>, world: Leve
         return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(OverlayTexture, 0)
-        super.defineSynchedData(builder)
+    override fun getMaxSize(): Int {
+        val level = this.level()
+        val biome = level.getBiome(this.blockPosition())
+
+        return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
+            10
+        } else {
+            5
+        }
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putInt("texture_overlay", this.overlayTexture.id)
-        super.addAdditionalSaveData(nbt)
-    }
-
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        if (nbt.contains("texture_overlay")) this.overlayTexture =
-            OverlayTextures.byId(nbt.getInt("texture_overlay"))
-        super.readAdditionalSaveData(nbt)
+    override fun getMinSize(): Int {
+        return -5
     }
 }

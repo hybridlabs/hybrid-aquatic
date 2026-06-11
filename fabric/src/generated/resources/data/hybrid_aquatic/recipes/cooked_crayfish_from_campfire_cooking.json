@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "hybrid_aquatic:raw_crayfish"
+  },
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/cooked_crayfish_from_campfire_cooking.json
+  "result": {
+    "id": "hybrid-aquatic:cooked_crayfish"
+  }
+}
+========
+  "result": "hybrid_aquatic:cooked_crayfish"
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/cooked_crayfish_from_campfire_cooking.json

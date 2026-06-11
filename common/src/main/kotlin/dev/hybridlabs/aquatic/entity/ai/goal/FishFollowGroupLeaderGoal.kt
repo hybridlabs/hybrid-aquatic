@@ -1,18 +1,18 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import com.mojang.datafixers.DataFixUtils
-import dev.hybridlabs.aquatic.entity.fish.HybridAquaticSchoolingFishEntity
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import net.minecraft.world.entity.ai.goal.Goal
 import java.util.function.Predicate
 
 class FishFollowGroupLeaderGoal(
-    val fish: HybridAquaticSchoolingFishEntity
+    val fish: HASchoolingFishEntity
 ) : Goal() {
     private val minSearchDelay = 200
     private var moveDelay = 0
     private var checkSurroundingDelay = getSurroundingSearchDelay(fish)
 
-    private fun getSurroundingSearchDelay(fish: HybridAquaticSchoolingFishEntity?): Int {
+    private fun getSurroundingSearchDelay(fish: HASchoolingFishEntity?): Int {
         return reducedTickDelay(minSearchDelay + fish!!.random.nextInt(minSearchDelay) % 20)
     }
 
@@ -27,16 +27,16 @@ class FishFollowGroupLeaderGoal(
         } else {
             checkSurroundingDelay = getSurroundingSearchDelay(fish)
             val predicate =
-                Predicate { fish: HybridAquaticSchoolingFishEntity -> fish.canHaveMoreFishInGroup() || !fish.hasLeader() }
+                Predicate { fish: HASchoolingFishEntity -> fish.canHaveMoreFishInGroup() || !fish.hasLeader() }
             val list = fish
                 .level()
                 .getEntitiesOfClass(fish.javaClass, fish.boundingBox.inflate(8.0, 8.0, 8.0), predicate)
             val schoolingFishEntity =
                 DataFixUtils.orElse(
-                    list.stream().filter { obj: HybridAquaticSchoolingFishEntity? -> obj!!.canHaveMoreFishInGroup() }
+                    list.stream().filter { obj: HASchoolingFishEntity? -> obj!!.canHaveMoreFishInGroup() }
                         .findAny(), fish)
             schoolingFishEntity!!.pullInOtherFish(
-                list.stream().filter { fish: HybridAquaticSchoolingFishEntity? -> !fish!!.hasLeader() })
+                list.stream().filter { fish: HASchoolingFishEntity? -> !fish!!.hasLeader() })
             fish.hasLeader()
         }
     }

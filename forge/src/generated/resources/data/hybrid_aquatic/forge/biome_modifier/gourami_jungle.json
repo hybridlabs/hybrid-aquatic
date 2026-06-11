@@ -1,0 +1,15 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/boxfish_reef.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:reef",
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:jungle",
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/gourami_jungle.json
+  "spawners": {
+    "type": "hybrid_aquatic:gourami",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 2
+  }
+}

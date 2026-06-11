@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.base.HACritterEntity
+import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -22,8 +24,8 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Level) :
-    HybridAquaticCritterEntity(entityType, world),
+class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) :
+    HACritterEntity(type, world),
     VariantHolder<SeaCucumberEntity.Companion.Type> {
 
     override fun remove(reason: RemovalReason) {
@@ -36,7 +38,7 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
                 for (l in 0 until spawnCount) {
                     val offsetX = (level().random.nextFloat() - 0.5f) * 2.0f
                     val offsetZ = (level().random.nextFloat() - 0.5f) * 2.0f
-                    val pearlfishEntity = HybridAquaticEntityTypes.PEARLFISH.get().create(level())
+                    val pearlfishEntity = HAEntityTypes.PEARLFISH.get().create(level())
 
                     pearlfishEntity?.let {
                         it.customName = text
@@ -97,10 +99,18 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
                 }
 
                 fun fromBiome(biome: Holder<Biome>): Type {
-                    return if (biome.`is`(BiomeTags.IS_DEEP_OCEAN)) {
-                        SEA_PIG
-                    } else {
-                        COMMON
+                    return when {
+                        biome.`is`(BiomeTags.IS_DEEP_OCEAN) -> {
+                            SEA_PIG
+                        }
+
+                        biome.`is`(HABiomeTags.ALL_TRENCHES) -> {
+                            SEA_PIG
+                        }
+
+                        else -> {
+                            COMMON
+                        }
                     }
                 }
             }
@@ -111,12 +121,13 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun getMaxSize(): Int {
@@ -127,19 +138,19 @@ class SeaCucumberEntity(entityType: EntityType<out SeaCucumberEntity>, world: Le
         return -5
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
 
     override fun getVariant(): Type {

@@ -1,434 +1,398 @@
 package dev.hybridlabs.aquatic.client.render.entity
 
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.ArrowSquidEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.CuttlefishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.FireflySquidEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.OctopusEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.UmbrellaOctopusEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaCucumberEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaSlugEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.SeaUrchinEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.CoconutCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.CrayfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.DecoratorCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.DungenessCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.FiddlerCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.FlowerCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.GhostCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.GiantIsopodEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.HermitCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.HorseshoeCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.LightfootCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.LobsterEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.ShrimpEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.SpiderCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.VampireCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.crustacean.YetiCrabEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.AfricanButterflyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.AnglerfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BarracudaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BarreleyeEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BettaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BlowfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.BoxfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.CarpEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.ClownfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.CoelacanthEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DamselfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DanioEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DiscusEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.DragonfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.FlashlightFishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.FlyingFishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.GoldenDoradoEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.GoldfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.GouramiEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.HerringEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.JohnDoryEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.LionfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MackerelEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MahiEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MantaRayEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.MorayEelEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.NeedlefishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OarfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OpahEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OscarEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.ParrotfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.PearlfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.PiranhaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.PlecoEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.PupfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.RatfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.RockfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeaAngelEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeaBassEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeadragonEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SeahorseEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.ShinerEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SnailfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SquirrelfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.StingrayEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.StonefishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.OceanSunfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SunfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.SurgeonfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TetraEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TigerBarbEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TriggerfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TroutEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.TunaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.fish.WrasseEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BarrelJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BigRedJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BlueJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.BoxJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.CepheidaeJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.CosmicJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.CrownJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.FireworkJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.LionsManeJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.MauveStingerEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.MoonJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.NomuraJellyfishEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.jellyfish.SeaNettleEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.cephalopods.*
+import dev.hybridlabs.aquatic.client.render.entity.critter.*
+import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
+import dev.hybridlabs.aquatic.client.render.entity.fish.*
+import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
+import dev.hybridlabs.aquatic.client.render.entity.mammal.DugongEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.mammal.ManateeEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinogenEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarcinomaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.miniboss.KarkinosEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.BaskingSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.BullSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.FrilledSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.GreatWhiteSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.HammerheadSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.HoundSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.LanternSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.ThresherSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.shark.TigerSharkEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.NautilusEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.cephalopods.VampireSquidEntityRenderer
-import dev.hybridlabs.aquatic.client.renderer.entity.shark.WhaleSharkEntityRenderer
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.client.render.entity.miniboss.*
+import dev.hybridlabs.aquatic.client.render.entity.misc.*
+import dev.hybridlabs.aquatic.client.render.entity.shark.*
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.platform.ClientServices
 
+@Suppress("unused")
 object HybridAquaticEntityRenderers {
     //region fish
     val AFRICAN_BUTTERFLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.AFRICAN_BUTTERFLYFISH,
+            HAEntityTypes.AFRICAN_BUTTERFLYFISH,
             ::AfricanButterflyfishEntityRenderer
         )
 
     val DAMSELFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.DAMSELFISH,
+            HAEntityTypes.DAMSELFISH,
             ::DamselfishEntityRenderer
         )
 
     val ANGLERFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.ANGLERFISH,
+            HAEntityTypes.ANGLERFISH,
             ::AnglerfishEntityRenderer
+        )
+
+    val VIPERFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.VIPERFISH,
+            ::ViperfishEntityRenderer
+        )
+
+    val HATCHETFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.HATCHETFISH,
+            ::HatchetfishEntityRenderer
+        )
+
+    val BLOBFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.BLOBFISH,
+            ::BlobfishEntityRenderer
+        )
+
+    val TRIPOD_FISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.TRIPOD_FISH,
+            ::TripodFishEntityRenderer
+        )
+
+    val FANGTOOTH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.FANGTOOTH,
+            ::FangtoothEntityRenderer
         )
 
     val DRAGONFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.DRAGONFISH,
+            HAEntityTypes.DRAGONFISH,
             ::DragonfishEntityRenderer
+        )
+
+    val HAGFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.HAGFISH,
+            ::HagfishEntityRenderer
         )
 
     val JOHN_DORY =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.JOHN_DORY,
+            HAEntityTypes.JOHN_DORY,
             ::JohnDoryEntityRenderer
         )
 
     val SNAILFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SNAILFISH,
+            HAEntityTypes.SNAILFISH,
             ::SnailfishEntityRenderer
         )
 
     val PEARLFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.PEARLFISH,
+            HAEntityTypes.PEARLFISH,
             ::PearlfishEntityRenderer
         )
 
     val PIRANHA =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.PIRANHA,
+            HAEntityTypes.PIRANHA,
             ::PiranhaEntityRenderer
         )
 
     val BARRELEYE =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BARRELEYE,
+            HAEntityTypes.BARRELEYE,
             ::BarreleyeEntityRenderer
         )
 
     val CLOWNFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.CLOWNFISH,
+            HAEntityTypes.CLOWNFISH,
             ::ClownfishEntityRenderer
+        )
+
+    val GARDEN_EEL =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.GARDEN_EEL,
+            ::GardenEelEntityRenderer
         )
 
     val TUNA =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.TUNA,
+            HAEntityTypes.TUNA,
             ::TunaEntityRenderer
         )
 
     val WRASSE =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.WRASSE,
+            HAEntityTypes.WRASSE,
             ::WrasseEntityRenderer
         )
 
     val GOLDEN_DORADO =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.GOLDEN_DORADO,
+            HAEntityTypes.GOLDEN_DORADO,
             ::GoldenDoradoEntityRenderer
         )
 
     val COELACANTH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.COELACANTH,
+            HAEntityTypes.COELACANTH,
             ::CoelacanthEntityRenderer
+        )
+
+    val SLICKHEAD =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.SLICKHEAD,
+            ::SlickheadEntityRenderer
         )
 
     val FLASHLIGHT_FISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.FLASHLIGHT_FISH,
+            HAEntityTypes.FLASHLIGHT_FISH,
             ::FlashlightFishEntityRenderer
         )
 
     val SQUIRRELFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SQUIRRELFISH,
+            HAEntityTypes.SQUIRRELFISH,
             ::SquirrelfishEntityRenderer
         )
 
     val FLYING_FISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.FLYING_FISH,
+            HAEntityTypes.FLYING_FISH,
             ::FlyingFishEntityRenderer
         )
 
     val LIONFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.LIONFISH,
+            HAEntityTypes.LIONFISH,
             ::LionfishEntityRenderer
         )
 
     val OARFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.OARFISH,
+            HAEntityTypes.OARFISH,
             ::OarfishEntityRenderer
         )
 
     val SEA_ANGEL =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEA_ANGEL,
+            HAEntityTypes.SEA_ANGEL,
             ::SeaAngelEntityRenderer
         )
 
     val OPAH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.OPAH, ::OpahEntityRenderer
+            HAEntityTypes.OPAH, ::OpahEntityRenderer
         )
 
 
     val OCEAN_SUNFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.OCEAN_SUNFISH, ::OceanSunfishEntityRenderer
+            HAEntityTypes.OCEAN_SUNFISH, ::OceanSunfishEntityRenderer
         )
 
     val MAHI =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.MAHI, ::MahiEntityRenderer
+            HAEntityTypes.MAHI, ::MahiEntityRenderer
         )
 
     val MORAY_EEL =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.MORAY_EEL,
+            HAEntityTypes.MORAY_EEL,
             ::MorayEelEntityRenderer
         )
 
     val ROCKFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.ROCKFISH,
+            HAEntityTypes.ROCKFISH,
             ::RockfishEntityRenderer
         )
 
     val SEA_BASS =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEA_BASS, ::SeaBassEntityRenderer
+            HAEntityTypes.SEA_BASS, ::SeaBassEntityRenderer
         )
 
     val TIGER_BARB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.TIGER_BARB,
+            HAEntityTypes.TIGER_BARB,
             ::TigerBarbEntityRenderer
         )
 
     val NEEDLEFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.NEEDLEFISH,
+            HAEntityTypes.NEEDLEFISH,
             ::NeedlefishEntityRenderer
         )
 
     val BARRACUDA =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BARRACUDA,
+            HAEntityTypes.BARRACUDA,
             ::BarracudaEntityRenderer
         )
 
     val MACKEREL =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.MACKEREL,
+            HAEntityTypes.MACKEREL,
             ::MackerelEntityRenderer
         )
 
     val HERRING =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.HERRING,
+            HAEntityTypes.HERRING,
             ::HerringEntityRenderer
         )
 
     val RATFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.RATFISH, ::RatfishEntityRenderer
+            HAEntityTypes.RATFISH, ::RatfishEntityRenderer
         )
 
     val TRIGGERFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.TRIGGERFISH,
+            HAEntityTypes.TRIGGERFISH,
             ::TriggerfishEntityRenderer
         )
 
-    val OSCAR =
+    val TREVALLY =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.OSCAR, ::OscarEntityRenderer
+            HAEntityTypes.TREVALLY,
+            ::TrevallyEntityRenderer
+        )
+
+    val CICHLID =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.CICHLID, ::CichlidEntityRenderer
         )
 
     val DANIO =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.DANIO, ::DanioEntityRenderer
+            HAEntityTypes.DANIO, ::DanioEntityRenderer
         )
 
     val BLOWFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BLOWFISH,
+            HAEntityTypes.BLOWFISH,
             ::BlowfishEntityRenderer
         )
 
     val TETRA =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.TETRA,
+            HAEntityTypes.TETRA,
             ::TetraEntityRenderer
         )
 
     val PUPFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.PUPFISH,
+            HAEntityTypes.PUPFISH,
             ::PupfishEntityRenderer
         )
 
     val STONEFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.STONEFISH,
+            HAEntityTypes.STONEFISH,
             ::StonefishEntityRenderer
         )
 
     val BETTA =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BETTA,
+            HAEntityTypes.BETTA,
             ::BettaEntityRenderer
-        )
-
-    val GOLDFISH =
-        ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.GOLDFISH,
-            ::GoldfishEntityRenderer
         )
 
     val SEAHORSE =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEAHORSE,
+            HAEntityTypes.SEAHORSE,
             ::SeahorseEntityRenderer
         )
 
     val SEADRAGON =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEADRAGON,
+            HAEntityTypes.SEADRAGON,
             ::SeadragonEntityRenderer
         )
 
     val MOON_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.MOON_JELLYFISH,
+            HAEntityTypes.MOON_JELLYFISH,
             ::MoonJellyfishEntityRenderer
         )
 
     val GOURAMI =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.GOURAMI,
+            HAEntityTypes.GOURAMI,
             ::GouramiEntityRenderer
         )
 
     val PLECO =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.PLECO,
+            HAEntityTypes.PLECO,
             ::PlecoEntityRenderer
         )
 
     val BOXFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BOXFISH,
+            HAEntityTypes.BOXFISH,
             ::BoxfishEntityRenderer
         )
 
     val DISCUS =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.DISCUS,
+            HAEntityTypes.DISCUS,
             ::DiscusEntityRenderer
+        )
+
+    val CORYDORA =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.CORYDORA,
+            ::CorydoraEntityRenderer
         )
 
     val SURGEONFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SURGEONFISH,
+            HAEntityTypes.SURGEONFISH,
             ::SurgeonfishEntityRenderer
         )
 
     val PARROTFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.PARROTFISH,
+            HAEntityTypes.PARROTFISH,
             ::ParrotfishEntityRenderer
         )
 
     val CARP =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.CARP,
+            HAEntityTypes.CARP,
             ::CarpEntityRenderer
+        )
+
+    val GOLDFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.GOLDFISH,
+            ::GoldfishEntityRenderer
         )
 
     val SHINER =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SHINER,
+            HAEntityTypes.SHINER,
             ::ShinerEntityRenderer
         )
 
     val TROUT =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.TROUT,
+            HAEntityTypes.TROUT,
             ::TroutEntityRenderer
         )
 
     val SUNFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SUNFISH,
+            HAEntityTypes.SUNFISH,
             ::SunfishEntityRenderer
         )
 
@@ -437,13 +401,13 @@ object HybridAquaticEntityRenderers {
     //region rays
     val STINGRAY =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.STINGRAY,
+            HAEntityTypes.STINGRAY,
             ::StingrayEntityRenderer
         )
 
     val MANTA_RAY =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.MANTA_RAY,
+            HAEntityTypes.MANTA_RAY,
             ::MantaRayEntityRenderer
         )
 
@@ -452,43 +416,55 @@ object HybridAquaticEntityRenderers {
     //region cephalopods
     val CUTTLEFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.CUTTLEFISH,
+            HAEntityTypes.CUTTLEFISH,
             ::CuttlefishEntityRenderer
+        )
+
+    val GIANT_SQUID =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.GIANT_SQUID,
+            ::GiantSquidEntityRenderer
+        )
+
+    val COLOSSAL_SQUID =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.COLOSSAL_SQUID,
+            ::ColossalSquidEntityRenderer
         )
 
     val UMBRELLA_OCTOPUS =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.UMBRELLA_OCTOPUS,
+            HAEntityTypes.UMBRELLA_OCTOPUS,
             ::UmbrellaOctopusEntityRenderer
         )
 
     val VAMPIRE_SQUID =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.VAMPIRE_SQUID,
+            HAEntityTypes.VAMPIRE_SQUID,
             ::VampireSquidEntityRenderer
         )
 
     val NAUTILUS =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.NAUTILUS,
+            HAEntityTypes.NAUTILUS,
             ::NautilusEntityRenderer
         )
 
     val ARROW_SQUID =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.ARROW_SQUID,
+            HAEntityTypes.ARROW_SQUID,
             ::ArrowSquidEntityRenderer
         )
 
     val FIREFLY_SQUID =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.FIREFLY_SQUID,
+            HAEntityTypes.FIREFLY_SQUID,
             ::FireflySquidEntityRenderer
         )
 
     val OCTOPUS =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.OCTOPUS,
+            HAEntityTypes.OCTOPUS,
             ::OctopusEntityRenderer
         )
 
@@ -497,73 +473,79 @@ object HybridAquaticEntityRenderers {
     //region jellyfish
     val SEA_NETTLE =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEA_NETTLE,
+            HAEntityTypes.SEA_NETTLE,
             ::SeaNettleEntityRenderer
         )
 
     val CEPHEIDAE_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.CEPHEIDAE_JELLYFISH,
+            HAEntityTypes.CEPHEIDAE_JELLYFISH,
             ::CepheidaeJellyfishEntityRenderer
         )
 
     val NOMURA_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.NOMURA_JELLYFISH,
+            HAEntityTypes.NOMURA_JELLYFISH,
             ::NomuraJellyfishEntityRenderer
         )
 
     val BARREL_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BARREL_JELLYFISH,
+            HAEntityTypes.BARREL_JELLYFISH,
             ::BarrelJellyfishEntityRenderer
         )
 
     val BLUE_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BLUE_JELLYFISH,
+            HAEntityTypes.BLUE_JELLYFISH,
             ::BlueJellyfishEntityRenderer
         )
 
     val MAUVE_STINGER =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.MAUVE_STINGER,
+            HAEntityTypes.MAUVE_STINGER,
             ::MauveStingerEntityRenderer
         )
 
     val LIONS_MANE_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.LIONS_MANE_JELLYFISH,
+            HAEntityTypes.LIONS_MANE_JELLYFISH,
             ::LionsManeJellyfishEntityRenderer
         )
 
     val CROWN_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.CROWN_JELLYFISH,
+            HAEntityTypes.CROWN_JELLYFISH,
             ::CrownJellyfishEntityRenderer
         )
 
     val BIG_RED_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BIG_RED_JELLYFISH,
+            HAEntityTypes.BIG_RED_JELLYFISH,
             ::BigRedJellyfishEntityRenderer
         )
 
     val COSMIC_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.COSMIC_JELLYFISH,
+            HAEntityTypes.COSMIC_JELLYFISH,
             ::CosmicJellyfishEntityRenderer
+        )
+
+    val COMB_JELLY =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.COMB_JELLY,
+            ::CombJellyEntityRenderer
         )
 
     val FIREWORK_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.FIREWORK_JELLYFISH,
+            HAEntityTypes.FIREWORK_JELLYFISH,
             ::FireworkJellyfishEntityRenderer
         )
 
     val BOX_JELLYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BOX_JELLYFISH,
+            HAEntityTypes.BOX_JELLYFISH,
             ::BoxJellyfishEntityRenderer
         )
 
@@ -572,96 +554,96 @@ object HybridAquaticEntityRenderers {
     //region crustaceans
     val DUNGENESS_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.DUNGENESS_CRAB,
+            HAEntityTypes.DUNGENESS_CRAB,
             ::DungenessCrabEntityRenderer
         )
 
     val FIDDLER_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.FIDDLER_CRAB,
+            HAEntityTypes.FIDDLER_CRAB,
             ::FiddlerCrabEntityRenderer
         )
 
     val GHOST_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.GHOST_CRAB,
+            HAEntityTypes.GHOST_CRAB,
             ::GhostCrabEntityRenderer
         )
 
     val FLOWER_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.FLOWER_CRAB,
+            HAEntityTypes.FLOWER_CRAB,
             ::FlowerCrabEntityRenderer
         )
 
     val LIGHTFOOT_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.LIGHTFOOT_CRAB,
+            HAEntityTypes.LIGHTFOOT_CRAB,
             ::LightfootCrabEntityRenderer
         )
 
     val VAMPIRE_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.VAMPIRE_CRAB,
+            HAEntityTypes.VAMPIRE_CRAB,
             ::VampireCrabEntityRenderer
         )
 
     val HORSESHOE_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.HORSESHOE_CRAB,
+            HAEntityTypes.HORSESHOE_CRAB,
             ::HorseshoeCrabEntityRenderer
         )
 
     val SPIDER_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SPIDER_CRAB,
+            HAEntityTypes.SPIDER_CRAB,
             ::SpiderCrabEntityRenderer
         )
 
     val YETI_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.YETI_CRAB,
+            HAEntityTypes.YETI_CRAB,
             ::YetiCrabEntityRenderer
         )
 
     val DECORATOR_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.DECORATOR_CRAB,
+            HAEntityTypes.DECORATOR_CRAB,
             ::DecoratorCrabEntityRenderer
         )
 
     val GIANT_ISOPOD =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.GIANT_ISOPOD,
+            HAEntityTypes.GIANT_ISOPOD,
             ::GiantIsopodEntityRenderer
         )
 
     val SHRIMP =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SHRIMP, ::ShrimpEntityRenderer
+            HAEntityTypes.SHRIMP, ::ShrimpEntityRenderer
         )
 
     val CRAYFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.CRAYFISH,
+            HAEntityTypes.CRAYFISH,
             ::CrayfishEntityRenderer
         )
 
     val LOBSTER =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.LOBSTER,
+            HAEntityTypes.LOBSTER,
             ::LobsterEntityRenderer
         )
 
     val COCONUT_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.COCONUT_CRAB,
+            HAEntityTypes.COCONUT_CRAB,
             ::CoconutCrabEntityRenderer
         )
 
     val HERMIT_CRAB =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.HERMIT_CRAB,
+            HAEntityTypes.HERMIT_CRAB,
             ::HermitCrabEntityRenderer
         )
 
@@ -670,25 +652,31 @@ object HybridAquaticEntityRenderers {
     //region critters
     val STARFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.STARFISH,
+            HAEntityTypes.STARFISH,
             ::StarfishEntityRenderer
         )
 
-    val NUDIBRANCH =
+    val SEA_SLUG =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEA_SLUG,
+            HAEntityTypes.SEA_SLUG,
             ::SeaSlugEntityRenderer
+        )
+
+    val SCALYFOOT_SNAIL =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.SCALYFOOT_SNAIL,
+            ::ScalyfootSnailEntityRenderer
         )
 
     val SEA_CUCUMBER =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEA_CUCUMBER,
+            HAEntityTypes.SEA_CUCUMBER,
             ::SeaCucumberEntityRenderer
         )
 
     val SEA_URCHIN =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.SEA_URCHIN,
+            HAEntityTypes.SEA_URCHIN,
             ::SeaUrchinEntityRenderer
         )
 
@@ -697,90 +685,174 @@ object HybridAquaticEntityRenderers {
     //region sharks
     val BULL_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BULL_SHARK,
+            HAEntityTypes.BULL_SHARK,
             ::BullSharkEntityRenderer
         )
 
     val BASKING_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.BASKING_SHARK,
+            HAEntityTypes.BASKING_SHARK,
             ::BaskingSharkEntityRenderer
         )
 
     val THRESHER_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.THRESHER_SHARK,
+            HAEntityTypes.THRESHER_SHARK,
             ::ThresherSharkEntityRenderer
         )
 
     val FRILLED_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.FRILLED_SHARK,
+            HAEntityTypes.FRILLED_SHARK,
             ::FrilledSharkEntityRenderer
+        )
+
+    val SIXGILL_SHARK =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.SIXGILL_SHARK,
+            ::SixgillSharkEntityRenderer
+        )
+
+    val SLEEPER_SHARK =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.SLEEPER_SHARK,
+            ::SleeperSharkEntityRenderer
+        )
+
+    val GOBLIN_SHARK =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.GOBLIN_SHARK,
+            ::GoblinSharkEntityRenderer
         )
 
     val LANTERN_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.LANTERN_SHARK,
+            HAEntityTypes.LANTERN_SHARK,
             ::LanternSharkEntityRenderer
         )
 
     val GREAT_WHITE_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.GREAT_WHITE_SHARK,
+            HAEntityTypes.GREAT_WHITE_SHARK,
             ::GreatWhiteSharkEntityRenderer
         )
 
-    val TIGER_SHARK =
+    val SAND_TIGER_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.TIGER_SHARK,
-            ::TigerSharkEntityRenderer
+            HAEntityTypes.SAND_TIGER_SHARK,
+            ::SandTigerSharkEntityRenderer
         )
 
     val HAMMERHEAD_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.HAMMERHEAD_SHARK,
+            HAEntityTypes.HAMMERHEAD_SHARK,
             ::HammerheadSharkEntityRenderer
         )
 
     val WHALE_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.WHALE_SHARK,
+            HAEntityTypes.WHALE_SHARK,
             ::WhaleSharkEntityRenderer
         )
 
     val HOUND_SHARK =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.HOUND_SHARK,
+            HAEntityTypes.HOUND_SHARK,
             ::HoundSharkEntityRenderer
         )
 
     //endregion
 
+    //#region Mammals
     val OTTER =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.OTTER,
+            HAEntityTypes.OTTER,
             ::OtterEntityRenderer
+        )
+
+    val DUGONG =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.DUGONG,
+            ::DugongEntityRenderer
+        )
+
+    val MANATEE =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.MANATEE,
+            ::ManateeEntityRenderer
+        )
+
+    val ORCA =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.ORCA,
+            ::OrcaEntityRenderer
         )
 
     //region minibosses
     val KARKINOS =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.KARKINOS,
+            HAEntityTypes.KARKINOS,
             ::KarkinosEntityRenderer
         )
 
     val KARCINOGEN =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.KARCINOGEN,
+            HAEntityTypes.KARCINOGEN,
             ::KarcinogenEntityRenderer
         )
 
     val KARCINOMA =
         ClientServices.PLATFORM.registerEntityRenderer(
-            HybridAquaticEntityTypes.KARCINOMA,
+            HAEntityTypes.KARCINOMA,
             ::KarcinomaEntityRenderer
         )
 
+    val SHELL_BEAST =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.SHELL_BEAST,
+            ::ShellBeastEntityRenderer
+        )
+
+    // val HYPNAUTILUS =
+    //     ClientServices.PLATFORM.registerEntityRenderer(
+    //         HAEntityTypes.HYPNAUTILUS,
+    //        ::HypnautilusEntityRenderer
+    //    )
+
+    val BEAKLING =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.BEAKLING,
+            ::BeaklingEntityRenderer
+        )
     //endregion
+
+    val DEPTH_CHARGE =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.DEPTH_CHARGE,
+            ::DepthChargeEntityRenderer
+        )
+
+    val SMALL_TNT =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.SMALL_TNT,
+            ::SmallTNTEntityRenderer
+        )
+
+    val ARGONAUT =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.ARGONAUT,
+            ::ArgonautEntityRenderer
+        )
+
+    val CAVITATION_BUBBLE =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.CAVITATION_BUBBLE,
+            ::CavitationBubbleEntityRenderer
+        )
+
+    val STARFISH_PROJECTILE =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.STARFISH_PROJECTILE,
+            ::StarfishProjectileRenderer
+        )
 }

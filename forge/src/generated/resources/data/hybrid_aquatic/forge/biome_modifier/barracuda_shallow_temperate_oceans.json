@@ -1,0 +1,15 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/frilled_shark_deep_tropical_oceans.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:deep_tropical_oceans",
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:shallow_temperate_oceans",
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/barracuda_shallow_temperate_oceans.json
+  "spawners": {
+    "type": "hybrid_aquatic:barracuda",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

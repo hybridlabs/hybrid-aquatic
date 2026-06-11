@@ -1,0 +1,106 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:african_butterflyfish",
+    "hybrid_aquatic:tetra",
+    "hybrid_aquatic:tiger_barb",
+    "hybrid_aquatic:gourami",
+    "hybrid_aquatic:pleco",
+    "hybrid_aquatic:discus",
+    "hybrid_aquatic:cichlid",
+    "hybrid_aquatic:danio",
+    "hybrid_aquatic:betta",
+    {
+      "id": "fintastic:featherback",
+      "required": false
+    },
+    {
+      "id": "fintastic:catfish",
+      "required": false
+    },
+    {
+      "id": "fintastic:minnow",
+      "required": false
+    },
+    {
+      "id": "fintastic:pleco",
+      "required": false
+    },
+    {
+      "id": "fintastic:guppy",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:catfish",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:mudskipper",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:tiger_scatfish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:tiger_scatfish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:threadfin_lookdown",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:threadfin_lookdown_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:teira_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:teira_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:atlantic_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:atlantic_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:golden_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:golden_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pacific_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pacific_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pinnate_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pinnate_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:orbicular_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:orbicular_spadefish_2",
+      "required": false
+    }
+  ]
+}

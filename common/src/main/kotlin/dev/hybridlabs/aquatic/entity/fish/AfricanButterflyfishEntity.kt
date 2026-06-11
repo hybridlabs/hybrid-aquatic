@@ -1,31 +1,35 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.goal.HybridAquaticJumpGoal
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.entity.ai.goal.BreathAirGoal
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DefaultAnimations
+import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.core.animation.AnimationState
 
-class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity>, world: Level) :
+    HAFishEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
+    )
 
     private var isGliding = false
 
@@ -33,9 +37,14 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
         return 1
     }
 
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(Items.SPIDER_EYE)
+    }
+
     override fun registerGoals() {
         super.registerGoals()
-        targetSelector.addGoal(5, HybridAquaticJumpGoal(this, 10))
+        goalSelector.addGoal(0, BreathAirGoal(this))
+        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 10, 1.5))
     }
 
     override fun tick() {
@@ -53,46 +62,6 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
         } else if (isGliding) {
             stopGliding()
         }
-    }
-
-    override fun handleAirSupply(air: Int) {
-        if (!isInWater && !isNoAi) {
-            this.airSupply -= 1
-        } else {
-            this.airSupply = this.maxAirSupply
-        }
-    }
-
-    override fun getMaxAirSupply(): Int {
-        return 900
-    }
-
-    override fun increaseAirSupply(currentAir: Int): Int {
-        return this.maxAirSupply
-    }
-
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
-    ): SpawnGroupData? {
-        this.airSupply = this.maxAirSupply
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
-    }
-
-    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(
-            AnimationController(
-                this, "Fly/Swim/Idle", 5
-            ) { state: AnimationState<HybridAquaticFishEntity> ->
-                when {
-                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
-                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
-                    else -> state.setAndContinue(DefaultAnimations.IDLE)
-                }
-            }
-        )
     }
 
     private fun startGliding() {
@@ -113,6 +82,34 @@ class AfricanButterflyfishEntity(entityType: EntityType<out AfricanButterflyfish
             motion.z * 1.1
         )
         this.deltaMovement = newMotion
+    }
+
+    override fun increaseAirSupply(currentAir: Int): Int {
+        return this.maxAirSupply
+    }
+
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
+        this.airSupply = this.maxAirSupply
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
+
+    override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
+        controllers.add(
+            AnimationController(this, "Fly/Swim/Idle", 5
+            ) { state: AnimationState<HAFishEntity> ->
+                when {
+                    this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
+                    state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)
+                    else -> state.setAndContinue(DefaultAnimations.IDLE)
+                }
+            }
+        )
     }
 
     companion object {

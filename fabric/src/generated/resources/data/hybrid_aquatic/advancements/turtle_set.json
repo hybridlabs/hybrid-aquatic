@@ -1,0 +1,38 @@
+{
+  "parent": "hybrid_aquatic:turtle_scute",
+  "criteria": {
+    "obtain_turtle_set": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "hybrid_aquatic:turtle_set"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.turtle_set.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "hybrid_aquatic:turtle_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.hybrid_aquatic.turtle_set.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_turtle_set"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

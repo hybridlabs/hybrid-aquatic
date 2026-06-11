@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "hybrid_aquatic:coral_chunk"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " C ",
+    " S ",
+    " S "
+  ],
+  "result": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/coral_shovel.json
+    "count": 1,
+    "id": "hybrid-aquatic:coral_shovel"
+  }
+}
+========
+    "item": "hybrid_aquatic:coral_shovel"
+  },
+  "show_notification": true
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/coral_shovel.json

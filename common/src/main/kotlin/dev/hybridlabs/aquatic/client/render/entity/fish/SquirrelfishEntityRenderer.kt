@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SquirrelfishEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<SquirrelfishEntity>(context, SquirrelfishEntityModel(), true, false)
+    HAFishEntityRenderer<SquirrelfishEntity>(context, SquirrelfishEntityModel(), true, false)

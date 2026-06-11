@@ -1,22 +1,20 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class SnailfishEntity(entityType: EntityType<out SnailfishEntity>, world: Level) :
-    HybridAquaticFishEntity(
-        entityType, world,
-        listOf(
-            HybridAquaticEntityTags.NONE
-        ),
-        listOf(
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
+class SnailfishEntity(type: EntityType<out SnailfishEntity>, world: Level) :
+    HAFishEntity(type, world) {
+    override fun getTargetConfig() =
+        MobTargetConfiguration.ofPrey(
+            HAEntityTags.LARGE_CREATURES,
+            HAEntityTags.ALL_SHARKS
         )
-    ) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 3

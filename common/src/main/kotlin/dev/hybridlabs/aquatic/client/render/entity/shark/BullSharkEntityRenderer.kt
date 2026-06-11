@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.shark.BullSharkEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BullSharkEntityRenderer(context: Context) :
-    HybridAquaticSharkEntityRenderer<BullSharkEntity>(context, BullSharkEntityModel(), true)
+    HASharkEntityRenderer<BullSharkEntity>(context, BullSharkEntityModel(), true)

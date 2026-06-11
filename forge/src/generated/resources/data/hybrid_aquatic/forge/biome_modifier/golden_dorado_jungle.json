@@ -1,0 +1,15 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/golden_dorado_jungle.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:jungle",
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:jungle",
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/golden_dorado_jungle.json
+  "spawners": {
+    "type": "hybrid_aquatic:golden_dorado",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hybrid_aquatic:block/jungle_lily_pad"
+      },
+      {
+        "model": "hybrid_aquatic:block/jungle_lily_pad",
+        "y": 90
+      },
+      {
+        "model": "hybrid_aquatic:block/jungle_lily_pad",
+        "y": 180
+      },
+      {
+        "model": "hybrid_aquatic:block/jungle_lily_pad",
+        "y": 270
+      }
+    ]
+  }
+}

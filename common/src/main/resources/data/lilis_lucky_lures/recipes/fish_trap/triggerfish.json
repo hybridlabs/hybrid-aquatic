@@ -1,11 +1,11 @@
 {
   "type": "lilis_lucky_lures:fish_trap",
   "bait_item": {
-    "item": "hybrid-aquatic:uni"
+    "item": "hybrid_aquatic:uni"
   },
   "catch": {
     "result": {
-      "item": "hybrid-aquatic:triggerfish",
+      "item": "hybrid_aquatic:triggerfish",
       "count": 1
     }
   },

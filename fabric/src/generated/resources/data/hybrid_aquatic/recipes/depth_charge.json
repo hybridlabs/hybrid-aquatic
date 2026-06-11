@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "S": {
+      "item": "hybrid_aquatic:sulfur"
+    }
+  },
+  "pattern": [
+    "SIS",
+    "ISI",
+    "SIS"
+  ],
+  "result": {
+    "item": "hybrid_aquatic:depth_charge"
+  },
+  "show_notification": true
+}

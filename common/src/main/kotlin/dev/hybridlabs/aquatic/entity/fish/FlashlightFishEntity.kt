@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.item.HybridAquaticItems
-import dev.hybridlabs.aquatic.tag.HybridAquaticEntityTags
+import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -12,23 +14,27 @@ import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityDimensions
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.Pose
+import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, world: Level) :
-    HybridAquaticSchoolingFishEntity(
-        entityType, world,
-        listOf(HybridAquaticEntityTags.NONE),
-        listOf(
-            HybridAquaticEntityTags.MEDIUM_PREY,
-            HybridAquaticEntityTags.LARGE_PREY,
-            HybridAquaticEntityTags.SHARK
-        )
-    ) {
+class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Level) :
+    HASchoolingFishEntity(type, world) {
+
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
+        HAEntityTags.MEDIUM_CREATURES,
+        HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.ALL_SHARKS
+    )
 
     override fun registerGoals() {
         super.registerGoals()
@@ -61,14 +67,14 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
         refreshDimensions()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt("FishCount", getFishCount())
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        super.addAdditionalSaveData(compound)
+        compound.putInt("FishCount", getFishCount())
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        setFishCount(nbt.getInt("FishCount").coerceAtMost(THREE_FISH))
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        super.readAdditionalSaveData(compound)
+        setFishCount(compound.getInt("FishCount").coerceAtMost(THREE_FISH))
     }
 
     override fun tick() {
@@ -143,19 +149,19 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
             val newFraction = health / maxHp
 
             val oldFishCount = when {
-                oldFraction > 2f / 3f -> MackerelEntity.THREE_FISH
-                oldFraction > 1f / 3f -> MackerelEntity.TWO_FISH
-                else -> MackerelEntity.ONE_FISH
+                oldFraction > 2f / 3f -> THREE_FISH
+                oldFraction > 1f / 3f -> TWO_FISH
+                else -> ONE_FISH
             }
 
             val newFishCount = when {
-                newFraction > 2f / 3f -> MackerelEntity.THREE_FISH
-                newFraction > 1f / 3f -> MackerelEntity.TWO_FISH
-                else -> MackerelEntity.ONE_FISH
+                newFraction > 2f / 3f -> THREE_FISH
+                newFraction > 1f / 3f -> TWO_FISH
+                else -> ONE_FISH
             }
 
-            if (newFishCount in 1..<oldFishCount) {
-                spawnAtLocation(HybridAquaticItems.FLASHLIGHT_FISH.get())
+            if (newFishCount in 1..<oldFishCount && level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                spawnAtLocation(HAItems.FLASHLIGHT_FISH.get())
             }
         }
 
@@ -186,8 +192,9 @@ class FlashlightFishEntity(entityType: EntityType<out FlashlightFishEntity>, wor
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
-            val nightSpawn = (world.seaLevel - 16)..< world.seaLevel
-            val daySpawn = (world.seaLevel - 128)..(world.seaLevel - 48)
+            val seaLevel = world.level.chunkSource.generator.seaLevel
+            val nightSpawn = (seaLevel - 16)..< seaLevel
+            val daySpawn = (seaLevel - 256)..(seaLevel - 48)
 
             val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
 

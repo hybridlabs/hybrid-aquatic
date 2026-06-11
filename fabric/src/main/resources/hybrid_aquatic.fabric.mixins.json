@@ -1,0 +1,50 @@
+{
+    "required": true,
+    "package": "dev.hybridlabs.aquatic.mixin",
+    "compatibilityLevel": "JAVA_17",
+    "plugin": "dev.hybridlabs.aquatic.mixin.FabricMixinPlugin",
+    "mixins": [
+        "BreathAirGoalMixin",
+        "EnchantmentMixin",
+        "EntityMixin",
+        "FabricPistonMovingBlockEntityMixin",
+        "FishingBobberEntityMixin",
+        "FishingRodItemMixin",
+        "FlowingFluidMixin",
+        "LivingEntityBubbleColumnMixin",
+        "PistonMovingBlockEntityMixin",
+        "PistonStructureResolverFabricMixin",
+        "PlayerEntityMixin",
+        "ResourceLocationMixin",
+        "SeagrassBlockMixin",
+        "ServerGamePacketListenerImplMixin",
+        "ServerPlayerEntityMixin",
+        "SpawnGroupMixin",
+        "TallSeagrassBlockMixin",
+        "compat.carpet.HoneyCarpetHACompatMixin",
+        "compat.carpet.SlimeCarpetHACompatMixin",
+        "compat.carpet.StickyBlockCarpetHACompatMixin"
+    ],
+    "client": [
+        "client.BookScreenMixin",
+        "client.CameraMixin",
+        "client.ClientPlayNetworkHandlerMixin",
+        "client.FishingBobberEntityClientMixin",
+        "client.FishingBobberEntityRendererMixin",
+        "client.FogRendererMixin",
+        "client.HeadFeatureRendererMixin",
+        "client.LivingEntityRendererMixin",
+        "client.LocalPlayerMixin",
+        "client.MouseHandlerMixin",
+        "client.ParticleEngineMixin",
+        "client.PlayerEntityRendererMixin",
+        "client.SkullBlockEntityModelMixin",
+        "client.WeatherDisplayMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "mixinextras": {
+        "minVersion": "0.5.0"
+    }
+}

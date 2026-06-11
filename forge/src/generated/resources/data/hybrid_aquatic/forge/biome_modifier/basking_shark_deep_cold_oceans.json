@@ -1,0 +1,18 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/barreleye_deep_tropical_oceans.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:deep_tropical_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:barreleye",
+    "maxCount": 2,
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:deep_cold_oceans",
+  "spawners": {
+    "type": "hybrid_aquatic:basking_shark",
+    "maxCount": 1,
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/basking_shark_deep_cold_oceans.json
+    "minCount": 1,
+    "weight": 1
+  }
+}

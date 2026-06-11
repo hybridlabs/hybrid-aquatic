@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "hybrid_aquatic:block/polished_yellow_brinestone",
+    "side": "hybrid_aquatic:block/polished_yellow_brinestone",
+    "top": "hybrid_aquatic:block/polished_yellow_brinestone"
+  }
+}

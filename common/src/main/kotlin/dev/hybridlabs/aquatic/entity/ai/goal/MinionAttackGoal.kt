@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.miniboss.HybridAquaticMinionEntity
+import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntitySelector
 import net.minecraft.world.entity.LivingEntity
@@ -12,7 +12,7 @@ import java.util.*
 import kotlin.math.max
 
 open class MinionAttackGoal(
-    private val minion: HybridAquaticMinionEntity,
+    protected val minion: HAMinionEntity,
     private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
@@ -32,7 +32,6 @@ open class MinionAttackGoal(
     }
 
     override fun canUse(): Boolean {
-
         val i = minion.level().gameTime
         if (i - this.lastCanUseCheck < 20L) {
             return false
@@ -148,10 +147,10 @@ open class MinionAttackGoal(
     }
 
     private fun resetAttackCooldown() {
-        this.ticksUntilNextAttack = this.adjustedTickDelay(10)
+        this.ticksUntilNextAttack = this.adjustedTickDelay(20)
     }
 
     protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (minion.bbWidth * 1.75f * minion.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
+        return (minion.bbWidth * 2.0f * minion.bbWidth * 2.0f + attackTarget.bbWidth).toDouble()
     }
 }

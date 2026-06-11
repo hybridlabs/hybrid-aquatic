@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.ShinerEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class ShinerEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<ShinerEntity>(context, ShinerEntityModel(), true, false)
+    HAFishEntityRenderer<ShinerEntity>(context, ShinerEntityModel(), true, false)

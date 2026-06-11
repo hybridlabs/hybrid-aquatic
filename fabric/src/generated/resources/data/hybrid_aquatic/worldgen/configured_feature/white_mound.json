@@ -1,0 +1,102 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:disk",
+        "config": {
+          "half_height": 1,
+          "radius": {
+            "type": "minecraft:uniform",
+            "value": {
+              "max_inclusive": 5,
+              "min_inclusive": 3
+            }
+          },
+          "state_provider": {
+            "fallback": {
+              "type": "minecraft:weighted_state_provider",
+              "entries": [
+                {
+                  "data": {
+                    "Name": "minecraft:calcite"
+                  },
+                  "weight": 5
+                },
+                {
+                  "data": {
+                    "Name": "minecraft:diorite"
+                  },
+                  "weight": 3
+                },
+                {
+                  "data": {
+                    "Name": "hybrid_aquatic:white_sandstone"
+                  },
+                  "weight": 1
+                }
+              ]
+            },
+            "rules": [
+              {
+                "if_true": {
+                  "type": "minecraft:not",
+                  "predicate": {
+                    "type": "minecraft:matching_blocks",
+                    "blocks": [
+                      "minecraft:calcite",
+                      "minecraft:diorite",
+                      "hybrid_aquatic:white_sand",
+                      "hybrid_aquatic:white_sandstone"
+                    ],
+                    "offset": [
+                      0,
+                      -1,
+                      0
+                    ]
+                  }
+                },
+                "then": {
+                  "type": "minecraft:simple_state_provider",
+                  "state": {
+                    "Name": "minecraft:water",
+                    "Properties": {
+                      "level": "0"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "target": {
+            "type": "minecraft:matching_blocks",
+            "blocks": [
+              "minecraft:calcite",
+              "minecraft:diorite",
+              "hybrid_aquatic:white_sand",
+              "hybrid_aquatic:white_sandstone"
+            ],
+            "offset": [
+              0,
+              -1,
+              0
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:count",
+          "count": 1
+        },
+        {
+          "type": "minecraft:heightmap",
+          "heightmap": "OCEAN_FLOOR"
+        }
+      ]
+    },
+    "tries": 6,
+    "xz_spread": 7,
+    "y_spread": 0
+  }
+}

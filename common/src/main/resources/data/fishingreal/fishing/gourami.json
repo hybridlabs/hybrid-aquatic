@@ -1,8 +1,8 @@
 {
   "input": {
-    "item": "hybrid-aquatic:gourami"
+    "item": "hybrid_aquatic:gourami"
   },
   "result": {
-    "id": "hybrid-aquatic:gourami"
+    "id": "hybrid_aquatic:gourami"
   }
 }

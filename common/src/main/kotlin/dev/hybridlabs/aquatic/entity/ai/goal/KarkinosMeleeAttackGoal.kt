@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Items
-import java.util.*
+import java.util.EnumSet
 import kotlin.math.max
 
 open class KarkinosMeleeAttackGoal(

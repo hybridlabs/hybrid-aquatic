@@ -1,0 +1,155 @@
+package dev.hybridlabs.aquatic.mixin.client;
+
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import dev.hybridlabs.aquatic.CommonClass;
+import dev.hybridlabs.aquatic.tag.HABiomeTags;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.Heightmap;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import static net.minecraft.client.renderer.LevelRenderer.getLightColor;
+
+@Mixin(LevelRenderer.class)
+public abstract class WeatherDisplayMixin implements ResourceManagerReloadListener, AutoCloseable {
+
+	@Unique
+	private static final ResourceLocation MARINE_SNOW = CommonClass.locate("textures/environment/marine_snow.png");
+
+	@Shadow private int ticks;
+	@Final @Shadow private float[] rainSizeX;
+	@Final @Shadow private float[] rainSizeZ;
+	@Final @Shadow private Minecraft minecraft;
+
+	@Inject(method = "renderSnowAndRain", at=@At("HEAD"))
+	void renderWeatherInject(LightTexture manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
+		if (minecraft.player != null && minecraft.level != null) {
+			float f = this.minecraft.level.getRainLevel(tickDelta);
+			Level world = this.minecraft.level;
+			if (f > 0.0f && cameraY < world.getSeaLevel() && world.getBiome(minecraft.player.blockPosition()).is(HABiomeTags.INSTANCE.getALL_TRENCHES())) {
+				manager.turnOnLightLayer();
+				int xFloored = Mth.floor(cameraX);
+				int yFloored = Mth.floor(cameraY);
+				int zFloored = Mth.floor(cameraZ);
+				Tesselator tessellator = Tesselator.getInstance();
+				BufferBuilder bufferBuilder = tessellator.getBuilder();
+				RenderSystem.disableCull();
+				RenderSystem.enableBlend();
+				RenderSystem.enableDepthTest();
+				int layers = 5;
+				if (Minecraft.useFancyGraphics()) {
+					layers = 10;
+				}
+
+				RenderSystem.depthMask(Minecraft.useShaderTransparency());
+				int m = -1;
+				RenderSystem.setShader(GameRenderer::getParticleShader);
+				BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+                float f1 = (float)this.ticks + tickDelta;
+
+				for (int n = zFloored - layers; n <= zFloored + layers; ++n) {
+					for (int o = xFloored - layers; o <= xFloored + layers; ++o) {
+						int p = (n - zFloored + 16) * 32 + o - xFloored + 16;
+						double d = (double) this.rainSizeX[p] * 0.5;
+						double e = (double) this.rainSizeZ[p] * 0.5;
+						mutable.set(o, cameraY, n);
+						Biome biome = world.getBiome(mutable).value();
+						if (biome.hasPrecipitation()) {
+							int height = world.getHeight(Heightmap.Types.OCEAN_FLOOR, o, n);
+							int r = yFloored - layers;
+							int s = yFloored + layers;
+							if (r < height) {
+								r = height;
+							}
+
+							if (s < height) {
+								s = height;
+							}
+
+							int t = Math.max(height, yFloored);
+
+							if (r != s) {
+								RandomSource random = RandomSource.create(((long) o * o * 3121 + o * 45238971L ^ (long) n * n * 418711 + n * 13761L));
+								mutable.set(o, r, n);
+								Biome.Precipitation precipitation = biome.getPrecipitationAt(mutable);
+                                if (precipitation == Biome.Precipitation.RAIN) {
+									if (m != 0) {
+
+                                        m = 0;
+										RenderSystem.setShaderTexture(0, MARINE_SNOW);
+										bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+									}
+
+                                    float f5 = -((float)(this.ticks + tickDelta)) / 768.0F;
+                                    float f6 = (float)(random.nextDouble() + (double)f1 * 0.001 * (double)((float)random.nextGaussian()));
+                                    float f7 = (float)(random.nextDouble() + (double)(f1 * (float)random.nextGaussian()) * 0.0001);
+
+                                    double dx = (double)o + 0.5 - cameraX;
+                                    double dz = (double)n + 0.5 - cameraZ;
+                                    float distanceFactor = (float)Math.sqrt(dx * dx + dz * dz) / (float)layers;
+                                    float fade = Mth.clamp((float)(world.getSeaLevel() - cameraY) / 48.0f, 0.0f, 0.8f);
+                                    float alpha = (((1.0F - distanceFactor * distanceFactor) * 0.3F + 0.5F) * f) * fade;
+
+                                    mutable.set(o, t, n);
+                                    int light = getLightColor(world, mutable);
+                                    int l3 = light >> 16 & 0xFFFF;
+                                    int i4 = light & 0xFFFF;
+                                    int j4 = (l3 * 3 + 240) / 4;
+                                    int k4 = (i4 * 3 + 240) / 4;
+
+                                    bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)s - cameraY, (double)n - cameraZ - e + 0.5)
+                                            .uv(0.0F + f6, (float)r * 0.25F + f5 + f7)
+                                            .color(1.0F, 1.0F, 1.0F, alpha)
+                                            .uv2(k4, j4)
+                                            .endVertex();
+                                    bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)s - cameraY, (double)n - cameraZ + e + 0.5)
+                                            .uv(1.0F + f6, (float)r * 0.25F + f5 + f7)
+                                            .color(1.0F, 1.0F, 1.0F, alpha)
+                                            .uv2(k4, j4)
+                                            .endVertex();
+                                    bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)r - cameraY, (double)n - cameraZ + e + 0.5)
+                                            .uv(1.0F + f6, (float)s * 0.25F + f5 + f7)
+                                            .color(1.0F, 1.0F, 1.0F, alpha)
+                                            .uv2(k4, j4)
+                                            .endVertex();
+                                    bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)r - cameraY, (double)n - cameraZ - e + 0.5)
+                                            .uv(0.0F + f6, (float)s * 0.25F + f5 + f7)
+                                            .color(1.0F, 1.0F, 1.0F, alpha)
+                                            .uv2(k4, j4)
+                                            .endVertex();
+                                }
+							}
+						}
+					}
+				}
+
+				if (m == 0) {
+					tessellator.end();
+				}
+
+				RenderSystem.enableCull();
+				RenderSystem.enableBlend();
+				RenderSystem.enableDepthTest();
+				manager.turnOffLightLayer();
+			}
+		}
+	}
+}

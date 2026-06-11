@@ -5,4 +5,4 @@ import dev.hybridlabs.aquatic.entity.fish.JohnDoryEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class JohnDoryEntityRenderer(context: Context) :
-    HybridAquaticFishEntityRenderer<JohnDoryEntity>(context, JohnDoryEntityModel(), true, false)
+    HAFishEntityRenderer<JohnDoryEntity>(context, JohnDoryEntityModel(), true, false)

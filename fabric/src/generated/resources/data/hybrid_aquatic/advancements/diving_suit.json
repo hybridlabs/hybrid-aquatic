@@ -1,0 +1,75 @@
+{
+  "parent": "hybrid_aquatic:fishing_net",
+  "criteria": {
+    "obtain_diving_suit": {
+      "conditions": {
+        "items": [
+          {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/diving_suit.json
+            "items": "hybrid-aquatic:diving_helmet"
+          },
+          {
+            "items": "hybrid-aquatic:diving_suit"
+          },
+          {
+            "items": "hybrid-aquatic:diving_leggings"
+          },
+          {
+            "items": "hybrid-aquatic:diving_boots"
+========
+            "items": [
+              "hybrid_aquatic:diving_helmet"
+            ]
+          },
+          {
+            "items": [
+              "hybrid_aquatic:diving_suit"
+            ]
+          },
+          {
+            "items": [
+              "hybrid_aquatic:diving_leggings"
+            ]
+          },
+          {
+            "items": [
+              "hybrid_aquatic:diving_boots"
+            ]
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/diving_suit.json
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/diving_suit.json
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+========
+    "announce_to_chat": true,
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/diving_suit.json
+    "description": {
+      "translate": "advancements.hybrid_aquatic.diving_suit.description"
+    },
+    "frame": "goal",
+    "icon": {
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/advancement/diving_suit.json
+      "count": 1,
+      "id": "hybrid-aquatic:diving_helmet"
+========
+      "item": "hybrid_aquatic:diving_helmet",
+      "nbt": "{Damage:0}"
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/advancements/diving_suit.json
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.diving_suit.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_diving_suit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

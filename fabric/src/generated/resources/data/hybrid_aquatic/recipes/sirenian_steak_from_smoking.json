@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "hybrid_aquatic:sirenian_beef"
+  },
+<<<<<<<< HEAD:fabric/src/generated/resources/data/hybrid-aquatic/recipe/cooked_fish_steak_from_smoking.json
+  "result": {
+    "id": "hybrid-aquatic:cooked_fish_steak"
+  }
+}
+========
+  "result": "hybrid_aquatic:sirenian_steak"
+}
+>>>>>>>> 1.20.1-biomes:fabric/src/generated/resources/data/hybrid_aquatic/recipes/sirenian_steak_from_smoking.json

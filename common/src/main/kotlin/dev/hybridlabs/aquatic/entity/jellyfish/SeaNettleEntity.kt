@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
-import dev.hybridlabs.aquatic.entity.HybridAquaticEntityTypes
+import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -18,19 +19,19 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level) :
-    HybridAquaticJellyfishEntity(entityType, world, true, 1),
+    HAJellyfishEntity(entityType, world, true, 1),
     VariantHolder<SeaNettleEntity.Companion.Type> {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 2
     }
 
-    override fun getDefaultDimensions(pose: Pose): EntityDimensions {
+    override fun getDimensions(pose: Pose): EntityDimensions {
         val scale = when (variant) {
             Type.COMPASS -> 0.6f
             else -> 1.0f
         }
-        return super.getDefaultDimensions(pose).scale(scale)
+        return super.getDimensions(pose).scale(scale)
     }
 
     companion object {
@@ -77,19 +78,20 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
     ): SpawnGroupData? {
-        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData)
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
 
         val variant = Type.entries.random(Random).id
         this.variant = Type.fromId(variant)
 
         if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
-            val fishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
-            if (fishCount > 0 && !level().isClientSide()) {
-                for (i in 0 until  fishCount) {
+            val jellyfishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
+            if (jellyfishCount > 0 && !level().isClientSide()) {
+                for (i in 0 until  jellyfishCount) {
                     val distance = 1.5f
-                    val entity = SeaNettleEntity(HybridAquaticEntityTypes.SEA_NETTLE.get(), this.level())
+                    val entity = SeaNettleEntity(HAEntityTypes.SEA_NETTLE.get(), this.level())
                     entity.variant = this.variant
                     entity.moveTo(
                         this.x + this.random.nextFloat() * distance,
@@ -103,20 +105,22 @@ class SeaNettleEntity(entityType: EntityType<out SeaNettleEntity>, world: Level)
         return spawnData
     }
 
-    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        builder.define(TYPE, 0)
-        super.defineSynchedData(builder)
+    //#region Data
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        nbt.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(compound)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        this.variant = Type.byName(nbt.getString("Type"))
-        super.readAdditionalSaveData(nbt)
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
     }
+    //#endregion
 
     override fun getVariant(): Type {
         return Type.fromId((entityData.get(TYPE) as Int))

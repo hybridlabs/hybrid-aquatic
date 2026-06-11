@@ -1,0 +1,18 @@
+{
+<<<<<<<< HEAD:neoforge/src/generated/resources/data/hybrid-aquatic/neoforge/biome_modifier/nomura_jellyfish_arctic_oceans.json
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid-aquatic:arctic_oceans",
+  "spawners": {
+    "type": "hybrid-aquatic:nomura_jellyfish",
+    "maxCount": 1,
+========
+  "type": "forge:add_spawns",
+  "biomes": "#hybrid_aquatic:deep_warm_oceans",
+  "spawners": {
+    "type": "hybrid_aquatic:ocean_sunfish",
+    "maxCount": 2,
+>>>>>>>> 1.20.1-biomes:forge/src/generated/resources/data/hybrid_aquatic/forge/biome_modifier/ocean_sunfish_deep_warm_oceans.json
+    "minCount": 1,
+    "weight": 1
+  }
+}
