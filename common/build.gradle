@@ -64,6 +64,10 @@ dependencies {
 
     //We load the Forge version of any included mod dependencies
     implementation "software.bernie.geckolib:geckolib-neoforge-${geckolib_version}"
+
+    implementation("com.terraformersmc:biolith-forge:${biolith_version}") {
+        exclude(group: "com.github.glitchfiend")
+    }
     // implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-${minecraft_version}"
 
 }
