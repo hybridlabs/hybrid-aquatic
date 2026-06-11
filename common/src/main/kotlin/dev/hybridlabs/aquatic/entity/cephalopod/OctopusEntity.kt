@@ -38,7 +38,6 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
@@ -49,7 +48,7 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
             Type.OCTOPUS -> OverlayTextures.TINT
         }
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -163,10 +162,10 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
         return OverlayTextures.byId(entityData.get(OverlayTexture)).serializedName
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(OverlayTexture, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(OverlayTexture, 0)
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

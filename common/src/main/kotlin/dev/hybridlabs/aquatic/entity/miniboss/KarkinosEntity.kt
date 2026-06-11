@@ -18,7 +18,6 @@ import net.minecraft.world.BossEvent
 import net.minecraft.world.Difficulty
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.LookControl
@@ -34,12 +33,12 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.PlayState
 
 class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
@@ -49,7 +48,7 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     var summonCooldown: Int = 0
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = KarkinosMoveControl(this)
         navigation = GroundPathNavigation(this, world)
         lookControl = LookControl(this)
@@ -121,10 +120,6 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         } else {
             noActionTime = 0
         }
-    }
-
-    override fun getMobType(): MobType {
-        return MobType.WATER
     }
 
     fun isFlipped(): Boolean {
@@ -208,10 +203,10 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(FLIPPED, false)
-        entityData.define(SUMMONING, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        defineSynchedData(builder)
+        builder.define(FLIPPED, false)
+        builder.define(SUMMONING, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

@@ -71,12 +71,7 @@ open class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings),
         return if (entity.isCrouching || context.isDescending) Shapes.empty() else SHAPE
     }
 
-    override fun isPathfindable(
-        state: BlockState,
-        level: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType,
-    ): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return true
     }
 

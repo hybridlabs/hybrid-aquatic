@@ -29,25 +29,25 @@ class ClownfishEntityModel : HAFishEntityModel<ClownfishEntity>("clownfish") {
 
     companion object {
         private val OCELLARIS_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_ocellaris.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_ocellaris.png")
         private val CLARKII_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_clarkii.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_clarkii.png")
         private val TOMATO_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_tomato.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_tomato.png")
         private val CINNAMON_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_cinnamon.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_cinnamon.png")
         private val WHITEBAND_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_whiteband.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_whiteband.png")
         private val PERCULA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_percula.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_percula.png")
         private val PINK_SKUNK_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_pink_skunk.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_pink_skunk.png")
         private val ORANGE_SKUNK_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_orange_skunk.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/clownfish/clownfish_orange_skunk.png")
 
         private val SMALL_CLOWNFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/clownfish/clownfish_small.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/clownfish/clownfish_small.geo.json")
         private val BIG_CLOWNFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/clownfish/clownfish_big.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/clownfish/clownfish_big.geo.json")
     }
 }

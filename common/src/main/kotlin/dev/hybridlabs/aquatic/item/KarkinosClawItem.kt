@@ -19,10 +19,9 @@ class KarkinosClawItem(settings: Properties) : Item(settings) {
         builder.put(
             Services.PLATFORM.reachAttribute,
             AttributeModifier(
-                UUID.fromString("592e9225-a554-42c9-9366-0fe5c53d9305"),
                 "Reach modifier",
                 3.0,
-                AttributeModifier.Operation.ADDITION
+                AttributeModifier.Operation.ADD_VALUE
             )
         )
         attributes = builder.build()

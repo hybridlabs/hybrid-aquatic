@@ -31,7 +31,7 @@ class LivingSpongeBlock(
 ) : BushBlock(settings), SimpleWaterloggedBlock {
 
     private var bubbleTimer = 0
-    val CODEC: MapCodec<TubeSpongeBlock> = simpleCodec(::TubeSpongeBlock)
+    val CODEC: MapCodec<LivingSpongeBlock> = simpleCodec(::LivingSpongeBlock)
 
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))

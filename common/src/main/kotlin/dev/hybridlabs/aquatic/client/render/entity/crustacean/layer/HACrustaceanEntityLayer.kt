@@ -25,9 +25,9 @@ class HACrustaceanEntityLayer<T: HACrustaceanEntity>(
         poseStack: PoseStack,
         animatable: T,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -40,6 +40,6 @@ class HACrustaceanEntityLayer<T: HACrustaceanEntity>(
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderType,
             bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1f, 1f, 1f, 1f)
+            1)
     }
 }

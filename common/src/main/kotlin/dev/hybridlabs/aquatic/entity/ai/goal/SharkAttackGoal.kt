@@ -110,7 +110,7 @@ open class SharkAttackGoal(
         val livingEntity = shark.target
         if (livingEntity != null) {
             shark.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
-            val d0 = shark.getPerceivedTargetDistanceSquareForMeleeAttack(livingEntity)
+            val d0 = shark.isWithinMeleeAttackRange(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((this.followingTargetEvenIfNotSeen || shark.sensing.hasLineOfSight(livingEntity)) &&

@@ -57,10 +57,9 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -103,9 +102,9 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(TYPE, 0)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        defineSynchedData(builder)
+        builder.define(TYPE, 0)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

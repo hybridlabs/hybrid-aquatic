@@ -21,11 +21,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 import java.util.function.IntFunction
 
 class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
@@ -41,9 +41,9 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
     }
 
     //#region Data
-    override fun defineSynchedData() {
-        entityData.define(OverlayTexture, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(OverlayTexture, 0)
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -113,13 +113,12 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val overlayID = world.random.nextIntBetweenInclusive(0, OverlayTextures.entries.size - 1)
         overlayTexture = OverlayTextures.byId(overlayID)
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     private var overlayTexture

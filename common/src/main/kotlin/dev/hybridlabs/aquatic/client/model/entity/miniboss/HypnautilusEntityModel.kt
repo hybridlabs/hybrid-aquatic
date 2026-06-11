@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.miniboss
 import dev.hybridlabs.aquatic.entity.miniboss.HypnautilusEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class HypnautilusEntityModel : HAMinionEntityModel<HypnautilusEntity>("hypnautilus") {
 

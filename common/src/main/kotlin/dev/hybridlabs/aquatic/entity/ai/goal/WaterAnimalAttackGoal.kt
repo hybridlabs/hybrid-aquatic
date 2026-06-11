@@ -105,7 +105,7 @@ open class WaterAnimalAttackGoal(
         val livingEntity = waterAnimal.target
         if (livingEntity != null) {
             waterAnimal.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
-            val d0 = waterAnimal.getPerceivedTargetDistanceSquareForMeleeAttack(livingEntity)
+            val d0 = waterAnimal.isWithinMeleeAttackRange(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((this.followingTargetEvenIfNotSeen || waterAnimal.sensing.hasLineOfSight(livingEntity)) &&

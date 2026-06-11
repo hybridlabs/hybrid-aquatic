@@ -4,7 +4,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.control.MoveControl
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -125,7 +125,7 @@ open class SmoothStrafeSwimmingMoveControl(
                     Mth.floor(this.mob.x + relativeX.toDouble()),
                     this.mob.blockY,
                     Mth.floor(this.mob.z + relativeZ.toDouble())
-                ) == BlockPathTypes.BLOCKED
+                ) == PathType.BLOCKED
             ) {
                 return false
             }

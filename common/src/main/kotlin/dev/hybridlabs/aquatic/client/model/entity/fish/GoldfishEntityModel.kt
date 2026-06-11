@@ -44,38 +44,38 @@ class GoldfishEntityModel : HAFishEntityModel<GoldfishEntity>("goldfish") {
 
     companion object {
         private val BABY_GOLDFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/goldfish/baby_goldfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/baby_goldfish.png")
         private val COMMON_GOLDFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/goldfish/common_goldfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/common_goldfish.png")
         private val TELESCOPE_GOLDFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/goldfish/telescope_goldfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/telescope_goldfish.png")
         private val BUBBLE_EYE_GOLDFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/goldfish/bubble_eye_goldfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/bubble_eye_goldfish.png")
         private val RYUKIN_GOLDFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/goldfish/ryukin_goldfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/ryukin_goldfish.png")
         private val FANTAIL_GOLDFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/goldfish/fantail_goldfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/fantail_goldfish.png")
         private val SHUBUNKIN_GOLDFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/goldfish/shubunkin_goldfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/shubunkin_goldfish.png")
 
         private val BABY_CARP_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/goldfish/baby_goldfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/baby_goldfish.geo.json")
         private val COMMON_GOLDFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/goldfish/common_goldfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/common_goldfish.geo.json")
         private val TELESCOPE_GOLDFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/goldfish/telescope_goldfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/telescope_goldfish.geo.json")
         private val BUBBLE_EYE_GOLDFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/goldfish/bubble_eye_goldfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/bubble_eye_goldfish.geo.json")
         private val RYUKIN_GOLDFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/goldfish/ryukin_goldfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/ryukin_goldfish.geo.json")
         private val FANTAIL_GOLDFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/goldfish/fantail_goldfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/fantail_goldfish.geo.json")
         private val SHUBUNKIN_GOLDFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/goldfish/shubunkin_goldfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/shubunkin_goldfish.geo.json")
 
         private val COMMON_GOLDFISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/goldfish/common_goldfish.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/goldfish/common_goldfish.animation.json")
         private val GOLDFISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/goldfish/goldfish.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/goldfish/goldfish.animation.json")
     }
 }

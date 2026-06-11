@@ -19,11 +19,10 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "DEPRECATION", "UNUSED_PARAMETER")
@@ -34,10 +33,10 @@ open class HACritterEntity(
     private val factory = GeckoLibUtil.createInstanceCache(this)
 
     override fun createNavigation(level: Level): PathNavigation {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, -1.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER_BORDER, -1.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         moveControl = MoveControl(this)
 
@@ -55,10 +54,9 @@ open class HACritterEntity(
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun getBreedOffspring(

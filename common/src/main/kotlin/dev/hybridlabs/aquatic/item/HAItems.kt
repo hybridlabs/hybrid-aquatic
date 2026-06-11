@@ -228,6 +228,7 @@ object HAItems {
         "moon_jellyfish_hat"
     ) {
         MOON_JELLYFISH_ARMOR_FACTORY.create(
+            ArmorItem.TYPE.HELMET,
             Item.Properties().stacksTo(1)
         )
     }
@@ -787,8 +788,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -802,8 +802,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -817,8 +816,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -832,8 +830,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -848,8 +845,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -863,8 +859,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -879,8 +874,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -894,8 +888,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -909,8 +902,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -924,8 +916,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -939,8 +930,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.5F)
-                        .meat()
+                        .saturationModifier(0.5F)
                         .build()
                 )
         )
@@ -954,8 +944,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -969,8 +958,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(5)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -984,8 +972,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -999,8 +986,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(5)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -1014,8 +1000,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(8)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1029,8 +1014,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -1044,8 +1028,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -1059,8 +1042,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1074,8 +1056,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1089,8 +1070,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -1104,8 +1084,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(8)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1119,8 +1098,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.6F)
-                        .meat()
+                        .saturationModifier(0.6F)
                         .build()
                 )
         )
@@ -1134,8 +1112,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1149,8 +1126,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1164,8 +1140,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1179,8 +1154,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1194,8 +1168,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1209,8 +1182,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1224,8 +1196,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1239,8 +1210,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1254,8 +1224,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
                         .build()
                 )
@@ -1270,8 +1239,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1285,8 +1253,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1300,8 +1267,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1313,7 +1279,10 @@ object HAItems {
         Item(
             Item.Properties()
                 .food(
-                    FoodProperties.Builder().nutrition(1).saturationMod(0.2F).meat().build()
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationModifier(0.2F)
+                        .build()
                 )
         )
     }
@@ -1326,8 +1295,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1341,8 +1309,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1356,8 +1323,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1371,8 +1337,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1386,8 +1351,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1401,8 +1365,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1416,8 +1379,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1431,8 +1393,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1446,8 +1407,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1461,8 +1421,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1476,8 +1435,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1491,9 +1449,8 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
+                        .saturationModifier(0.2F)
                         .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1507,8 +1464,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1522,8 +1478,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1537,8 +1492,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1552,8 +1506,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1567,8 +1520,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1582,8 +1534,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.2F)
-                        .meat()
+                        .saturationModifier(0.2F)
                         .build()
                 )
         )
@@ -1597,9 +1548,8 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1613,9 +1563,8 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1629,9 +1578,8 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1645,8 +1593,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1660,8 +1607,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1675,9 +1621,8 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
+                        .saturationModifier(0.4F)
                         .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
-                        .meat()
                         .build()
                 )
         )
@@ -1691,8 +1636,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1706,8 +1650,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1721,8 +1664,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1736,8 +1678,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1751,8 +1692,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1766,8 +1706,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1781,8 +1720,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1796,8 +1734,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1811,8 +1748,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(0.4F)
-                        .meat()
+                        .saturationModifier(0.4F)
                         .build()
                 )
         )
@@ -1826,8 +1762,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1841,8 +1776,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1856,8 +1790,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1871,8 +1804,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )
@@ -1886,8 +1818,7 @@ object HAItems {
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
-                        .saturationMod(0.8F)
-                        .meat()
+                        .saturationModifier(0.8F)
                         .build()
                 )
         )

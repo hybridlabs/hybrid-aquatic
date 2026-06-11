@@ -7,10 +7,10 @@ class WrasseEntityModel : HAFishEntityModel<WrasseEntity>("wrasse") {
 
     companion object {
         private val CALIFORNIA_SHEEPSHEAD_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/wrasse/california_sheepshead.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/wrasse/california_sheepshead.png")
 
         private val CALIFORNIA_SHEEPSHEAD_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/wrasse/california_sheepshead.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/wrasse/california_sheepshead.geo.json")
     }
 
     override fun getTextureResource(animatable: WrasseEntity): ResourceLocation {

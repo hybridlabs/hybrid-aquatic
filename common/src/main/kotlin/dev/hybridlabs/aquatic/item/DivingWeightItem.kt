@@ -11,13 +11,13 @@ class DivingWeightItem(settings: Properties) : Item(settings) {
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
+        context: TooltipContext,
         lines: MutableList<Component>,
-        context: TooltipFlag
+        tooltipFlag: TooltipFlag
     ) {
         val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
 
         lines.add(text)
-        super.appendHoverText(stack, level, lines, context)
+        super.appendHoverText(stack, context, lines, context)
     }
 }

@@ -44,9 +44,8 @@ class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) :
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
-        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData)
 
         val variant = Type.entries.random(Random).id
         this.variant = Type.fromId(variant)
@@ -126,9 +125,9 @@ class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) :
         }
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(TYPE, 0)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        defineSynchedData(builder)
+        builder.define(TYPE, 0)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

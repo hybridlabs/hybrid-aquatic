@@ -1,9 +1,9 @@
-package dev.hybridlabs.aquatic.item.armor
+package dev.hybridlabs.aquatic.item.cosmetic
 
 import net.minecraft.world.item.Item
 import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
 abstract class ManglerfishCosmeticItem(settings: Properties) :

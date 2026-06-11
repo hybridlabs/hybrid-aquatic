@@ -9,11 +9,11 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.animal.Turtle
 import net.minecraft.world.level.Level
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 
 class DungenessCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
     HACrustaceanEntity(entityType, world, true) {

@@ -15,19 +15,15 @@ import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 
 class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     HAMinionEntity(type, world) {
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)

@@ -25,13 +25,13 @@ class PlecoEntityModel : HAFishEntityModel<PlecoEntity>("pleco") {
 
     companion object {
         private val COMMON_PLECO_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/pleco/common_pleco.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/pleco/common_pleco.png")
         private val BRISTLENOSE_PLECO_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/pleco/bristlenose_pleco.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/pleco/bristlenose_pleco.png")
 
         private val COMMON_PLECO_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/pleco/common_pleco.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/pleco/common_pleco.geo.json")
         private val BRISTLENOSE_PLECO_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/pleco/bristlenose_pleco.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/pleco/bristlenose_pleco.geo.json")
     }
 }

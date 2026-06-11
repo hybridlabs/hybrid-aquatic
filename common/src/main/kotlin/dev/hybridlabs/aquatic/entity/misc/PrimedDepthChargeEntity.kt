@@ -84,8 +84,8 @@ open class PrimedDepthChargeEntity(
     }
 
     //#region Data
-    override fun defineSynchedData() {
-        this.entityData.define<Int?>(DATA_FUSE_ID, 100)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define<Int?>(DATA_FUSE_ID, 100)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -99,10 +99,6 @@ open class PrimedDepthChargeEntity(
 
     override fun getOwner(): LivingEntity? {
         return this.owner
-    }
-
-    override fun getEyeHeight(pose: Pose, size: EntityDimensions): Float {
-        return 0.15f
     }
 
     var fuse: Int

@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 import dev.hybridlabs.aquatic.entity.fish.GardenEelEntity
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class GardenEelEntityModel : HAFishEntityModel<GardenEelEntity>("garden_eel") {
 

@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
     override fun getRenderType(animatable: SeadragonEntity, texture: ResourceLocation): RenderType {
@@ -53,24 +53,24 @@ class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
 
     companion object {
         private val LEAFY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/seadragon/leafy_seadragon.png")
         private val WEEDY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/seadragon/weedy_seadragon.png")
         private val RUBY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/seadragon/ruby_seadragon.png")
 
         private val LEAFY_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/seadragon/leafy_seadragon.geo.json")
         private val WEEDY_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/seadragon/weedy_seadragon.geo.json")
         private val RUBY_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/seadragon/ruby_seadragon.geo.json")
 
         private val LEAFY_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_leafy.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_leafy.animation.json")
         private val WEEDY_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_weedy.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_weedy.animation.json")
         private val RUBY_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_ruby.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/seadragon/seadragon_ruby.animation.json")
     }
 }

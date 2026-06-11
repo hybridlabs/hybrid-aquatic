@@ -20,12 +20,12 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
 
 @Suppress("unused", "DEPRECATION")
 class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
@@ -38,9 +38,9 @@ class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
     )
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
         moveControl = MoveControl(this)
         lookControl = LookControl(this)
         navigation = GroundPathNavigation(this, world)

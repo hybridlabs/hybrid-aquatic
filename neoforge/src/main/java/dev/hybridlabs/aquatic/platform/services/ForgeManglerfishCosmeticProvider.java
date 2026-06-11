@@ -1,8 +1,7 @@
 package dev.hybridlabs.aquatic.platform.services;
 
 import dev.hybridlabs.aquatic.item.armor.ForgeManglerfishCosmeticItem;
-import dev.hybridlabs.aquatic.item.armor.ManglerfishCosmeticItem;
-import net.minecraft.world.item.ArmorItem;
+import dev.hybridlabs.aquatic.item.cosmetic.ManglerfishCosmeticItem;
 import net.minecraft.world.item.Item;
 
 public class ForgeManglerfishCosmeticProvider implements ManglerfishCosmeticProvider {

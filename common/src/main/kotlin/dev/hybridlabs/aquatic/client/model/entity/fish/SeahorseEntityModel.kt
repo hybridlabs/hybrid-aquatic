@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
 
@@ -34,12 +34,12 @@ class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
 
     companion object {
         private val COMMON_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_common.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_common.png")
         private val PYGMY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_pygmy.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_pygmy.png")
         private val THORNY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_thorny.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_thorny.png")
         private val BIG_BELLY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_big_belly.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/seahorse/seahorse_big_belly.png")
     }
 }

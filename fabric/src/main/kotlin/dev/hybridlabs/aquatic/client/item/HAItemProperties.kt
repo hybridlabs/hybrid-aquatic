@@ -8,7 +8,7 @@ object HAItemProperties {
     init {
         FabricModelPredicateProviderRegistry.register(
             HAItems.OMINOUS_CONCH.get(),
-            ResourceLocation("tooting")
+            ResourceLocation.fromNamespaceAndPath("tooting")
         ) { stack, _, entity, _ ->
             if (entity != null && entity.isUsingItem && entity.useItem == stack) 1.0f else 0.0f
         }

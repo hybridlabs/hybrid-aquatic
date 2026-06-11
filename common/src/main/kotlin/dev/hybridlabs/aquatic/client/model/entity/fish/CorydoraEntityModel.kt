@@ -18,10 +18,10 @@ class CorydoraEntityModel : HAFishEntityModel<CorydoraEntity>("corydora") {
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/corydora/corydora_albino.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/corydora/corydora_panda.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/corydora/corydora_bronze.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/corydora/corydora_nattereri.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/corydora/corydora_albino.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/corydora/corydora_panda.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/corydora/corydora_bronze.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/corydora/corydora_nattereri.png"),
         )
     }
 }

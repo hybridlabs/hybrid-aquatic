@@ -8,9 +8,9 @@ class HammerheadSharkEntityModel : HASharkEntityModel<HammerheadSharkEntity>("ha
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid_aquatic", "textures/entity/shark/hammerhead_shark/hammerhead_shark.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/shark/hammerhead_shark/hammerhead_shark_brown.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/shark/hammerhead_shark/hammerhead_shark_olive.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/shark/hammerhead_shark/hammerhead_shark.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/shark/hammerhead_shark/hammerhead_shark_brown.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/shark/hammerhead_shark/hammerhead_shark_olive.png")
         )
     }
 

@@ -46,9 +46,9 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
     }
 
     //#region Data
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -66,13 +66,12 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
         this.variant = selectedType
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {

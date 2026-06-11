@@ -9,22 +9,22 @@ class HermitCrabEntityModel : HACrustaceanEntityModel<HermitCrabEntity>("hermit_
 
     companion object {
         private val SHELL_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_shell.png")
         private val OMINOUS_CONCH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_ominous_conch.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_ominous_conch.png")
         private val BLOCK_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_block.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab_block.png")
         private val NONE_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/hermit_crab/hermit_crab.png")
 
         private val SHELL_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab_shell.geo.json")
         private val OMINOUS_CONCH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab_ominous_conch.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab_ominous_conch.geo.json")
         private val BLOCK_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab_block.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab_block.geo.json")
         private val NONE_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/crustacean/hermit_crab/hermit_crab.geo.json")
     }
 
     override fun getTextureResource(animatable: HermitCrabEntity): ResourceLocation {

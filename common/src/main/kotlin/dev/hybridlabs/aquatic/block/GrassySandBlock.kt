@@ -17,12 +17,7 @@ import net.minecraft.world.level.block.state.BlockState
 class GrassySandBlock(properties: Properties) :
     FallingBlock(properties), BonemealableBlock {
 
-    override fun isValidBonemealTarget(
-        level: LevelReader,
-        pos: BlockPos,
-        state: BlockState,
-        isClient: Boolean
-    ): Boolean {
+    override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState): Boolean {
         return level.getBlockState(pos.above()).isAir
     }
 

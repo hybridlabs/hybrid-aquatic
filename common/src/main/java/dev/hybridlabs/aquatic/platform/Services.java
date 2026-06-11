@@ -23,6 +23,7 @@ public class Services {
     public static final GoldHatxolotlArmorProvider GOLD_HATXOLOTL_ARMOR_FACTORY = load(GoldHatxolotlArmorProvider.class);
     public static final BlueHatxolotlArmorProvider BLUE_HATXOLOTL_ARMOR_FACTORY = load(BlueHatxolotlArmorProvider.class);
     public static final CyanHatxolotlArmorProvider CYAN_HATXOLOTL_ARMOR_FACTORY = load(CyanHatxolotlArmorProvider.class);    public static final DivingArmorProvider DIVING_ARMOR_FACTORY = load(DivingArmorProvider.class);
+    public static final DivingArmorProvider DIVING_ARMOR_FACTORY = load(DivingArmorProvider.class);
     public static final ReinforcedDivingArmorProvider REINFORCED_DIVING_ARMOR_FACTORY = load(ReinforcedDivingArmorProvider.class);
     public static final GlowingDivingArmorProvider GLOWING_DIVING_ARMOR_FACTORY = load(GlowingDivingArmorProvider.class);
     public static final SeashellArmorProvider SEASHELL_ARMOR_FACTORY = load(SeashellArmorProvider.class);

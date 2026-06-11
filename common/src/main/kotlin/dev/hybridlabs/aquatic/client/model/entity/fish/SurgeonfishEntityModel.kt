@@ -30,31 +30,31 @@ class SurgeonfishEntityModel : HAFishEntityModel<SurgeonfishEntity>("surgeonfish
 
     companion object {
         private val BLUE_TANG_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_blue_tang.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_blue_tang.png")
         private val POWDER_BLUE_TANG_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_powder_blue_tang.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_powder_blue_tang.png")
         private val YELLOW_TANG_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_yellow_tang.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_yellow_tang.png")
         private val LINED_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_lined.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_lined.png")
         private val ORANGESHOULDER_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_orangeshoulder.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_orangeshoulder.png")
         private val SOHAL_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_sohal.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_sohal.png")
         private val UNICORNFISH_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_unicornfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/surgeonfish/surgeonfish_unicornfish.png")
 
         private val BLUE_TANG_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_blue_tang.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_blue_tang.geo.json")
         private val POWDER_BLUE_TANG_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_powder_blue_tang.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_powder_blue_tang.geo.json")
         private val YELLOW_TANG_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_yellow_tang.geo.json")
-        private val LINED_MODEL = ResourceLocation("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_lined.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_yellow_tang.geo.json")
+        private val LINED_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_lined.geo.json")
         private val ORANGESHOULDER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_orangeshoulder.geo.json")
-        private val SOHAL_MODEL = ResourceLocation("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_sohal.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_orangeshoulder.geo.json")
+        private val SOHAL_MODEL = ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_sohal.geo.json")
         private val UNICORNFISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_unicornfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/surgeonfish/surgeonfish_unicornfish.geo.json")
     }
 }

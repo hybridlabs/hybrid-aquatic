@@ -6,33 +6,33 @@ import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class OtterEntityModel : HAMammalEntityModel<OtterEntity>("otter") {
 
     companion object {
         private val RIVER_OTTER_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/otter/river_otter.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/otter/river_otter.png")
         private val BABY_RIVER_OTTER_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/otter/baby_river_otter.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/otter/baby_river_otter.png")
         private val SEA_OTTER_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/otter/sea_otter.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/otter/sea_otter.png")
         private val BABY_SEA_OTTER_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/otter/baby_sea_otter.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/otter/baby_sea_otter.png")
 
         private val RIVER_OTTER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/mammal/otter/river_otter.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/otter/river_otter.geo.json")
         private val BABY_RIVER_OTTER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/mammal/otter/baby_river_otter.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/otter/baby_river_otter.geo.json")
         private val SEA_OTTER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/mammal/otter/sea_otter.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/otter/sea_otter.geo.json")
         private val BABY_SEA_OTTER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/mammal/otter/baby_sea_otter.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/otter/baby_sea_otter.geo.json")
 
         private val RIVER_OTTER_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/mammal/otter/river_otter.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/mammal/otter/river_otter.animation.json")
         private val SEA_OTTER_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/mammal/otter/sea_otter.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/mammal/otter/sea_otter.animation.json")
     }
 
     override fun getTextureResource(animatable: OtterEntity): ResourceLocation {

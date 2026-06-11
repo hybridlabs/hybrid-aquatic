@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.block
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.tags.FluidTags
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
@@ -35,7 +36,7 @@ class TallSeaLettuceBlock(settings: Properties) : DoublePlantBlock(settings), Li
         return floor.isFaceSturdy(world, pos, Direction.UP) && !floor.`is`(Blocks.MAGMA_BLOCK) && !floor.`is`(HABlocks.AERATED_SAND.get()) && !floor.`is`(HABlocks.BUBBLE_GEYSER.get())
     }
 
-    override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getCloneItemStack(level: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
         return ItemStack(HABlocks.SEA_LETTUCE.get())
     }
 
@@ -65,7 +66,13 @@ class TallSeaLettuceBlock(settings: Properties) : DoublePlantBlock(settings), Li
         return Fluids.WATER.getSource(false)
     }
 
-    override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canPlaceLiquid(
+        p0: Player?,
+        world: BlockGetter,
+        pos: BlockPos,
+        state: BlockState,
+        fluid: Fluid
+    ): Boolean {
         return false
     }
 

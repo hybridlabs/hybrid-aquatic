@@ -25,14 +25,13 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.monster.Monster.isDarkEnoughToSpawn
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -42,9 +41,9 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     open val inkConfig: InkConfiguration? = null
 
     override fun createNavigation(level: Level): PathNavigation {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         moveControl = SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, false)
         lookControl = SmoothSwimmingLookControl(this, 10)
@@ -65,7 +64,7 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
     //#region Data
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         super.defineSynchedData(builder)
-        entityData.define(ATTEMPT_ATTACK, false)
+        builder.define(ATTEMPT_ATTACK, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -81,11 +80,10 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         this.xRot = 0.0f
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {

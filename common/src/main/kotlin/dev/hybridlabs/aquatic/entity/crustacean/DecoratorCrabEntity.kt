@@ -15,6 +15,7 @@ import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.VariantHolder
@@ -49,7 +50,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
                 this.coralTimer = 3600
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0f, 1.0f)
                 this.gameEvent(GameEvent.SHEAR, player)
-                itemStack.hurtAndBreak(1, player) { it.broadcastBreakEvent(hand) }
+                itemStack.hurtAndBreak(1, player, getSlotForHand(hand))
                 spawnAtLocation(ItemStack(HAItems.CORAL_CHUNK.get()))
                 return InteractionResult.SUCCESS
             }
@@ -70,11 +71,10 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -127,10 +127,10 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
     }
 
     //#region Data
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(CORAL_TIMER, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(CORAL_TIMER, 0)
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

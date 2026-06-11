@@ -42,13 +42,13 @@ import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.levelgen.Heightmap
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.RawAnimation
 import java.util.*
 import java.util.function.IntFunction
 
@@ -67,10 +67,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
     )
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER_BORDER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         moveControl = swimControl
         lookControl = OtterLookControl(this)
@@ -131,11 +131,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         return this.maxAirSupply
     }
 
-    /* Can't breathe underwater, but can't drown, either. */
-    override fun canBreatheUnderwater(): Boolean {
-        return false
-    }
-
     override fun isPushedByFluid(): Boolean {
         return false
     }
@@ -171,7 +166,6 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
@@ -181,7 +175,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
             this.setAge(-6000)
         }
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     //#region SFX
@@ -360,11 +354,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         }
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(HUNGER, MAX_HUNGER)
-        entityData.define(ACTION, 0) // OtterAction.IDLE
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(HUNGER, MAX_HUNGER)
+        builder.define(ACTION, 0) // OtterAction.IDLE
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -417,7 +411,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         otter,
         speedModifier, followingTargetEvenIfNotSeen
     ) {
-        override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
+        override fun checkAndPerformAttack(enemy: LivingEntity) {
             val d0 = this.getAttackReachSqr(enemy)
             if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
                 this.resetAttackCooldown()

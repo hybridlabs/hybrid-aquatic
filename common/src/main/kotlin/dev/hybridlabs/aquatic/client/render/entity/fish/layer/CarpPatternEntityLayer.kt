@@ -24,9 +24,9 @@ class CarpPatternEntityLayer(
         poseStack: PoseStack,
         animatable: CarpEntity,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -39,6 +39,6 @@ class CarpPatternEntityLayer(
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, patternRenderType,
             bufferSource.getBuffer(patternRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1f, 1f, 1f, 1f)
+            1)
     }
 }

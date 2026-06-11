@@ -10,19 +10,17 @@ import net.minecraft.world.level.Level
 
 class CoralHoeItem(settings: Properties) : HoeItem(
     HAToolMaterials.CORAL,
-    1,
-    -2.0f,
     settings) {
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
+        context: TooltipContext,
         tooltip: MutableList<Component>,
         options: TooltipFlag
     ) {
         val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
 
         tooltip.add(text)
-        super.appendHoverText(stack, level, tooltip, options)
+        super.appendHoverText(stack, context, tooltip, options)
     }
 }

@@ -115,7 +115,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
         builder.add(WORMS, WATERLOGGED)
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, isClient: Boolean): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
         return false
     }
 
@@ -126,7 +126,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
     override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

@@ -8,21 +8,21 @@ class LobsterEntityModel : HACrustaceanEntityModel<LobsterEntity>("lobster") {
 
     companion object {
         private val clawlessTextures = listOf(
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_california_spiny.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_ornate_spiny.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_california_spiny.png")
         )
 
         private val clawedTextures = listOf(
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_american.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_american.png")
         )
 
         private val REGAL_SLIPPER_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_regal_slipper.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/lobster/lobster_regal_slipper.png")
 
         private val LOBSTER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/crustacean/lobster/lobster.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/crustacean/lobster/lobster.geo.json")
         private val SLIPPER_LOBSTER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/crustacean/lobster/lobster_slipper.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/crustacean/lobster/lobster_slipper.geo.json")
     }
 
     override fun getTextureResource(animatable: LobsterEntity): ResourceLocation {

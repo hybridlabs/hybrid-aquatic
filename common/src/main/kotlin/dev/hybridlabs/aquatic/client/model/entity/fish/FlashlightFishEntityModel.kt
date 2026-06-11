@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.PartNames
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import kotlin.math.abs
 
 class FlashlightFishEntityModel : HAFishEntityModel<FlashlightFishEntity>("flashlight_fish") {
@@ -15,18 +15,18 @@ class FlashlightFishEntityModel : HAFishEntityModel<FlashlightFishEntity>("flash
 
     companion object {
         private val ONE_FISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish.geo.json")
         private val TWO_FISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish_two.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish_two.geo.json")
         private val THREE_FISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish_three.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/flashlight_fish/flashlight_fish_three.geo.json")
 
         private val ONE_FISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish.animation.json")
         private val TWO_FISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_two.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_two.animation.json")
         private val THREE_FISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_three.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/flashlight_fish/flashlight_fish_three.animation.json")
     }
 
     override fun getModelResource(animatable: FlashlightFishEntity): ResourceLocation {

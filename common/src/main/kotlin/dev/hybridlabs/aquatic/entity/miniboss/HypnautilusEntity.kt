@@ -28,13 +28,13 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
 import java.util.*
 
 class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
@@ -44,7 +44,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     var prevOwner: UUID? = null
 
     init {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
         moveControl = SmoothSwimmingMoveControl(this, 85, 5, 0.02F, 0.1f, true)
         lookControl = SmoothSwimmingLookControl(this, 10)
         navigation = WaterBoundPathNavigation(this, world)
@@ -110,9 +110,9 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         setHypnotizing(false)
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(HYPNOTIZING, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        defineSynchedData(builder)
+        builder.define(HYPNOTIZING, false)
     }
 
     override fun addAdditionalSaveData(nbt: CompoundTag) {

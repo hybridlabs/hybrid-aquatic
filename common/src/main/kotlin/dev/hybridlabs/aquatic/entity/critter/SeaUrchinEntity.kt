@@ -31,11 +31,10 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
         this.refreshDimensions()
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun registerGoals() {
@@ -108,9 +107,9 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
         return -5
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

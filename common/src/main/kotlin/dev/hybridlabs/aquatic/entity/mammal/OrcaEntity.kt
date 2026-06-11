@@ -89,7 +89,6 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEnti
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.airSupply = this.maxAirSupply
         this.yRot = 0.0f
@@ -110,7 +109,7 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEnti
             this.setAge(-6000)
         }
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -265,11 +264,11 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEnti
     }
 
     //#region Data
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(EyeSpotTexture, 0)
-        entityData.define(SaddleTexture, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(EyeSpotTexture, 0)
+        builder.define(SaddleTexture, 0)
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

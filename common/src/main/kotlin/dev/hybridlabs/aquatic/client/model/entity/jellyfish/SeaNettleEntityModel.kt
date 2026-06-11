@@ -11,19 +11,19 @@ class SeaNettleEntityModel : HAJellyfishEntityModel<SeaNettleEntity>("sea_nettle
 
     companion object {
         private val PACIFIC_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/pacific_sea_nettle.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/pacific_sea_nettle.png")
         private val COMPASS_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/compass_jellyfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/compass_jellyfish.png")
 
         private val PACIFIC_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/jellyfish/sea_nettle/sea_nettle.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/jellyfish/sea_nettle/sea_nettle.geo.json")
         private val COMPASS_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/jellyfish/sea_nettle/compass_jellyfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/jellyfish/sea_nettle/compass_jellyfish.geo.json")
 
         private val PACIFIC_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/sea_nettle.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/sea_nettle.animation.json")
         private val COMPASS_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/compass_jellyfish.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/compass_jellyfish.animation.json")
     }
     override fun getTextureResource(animatable: SeaNettleEntity): ResourceLocation {
         return when (animatable.variant) {

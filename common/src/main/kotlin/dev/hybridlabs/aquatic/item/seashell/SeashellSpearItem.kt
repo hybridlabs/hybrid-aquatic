@@ -6,23 +6,20 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.SwordItem
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 
 class SeashellSpearItem(settings: Properties) : SwordItem(
     HAToolMaterials.SEASHELL,
-    2,
-    -2.4f,
     settings) {
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
+        context: TooltipContext,
         tooltip: MutableList<Component>,
         options: TooltipFlag
     ) {
         val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
 
         tooltip.add(text)
-        super.appendHoverText(stack, level, tooltip, options)
+        super.appendHoverText(stack, context, tooltip, options)
     }
 }

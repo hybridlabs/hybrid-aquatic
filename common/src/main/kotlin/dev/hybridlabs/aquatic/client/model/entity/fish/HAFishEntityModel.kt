@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 import kotlin.math.abs
 

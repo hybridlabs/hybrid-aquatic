@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -58,12 +60,7 @@ class ShortRedAlgaeBlock(settings: Properties?) :
         return blockState
     }
 
-    override fun isValidBonemealTarget(
-        world: LevelReader,
-        pos: BlockPos,
-        state: BlockState,
-        isClient: Boolean,
-    ): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
         return true
     }
 
@@ -80,7 +77,13 @@ class ShortRedAlgaeBlock(settings: Properties?) :
         world.setBlock(pos, blockState, 2)
     }
 
-    override fun canPlaceLiquid(world: BlockGetter, pos: BlockPos, state: BlockState, fluid: Fluid): Boolean {
+    override fun canPlaceLiquid(
+        p0: Player?,
+        world: BlockGetter,
+        pos: BlockPos,
+        state: BlockState,
+        fluid: Fluid
+    ): Boolean {
         return false
     }
 
@@ -93,7 +96,12 @@ class ShortRedAlgaeBlock(settings: Properties?) :
         return false
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<ShortRedAlgaeBlock> = simpleCodec(::ShortRedAlgaeBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

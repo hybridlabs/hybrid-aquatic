@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -97,7 +98,12 @@ class WaterHyacinthBlock(settings: Properties) : BushBlock(settings), SimpleWate
         builder.add(WATERLOGGED)
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<WaterHyacinthBlock> = simpleCodec(::WaterHyacinthBlock)
         private val SHAPE: VoxelShape = box(3.0, 14.0, 3.0, 13.0, 16.0, 13.0)
     }
 }

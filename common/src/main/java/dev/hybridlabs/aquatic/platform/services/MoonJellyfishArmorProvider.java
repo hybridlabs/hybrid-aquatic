@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.platform.services;
 
-import dev.hybridlabs.aquatic.item.cosmetic.MoonJellyfishHatItem;
+import dev.hybridlabs.aquatic.item.armor.MoonJellyfishArmorItem;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 
 public interface MoonJellyfishArmorProvider {
-    MoonJellyfishHatItem create(Item.Properties settings);
+    MoonJellyfishArmorItem create(ArmorItem.Type type, Item.Properties settings);
 }

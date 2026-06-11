@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.item.GeoRenderProviderStorage
+import dev.hybridlabs.aquatic.item.cosmetic.ManglerfishCosmeticItem
 import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer
 import java.util.function.Supplier

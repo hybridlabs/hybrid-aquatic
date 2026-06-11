@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -23,9 +23,9 @@ abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
     private var attackTick = 0
 
     //#region Data
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(ATTEMPT_ATTACK, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        defineSynchedData(builder)
+        builder.define(ATTEMPT_ATTACK, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -50,10 +50,6 @@ abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return false
-    }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
     }
 
     override fun isPreventingPlayerRest(player: Player): Boolean {

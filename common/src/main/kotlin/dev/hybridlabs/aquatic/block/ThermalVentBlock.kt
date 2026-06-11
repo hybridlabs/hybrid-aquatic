@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -17,6 +18,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.BushBlock
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
@@ -80,12 +82,7 @@ class ThermalVentBlock(
         )
     }
 
-    override fun isPathfindable(
-        state: BlockState,
-        world: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType,
-    ): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
@@ -217,7 +214,12 @@ class ThermalVentBlock(
         builder.add(THICKNESS, WATERLOGGED)
     }
 
+    override fun codec(): MapCodec<out ThermalVentBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<ThermalVentBlock> = simpleCodec(::ThermalVentBlock)
         val THICKNESS: EnumProperty<ThermalVentPosition> = EnumProperty.create(
             "thickness",
             ThermalVentPosition::class.java,

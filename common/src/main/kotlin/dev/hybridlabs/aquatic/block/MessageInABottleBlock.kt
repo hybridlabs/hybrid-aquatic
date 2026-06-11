@@ -51,10 +51,10 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         }
     }
 
-    override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
-        val blockEntity = world.getBlockEntity(pos)
+    override fun getCloneItemStack(level: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
+        val blockEntity = level.getBlockEntity(pos)
         if (blockEntity !is MessageInABottleBlockEntity) {
-            return super.getCloneItemStack(world, pos, state)
+            return super.getCloneItemStack(level, pos, state)
         }
         return createItemStack(blockEntity)
     }
@@ -121,7 +121,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         return InteractionResult.PASS
     }
 
-    override fun isPathfindable(state: BlockState, world: BlockGetter, pos: BlockPos, type: PathComputationType): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

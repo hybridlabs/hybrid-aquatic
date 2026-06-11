@@ -32,17 +32,17 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.entity.animal.IronGolem
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.animation.RawAnimation
-import software.bernie.geckolib.core.`object`.PlayState
-import software.bernie.geckolib.util.ClientUtils
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.util.ClientUtil
 import java.lang.ref.WeakReference
 import java.util.Collections.synchronizedList
 import java.util.function.Predicate
@@ -71,9 +71,9 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     //#endregion
 
     override fun createNavigation(level: Level): PathNavigation {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         moveControl = SmoothStrafeSwimmingMoveControl(
             this,
@@ -165,15 +165,11 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         }
     }
 
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
-
     //#region Data
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(DATA_IS_CHARGING, false)
-        entityData.define(SUMMONING, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        defineSynchedData(builder)
+        builder.define(DATA_IS_CHARGING, false)
+        builder.define(SUMMONING, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -257,7 +253,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             AnimationController(this, "shoot_controller") { PlayState.STOP }
                 .triggerableAnim("shoot", DefaultAnimations.ATTACK_SHOOT)
                 .setSoundKeyframeHandler { event ->
-                    val player = ClientUtils.getClientPlayer()
+                    val player = ClientUtil.getClientPlayer()
 
                     player?.playSound(HASoundEvents.SHELL_BEAST_SHOOT.get(), 1f, 1f)
                 }
@@ -267,7 +263,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             AnimationController(this, "summon_controller") { PlayState.STOP }
                 .triggerableAnim("summon", SUMMON_ANIMATION)
                 .setSoundKeyframeHandler { event ->
-                    val player = ClientUtils.getClientPlayer()
+                    val player = ClientUtil.getClientPlayer()
 
                     player?.playSound(HASoundEvents.SHELL_BEAST_ROAR.get(), 1f, 1f)
                 }
@@ -283,7 +279,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 }
             )
                 .setSoundKeyframeHandler { event ->
-                    val player = ClientUtils.getClientPlayer()
+                    val player = ClientUtil.getClientPlayer()
 
                     player?.playSound(HASoundEvents.SHELL_BEAST_ROAR.get(), 1f, 1f)
                 }

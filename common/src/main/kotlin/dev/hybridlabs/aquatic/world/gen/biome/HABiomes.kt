@@ -758,7 +758,7 @@ object HABiomes {
 
         //#region Surface Rule Generation
         SurfaceGeneration.addOverworldSurfaceRules(
-            ResourceLocation("hybrid_aquatic", "rules/overworld"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "rules/overworld"),
             ifTrue(
                 abovePreliminarySurface(),
                 sequence(

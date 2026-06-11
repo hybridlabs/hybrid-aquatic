@@ -19,20 +19,20 @@ class TetraEntityModel : HAFishEntityModel<TetraEntity>("tetra") {
 
     companion object {
         private val NEON_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/neon_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/neon_tetra.png")
         private val GREEN_NEON_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/green_neon_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/green_neon_tetra.png")
         private val BLACK_NEON_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/black_neon_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/black_neon_tetra.png")
         private val EMBER_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/ember_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/ember_tetra.png")
         private val GLOWLIGHT_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/glowlight_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/glowlight_tetra.png")
         private val RUMMYNOSE_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/rummynose_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/rummynose_tetra.png")
         private val CARDINAL_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/cardinal_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/cardinal_tetra.png")
         private val BLIND_CAVE_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/cave_tetra.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/cave_tetra.png")
     }
 }

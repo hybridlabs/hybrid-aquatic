@@ -28,18 +28,18 @@ class StingrayEntityModel : HAFishEntityModel<StingrayEntity>("stingray") {
 
     companion object {
         private val BLUE_SPOTTED_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/stingray/stingray_blue_spotted.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/stingray/stingray_blue_spotted.png")
         private val SPOTTED_EAGLE_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/stingray/stingray_spotted_eagle.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/stingray/stingray_spotted_eagle.png")
 
         private val BLUE_SPOTTED_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/stingray/stingray_blue_spotted.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/stingray/stingray_blue_spotted.geo.json")
         private val SPOTTED_EAGLE_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/stingray/stingray_spotted_eagle.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/stingray/stingray_spotted_eagle.geo.json")
 
         private val BLUE_SPOTTED_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/stingray/stingray_blue_spotted.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/stingray/stingray_blue_spotted.animation.json")
         private val SPOTTED_EAGLE_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/stingray/stingray_spotted_eagle.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/stingray/stingray_spotted_eagle.animation.json")
     }
 }

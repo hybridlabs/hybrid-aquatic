@@ -24,9 +24,9 @@ class OrcaEyeSpotEntityLayer(
         poseStack: PoseStack,
         animatable: OrcaEntity,
         bakedModel: BakedGeoModel,
-        renderType: RenderType,
+        renderType: RenderType?,
         bufferSource: MultiBufferSource,
-        buffer: VertexConsumer,
+        buffer: VertexConsumer?,
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int
@@ -38,6 +38,6 @@ class OrcaEyeSpotEntityLayer(
 
         getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, eyeSpotRenderType,
             bufferSource.getBuffer(eyeSpotRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1f, 1f, 1f, 1f)
+            1)
     }
 }

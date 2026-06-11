@@ -4,25 +4,25 @@ import dev.hybridlabs.aquatic.entity.fish.MackerelEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import kotlin.math.abs
 
 class MackerelEntityModel : HAFishEntityModel<MackerelEntity>("mackerel") {
 
     companion object {
         private val ONE_FISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/mackerel/mackerel.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/mackerel/mackerel.geo.json")
         private val TWO_FISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/mackerel/mackerel_two.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/mackerel/mackerel_two.geo.json")
         private val THREE_FISH_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/fish/mackerel/mackerel_three.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/mackerel/mackerel_three.geo.json")
 
         private val ONE_FISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel.animation.json")
         private val TWO_FISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel_two.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel_two.animation.json")
         private val THREE_FISH_ANIMATION =
-            ResourceLocation("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel_three.animation.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/mackerel/mackerel_three.animation.json")
     }
 
     override fun getModelResource(animatable: MackerelEntity): ResourceLocation {

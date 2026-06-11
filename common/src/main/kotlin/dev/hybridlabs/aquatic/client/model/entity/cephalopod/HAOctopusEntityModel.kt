@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")

@@ -6,23 +6,20 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.ShovelItem
 import net.minecraft.world.item.TooltipFlag
-import net.minecraft.world.level.Level
 
 class SeashellShovelItem(settings: Properties) : ShovelItem(
     HAToolMaterials.SEASHELL,
-    1.5F,
-    -3.0f,
     settings) {
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
+        context: TooltipContext,
         tooltip: MutableList<Component>,
         options: TooltipFlag
     ) {
         val text = Component.translatable(this.descriptionId.plus(".description")).withStyle(ChatFormatting.GRAY)
 
         tooltip.add(text)
-        super.appendHoverText(stack, level, tooltip, options)
+        super.appendHoverText(stack, context, tooltip, options)
     }
 }

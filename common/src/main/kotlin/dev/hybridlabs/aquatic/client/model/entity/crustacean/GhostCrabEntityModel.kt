@@ -8,10 +8,10 @@ class GhostCrabEntityModel : HACrustaceanEntityModel<GhostCrabEntity>("ghost_cra
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_white.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_yellow.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_purple.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_red.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_white.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_yellow.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_purple.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/crustacean/ghost_crab/ghost_crab_red.png")
         )
     }
 

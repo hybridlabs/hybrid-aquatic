@@ -8,6 +8,7 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.Vec3i
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.DifficultyInstance
@@ -32,10 +33,10 @@ import net.minecraft.world.level.block.NoteBlock
 import net.minecraft.world.level.block.TntBlock
 import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
-import software.bernie.geckolib.core.animation.AnimationState
-import software.bernie.geckolib.core.`object`.PlayState
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.PlayState
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
@@ -68,7 +69,6 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
         entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
     ): SpawnGroupData? {
         this.setCanPickUpLoot(true)
 
@@ -81,7 +81,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         }
         shellItem = generatedRoll
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun canTakeItem(itemstack: ItemStack): Boolean {
@@ -142,7 +142,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         return super.mobInteract(player, hand)
     }
 
-    override fun dropCustomDeathLoot(source: DamageSource, looting: Int, causedByPlayer: Boolean) {
+    override fun dropCustomDeathLoot(level: ServerLevel, source: DamageSource, causedByPlayer: Boolean) {
         if (!shellItem.isEmpty) {
 
             if (shellItem.`is`(HAItems.OMINOUS_CONCH.get())) {

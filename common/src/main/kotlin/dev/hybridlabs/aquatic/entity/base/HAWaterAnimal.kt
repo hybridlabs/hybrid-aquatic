@@ -26,10 +26,10 @@ import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.ServerLevelAccessor
-import net.minecraft.world.level.pathfinder.BlockPathTypes
+import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.core.animation.RawAnimation
+import software.bernie.geckolib.animation.RawAnimation
 import java.util.*
 
 @Suppress("UNCHECKED_CAST")
@@ -53,9 +53,9 @@ abstract class HAWaterAnimal protected constructor(
     }
 
     override fun createNavigation(level: Level): PathNavigation {
-        setPathfindingMalus(BlockPathTypes.WATER, 0.0f)
-        setPathfindingMalus(BlockPathTypes.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.WATER, 0.0f)
+        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
+        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
 
         return WaterBoundPathNavigation(this, level)
     }
@@ -252,7 +252,7 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
-    override fun getExperienceReward(): Int {
+    override fun getBaseExperienceReward(): Int {
         return 1 + this.level().random.nextInt(3)
     }
     //#endregion
@@ -339,17 +339,17 @@ abstract class HAWaterAnimal protected constructor(
         setPerformingTrick(false)
     }
 
-    override fun defineSynchedData() {
-        super.defineSynchedData()
-        entityData.define(SIZE, 0)
-        entityData.define(HUNGER, MAX_HUNGER)
-        entityData.define(MOISTNESS, getMaxMoistness())
-        entityData.define(SITTING, false)
-        entityData.define(FEEDING, false)
-        entityData.define(GRAZING, false)
-        entityData.define(DIGGING, false)
-        entityData.define(PERFORMING, false)
-        entityData.define(ATTEMPT_ATTACK, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(SIZE, 0)
+        builder.define(HUNGER, MAX_HUNGER)
+        builder.define(MOISTNESS, getMaxMoistness())
+        builder.define(SITTING, false)
+        builder.define(FEEDING, false)
+        builder.define(GRAZING, false)
+        builder.define(DIGGING, false)
+        builder.define(PERFORMING, false)
+        builder.define(ATTEMPT_ATTACK, false)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
@@ -475,11 +475,10 @@ abstract class HAWaterAnimal protected constructor(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         this.size = this.random.nextIntBetweenInclusive(getMinSize(), getMaxSize())
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     fun finalizeSpawnChildFromBreeding(level: ServerLevel, waterAnimal: HAWaterAnimal) {
@@ -532,14 +531,6 @@ abstract class HAWaterAnimal protected constructor(
     override fun isPushedByFluid(): Boolean {
         return false
     }
-
-    override fun canBreatheUnderwater(): Boolean {
-        return true
-    }
-
-    override fun getMobType(): MobType {
-        return MobType.WATER
-    }
     //#endregion
 
     override fun checkSpawnObstruction(level: LevelReader): Boolean {
@@ -556,7 +547,7 @@ abstract class HAWaterAnimal protected constructor(
     }
     //#endregion
 
-    override fun canBeLeashed(player: Player): Boolean {
+    override fun canBeLeashed(): Boolean {
         return false
     }
 

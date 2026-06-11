@@ -23,7 +23,7 @@ class FishingNetItem(settings: Properties) : Item(settings) {
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
+        context: TooltipContext,
         lines: MutableList<Component>,
         options: TooltipFlag
     ) {

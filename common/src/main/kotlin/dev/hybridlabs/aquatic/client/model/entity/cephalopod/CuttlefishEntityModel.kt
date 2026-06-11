@@ -8,12 +8,12 @@ class CuttlefishEntityModel : HACephalopodEntityModel<CuttlefishEntity>("cuttlef
 
     companion object {
         private val commonTextures = listOf(
-            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_6.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_5.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_1.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_2.png"),
-            ResourceLocation("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_3.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_4.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_6.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_5.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_1.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_2.png"),
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/cephalopod/cuttlefish/common_cuttlefish_3.png")
         )
     }
 

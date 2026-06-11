@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.util.RandomSource
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.BlockGetter
@@ -92,7 +93,7 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
         return RenderShape.INVISIBLE
     }
 
-    override fun pickupBlock(level: LevelAccessor, pos: BlockPos, state: BlockState): ItemStack {
+    override fun pickupBlock(p0: Player?, level: LevelAccessor, pos: BlockPos, state: BlockState): ItemStack {
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11)
         return ItemStack(Items.WATER_BUCKET)
     }
@@ -101,12 +102,7 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
         return Fluids.WATER.pickupSound
     }
 
-    override fun isPathfindable(
-        state: BlockState,
-        level: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType
-    ): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 

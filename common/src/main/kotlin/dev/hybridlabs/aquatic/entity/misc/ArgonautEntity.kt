@@ -37,9 +37,9 @@ import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.core.animation.AnimatableManager
-import software.bernie.geckolib.core.animation.AnimationController
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
+import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.IntFunction
 
@@ -89,17 +89,18 @@ open class ArgonautEntity(
             return 2
         }
     }
+    
     //#region Data
-    override fun defineSynchedData() {
-        this.entityData.define(DATA_ID_HURT, 0)
-        this.entityData.define(DATA_ID_HURTDIR, 1)
-        this.entityData.define(DATA_ID_DAMAGE, 0.0f)
-        this.entityData.define(DATA_ID_RIGHT_PROPELLER, false)
-        this.entityData.define(DATA_ID_LEFT_PROPELLER, false)
-        this.entityData.define(DATA_ID_GLOWING, false)
-        this.entityData.define(SHELL_COLOR, ShellColor.NONE.id)
-        this.entityData.define(SAIL_COLOR, SailColor.NONE.id)
-        this.entityData.define(IS_BURNING, false)
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(DATA_ID_HURT, 0)
+        builder.define(DATA_ID_HURTDIR, 1)
+        builder.define(DATA_ID_DAMAGE, 0.0f)
+        builder.define(DATA_ID_RIGHT_PROPELLER, false)
+        builder.define(DATA_ID_LEFT_PROPELLER, false)
+        builder.define(DATA_ID_GLOWING, false)
+        builder.define(SHELL_COLOR, ShellColor.NONE.id)
+        builder.define(SAIL_COLOR, SailColor.NONE.id)
+        builder.define(IS_BURNING, false)
     }
 
     override fun addAdditionalSaveData(tag: CompoundTag) {
@@ -153,20 +154,12 @@ open class ArgonautEntity(
         return size.height * 0.5f
     }
 
-    override fun lerpTo(
-        x: Double,
-        y: Double,
-        z: Double,
-        yaw: Float,
-        pitch: Float,
-        posRotationIncrements: Int,
-        teleport: Boolean,
-    ) {
+    override fun lerpTo(x: Double, y: Double, z: Double, pitch: Float, xRot: Float, posRotationIncrements: Int) {
         this.lerpX = x
         this.lerpY = y
         this.lerpZ = z
-        this.lerpYRot = yaw.toDouble()
-        this.lerpXRot = pitch.toDouble()
+        this.lerpYRot = pitch.toDouble()
+        this.lerpXRot = xRot.toDouble()
         this.lerpSteps = 10
     }
 

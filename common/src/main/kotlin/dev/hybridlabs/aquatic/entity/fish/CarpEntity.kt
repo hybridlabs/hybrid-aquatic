@@ -85,8 +85,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome, Random.Default)
@@ -104,7 +103,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             }
         }
 
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     override fun spawnChildFromBreeding(level: ServerLevel, mate: HAWaterAnimal) {
@@ -279,10 +278,10 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         return PatternTextures.byId(entityData.get(PATTERN)).serializedName
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        entityData.define(PATTERN, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        builder.define(TYPE, 0)
+        builder.define(PATTERN, 0)
+        defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

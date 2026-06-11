@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
 import net.minecraft.util.Mth
-import software.bernie.geckolib.core.animation.AnimationState
+import software.bernie.geckolib.animation.AnimationState
 
 class ShellBeastEntityModel : HAMinibossEntityModel<ShellBeastEntity>("shell_beast") {
 

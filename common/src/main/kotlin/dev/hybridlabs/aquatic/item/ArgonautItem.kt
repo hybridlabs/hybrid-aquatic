@@ -25,9 +25,9 @@ class ArgonautItem(properties: Properties) : Item(properties) {
 
     override fun appendHoverText(
         stack: ItemStack,
-        level: Level?,
+        context: TooltipContext,
         lines: MutableList<Component>,
-        context: TooltipFlag
+        tooltipFlag: TooltipFlag
     ) {
         val tag = stack.tag ?: return
 

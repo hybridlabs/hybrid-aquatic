@@ -9,15 +9,15 @@ import net.minecraft.world.level.biome.Biome
 object HABiomeTags {
     //#region Compatibility Biome Tags
     // rainbow reef
-    val RR_WARM_OCEANS = TagKey.create(Registries.BIOME, ResourceLocation("rainbowreef", "warm_oceans"))
+    val RR_WARM_OCEANS = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("rainbowreef", "warm_oceans"))
     //fintastic
-    val MOONY_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "moony_biomes"))
-    val PLECO_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "pleco_biomes"))
-    val CATFISH_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "catfish_biomes"))
-    val ARAPAIMA_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "arapaima_biomes"))
-    val GUPPY_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "guppy_biomes"))
-    val FWSHARK_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "fwshark_biomes"))
-    val MINNOW_SURFACE_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation("fintastic", "minnow_surface_biomes"))
+    val MOONY_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("fintastic", "moony_biomes"))
+    val PLECO_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("fintastic", "pleco_biomes"))
+    val CATFISH_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("fintastic", "catfish_biomes"))
+    val ARAPAIMA_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("fintastic", "arapaima_biomes"))
+    val GUPPY_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("fintastic", "guppy_biomes"))
+    val FWSHARK_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("fintastic", "fwshark_biomes"))
+    val MINNOW_SURFACE_BIOMES = TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("fintastic", "minnow_surface_biomes"))
 
     //#region Frozen Ocean Tags
     val SHALLOW_FROZEN_OCEANS = create("shallow_frozen_oceans")

@@ -11,14 +11,14 @@ class CepheidaeJellyfishEntityModel : HAJellyfishEntityModel<CepheidaeJellyfishE
 
     companion object {
         private val CAULIFLOWER_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.png")
         private val FRIED_EGG_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.png")
 
         private val CAULIFLOWER_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/jellyfish/cepheidae_jellyfish/cauliflower_jellyfish.geo.json")
         private val FRIED_EGG_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/jellyfish/cepheidae_jellyfish/fried_egg_jellyfish.geo.json")
     }
 
     override fun getTextureResource(animatable: CepheidaeJellyfishEntity): ResourceLocation {
