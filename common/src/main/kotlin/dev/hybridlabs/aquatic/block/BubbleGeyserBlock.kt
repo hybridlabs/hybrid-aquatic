@@ -3,15 +3,16 @@ package dev.hybridlabs.aquatic.block
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.util.ColorRGBA
 import net.minecraft.util.RandomSource
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.SandBlock
+import net.minecraft.world.level.block.ColoredFallingBlock
 import net.minecraft.world.level.block.state.BlockState
 
 @Suppress("OVERRIDE_DEPRECATION")
-class BubbleGeyserBlock(dustColor: Int, settings: Properties) : SandBlock(dustColor, settings) {
+class BubbleGeyserBlock(dustColor: ColorRGBA, settings: Properties) : ColoredFallingBlock(dustColor, settings) {
     override fun tick(state: BlockState, level: ServerLevel, pos: BlockPos, random: RandomSource) {
         BubbleNetBlock.updateColumn(level, pos.above(), state)
     }

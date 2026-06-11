@@ -41,12 +41,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
 class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : Block(settings),
     EntityBlock, SimpleWaterloggedBlock {
 
-    override fun isPathfindable(
-        state: BlockState,
-        world: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType,
-    ): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
@@ -102,13 +97,12 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
         builder.add(STATE, WATERLOGGED, FACING)
     }
 
-    override fun use(
+    override fun useWithoutItem(
         state: BlockState,
         world: Level,
         pos: BlockPos,
         player: Player,
-        hand: InteractionHand,
-        hit: BlockHitResult,
+        hit: BlockHitResult
     ): InteractionResult {
 
         if (world.isClientSide) return InteractionResult.SUCCESS

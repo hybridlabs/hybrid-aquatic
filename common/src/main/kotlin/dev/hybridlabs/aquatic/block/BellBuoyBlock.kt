@@ -7,7 +7,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -35,12 +34,7 @@ open class BellBuoyBlock(settings: Properties) : Block(settings), EntityBlock, S
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
-    override fun isPathfindable(
-        state: BlockState,
-        world: BlockGetter,
-        pos: BlockPos,
-        type: PathComputationType,
-    ): Boolean {
+    override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
         return false
     }
 
@@ -63,13 +57,12 @@ open class BellBuoyBlock(settings: Properties) : Block(settings), EntityBlock, S
         return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
-    override fun use(
+    override fun useWithoutItem(
         state: BlockState,
         world: Level,
         pos: BlockPos,
         player: Player,
-        hand: InteractionHand,
-        hit: BlockHitResult,
+        hit: BlockHitResult
     ): InteractionResult {
         val blockentity = world.getBlockEntity(pos)
         if (!world.isClientSide && blockentity is BellBuoyBlockEntity) {
