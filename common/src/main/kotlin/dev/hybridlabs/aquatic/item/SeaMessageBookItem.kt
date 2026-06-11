@@ -16,16 +16,15 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class
-SeaMessageBookItem(settings: Properties) : Item(settings) {
+class SeaMessageBookItem(settings: Properties) : Item(settings) {
 
     override fun appendHoverText(
         stack: ItemStack,
-        world: Level?,
+        context: TooltipContext,
         tooltip: MutableList<Component>,
-        context: TooltipFlag
+        tooltipFlag: TooltipFlag
     ) {
-        world?.registryAccess()?.let { registryManager ->
+        context.registries()?.let { registryManager ->
             val message = getSeaMessage(stack, registryManager) ?: return@let
             message.author.ifPresent { author ->
                 tooltip.add(Component.translatable("book.byAuthor", author).withStyle(ChatFormatting.GRAY))

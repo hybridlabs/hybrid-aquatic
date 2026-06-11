@@ -18,7 +18,7 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
-class MoonJellyfishHatItem(type: Type, settings: Properties) :
+class MoonJellyfishArmorItem(type: Type, settings: Properties) :
     ArmorItem(HAArmorMaterials.MOONJELLYFISH, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 

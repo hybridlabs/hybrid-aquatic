@@ -45,10 +45,10 @@ import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.constant.DefaultAnimations
 import java.util.*
 import java.util.function.IntFunction
 
@@ -402,14 +402,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
     internal class OtterAttackGoal(
         val otter: OtterEntity,
         speedModifier: Double,
-        followingTargetEvenIfNotSeen: Boolean,
+        followingTargetEvenIfNotSeen: Boolean
     ) : MeleeAttackGoal(
         otter,
         speedModifier, followingTargetEvenIfNotSeen
     ) {
         override fun checkAndPerformAttack(enemy: LivingEntity) {
-            val d0 = this.getAttackReachSqr(enemy)
-            if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
+            if (canPerformAttack(enemy))
+            {
                 this.resetAttackCooldown()
                 otter.swing(InteractionHand.MAIN_HAND)
                 otter.doHurtTarget(enemy)
@@ -417,7 +417,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
                 if (enemy.health <= 0) otter.hunger = MAX_HUNGER
                 otter.health = otter.maxHealth
             }
-            super.checkAndPerformAttack(enemy, distToEnemySqr)
+            super.checkAndPerformAttack(enemy)
         }
     }
 

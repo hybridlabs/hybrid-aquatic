@@ -28,11 +28,11 @@ import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
@@ -251,8 +251,7 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
         }
 
         override fun checkAndPerformAttack(target: LivingEntity) {
-            val d = getAttackReachSqr(target)
-            if (squaredDistance <= d && this.isTimeToAttack) {
+            if (canPerformAttack(target)){
                 resetAttackCooldown()
                 mob.doHurtTarget(target)
                 cephalopod.isSprinting = true
@@ -260,14 +259,10 @@ open class HACephalopodEntity(type: EntityType<out HACephalopodEntity>, world: L
 
                 if (target.health <= 0)
                     cephalopod.hunger = MAX_HUNGER
-
                 cephalopod.health = cephalopod.maxHealth
             }
         }
 
-        override fun getAttackReachSqr(entity: LivingEntity): Double {
-            return (1.25f + entity.bbWidth).toDouble()
-        }
 
         override fun start() {
             super.start()

@@ -1,11 +1,7 @@
 package dev.hybridlabs.aquatic.platform.services;
 
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.Item;
@@ -59,9 +55,11 @@ public interface PlatformHelper {
 
     Path getConfigDir();
 
-    <T extends Mob> void registerSpawnPlacement(RegistryObject<EntityType<T>> entityType,
-                                                SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType,
-                                                SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
+    <T extends Mob> void registerSpawnPlacement(
+            RegistryObject<EntityType<T>> entityType,
+            SpawnPlacementType decoratorType,
+            Heightmap.Types heightMapType,
+            SpawnPlacements.SpawnPredicate<T> decoratorPredicate);
 
     <T extends LivingEntity> void registerAttributes(@NotNull String id, EntityType<T> entityType,
                                                      Callable<AttributeSupplier.Builder> attributeContainer);

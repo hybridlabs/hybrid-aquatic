@@ -1,6 +1,6 @@
-package dev.hybridlabs.aquatic.item.armor
+package dev.hybridlabs.aquatic.item.cosmetic
 
-import dev.hybridlabs.aquatic.client.render.armor.SeashellArmorRenderer
+import dev.hybridlabs.aquatic.client.render.armor.ManglerfishArmorRenderer
 import dev.hybridlabs.aquatic.item.HAArmorMaterials
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
@@ -15,9 +15,8 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
-class SeashellArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HAArmorMaterials.SEASHELL, type, settings),
-    GeoItem {
+class ManglerfishArmorItem(type: Type, settings: Properties) :
+    ArmorItem(HAArmorMaterials.MANGLERFISH, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
@@ -33,12 +32,12 @@ class SeashellArmorItem(type: Type, settings: Properties) :
 
             override fun <T : LivingEntity?> getGeoArmorRenderer(
                 livingEntity: T?,
-                itemStack: ItemStack,
+                itemStack: ItemStack?,
                 equipmentSlot: EquipmentSlot?,
-                original: HumanoidModel<T>?
+                original: HumanoidModel<T?>?
             ): HumanoidModel<*>? {
                 if (this.renderer == null)
-                    this.renderer = SeashellArmorRenderer()
+                    this.renderer = ManglerfishArmorRenderer()
                 return this.renderer
             }
         })

@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.client.render.armor
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.item.cosmetic.ManglerfishCosmeticItem
+import dev.hybridlabs.aquatic.item.cosmetic.ManglerfishArmorItem
 import software.bernie.geckolib.model.DefaultedItemGeoModel
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 
-class ManglerfishArmorRenderer : GeoArmorRenderer<ManglerfishCosmeticItem>(
+class ManglerfishArmorRenderer : GeoArmorRenderer<ManglerfishArmorItem>(
     DefaultedItemGeoModel(CommonClass.locate("armor/manglerfish_armor"))
 )

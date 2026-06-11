@@ -71,7 +71,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     override fun playerTouch(entity: Player) {
     }
 
-    override fun getPickupItem(): ItemStack {
+    override fun getDefaultPickupItem(): ItemStack {
         return ItemStack(HAItems.STARFISH.get())
     }
 

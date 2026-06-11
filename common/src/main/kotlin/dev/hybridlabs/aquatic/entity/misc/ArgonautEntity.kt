@@ -150,10 +150,6 @@ open class ArgonautEntity(
         entityData.set(SAIL_COLOR, sailColor.id)
     }
 
-    override fun getEyeHeight(pose: Pose, size: EntityDimensions): Float {
-        return size.height * 0.5f
-    }
-
     override fun lerpTo(x: Double, y: Double, z: Double, pitch: Float, xRot: Float, posRotationIncrements: Int) {
         this.lerpX = x
         this.lerpY = y

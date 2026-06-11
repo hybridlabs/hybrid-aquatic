@@ -2,21 +2,17 @@
 
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.server.level.ServerLevel
+import net.minecraft.core.RegistryAccess
+import net.minecraft.core.component.DataComponents
 import net.minecraft.util.StringRepresentable
-import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResult
-import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.player.Player
-import net.minecraft.world.entity.vehicle.Boat
-import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -30,7 +26,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties.WAT
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
-import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 import kotlin.jvm.optionals.getOrNull
@@ -44,13 +39,6 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false))
     }
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        super.entityInside(state, level, pos, entity)
-        if (level is ServerLevel && entity is Boat) {
-            level.destroyBlock(BlockPos(pos), true, entity)
-        }
-    }
-
     override fun getCloneItemStack(level: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
         val blockEntity = level.getBlockEntity(pos)
         if (blockEntity !is MessageInABottleBlockEntity) {
@@ -61,7 +49,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (!fluidStateAbove.`is`( Fluids.EMPTY)) {
+        if (!fluidStateAbove.`is`(Fluids.EMPTY)) {
             return false
         }
 
@@ -79,20 +67,19 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         pos: BlockPos,
         state: BlockState,
         placer: LivingEntity?,
-        stack: ItemStack,
+        stack: ItemStack
     ) {
-        stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG)?.let { nbt ->
+        stack.get(DataComponents.BLOCK_ENTITY_DATA)?.let { component ->
             // if not present, generate a random message
-            if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
+            component.copyTag()[MessageInABottleBlockEntity.MESSAGE_KEY]?.let {
                 // get a random message
                 val registryManager = world.registryAccess()
                 val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
                 val messageKey = registry.getRandom(world.random).getOrNull()?.key() ?: return
-                val message = registry.get(messageKey) ?: return
 
                 // get block entity
                 val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
-                blockEntity.messageItemStack = SeaMessageBookItem.createItemStack(message, registryManager)
+                blockEntity.messageId = messageKey.location()
             }
         }
     }
@@ -101,24 +88,6 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         val waterlogged = ctx.level.getFluidState(ctx.clickedPos) == Fluids.WATER.getSource(false)
         return defaultBlockState()
             .setValue(WATERLOGGED, waterlogged)
-    }
-
-    override fun use(
-        state: BlockState,
-        level: Level,
-        pos: BlockPos,
-        player: Player,
-        hand: InteractionHand,
-        hit: BlockHitResult,
-    ): InteractionResult {
-        if (player.getItemInHand(hand).isEmpty) {
-            (level.getBlockEntity(pos) as? MessageInABottleBlockEntity)?.let { blockEntity ->
-                blockEntity.variant = blockEntity.variant.next
-                return InteractionResult.sidedSuccess(level.isClientSide)
-            }
-        }
-
-        return InteractionResult.PASS
     }
 
     override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
@@ -131,7 +100,7 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         neighborState: BlockState,
         world: LevelAccessor,
         pos: BlockPos,
-        neighborPos: BlockPos,
+        neighborPos: BlockPos
     ): BlockState {
         // tick fluid when waterlogged
         if (state.getValue(WATERLOGGED)) {
@@ -154,13 +123,17 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         state: BlockState,
         world: BlockGetter,
         pos: BlockPos,
-        context: CollisionContext,
+        context: CollisionContext
     ): VoxelShape {
         return if (state.getValue(WATERLOGGED)) WATER_SHAPE else SHAPE
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(WATERLOGGED)
+    }
+
+    override fun codec(): MapCodec<out BaseEntityBlock?> {
+        TODO("Not yet implemented")
     }
 
     override fun getRenderShape(state: BlockState): RenderShape {
@@ -181,16 +154,12 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         POTION("potion"),
         WINE("wine");
 
-        val next: Variant by lazy { NEXT_MAP[this] ?: entries[0] }
-
         override fun getSerializedName(): String {
             return id
         }
 
         companion object {
             private val BY_ID = entries.associateBy(Variant::id)
-
-            private val NEXT_MAP = entries.zipWithNext().toMap()
 
             fun byId(id: String): Variant {
                 return BY_ID[id] ?: BOTTLE
@@ -205,7 +174,11 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
 
         fun createItemStack(blockEntity: MessageInABottleBlockEntity): ItemStack {
             val stack = ItemStack(HABlocks.MESSAGE_IN_A_BOTTLE.get())
-            stack.getOrCreateTag().put(BlockItem.BLOCK_ENTITY_TAG, blockEntity.saveWithoutMetadata())
+
+            stack.set(
+                DataComponents.BLOCK_ENTITY_DATA,
+                CustomData.of(blockEntity.getUpdateTag(RegistryAccess.EMPTY)
+                ))
             return stack
         }
     }

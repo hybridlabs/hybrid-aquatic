@@ -5,9 +5,12 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.item.armor.*
 import dev.hybridlabs.aquatic.item.coral.*
+import dev.hybridlabs.aquatic.item.cosmetic.*
 import dev.hybridlabs.aquatic.item.seashell.*
-import dev.hybridlabs.aquatic.platform.Services.*
+import dev.hybridlabs.aquatic.platform.Services.PLATFORM
+import dev.hybridlabs.aquatic.platform.Services.TURTLE_ARMOR_FACTORY
 import dev.hybridlabs.aquatic.tag.HAInstrumentTags
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
@@ -25,7 +28,7 @@ object HAItems {
     val DIVING_HELMET = register(
         "diving_helmet"
     ) {
-        DIVING_ARMOR_FACTORY.create(
+        DivingArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -34,24 +37,27 @@ object HAItems {
     val DIVING_SUIT = register(
         "diving_suit"
     ) {
-        DIVING_ARMOR_FACTORY.create(
-            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+        DivingArmorItem(
+            ArmorItem.Type.CHESTPLATE,
+            Item.Properties().stacksTo(1)
         )
     }
 
     val DIVING_LEGGINGS = register(
         "diving_leggings"
     ) {
-        DIVING_ARMOR_FACTORY.create(
-            ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
+        DivingArmorItem(
+            ArmorItem.Type.LEGGINGS,
+            Item.Properties().stacksTo(1)
         )
     }
 
     val DIVING_BOOTS = register(
         "diving_boots"
     ) {
-        DIVING_ARMOR_FACTORY.create(
-            ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
+        DivingArmorItem(
+            ArmorItem.Type.BOOTS,
+            Item.Properties().stacksTo(1)
         )
     }
     //#endregion
@@ -60,7 +66,7 @@ object HAItems {
     val REINFORCED_DIVING_HELMET = register(
         "reinforced_diving_helmet"
     ) {
-        REINFORCED_DIVING_ARMOR_FACTORY.create(
+        ReinforcedDivingArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -69,7 +75,7 @@ object HAItems {
     val REINFORCED_DIVING_SUIT = register(
         "reinforced_diving_suit"
     ) {
-        REINFORCED_DIVING_ARMOR_FACTORY.create(
+        ReinforcedDivingArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -77,7 +83,7 @@ object HAItems {
     val REINFORCED_DIVING_LEGGINGS = register(
         "reinforced_diving_leggings"
     ) {
-        REINFORCED_DIVING_ARMOR_FACTORY.create(
+        ReinforcedDivingArmorItem(
             ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
         )
     }
@@ -85,7 +91,7 @@ object HAItems {
     val REINFORCED_DIVING_BOOTS = register(
         "reinforced_diving_boots"
     ) {
-        REINFORCED_DIVING_ARMOR_FACTORY.create(
+        ReinforcedDivingArmorItem(
             ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
         )
     }
@@ -95,7 +101,7 @@ object HAItems {
     val GLOWING_DIVING_HELMET = register(
         "glowing_diving_helmet"
     ) {
-        GLOWING_DIVING_ARMOR_FACTORY.create(
+        GlowingDivingArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -104,7 +110,7 @@ object HAItems {
     val GLOWING_DIVING_SUIT = register(
         "glowing_diving_suit"
     ) {
-        GLOWING_DIVING_ARMOR_FACTORY.create(
+        GlowingDivingArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -112,7 +118,7 @@ object HAItems {
     val GLOWING_DIVING_LEGGINGS = register(
         "glowing_diving_leggings"
     ) {
-        GLOWING_DIVING_ARMOR_FACTORY.create(
+        GlowingDivingArmorItem(
             ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
         )
     }
@@ -120,7 +126,7 @@ object HAItems {
     val GLOWING_DIVING_BOOTS = register(
         "glowing_diving_boots"
     ) {
-        GLOWING_DIVING_ARMOR_FACTORY.create(
+        GlowingDivingArmorItem(
             ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
         )
     }
@@ -130,7 +136,7 @@ object HAItems {
     val NAUTILUS_HELMET = register(
         "nautilus_helmet"
     ) {
-        SEASHELL_ARMOR_FACTORY.create(
+        SeashellArmorItem(
             ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
         )
     }
@@ -138,7 +144,7 @@ object HAItems {
     val NAUTILUS_PAULDRONS = register(
         "nautilus_pauldrons"
     ) {
-        SEASHELL_ARMOR_FACTORY.create(
+        SeashellArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }
@@ -158,7 +164,8 @@ object HAItems {
     val MANGLERFISH_LURE = register(
         "manglerfish_lure"
     ) {
-        MANGLERFISH_COSMETIC_PROVIDER.create(
+        ManglerfishArmorItem(
+            ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
     }
@@ -166,7 +173,8 @@ object HAItems {
     val MANGLERFISH_FIN = register(
         "manglerfish_fin"
     ) {
-        MANGLERFISH_COSMETIC_PROVIDER.create(
+        ManglerfishArmorItem(
+            ArmorItem.Type.CHESTPLATE,
             Item.Properties().stacksTo(1)
         )
     }
@@ -174,7 +182,8 @@ object HAItems {
     val EEL_SCARF = register(
         "eel_scarf"
     ) {
-        EEL_ARMOR_FACTORY.create(
+        EelArmorItem(
+            ArmorItem.Type.CHESTPLATE,
             Item.Properties().stacksTo(1)
         )
     }
@@ -182,7 +191,7 @@ object HAItems {
     val PINK_HATXOLOTL = register(
         "pink_hatxolotl"
     ) {
-        PINK_HATXOLOTL_ARMOR_FACTORY.create(
+        PinkHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -191,7 +200,7 @@ object HAItems {
     val BROWN_HATXOLOTL = register(
         "brown_hatxolotl"
     ) {
-        BROWN_HATXOLOTL_ARMOR_FACTORY.create(
+        BrownHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -200,7 +209,7 @@ object HAItems {
     val GOLD_HATXOLOTL = register(
         "gold_hatxolotl"
     ) {
-        GOLD_HATXOLOTL_ARMOR_FACTORY.create(
+        GoldHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -209,7 +218,7 @@ object HAItems {
     val BLUE_HATXOLOTL = register(
         "blue_hatxolotl"
     ) {
-        BLUE_HATXOLOTL_ARMOR_FACTORY.create(
+        BlueHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -218,7 +227,7 @@ object HAItems {
     val CYAN_HATXOLOTL = register(
         "cyan_hatxolotl"
     ) {
-        CYAN_HATXOLOTL_ARMOR_FACTORY.create(
+        CyanHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
@@ -227,8 +236,8 @@ object HAItems {
     val MOON_JELLYFISH_HAT = register(
         "moon_jellyfish_hat"
     ) {
-        MOON_JELLYFISH_ARMOR_FACTORY.create(
-            ArmorItem.TYPE.HELMET,
+        MoonJellyfishArmorItem(
+            ArmorItem.Type.HELMET,
             Item.Properties().stacksTo(1)
         )
     }

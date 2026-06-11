@@ -3,13 +3,13 @@ package dev.hybridlabs.aquatic.item.armor
 import dev.emi.trinkets.api.Trinket
 import dev.emi.trinkets.api.TrinketsApi
 import dev.hybridlabs.aquatic.client.render.item.GeoRenderProviderStorage
-import dev.hybridlabs.aquatic.item.cosmetic.MoonJellyfishHatItem
+import dev.hybridlabs.aquatic.item.cosmetic.MoonJellyfishArmorItem
 import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer
 import java.util.function.Supplier
 
 class FabricMoonJellyfishHatItem(settings: Properties) :
-    MoonJellyfishHatItem(settings), Trinket, GeoItem {
+    MoonJellyfishArmorItem(settings), Trinket, GeoItem {
 
     init {
         TrinketsApi.registerTrinket(this, this)

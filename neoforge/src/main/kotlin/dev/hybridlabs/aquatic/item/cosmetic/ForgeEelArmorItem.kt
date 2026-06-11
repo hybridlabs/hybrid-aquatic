@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.armor.EelArmorRenderer
-import dev.hybridlabs.aquatic.item.cosmetic.EelScarfItem
+import dev.hybridlabs.aquatic.item.cosmetic.EelArmorItem
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
@@ -11,8 +11,8 @@ import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 import java.util.function.Consumer
 
-class ForgeEelScarfItem(settings: Properties) :
-    EelScarfItem(settings),
+class ForgeEelArmorItem(settings: Properties) :
+    EelArmorItem(settings),
     GeoItem {
 
     override fun initializeClient(consumer: Consumer<IClientItemExtensions?>) {

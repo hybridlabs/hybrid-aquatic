@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -60,11 +61,13 @@ public class FabricPlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public <T extends Mob> void registerSpawnPlacement(RegistryObject<EntityType<T>> entityType,
-                                                       SpawnPlacements.Type decoratorType,
-                                                       Heightmap.Types heightMapType,
-                                                       SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
-        SpawnPlacements.register(entityType.get(), decoratorType, heightMapType, decoratorPredicate);
+    public <T extends Mob> void registerSpawnPlacement(
+            RegistryObject<EntityType<T>> entityType,
+            SpawnPlacementType decoratorType,
+            Heightmap.Types heightMapType,
+            SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
+        SpawnPlacements.register(
+                entityType.get(), decoratorType, heightMapType, decoratorPredicate);
     }
 
     @Override

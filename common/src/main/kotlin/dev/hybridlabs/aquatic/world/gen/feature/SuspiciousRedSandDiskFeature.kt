@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.loot.HALootTables
 import net.minecraft.core.BlockPos
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
@@ -31,7 +33,9 @@ class SuspiciousRedSandDiskFeature(
                 level.getBlockEntity(pos, BlockEntityType.BRUSHABLE_BLOCK)
                     .ifPresent { brushable ->
                         brushable.setLootTable(
-                            HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID,
+                            (ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID)),
                             pos.asLong()
                         )
                     }
