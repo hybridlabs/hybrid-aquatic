@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.block.OysterBlock
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
@@ -69,7 +70,7 @@ class OysterBlockEntity(
         }
     }
 
-    override fun saveAdditional(tag: CompoundTag) {
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag)
         tag.putInt("pearl_timer", pearlTimer)
     }
