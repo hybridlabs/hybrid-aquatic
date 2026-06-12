@@ -93,10 +93,7 @@ open class HADolphinEntityRenderer<T : HADolphinEntity>(
         partialTick: Float,
         packedLight: Int,
         packedOverlay: Int,
-        red: Float,
-        green: Float,
-        blue: Float,
-        alpha: Float,
+        colour: Int
     ) {
         super.preRender(
             poseStack,
@@ -108,10 +105,7 @@ open class HADolphinEntityRenderer<T : HADolphinEntity>(
             partialTick,
             packedLight,
             packedOverlay,
-            red,
-            green,
-            blue,
-            alpha
+            1
         )
 
         this.mainHandItem = animatable.mainHandItem

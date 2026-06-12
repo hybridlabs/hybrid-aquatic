@@ -71,7 +71,7 @@ class OysterBlockEntity(
     }
 
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag)
+        super.saveAdditional(tag, registries)
         tag.putInt("pearl_timer", pearlTimer)
     }
 

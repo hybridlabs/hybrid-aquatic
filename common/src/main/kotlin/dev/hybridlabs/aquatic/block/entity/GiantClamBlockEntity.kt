@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.block.GiantClamBlock
 import net.minecraft.core.BlockPos
+import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
@@ -69,8 +70,8 @@ class GiantClamBlockEntity(
         }
     }
 
-    override fun saveAdditional(tag: CompoundTag) {
-        super.saveAdditional(tag)
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
         tag.putInt("pearl_timer", pearlTimer)
     }
 
