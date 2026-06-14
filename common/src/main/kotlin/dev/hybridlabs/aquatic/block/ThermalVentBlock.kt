@@ -169,14 +169,7 @@ class ThermalVentBlock(
         pos: BlockPos,
         context: CollisionContext,
     ): VoxelShape {
-        val voxelShape = when (val thickness = state.getValue(THICKNESS) as ThermalVentPosition) {
-            ThermalVentPosition.TIP -> TIP_COLLISION_SHAPE
-            ThermalVentPosition.MIDDLE -> MIDDLE_COLLISION_SHAPE
-            ThermalVentPosition.BASE -> BASE_COLLISION_SHAPE
-            else -> throw IllegalStateException("Unexpected thickness: $thickness")
-        }
-        val vec3d = state.getOffset(world, pos)
-        return voxelShape.move(vec3d.x, 0.0, vec3d.z)
+        return SHAPE
     }
 
     override fun getOcclusionShape(state: BlockState, world: BlockGetter, pos: BlockPos): VoxelShape {
@@ -189,15 +182,7 @@ class ThermalVentBlock(
         pos: BlockPos,
         context: CollisionContext,
     ): VoxelShape {
-        val voxelShape = when (val thickness = state.getValue(THICKNESS) as ThermalVentPosition) {
-            ThermalVentPosition.TIP -> TIP_SHAPE
-            ThermalVentPosition.MIDDLE -> MIDDLE_SHAPE
-            ThermalVentPosition.BASE -> BASE_SHAPE
-            else -> throw IllegalStateException("Unexpected thickness: $thickness")
-        }
-
-        val modelOffset = state.getOffset(world, pos)
-        return voxelShape.move(modelOffset.x, 0.0, modelOffset.z)
+        return SHAPE
     }
 
     override fun getFluidState(state: BlockState): FluidState {
@@ -223,13 +208,7 @@ class ThermalVentBlock(
 
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
-        private val TIP_COLLISION_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)
-        private val MIDDLE_COLLISION_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
-        private val BASE_COLLISION_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
-
-        private val TIP_SHAPE = box(3.0, 0.0, 3.0, 13.0, 4.0, 13.0)
-        private val MIDDLE_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
-        private val BASE_SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
+        private val SHAPE = box(3.0, 0.0, 3.0, 13.0, 16.0, 13.0)
     }
 
     enum class ThermalVentPosition : StringRepresentable {
