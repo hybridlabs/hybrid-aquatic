@@ -490,17 +490,38 @@ object HABlocks {
         .instabreak())
     }
 
-    val SHORT_RED_ALGAE = register("short_red_algae") { ShortRedAlgaeBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
-    val RED_ALGAE = register("red_algae") { RedAlgaeBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
-    val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(Properties.copy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
+    val SHORT_RED_ALGAE = register("short_red_algae") {
+        ShortRedAlgaeBlock(Properties
+            .copy(Blocks.SEAGRASS)
+            .offsetType(BlockBehaviour.OffsetType.XZ)) }
 
-    val SEA_LETTUCE = register("sea_lettuce") { SeaLettuceBlock(Properties.copy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
-    val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(Properties.copy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
+    val RED_ALGAE = register("red_algae") {
+        RedAlgaeBlock(Properties
+            .copy(Blocks.SEAGRASS)
+            .offsetType(BlockBehaviour.OffsetType.XZ)) }
 
-    val BONE_WORMS = register("bone_worms") { BoneWormsBlock(Properties.copy(Blocks.SEAGRASS)) }
+    val TALL_RED_ALGAE = register("tall_red_algae") {
+        TallRedAlgaeBlock(Properties
+            .copy(Blocks.TALL_SEAGRASS)
+            .offsetType(BlockBehaviour.OffsetType.NONE)) }
+
+    val SEA_LETTUCE = register("sea_lettuce") {
+        SeaLettuceBlock(Properties
+        .copy(Blocks.SEAGRASS)
+        .offsetType(BlockBehaviour.OffsetType.XZ)) }
+
+    val TALL_SEA_LETTUCE = register("tall_sea_lettuce") {
+        TallSeaLettuceBlock(Properties
+                .copy(Blocks.TALL_SEAGRASS)
+                .offsetType(BlockBehaviour.OffsetType.NONE)) }
+
+    val BONE_WORMS = register("bone_worms") {
+        BoneWormsBlock(Properties
+                .copy(Blocks.SEAGRASS)) }
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register("dead_lophelia_coral_block") {
-        Block(Properties.copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(Properties
+            .copy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
