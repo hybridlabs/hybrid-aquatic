@@ -1,6 +1,6 @@
 accessWidener v2 named
 
-accessible class net/minecraft/world/level/block/BaseEntityBlock
+accessible method net/minecraft/world/level/block/BaseEntityBlock createTickerHelper (Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/world/level/block/entity/BlockEntityTicker;)Lnet/minecraft/world/level/block/entity/BlockEntityTicker;
 accessible class net/minecraft/client/gui/screens/MenuScreens
 accessible class net/minecraft/client/renderer/RenderType
 accessible class net/minecraft/client/renderer/FogRenderer$FogData
@@ -18,11 +18,6 @@ accessible method net/minecraft/client/renderer/RenderType create (Ljava/lang/St
 accessible method net/minecraft/client/renderer/RenderType create (Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
 accessible method net/minecraft/core/particles/SimpleParticleType <init> (Z)V
 accessible class net/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration
-accessible class net/minecraft/client/renderer/FogRenderer$FogData
-accessible class net/minecraft/client/renderer/FogRenderer$MobEffectFogFunction
-accessible class net/minecraft/client/renderer/FogRenderer$BlindnessFogFunction
-accessible class net/minecraft/client/renderer/FogRenderer$DarknessFogFunction
-accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
 
 
 
