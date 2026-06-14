@@ -51,6 +51,11 @@ class BiomeTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .addOptional(Biomes.DEEP_FROZEN_OCEAN)
             .addOptional(Biomes.DEEP_LUKEWARM_OCEAN)
 
+        getOrCreateTagBuilder(HABiomeTags.CAN_SUMMON_SHELL_BEAST)
+            .addOptionalTag(HABiomeTags.HA_DEEP_OCEANS)
+            .addOptionalTag(HABiomeTags.ALL_TRENCHES)
+            .addTag(BiomeTags.IS_DEEP_OCEAN)
+
         getOrCreateTagBuilder(BiomeTags.IS_RIVER)
             .addOptional(HABiomes.TROPICAL_RIVER)
         //#endregion

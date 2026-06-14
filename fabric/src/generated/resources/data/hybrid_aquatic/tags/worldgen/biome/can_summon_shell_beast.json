@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#hybrid_aquatic:ha_deep_oceans",
+      "required": false
+    },
+    {
+      "id": "#hybrid_aquatic:all_trenches",
+      "required": false
+    },
+    "#minecraft:is_deep_ocean"
+  ]
+}
