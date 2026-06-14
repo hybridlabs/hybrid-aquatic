@@ -77,6 +77,7 @@ object HABiomeTags {
     val MARSHES = create("marshes")
     val MANGROVES = create("mangroves")
     val HA_DEEP_OCEANS = create("ha_deep_oceans")
+    val CAN_SUMMON_SHELL_BEAST = create("can_summon_shell_beast")
 
     //#region Misc Tags
     val BOTTLE_SPAWN_BIOMES = create("bottle_spawn_biomes")
