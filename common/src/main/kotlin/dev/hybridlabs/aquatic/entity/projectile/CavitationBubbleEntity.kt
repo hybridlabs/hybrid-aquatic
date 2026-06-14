@@ -13,12 +13,12 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
 import net.minecraft.world.phys.HitResult
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 
 @Suppress("DEPRECATION")
@@ -61,9 +61,8 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         if (this.level().isClientSide || (entity == null || !entity.isRemoved) && this.level()
                 .hasChunkAt(this.blockPosition())
         ) {
-            super.tick()
             if (this.shouldBurn()) {
-                this.setSecondsOnFire(1)
+                this.igniteForSeconds(1f)
             }
 
             val hitresult = ProjectileUtil.getHitResultOnMoveVector(
@@ -81,7 +80,9 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
             ProjectileUtil.rotateTowardsMovement(this, 0.2f)
             val f = this.inertia
 
-            this.deltaMovement = vec3.add(this.xPower, this.yPower, this.zPower).scale(f.toDouble())
+            this.deltaMovement = vec3
+                .add(vec3.normalize().scale(this.accelerationPower))
+                .scale(f.toDouble())
             this.level().addParticle(
                 this.trailParticle,
                 d0,
