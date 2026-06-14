@@ -187,6 +187,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
         getOrCreateTagBuilder(HAEntityTags.ALL_FISH)
             .addTag(HAEntityTags.RAY)
             .addTag(HAEntityTags.REEF_FISH)
+            .addTag(HAEntityTags.OPEN_OCEAN_FISH)
             .addTag(HAEntityTags.DEEP_FISH)
             .addTag(HAEntityTags.RIVER_FISH)
             .addTag(HAEntityTags.TROPICAL_RIVER_FISH)
@@ -216,6 +217,7 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.NEEDLEFISH.get(),
                 HAEntityTypes.PARROTFISH.get(),
                 HAEntityTypes.SEAHORSE.get(),
+                HAEntityTypes.SEADRAGON.get(),
                 HAEntityTypes.SQUIRRELFISH.get(),
                 HAEntityTypes.STONEFISH.get(),
                 HAEntityTypes.SURGEONFISH.get(),
@@ -267,6 +269,21 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("bountiful_critters", "stingray"))
             .addOptional(ResourceLocation("rainbowreef", "ray"))
             .addOptional(ResourceLocation("finsandtails", "golden_river_ray"))
+
+        getOrCreateTagBuilder(HAEntityTags.OPEN_OCEAN_FISH)
+            .add(
+                HAEntityTypes.TUNA.get(),
+                HAEntityTypes.MAHI.get(),
+                HAEntityTypes.OPAH.get(),
+                HAEntityTypes.OCEAN_SUNFISH.get(),
+            )
+            .addOptional(ResourceLocation("spawn", "angler_fish"))
+            .addOptional(ResourceLocation("fintastic", "coelacanth"))
+            .addOptional(ResourceLocation("alexsmobs", "blobfish"))
+            .addOptional(ResourceLocation("alexscaves", "tripodfish"))
+            .addOptional(ResourceLocation("alexscaves", "lanternfish"))
+            .addOptional(ResourceLocation("alexscaves", "gossamer_worm"))
+            .addOptional(ResourceLocation("bountiful_critters", "barreleye"))
 
         getOrCreateTagBuilder(HAEntityTags.DEEP_FISH)
             .add(

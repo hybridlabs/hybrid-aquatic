@@ -30,6 +30,7 @@ object HAEntityTags {
     val ALL_FISH = create("all_fish")
     val RAY = create("ray")
     val REEF_FISH = create("reef_fish")
+    val OPEN_OCEAN_FISH = create("open_ocean_fish")
     val DEEP_FISH = create("deep_fish")
     val RIVER_FISH = create("river_fish")
     val TROPICAL_RIVER_FISH = create("tropical_river_fish")
