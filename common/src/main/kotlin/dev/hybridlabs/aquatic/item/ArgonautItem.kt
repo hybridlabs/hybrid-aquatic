@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import net.minecraft.core.Direction
+import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.stats.Stats
@@ -29,7 +30,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
         lines: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
-        val tag = stack.tag ?: return
+        val tag = stack.get(DataComponents.CUSTOM_DATA)?.copyTag() ?: return
 
         if (tag.contains("ShellColor")) {
             val color = ArgonautEntity.ShellColor.byId(tag.getInt("ShellColor"))
@@ -84,7 +85,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
     }
 
     private fun applyArgonautData(entity: ArgonautEntity, stack: ItemStack) {
-        val tag = stack.tag ?: return
+        val tag = stack.get(DataComponents.CUSTOM_DATA)?.copyTag() ?: return
 
         if (tag.contains("ShellColor")) {
             val shellColorId = tag.getInt("ShellColor")
@@ -103,6 +104,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
 
     override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         val stack = player.getItemInHand(hand)
+        val customData = stack.get(DataComponents.CUSTOM_DATA)
         val hit = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY)
 
         if (hit.type != HitResult.Type.BLOCK) {
@@ -133,7 +135,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             return InteractionResultHolder.pass(stack)
         }
 
-        stack.tag?.let { tag ->
+        customData?.copyTag()?.let { tag ->
             if (tag.contains("ShellColor")) {
                 entity.setShellColor(ArgonautEntity.ShellColor.byId(tag.getInt("ShellColor")))
             }

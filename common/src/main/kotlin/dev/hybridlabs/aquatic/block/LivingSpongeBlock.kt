@@ -26,7 +26,6 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
 class LivingSpongeBlock(
-    private val emitsParticles: Boolean,
     settings: Properties
 ) : BushBlock(settings), SimpleWaterloggedBlock {
 
@@ -85,7 +84,7 @@ class LivingSpongeBlock(
     }
 
     override fun animateTick(state: BlockState, world: Level, pos: BlockPos, random: RandomSource) {
-        if (state.getValue(WATERLOGGED) && emitsParticles && bubbleTimer % 20 == 0) {
+        if (state.getValue(WATERLOGGED) && bubbleTimer % 20 == 0) {
             (bubbleTimer / 60).toFloat() * 0.05f
             val upwardVelocity = 0.1f
 
@@ -101,7 +100,12 @@ class LivingSpongeBlock(
         bubbleTimer++
     }
 
+    override fun codec(): MapCodec<out BushBlock> {
+        return CODEC
+    }
+
     companion object {
+        val CODEC: MapCodec<LivingSpongeBlock> = simpleCodec(::LivingSpongeBlock)
         private val SHAPE = box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }
 }

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.placement.AquaticPlacements
@@ -17,6 +18,10 @@ import net.minecraft.world.level.block.state.BlockState
 class GrassySandBlock(properties: Properties) :
     FallingBlock(properties), BonemealableBlock {
 
+    override fun codec(): MapCodec<out FallingBlock> {
+        return CODEC
+    }
+
     override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState): Boolean {
         return level.getBlockState(pos.above()).isAir
     }
@@ -25,14 +30,14 @@ class GrassySandBlock(properties: Properties) :
         level: Level,
         random: RandomSource,
         pos: BlockPos,
-        state: BlockState
+        state: BlockState,
     ): Boolean = true
 
     override fun performBonemeal(
         level: ServerLevel,
         random: RandomSource,
         pos: BlockPos,
-        state: BlockState
+        state: BlockState,
     ) {
         val startPos = pos.above()
 
@@ -74,7 +79,7 @@ class GrassySandBlock(properties: Properties) :
         state: BlockState,
         level: ServerLevel,
         pos: BlockPos,
-        random: RandomSource
+        random: RandomSource,
     ) {
         val abovePos = pos.above()
         val aboveState = level.getBlockState(abovePos)
@@ -90,4 +95,8 @@ class GrassySandBlock(properties: Properties) :
     }
 
     override fun isRandomlyTicking(state: BlockState): Boolean = true
+
+    companion object {
+        val CODEC: MapCodec<GrassySandBlock> = simpleCodec(::GrassySandBlock)
+    }
 }

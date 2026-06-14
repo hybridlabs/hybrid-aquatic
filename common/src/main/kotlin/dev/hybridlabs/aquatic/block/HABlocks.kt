@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.util.ColorRGBA
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -14,7 +15,6 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument
 import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
 import java.util.function.Supplier
-import net.minecraft.util.ColorRGBA
 
 
 /**
@@ -802,7 +802,7 @@ object HABlocks {
     }
 
     val TUBE_SPONGE = register("tube_sponge") {
-        LivingSpongeBlock(true, Properties.of()
+        LivingSpongeBlock(Properties.of()
             .mapColor(MapColor.COLOR_YELLOW)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
@@ -810,7 +810,7 @@ object HABlocks {
     }
 
     val GLASS_SPONGE = register("glass_sponge") {
-        LivingSpongeBlock(true, Properties.of()
+        LivingSpongeBlock(Properties.of()
             .mapColor(MapColor.COLOR_LIGHT_GRAY)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
@@ -819,7 +819,7 @@ object HABlocks {
     }
 
     val HARP_SPONGE = register("harp_sponge") {
-        LivingSpongeBlock(true, Properties.of()
+        LivingSpongeBlock(Properties.of()
             .mapColor(MapColor.COLOR_LIGHT_GRAY)
             .sound(SoundType.SLIME_BLOCK)
             .noCollission()
@@ -829,7 +829,7 @@ object HABlocks {
     }
 
     val PING_PONG_SPONGE = register("ping_pong_sponge") {
-        LivingSpongeBlock(true, Properties.of()
+        LivingSpongeBlock(Properties.of()
             .mapColor(MapColor.COLOR_LIGHT_GRAY)
             .sound(SoundType.SLIME_BLOCK)
             .noCollission()
