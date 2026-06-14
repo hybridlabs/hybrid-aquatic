@@ -1,0 +1,37 @@
+{
+  "replace": false,
+  "values": [
+    "hybrid_aquatic:tuna",
+    "hybrid_aquatic:mahi",
+    "hybrid_aquatic:opah",
+    "hybrid_aquatic:ocean_sunfish",
+    {
+      "id": "spawn:angler_fish",
+      "required": false
+    },
+    {
+      "id": "fintastic:coelacanth",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:blobfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:gossamer_worm",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:barreleye",
+      "required": false
+    }
+  ]
+}
