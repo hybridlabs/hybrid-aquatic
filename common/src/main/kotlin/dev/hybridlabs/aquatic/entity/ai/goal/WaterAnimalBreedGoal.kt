@@ -88,7 +88,6 @@ open class WaterAnimalBreedGoal @JvmOverloads constructor(
         this.waterAnimal.spawnChildFromBreeding(this.level as ServerLevel, mate)
     }
 
-
     companion object {
         private val PARTNER_TARGETING: TargetingConditions =
             TargetingConditions.forNonCombat().range(8.0).ignoreLineOfSight()

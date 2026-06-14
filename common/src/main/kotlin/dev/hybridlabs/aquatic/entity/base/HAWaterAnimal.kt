@@ -69,7 +69,9 @@ abstract class HAWaterAnimal protected constructor(
     }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
-        return !this.fromFishingNet && !this.hasCustomName()
+        return !isPersistenceRequired &&
+                !this.fromFishingNet &&
+                !this.hasCustomName()
     }
 
     override fun tick() {
@@ -456,6 +458,8 @@ abstract class HAWaterAnimal protected constructor(
     open fun spawnChildFromBreeding(level: ServerLevel, mate: HAWaterAnimal) {
         val baby = this.getBreedOffspring(level, mate) ?: return
 
+        this.setPersistenceRequired()
+        baby.setPersistenceRequired()
         baby.isBaby = true
         baby.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
 
