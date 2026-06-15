@@ -276,14 +276,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.MAHI.get(),
                 HAEntityTypes.OPAH.get(),
                 HAEntityTypes.OCEAN_SUNFISH.get(),
+                HAEntityTypes.BARRACUDA.get(),
             )
-            .addOptional(ResourceLocation("spawn", "angler_fish"))
-            .addOptional(ResourceLocation("fintastic", "coelacanth"))
-            .addOptional(ResourceLocation("alexsmobs", "blobfish"))
-            .addOptional(ResourceLocation("alexscaves", "tripodfish"))
-            .addOptional(ResourceLocation("alexscaves", "lanternfish"))
-            .addOptional(ResourceLocation("alexscaves", "gossamer_worm"))
-            .addOptional(ResourceLocation("bountiful_critters", "barreleye"))
+            .addOptional(ResourceLocation("spawn", "sunfish"))
+            .addOptional(ResourceLocation("spawn", "tuna"))
+            .addOptional(ResourceLocation("spawn", "barracuda"))
 
         getOrCreateTagBuilder(HAEntityTags.DEEP_FISH)
             .add(

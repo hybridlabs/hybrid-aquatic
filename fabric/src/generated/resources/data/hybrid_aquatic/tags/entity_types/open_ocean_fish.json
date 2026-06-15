@@ -5,32 +5,17 @@
     "hybrid_aquatic:mahi",
     "hybrid_aquatic:opah",
     "hybrid_aquatic:ocean_sunfish",
+    "hybrid_aquatic:barracuda",
     {
-      "id": "spawn:angler_fish",
+      "id": "spawn:sunfish",
       "required": false
     },
     {
-      "id": "fintastic:coelacanth",
+      "id": "spawn:tuna",
       "required": false
     },
     {
-      "id": "alexsmobs:blobfish",
-      "required": false
-    },
-    {
-      "id": "alexscaves:tripodfish",
-      "required": false
-    },
-    {
-      "id": "alexscaves:lanternfish",
-      "required": false
-    },
-    {
-      "id": "alexscaves:gossamer_worm",
-      "required": false
-    },
-    {
-      "id": "bountiful_critters:barreleye",
+      "id": "spawn:barracuda",
       "required": false
     }
   ]
