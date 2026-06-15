@@ -14,18 +14,10 @@ import net.minecraft.tags.BiomeTags
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.levelgen.SurfaceRules.DEEP_UNDER_FLOOR
-import net.minecraft.world.level.levelgen.SurfaceRules.ON_FLOOR
-import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource
-import net.minecraft.world.level.levelgen.SurfaceRules.UNDER_FLOOR
-import net.minecraft.world.level.levelgen.SurfaceRules.abovePreliminarySurface
-import net.minecraft.world.level.levelgen.SurfaceRules.ifTrue
-import net.minecraft.world.level.levelgen.SurfaceRules.isBiome
-import net.minecraft.world.level.levelgen.SurfaceRules.sequence
-import net.minecraft.world.level.levelgen.SurfaceRules.state
+import net.minecraft.world.level.levelgen.SurfaceRules.*
 
 object HABiomes {
-    val config = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
+    val config by lazy { ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE) }
 
     //#region Reworked Vanilla Surface Rules
     val WARM_OCEAN_SURFACE_RULE: RuleSource = ifTrue(
