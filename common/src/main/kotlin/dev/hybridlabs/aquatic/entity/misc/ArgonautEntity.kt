@@ -10,7 +10,7 @@ import net.minecraft.network.protocol.game.ServerboundPaddleBoatPacket
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.ResourceKey
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
@@ -32,6 +32,7 @@ import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
@@ -51,7 +52,7 @@ open class ArgonautEntity(
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
     private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(28, ItemStack.EMPTY)
-    private var argonautLootTable: ResourceLocation? = null
+    private var argonautLootTable: ResourceKey<LootTable>? = null
     private var argonautLootTableSeed: Long = 0
     private var inputLeft = false
     private var inputRight = false
@@ -404,6 +405,7 @@ open class ArgonautEntity(
 
     fun getArgonautItem(argonaut: ArgonautEntity): ItemStack {
         val stack = ItemStack(HAItems.ARGONAUT.get())
+        TODO("FIX")
         val tag = stack.orCreateTag
 
         tag.putInt("ShellColor", argonaut.getShellColor().id)
@@ -471,9 +473,14 @@ open class ArgonautEntity(
         return true
     }
 
-    override fun getPassengersRidingOffset(): Double {
-        return 0.65
+    override fun getPassengerRidingPosition(entity: Entity): Vec3 {
+        TODO("HAVENT FIXED")
+        return super.getPassengerRidingPosition(entity)
     }
+
+//    override fun getPassengersRidingOffset(): Double {
+//        return 0.65
+//    }
 
     protected fun clampRotation(entityToUpdate: Entity) {
         entityToUpdate.setYBodyRot(this.yRot)
@@ -587,11 +594,11 @@ open class ArgonautEntity(
         }
     }
 
-    override fun getLootTable(): ResourceLocation? {
+    override fun getLootTable(): ResourceKey<LootTable> {
         return argonautLootTable
     }
 
-    override fun setLootTable(id: ResourceLocation?) {
+    override fun setLootTable(id: ResourceKey<LootTable?>?) {
         argonautLootTable = id
     }
 

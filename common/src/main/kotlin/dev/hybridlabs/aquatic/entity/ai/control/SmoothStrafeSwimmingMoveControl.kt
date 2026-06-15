@@ -120,11 +120,12 @@ open class SmoothStrafeSwimmingMoveControl(
         val pathnavigation = this.mob.getNavigation()
         if (pathnavigation != null) {
             val nodeevaluator = pathnavigation.getNodeEvaluator()
-            if (nodeevaluator != null && nodeevaluator.getBlockPathType(
-                    this.mob.level(),
+            if (nodeevaluator != null && nodeevaluator.getPathTypeOfMob(
+                    TODO("NEEDS FIXING"),
                     Mth.floor(this.mob.x + relativeX.toDouble()),
                     this.mob.blockY,
-                    Mth.floor(this.mob.z + relativeZ.toDouble())
+                    Mth.floor(this.mob.z + relativeZ.toDouble()),
+                    this.mob
                 ) == PathType.BLOCKED
             ) {
                 return false

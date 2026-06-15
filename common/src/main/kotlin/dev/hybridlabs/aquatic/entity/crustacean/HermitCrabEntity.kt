@@ -37,6 +37,7 @@ import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.PlayState
+import kotlin.jvm.optionals.getOrDefault
 
 @Suppress("DEPRECATION")
 class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
@@ -52,14 +53,15 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
         super.addAdditionalSaveData(compound)
-        if (hasShell) compound.put("ShellItem", shellItem.save(CompoundTag()))
+        if (hasShell) compound.put("ShellItem", shellItem.save(this.registryAccess()))
     }
 
     override fun readAdditionalSaveData(compound: CompoundTag) {
         super.readAdditionalSaveData(compound)
         if (hasShell) {
+            TODO("MIGRATE TO COMPONENTS")
             val shellItemNBT = compound.getCompound("ShellItem")
-            shellItem = if (shellItemNBT.isEmpty) Items.NAUTILUS_SHELL.defaultInstance else ItemStack.of(shellItemNBT)
+            shellItem = if (shellItemNBT.isEmpty) Items.NAUTILUS_SHELL.defaultInstance else ItemStack.parse(this.registryAccess(), shellItemNBT).getOrDefault(Items.NAUTILUS_SHELL.defaultInstance)
         }
     }
 
