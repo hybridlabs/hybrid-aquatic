@@ -43,6 +43,7 @@ object HybridAquaticForge {
         StructureSpawnModifier.registerHybridAquaticStructureModifiers()
         HAGlobalLootModifier.registerGlobalLootModifiers()
 
+        HAParticleTypes
         HABlocks
         HAPlatformBlocks
         HAPlatformFluids
@@ -50,7 +51,6 @@ object HybridAquaticForge {
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings
-        HAParticleTypes
 
         HABiomeTags
 

@@ -1,6 +1,9 @@
 package dev.hybridlabs.aquatic
 
-import dev.hybridlabs.aquatic.block.*
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.property.FlammableProperty
 import dev.hybridlabs.aquatic.block.property.StrippableProperty
@@ -51,6 +54,7 @@ object HybridAquatic : ModInitializer {
         logger.info("Initializing ${Constants.MOD_NAME}")
         CommonClass.init()
 
+        HAParticleTypes
         HABlocks
         HAPlatformFluids
         HAPlatformBlocks
@@ -59,7 +63,6 @@ object HybridAquatic : ModInitializer {
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings
-        HAParticleTypes
 
         if (configHandler.config.biomeConfig.enableBiomes) {
             HABiomes.addBiomes()
@@ -88,8 +91,6 @@ object HybridAquatic : ModInitializer {
         FeatureBiomeModifications.registerBiomeModifications()
 
         SpawnRestrictionRegistry.registerSpawnRestrictions()
-
-        //HybridAquaticParticleTypes
 
         registerDynamicRegistries()
         if (configHandler.config.enableWanderingTraderTrades) {
