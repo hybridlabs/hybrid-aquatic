@@ -110,7 +110,7 @@ open class ArgonautEntity(
         tag.putString("ShellColor", this.getShellColor().serializedName)
         tag.putString("SailColor", this.getSailColor().serializedName)
         tag.putInt("BurnTime", this.litTime)
-        this.addChestVehicleSaveData(tag)
+        this.addChestVehicleSaveData(tag, this.registryAccess())
     }
 
     override fun readAdditionalSaveData(tag: CompoundTag) {
