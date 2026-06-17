@@ -81,7 +81,6 @@ fabricApi {
     }
 }
 
-
 loom {
     var accessWidenerFile = file("src/main/resources/${mod_id}.accesswidener")
     if (accessWidenerFile.exists()) {

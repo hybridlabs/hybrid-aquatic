@@ -39,7 +39,6 @@ legacyForge {
         main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
     }
 
-
     runs {
         client {
             client()
