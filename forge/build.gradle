@@ -68,23 +68,28 @@ repositories {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
+
     maven {
         name = "Geckolib"
         url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
     }
+
     maven {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven/"
     }
+
     maven {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/releases/"
     }
-    mavenCentral()
+
     maven {
         name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
     }
+
+    mavenCentral()
 }
 
 sourceSets.main.resources.srcDirs += 'src/generated/resources'
