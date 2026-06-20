@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import net.minecraft.ChatFormatting
+import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.TagKey
@@ -31,14 +32,14 @@ class OminousConchItem(
         lines: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
-        val tag = stack.tags
+        val customData = stack.get(DataComponents.CUSTOM_DATA) ?: return
 
         lines.add(
             Component.translatable("item.hybrid_aquatic.ominous_conch.function")
                 .withStyle(ChatFormatting.GRAY)
         )
 
-        val hasSummoned = tag.getBoolean("hasSummoned") == true
+        val hasSummoned = customData.contains("hasSummoned")
 
         if (!hasSummoned) {
             lines.add(
