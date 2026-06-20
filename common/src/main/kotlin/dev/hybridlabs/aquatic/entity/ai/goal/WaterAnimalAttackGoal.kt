@@ -36,27 +36,19 @@ open class WaterAnimalAttackGoal(
             return false
         }
 
-        val i = waterAnimal.level().gameTime
+        val i: Long = waterAnimal.level().gameTime
         if (i - this.lastCanUseCheck < 20L) {
             return false
         } else {
             this.lastCanUseCheck = i
-            val livingEntity = waterAnimal.target
-            if (livingEntity == null) {
+            val livingentity: LivingEntity? = waterAnimal.target
+            if (livingentity == null) {
                 return false
-            } else if (!livingEntity.isAlive) {
+            } else if (!livingentity.isAlive) {
                 return false
             } else {
-                this.path = waterAnimal.navigation.createPath(livingEntity, 3)
-                return if (this.path != null) {
-                    true
-                } else {
-                    getAttackReachSqr(livingEntity) >= waterAnimal.distanceToSqr(
-                        livingEntity.x,
-                        livingEntity.y,
-                        livingEntity.z
-                    )
-                }
+                this.path = waterAnimal.getNavigation().createPath(livingentity, 0)
+                return if (this.path != null) true else waterAnimal.isWithinMeleeAttackRange(livingentity)
             }
         }
     }
@@ -105,7 +97,6 @@ open class WaterAnimalAttackGoal(
         val livingEntity = waterAnimal.target
         if (livingEntity != null) {
             waterAnimal.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
-            val d0 = waterAnimal.isWithinMeleeAttackRange(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((this.followingTargetEvenIfNotSeen || waterAnimal.sensing.hasLineOfSight(livingEntity)) &&
@@ -122,6 +113,7 @@ open class WaterAnimalAttackGoal(
                 this.pathedTargetY = livingEntity.y
                 this.pathedTargetZ = livingEntity.z
                 this.ticksUntilNextPathRecalculation = 4 + waterAnimal.random.nextInt(7)
+                val d0: Double = waterAnimal.distanceToSqr(livingEntity)
                 if (d0 > 1024.0) {
                     this.ticksUntilNextPathRecalculation += 10
                 } else if (d0 > 256.0) {
@@ -135,21 +127,16 @@ open class WaterAnimalAttackGoal(
                 this.ticksUntilNextPathRecalculation = this.adjustedTickDelay(this.ticksUntilNextPathRecalculation)
             }
 
-            this.ticksUntilNextAttack =
-                max((this.ticksUntilNextAttack - 1).toDouble(), 0.0).toInt()
-            this.checkAndPerformAttack(livingEntity, d0)
+            this.ticksUntilNextAttack = max((this.ticksUntilNextAttack - 1).toDouble(), 0.0).toInt()
+            this.checkAndPerformAttack(livingEntity)
         }
     }
 
-    protected open fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
-        val d0 = this.getAttackReachSqr(enemy)
-        if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
+    protected open fun checkAndPerformAttack(target: LivingEntity) {
+        if (this.canPerformAttack(target)) {
             this.resetAttackCooldown()
             waterAnimal.swing(InteractionHand.MAIN_HAND)
-            waterAnimal.doHurtTarget(enemy)
-
-            if (enemy.health <= 0) waterAnimal.hunger = HAWaterAnimal.MAX_HUNGER
-            waterAnimal.health = waterAnimal.maxHealth
+            waterAnimal.doHurtTarget(target)
         }
     }
 
@@ -157,7 +144,12 @@ open class WaterAnimalAttackGoal(
         this.ticksUntilNextAttack = this.adjustedTickDelay(20)
     }
 
-    protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (waterAnimal.bbWidth * 1.75f * waterAnimal.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
+    protected fun isTimeToAttack(): Boolean {
+        return this.ticksUntilNextAttack <= 0
+    }
+
+    protected fun canPerformAttack(entity: LivingEntity): Boolean {
+        return this.isTimeToAttack() && waterAnimal.isWithinMeleeAttackRange(entity) && waterAnimal.sensing
+            .hasLineOfSight(entity)
     }
 }
