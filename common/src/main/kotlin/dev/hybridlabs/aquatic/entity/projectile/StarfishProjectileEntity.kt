@@ -36,7 +36,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     constructor(
         level: Level,
         owner: LivingEntity,
-    ) : super(HAEntityTypes.STARFISH_PROJECTILE.get(), owner, level)
+    ) : super(HAEntityTypes.STARFISH_PROJECTILE.get(), owner, level, ItemStack(HAItems.STARFISH.get()),null)
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
