@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.inventory.ArgonautMenu
 import net.minecraft.core.Direction
 import net.minecraft.core.NonNullList
+import net.minecraft.core.component.DataComponents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ServerboundPaddleBoatPacket
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -28,19 +29,21 @@ import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.DyeItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 import net.minecraft.world.level.gameevent.GameEvent
+import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
 import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.IntFunction
 
@@ -48,11 +51,11 @@ open class ArgonautEntity(
     type: EntityType<out ArgonautEntity>,
     world: Level,
 ) :
-    Entity(type, world), PlayerRideable, HasCustomInventoryScreen, ContainerEntity,
+    LivingEntity(type, world), PlayerRideable, HasCustomInventoryScreen, ContainerEntity,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
     private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(28, ItemStack.EMPTY)
-    private var argonautLootTable: ResourceKey<LootTable>? = null
+    private var argonautLootTable: ResourceKey<LootTable> = BuiltInLootTables.EMPTY
     private var argonautLootTableSeed: Long = 0
     private var inputLeft = false
     private var inputRight = false
@@ -72,7 +75,7 @@ open class ArgonautEntity(
     private var litDuration = 0
     private val dataAccess = object : ContainerData {
         override fun get(index: Int): Int {
-            return when(index) {
+            return when (index) {
                 0 -> litTime
                 1 -> litDuration
                 else -> 0
@@ -80,7 +83,7 @@ open class ArgonautEntity(
         }
 
         override fun set(index: Int, value: Int) {
-            when(index) {
+            when (index) {
                 0 -> litTime = value
                 1 -> litDuration = value
             }
@@ -90,7 +93,7 @@ open class ArgonautEntity(
             return 2
         }
     }
-    
+
     //#region Data
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(DATA_ID_HURT, 0)
@@ -131,7 +134,7 @@ open class ArgonautEntity(
 
         this.litTime = tag.getInt("BurnTime")
         setLit(litTime > 0)
-        this.readChestVehicleSaveData(tag)
+        this.readChestVehicleSaveData(tag, this.registryAccess())
     }
     //#endregion
 
@@ -253,7 +256,7 @@ open class ArgonautEntity(
         }
     }
 
-    open fun tickRidden(player: Player, travelVector: Vec3) {
+    override fun tickRidden(player: Player, travelVector: Vec3) {
         val vec2 = getRiddenRotation(player)
 
         val pitch = if (this.onGround() && !this.isInWater) 0f else vec2.x
@@ -263,7 +266,7 @@ open class ArgonautEntity(
         yRotO = yRot
     }
 
-    protected open fun getRiddenRotation(entity: LivingEntity): Vec2 {
+    fun getRiddenRotation(entity: LivingEntity): Vec2 {
         return Vec2(entity.xRot, entity.yRot)
     }
 
@@ -271,7 +274,8 @@ open class ArgonautEntity(
         if (this.isInWater) {
             val waterFriction = 0.96f
 
-            this.deltaMovement = deltaMovement.multiply(waterFriction.toDouble(), waterFriction.toDouble(), waterFriction.toDouble())
+            this.deltaMovement =
+                deltaMovement.multiply(waterFriction.toDouble(), waterFriction.toDouble(), waterFriction.toDouble())
             this.deltaRotation *= waterFriction
         } else {
             val groundFriction = 0.9
@@ -377,7 +381,7 @@ open class ArgonautEntity(
     }
 
     override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (source.entity != null && this.hasPassenger(source.entity)) {
+        if (this.hasPassenger(source.entity)) {
             return false
         }
 
@@ -405,13 +409,12 @@ open class ArgonautEntity(
 
     fun getArgonautItem(argonaut: ArgonautEntity): ItemStack {
         val stack = ItemStack(HAItems.ARGONAUT.get())
-        TODO("FIX")
-        val tag = stack.orCreateTag
-
-        tag.putInt("ShellColor", argonaut.getShellColor().id)
-        tag.putInt("SailColor", argonaut.getSailColor().id)
-        tag.putBoolean("Glowing", argonaut.isGlowing())
-
+        val tag = CompoundTag().apply {
+            putInt("ShellColor", argonaut.getShellColor().id)
+            putInt("SailColor", argonaut.getSailColor().id)
+            putBoolean("Glowing", argonaut.isGlowing())
+        }
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag))
         return stack
     }
 
@@ -473,8 +476,11 @@ open class ArgonautEntity(
         return true
     }
 
+    override fun getMainArm(): HumanoidArm {
+        TODO("Not yet implemented")
+    }
+
     override fun getPassengerRidingPosition(entity: Entity): Vec3 {
-        TODO("HAVENT FIXED")
         return super.getPassengerRidingPosition(entity)
     }
 
@@ -555,7 +561,7 @@ open class ArgonautEntity(
             callback.accept(
                 passenger,
                 this.x,
-                this.y + this.passengersRidingOffset + passenger.myRidingOffset,
+                this.y + this.getPassengerRidingPosition(passenger).y,
                 this.z
             )
         }
@@ -598,12 +604,27 @@ open class ArgonautEntity(
         return argonautLootTable
     }
 
-    override fun setLootTable(id: ResourceKey<LootTable?>?) {
-        argonautLootTable = id
+    override fun setLootTable(id: ResourceKey<LootTable>?) {
+        if (id != null) argonautLootTable = id
     }
 
     override fun getLootTableSeed(): Long {
         return argonautLootTableSeed
+    }
+
+    override fun getArmorSlots(): Iterable<ItemStack?> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getItemBySlot(slot: EquipmentSlot): ItemStack {
+        TODO("Not yet implemented")
+    }
+
+    override fun setItemSlot(
+        slot: EquipmentSlot,
+        stack: ItemStack
+    ) {
+        TODO("Not yet implemented")
     }
 
     override fun setLootTableSeed(seed: Long) {
@@ -653,7 +674,7 @@ open class ArgonautEntity(
         playerInventory: Inventory,
         player: Player,
     ): AbstractContainerMenu? {
-        if (this.lootTable != null && player.isSpectator) {
+        if (this.lootTable == BuiltInLootTables.EMPTY && player.isSpectator) {
             return null
         } else {
             this.unpackLootTable(playerInventory.player)
