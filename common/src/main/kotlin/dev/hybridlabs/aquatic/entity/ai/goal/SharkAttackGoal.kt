@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.effect.MobEffectInstance
@@ -41,27 +41,19 @@ open class SharkAttackGoal(
             return false
         }
 
-        val i = shark.level().gameTime
+        val i: Long = shark.level().gameTime
         if (i - this.lastCanUseCheck < 20L) {
             return false
         } else {
             this.lastCanUseCheck = i
-            val livingEntity = shark.target
-            if (livingEntity == null) {
+            val livingentity: LivingEntity? = shark.target
+            if (livingentity == null) {
                 return false
-            } else if (!livingEntity.isAlive) {
+            } else if (!livingentity.isAlive) {
                 return false
             } else {
-                this.path = shark.navigation.createPath(livingEntity, 3)
-                return if (this.path != null) {
-                    true
-                } else {
-                    getAttackReachSqr(livingEntity) >= shark.distanceToSqr(
-                        livingEntity.x,
-                        livingEntity.y,
-                        livingEntity.z
-                    )
-                }
+                this.path = shark.getNavigation().createPath(livingentity, 0)
+                return if (this.path != null) true else shark.isWithinMeleeAttackRange(livingentity)
             }
         }
     }
@@ -110,7 +102,6 @@ open class SharkAttackGoal(
         val livingEntity = shark.target
         if (livingEntity != null) {
             shark.lookControl.setLookAt(livingEntity, 30.0f, 30.0f)
-            val d0 = shark.isWithinMeleeAttackRange(livingEntity)
             this.ticksUntilNextPathRecalculation =
                 max((this.ticksUntilNextPathRecalculation - 1).toDouble(), 0.0).toInt()
             if ((this.followingTargetEvenIfNotSeen || shark.sensing.hasLineOfSight(livingEntity)) &&
@@ -127,6 +118,7 @@ open class SharkAttackGoal(
                 this.pathedTargetY = livingEntity.y
                 this.pathedTargetZ = livingEntity.z
                 this.ticksUntilNextPathRecalculation = 4 + shark.random.nextInt(7)
+                val d0: Double = shark.distanceToSqr(livingEntity)
                 if (d0 > 1024.0) {
                     this.ticksUntilNextPathRecalculation += 10
                 } else if (d0 > 256.0) {
@@ -140,19 +132,19 @@ open class SharkAttackGoal(
                 this.ticksUntilNextPathRecalculation = this.adjustedTickDelay(this.ticksUntilNextPathRecalculation)
             }
 
-            this.ticksUntilNextAttack =
-                max((this.ticksUntilNextAttack - 1).toDouble(), 0.0).toInt()
-            this.checkAndPerformAttack(livingEntity, d0)
+            this.ticksUntilNextAttack = max((this.ticksUntilNextAttack - 1).toDouble(), 0.0).toInt()
+            this.checkAndPerformAttack(livingEntity)
         }
     }
 
-    protected open fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
-        val d0 = this.getAttackReachSqr(enemy)
-        if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
+    protected open fun checkAndPerformAttack(enemy: LivingEntity) {
+        if (this.canPerformAttack(enemy)) {
             this.resetAttackCooldown()
             shark.swing(InteractionHand.MAIN_HAND)
             shark.doHurtTarget(enemy)
-            if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), 200, 0), shark) }
+            if (!enemy.isBlocking) {
+                enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), 200, 0), shark)
+            }
 
             if (enemy.health <= 0) shark.hunger = HAWaterAnimal.MAX_HUNGER
 
@@ -167,7 +159,12 @@ open class SharkAttackGoal(
         this.ticksUntilNextAttack = this.adjustedTickDelay(20)
     }
 
-    protected open fun getAttackReachSqr(attackTarget: LivingEntity): Double {
-        return (shark.bbWidth * 1.75f * shark.bbWidth * 1.75f + attackTarget.bbWidth).toDouble()
+    protected fun isTimeToAttack(): Boolean {
+        return this.ticksUntilNextAttack <= 0
+    }
+
+    protected fun canPerformAttack(entity: LivingEntity): Boolean {
+        return this.isTimeToAttack() && shark.isWithinMeleeAttackRange(entity) && shark.sensing
+            .hasLineOfSight(entity)
     }
 }
