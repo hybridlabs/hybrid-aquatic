@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.TagEntry.tag
 import net.minecraft.tags.TagKey
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -60,7 +61,7 @@ class OminousConchItem(
 
         if (level.isClientSide) return result
 
-        val tag = stack.orCreateTag
+        val tag = stack.get(DataComponents.CUSTOM_DATA)?.copyTag() ?: return result
 
         if (tag.getBoolean(TAG_HAS_SUMMONED)) return result
 
