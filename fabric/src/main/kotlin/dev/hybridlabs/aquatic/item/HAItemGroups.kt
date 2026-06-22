@@ -355,6 +355,7 @@ object HAItemGroups {
                 entries.accept(HAItems.BARRELEYE.get())
                 entries.accept(HAItems.DRAGONFISH.get())
                 entries.accept(HAItems.BLOBFISH.get())
+                entries.accept(HAItems.HAGFISH.get())
                 entries.accept(HAItems.FLASHLIGHT_FISH.get())
                 entries.accept(HAItems.RATFISH.get())
                 entries.accept(HAItems.SQUIRRELFISH.get())
