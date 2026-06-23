@@ -41,7 +41,7 @@ object HybridAquaticNetworkingForge {
             if (foundEntity == null || foundEntity !is FishingHook) return
 
             val additionalBobberData = foundEntity as CustomFishingBobberEntityData
-            additionalBobberData.`hybrid_aquatic$setLureItem`(itemStack)
+            additionalBobberData.lureItem
             sendHookPacket(data.id, itemStack)
         }
     }
@@ -55,7 +55,7 @@ object HybridAquaticNetworkingForge {
             if (foundEntity !is FishingHook) return
 
             val additionalBobberData = foundEntity as CustomFishingBobberEntityData
-            val lureItem: ItemStack = additionalBobberData.`hybrid_aquatic$getLureItem`()
+            val lureItem: ItemStack = additionalBobberData.lureItem
             if (lureItem.isEmpty) return
 
             sendClientHookPacket(sender, foundEntity.id, lureItem)

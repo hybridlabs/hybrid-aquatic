@@ -26,9 +26,7 @@
         "compat.carpet.StickyBlockCarpetHACompatMixin"
     ],
     "client": [
-        "client.BookScreenMixin",
         "client.CameraMixin",
-        "client.ClientPlayNetworkHandlerMixin",
         "client.FishingBobberEntityClientMixin",
         "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",

@@ -21,7 +21,7 @@ object HybridAquaticFabricNetworking {
             if (foundEntity == null || foundEntity !is FishingHook) return@registerGlobalReceiver
 
             val additionalBobberData = foundEntity as CustomFishingBobberEntityData
-            val lureItem: ItemStack = additionalBobberData.`hybrid_aquatic$getLureItem`()
+            val lureItem: ItemStack = additionalBobberData.lureItem
             if (lureItem.isEmpty) return@registerGlobalReceiver
 
             if (ServerPlayNetworking.canSend(context.player(), FishingBobberPayload.type))

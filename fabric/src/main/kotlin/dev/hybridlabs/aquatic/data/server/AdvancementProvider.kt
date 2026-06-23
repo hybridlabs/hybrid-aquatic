@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server
 
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
@@ -9,25 +10,18 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementHolder
 import net.minecraft.advancements.AdvancementType
-import net.minecraft.advancements.RequirementsStrategy
-import net.minecraft.advancements.critereon.BlockPredicate
-import net.minecraft.advancements.critereon.EnterBlockTrigger
-import net.minecraft.advancements.critereon.EntityPredicate
-import net.minecraft.advancements.critereon.InventoryChangeTrigger
-import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger
-import net.minecraft.advancements.critereon.KilledTrigger
-import net.minecraft.advancements.critereon.LocationPredicate
+import net.minecraft.advancements.critereon.*
 import net.minecraft.core.HolderLookup
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.Blocks.WATER
+import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(output) {
-    override fun generateAdvancement(p0: HolderLookup.Provider, consumer: Consumer<AdvancementHolder>) {
+class AdvancementProvider(output: FabricDataOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) : FabricAdvancementProvider(output,registryLookup) {
+    override fun generateAdvancement(registryLookup: HolderLookup.Provider, consumer: Consumer<AdvancementHolder>) {
         val rootAdvancement = Advancement.Builder.advancement()
             .display(
                 HAItems.TUNA.get(),
@@ -43,7 +37,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "enter_water",
                 EnterBlockTrigger.TriggerInstance.entersBlock(WATER)
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "root"))
+            .build(CommonClass.locate("root"))
         consumer.accept(rootAdvancement)
 
         val fishingNetAdvancement = Advancement.Builder.advancement()
@@ -62,7 +56,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "fishing_net",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.FISHING_NET.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "fishing_net"))
+            .build(CommonClass.locate("fishing_net"))
         consumer.accept(fishingNetAdvancement)
 
         val divingWeightAdvancement = Advancement.Builder.advancement()
@@ -81,7 +75,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "diving_weight",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.DIVING_WEIGHT.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "diving_weight"))
+            .build(CommonClass.locate("diving_weight"))
         consumer.accept(divingWeightAdvancement)
 
         val fishingHookAdvancement = Advancement.Builder.advancement()
@@ -102,7 +96,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.LURE_ITEMS).build()
                 )
 
-            ).build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "hook"))
+            ).build(CommonClass.locate("hook"))
         consumer.accept(fishingHookAdvancement)
 
         val creeperHookAdvancement = Advancement.Builder.advancement()
@@ -121,7 +115,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_creeper_hook",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CREEPERMAGNET_HOOK.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "creeper_hook"))
+            .build(CommonClass.locate("creeper_hook"))
         consumer.accept(creeperHookAdvancement)
 
         //#region Depth Charge Advancement Tree
@@ -141,7 +135,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_glowstick",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSTICK.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowstick"))
+            .build(CommonClass.locate("glowstick"))
         consumer.accept(glowstickAdvancement)
 
         val buoyAdvancement = Advancement.Builder.advancement()
@@ -160,7 +154,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_buoy",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BUOY.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "buoy"))
+            .build(CommonClass.locate("buoy"))
         consumer.accept(buoyAdvancement)
 
         val sulfurAdvancement = Advancement.Builder.advancement()
@@ -179,7 +173,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_sulfur",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "sulfur"))
+            .build(CommonClass.locate("sulfur"))
         consumer.accept(sulfurAdvancement)
 
         val depthChargeAdvancement = Advancement.Builder.advancement()
@@ -198,7 +192,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_depth_charge",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.DEPTH_CHARGE.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "depth_charge"))
+            .build(CommonClass.locate("depth_charge"))
         consumer.accept(depthChargeAdvancement)
         //#endregion
 
@@ -221,7 +215,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     Items.NAUTILUS_SHELL
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "nautilus_shell"))
+            .build(CommonClass.locate("nautilus_shell"))
         consumer.accept(seashellAdvancement)
 
         val seashellToolsAdvancement = Advancement.Builder.advancement()
@@ -242,7 +236,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.SEASHELL_SET).build()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "seashell_tools"))
+            .build(CommonClass.locate("seashell_tools"))
         consumer.accept(seashellToolsAdvancement)
 
         val obtainConduitAdvancement = Advancement.Builder.advancement()
@@ -261,7 +255,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_conduit",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.CONDUIT)
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "conduit"))
+            .build(CommonClass.locate("conduit"))
         consumer.accept(obtainConduitAdvancement)
         //#endregion
 
@@ -284,7 +278,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.CORAL_CHUNK.get()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "coral_chunk"))
+            .build(CommonClass.locate("coral_chunk"))
         consumer.accept(coralChunkAdvancement)
 
         val coralToolsAdvancement = Advancement.Builder.advancement()
@@ -305,7 +299,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.CORAL_SET).build()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "coral_tools"))
+            .build(CommonClass.locate("coral_tools"))
         consumer.accept(coralToolsAdvancement)
         //#endregion
 
@@ -313,7 +307,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         val turtleScuteAdvancement = Advancement.Builder.advancement()
             .parent(rootAdvancement)
             .display(
-                Items.SCUTE,
+                Items.TURTLE_SCUTE,
                 Component.translatable("advancements.hybrid_aquatic.turtle_scute.title"),
                 Component.translatable("advancements.hybrid_aquatic.turtle_scute.description"),
                 ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/block/coralstone.png"),
@@ -325,10 +319,10 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .addCriterion(
                 "obtain_turtle_scute",
                 InventoryChangeTrigger.TriggerInstance.hasItems(
-                    Items.SCUTE
+                    Items.TURTLE_SCUTE
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "turtle_scute"))
+            .build(CommonClass.locate("turtle_scute"))
         consumer.accept(turtleScuteAdvancement)
 
         val turtleSetAdvancement = Advancement.Builder.advancement()
@@ -349,7 +343,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.TURTLE_SET).build()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "turtle_set"))
+            .build(CommonClass.locate("turtle_set"))
         consumer.accept(turtleSetAdvancement)
         //#endregion
 
@@ -375,7 +369,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.DIVING_BOOTS.get()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "diving_suit"))
+            .build(CommonClass.locate("diving_suit"))
         consumer.accept(divingSuitAdvancement)
 
         val divingUpgradeAdvancement = Advancement.Builder.advancement()
@@ -396,7 +390,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "diving_upgrade"))
+            .build(CommonClass.locate("diving_upgrade"))
         consumer.accept(divingUpgradeAdvancement)
 
         val reinforcedDivingSuitAdvancement = Advancement.Builder.advancement()
@@ -420,7 +414,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.REINFORCED_DIVING_BOOTS.get()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_suit"))
+            .build(CommonClass.locate("reinforced_diving_suit"))
         consumer.accept(reinforcedDivingSuitAdvancement)
 
         val glowingDivingSuitAdvancement = Advancement.Builder.advancement()
@@ -444,7 +438,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.GLOWING_DIVING_BOOTS.get()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_suit"))
+            .build(CommonClass.locate("glowing_diving_suit"))
         consumer.accept(glowingDivingSuitAdvancement)
         //#endregion
 
@@ -466,7 +460,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     HAItems.CLAM.get()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "get_clam"))
+            .build(CommonClass.locate("get_clam"))
         consumer.accept(getClamAdvancement)
 
         val plantClamAdvancement = Advancement.Builder.advancement()
@@ -498,7 +492,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                         .of(HAItems.CLAM.get())
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "plant_clam"))
+            .build(CommonClass.locate("plant_clam"))
         consumer.accept(plantClamAdvancement)
 
         val killSirenianAdvancement = Advancement.Builder.advancement()
@@ -516,17 +510,16 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .addCriterion(
                 "kill_manatee",
                 KilledTrigger.TriggerInstance.playerKilledEntity(
-                    EntityPredicate.Builder.entity().of(HAEntityTypes.MANATEE.get()).build()
+                    EntityPredicate.Builder.entity().of(HAEntityTypes.MANATEE.get())
                 )
             )
             .addCriterion(
                 "kill_dugong",
                 KilledTrigger.TriggerInstance.playerKilledEntity(
-                    EntityPredicate.Builder.entity().of(HAEntityTypes.DUGONG.get()).build()
+                    EntityPredicate.Builder.entity().of(HAEntityTypes.DUGONG.get())
                 )
             )
-            .requirements(RequirementsStrategy.OR)
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "kill_sirenian"))
+            .build(CommonClass.locate("kill_sirenian"))
         consumer.accept(killSirenianAdvancement)
 
         //#region Pearl Advancement Tree
@@ -546,7 +539,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "pearl"))
+            .build(CommonClass.locate("pearl"))
         consumer.accept(obtainPearlAdvancement)
 
         val obtainBlackPearlAdvancement = Advancement.Builder.advancement()
@@ -565,7 +558,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_black_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BLACK_PEARL.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "black_pearl"))
+            .build(CommonClass.locate("black_pearl"))
         consumer.accept(obtainBlackPearlAdvancement)
         //#endregion
 
@@ -588,7 +581,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                     ItemPredicate.Builder.item().of(HAItemTags.CRAB_CLAW).build()
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "crab_claw"))
+            .build(CommonClass.locate("crab_claw"))
         consumer.accept(crabClawAdvancement)
 
         val ominousHookAdvancement = Advancement.Builder.advancement()
@@ -607,7 +600,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_ominous_hook",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.OMINOUS_HOOK.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "ominous_hook"))
+            .build(CommonClass.locate("ominous_hook"))
         consumer.accept(ominousHookAdvancement)
 
         val killKarkinosAdvancement = Advancement.Builder.advancement()
@@ -625,10 +618,10 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .addCriterion(
                 "kill_karkinos",
                 KilledTrigger.TriggerInstance.playerKilledEntity(
-                    EntityPredicate.Builder.entity().of(HAEntityTypes.KARKINOS.get()).build()
+                    EntityPredicate.Builder.entity().of(HAEntityTypes.KARKINOS.get())
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "kill_karkinos"))
+            .build(CommonClass.locate("kill_karkinos"))
         consumer.accept(killKarkinosAdvancement)
         //#endregion
 
@@ -649,7 +642,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_ominous_conch",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.OMINOUS_CONCH.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "ominous_conch"))
+            .build(CommonClass.locate("ominous_conch"))
         consumer.accept(ominousConchAdvancement)
 
         val killShellBeastAdvancement = Advancement.Builder.advancement()
@@ -667,10 +660,10 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .addCriterion(
                 "kill_shell_beast",
                 KilledTrigger.TriggerInstance.playerKilledEntity(
-                    EntityPredicate.Builder.entity().of(HAEntityTypes.SHELL_BEAST.get()).build()
+                    EntityPredicate.Builder.entity().of(HAEntityTypes.SHELL_BEAST.get())
                 )
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "shell_beast"))
+            .build(CommonClass.locate("shell_beast"))
         consumer.accept(killShellBeastAdvancement)
 
         val argonautAdvancement = Advancement.Builder.advancement()
@@ -689,7 +682,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_argonaut",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.ARGONAUT.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "argonaut"))
+            .build(CommonClass.locate("argonaut"))
         consumer.accept(argonautAdvancement)
 
         //#endregion
@@ -711,7 +704,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_shark_tooth",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SHARK_TOOTH.get())
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "bigger_boat"))
+            .build(CommonClass.locate("bigger_boat"))
         consumer.accept(obtainSharkToothAdvancement)
 
         val obtainTridentAdvancement = Advancement.Builder.advancement()
@@ -730,7 +723,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 "obtain_trident",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.TRIDENT)
             )
-            .build(ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "trident"))
+            .build(CommonClass.locate("trident"))
         consumer.accept(obtainTridentAdvancement)
         //#endregion
     }

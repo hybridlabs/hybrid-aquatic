@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.entity.base.HASharkEntity;
 import dev.hybridlabs.aquatic.item.HAItems;
 import dev.hybridlabs.aquatic.item.HAToolMaterials;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,6 +21,8 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
@@ -120,9 +123,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         updateTurtleChestplate();
         // Repairs coral tools in the water
         repairCoralTools();
-    }
-
-    @Inject(method = "getDestroySpeed", at = @At("RETURN"), cancellable = true)
+    }@Inject(method = "getDestroySpeed", at = @At("RETURN"), cancellable = true)
     private void hybridaquatic$boostSeashellUnderwaterSpeed(
             BlockState state, CallbackInfoReturnable<Float> cir
     ) {
@@ -134,9 +135,17 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         if (tieredItem.getTier() != HAToolMaterials.SEASHELL) return;
 
         if (player.isEyeInFluid(FluidTags.WATER)) {
+            var aquaAffinity = player.level()
+                    .registryAccess()
+                    .lookupOrThrow(Registries.ENCHANTMENT)
+                    .getOrThrow(Enchantments.AQUA_AFFINITY);
+
+            boolean hasAquaAffinity =
+                    EnchantmentHelper.getEnchantmentLevel(aquaAffinity, player) > 0;
 
             float speed = cir.getReturnValue();
-            if (!net.minecraft.world.item.enchantment.EnchantmentHelper.hasAquaAffinity(player)) {
+
+            if (!hasAquaAffinity) {
                 speed *= 5.0F;
             }
 
@@ -157,7 +166,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             } else {
                 player.addEffect(
                         new MobEffectInstance(
-                                HAMobEffects.INSTANCE.getCLARITY().get(),
+                                HAMobEffects.INSTANCE.getCLARITY().asHolder(),
                                 600,
                                 0,
                                 false,
@@ -174,7 +183,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             } else {
                 player.addEffect(
                         new MobEffectInstance(
-                                HAMobEffects.INSTANCE.getCLARITY().get(),
+                                HAMobEffects.INSTANCE.getCLARITY().asHolder(),
                                 1800,
                                 0,
                                 false,
@@ -191,7 +200,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             } else {
                 player.addEffect(
                         new MobEffectInstance(
-                                HAMobEffects.INSTANCE.getCLARITY().get(),
+                                HAMobEffects.INSTANCE.getCLARITY().asHolder(),
                                 1800,
                                 0,
                                 false,

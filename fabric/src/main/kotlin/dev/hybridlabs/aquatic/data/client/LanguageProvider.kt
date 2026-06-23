@@ -13,12 +13,14 @@ import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.Util
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
+import java.util.concurrent.CompletableFuture
 
-class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
-    override fun generateTranslations(builder: TranslationBuilder) {
+class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) : FabricLanguageProvider(output,lookupProvider) {
+    override fun generateTranslations(lookupProvider: HolderLookup.Provider, builder: TranslationBuilder) {
         // item group
         builder.add(
             BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(HAItemGroups.BLOCKS.get())

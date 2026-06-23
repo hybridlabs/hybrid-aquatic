@@ -28,9 +28,8 @@ public class FogRendererMixin {
 
         if (entity instanceof LocalPlayer clientPlayerEntity && cameraSubmersionType == FogType.WATER) {
             Level world = clientPlayerEntity.level();
-            MobEffectInstance clarityEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getCLARITY().get());
-            MobEffectInstance conduitEffect = clientPlayerEntity.getEffect(MobEffects.CONDUIT_POWER);
-            MobEffectInstance thalassophobiaEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getTHALASSOPHOBIA().get());
+            MobEffectInstance clarityEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getCLARITY().asHolder());
+            MobEffectInstance thalassophobiaEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getTHALASSOPHOBIA().asHolder());
 
             if (clarityEffect != null) {
                 new ClarityFogModifier().setupFog(fogData, clientPlayerEntity, clarityEffect, viewDistance, tickDelta);

@@ -54,7 +54,9 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
-        setLureItem(ItemStack.of(nbt.getCompound("lureItem")));
+        setLureItem(
+                ItemStack.parseOptional(
+                        this.level().registryAccess(), nbt.getCompound("lureItem")));
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -62,7 +64,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
         if (!lureItemStack.is(HAItemTags.INSTANCE.getLURE_ITEMS())) return;
 
         CompoundTag itemStack = new CompoundTag();
-        getLureItem().save(itemStack);
+        getLureItem().save(this.level().registryAccess(), itemStack);
         nbt.put("lureItem", itemStack);
     }
 
@@ -108,7 +110,8 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                 createAndLaunchEntityAtPlayer(karkinosType);
 
                 instance = LootTable.EMPTY;
-            } else if (lureItemStack.is(HAItems.INSTANCE.getCREEPERMAGNET_HOOK().get())) {
+            } else if (lureItemStack.is(
+                    HAItems.INSTANCE.getCREEPERMAGNET_HOOK().get())) {
                 var creeperType = EntityType.CREEPER;
                 createAndLaunchEntityAtPlayer(creeperType);
 
@@ -116,8 +119,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
             }
 
             // Damage lure AFTER we catch anything with it
-            lureItemStack.hurtAndBreak(1, getPlayerOwner(), (player) -> this.level().playSound(null, this,
-                    SoundEvents.ITEM_BREAK, SoundSource.PLAYERS, 1.0f, 1.0f));
+            lureItemStack.hurtAndBreak(1, getPlayerOwner(), EquipmentSlot.MAINHAND);
         }
 
         return instance;

@@ -5,7 +5,9 @@ import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.loot.HALootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
@@ -15,11 +17,12 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class GenericLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextParamSets.ALL_PARAMS) {
-    override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+class GenericLootTableProvider(output: FabricDataOutput,lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
+    override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
 
         //#region Universal Crate Loot
         fun universalCratePool(): LootPool.Builder {
@@ -63,7 +66,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
 
         //#region Crate Loot Tables
         exporter.accept(
-            HALootTables.CRAB_POT_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.CRAB_POT_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.CRAB_POT_TREASURE_ID)
                 .pool(
@@ -120,7 +124,9 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.HYBRID_CRATE_TREASURE_ID,
+            ResourceKey.create(
+                Registries.LOOT_TABLE,
+            HALootTables.HYBRID_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HYBRID_CRATE_TREASURE_ID)
                 .pool(
@@ -149,7 +155,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.OAK_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.OAK_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.OAK_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -174,7 +181,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.SPRUCE_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.SPRUCE_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.SPRUCE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -199,7 +207,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.BIRCH_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.BIRCH_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.BIRCH_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -224,7 +233,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.ACACIA_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.ACACIA_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.ACACIA_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -249,7 +259,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.DARK_OAK_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DARK_OAK_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.DARK_OAK_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -274,7 +285,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.MANGROVE_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.MANGROVE_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.MANGROVE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -299,7 +311,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.CHERRY_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.CHERRY_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.CHERRY_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -324,7 +337,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.JUNGLE_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.JUNGLE_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.JUNGLE_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -353,7 +367,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.BAMBOO_CRATE_TREASURE_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.BAMBOO_CRATE_TREASURE_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.BAMBOO_CRATE_TREASURE_ID)
                 .pool(universalCratePool().build())
@@ -388,7 +403,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
 
         //#region Extra Entity Loot
         exporter.accept(
-            HALootTables.CLAWED_LOBSTER,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.CLAWED_LOBSTER),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -401,7 +417,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.CLAWLESS_LOBSTER,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.CLAWLESS_LOBSTER),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -411,7 +428,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
 
         //#region Decorator Crab Loot
         exporter.accept(
-            HALootTables.DECORATOR_FIRE,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DECORATOR_FIRE),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -420,7 +438,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.DECORATOR_BRAIN,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DECORATOR_BRAIN),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -429,7 +448,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.DECORATOR_TUBE,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DECORATOR_TUBE),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -438,7 +458,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.DECORATOR_BUBBLE,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DECORATOR_BUBBLE),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -447,7 +468,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.DECORATOR_HORN,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DECORATOR_HORN),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -456,7 +478,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.DECORATOR_THORN,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DECORATOR_THORN),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -465,7 +488,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.DECORATOR_LOPHELIA,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.DECORATOR_LOPHELIA),
             LootTable.lootTable()
                 .pool(
                     LootPool.lootPool()
@@ -476,7 +500,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         //#endregion
 
         exporter.accept(
-            HALootTables.VENT_LOOT_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.VENT_LOOT_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.VENT_LOOT_ID)
                 .pool(
@@ -499,7 +524,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
 
         //#region Archaeology Loot
         exporter.accept(
-                HALootTables.BEACH_ARCHAEOLOGY_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+                HALootTables.BEACH_ARCHAEOLOGY_ID),
         LootTable.lootTable()
             .setRandomSequence(HALootTables.BEACH_ARCHAEOLOGY_ID)
             .pool(
@@ -530,7 +556,7 @@ class GenericLootTableProvider(output: FabricDataOutput) :
                     .add(LootItem.lootTableItem(HAItems.CHERRY_CRATE.get()).setWeight(3))
                     .add(LootItem.lootTableItem(HAItems.BAMBOO_CRATE.get()).setWeight(3))
                     .add(LootItem.lootTableItem(Items.NAUTILUS_SHELL).setWeight(4))
-                    .add(LootItem.lootTableItem(Items.SCUTE).setWeight(4))
+                    .add(LootItem.lootTableItem(Items.TURTLE_SCUTE).setWeight(4))
                     .add(LootItem.lootTableItem(Items.TURTLE_EGG).setWeight(2))
                     .add(LootItem.lootTableItem(Items.HEART_OF_THE_SEA).setWeight(1))
                     .add(LootItem.lootTableItem(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()).setWeight(1))
@@ -539,7 +565,8 @@ class GenericLootTableProvider(output: FabricDataOutput) :
         )
 
         exporter.accept(
-            HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID,
+            ResourceKey.create(Registries.LOOT_TABLE,
+            HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.PLACER_RIVER_ARCHAEOLOGY_ID)
                 .pool(

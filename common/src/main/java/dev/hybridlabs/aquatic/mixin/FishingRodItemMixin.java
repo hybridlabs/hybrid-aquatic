@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.mixin;
 import dev.hybridlabs.aquatic.access.CustomFishingBobberEntityData;
 import dev.hybridlabs.aquatic.tag.HAItemTags;
 import dev.hybridlabs.aquatic.utils.HandUtils;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -24,20 +25,25 @@ public abstract class FishingRodItemMixin {
             "(Lnet" + "/minecraft/world/entity/Entity;)Z"), cancellable = true)
     private void redirectFix(Level world, Player user, InteractionHand hand,
                              CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        ItemStack mainHandItemStack = user.getItemInHand(hand);
-        ItemStack opposingHandItemStack = user.getItemInHand(HandUtils.getOpposingHand(hand));
+        if (world instanceof ServerLevel serverLevel) {
+            ItemStack mainHandItemStack = user.getItemInHand(hand);
+            ItemStack opposingHandItemStack = user.getItemInHand(HandUtils.getOpposingHand(hand));
 
-        if (opposingHandItemStack.is(HAItemTags.INSTANCE.getLURE_ITEMS())) {
-            int lureLevel = EnchantmentHelper.getFishingSpeedBonus(mainHandItemStack);
-            int luckLevel = EnchantmentHelper.getFishingLuckBonus(mainHandItemStack);
-            FishingHook customBobber = new FishingHook(user, world, lureLevel, luckLevel);
+            if (opposingHandItemStack.is(HAItemTags.INSTANCE.getLURE_ITEMS())) {
+                float lureLevel =
+                        EnchantmentHelper.getFishingTimeReduction(serverLevel, mainHandItemStack, user);
+                float luckLevel =
+                        EnchantmentHelper.getFishingLuckBonus(serverLevel,mainHandItemStack, user);
+                FishingHook customBobber = new FishingHook(user, world, (int)lureLevel, (int)luckLevel);
 
-            ((CustomFishingBobberEntityData) customBobber).setLureItem(opposingHandItemStack.copyAndClear());
-            world.addFreshEntity(customBobber);
+                ((CustomFishingBobberEntityData) customBobber)
+                        .setLureItem(opposingHandItemStack.copyAndClear());
+                world.addFreshEntity(customBobber);
 
-            user.awardStat(Stats.ITEM_USED.get(((FishingRodItem) (Object) this)));
-            user.gameEvent(GameEvent.ITEM_INTERACT_START);
-            cir.setReturnValue(InteractionResultHolder.success(mainHandItemStack));
+                user.awardStat(Stats.ITEM_USED.get(((FishingRodItem) (Object) this)));
+                user.gameEvent(GameEvent.ITEM_INTERACT_START);
+                cir.setReturnValue(InteractionResultHolder.success(mainHandItemStack));
+            }
         }
     }
 }

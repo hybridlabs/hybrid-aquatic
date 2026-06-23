@@ -1,6 +1,9 @@
 package dev.hybridlabs.aquatic
 
-import dev.hybridlabs.aquatic.block.*
+import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.property.FlammableProperty
 import dev.hybridlabs.aquatic.block.property.StrippableProperty
@@ -16,7 +19,7 @@ import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.item.instrument.HAInstruments
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworking
+import dev.hybridlabs.aquatic.network.HybridAquaticFabricNetworking
 import dev.hybridlabs.aquatic.painting.HAPaintings
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.potions.HAPotions
@@ -35,6 +38,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STARTING
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import net.minecraft.core.registries.BuiltInRegistries
@@ -71,7 +75,8 @@ object HybridAquatic : ModInitializer {
         HABiomeTags
 
         HAMobEffects
-        HAPotions.registerPotionRecipes()
+        HAPotions
+        registerBrewingRecipes()
 
         HAItems
         HAPlatformItems
@@ -130,33 +135,33 @@ object HybridAquatic : ModInitializer {
 
     private fun registerFlammables(registry: FlammableBlockRegistry) {
         // same as vanilla grass
-        registry.add(HybridAquaticPlatformBlocks.DUNEGRASS.get(), 60, 100)
-        registry.add(HybridAquaticPlatformBlocks.TALL_DUNEGRASS.get(), 60, 100)
-        registry.add(HybridAquaticPlatformBlocks.CATTAIL.get(), 60, 100)
+        registry.add(HAPlatformBlocks.DUNEGRASS.get(), 60, 100)
+        registry.add(HAPlatformBlocks.TALL_DUNEGRASS.get(), 60, 100)
+        registry.add(HAPlatformBlocks.CATTAIL.get(), 60, 100)
         // same as vanilla logs
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
-        registry.add(HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
+        registry.add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_WOOD.get(), 5, 5)
+        registry.add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get(), 5, 5)
         // same as vanilla cut wood
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
-        registry.add(HybridAquaticPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_PLANKS.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_SLAB.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_FENCE.get(), 5, 20)
+        registry.add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20)
     }
 
     private fun registerStrippables() {
         StrippableBlockRegistry.register(
-            HybridAquaticPlatformBlocks.DRIFTWOOD_LOG.get(),
-            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()
+            HAPlatformBlocks.DRIFTWOOD_LOG.get(),
+            HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()
         )
         StrippableBlockRegistry.register(
-            HybridAquaticPlatformBlocks.DRIFTWOOD_WOOD.get(),
-            HybridAquaticPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
+            HAPlatformBlocks.DRIFTWOOD_WOOD.get(),
+            HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
         )
     }
 
-    private fun registerBiomeModifications(config: HybridAquaticConfig) {
+    private fun registerBiomeModifications(config: HAConfig) {
         config.entitySpawnConfig.forEach { config ->
             BiomeModifications.addSpawn(
                 BiomeSelectors.tag(config.biomes),
@@ -171,7 +176,7 @@ object HybridAquatic : ModInitializer {
 
     private fun registerBrewingRecipes() {
         FabricBrewingRecipeRegistryBuilder.BUILD.register { builder ->
-            for (recipe in HybridAquaticPotions.recipes.get()) {
+            for (recipe in HAPotions.recipes.get()) {
                 builder.registerPotionRecipe(
                     recipe.inputPotion,
                     Ingredient.of(recipe.addition),

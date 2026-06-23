@@ -1,10 +1,7 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.*;
 import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.tag.HABiomeTags;
 import net.minecraft.client.Minecraft;
@@ -49,8 +46,8 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 				int xFloored = Mth.floor(cameraX);
 				int yFloored = Mth.floor(cameraY);
 				int zFloored = Mth.floor(cameraZ);
-				Tesselator tessellator = Tesselator.getInstance();
-				BufferBuilder bufferBuilder = tessellator.getBuilder();
+                Tesselator tesselator = Tesselator.getInstance();
+                BufferBuilder bufferbuilder = null;
 				RenderSystem.disableCull();
 				RenderSystem.enableBlend();
 				RenderSystem.enableDepthTest();
@@ -95,7 +92,7 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 
                                         m = 0;
 										RenderSystem.setShaderTexture(0, MARINE_SNOW);
-										bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+                                        bufferbuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
 									}
 
                                     float f5 = -((float)(this.ticks + tickDelta)) / 768.0F;
@@ -115,35 +112,31 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
                                     int j4 = (l3 * 3 + 240) / 4;
                                     int k4 = (i4 * 3 + 240) / 4;
 
-                                    bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)s - cameraY, (double)n - cameraZ - e + 0.5)
-                                            .uv(0.0F + f6, (float)r * 0.25F + f5 + f7)
-                                            .color(1.0F, 1.0F, 1.0F, alpha)
-                                            .uv2(k4, j4)
-                                            .endVertex();
-                                    bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)s - cameraY, (double)n - cameraZ + e + 0.5)
-                                            .uv(1.0F + f6, (float)r * 0.25F + f5 + f7)
-                                            .color(1.0F, 1.0F, 1.0F, alpha)
-                                            .uv2(k4, j4)
-                                            .endVertex();
-                                    bufferBuilder.vertex((double)o - cameraX + d + 0.5, (double)r - cameraY, (double)n - cameraZ + e + 0.5)
-                                            .uv(1.0F + f6, (float)s * 0.25F + f5 + f7)
-                                            .color(1.0F, 1.0F, 1.0F, alpha)
-                                            .uv2(k4, j4)
-                                            .endVertex();
-                                    bufferBuilder.vertex((double)o - cameraX - d + 0.5, (double)r - cameraY, (double)n - cameraZ - e + 0.5)
-                                            .uv(0.0F + f6, (float)s * 0.25F + f5 + f7)
-                                            .color(1.0F, 1.0F, 1.0F, alpha)
-                                            .uv2(k4, j4)
-                                            .endVertex();
+                                    bufferbuilder.addVertex((float)((double)o - cameraX - d + 0.5), (float)((double)s - cameraY), (float)((double)n - cameraZ - e + 0.5))
+                                            .setUv(0.0F + f6, (float)r * 0.25F + f5 + f7)
+                                            .setColor(1.0F, 1.0F, 1.0F, alpha)
+                                            .setUv2(k4, j4);
+                                    bufferbuilder.addVertex((float)((double)o - cameraX + d + 0.5), (float)((double)s - cameraY), (float)((double)n - cameraZ + e + 0.5))
+                                            .setUv(1.0F + f6, (float)r * 0.25F + f5 + f7)
+                                            .setColor(1.0F, 1.0F, 1.0F, alpha)
+                                            .setUv2(k4, j4);
+                                    bufferbuilder.addVertex((float)((double)o - cameraX + d + 0.5), (float)((double)r - cameraY), (float)((double)n - cameraZ + e + 0.5))
+                                            .setUv(1.0F + f6, (float)s * 0.25F + f5 + f7)
+                                            .setColor(1.0F, 1.0F, 1.0F, alpha)
+                                            .setUv2(k4, j4);
+                                    bufferbuilder.addVertex((float)((double)o - cameraX - d + 0.5), (float)((double)r - cameraY), (float)((double)n - cameraZ - e + 0.5))
+                                            .setUv(0.0F + f6, (float)s * 0.25F + f5 + f7)
+                                            .setColor(1.0F, 1.0F, 1.0F, alpha)
+                                            .setUv2(k4, j4);
                                 }
 							}
 						}
 					}
 				}
 
-				if (m == 0) {
-					tessellator.end();
-				}
+                if (m >= 0) {
+                    BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
+                }
 
 				RenderSystem.enableCull();
 				RenderSystem.enableBlend();

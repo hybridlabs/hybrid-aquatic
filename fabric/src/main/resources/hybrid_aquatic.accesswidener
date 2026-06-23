@@ -1,6 +1,7 @@
 accessWidener v2 named
 
 accessible method net/minecraft/world/level/block/BaseEntityBlock createTickerHelper (Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/world/level/block/entity/BlockEntityTicker;)Lnet/minecraft/world/level/block/entity/BlockEntityTicker;
+accessible field net/minecraft/world/level/block/entity/BlockEntityType validBlocks Ljava/util/Set;
 accessible class net/minecraft/client/gui/screens/MenuScreens
 accessible class net/minecraft/client/renderer/RenderType
 accessible class net/minecraft/client/renderer/FogRenderer$FogData
@@ -8,6 +9,12 @@ accessible class net/minecraft/client/renderer/FogRenderer$MobEffectFogFunction
 accessible class net/minecraft/client/renderer/FogRenderer$BlindnessFogFunction
 accessible class net/minecraft/client/renderer/FogRenderer$DarknessFogFunction
 accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
+accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
+accessible field net/minecraft/world/level/block/state/properties/IntegerProperty min I
+accessible field net/minecraft/world/level/block/state/properties/IntegerProperty max I
+accessible field net/minecraft/world/level/levelgen/structure/Structure settings Lnet/minecraft/world/level/levelgen/structure/Structure$StructureSettings;
+mutable field net/minecraft/world/level/levelgen/structure/Structure settings Lnet/minecraft/world/level/levelgen/structure/Structure$StructureSettings;
+mutable field net/minecraft/world/level/levelgen/structure/Structure$StructureSettings spawnOverrides Ljava/util/Map;
 accessible class net/minecraft/world/inventory/MenuType$MenuSupplier
 accessible method net/minecraft/client/gui/screens/MenuScreens register (Lnet/minecraft/world/inventory/MenuType;Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;)V
 accessible method net/minecraft/world/inventory/MenuType <init> (Lnet/minecraft/world/inventory/MenuType$MenuSupplier;Lnet/minecraft/world/flag/FeatureFlagSet;)V

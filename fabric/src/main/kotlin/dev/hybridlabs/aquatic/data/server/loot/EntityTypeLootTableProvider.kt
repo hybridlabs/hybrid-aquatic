@@ -6,30 +6,32 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.advancements.critereon.EntityFlagsPredicate
 import net.minecraft.advancements.critereon.EntityPredicate
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.entity.EntityType
+import net.minecraft.core.HolderLookup
+import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootContext
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction
+import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
 /**
  * Generates entity loot tables.
  */
-class EntityTypeLootTableProvider(output: FabricDataOutput) :
-    SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
-    override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
+class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableProvider(exporter, lookupProvider, LootContextParamSets.ENTITY) {
+    override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
+        val lookup = lookupProvider.join()
         // nautilus
-        export(exporter, HAEntityTypes.NAUTILUS.get()) {
+        export(exporter, HAEntityTypes.NAUTILUS.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -53,7 +55,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HAEntityTypes.MANATEE.get()) {
+        export(exporter, HAEntityTypes.MANATEE.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -70,7 +72,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HAEntityTypes.STARFISH.get()) {
+        export(exporter, HAEntityTypes.STARFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -79,7 +81,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HAEntityTypes.DUGONG.get()) {
+        export(exporter, HAEntityTypes.DUGONG.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -97,7 +99,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         }
 
         //#region Minibosses
-        export(exporter, HAEntityTypes.KARKINOS.get()) {
+        export(exporter, HAEntityTypes.KARKINOS.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -112,7 +114,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
             )
         }
 
-        export(exporter, HAEntityTypes.SHELL_BEAST.get()) {
+        export(exporter, HAEntityTypes.SHELL_BEAST.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -129,7 +131,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
         //#endregion
 
         //#region Crustaceans
-        export(exporter, HAEntityTypes.DECORATOR_CRAB.get()) {
+        export(exporter, HAEntityTypes.DECORATOR_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -142,13 +144,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.HORSESHOE_CRAB.get()) {
+        export(exporter, HAEntityTypes.HORSESHOE_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -161,13 +163,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.DUNGENESS_CRAB.get()) {
+        export(exporter, HAEntityTypes.DUNGENESS_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -180,13 +182,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.FIDDLER_CRAB.get()) {
+        export(exporter, HAEntityTypes.FIDDLER_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -199,13 +201,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SPIDER_CRAB.get()) {
+        export(exporter, HAEntityTypes.SPIDER_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -218,13 +220,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.GHOST_CRAB.get()) {
+        export(exporter, HAEntityTypes.GHOST_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -237,13 +239,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.VAMPIRE_CRAB.get()) {
+        export(exporter, HAEntityTypes.VAMPIRE_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -256,13 +258,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.FLOWER_CRAB.get()) {
+        export(exporter, HAEntityTypes.FLOWER_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -275,13 +277,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.COCONUT_CRAB.get()) {
+        export(exporter, HAEntityTypes.COCONUT_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -294,13 +296,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.YETI_CRAB.get()) {
+        export(exporter, HAEntityTypes.YETI_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -313,13 +315,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.LIGHTFOOT_CRAB.get()) {
+        export(exporter, HAEntityTypes.LIGHTFOOT_CRAB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -332,13 +334,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.LOBSTER.get()) {
+        export(exporter, HAEntityTypes.LOBSTER.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -351,7 +353,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
@@ -367,12 +369,12 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.CRAYFISH.get()) {
+        export(exporter, HAEntityTypes.CRAYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -385,13 +387,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SHRIMP.get()) {
+        export(exporter, HAEntityTypes.SHRIMP.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -404,14 +406,14 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
         // cephalopods
-        export(exporter, HAEntityTypes.VAMPIRE_SQUID.get()) {
+        export(exporter, HAEntityTypes.VAMPIRE_SQUID.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -424,12 +426,12 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
-        export(exporter, HAEntityTypes.CUTTLEFISH.get()) {
+        export(exporter, HAEntityTypes.CUTTLEFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -453,13 +455,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.ARROW_SQUID.get()) {
+        export(exporter, HAEntityTypes.ARROW_SQUID.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -478,18 +480,18 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.GIANT_SQUID.get()) {
+        export(exporter, HAEntityTypes.GIANT_SQUID.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.INK_SAC)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
@@ -505,18 +507,18 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.COLOSSAL_SQUID.get()) {
+        export(exporter, HAEntityTypes.COLOSSAL_SQUID.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.INK_SAC)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
@@ -532,13 +534,13 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.FIREFLY_SQUID.get()) {
+        export(exporter, HAEntityTypes.FIREFLY_SQUID.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -557,51 +559,51 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_CUCUMBER.get()) {
+        export(exporter, HAEntityTypes.SEA_CUCUMBER.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SCALYFOOT_SNAIL.get()) {
+        export(exporter, HAEntityTypes.SCALYFOOT_SNAIL.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.IRON_NUGGET)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 2.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 2.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_SLUG.get()) {
+        export(exporter, HAEntityTypes.SEA_SLUG.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_URCHIN.get()) {
+        export(exporter, HAEntityTypes.SEA_URCHIN.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SEA_URCHIN_SPINE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
@@ -609,7 +611,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.UNI.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
                     ).build()
             )
@@ -617,7 +619,7 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
 
         // end region
 
-        export(exporter, HAEntityTypes.OCTOPUS.get()) {
+        export(exporter, HAEntityTypes.OCTOPUS.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -630,251 +632,251 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                                     )
                                 )
                             )
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     ).build()
             )
         }
 
         // jellyfish
-        export(exporter, HAEntityTypes.MOON_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.MOON_JELLYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_NETTLE.get()) {
+        export(exporter, HAEntityTypes.SEA_NETTLE.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.NOMURA_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.NOMURA_JELLYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.LIONS_MANE_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.LIONS_MANE_JELLYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.BLUE_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.BLUE_JELLYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
 
-        export(exporter, HAEntityTypes.BARREL_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.BARREL_JELLYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.MAUVE_STINGER.get()) {
+        export(exporter, HAEntityTypes.MAUVE_STINGER.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.CEPHEIDAE_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.CEPHEIDAE_JELLYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(Items.SLIME_BALL)
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.CROWN_JELLYFISH.get()) {
+        export(exporter, HAEntityTypes.CROWN_JELLYFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.GLOWSLIME.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.ANGLERFISH.get()) {
+        export(exporter, HAEntityTypes.ANGLERFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.ANGLERFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.DRAGONFISH.get()) {
+        export(exporter, HAEntityTypes.DRAGONFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.DRAGONFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.BLOBFISH.get()) {
+        export(exporter, HAEntityTypes.BLOBFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.BLOBFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.HAGFISH.get()) {
+        export(exporter, HAEntityTypes.HAGFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.HAGFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.ROCKFISH.get()) {
+        export(exporter, HAEntityTypes.ROCKFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.ROCKFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_BASS.get()) {
+        export(exporter, HAEntityTypes.SEA_BASS.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SEA_BASS.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.CLOWNFISH.get()) {
+        export(exporter, HAEntityTypes.CLOWNFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.CLOWNFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.DAMSELFISH.get()) {
+        export(exporter, HAEntityTypes.DAMSELFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.DAMSELFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.JOHN_DORY.get()) {
+        export(exporter, HAEntityTypes.JOHN_DORY.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.JOHN_DORY.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SURGEONFISH.get()) {
+        export(exporter, HAEntityTypes.SURGEONFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SURGEONFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.BOXFISH.get()) {
+        export(exporter, HAEntityTypes.BOXFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.BOXFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.LIONFISH.get()) {
+        export(exporter, HAEntityTypes.LIONFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.LIONFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.BARRELEYE.get()) {
+        export(exporter, HAEntityTypes.BARRELEYE.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.GLOWSLIME.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
@@ -882,459 +884,459 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.BARRELEYE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.STINGRAY.get()) {
+        export(exporter, HAEntityTypes.STINGRAY.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.STINGRAY.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.GOURAMI.get()) {
+        export(exporter, HAEntityTypes.GOURAMI.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.GOURAMI.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.BETTA.get()) {
+        export(exporter, HAEntityTypes.BETTA.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.BETTA.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.PEARLFISH.get()) {
+        export(exporter, HAEntityTypes.PEARLFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.PEARLFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SNAILFISH.get()) {
+        export(exporter, HAEntityTypes.SNAILFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SNAILFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.DANIO.get()) {
+        export(exporter, HAEntityTypes.DANIO.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.DANIO.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.DISCUS.get()) {
+        export(exporter, HAEntityTypes.DISCUS.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.DISCUS.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.BLOWFISH.get()) {
+        export(exporter, HAEntityTypes.BLOWFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.BLOWFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.STONEFISH.get()) {
+        export(exporter, HAEntityTypes.STONEFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.STONEFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.CARP.get()) {
+        export(exporter, HAEntityTypes.CARP.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.CARP.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.GOLDFISH.get()) {
+        export(exporter, HAEntityTypes.GOLDFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.GOLDFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.PLECO.get()) {
+        export(exporter, HAEntityTypes.PLECO.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.PLECO.get())
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
-                            .apply(LootingEnchantFunction.lootingMultiplier(ConstantValue.exactly(1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SHINER.get()) {
+        export(exporter, HAEntityTypes.SHINER.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.RAW_FISH_MEAT.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(1.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.FANGTOOTH.get()) {
+        export(exporter, HAEntityTypes.FANGTOOTH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.RAW_FISH_MEAT.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(1.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.HATCHETFISH.get()) {
+        export(exporter, HAEntityTypes.HATCHETFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.RAW_FISH_MEAT.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(1.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.VIPERFISH.get()) {
+        export(exporter, HAEntityTypes.VIPERFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.RAW_FISH_MEAT.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(1.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SUNFISH.get()) {
+        export(exporter, HAEntityTypes.SUNFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SUNFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(1.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.TROUT.get()) {
+        export(exporter, HAEntityTypes.TROUT.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.TROUT.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(1.0F, 2.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(1.0F, 2.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.PARROTFISH.get()) {
+        export(exporter, HAEntityTypes.PARROTFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.PARROTFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.WRASSE.get()) {
+        export(exporter, HAEntityTypes.WRASSE.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SHEEPSHEAD_WRASSE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.FLASHLIGHT_FISH.get()) {
+        export(exporter, HAEntityTypes.FLASHLIGHT_FISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.FLASHLIGHT_FISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.RATFISH.get()) {
+        export(exporter, HAEntityTypes.RATFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.RATFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.PIRANHA.get()) {
+        export(exporter, HAEntityTypes.PIRANHA.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.PIRANHA.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.MAHI.get()) {
+        export(exporter, HAEntityTypes.MAHI.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.MAHI.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.OPAH.get()) {
+        export(exporter, HAEntityTypes.OPAH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.OPAH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.NEEDLEFISH.get()) {
+        export(exporter, HAEntityTypes.NEEDLEFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.NEEDLEFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.MACKEREL.get()) {
+        export(exporter, HAEntityTypes.MACKEREL.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.MACKEREL.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.HERRING.get()) {
+        export(exporter, HAEntityTypes.HERRING.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.HERRING.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.TUNA.get()) {
+        export(exporter, HAEntityTypes.TUNA.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.TUNA.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.FLYING_FISH.get()) {
+        export(exporter, HAEntityTypes.FLYING_FISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.FLYING_FISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.TRIGGERFISH.get()) {
+        export(exporter, HAEntityTypes.TRIGGERFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.TRIGGERFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
 
-        export(exporter, HAEntityTypes.TREVALLY.get()) {
+        export(exporter, HAEntityTypes.TREVALLY.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.TREVALLY.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SEAHORSE.get()) {
+        export(exporter, HAEntityTypes.SEAHORSE.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SEAHORSE.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.OCEAN_SUNFISH.get()) {
+        export(exporter, HAEntityTypes.OCEAN_SUNFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.OCEAN_SUNFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.COELACANTH.get()) {
+        export(exporter, HAEntityTypes.COELACANTH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.COELACANTH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.GOLDEN_DORADO.get()) {
+        export(exporter, HAEntityTypes.GOLDEN_DORADO.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.GOLDEN_DORADO.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.OARFISH.get()) {
+        export(exporter, HAEntityTypes.OARFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.OARFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.CICHLID.get()) {
+        export(exporter, HAEntityTypes.CICHLID.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.CICHLID.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.TIGER_BARB.get()) {
+        export(exporter, HAEntityTypes.TIGER_BARB.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.TIGER_BARB.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.MORAY_EEL.get()) {
+        export(exporter, HAEntityTypes.MORAY_EEL.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.MORAY_EEL.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
         }
 
-        export(exporter, HAEntityTypes.SQUIRRELFISH.get()) {
+        export(exporter, HAEntityTypes.SQUIRRELFISH.get().defaultLootTable){
             pool(
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(HAItems.SQUIRRELFISH.get())
-                            .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                     ).build()
             )
@@ -1345,15 +1347,15 @@ class EntityTypeLootTableProvider(output: FabricDataOutput) :
      * Exports a loot table for [entityType] to [exporter] using its loot table id.
      */
     private fun export(
-        exporter: BiConsumer<ResourceLocation, LootTable.Builder>,
-        entityType: EntityType<*>,
+        exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>,
+        entityTable: ResourceKey<LootTable>,
         builder: LootTable.Builder.() -> Unit
     ) {
-        exporter.accept(entityType.defaultLootTable, LootTable.lootTable().apply(builder))
+        exporter.accept(entityTable, LootTable.lootTable().apply(builder))
     }
 
     companion object {
         private val NEEDS_ENTITY_ON_FIRE: EntityPredicate.Builder =
-            EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true).build())
+            EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true))
     }
 }

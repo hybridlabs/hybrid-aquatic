@@ -278,9 +278,9 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.OCEAN_SUNFISH.get(),
                 HAEntityTypes.BARRACUDA.get(),
             )
-            .addOptional(ResourceLocation("spawn", "sunfish"))
-            .addOptional(ResourceLocation("spawn", "tuna"))
-            .addOptional(ResourceLocation("spawn", "barracuda"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("spawn", "sunfish"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("spawn", "tuna"))
+            .addOptional(ResourceLocation.fromNamespaceAndPath("spawn", "barracuda"))
 
         getOrCreateTagBuilder(HAEntityTags.DEEP_FISH)
             .add(

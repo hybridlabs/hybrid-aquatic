@@ -18,20 +18,12 @@
         "TallSeagrassBlockMixin"
     ],
     "client": [
-<<<<<<<< HEAD:neoforge/src/main/resources/hybrid-aquatic.forge.mixins.json
-========
-        "client.BookScreenMixin",
         "client.CameraMixin",
-        "client.ClientPlayNetworkHandlerMixin",
->>>>>>>> 1.20.1-biomes:neoforge/src/main/resources/hybrid_aquatic.forge.mixins.json
         "client.FishingBobberEntityClientMixin",
         "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
-<<<<<<<< HEAD:neoforge/src/main/resources/hybrid-aquatic.forge.mixins.json
         "client.SkullBlockEntityTextureMixin",
-        "client.InGameHudMixin"
-========
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
         "client.MouseHandlerMixin",
@@ -39,7 +31,6 @@
         "client.PlayerEntityRendererMixin",
         "client.SkullBlockEntityTextureMixin",
         "client.WeatherDisplayMixin"
->>>>>>>> 1.20.1-biomes:neoforge/src/main/resources/hybrid_aquatic.forge.mixins.json
     ],
     "injectors": {
         "defaultRequire": 1

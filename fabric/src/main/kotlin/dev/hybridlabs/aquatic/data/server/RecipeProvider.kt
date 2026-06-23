@@ -9,26 +9,21 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.data.recipes.FinishedRecipe
-import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.ShapedRecipeBuilder
-import net.minecraft.data.recipes.ShapelessRecipeBuilder
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
-import net.minecraft.data.recipes.SmithingTransformRecipeBuilder
+import net.minecraft.core.HolderLookup
+import net.minecraft.data.recipes.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.crafting.AbstractCookingRecipe
-import net.minecraft.world.item.crafting.Ingredient
-import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import java.util.function.Consumer
+import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
-    override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
+class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    FabricRecipeProvider(output, lookupProvider) {
+    override fun buildRecipes(exporter: RecipeOutput) {
 
         //#region Sandstone Block Recipes
         stairBuilder(
@@ -1514,8 +1509,8 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .pattern("S S")
             .pattern("SSS")
             .pattern("SSS")
-            .define('S', Items.SCUTE)
-            .unlockedBy("has_scute", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SCUTE))
+            .define('S', Items.TURTLE_SCUTE)
+            .unlockedBy("has_scute", InventoryChangeTrigger.TriggerInstance.hasItems(Items.TURTLE_SCUTE))
             .save(exporter)
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_HELMET.get())
@@ -1923,7 +1918,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     }
 
     private fun offerCookingRecipes(
-        exporter: Consumer<FinishedRecipe>,
+        exporter: RecipeOutput,
         input: Item,
         output: Item,
         experience: Float,
@@ -1932,6 +1927,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             exporter,
             "smelting",
             RecipeSerializer.SMELTING_RECIPE,
+            ::SmeltingRecipe,
             200,
             input,
             output,
@@ -1941,6 +1937,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             exporter,
             "smoking",
             RecipeSerializer.SMOKING_RECIPE,
+            ::SmokingRecipe,
             100,
             input,
             output,
@@ -1950,6 +1947,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             exporter,
             "campfire_cooking",
             RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+            ::CampfireCookingRecipe,
             600,
             input,
             output,
@@ -1959,7 +1957,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
 
     //#region Kelp Cooking Recipes
     private fun offerKelpCookingRecipes(
-        exporter: Consumer<FinishedRecipe>,
+        exporter: RecipeOutput,
         inputTag: TagKey<Item>,
         output: Item,
         experience: Float,
@@ -1968,6 +1966,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             exporter,
             "smelting",
             RecipeSerializer.SMELTING_RECIPE,
+            ::SmeltingRecipe,
             200,
             inputTag,
             output,
@@ -1977,6 +1976,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             exporter,
             "smoking",
             RecipeSerializer.SMOKING_RECIPE,
+            ::SmokingRecipe,
             100,
             inputTag,
             output,
@@ -1986,6 +1986,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             exporter,
             "campfire_cooking",
             RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
+            ::CampfireCookingRecipe,
             600,
             inputTag,
             output,
@@ -1993,18 +1994,25 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         )
     }
 
-    private fun offerKelpCookingRecipe(
-        exporter: Consumer<FinishedRecipe>,
+    private fun <T : AbstractCookingRecipe> offerKelpCookingRecipe(
+        exporter: RecipeOutput,
         cooker: String,
-        serializer: RecipeSerializer<out AbstractCookingRecipe>,
+        serializer: RecipeSerializer<T>,
+        recipeFactory: AbstractCookingRecipe.Factory<T>,
         cookingTime: Int,
         inputTag: TagKey<Item>,
         output: Item,
         experience: Float,
     ) {
-        val builder = SimpleCookingRecipeBuilder
-            .generic(Ingredient.of(inputTag), RecipeCategory.FOOD, output, experience, cookingTime, serializer)
-            .unlockedBy("has_kelp", has(inputTag))
+        val builder = SimpleCookingRecipeBuilder.generic(
+            Ingredient.of(inputTag),
+            RecipeCategory.FOOD,
+            output,
+            experience,
+            cookingTime,
+            serializer,
+            recipeFactory
+        ).unlockedBy("has_kelp", has(inputTag))
 
         val recipeId = getItemName(output) + "_from_" + cooker
         builder.save(exporter, recipeId)
@@ -2025,7 +2033,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     )
 
     private fun offerRaftRecipes(
-        exporter: Consumer<FinishedRecipe>,
+        exporter: RecipeOutput,
         map: Map<Block, Block>,
     ) {
         for ((woodType, raftType) in map) {
@@ -2100,7 +2108,7 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     )
 
     private fun offerBleachingRecipes(
-        exporter: Consumer<FinishedRecipe>,
+        exporter: RecipeOutput,
         map: Map<Block, Block>,
     ) {
         for ((deadCoral, bleachedCoral) in map) {

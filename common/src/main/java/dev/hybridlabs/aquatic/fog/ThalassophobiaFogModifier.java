@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.fog;
 import com.mojang.blaze3d.shaders.FogShape;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -11,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class ThalassophobiaFogModifier implements FogRenderer.MobEffectFogFunction {
     @Override
-    public @NotNull MobEffect getMobEffect() {
-        return HAMobEffects.INSTANCE.getTHALASSOPHOBIA().get();
+    public @NotNull Holder<MobEffect> getMobEffect() {
+        return HAMobEffects.INSTANCE.getTHALASSOPHOBIA().asHolder();
     }
 
     @Override

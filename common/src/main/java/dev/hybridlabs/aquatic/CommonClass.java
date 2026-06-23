@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Instrument;
@@ -43,8 +42,8 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.SOUND_EVENT, MOD_ID);
     public static final RegistrationProvider<Fluid> FLUIDS =
             RegistrationProvider.get(BuiltInRegistries.FLUID, MOD_ID);
-    public static final RegistrationProvider<PaintingVariant> PAINTINGS =
-            RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
+    //public static final RegistrationProvider<PaintingVariant> PAINTINGS =
+    //        RegistrationProvider.get(BuiltInRegistries.PAINTING_VARIANT, MOD_ID);
     public static final RegistrationProvider<Potion> POTIONS =
             RegistrationProvider.get(BuiltInRegistries.POTION, MOD_ID);
     public static final RegistrationProvider<MobEffect> MOB_EFFECTS =
@@ -69,7 +68,7 @@ public class CommonClass {
     public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
 
     public static ResourceLocation locate(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public static void init() {

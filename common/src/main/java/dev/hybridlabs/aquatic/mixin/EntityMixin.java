@@ -92,7 +92,7 @@ public class EntityMixin {
                 //with reinforced diving suit
             if (isWearingReinforcedDivingSet(entity)) {
                 entity.addEffect(new MobEffectInstance(
-                        HAMobEffects.INSTANCE.getCORROSION().get(),
+                        HAMobEffects.INSTANCE.getCORROSION().asHolder(),
                         120,
                         0
                 ));
@@ -106,7 +106,7 @@ public class EntityMixin {
                 ));
 
                 entity.addEffect(new MobEffectInstance(
-                        HAMobEffects.INSTANCE.getCORROSION().get(),
+                        HAMobEffects.INSTANCE.getCORROSION().asHolder(),
                         120,
                         0
                 ));
@@ -120,7 +120,7 @@ public class EntityMixin {
                 ));
 
                 entity.addEffect(new MobEffectInstance(
-                        HAMobEffects.INSTANCE.getCORROSION().get(),
+                        HAMobEffects.INSTANCE.getCORROSION().asHolder(),
                         120,
                         0
                 ));

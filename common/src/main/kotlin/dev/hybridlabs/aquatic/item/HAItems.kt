@@ -10,7 +10,6 @@ import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.cosmetic.*
 import dev.hybridlabs.aquatic.item.seashell.*
 import dev.hybridlabs.aquatic.platform.Services.PLATFORM
-import dev.hybridlabs.aquatic.platform.Services.TURTLE_ARMOR_FACTORY
 import dev.hybridlabs.aquatic.tag.HAInstrumentTags
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
@@ -154,7 +153,7 @@ object HAItems {
     val TURTLE_CHESTPLATE = register(
         "turtle_chestplate"
     ) {
-        TURTLE_ARMOR_FACTORY.create(
+        TurtleArmorItem(
             ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
         )
     }

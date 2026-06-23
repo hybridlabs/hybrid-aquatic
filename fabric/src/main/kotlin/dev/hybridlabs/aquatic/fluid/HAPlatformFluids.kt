@@ -16,7 +16,7 @@ object HAPlatformFluids {
     val BRINE = registerFluidBlock("brine") {
         LiquidBlock(
             BRINE_STILL.get(),
-            Properties.copy(Blocks.WATER).liquid()
+            Properties.ofFullCopy(Blocks.WATER).liquid()
         )
     }
 

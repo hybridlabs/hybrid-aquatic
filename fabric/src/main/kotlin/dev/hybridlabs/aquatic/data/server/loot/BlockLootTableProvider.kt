@@ -15,9 +15,11 @@ import net.minecraft.advancements.critereon.EnchantmentPredicate
 import net.minecraft.advancements.critereon.ItemPredicate
 import net.minecraft.advancements.critereon.MinMaxBounds
 import net.minecraft.advancements.critereon.StatePropertiesPredicate
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.ItemTags
-import net.minecraft.world.item.BlockItem.BLOCK_ENTITY_TAG
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.block.BaseCoralWallFanBlock
 import net.minecraft.world.level.block.PotatoBlock
@@ -27,9 +29,9 @@ import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
 import net.minecraft.world.level.storage.loot.entries.LootItem
-import net.minecraft.world.level.storage.loot.entries.LootTableReference
+import net.minecraft.world.level.storage.loot.entries.NestedLootTable
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
-import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction
+import net.minecraft.world.level.storage.loot.functions.CopyCustomDataFunction
 import net.minecraft.world.level.storage.loot.functions.LimitCount
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
@@ -38,8 +40,10 @@ import net.minecraft.world.level.storage.loot.predicates.MatchTool
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import java.util.concurrent.CompletableFuture
 
-class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTableProvider(output) {
+class BlockLootTableProvider(output: FabricDataOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) :
+    FabricBlockLootTableProvider(output, registryLookup) {
 
     override fun generate() {
 
@@ -48,7 +52,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -57,7 +61,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -66,7 +70,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -77,7 +81,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -86,7 +90,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -95,7 +99,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -104,7 +108,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -113,7 +117,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -122,7 +126,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -155,7 +159,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(HAS_SHEARS_OR_SILK_TOUCH.build())
+                    .conditionally(hasShearsOrSilkTouch().build())
                     .build()
             )
         }
@@ -246,11 +250,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_LOPHELIA_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -260,11 +264,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -274,11 +278,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -288,11 +292,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_THORN_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -302,11 +306,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_SUN_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -316,11 +320,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_BUTTON_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -330,11 +334,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_ROSE_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -344,11 +348,11 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                 LootPool.lootPool()
                     .add(
                         LootItem.lootTableItem(block)
-                            .`when`(HAS_SILK_TOUCH)
+                            .`when`(hasSilkTouch())
                     )
                     .add(
                         LootItem.lootTableItem(HABlocks.DEAD_LEAF_CORAL_BLOCK.get())
-                            .`when`(HAS_SILK_TOUCH.invert())
+                            .`when`(hasSilkTouch().invert())
                     )
             )
         }
@@ -403,8 +407,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootItem.lootTableItem(block).`when`(HAS_SILK_TOUCH),
-                        LootTableReference.lootTableReference(HALootTables.VENT_LOOT_ID)
+                        LootItem.lootTableItem(block).`when`(hasSilkTouch()),
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HALootTables.VENT_LOOT_ID
+                            )
+                        )
                     )
                 )
             )
@@ -414,8 +423,13 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootItem.lootTableItem(block).`when`(HAS_SILK_TOUCH),
-                        LootTableReference.lootTableReference(HALootTables.VENT_LOOT_ID)
+                        LootItem.lootTableItem(block).`when`(hasSilkTouch()),
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HALootTables.VENT_LOOT_ID
+                            )
+                        )
                     )
                 )
             )
@@ -448,7 +462,7 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                                 )
                                 .apply(
                                     ApplyBonusCount.addUniformBonusCount(
-                                        Enchantments.BLOCK_FORTUNE,
+                                        Enchantments.FORTUNE,
                                         1
                                     )
                                 )
@@ -489,14 +503,14 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootItem.lootTableItem(block).`when`(HAS_SILK_TOUCH).apply(
-                            CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                .copy(VARIANT_KEY, "$BLOCK_ENTITY_TAG.$VARIANT_KEY")
-                                .copy(MESSAGE_KEY, "$BLOCK_ENTITY_TAG.$MESSAGE_KEY")
+                        LootItem.lootTableItem(block).`when`(hasSilkTouch()).apply(
+                            CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                .copy(VARIANT_KEY, VARIANT_KEY)
+                                .copy(MESSAGE_KEY, MESSAGE_KEY)
                         ),
                         LootItem.lootTableItem(HAItems.SEA_MESSAGE_BOOK.get()).apply(
-                            CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                .copy("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
+                            CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                .copy(MESSAGE_KEY, SEA_MESSAGE_KEY)
                         )
                     )
                 ).build()
@@ -511,7 +525,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.CRAB_POT_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HALootTables.CRAB_POT_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
@@ -524,7 +543,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.HYBRID_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.HYBRID_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -537,7 +561,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.OAK_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.OAK_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
@@ -550,7 +579,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.BIRCH_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.BIRCH_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -563,7 +597,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.SPRUCE_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.SPRUCE_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -576,9 +615,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.DARK_OAK_CRATE_TREASURE_ID)
-                            .`when`(
-
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.DARK_OAK_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                                 MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                             ),
                         LootItem.lootTableItem(block.asItem()),
@@ -591,7 +633,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.ACACIA_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.ACACIA_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -604,7 +651,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.JUNGLE_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.JUNGLE_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -617,7 +669,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.BAMBOO_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.BAMBOO_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -630,8 +687,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.MANGROVE_CRATE_TREASURE_ID)
-                            .`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.MANGROVE_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                                 MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                             ),
                         LootItem.lootTableItem(block.asItem()),
@@ -644,7 +705,12 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
             LootTable.lootTable().pool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        LootTableReference.lootTableReference(HALootTables.CHERRY_CRATE_TREASURE_ID).`when`(
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                            HALootTables.CHERRY_CRATE_TREASURE_ID
+                            )
+                        ).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
