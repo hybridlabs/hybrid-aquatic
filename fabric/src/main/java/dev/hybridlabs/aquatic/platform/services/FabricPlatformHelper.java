@@ -14,6 +14,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -82,7 +83,7 @@ public class FabricPlatformHelper implements PlatformHelper {
 
     @Override
     public Attribute getReachAttribute() {
-        return ReachEntityAttributes.REACH;
+        return Attributes.BLOCK_INTERACTION_RANGE.value();
     }
 
     @Override

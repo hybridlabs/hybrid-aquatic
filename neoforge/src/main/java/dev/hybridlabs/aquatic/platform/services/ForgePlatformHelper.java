@@ -14,6 +14,7 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -107,7 +108,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public Attribute getReachAttribute() {
-        return NeoForgeMod.BLOCK_REACH.get();
+        return Attributes.BLOCK_INTERACTION_RANGE.value();
     }
 
     @Override
