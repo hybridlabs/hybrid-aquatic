@@ -11,6 +11,7 @@ import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 
+import dev.hybridlabs.aquatic.utils.HASpawnGroup;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -27,7 +28,6 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
