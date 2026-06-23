@@ -87,7 +87,7 @@ dependencies {
     compileOnly project(":common")
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
     implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-${minecraft_version}"
-    implementation("com.terraformersmc:biolith-forge:${biolith_version}") {
+    implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
     implementation 'org.jetbrains:annotations:25.0.0'
