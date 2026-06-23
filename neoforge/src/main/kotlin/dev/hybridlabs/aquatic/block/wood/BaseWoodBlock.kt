@@ -8,7 +8,7 @@ import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.block.RotatedPillarBlock
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraftforge.common.ToolAction
+import net.neoforged.neoforge.common.ItemAbility
 
 open class BaseWoodBlock(settings: Properties) : RotatedPillarBlock(settings) {
     override fun isFlammable(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Boolean {
@@ -28,7 +28,7 @@ open class BaseWoodBlock(settings: Properties) : RotatedPillarBlock(settings) {
     override fun getToolModifiedState(
         state: BlockState?,
         context: UseOnContext?,
-        toolAction: ToolAction?,
+        toolAction: ItemAbility?,
         simulate: Boolean
     ): BlockState? {
         if (context!!.itemInHand.item is AxeItem) {

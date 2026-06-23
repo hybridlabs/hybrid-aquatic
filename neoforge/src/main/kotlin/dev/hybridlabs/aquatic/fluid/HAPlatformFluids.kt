@@ -8,15 +8,16 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LiquidBlock
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.material.FlowingFluid
-import net.minecraftforge.fluids.FluidType
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
+import net.neoforged.neoforge.fluids.FluidType
+import net.neoforged.neoforge.registries.DeferredHolder
+import net.neoforged.neoforge.registries.DeferredRegister
+import net.neoforged.neoforge.registries.NeoForgeRegistries
 import java.util.function.Supplier
 
 
 object HAPlatformFluids {
     val FLUID_TYPES: DeferredRegister<FluidType> =
-        DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, Constants.MOD_ID)
+        DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, Constants.MOD_ID)
 
     val BRINE_FLUIDTYPE = registerFluidType("brine") {
         BrineFluidType(FluidType.Properties.create())
@@ -28,7 +29,7 @@ object HAPlatformFluids {
     val BRINE = registerFluidBlock("brine") {
         LiquidBlock(
             BRINE_STILL.get(),
-            Properties.copy(Blocks.WATER).liquid()
+            Properties.ofFullCopy(Blocks.WATER).liquid()
         )
     }
 
@@ -36,7 +37,7 @@ object HAPlatformFluids {
         return CommonClass.FLUIDS.register(id, fluid)
     }
 
-    private fun <T: FluidType> registerFluidType(id: String, fluid: Supplier<T>): net.minecraftforge.registries.RegistryObject<T> {
+    private fun <T: FluidType> registerFluidType(id: String, fluid: Supplier<T>): DeferredHolder<FluidType?, T?> {
         return FLUID_TYPES.register(id, fluid)
     }
 

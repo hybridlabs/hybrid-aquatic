@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.forge
 import dev.hybridlabs.aquatic.block.HABlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.FluidTags
-import net.minecraftforge.common.MinecraftForge.EVENT_BUS
-import net.minecraftforge.event.entity.living.LivingBreatheEvent
+import net.neoforged.neoforge.common.NeoForge.EVENT_BUS
+import net.neoforged.neoforge.event.entity.living.LivingBreatheEvent
 
 object HybridAquaticEventBusEvents {
     init {
@@ -19,7 +19,6 @@ object HybridAquaticEventBusEvents {
             world.getBlockState(BlockPos.containing(entity.x, entity.eyeY, entity.z))
                 .`is`(HABlocks.DECORATIVE_BUBBLE_COLUMN.get())) {
             event.setCanBreathe(true)
-            event.setCanRefillAir(true)
         }
     }
 }

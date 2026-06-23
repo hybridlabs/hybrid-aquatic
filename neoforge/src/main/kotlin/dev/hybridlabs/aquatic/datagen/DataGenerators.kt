@@ -5,12 +5,12 @@ import dev.hybridlabs.aquatic.datagen.server.BiomeModifierProvider
 import dev.hybridlabs.aquatic.datagen.server.HAGlobalLootModifierProvider
 import dev.hybridlabs.aquatic.datagen.server.StructureModifierProvider
 import dev.hybridlabs.aquatic.utils.NaughtyRegistrySetBuilder
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider
-import net.minecraftforge.data.event.GatherDataEvent
-import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber
-import net.minecraftforge.registries.ForgeRegistries.Keys.BIOME_MODIFIERS
-import net.minecraftforge.registries.ForgeRegistries.Keys.STRUCTURE_MODIFIERS
+import net.neoforged.bus.api.SubscribeEvent
+import net.neoforged.fml.common.EventBusSubscriber
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider
+import net.neoforged.neoforge.data.event.GatherDataEvent
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.BIOME_MODIFIERS
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.STRUCTURE_MODIFIERS
 
 /**
  * Datagen for Forge specific data resources like biome modifiers.
@@ -32,7 +32,9 @@ object DataGenerators {
         builder.add(BIOME_MODIFIERS, ::BiomeModifierProvider)
         builder.add(STRUCTURE_MODIFIERS, ::StructureModifierProvider)
 
-        generator.addProvider(event.includeServer(), DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder, setOf(Constants.MOD_ID)))
-        generator.addProvider(event.includeServer(), HAGlobalLootModifierProvider(packOutput))
+        generator.addProvider(event.includeServer(),
+            DatapackBuiltinEntriesProvider(packOutput, lookupProvider, builder, setOf(Constants.MOD_ID))
+        )
+        generator.addProvider(event.includeServer(), HAGlobalLootModifierProvider(packOutput, lookupProvider))
     }
 }

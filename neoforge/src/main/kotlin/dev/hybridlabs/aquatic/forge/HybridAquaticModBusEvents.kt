@@ -21,7 +21,6 @@ import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
@@ -36,15 +35,15 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraftforge.client.event.EntityRenderersEvent
-import net.minecraftforge.client.extensions.common.IClientItemExtensions
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
-import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
-import net.minecraftforge.registries.DataPackRegistryEvent
-import thedarkcolour.kotlinforforge.forge.MOD_BUS
-import thedarkcolour.kotlinforforge.forge.runForDist
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
+import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+import net.neoforged.neoforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
+import net.neoforged.neoforge.registries.DataPackRegistryEvent
+import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
+import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
 import top.theillusivec4.curios.api.SlotContext
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry
 import top.theillusivec4.curios.api.client.ICurioRenderer
@@ -52,7 +51,6 @@ import top.theillusivec4.curios.api.client.ICurioRenderer
 object HybridAquaticModBusEvents {
     init {
         MOD_BUS.addListener(::loadSeaMessages)
-        MOD_BUS.addListener(::registerPotionsRecipes)
         MOD_BUS.addListener(::registerSpawnPlacements)
         MOD_BUS.addListener(::addBiomes)
 
@@ -80,13 +78,7 @@ object HybridAquaticModBusEvents {
         )
     }
 
-    private fun registerPotionsRecipes(event: FMLCommonSetupEvent) {
-        event.enqueueWork {
-            HAPotions.registerPotionRecipes()
-        }
-    }
-
-    private fun registerSpawnPlacements(event: SpawnPlacementRegisterEvent) {
+    private fun registerSpawnPlacements(event: RegisterSpawnPlacementsEvent) {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
     }
 
@@ -239,9 +231,9 @@ object HybridAquaticModBusEvents {
                 (renderLayerParent.model) as HumanoidModel<*>
             )
             val vertexConsumer =
-                ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
+                ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false)
             model.renderToBuffer(
-                poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
+                poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY
             )
         }
     }

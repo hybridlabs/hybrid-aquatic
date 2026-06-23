@@ -6,12 +6,13 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.RandomSource
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.BlockGetter
+import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.TallSeagrassBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 
 class DunegrassBlock(settings: Properties): BaseDunegrassBlock(settings){
-    override fun getCloneItemStack(world: BlockGetter, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getCloneItemStack(world: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
         return ItemStack(HAPlatformBlocks.DUNEGRASS.get())
     }
     override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {

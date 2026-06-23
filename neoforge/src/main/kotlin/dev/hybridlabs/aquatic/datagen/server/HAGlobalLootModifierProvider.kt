@@ -1,9 +1,9 @@
-package dev.hybridlabs.aquatic.datagen
+package dev.hybridlabs.aquatic.datagen.server
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.loot.HAGlobalLootModifier
-import dev.hybridlabs.aquatic.tag.HybridAquaticItemTags
+import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
 import net.minecraft.tags.ItemTags
@@ -16,8 +16,8 @@ import net.neoforged.neoforge.common.loot.IGlobalLootModifier
 import java.util.concurrent.CompletableFuture
 
 class HAGlobalLootModifierProvider
-    (output: PackOutput, registries: CompletableFuture<HolderLookup.Provider>):
-    GlobalLootModifierProvider(output,registries, Constants.MOD_ID) {
+    (output: PackOutput, registries: CompletableFuture<HolderLookup.Provider>) :
+    GlobalLootModifierProvider(output, registries, Constants.MOD_ID) {
     override fun start() {
         this.add<IGlobalLootModifier?>(
             "fishing_fish",
@@ -38,7 +38,7 @@ class HAGlobalLootModifierProvider
             HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
                 BuiltInLootTables.FISHING.location(),
-                HybridAquaticItemTags.FISHING_TREASURE,
+                HAItemTags.FISHING_TREASURE,
                 0.25f,
                 WeightedRandomList.create(
                     WeightedEntry.wrap(CommonClass.locate("gameplay/fishing/ha_crates"), 1),

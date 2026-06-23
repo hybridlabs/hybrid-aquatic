@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
-import net.minecraftforge.fluids.FluidType
+import net.neoforged.neoforge.fluids.FluidType
 
 abstract class BrineFluid : CommonBrineFluid() {
 
@@ -29,7 +29,7 @@ abstract class BrineFluid : CommonBrineFluid() {
     }
 
     override fun getFluidType(): FluidType {
-        return HAPlatformFluids.BRINE_FLUIDTYPE.get()
+        return HAPlatformFluids.BRINE_FLUIDTYPE.get() as FluidType
     }
 
     class Flowing : BrineFluid() {
