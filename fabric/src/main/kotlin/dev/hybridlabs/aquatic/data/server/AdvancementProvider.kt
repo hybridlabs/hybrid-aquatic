@@ -486,7 +486,6 @@ class AdvancementProvider(output: FabricDataOutput, registryLookup: CompletableF
                                     Blocks.SAND,
                                     HABlocks.GRASSY_SAND.get()
                                 )
-                                .build()
                         ),
                     ItemPredicate.Builder.item()
                         .of(HAItems.CLAM.get())

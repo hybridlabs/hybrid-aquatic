@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.item.renderer
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.block.BlockEntityHelper.Companion.createBlockEntityRendererProviderContext
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import dev.hybridlabs.aquatic.block.MessageInABottleBlock.Variant
 import dev.hybridlabs.aquatic.client.render.block.entity.MessageInABottleBlockEntityRenderer
 import net.minecraft.client.Minecraft
 import net.minecraft.client.model.geom.EntityModelSet
@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher
 import net.minecraft.core.BlockPos
+import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
@@ -36,7 +37,7 @@ class MessageInABottleBlockItemRenderer(
     ) {
         val id = stack.components[DataComponents.BLOCK_ENTITY_DATA]?.copyTag()
             ?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
-        blockEntity.variant = MessageInABottleBlock.Variant.byId(id)
+        blockEntity.variant = Variant.byId(id)
 
         @Suppress("UnstableApiUsage")
         RENDERER.render(blockEntity, 1.0f, poseStack, buffer, packedLight, packedOverlay)

@@ -25,7 +25,6 @@ import dev.hybridlabs.aquatic.client.render.block.HAModelLayerRegistry
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.fluid.HAFluidRenderer
-import dev.hybridlabs.aquatic.client.render.item.HAItemRendererRegistry
 import dev.hybridlabs.aquatic.client.render.item.HATrinketRendererRegistry
 import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
@@ -42,7 +41,6 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticClientNetworking
 
         HABlockRendererRegistry
-        HAItemRendererRegistry
         HybridAquaticEntityRenderers
         registerWeatherRenderers()
         HATrinketRendererRegistry

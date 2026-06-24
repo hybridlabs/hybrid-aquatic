@@ -1,30 +1,44 @@
 package dev.hybridlabs.aquatic.client.render.item.renderer
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.hybridlabs.aquatic.block.BlockEntityHelper
+import dev.hybridlabs.aquatic.block.BlockEntityHelper.Companion.createBlockEntityRendererProviderContext
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.render.block.entity.StrawberryAnemoneBlockEntityRenderer
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry.DynamicItemRenderer
+import net.minecraft.client.Minecraft
+import net.minecraft.client.model.geom.EntityModelSet
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer
 import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher
 import net.minecraft.core.BlockPos
 import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
-class StrawberryAnemoneBlockItemRenderer : DynamicItemRenderer {
-    private val strawberryAnemoneBlockEntity =
-        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HABlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
-    private val renderer =
-        StrawberryAnemoneBlockEntityRenderer(BlockEntityHelper.createBlockEntityRendererProviderContext())
-
-    override fun render(
-        stack: ItemStack,
-        mode: ItemDisplayContext,
-        matrices: PoseStack,
-        vertexConsumers: MultiBufferSource,
-        light: Int,
-        overlay: Int
+class StrawberryAnemoneBlockItemRenderer(
+    blockEntityRenderDispatcher: BlockEntityRenderDispatcher,
+    entityModelSet: EntityModelSet
+) :
+    BlockEntityWithoutLevelRenderer(
+        blockEntityRenderDispatcher, entityModelSet
     ) {
-        renderer.render(strawberryAnemoneBlockEntity, 1.0f, matrices, vertexConsumers, light, overlay)
+
+    constructor() : this(client.blockEntityRenderDispatcher, client.entityModels)
+
+    val blockEntity by lazy {
+        StrawberryAnemoneBlockEntity(BlockPos.ZERO, HABlocks.STRAWBERRY_ANEMONE.get().defaultBlockState())
+    }
+
+    override fun renderByItem(
+        stack: ItemStack, displayContext: ItemDisplayContext,
+        poseStack: PoseStack, buffer: MultiBufferSource, packedLight: Int,
+        packedOverlay: Int
+    ) {
+        RENDERER.render(blockEntity, 1.0f, poseStack, buffer, packedLight, packedOverlay)
+    }
+
+    companion object {
+        private val RENDERER: StrawberryAnemoneBlockEntityRenderer =
+            StrawberryAnemoneBlockEntityRenderer(createBlockEntityRendererProviderContext())
+        private val client: Minecraft = Minecraft.getInstance()
     }
 }
