@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.utils;
 
 import dev.hybridlabs.aquatic.Constants;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
 
 import java.util.Map;

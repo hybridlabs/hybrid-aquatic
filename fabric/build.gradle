@@ -89,7 +89,6 @@ loom {
         defaultRefmapName.set("${mod_id}.refmap.json")
     }
 
-
     compileKotlin {
         source(project(":common").sourceSets.main.allSource)
         inputs.file "../gradle.properties"
