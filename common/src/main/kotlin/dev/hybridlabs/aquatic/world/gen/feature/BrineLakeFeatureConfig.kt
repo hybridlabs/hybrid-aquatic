@@ -12,8 +12,8 @@ data class BrineLakeFeatureConfig(
     companion object {
         val CODEC: Codec<BrineLakeFeatureConfig> = RecordCodecBuilder.create { instance ->
             instance.group(
-                BlockStateProvider.CODEC.fieldOf("base_block").forGetter(BrineLakeFeatureConfig::barrierProvider),
-                BlockStateProvider.CODEC.fieldOf("vent_block").forGetter(BrineLakeFeatureConfig::fluidProvider),
+                BlockStateProvider.CODEC.fieldOf("barrier_block").forGetter(BrineLakeFeatureConfig::barrierProvider),
+                BlockStateProvider.CODEC.fieldOf("fluid_block").forGetter(BrineLakeFeatureConfig::fluidProvider),
             ).apply(instance, ::BrineLakeFeatureConfig)
         }
     }

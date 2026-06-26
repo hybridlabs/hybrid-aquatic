@@ -54,12 +54,10 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
         registryBuilder.add(HARegistryKeys.SEA_MESSAGE) {}
         registryBuilder.add(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
-        registryBuilder.add(Registries.BIOME) {
-            HABiomes
-        }
-        registryBuilder.add(Registries.CONFIGURED_FEATURE) {
-            HAConfiguredFeatures
-        }
+        registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureProvider::bootstrapPlacedFeatures)
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureProvider::bootstrapConfiguredFeatures)
+        registryBuilder.add(Registries.BIOME) { HABiomes }
+        registryBuilder.add(Registries.CONFIGURED_FEATURE) { HAConfiguredFeatures }
     }
 
     fun <T> filterHybridAquatic(registry: Registry<T>): (T & Any) -> Boolean {

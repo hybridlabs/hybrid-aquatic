@@ -10,12 +10,16 @@ import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.DelesseriaFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.HolderSet
 import net.minecraft.core.Vec3i
+import net.minecraft.core.registries.Registries
+import net.minecraft.data.worldgen.BootstrapContext
+import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.random.SimpleWeightedRandomList
@@ -51,11 +55,13 @@ class ConfiguredFeatureProvider(
     output: FabricDataOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
-    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
+    companion object {
+        fun bootstrapConfiguredFeatures(bootstrap: BootstrapContext<ConfiguredFeature<*, *>>) {
 
-        val ANEMONES = entries.add(
-            HAConfiguredFeatures.ANEMONES,
-            ConfiguredFeature(
+            val ANEMONES = FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.ANEMONES,
+
                 Feature.NO_BONEMEAL_FLOWER,
                 RandomPatchConfiguration(
                     4, 2, 2,
@@ -87,11 +93,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.RED_BRINE_POOL,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.RED_BRINE_POOL,
                 HAFeatures.BRINE_LAKE.get(),
                 BrineLakeFeatureConfig(
                     BlockStateProvider.simple(
@@ -104,11 +109,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.ORANGE_BRINE_POOL,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.ORANGE_BRINE_POOL,
                 HAFeatures.BRINE_LAKE.get(),
                 BrineLakeFeatureConfig(
                     BlockStateProvider.simple(
@@ -121,11 +125,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.YELLOW_BRINE_POOL,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.YELLOW_BRINE_POOL,
                 HAFeatures.BRINE_LAKE.get(),
                 BrineLakeFeatureConfig(
                     BlockStateProvider.simple(
@@ -138,11 +141,10 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.BRINE_POOL,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.BRINE_POOL,
                 Feature.SIMPLE_RANDOM_SELECTOR,
                 SimpleRandomFeatureConfiguration(
                     HolderSet.direct(
@@ -152,11 +154,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.TIDE_POOLS,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.TIDE_POOLS,
+
                 WATERLOGGED_VEGETATION_PATCH, VegetationPatchConfiguration(
                     HABlockTags.TIDE_POOL_REPLACEABLE,
                     WeightedStateProvider(
@@ -166,7 +168,9 @@ class ConfiguredFeatureProvider(
                             .build()
                     ),
                     PlacementUtils.inlinePlaced(
-                        ANEMONES
+                        HAFeatures.ANEMONES.get(),
+                        FeatureConfiguration.NONE,
+                        *arrayOfNulls<PlacementModifier>(0)
                     ),
                     CaveSurface.FLOOR,
                     BiasedToBottomInt.of(1, 7),
@@ -177,11 +181,11 @@ class ConfiguredFeatureProvider(
                     0.5f
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.BOULDER,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.BOULDER,
+
                 GEODE, GeodeConfiguration(
                     GeodeBlockSettings(
                         BlockStateProvider.simple(Blocks.STONE),
@@ -207,11 +211,11 @@ class ConfiguredFeatureProvider(
                     50
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.DEEP_OCEAN_VEGETATION,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.DEEP_OCEAN_VEGETATION,
+
                 Feature.SIMPLE_RANDOM_SELECTOR,
                 SimpleRandomFeatureConfiguration(
                     HolderSet.direct(
@@ -238,11 +242,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.BLEACHED_REEF_VEGETATION,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.BLEACHED_REEF_VEGETATION,
+
                 Feature.SIMPLE_RANDOM_SELECTOR,
                 SimpleRandomFeatureConfiguration(
                     HolderSet.direct(
@@ -269,11 +273,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.CORAL_REEF_VEGETATION,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.CORAL_REEF_VEGETATION,
+
                 Feature.SIMPLE_RANDOM_SELECTOR,
                 SimpleRandomFeatureConfiguration(
                     HolderSet.direct(
@@ -300,38 +304,40 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.RED_MEADOW_VEGETATION,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.RED_MEADOW_VEGETATION,
+
                 HAFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.66f
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.AERATED_SAND_CIRCLE,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.AERATED_SAND_CIRCLE,
+
                 Feature.DISK,
                 DiskConfiguration(
                     RuleBasedBlockStateProvider.simple(HABlocks.AERATED_SAND.get()),
-                    BlockPredicate.matchesBlocks(listOf<Block>(
-                        HABlocks.GRASSY_SAND.get(),
-                        HABlocks.SHORESTONE.get(),
-                        HABlocks.CORALSTONE.get(),
-                        Blocks.SAND)
+                    BlockPredicate.matchesBlocks(
+                        listOf<Block>(
+                            HABlocks.GRASSY_SAND.get(),
+                            HABlocks.SHORESTONE.get(),
+                            HABlocks.CORALSTONE.get(),
+                            Blocks.SAND
+                        )
                     ),
                     UniformInt.of(1, 3),
                     1
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.SAND_CIRCLE,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.SAND_CIRCLE,
+
                 Feature.DISK,
                 DiskConfiguration(
                     RuleBasedBlockStateProvider.simple(Blocks.SAND),
@@ -340,11 +346,11 @@ class ConfiguredFeatureProvider(
                     1
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.SULFUR_DEPOSIT,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.SULFUR_DEPOSIT,
+
                 Feature.ORE,
                 OreConfiguration(
                     TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES),
@@ -353,11 +359,11 @@ class ConfiguredFeatureProvider(
                     0.0f
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.SUSPICIOUS_SAND_DISK,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.SUSPICIOUS_SAND_DISK,
+
                 HAFeatures.SUSPICIOUS_SAND_DISK.get(),
                 DiskConfiguration(
                     RuleBasedBlockStateProvider.simple(Blocks.SUSPICIOUS_SAND),
@@ -366,49 +372,47 @@ class ConfiguredFeatureProvider(
                     1
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.DUNEGRASS_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.DUNEGRASS_PATCH,
+
                 HybridAquatic.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.5f
                 )
             )
-        )
 
-        //#region Sargassum
-        entries.add(
-            HAConfiguredFeatures.SARGASSUM,
-            ConfiguredFeature(
-                HAFeatures.SARGASSUM.get(),
-                _root_ide_package_.dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig(
+            //#region Sargassum
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.SARGASSUM,
+                HAFeatures.SARGASSUM.get(), SargassumFeatureConfig(
                     SimpleStateProvider.simple(HABlocks.SARGASSUM.get())
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.BULL_KELP,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.BULL_KELP,
+
                 HAFeatures.BULL_KELP.get(), BullKelpFeatureConfig(
                     SimpleStateProvider.simple(HABlocks.BULL_KELP.get())
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.DELESSERIA,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.DELESSERIA,
+
                 HAFeatures.DELESSERIA.get(), DelesseriaFeatureConfig(
                     SimpleStateProvider.simple(HABlocks.DELESSERIA.get())
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.FLOATING_SARGASSUM,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.FLOATING_SARGASSUM,
+
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     100, 10, 10,
                     PlacementUtils.filtered(
@@ -427,11 +431,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.WATER_LETTUCE,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.WATER_LETTUCE,
+
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     30, 5, 5,
                     PlacementUtils.filtered(
@@ -443,11 +447,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.WATER_HYACINTH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.WATER_HYACINTH,
+
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     30, 5, 5,
                     PlacementUtils.filtered(
@@ -459,11 +463,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.JUNGLE_LILY_PAD,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.JUNGLE_LILY_PAD,
+
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     10, 5, 5,
                     PlacementUtils.filtered(
@@ -475,21 +479,21 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.SEA_LETTUCE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.SEA_LETTUCE_PATCH,
+
                 HAFeatures.SEA_LETTUCE_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.33f
                 )
             )
-        )
 
-        // mussel patch
-        entries.add(
-            HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH,
-            ConfiguredFeature(
+            // mussel patch
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH,
+
                 Feature.FLOWER,
                 RandomPatchConfiguration(
                     16, 4, 4,
@@ -505,12 +509,12 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // tube sponge patch
-        entries.add(
-            HAConfiguredFeatures.TUBE_SPONGE_PATCH,
-            ConfiguredFeature(
+            // tube sponge patch
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.TUBE_SPONGE_PATCH,
+
                 Feature.FLOWER,
                 RandomPatchConfiguration(
                     4, 2, 2,
@@ -525,11 +529,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.GLASS_SPONGE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.GLASS_SPONGE_PATCH,
+
                 Feature.FLOWER,
                 RandomPatchConfiguration(
                     4, 4, 2,
@@ -544,11 +548,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.HARP_SPONGE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.HARP_SPONGE_PATCH,
+
                 Feature.FLOWER,
                 RandomPatchConfiguration(
                     4, 4, 2,
@@ -563,11 +567,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        entries.add(
-            HAConfiguredFeatures.PING_PONG_SPONGE_PATCH,
-            ConfiguredFeature(
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.PING_PONG_SPONGE_PATCH,
+
                 Feature.FLOWER,
                 RandomPatchConfiguration(
                     4, 4, 2,
@@ -582,12 +586,12 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // giant clam patch
-        entries.add(
-            HAConfiguredFeatures.GIANT_CLAM_PATCH,
-            ConfiguredFeature(
+            // giant clam patch
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.GIANT_CLAM_PATCH,
+
                 Feature.NO_BONEMEAL_FLOWER, RandomPatchConfiguration(
                     2, 2, 2,
                     PlacementUtils.filtered(
@@ -612,12 +616,12 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // giant clam patch
-        entries.add(
-            HAConfiguredFeatures.OYSTER_BED,
-            ConfiguredFeature(
+            // giant clam patch
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.OYSTER_BED,
+
                 Feature.NO_BONEMEAL_FLOWER, RandomPatchConfiguration(
                     2, 2, 2,
                     PlacementUtils.filtered(
@@ -652,22 +656,22 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // message in a bottle
-        entries.add(
-            HAConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
-            ConfiguredFeature(
+            // message in a bottle
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
+
                 HAFeatures.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleFeatureConfig(
                     SimpleStateProvider.simple(HABlocks.MESSAGE_IN_A_BOTTLE.get())
                 )
             )
-        )
 
-        // thermal vents
-        entries.add(
-            HAConfiguredFeatures.THERMAL_VENT_PATCH,
-            ConfiguredFeature(
+            // thermal vents
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.THERMAL_VENT_PATCH,
+
                 HAFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
                     SimpleStateProvider.simple(HABlocks.CHIMNEYSTONE.get()),
                     SimpleStateProvider.simple(HABlocks.THERMAL_VENT.get()),
@@ -680,11 +684,11 @@ class ConfiguredFeatureProvider(
                     UniformInt.of(TubeWormBlock.WORMS.min, TubeWormBlock.WORMS.max),
                 )
             )
-        )
 
-        // coral mound base
-        entries.add(
-            HAConfiguredFeatures.CORAL_MOUND, ConfiguredFeature(
+            // coral mound base
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.CORAL_MOUND,
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     6, 7, 0, PlacementUtils.inlinePlaced(
                         Feature.DISK, DiskConfiguration(
@@ -708,12 +712,12 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // coral mound coral layers
-        entries.add(
-            HAConfiguredFeatures.CORAL_LAYER,
-            ConfiguredFeature(
+            // coral mound coral layers
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.CORAL_LAYER,
+
                 Feature.RANDOM_SELECTOR,
                 RandomFeatureConfiguration(
                     listOf(
@@ -796,11 +800,11 @@ class ConfiguredFeatureProvider(
                     PlacementUtils.inlinePlaced(Feature.NO_OP, NoneFeatureConfiguration())
                 )
             )
-        )
 
-        // mound base
-        entries.add(
-            HAConfiguredFeatures.MOUND, ConfiguredFeature(
+            // mound base
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.MOUND,
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     6, 7, 0, PlacementUtils.inlinePlaced(
                         Feature.DISK, DiskConfiguration(
@@ -850,11 +854,11 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
 
-        // white mound
-        entries.add(
-            HAConfiguredFeatures.WHITE_MOUND, ConfiguredFeature(
+            // white mound
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.WHITE_MOUND,
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     6, 7, 0, PlacementUtils.inlinePlaced(
                         Feature.DISK, DiskConfiguration(
@@ -893,7 +897,58 @@ class ConfiguredFeatureProvider(
                     )
                 )
             )
-        )
+        }
+    }
+
+    override fun configure(registries: HolderLookup.Provider, entries: Entries) {
+        val reg = registries.lookup(Registries.CONFIGURED_FEATURE).get()
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.ANEMONES))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.DEEP_OCEAN_VEGETATION))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.BLEACHED_REEF_VEGETATION))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.CORAL_REEF_VEGETATION))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.RED_MEADOW_VEGETATION))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.DUNEGRASS_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.SARGASSUM))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_SARGASSUM))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.BULL_KELP))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.DELESSERIA))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.WATER_LETTUCE))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.WATER_HYACINTH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.JUNGLE_LILY_PAD))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.AERATED_SAND_CIRCLE))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.SAND_CIRCLE))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.SULFUR_DEPOSIT))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.SUSPICIOUS_SAND_DISK))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.SEA_LETTUCE_PATCH))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.GIANT_CLAM_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.OYSTER_BED))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.TUBE_SPONGE_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.GLASS_SPONGE_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.HARP_SPONGE_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.PING_PONG_SPONGE_PATCH))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.THERMAL_VENT_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.MESSAGE_IN_A_BOTTLE))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.TIDE_POOLS))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.BOULDER))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.BRINE_POOL))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.RED_BRINE_POOL))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.ORANGE_BRINE_POOL))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.YELLOW_BRINE_POOL))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.CORAL_MOUND))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.CORAL_LAYER))
+
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.MOUND))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.WHITE_MOUND))
     }
 
     override fun getName(): String {
