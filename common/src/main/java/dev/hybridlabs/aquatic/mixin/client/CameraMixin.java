@@ -20,10 +20,10 @@ public abstract class CameraMixin {
 	private Entity entity;
 	
 	@Shadow
-	protected abstract double getMaxZoom(double startingDistance);
+	protected abstract float getMaxZoom(float startingDistance);
 	
 	@Shadow
-	protected abstract void move(double distanceOffset, double verticalOffset, double horizontalOffset);
+	protected abstract void move(float distanceOffset, float verticalOffset, float horizontalOffset);
 	
 	@Inject(
 		method = "setup",
@@ -32,26 +32,26 @@ public abstract class CameraMixin {
 	private void changeCameraPosInArgonaut(BlockGetter level, Entity entity, boolean detached, boolean thirdPersonReverse, float partialTick, CallbackInfo ci) {
 		if (!detached && entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity argonaut) {
 			var argonautRotationRadX = Math.toRadians(argonaut.getRotationVector().x);
-			this.move(argonautRotationRadX * 0.25, Math.abs(argonautRotationRadX * 0.25), 0.0);
+			this.move((float)(argonautRotationRadX * 0.25), (float)(Math.abs(argonautRotationRadX * 0.25)), 0.0f);
 		}
 	}
 	
 	@ModifyArg(
 		method = "setup",
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;getMaxZoom(D)D"), index = 0
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;getMaxZoom(F)F"), index = 0
 	)
-	private double changeCameraDistance(double original) {
-		return entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity ? 7.5d : original;
+	private float changeCameraDistance(float original) {
+		return entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity ? 7.5f : original;
 	}
 	
 	@ModifyExpressionValue(
 		method = "setup",
 		slice = @Slice(
-			from = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;getMaxZoom(D)D", ordinal = 0),
+			from = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;getMaxZoom(F)F", ordinal = 0),
 			to = @At(value = "TAIL")),
-		at = @At(value = "CONSTANT", args = "doubleValue=0.0", ordinal = 0)
+		at = @At(value = "CONSTANT", args = "floatValue=0.0", ordinal = 0)
 	)
-	private double changeCameraHeight(double original) {
-		return entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity ? getMaxZoom(3.0) : original;
+	private float changeCameraHeight(float original) {
+		return entity.getRootVehicle() != entity && entity.getRootVehicle() instanceof ArgonautEntity ? getMaxZoom(3.0f) : original;
 	}
 }
