@@ -31,14 +31,14 @@ object HATrinketRendererRegistry {
         TrinketRendererRegistry.registerRenderer(item) { itemStack, slotReference, contextModel, poseStack, bufferSource, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch ->
             if (entity is AbstractClientPlayer) {
                 val renderer = (item as GeoItem).renderProvider as GeoRenderProvider
-                val model = renderer.getGenericArmorModel(
+                val model = renderer.getGeoArmorRenderer(
                     entity, itemStack, equipmentSlot,
                     contextModel as HumanoidModel<LivingEntity>
                 )
                 val vertexConsumer =
                     ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false)
-                model.renderToBuffer(
-                    poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
+                model?.renderToBuffer(
+                    poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY
                 )
             }
         }
