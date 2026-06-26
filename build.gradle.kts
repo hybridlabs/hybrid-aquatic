@@ -105,10 +105,12 @@ cloche {
             include("io.github.llamalad7:mixinextras-fabric:0.5.0")
         }
 
+        data()
+
         // All client code lives in the main source set (no separate client sourceset).
         includedClient()
 
-        runs { client(); server() }
+        runs { client(); server(); data(); }
     }
 
     forge {
@@ -139,7 +141,9 @@ cloche {
             include("io.github.llamalad7:mixinextras-forge:0.5.0")
         }
 
-        runs { client(); server() }
+        data()
+
+        runs { client(); server(); data() }
     }
 }
 
