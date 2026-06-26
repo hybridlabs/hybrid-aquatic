@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:yellow_brinestone_brick_slab_from_yellow_brinestone_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_brinestone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:yellow_brinestone_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_yellow_brinestone_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:yellow_brinestone_brick_slab_from_yellow_brinestone_bricks_stonecutting"
+    ]
+  }
+}

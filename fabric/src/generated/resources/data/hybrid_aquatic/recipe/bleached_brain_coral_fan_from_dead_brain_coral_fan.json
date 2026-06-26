@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "minecraft:dead_brain_coral_fan"
+    },
+    "W": {
+      "item": "minecraft:white_dye"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "CWC",
+    "CCC"
+  ],
+  "result": {
+    "count": 8,
+    "id": "hybrid_aquatic:bleached_brain_coral_fan"
+  }
+}

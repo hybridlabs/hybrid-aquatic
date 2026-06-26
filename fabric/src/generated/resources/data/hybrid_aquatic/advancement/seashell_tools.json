@@ -1,0 +1,35 @@
+{
+  "parent": "hybrid_aquatic:nautilus_shell",
+  "criteria": {
+    "obtain_seashell_tools": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#hybrid_aquatic:seashell_set"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.seashell_tools.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:seashell_spear"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.seashell_tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_seashell_tools"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

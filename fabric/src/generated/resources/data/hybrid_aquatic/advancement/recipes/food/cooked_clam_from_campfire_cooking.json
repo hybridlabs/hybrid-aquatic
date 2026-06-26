@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clam": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:clam"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:cooked_clam_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_clam"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:cooked_clam_from_campfire_cooking"
+    ]
+  }
+}

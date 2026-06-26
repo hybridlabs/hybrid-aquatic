@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_schist": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:polished_schist"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:schist_bricks_from_polished_schist_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_schist"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:schist_bricks_from_polished_schist_stonecutting"
+    ]
+  }
+}

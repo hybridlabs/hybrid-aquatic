@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:turtle",
+    {
+      "id": "alexsmobs:terrapin",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:alligator_snapping_turtle",
+      "required": false
+    }
+  ]
+}

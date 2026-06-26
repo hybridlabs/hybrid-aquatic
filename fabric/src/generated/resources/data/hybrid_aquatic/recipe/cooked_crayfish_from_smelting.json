@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.15,
+  "ingredient": {
+    "item": "hybrid_aquatic:raw_crayfish"
+  },
+  "result": {
+    "id": "hybrid_aquatic:cooked_crayfish"
+  }
+}

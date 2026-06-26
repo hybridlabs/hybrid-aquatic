@@ -1,0 +1,35 @@
+{
+  "parent": "hybrid_aquatic:crab_claw",
+  "criteria": {
+    "obtain_ominous_hook": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:ominous_hook"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.ominous_hook.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:ominous_hook"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.ominous_hook.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_ominous_hook"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

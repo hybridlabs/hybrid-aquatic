@@ -1,0 +1,34 @@
+{
+  "parent": "hybrid_aquatic:root",
+  "criteria": {
+    "obtain_glowstick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:glowstick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.glowstick.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:glowstick"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.glowstick.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_glowstick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

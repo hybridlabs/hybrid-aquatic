@@ -1,0 +1,35 @@
+{
+  "parent": "hybrid_aquatic:nautilus_shell",
+  "criteria": {
+    "obtain_conduit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:conduit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.conduit.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:conduit"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.conduit.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_conduit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.15,
+  "ingredient": {
+    "tag": "hybrid_aquatic:kelps"
+  },
+  "result": {
+    "id": "minecraft:dried_kelp"
+  }
+}

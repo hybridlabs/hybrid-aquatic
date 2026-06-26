@@ -1,0 +1,44 @@
+{
+  "parent": "hybrid_aquatic:fishing_net",
+  "criteria": {
+    "obtain_diving_suit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:diving_helmet"
+          },
+          {
+            "items": "hybrid_aquatic:diving_suit"
+          },
+          {
+            "items": "hybrid_aquatic:diving_leggings"
+          },
+          {
+            "items": "hybrid_aquatic:diving_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.diving_suit.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:diving_helmet"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.diving_suit.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_diving_suit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

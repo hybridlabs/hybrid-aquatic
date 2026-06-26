@@ -1,0 +1,23 @@
+{
+  "values": [
+    "hybrid_aquatic:diving_suit",
+    "hybrid_aquatic:reinforced_diving_suit",
+    "hybrid_aquatic:glowing_diving_suit",
+    {
+      "id": "create:copper_backtank",
+      "required": false
+    },
+    {
+      "id": "create:netherite_backtank",
+      "required": false
+    },
+    {
+      "id": "aquamirae:three_bolt_chestplate",
+      "required": false
+    },
+    {
+      "id": "alexscaves:diving_chestplate",
+      "required": false
+    }
+  ]
+}

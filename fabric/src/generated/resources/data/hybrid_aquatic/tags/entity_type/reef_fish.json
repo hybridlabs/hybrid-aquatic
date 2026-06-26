@@ -1,0 +1,159 @@
+{
+  "values": [
+    "hybrid_aquatic:blowfish",
+    "hybrid_aquatic:boxfish",
+    "hybrid_aquatic:clownfish",
+    "hybrid_aquatic:garden_eel",
+    "hybrid_aquatic:damselfish",
+    "hybrid_aquatic:flying_fish",
+    "hybrid_aquatic:lionfish",
+    "hybrid_aquatic:moray_eel",
+    "hybrid_aquatic:needlefish",
+    "hybrid_aquatic:parrotfish",
+    "hybrid_aquatic:seahorse",
+    "hybrid_aquatic:seadragon",
+    "hybrid_aquatic:squirrelfish",
+    "hybrid_aquatic:stonefish",
+    "hybrid_aquatic:surgeonfish",
+    "hybrid_aquatic:triggerfish",
+    "hybrid_aquatic:trevally",
+    "hybrid_aquatic:wrasse",
+    "minecraft:tropical_fish",
+    {
+      "id": "alexsmobs:flying_fish",
+      "required": false
+    },
+    {
+      "id": "bountiful_critters:angelfish",
+      "required": false
+    },
+    {
+      "id": "spawn:seahorse",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:basslet",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:boxfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:butterflyfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:clownfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:dwarf_angelfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:goby",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:hogfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:moorish_idol",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:parrotfish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:pipefish",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:ray",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:seahorse",
+      "required": false
+    },
+    {
+      "id": "rainbowreef:tang",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:tiger_scatfish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:tiger_scatfish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:threadfin_lookdown",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:threadfin_lookdown_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:teira_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:teira_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:atlantic_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:atlantic_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:golden_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:golden_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pacific_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pacific_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pinnate_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:pinnate_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:orbicular_spadefish",
+      "required": false
+    },
+    {
+      "id": "wonderoussea:orbicular_spadefish_2",
+      "required": false
+    },
+    {
+      "id": "finsandtails:ornate_bugfish",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "hybrid_aquatic:nautilus_shell",
+  "criteria": {
+    "obtain_ominous_conch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:ominous_conch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.ominous_conch.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:ominous_conch"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.ominous_conch.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_ominous_conch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

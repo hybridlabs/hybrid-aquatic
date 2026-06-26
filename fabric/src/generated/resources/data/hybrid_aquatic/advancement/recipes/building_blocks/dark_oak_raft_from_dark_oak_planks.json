@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dark_oak_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dark_oak_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:dark_oak_raft_from_dark_oak_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dark_oak_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:dark_oak_raft_from_dark_oak_planks"
+    ]
+  }
+}

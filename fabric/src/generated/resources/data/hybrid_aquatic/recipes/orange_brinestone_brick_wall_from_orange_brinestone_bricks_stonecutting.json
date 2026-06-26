@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "hybrid_aquatic:orange_brinestone_bricks"
-  },
-  "result": "hybrid_aquatic:orange_brinestone_brick_wall"
-}

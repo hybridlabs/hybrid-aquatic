@@ -1,0 +1,34 @@
+{
+  "parent": "hybrid_aquatic:glowstick",
+  "criteria": {
+    "obtain_sulfur": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:sulfur"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.sulfur.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:sulfur"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.sulfur.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_sulfur"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

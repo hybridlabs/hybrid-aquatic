@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "hybrid_aquatic:glowslime"
+  },
+  "base": {
+    "item": "hybrid_aquatic:diving_suit"
+  },
+  "result": {
+    "count": 1,
+    "id": "hybrid_aquatic:glowing_diving_suit"
+  },
+  "template": {
+    "item": "hybrid_aquatic:diving_armor_upgrade_template"
+  }
+}

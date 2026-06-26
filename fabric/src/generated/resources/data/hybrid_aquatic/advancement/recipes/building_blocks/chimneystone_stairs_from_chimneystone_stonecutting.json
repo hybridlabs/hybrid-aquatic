@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chimneystone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:chimneystone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:chimneystone_stairs_from_chimneystone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chimneystone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:chimneystone_stairs_from_chimneystone_stonecutting"
+    ]
+  }
+}

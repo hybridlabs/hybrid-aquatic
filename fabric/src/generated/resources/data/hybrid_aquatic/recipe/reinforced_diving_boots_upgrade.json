@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "hybrid_aquatic:black_pearl"
+  },
+  "base": {
+    "item": "hybrid_aquatic:diving_boots"
+  },
+  "result": {
+    "count": 1,
+    "id": "hybrid_aquatic:reinforced_diving_boots"
+  },
+  "template": {
+    "item": "hybrid_aquatic:diving_armor_upgrade_template"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "items": "#minecraft:axes"
+                  }
+                }
+              ],
+              "value": "hybrid_aquatic:gameplay/bamboo_crate_treasure"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "hybrid_aquatic:bamboo_crate"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

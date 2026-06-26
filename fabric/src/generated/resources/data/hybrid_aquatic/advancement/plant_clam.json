@@ -1,0 +1,48 @@
+{
+  "parent": "hybrid_aquatic:get_clam",
+  "criteria": {
+    "plant_clam": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "minecraft:sand",
+                  "hybrid_aquatic:grassy_sand"
+                ]
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "hybrid_aquatic:clam"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.plant_clam.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:cooked_clam"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.plant_clam.title"
+    }
+  },
+  "requirements": [
+    [
+      "plant_clam"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

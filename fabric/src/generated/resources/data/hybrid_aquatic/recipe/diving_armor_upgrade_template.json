@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "U": {
+      "item": "hybrid_aquatic:diving_armor_upgrade_template"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PUP",
+    "PCP"
+  ],
+  "result": {
+    "count": 2,
+    "id": "hybrid_aquatic:diving_armor_upgrade_template"
+  }
+}

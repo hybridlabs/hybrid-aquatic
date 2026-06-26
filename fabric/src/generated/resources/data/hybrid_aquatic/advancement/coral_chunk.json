@@ -1,0 +1,34 @@
+{
+  "parent": "hybrid_aquatic:root",
+  "criteria": {
+    "obtain_coral_chunk": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:coral_chunk"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.coral_chunk.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:coral_chunk"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.coral_chunk.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_coral_chunk"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

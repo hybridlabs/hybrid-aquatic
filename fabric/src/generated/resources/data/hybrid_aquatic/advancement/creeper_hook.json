@@ -1,0 +1,35 @@
+{
+  "parent": "hybrid_aquatic:hook",
+  "criteria": {
+    "obtain_creeper_hook": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:creepermagnet_hook"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.creeper_hook.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:creepermagnet_hook"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.creeper_hook.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_creeper_hook"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

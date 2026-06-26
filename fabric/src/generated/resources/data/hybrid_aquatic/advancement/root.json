@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "enter_water": {
+      "conditions": {
+        "block": "minecraft:water"
+      },
+      "trigger": "minecraft:enter_block"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.enter_water.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:tuna"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.enter_water.title"
+    }
+  },
+  "requirements": [
+    [
+      "enter_water"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

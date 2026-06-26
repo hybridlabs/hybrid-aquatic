@@ -1,0 +1,14 @@
+{
+  "values": [
+    "hybrid_aquatic:raw_lobster",
+    "hybrid_aquatic:cooked_lobster",
+    "hybrid_aquatic:raw_lobster_tail",
+    "hybrid_aquatic:cooked_lobster_tail",
+    "hybrid_aquatic:raw_crab",
+    "hybrid_aquatic:cooked_crab",
+    "hybrid_aquatic:raw_shrimp",
+    "hybrid_aquatic:cooked_shrimp",
+    "hybrid_aquatic:raw_crayfish",
+    "hybrid_aquatic:cooked_crayfish"
+  ]
+}

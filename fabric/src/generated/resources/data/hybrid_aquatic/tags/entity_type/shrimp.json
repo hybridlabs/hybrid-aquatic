@@ -1,0 +1,17 @@
+{
+  "values": [
+    "hybrid_aquatic:shrimp",
+    {
+      "id": "fintastic:fairy_shrimp",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:mantis_shrimp",
+      "required": false
+    },
+    {
+      "id": "finsandtails:banded_redback_shrimp",
+      "required": false
+    }
+  ]
+}

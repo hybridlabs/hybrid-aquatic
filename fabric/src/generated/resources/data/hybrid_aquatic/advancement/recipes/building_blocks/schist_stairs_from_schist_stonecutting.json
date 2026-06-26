@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_schist": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:schist"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:schist_stairs_from_schist_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_schist"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:schist_stairs_from_schist_stonecutting"
+    ]
+  }
+}

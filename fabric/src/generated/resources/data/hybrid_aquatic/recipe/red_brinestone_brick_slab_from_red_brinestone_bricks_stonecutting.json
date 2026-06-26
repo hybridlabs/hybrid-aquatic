@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "hybrid_aquatic:red_brinestone_bricks"
+  },
+  "result": {
+    "count": 2,
+    "id": "hybrid_aquatic:red_brinestone_brick_slab"
+  }
+}

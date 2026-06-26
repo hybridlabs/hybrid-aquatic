@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "hybrid_aquatic:schist"
+  },
+  "result": {
+    "count": 1,
+    "id": "hybrid_aquatic:schist_wall"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "hybrid_aquatic:crystalline_sulfur"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "hybrid_aquatic:sulfur"
+  }
+}

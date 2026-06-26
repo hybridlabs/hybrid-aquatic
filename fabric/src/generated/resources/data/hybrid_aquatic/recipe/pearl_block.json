@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "hybrid_aquatic:pearl"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PPP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "hybrid_aquatic:pearl_block"
+  }
+}

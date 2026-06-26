@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_fish_meat": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:raw_fish_meat"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:cooked_fish_meat_from_campfire_cooking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_fish_meat"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:cooked_fish_meat_from_campfire_cooking"
+    ]
+  }
+}

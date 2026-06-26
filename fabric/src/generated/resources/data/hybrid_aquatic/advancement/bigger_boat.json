@@ -1,0 +1,35 @@
+{
+  "parent": "hybrid_aquatic:root",
+  "criteria": {
+    "obtain_shark_tooth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:shark_tooth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.bigger_boat.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:shark_tooth"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.bigger_boat.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_shark_tooth"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": {
+      "item": "hybrid_aquatic:prismarine_rod"
+    },
+    "S": {
+      "item": "hybrid_aquatic:shark_tooth"
+    }
+  },
+  "pattern": [
+    "SSS",
+    " R ",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:trident"
+  }
+}

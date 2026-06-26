@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "item": "minecraft:turtle_scute"
+    }
+  },
+  "pattern": [
+    "S S",
+    "SSS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "hybrid_aquatic:turtle_chestplate"
+  }
+}

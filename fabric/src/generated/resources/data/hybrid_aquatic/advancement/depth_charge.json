@@ -1,0 +1,35 @@
+{
+  "parent": "hybrid_aquatic:sulfur",
+  "criteria": {
+    "obtain_depth_charge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:depth_charge"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.depth_charge.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:depth_charge"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.depth_charge.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_depth_charge"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

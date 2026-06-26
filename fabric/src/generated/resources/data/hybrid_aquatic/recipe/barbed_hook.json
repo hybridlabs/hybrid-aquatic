@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "N  ",
+    "N N",
+    "NNN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "hybrid_aquatic:barbed_hook"
+  }
+}

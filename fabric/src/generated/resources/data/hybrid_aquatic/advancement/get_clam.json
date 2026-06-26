@@ -1,0 +1,34 @@
+{
+  "parent": "hybrid_aquatic:root",
+  "criteria": {
+    "obtain_clam": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:clam"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "hybrid_aquatic:textures/block/coralstone.png",
+    "description": {
+      "translate": "advancements.hybrid_aquatic.get_clam.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "hybrid_aquatic:clam"
+    },
+    "title": {
+      "translate": "advancements.hybrid_aquatic.get_clam.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_clam"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

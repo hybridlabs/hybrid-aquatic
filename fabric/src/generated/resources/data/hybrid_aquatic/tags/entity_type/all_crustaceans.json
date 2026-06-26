@@ -1,0 +1,16 @@
+{
+  "values": [
+    "#hybrid_aquatic:crab",
+    "#hybrid_aquatic:lobster",
+    "#hybrid_aquatic:shrimp",
+    "hybrid_aquatic:giant_isopod",
+    {
+      "id": "alexsmobs:triops",
+      "required": false
+    },
+    {
+      "id": "fintastic:daphnia",
+      "required": false
+    }
+  ]
+}

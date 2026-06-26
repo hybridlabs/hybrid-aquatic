@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "hybrid_aquatic:polished_yellow_brinestone"
-  },
-  "result": "hybrid_aquatic:polished_yellow_brinestone_slab"
-}

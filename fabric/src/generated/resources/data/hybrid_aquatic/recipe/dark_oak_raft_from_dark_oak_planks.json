@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "minecraft:dark_oak_planks"
+    }
+  },
+  "pattern": [
+    "SS ",
+    "SW ",
+    "   "
+  ],
+  "result": {
+    "count": 2,
+    "id": "hybrid_aquatic:dark_oak_raft"
+  }
+}
