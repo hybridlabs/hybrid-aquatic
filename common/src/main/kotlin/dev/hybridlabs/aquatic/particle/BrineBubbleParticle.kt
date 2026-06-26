@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.SimpleParticleType
 import net.minecraft.tags.FluidTags
 
-class BrineBubbleParticle internal constructor(
+class BrineBubbleParticle(
     level: ClientLevel,
     x: Double,
     y: Double,

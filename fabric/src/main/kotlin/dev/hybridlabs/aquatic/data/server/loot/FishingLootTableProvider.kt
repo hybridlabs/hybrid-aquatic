@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.enchantment.Enchantment
@@ -18,14 +19,12 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+class FishingLootTableProvider(output: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     SimpleFabricLootTableProvider(output, lookupProvider, LootContextParamSets.FISHING) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
 
         exporter.accept(
-            ResourceKey.create(
-                Registries.LOOT_TABLE,
-            HALootTables.HA_SMALL_FISH),
+            ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_SMALL_FISH),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_SMALL_FISH)
                 .pool(
@@ -39,9 +38,7 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
         )
 
         exporter.accept(
-            ResourceKey.create(
-                Registries.LOOT_TABLE,
-            HALootTables.HA_MEDIUM_FISH),
+            ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_MEDIUM_FISH),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_MEDIUM_FISH)
                 .pool(
@@ -93,7 +90,11 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
         // message in a bottle loot table
         // TODO: Actually check if variant is in HAPaintingTags.KEEPS_PAINTING_VARIANT.
         //  Couldn't find a way to do it but we don't need this right now
+
+        this.lookupProvider.completeAsync 
+
         val messageInABottleLootPoolBuilder = LootPool.lootPool()
+        Registries.PAINTING_VARIANT
         BuiltInRegistries.PAINTING_VARIANT.forEach { variant ->
             val variantKey = BuiltInRegistries.PAINTING_VARIANT.getKey(variant)
             if (variantKey.namespace != Constants.MOD_ID) return@forEach

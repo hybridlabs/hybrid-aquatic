@@ -19,20 +19,17 @@ import dev.hybridlabs.aquatic.client.render.block.HABlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
-import dev.hybridlabs.aquatic.fluid.BrineFluidType
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.network.FishingBobberPayload
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ClientPayloadHandler
-import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ServerPayloadHandler
+import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
-import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.world.entity.EquipmentSlot
@@ -68,6 +65,7 @@ object HybridAquaticModBusEvents {
         runForDist(
             clientTarget = {
                 MOD_BUS.addListener(::onClientSetup)
+                MOD_BUS.addListener(::registerParticleProviders)
                 MOD_BUS.addListener(::registerModelLayers)
                 MOD_BUS.addListener(::registerSkullModels)
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
@@ -175,6 +173,26 @@ object HybridAquaticModBusEvents {
             PlushieBlock.Variant.WHALE_SHARK,
             BullSharkPlushieModel(modelLoader.bakeLayer(WHALE_SHARK_PLUSHIE))
         )
+    }
+
+    private fun registerParticleProviders(event: RegisterParticleProvidersEvent) {
+        event.registerSpriteSet(
+            HAParticleTypes.SARGASSUM.get()
+        ) { sprites ->
+            SargassumParticle.Companion.Provider(sprites)
+        }
+
+        event.registerSpriteSet(
+            HAParticleTypes.BRINE_BUBBLE.get()
+        ) { sprites ->
+            BrineBubbleParticle.Companion.Provider(sprites)
+        }
+
+        event.registerSpriteSet(
+            HAParticleTypes.BRINE_BUBBLE_POP.get()
+        ) { sprites ->
+            BrineBubblePopParticle.Companion.Provider(sprites)
+        }
     }
 
     private fun onClientSetup(event: FMLClientSetupEvent) {

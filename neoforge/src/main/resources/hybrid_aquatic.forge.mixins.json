@@ -30,7 +30,6 @@
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
         "client.MouseHandlerMixin",
-        "client.ParticleEngineMixin",
         "client.PlayerEntityRendererMixin",
         "client.SkullBlockEntityTextureMixin",
         "client.WeatherDisplayMixin",

@@ -4,7 +4,7 @@ import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.*
 import net.minecraft.core.particles.SimpleParticleType
 
-class BrineBubblePopParticle internal constructor(
+class BrineBubblePopParticle(
     level: ClientLevel,
     x: Double,
     y: Double,
