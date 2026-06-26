@@ -90,7 +90,7 @@ public abstract class FabricSoundsProvider implements DataProvider {
 			final T value,
 			final Path path
 	) {
-		JsonElement json = codec.encodeStart(ops, value).getOrThrow(false, a -> a = "fuck you");
+		JsonElement json = codec.encodeStart(ops, value).getOrThrow();
 		return DataProvider.saveStable(cache, json, path);
 	}
 }
