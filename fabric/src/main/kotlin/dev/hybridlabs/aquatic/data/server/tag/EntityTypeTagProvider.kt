@@ -163,7 +163,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.COELACANTH.get(),
                 HAEntityTypes.SLICKHEAD.get(),
                 HAEntityTypes.GOLDEN_DORADO.get(),
-                EntityType.PLAYER,
                 EntityType.TURTLE,
             )
             .addOptional(ResourceLocation("bountiful_critters", "sunfish"))
