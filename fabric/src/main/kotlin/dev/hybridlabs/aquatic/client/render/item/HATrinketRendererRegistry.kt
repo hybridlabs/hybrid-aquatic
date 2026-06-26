@@ -11,7 +11,7 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.Item
 import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.animatable.client.RenderProvider
+import software.bernie.geckolib.animatable.client.GeoRenderProvider
 
 object HATrinketRendererRegistry {
 
@@ -30,13 +30,13 @@ object HATrinketRendererRegistry {
     private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot) {
         TrinketRendererRegistry.registerRenderer(item) { itemStack, slotReference, contextModel, poseStack, bufferSource, light, entity, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch ->
             if (entity is AbstractClientPlayer) {
-                val renderer = (item as GeoItem).renderProvider.get() as RenderProvider
+                val renderer = (item as GeoItem).renderProvider as GeoRenderProvider
                 val model = renderer.getGenericArmorModel(
                     entity, itemStack, equipmentSlot,
                     contextModel as HumanoidModel<LivingEntity>
                 )
                 val vertexConsumer =
-                    ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
+                    ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false)
                 model.renderToBuffer(
                     poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
                 )
