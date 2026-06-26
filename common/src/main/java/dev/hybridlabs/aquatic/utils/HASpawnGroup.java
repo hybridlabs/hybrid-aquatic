@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.utils;
 
+import dev.hybridlabs.aquatic.CommonClass;
 import dev.hybridlabs.aquatic.Constants;
 import net.minecraft.world.entity.MobCategory;
 
@@ -36,6 +37,6 @@ public enum HASpawnGroup {
     public static final Map<String, MobCategory> BY_NAME = new ConcurrentHashMap<>();
 
     public static MobCategory byName(String name) {
-        return BY_NAME.get(name);
+        return BY_NAME.get(Constants.MOD_ID + ':' + name);
     }
 }
