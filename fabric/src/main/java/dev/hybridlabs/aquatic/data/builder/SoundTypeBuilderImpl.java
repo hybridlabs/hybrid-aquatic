@@ -115,7 +115,8 @@ public record Entry(ResourceLocation name, RegistrationType type, float volume, 
 			Entry::name
 	);
 	
-	private static final Codec<Entry> CODEC = ExtraCodecs.xor(STRING_CODEC, MAP_CODEC).xmap(SoundTypeBuilderImpl::unwrap, sound -> {
+	private static final Codec<Entry> CODEC = Codec.xor(STRING_CODEC, MAP_CODEC).xmap(SoundTypeBuilderImpl::unwrap,
+            sound -> {
 		if (sound.type() != RegistrationType.FILE
 				    || sound.volume() != RegistrationBuilder.DEFAULT_VOLUME
 				    || sound.pitch() != RegistrationBuilder.DEFAULT_PITCH
