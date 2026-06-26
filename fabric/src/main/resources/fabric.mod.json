@@ -62,9 +62,9 @@
         "fabric-language-kotlin": "*",
         "fabric-api": ">=0.116",
         "geckolib": ">=4.8",
-        "lithostitched": ">=1.7.9",
+        "lithostitched": ">=1.5.0",
         "biolith": "*",
-        "trinkets": ">=3.10.1"
+        "trinkets": ">=3.10.0"
     },
 
     "custom": {

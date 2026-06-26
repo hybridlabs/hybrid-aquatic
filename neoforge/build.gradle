@@ -86,7 +86,7 @@ processResources {
 dependencies {
     compileOnly project(":common")
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
-    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.1"
+    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-1.21.1"
     implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }

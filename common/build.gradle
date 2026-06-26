@@ -68,8 +68,6 @@ dependencies {
     implementation("com.terraformersmc:biolith-forge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
-    // implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-${minecraft_version}"
-
 }
 
 configurations {
