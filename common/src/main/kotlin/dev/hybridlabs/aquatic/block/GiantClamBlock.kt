@@ -141,10 +141,6 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
 
         if (state.getValue(STATE) == GiantClamState.OPEN) {
             be.closeAndStartCooldown()
-
-            if (!entity.isSteppingCarefully && entity is LivingEntity) {
-                entity.hurt(world.damageSources().inWall(), 4.0f)
-            }
         }
 
         super.stepOn(world, pos, state, entity)

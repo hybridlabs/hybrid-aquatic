@@ -141,10 +141,6 @@ class OysterBlock(private val emitsParticles: Boolean, settings: Properties) : B
 
         if (state.getValue(STATE) == OysterState.OPEN) {
             be.closeAndStartCooldown()
-
-            if (!entity.isSteppingCarefully && entity is LivingEntity) {
-                entity.hurt(world.damageSources().inWall(), 4.0f)
-            }
         }
 
         super.stepOn(world, pos, state, entity)
