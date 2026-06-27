@@ -154,7 +154,7 @@ open class HACrustaceanEntity(
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(BURROWING, false)
         builder.define(SHELL_ITEM, ItemStack.EMPTY)
     }
