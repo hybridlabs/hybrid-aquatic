@@ -176,21 +176,13 @@ object HybridAquaticModBusEvents {
     }
 
     private fun registerParticleProviders(event: RegisterParticleProvidersEvent) {
-        event.registerSpriteSet(
-            HAParticleTypes.SARGASSUM.get()
-        ) { sprites ->
+        event.registerSpriteSet(HAParticleTypes.SARGASSUM.get()) { sprites ->
             SargassumParticle.Companion.Provider(sprites)
         }
-
-        event.registerSpriteSet(
-            HAParticleTypes.BRINE_BUBBLE.get()
-        ) { sprites ->
+        event.registerSpriteSet(HAParticleTypes.BRINE_BUBBLE.get()) { sprites ->
             BrineBubbleParticle.Companion.Provider(sprites)
         }
-
-        event.registerSpriteSet(
-            HAParticleTypes.BRINE_BUBBLE_POP.get()
-        ) { sprites ->
+        event.registerSpriteSet(HAParticleTypes.BRINE_BUBBLE_POP.get()) { sprites ->
             BrineBubblePopParticle.Companion.Provider(sprites)
         }
     }
