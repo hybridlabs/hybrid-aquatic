@@ -948,6 +948,7 @@ class BiomeProvider(
         entries.add(reg.getOrThrow(HABiomes.SULFURIC_CAVES))
         entries.add(reg.getOrThrow(HABiomes.TROPICAL_DEEP_CORAL_REEF))
         entries.add(reg.getOrThrow(HABiomes.WARM_TRENCH))
+        entries.add(reg.getOrThrow(HABiomes.RED_MEADOW))
     }
 
     override fun getName(): String {
