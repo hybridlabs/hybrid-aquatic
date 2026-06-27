@@ -525,6 +525,7 @@ class PlacedFeatureProvider(
         entries.add(reg.getOrThrow(HAPlacedFeatures.DISK_SUSPICIOUS_SAND))
         entries.add(reg.getOrThrow(HAPlacedFeatures.OYSTER_BED))
         entries.add(reg.getOrThrow(HAPlacedFeatures.MOUND))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.SULFUR_DEPOSIT))
     }
 
     override fun getName(): String {
