@@ -308,7 +308,7 @@ class ConfiguredFeatureProvider(
 
             FeatureUtils.register(
                 bootstrap,
-                HAConfiguredFeatures.RED_MEADOW_VEGETATION,
+                HAConfiguredFeatures.RED_ALGAE_PATCH,
 
                 HAFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.66f
@@ -908,7 +908,7 @@ class ConfiguredFeatureProvider(
         entries.add(reg.getOrThrow(HAConfiguredFeatures.DEEP_OCEAN_VEGETATION))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.BLEACHED_REEF_VEGETATION))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.CORAL_REEF_VEGETATION))
-        entries.add(reg.getOrThrow(HAConfiguredFeatures.RED_MEADOW_VEGETATION))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.RED_ALGAE_PATCH))
 
         entries.add(reg.getOrThrow(HAConfiguredFeatures.DUNEGRASS_PATCH))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.SARGASSUM))

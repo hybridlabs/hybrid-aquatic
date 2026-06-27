@@ -14,6 +14,7 @@ object HAConfiguredFeatures {
     val BLEACHED_REEF_VEGETATION = register("bleached_reef_vegetation")
     val CORAL_REEF_VEGETATION = register("coral_reef_vegetation")
     val RED_MEADOW_VEGETATION = register("red_meadow_vegetation")
+    val RED_ALGAE_PATCH = register("red_algae_patch")
 
     val DUNEGRASS_PATCH = register("dunegrass_patch")
     val SARGASSUM = register("sargassum")

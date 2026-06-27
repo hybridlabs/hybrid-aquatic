@@ -401,8 +401,8 @@ class PlacedFeatureProvider(
             //#region Red Algae
             PlacementUtils.register(
                 bootstrap,
-                HAPlacedFeatures.RED_MEADOW_VEGETATION,
-                reg.get(HAConfiguredFeatures.RED_MEADOW_VEGETATION).get(), seaweedModifier(256)
+                HAPlacedFeatures.RED_ALGAE_PATCH,
+                reg.get(HAConfiguredFeatures.RED_ALGAE_PATCH).get(), seaweedModifier(256)
             )
             //#endregion
 
