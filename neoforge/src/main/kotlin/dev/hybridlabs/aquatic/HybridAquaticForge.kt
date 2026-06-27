@@ -35,7 +35,6 @@ import net.neoforged.fml.common.Mod
 object HybridAquaticForge {
 
     init {
-
         CommonClass.init()
 
         StructureSpawnModifier

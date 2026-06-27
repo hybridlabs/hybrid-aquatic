@@ -10,8 +10,6 @@ import dev.hybridlabs.aquatic.item.MessageInABottleItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
-
-import dev.hybridlabs.aquatic.utils.HASpawnGroup;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;

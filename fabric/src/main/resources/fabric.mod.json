@@ -12,7 +12,8 @@
         "Andante",
         "Eggo",
         "Ragno",
-        "murphy slaw"
+        "murphy slaw",
+        "AyaanDB"
     ],
 
     "contact": {
@@ -37,7 +38,6 @@
                 "value": "dev.hybridlabs.aquatic.HybridAquaticClient",
                 "adapter": "kotlin"
             }
-
         ],
         "fabric-datagen": [
             {

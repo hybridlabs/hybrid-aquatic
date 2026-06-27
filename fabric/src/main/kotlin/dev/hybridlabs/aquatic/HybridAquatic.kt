@@ -185,5 +185,4 @@ object HybridAquatic : ModInitializer {
             }
         }
     }
-
 }
