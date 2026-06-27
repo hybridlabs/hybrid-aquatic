@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "spawners": {
+    "type": "hybrid_aquatic:coconut_crab",
+    "maxCount": 4,
+    "minCount": 1,
+    "weight": 1
+  },
+  "structures": "minecraft:shipwreck_beached"
+}

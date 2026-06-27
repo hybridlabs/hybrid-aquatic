@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:red_meadow",
+  "spawners": {
+    "type": "hybrid_aquatic:moon_jellyfish",
+    "maxCount": 5,
+    "minCount": 2,
+    "weight": 5
+  }
+}

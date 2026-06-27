@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hybrid_aquatic:seagrass_bed",
+  "features": "hybrid_aquatic:mound",
+  "step": "surface_structures"
+}

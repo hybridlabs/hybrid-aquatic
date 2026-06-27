@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hybrid_aquatic:tropical_rivers",
+  "features": "hybrid_aquatic:jungle_lily_pad",
+  "step": "vegetal_decoration"
+}

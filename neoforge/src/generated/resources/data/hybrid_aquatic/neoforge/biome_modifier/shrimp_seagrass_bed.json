@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:seagrass_bed",
+  "spawners": {
+    "type": "hybrid_aquatic:shrimp",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 3
+  }
+}

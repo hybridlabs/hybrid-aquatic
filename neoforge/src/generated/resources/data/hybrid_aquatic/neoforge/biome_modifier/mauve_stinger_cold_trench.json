@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:cold_trench",
+  "spawners": {
+    "type": "hybrid_aquatic:mauve_stinger",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 2
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hybrid_aquatic:sandy_beaches",
+  "features": "hybrid_aquatic:disk_suspicious_sand",
+  "step": "underground_ores"
+}

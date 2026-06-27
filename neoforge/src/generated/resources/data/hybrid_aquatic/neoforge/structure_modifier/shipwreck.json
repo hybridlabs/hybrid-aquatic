@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "spawners": {
+    "type": "hybrid_aquatic:great_white_shark",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 1
+  },
+  "structures": "minecraft:shipwreck"
+}

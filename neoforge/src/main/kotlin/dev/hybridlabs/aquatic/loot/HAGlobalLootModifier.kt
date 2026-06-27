@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.loot
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import dev.hybridlabs.aquatic.Constants
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -18,9 +17,6 @@ import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier
 import net.neoforged.neoforge.common.loot.LootModifier
-import net.neoforged.neoforge.registries.DeferredRegister
-import net.neoforged.neoforge.registries.NeoForgeRegistries
-import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 
 class HAGlobalLootModifier(
     conditionsIn: Array<LootItemCondition>,
@@ -77,10 +73,6 @@ class HAGlobalLootModifier(
                         .fieldOf("tables").forGetter(HAGlobalLootModifier::tables)
                 )
             ).apply(inst, ::HAGlobalLootModifier)
-        }
-        fun registerGlobalLootModifiers() {
-            val lootModifiers = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Constants.MOD_ID)
-            lootModifiers.register("ha_loot_modifier", HAGlobalLootModifier::CODEC)
         }
     }
 }

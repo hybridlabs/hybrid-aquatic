@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:shallow_cold_oceans",
+  "spawners": {
+    "type": "hybrid_aquatic:herring",
+    "maxCount": 12,
+    "minCount": 4,
+    "weight": 5
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:all_trenches",
+  "spawners": {
+    "type": "hybrid_aquatic:hatchetfish",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

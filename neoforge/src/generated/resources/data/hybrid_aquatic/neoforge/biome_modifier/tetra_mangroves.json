@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:mangroves",
+  "spawners": {
+    "type": "hybrid_aquatic:tetra",
+    "maxCount": 3,
+    "minCount": 2,
+    "weight": 3
+  }
+}

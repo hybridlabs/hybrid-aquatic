@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:mangroves",
+  "spawners": {
+    "type": "hybrid_aquatic:african_butterflyfish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 2
+  }
+}

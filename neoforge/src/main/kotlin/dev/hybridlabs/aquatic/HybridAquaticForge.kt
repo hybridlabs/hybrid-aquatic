@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
@@ -29,6 +30,10 @@ import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import dev.hybridlabs.aquatic.world.inventory.HAMenuTypes
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.neoforged.fml.common.Mod
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier
+import net.neoforged.neoforge.registries.DeferredRegister
+import net.neoforged.neoforge.registries.NeoForgeRegistries
+import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 
 @Suppress("UnusedExpression")
 @Mod(Constants.MOD_ID)
@@ -38,7 +43,7 @@ object HybridAquaticForge {
         CommonClass.init()
 
         StructureSpawnModifier
-        HAGlobalLootModifier.registerGlobalLootModifiers()
+        registerGlobalLootModifiers()
 
         HABlocks
         HAPlatformBlocks
@@ -72,5 +77,11 @@ object HybridAquaticForge {
         HybridAquaticModBusEvents
         HybridAquaticForgeBusEvents
         HybridAquaticEventBusEvents
+    }
+
+    private fun registerGlobalLootModifiers(){
+        val lootModifiers = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Constants.MOD_ID)
+        lootModifiers.register(MOD_BUS)
+        lootModifiers.register<MapCodec<out IGlobalLootModifier>>("ha_loot_modifier", HAGlobalLootModifier::CODEC)
     }
 }

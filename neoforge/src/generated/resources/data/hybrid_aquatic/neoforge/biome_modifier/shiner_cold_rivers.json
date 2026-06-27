@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:cold_rivers",
+  "spawners": {
+    "type": "hybrid_aquatic:shiner",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 3
+  }
+}

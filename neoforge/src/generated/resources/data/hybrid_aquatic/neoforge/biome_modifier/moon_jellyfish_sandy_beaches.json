@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:sandy_beaches",
+  "spawners": {
+    "type": "hybrid_aquatic:moon_jellyfish",
+    "maxCount": 5,
+    "minCount": 2,
+    "weight": 5
+  }
+}

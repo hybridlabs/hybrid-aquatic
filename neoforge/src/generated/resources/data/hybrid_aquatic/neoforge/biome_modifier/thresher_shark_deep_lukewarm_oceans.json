@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:deep_lukewarm_oceans",
+  "spawners": {
+    "type": "hybrid_aquatic:thresher_shark",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 2
+  }
+}

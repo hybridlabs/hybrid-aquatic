@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hybrid_aquatic:cold_rivers",
+  "spawners": {
+    "type": "hybrid_aquatic:trout",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 2
+  }
+}
