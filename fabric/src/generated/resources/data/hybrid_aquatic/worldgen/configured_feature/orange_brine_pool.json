@@ -1,13 +1,13 @@
 {
   "type": "hybrid_aquatic:brine_lake",
   "config": {
-    "base_block": {
+    "barrier_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
         "Name": "hybrid_aquatic:orange_brinestone"
       }
     },
-    "vent_block": {
+    "fluid_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
         "Name": "hybrid_aquatic:brine",

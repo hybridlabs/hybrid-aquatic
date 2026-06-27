@@ -4,8 +4,8 @@ package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.HybridAquatic
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.block.TubeWormBlock
+import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
@@ -17,6 +17,7 @@ import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.HolderSet
 import net.minecraft.core.Vec3i
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.features.FeatureUtils
@@ -148,9 +149,9 @@ class ConfiguredFeatureProvider(
                 Feature.SIMPLE_RANDOM_SELECTOR,
                 SimpleRandomFeatureConfiguration(
                     HolderSet.direct(
-                        entries.ref(HAPlacedFeatures.RED_BRINE_POOL),
-                        entries.ref(HAPlacedFeatures.ORANGE_BRINE_POOL),
-                        entries.ref(HAPlacedFeatures.YELLOW_BRINE_POOL)
+                        bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.RED_BRINE_POOL).get(),
+                        bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.YELLOW_BRINE_POOL).get(),
+                        bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.ORANGE_BRINE_POOL).get()
                     )
                 )
             )
