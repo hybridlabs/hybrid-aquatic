@@ -522,6 +522,7 @@ class PlacedFeatureProvider(
         entries.add(reg.getOrThrow(HAPlacedFeatures.PING_PONG_SPONGE_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.TUBE_SPONGE_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.WATER_LETTUCE))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.DISK_SUSPICIOUS_SAND))
     }
 
     override fun getName(): String {
