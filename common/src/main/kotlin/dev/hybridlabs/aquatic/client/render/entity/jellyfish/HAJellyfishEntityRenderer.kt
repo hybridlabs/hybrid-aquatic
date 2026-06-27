@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
+import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.util.Mth
@@ -23,12 +23,19 @@ open class HAJellyfishEntityRenderer<T : HAJellyfishEntity>(
         if (canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
     }
 
-    override fun applyRotations(jellyfishEntity: T, matrixStack: PoseStack, f: Float, g: Float, h: Float) {
-        val i = Mth.lerp(h, jellyfishEntity.prevTiltAngle, jellyfishEntity.tiltAngle)
-        matrixStack.translate(0.0f, 0.25f, 0.0f)
-        matrixStack.mulPose(Axis.YP.rotationDegrees(180.0f - g))
-        matrixStack.mulPose(Axis.XP.rotationDegrees(i))
-        matrixStack.translate(0.0f, 0.0f, 0.0f)
+    override fun applyRotations(
+        jellyfishEntity: T,
+        poseStack: PoseStack,
+        ageInTicks: Float,
+        rotationYaw: Float,
+        partialTick: Float,
+        nativeScale: Float
+    ) {
+        val i = Mth.lerp(partialTick, jellyfishEntity.prevTiltAngle, jellyfishEntity.tiltAngle)
+        poseStack.translate(0.0f, 0.25f, 0.0f)
+        poseStack.mulPose(Axis.YP.rotationDegrees(180.0f - rotationYaw))
+        poseStack.mulPose(Axis.XP.rotationDegrees(i))
+        poseStack.translate(0.0f, 0.0f, 0.0f)
     }
 
     override fun getDeathMaxRotation(animatable: T): Float {
