@@ -525,6 +525,13 @@ class PlacedFeatureProvider(
         entries.add(reg.getOrThrow(HAPlacedFeatures.DISK_SUSPICIOUS_SAND))
         entries.add(reg.getOrThrow(HAPlacedFeatures.OYSTER_BED))
         entries.add(reg.getOrThrow(HAPlacedFeatures.MOUND))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.CORAL_MOUND))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.CORAL_REEF_VEGETATION))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.DEEP_OCEAN_VEGETATION))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.SAND_CIRCLE))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.AERATED_SAND_CIRCLE))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.TIDE_POOLS))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.CORAL_LAYER))
         entries.add(reg.getOrThrow(HAPlacedFeatures.SULFUR_DEPOSIT))
     }
 

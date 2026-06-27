@@ -1,0 +1,16 @@
+{
+  "feature": "hybrid_aquatic:deep_ocean_vegetation",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 10
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
