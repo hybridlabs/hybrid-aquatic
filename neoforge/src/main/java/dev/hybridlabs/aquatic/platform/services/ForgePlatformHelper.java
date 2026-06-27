@@ -113,7 +113,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public MobCategory getHybridMobCategoryByName(String name) {
-        return MobCategory.valueOf(name);
+        return MobCategory.valueOf((Constants.MOD_ID + '_' + name).toUpperCase());
     }
 
     @Override
