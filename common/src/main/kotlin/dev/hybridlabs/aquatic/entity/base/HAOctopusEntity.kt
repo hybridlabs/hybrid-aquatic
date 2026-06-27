@@ -75,7 +75,7 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
 
     //#region Data
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(ATTEMPT_ATTACK, false)
         builder.define(TARGET_COLOR, 12799593)
         builder.define(CURRENT_COLOR, 12799593)

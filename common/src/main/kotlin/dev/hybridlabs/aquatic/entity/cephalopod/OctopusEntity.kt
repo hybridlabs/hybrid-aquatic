@@ -165,7 +165,7 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(TYPE, 0)
         builder.define(OverlayTexture, 0)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

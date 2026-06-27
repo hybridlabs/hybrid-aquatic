@@ -136,7 +136,7 @@ class DecoratorCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world:
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(TYPE, 0)
         builder.define(CORAL_TIMER, 0)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

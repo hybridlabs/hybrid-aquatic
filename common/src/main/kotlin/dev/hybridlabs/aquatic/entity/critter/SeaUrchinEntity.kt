@@ -109,7 +109,7 @@ class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(TYPE, 0)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

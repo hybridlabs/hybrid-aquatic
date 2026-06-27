@@ -96,7 +96,7 @@ open class HASirenianEntity(type: EntityType<out HASirenianEntity>, world: Level
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(CLAM_POS, BlockPos.ZERO)
         builder.define(HAS_SEA_LETTUCE, false)
     }

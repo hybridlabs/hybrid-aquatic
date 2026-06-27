@@ -205,7 +205,7 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(FLIPPED, false)
         builder.define(SUMMONING, false)
     }

@@ -24,7 +24,7 @@ abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
 
     //#region Data
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(ATTEMPT_ATTACK, false)
     }
 

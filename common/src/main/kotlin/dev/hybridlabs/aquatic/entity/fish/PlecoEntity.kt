@@ -103,7 +103,7 @@ class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(TYPE, 0)
     }
 

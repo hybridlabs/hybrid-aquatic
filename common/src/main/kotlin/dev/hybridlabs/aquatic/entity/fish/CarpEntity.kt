@@ -281,7 +281,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(TYPE, 0)
         builder.define(PATTERN, 0)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

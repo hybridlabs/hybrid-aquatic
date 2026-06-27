@@ -268,7 +268,7 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEnti
         builder.define(TYPE, 0)
         builder.define(EyeSpotTexture, 0)
         builder.define(SaddleTexture, 0)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

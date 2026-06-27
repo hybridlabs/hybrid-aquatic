@@ -354,7 +354,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMam
         builder.define(TYPE, 0)
         builder.define(HUNGER, MAX_HUNGER)
         builder.define(ACTION, 0) // OtterAction.IDLE
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

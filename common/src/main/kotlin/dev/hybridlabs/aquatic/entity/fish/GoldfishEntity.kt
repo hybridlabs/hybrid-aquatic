@@ -108,7 +108,7 @@ class GoldfishEntity(type: EntityType<out GoldfishEntity>, world: Level) :
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(TYPE, 0)
     }
 

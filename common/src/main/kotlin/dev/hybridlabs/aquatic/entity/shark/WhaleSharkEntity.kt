@@ -43,7 +43,7 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
     //#region Data
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(OverlayTexture, 0)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

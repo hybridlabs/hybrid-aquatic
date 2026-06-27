@@ -18,12 +18,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.PlayState
 import java.util.function.IntFunction
 
 class ShrimpEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
@@ -147,7 +143,7 @@ class ShrimpEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level)
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(OverlayTexture, 0)
         builder.define(CLEANING, false)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

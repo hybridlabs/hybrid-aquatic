@@ -111,7 +111,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(HYPNOTIZING, false)
     }
 

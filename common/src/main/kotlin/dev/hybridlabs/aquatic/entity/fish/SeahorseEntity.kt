@@ -43,7 +43,7 @@ class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) :
     //#region Data
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
         builder.define(TYPE, 0)
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {

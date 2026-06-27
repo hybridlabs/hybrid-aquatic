@@ -126,7 +126,7 @@ class ClownfishEntity(type: EntityType<out ClownfishEntity>, world: Level) :
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
-        defineSynchedData(builder)
+        super.defineSynchedData(builder)
         builder.define(TYPE, 0)
     }
 
