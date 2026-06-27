@@ -356,45 +356,118 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
         for (block in listOf(
             HABlocks.LOPHELIA_CORAL.get(),
             HABlocks.DEAD_LOPHELIA_CORAL.get(),
+            HABlocks.BLEACHED_LOPHELIA_CORAL.get(),
             HABlocks.LOPHELIA_CORAL_FAN.get(),
             HABlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
+            HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
 
             HABlocks.BAMBOO_CORAL.get(),
             HABlocks.DEAD_BAMBOO_CORAL.get(),
+            HABlocks.BLEACHED_BAMBOO_CORAL.get(),
             HABlocks.BAMBOO_CORAL_FAN.get(),
             HABlocks.DEAD_BAMBOO_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get(),
 
             HABlocks.ZIGZAG_CORAL.get(),
             HABlocks.DEAD_ZIGZAG_CORAL.get(),
+            HABlocks.BLEACHED_ZIGZAG_CORAL.get(),
             HABlocks.ZIGZAG_CORAL_FAN.get(),
             HABlocks.DEAD_ZIGZAG_CORAL_FAN.get(),
+            HABlocks.BLEACHED_ZIGZAG_CORAL_FAN.get(),
 
             HABlocks.THORN_CORAL.get(),
             HABlocks.DEAD_THORN_CORAL.get(),
+            HABlocks.BLEACHED_THORN_CORAL.get(),
             HABlocks.THORN_CORAL_FAN.get(),
             HABlocks.DEAD_THORN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_THORN_CORAL_FAN.get(),
 
             HABlocks.SUN_CORAL.get(),
             HABlocks.DEAD_SUN_CORAL.get(),
+            HABlocks.BLEACHED_SUN_CORAL.get(),
             HABlocks.SUN_CORAL_FAN.get(),
             HABlocks.DEAD_SUN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_SUN_CORAL_FAN.get(),
 
             HABlocks.BUTTON_CORAL.get(),
             HABlocks.DEAD_BUTTON_CORAL.get(),
+            HABlocks.BLEACHED_BUTTON_CORAL.get(),
             HABlocks.BUTTON_CORAL_FAN.get(),
             HABlocks.DEAD_BUTTON_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
 
             HABlocks.ROSE_CORAL.get(),
             HABlocks.DEAD_ROSE_CORAL.get(),
+            HABlocks.BLEACHED_ROSE_CORAL.get(),
             HABlocks.ROSE_CORAL_FAN.get(),
             HABlocks.DEAD_ROSE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_ROSE_CORAL_FAN.get(),
 
             HABlocks.LEAF_CORAL.get(),
             HABlocks.DEAD_LEAF_CORAL.get(),
+            HABlocks.BLEACHED_LEAF_CORAL.get(),
             HABlocks.LEAF_CORAL_FAN.get(),
             HABlocks.DEAD_LEAF_CORAL_FAN.get(),
+            HABlocks.BLEACHED_LEAF_CORAL_FAN.get(),
+
+            HABlocks.BLEACHED_FIRE_CORAL.get(),
+            HABlocks.BLEACHED_FIRE_CORAL_FAN.get(),
+
+            HABlocks.BLEACHED_TUBE_CORAL.get(),
+            HABlocks.BLEACHED_TUBE_CORAL_FAN.get(),
+
+            HABlocks.BLEACHED_HORN_CORAL.get(),
+            HABlocks.BLEACHED_HORN_CORAL_FAN.get(),
+
+            HABlocks.BLEACHED_BUBBLE_CORAL.get(),
+            HABlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
+
+            HABlocks.BLEACHED_BRAIN_CORAL.get(),
+            HABlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
         )) {
             add(block, createSilkTouchOnlyTable(block))
+        }
+
+        mapOf(
+            HABlocks.LOPHELIA_CORAL_WALL_FAN.get() to HABlocks.LOPHELIA_CORAL_FAN.get(),
+            HABlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get() to HABlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
+            HABlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get(),
+
+            HABlocks.BAMBOO_CORAL_WALL_FAN.get() to HABlocks.BAMBOO_CORAL_FAN.get(),
+            HABlocks.DEAD_BAMBOO_CORAL_WALL_FAN.get() to HABlocks.DEAD_BAMBOO_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BAMBOO_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get(),
+
+            HABlocks.ZIGZAG_CORAL_WALL_FAN.get() to HABlocks.ZIGZAG_CORAL_FAN.get(),
+            HABlocks.DEAD_ZIGZAG_CORAL_WALL_FAN.get() to HABlocks.DEAD_ZIGZAG_CORAL_FAN.get(),
+            HABlocks.BLEACHED_ZIGZAG_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_ZIGZAG_CORAL_FAN.get(),
+
+            HABlocks.THORN_CORAL_WALL_FAN.get() to HABlocks.THORN_CORAL_FAN.get(),
+            HABlocks.DEAD_THORN_CORAL_WALL_FAN.get() to HABlocks.DEAD_THORN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_THORN_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_THORN_CORAL_FAN.get(),
+
+            HABlocks.SUN_CORAL_WALL_FAN.get() to HABlocks.SUN_CORAL_FAN.get(),
+            HABlocks.DEAD_SUN_CORAL_WALL_FAN.get() to HABlocks.DEAD_SUN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_SUN_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_SUN_CORAL_FAN.get(),
+
+            HABlocks.BUTTON_CORAL_WALL_FAN.get() to HABlocks.BUTTON_CORAL_FAN.get(),
+            HABlocks.DEAD_BUTTON_CORAL_WALL_FAN.get() to HABlocks.DEAD_BUTTON_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BUTTON_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_BUTTON_CORAL_FAN.get(),
+
+            HABlocks.ROSE_CORAL_WALL_FAN.get() to HABlocks.ROSE_CORAL_FAN.get(),
+            HABlocks.DEAD_ROSE_CORAL_WALL_FAN.get() to HABlocks.DEAD_ROSE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_ROSE_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_ROSE_CORAL_FAN.get(),
+
+            HABlocks.LEAF_CORAL_WALL_FAN.get() to HABlocks.LEAF_CORAL_FAN.get(),
+            HABlocks.DEAD_LEAF_CORAL_WALL_FAN.get() to HABlocks.DEAD_LEAF_CORAL_FAN.get(),
+            HABlocks.BLEACHED_LEAF_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_LEAF_CORAL_FAN.get(),
+
+            HABlocks.BLEACHED_FIRE_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_FIRE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_TUBE_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_TUBE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_HORN_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_HORN_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BUBBLE_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_BUBBLE_CORAL_FAN.get(),
+            HABlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get() to HABlocks.BLEACHED_BRAIN_CORAL_FAN.get(),
+        ).forEach { (wallFan, fan) ->
+            add(wallFan, createSilkTouchOnlyTable(fan))
         }
         //#endregion
 

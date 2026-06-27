@@ -28,7 +28,137 @@ import java.util.function.BiConsumer
 class EntityTypeLootTableProvider(output: FabricDataOutput) :
     SimpleFabricLootTableProvider(output, LootContextParamSets.ENTITY) {
     override fun generate(exporter: BiConsumer<ResourceLocation, LootTable.Builder>) {
-        // nautilus
+        // sharks
+        export(exporter, HAEntityTypes.SLEEPER_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.SIXGILL_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.GOBLIN_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.HAMMERHEAD_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.BULL_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.GREAT_WHITE_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.THRESHER_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.WHALE_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.BASKING_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.HOUND_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_MEAT.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.SAND_TIGER_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.FRILLED_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_STEAK.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.LANTERN_SHARK.get()) {
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_FISH_MEAT.get())
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 3.0F)))
+                    ).build()
+            )
+        }
+
         export(exporter, HAEntityTypes.NAUTILUS.get()) {
             pool(
                 LootPool.lootPool()
