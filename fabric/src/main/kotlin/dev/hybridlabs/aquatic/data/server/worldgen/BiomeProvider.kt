@@ -166,7 +166,7 @@ class BiomeProvider(
                     )
                     addFeature(
                         GenerationStep.Decoration.VEGETAL_DECORATION,
-                        featuresGetter.get(HAPlacedFeatures.RED_MEADOW_VEGETATION).get()
+                        featuresGetter.get(HAPlacedFeatures.RED_ALGAE_PATCH).get()
                     )
                     addFeature(
                         GenerationStep.Decoration.VEGETAL_DECORATION,
