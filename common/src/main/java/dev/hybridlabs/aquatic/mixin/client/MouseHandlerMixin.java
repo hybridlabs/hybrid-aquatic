@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(MouseHandler.class)
 public class MouseHandlerMixin {
     @WrapOperation(
-            method = "turnPlayer()V",
+            method = "turnPlayer(D)V",
             at =
                     @At(
                             value = "INVOKE",
