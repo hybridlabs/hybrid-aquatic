@@ -34,16 +34,16 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
      */
     var messageId: ResourceLocation? = null
 
-    override fun saveAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(nbt, registries)
-        nbt.putString(VARIANT_KEY, variant.id)
-        nbt.putString(MESSAGE_KEY, messageId.toString())
+    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.saveAdditional(tag, registries)
+        tag.putString(VARIANT_KEY, variant.id)
+        tag.putString(MESSAGE_KEY, messageId.toString())
     }
 
-    override fun loadAdditional(nbt: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(nbt, registries)
-        variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        messageId = ResourceLocation.tryParse(nbt.getString(MESSAGE_KEY))
+    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
+        super.loadAdditional(tag, registries)
+        variant = MessageInABottleBlock.Variant.byId(tag.getString(VARIANT_KEY))
+        messageId = ResourceLocation.tryParse(tag.getString(MESSAGE_KEY))
     }
 
     private fun <E> predicate(

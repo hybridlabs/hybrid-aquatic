@@ -76,7 +76,6 @@ class GiantClamBlockEntity(
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        TODO("MIGRATE TO COMPONENTS")
         super.loadAdditional(tag, registries)
         pearlTimer = tag.getInt("pearl_timer")
     }
