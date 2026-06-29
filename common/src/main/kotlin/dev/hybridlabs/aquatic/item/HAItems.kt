@@ -1837,309 +1837,294 @@ object HAItems {
     //#region Spawn Eggs
     //#region Fish Spawn Eggs
     val AFRICAN_BUTTERFLYFISH_SPAWN_EGG =
-        registerSpawnEgg(
-            "african_butterflyfish_spawn_egg",
-            HAEntityTypes.AFRICAN_BUTTERFLYFISH,
-            0xb57955,
-            0x1e3555
-        )
+        registerSpawnEgg("african_butterflyfish_spawn_egg", HAEntityTypes.AFRICAN_BUTTERFLYFISH, 0x000000, 0x000000)
     val BARRELEYE_SPAWN_EGG =
-        registerSpawnEgg("barreleye_spawn_egg", HAEntityTypes.BARRELEYE, 0x4b4343, 0x6bc96c)
+        registerSpawnEgg("barreleye_spawn_egg", HAEntityTypes.BARRELEYE, 0x000000, 0x000000)
     val BETTA_SPAWN_EGG =
-        registerSpawnEgg("betta_spawn_egg", HAEntityTypes.BETTA, 0xcc425e, 0x504198)
+        registerSpawnEgg("betta_spawn_egg", HAEntityTypes.BETTA, 0x000000, 0x000000)
     val DAMSELFISH_SPAWN_EGG =
-        registerSpawnEgg("damselfish_spawn_egg", HAEntityTypes.DAMSELFISH, 0x96aba5, 0xf9d100)
+        registerSpawnEgg("damselfish_spawn_egg", HAEntityTypes.DAMSELFISH, 0x000000, 0x000000)
     val CARP_SPAWN_EGG =
-        registerSpawnEgg("carp_spawn_egg", HAEntityTypes.CARP, 0x725234, 0xd3ad8c)
+        registerSpawnEgg("carp_spawn_egg", HAEntityTypes.CARP, 0x000000, 0x000000)
     val GOLDFISH_SPAWN_EGG =
-        registerSpawnEgg("goldfish_spawn_egg", HAEntityTypes.GOLDFISH, 0x725234, 0xd3ad8c)
+        registerSpawnEgg("goldfish_spawn_egg", HAEntityTypes.GOLDFISH, 0x000000, 0x000000)
     val TROUT_SPAWN_EGG =
-        registerSpawnEgg("trout_spawn_egg", HAEntityTypes.TROUT, 0xc6bd88, 0xe07d5a)
+        registerSpawnEgg("trout_spawn_egg", HAEntityTypes.TROUT, 0x000000, 0x000000)
     val SUNFISH_SPAWN_EGG =
-        registerSpawnEgg("sunfish_spawn_egg", HAEntityTypes.SUNFISH, 0x667749, 0xd38257)
+        registerSpawnEgg("sunfish_spawn_egg", HAEntityTypes.SUNFISH, 0x000000, 0x000000)
     val CLOWNFISH_SPAWN_EGG =
-        registerSpawnEgg("clownfish_spawn_egg", HAEntityTypes.CLOWNFISH, 0xff9166, 0xfdf7f9)
+        registerSpawnEgg("clownfish_spawn_egg", HAEntityTypes.CLOWNFISH, 0x000000, 0x000000)
     val GARDEN_EEL_SPAWN_EGG =
-        registerSpawnEgg("garden_eel_spawn_egg", HAEntityTypes.GARDEN_EEL, 0xffd14e, 0xececd4)
+        registerSpawnEgg("garden_eel_spawn_egg", HAEntityTypes.GARDEN_EEL, 0x000000, 0x000000)
     val BOXFISH_SPAWN_EGG =
-        registerSpawnEgg("boxfish_spawn_egg", HAEntityTypes.BOXFISH, 0xfffeac, 0xffc056)
+        registerSpawnEgg("boxfish_spawn_egg", HAEntityTypes.BOXFISH, 0x000000, 0x000000)
     val DANIO_SPAWN_EGG =
-        registerSpawnEgg("danio_spawn_egg", HAEntityTypes.DANIO, 0xdcdced, 0x2a3f52)
+        registerSpawnEgg("danio_spawn_egg", HAEntityTypes.DANIO, 0x000000, 0x000000)
     val DISCUS_SPAWN_EGG =
-        registerSpawnEgg("discus_spawn_egg", HAEntityTypes.DISCUS, 0xeeeecd, 0xf4a957)
+        registerSpawnEgg("discus_spawn_egg", HAEntityTypes.DISCUS, 0x000000, 0x000000)
     val CORYDORA_SPAWN_EGG =
-        registerSpawnEgg("corydora_spawn_egg", HAEntityTypes.CORYDORA, 0x996059, 0x6e6b65)
+        registerSpawnEgg("corydora_spawn_egg", HAEntityTypes.CORYDORA, 0x000000, 0x000000)
     val FLASHLIGHT_FISH_SPAWN_EGG =
-        registerSpawnEgg("flashlight_fish_spawn_egg", HAEntityTypes.FLASHLIGHT_FISH, 0x5c433e, 0xfffaa9)
-    val SQUIRRELFISH_FISH_SPAWN_EGG =
-        registerSpawnEgg("squirrelfish_spawn_egg", HAEntityTypes.SQUIRRELFISH, 0x9b3f3d, 0xcfa184)
-    val PEARLFISH_FISH_SPAWN_EGG =
-        registerSpawnEgg("pearlfish_spawn_egg", HAEntityTypes.PEARLFISH, 0x464c59, 0xc7cfd3)
+        registerSpawnEgg("flashlight_fish_spawn_egg", HAEntityTypes.FLASHLIGHT_FISH, 0x000000, 0x000000)
+    val SQUIRRELFISH_SPAWN_EGG =
+        registerSpawnEgg("squirrelfish_spawn_egg", HAEntityTypes.SQUIRRELFISH, 0x000000, 0x000000)
+    val PEARLFISH_SPAWN_EGG =
+        registerSpawnEgg("pearlfish_spawn_egg", HAEntityTypes.PEARLFISH, 0x000000, 0x000000)
     val FLYING_FISH_SPAWN_EGG =
-        registerSpawnEgg("flying_fish_spawn_egg", HAEntityTypes.FLYING_FISH, 0x7c93e1, 0xfbf7e6)
+        registerSpawnEgg("flying_fish_spawn_egg", HAEntityTypes.FLYING_FISH, 0x000000, 0x000000)
     val GOURAMI_SPAWN_EGG =
-        registerSpawnEgg("gourami_spawn_egg", HAEntityTypes.GOURAMI, 0x7bb6cf, 0x722a37)
+        registerSpawnEgg("gourami_spawn_egg", HAEntityTypes.GOURAMI, 0x000000, 0x000000)
     val PLECO_SPAWN_EGG =
-        registerSpawnEgg("pleco_spawn_egg", HAEntityTypes.PLECO, 0x3f3d28, 0xa4a39a)
+        registerSpawnEgg("pleco_spawn_egg", HAEntityTypes.PLECO, 0x000000, 0x000000)
     val SHINER_SPAWN_EGG =
-        registerSpawnEgg("shiner_spawn_egg", HAEntityTypes.SHINER, 0xc6c484, 0xd18952)
+        registerSpawnEgg("shiner_spawn_egg", HAEntityTypes.SHINER, 0x000000, 0x000000)
     val LIONFISH_SPAWN_EGG =
-        registerSpawnEgg("lionfish_spawn_egg", HAEntityTypes.LIONFISH, 0xf9e6cf, 0xc64524)
+        registerSpawnEgg("lionfish_spawn_egg", HAEntityTypes.LIONFISH, 0x000000, 0x000000)
     val MACKEREL_SPAWN_EGG =
-        registerSpawnEgg("mackerel_spawn_egg", HAEntityTypes.MACKEREL, 0x395562, 0xfff09c)
+        registerSpawnEgg("mackerel_spawn_egg", HAEntityTypes.MACKEREL, 0x000000, 0x000000)
     val HERRING_SPAWN_EGG =
-        registerSpawnEgg("herring_spawn_egg", HAEntityTypes.HERRING, 0xcfd8d4, 0x5f6e75)
+        registerSpawnEgg("herring_spawn_egg", HAEntityTypes.HERRING, 0x000000, 0x000000)
     val MAHI_SPAWN_EGG =
-        registerSpawnEgg("mahi_spawn_egg", HAEntityTypes.MAHI, 0x528c4e, 0xfffd69)
+        registerSpawnEgg("mahi_spawn_egg", HAEntityTypes.MAHI, 0x000000, 0x000000)
     val MANTA_RAY_SPAWN_EGG =
-        registerSpawnEgg("manta_ray_spawn_egg", HAEntityTypes.MANTA_RAY, 0x000000, 0xFFFFFF)
+        registerSpawnEgg("manta_ray_spawn_egg", HAEntityTypes.MANTA_RAY, 0x000000, 0x000000)
     val MORAY_EEL_SPAWN_EGG =
-        registerSpawnEgg("moray_eel_spawn_egg", HAEntityTypes.MORAY_EEL, 0x8da163, 0x1d4435)
+        registerSpawnEgg("moray_eel_spawn_egg", HAEntityTypes.MORAY_EEL, 0x000000, 0x000000)
     val NEEDLEFISH_SPAWN_EGG =
-        registerSpawnEgg("needlefish_spawn_egg", HAEntityTypes.NEEDLEFISH, 0xc0e4f7, 0x537da8)
+        registerSpawnEgg("needlefish_spawn_egg", HAEntityTypes.NEEDLEFISH, 0x000000, 0x000000)
     val BARRACUDA_SPAWN_EGG =
-        registerSpawnEgg("barracuda_spawn_egg", HAEntityTypes.BARRACUDA, 0x64b2c6, 0x3d4d64)
+        registerSpawnEgg("barracuda_spawn_egg", HAEntityTypes.BARRACUDA, 0x000000, 0x000000)
     val OPAH_SPAWN_EGG =
-        registerSpawnEgg("opah_spawn_egg", HAEntityTypes.OPAH, 0x6472a7, 0xea6262)
+        registerSpawnEgg("opah_spawn_egg", HAEntityTypes.OPAH, 0x000000, 0x000000)
     val CICHLID_SPAWN_EGG =
-        registerSpawnEgg("cichlid_spawn_egg", HAEntityTypes.CICHLID, 0xd5c97e, 0x836136)
+        registerSpawnEgg("cichlid_spawn_egg", HAEntityTypes.CICHLID, 0x000000, 0x000000)
     val PARROTFISH_SPAWN_EGG =
-        registerSpawnEgg("parrotfish_spawn_egg", HAEntityTypes.PARROTFISH, 0x728e6b, 0xe5c5c3)
+        registerSpawnEgg("parrotfish_spawn_egg", HAEntityTypes.PARROTFISH, 0x000000, 0x000000)
     val PIRANHA_SPAWN_EGG =
-        registerSpawnEgg("piranha_spawn_egg", HAEntityTypes.PIRANHA, 0x535f92, 0xaf3b3d)
+        registerSpawnEgg("piranha_spawn_egg", HAEntityTypes.PIRANHA, 0x000000, 0x000000)
     val ROCKFISH_SPAWN_EGG =
-        registerSpawnEgg("rockfish_spawn_egg", HAEntityTypes.ROCKFISH, 0x711b2f, 0xeb5948)
+        registerSpawnEgg("rockfish_spawn_egg", HAEntityTypes.ROCKFISH, 0x000000, 0x000000)
     val SEA_BASS_SPAWN_EGG =
-        registerSpawnEgg("sea_bass_spawn_egg", HAEntityTypes.SEA_BASS, 0x323337, 0xe7e8e8)
+        registerSpawnEgg("sea_bass_spawn_egg", HAEntityTypes.SEA_BASS, 0x000000, 0x000000)
     val SEAHORSE_SPAWN_EGG =
-        registerSpawnEgg("seahorse_spawn_egg", HAEntityTypes.SEAHORSE, 0xffc9ab, 0xe63f5e)
+        registerSpawnEgg("seahorse_spawn_egg", HAEntityTypes.SEAHORSE, 0x000000, 0x000000)
     val SEADRAGON_SPAWN_EGG =
-        registerSpawnEgg("seadragon_spawn_egg", HAEntityTypes.SEADRAGON, 0xffc9ab, 0xe63f5e)
+        registerSpawnEgg("seadragon_spawn_egg", HAEntityTypes.SEADRAGON, 0x000000, 0x000000)
     val STINGRAY_SPAWN_EGG =
-        registerSpawnEgg("stingray_spawn_egg", HAEntityTypes.STINGRAY, 0xffa214, 0x0069aa)
+        registerSpawnEgg("stingray_spawn_egg", HAEntityTypes.STINGRAY, 0x000000, 0x000000)
     val STONEFISH_SPAWN_EGG =
-        registerSpawnEgg("stonefish_spawn_egg", HAEntityTypes.STONEFISH, 0xaf8b68, 0x574435)
+        registerSpawnEgg("stonefish_spawn_egg", HAEntityTypes.STONEFISH, 0x000000, 0x000000)
     val OCEAN_SUNFISH_SPAWN_EGG =
-        registerSpawnEgg("ocean_sunfish_spawn_egg", HAEntityTypes.OCEAN_SUNFISH, 0x687f96, 0x455764)
+        registerSpawnEgg("ocean_sunfish_spawn_egg", HAEntityTypes.OCEAN_SUNFISH, 0x000000, 0x000000)
     val SURGEONFISH_SPAWN_EGG =
-        registerSpawnEgg("surgeonfish_spawn_egg", HAEntityTypes.SURGEONFISH, 0x88a1d7, 0x211b2f)
+        registerSpawnEgg("surgeonfish_spawn_egg", HAEntityTypes.SURGEONFISH, 0x000000, 0x000000)
     val TETRA_SPAWN_EGG =
-        registerSpawnEgg("tetra_spawn_egg", HAEntityTypes.TETRA, 0x4eb1cc, 0xe64d43)
+        registerSpawnEgg("tetra_spawn_egg", HAEntityTypes.TETRA, 0x000000, 0x000000)
     val PUPFISH_SPAWN_EGG =
-        registerSpawnEgg("pupfish_spawn_egg", HAEntityTypes.PUPFISH, 0x020c44, 0x2785f5)
+        registerSpawnEgg("pupfish_spawn_egg", HAEntityTypes.PUPFISH, 0x000000, 0x000000)
     val TIGER_BARB_SPAWN_EGG =
-        registerSpawnEgg("tiger_barb_spawn_egg", HAEntityTypes.TIGER_BARB, 0xfbbf2d, 0x611851)
+        registerSpawnEgg("tiger_barb_spawn_egg", HAEntityTypes.TIGER_BARB, 0x000000, 0x000000)
     val BLOWFISH_SPAWN_EGG =
-        registerSpawnEgg("blowfish_spawn_egg", HAEntityTypes.BLOWFISH, 0xfcf2ce, 0x885e6d)
+        registerSpawnEgg("blowfish_spawn_egg", HAEntityTypes.BLOWFISH, 0x000000, 0x000000)
     val TRIGGERFISH_SPAWN_EGG =
-        registerSpawnEgg("triggerfish_spawn_egg", HAEntityTypes.TRIGGERFISH, 0x5b7c7e, 0xbdcdda)
+        registerSpawnEgg("triggerfish_spawn_egg", HAEntityTypes.TRIGGERFISH, 0x000000, 0x000000)
     val TREVALLY_SPAWN_EGG =
-        registerSpawnEgg("trevally_spawn_egg", HAEntityTypes.TREVALLY, 0xe3bb5f, 0x575644)
+        registerSpawnEgg("trevally_spawn_egg", HAEntityTypes.TREVALLY, 0x000000, 0x000000)
     val TUNA_SPAWN_EGG =
-        registerSpawnEgg("tuna_spawn_egg", HAEntityTypes.TUNA, 0x36668d, 0xf5d58d)
+        registerSpawnEgg("tuna_spawn_egg", HAEntityTypes.TUNA, 0x000000, 0x000000)
     val GOLDEN_DORADO_SPAWN_EGG =
-        registerSpawnEgg("golden_dorado_spawn_egg", HAEntityTypes.GOLDEN_DORADO, 0xd16020, 0xa4975f)
+        registerSpawnEgg("golden_dorado_spawn_egg", HAEntityTypes.GOLDEN_DORADO, 0x000000, 0x000000)
     val WRASSE_SPAWN_EGG =
-        registerSpawnEgg("wrasse_spawn_egg", HAEntityTypes.WRASSE, 0x2c2628, 0xdc5f5d)
+        registerSpawnEgg("wrasse_spawn_egg", HAEntityTypes.WRASSE, 0x000000, 0x000000)
     val ANGLERFISH_SPAWN_EGG =
-        registerSpawnEgg("anglerfish_spawn_egg", HAEntityTypes.ANGLERFISH, 0x4b4257, 0xa7f1eb)
+        registerSpawnEgg("anglerfish_spawn_egg", HAEntityTypes.ANGLERFISH, 0x000000, 0x000000)
     val VIPERFISH_SPAWN_EGG =
-        registerSpawnEgg("viperfish_spawn_egg", HAEntityTypes.VIPERFISH, 0x65727e, 0x65727e)
+        registerSpawnEgg("viperfish_spawn_egg", HAEntityTypes.VIPERFISH, 0x000000, 0x000000)
     val HATCHETFISH_SPAWN_EGG =
-        registerSpawnEgg("hatchetfish_spawn_egg", HAEntityTypes.HATCHETFISH, 0x5e718e, 0x4c7597)
+        registerSpawnEgg("hatchetfish_spawn_egg", HAEntityTypes.HATCHETFISH, 0x000000, 0x000000)
     val BLOBFISH_SPAWN_EGG =
-        registerSpawnEgg("blobfish_spawn_egg", HAEntityTypes.BLOBFISH, 0x736c6d, 0x86948f)
+        registerSpawnEgg("blobfish_spawn_egg", HAEntityTypes.BLOBFISH, 0x000000, 0x000000)
     val HAGFISH_SPAWN_EGG =
-        registerSpawnEgg("hagfish_spawn_egg", HAEntityTypes.HAGFISH, 0x412c33, 0x7b535b)
+        registerSpawnEgg("hagfish_spawn_egg", HAEntityTypes.HAGFISH, 0x000000, 0x000000)
     val TRIPOD_FISH_SPAWN_EGG =
-        registerSpawnEgg("tripod_fish_spawn_egg", HAEntityTypes.TRIPOD_FISH, 0x4c7597, 0xafeeee)
+        registerSpawnEgg("tripod_fish_spawn_egg", HAEntityTypes.TRIPOD_FISH, 0x000000, 0x000000)
     val FANGTOOTH_SPAWN_EGG =
-        registerSpawnEgg("fangtooth_spawn_egg", HAEntityTypes.FANGTOOTH, 0xab691b, 0xf4d29c)
+        registerSpawnEgg("fangtooth_spawn_egg", HAEntityTypes.FANGTOOTH, 0x000000, 0x000000)
     val COELACANTH_SPAWN_EGG =
-        registerSpawnEgg("coelacanth_spawn_egg", HAEntityTypes.COELACANTH, 0x2f517a, 0xbac4d3)
+        registerSpawnEgg("coelacanth_spawn_egg", HAEntityTypes.COELACANTH, 0x000000, 0x000000)
     val SLICKHEAD_SPAWN_EGG =
-        registerSpawnEgg("slickhead_spawn_egg", HAEntityTypes.SLICKHEAD, 0x4e3a35, 0x5a9aa5)
+        registerSpawnEgg("slickhead_spawn_egg", HAEntityTypes.SLICKHEAD, 0x000000, 0x000000)
     val DRAGONFISH_SPAWN_EGG =
-        registerSpawnEgg("dragonfish_spawn_egg", HAEntityTypes.DRAGONFISH, 0x2e2e33, 0xfffaa9)
+        registerSpawnEgg("dragonfish_spawn_egg", HAEntityTypes.DRAGONFISH, 0x000000, 0x000000)
     val JOHN_DORY_SPAWN_EGG =
-        registerSpawnEgg("john_dory_spawn_egg", HAEntityTypes.JOHN_DORY, 0xdcc6c6, 0x8a7f55)
+        registerSpawnEgg("john_dory_spawn_egg", HAEntityTypes.JOHN_DORY, 0x000000, 0x000000)
     val SNAILFISH_SPAWN_EGG =
-        registerSpawnEgg("snailfish_spawn_egg", HAEntityTypes.SNAILFISH, 0xe0c2ed, 0xf0dcef)
+        registerSpawnEgg("snailfish_spawn_egg", HAEntityTypes.SNAILFISH, 0x000000, 0x000000)
     val OARFISH_SPAWN_EGG =
-        registerSpawnEgg("oarfish_spawn_egg", HAEntityTypes.OARFISH, 0x8892ab, 0xb04743)
+        registerSpawnEgg("oarfish_spawn_egg", HAEntityTypes.OARFISH, 0x000000, 0x000000)
     val RATFISH_SPAWN_EGG =
-        registerSpawnEgg("ratfish_spawn_egg", HAEntityTypes.RATFISH, 0xa16470, 0x673146)
+        registerSpawnEgg("ratfish_spawn_egg", HAEntityTypes.RATFISH, 0x000000, 0x000000)
     //#endregion
 
     //#region Shark Spawn Eggs
     val BASKING_SHARK_SPAWN_EGG =
-        registerSpawnEgg("basking_shark_spawn_egg", HAEntityTypes.BASKING_SHARK, 0x6a6558, 0xb5b3a6)
+        registerSpawnEgg("basking_shark_spawn_egg", HAEntityTypes.BASKING_SHARK, 0x000000, 0x000000)
     val BULL_SHARK_SPAWN_EGG =
-        registerSpawnEgg("bull_shark_spawn_egg", HAEntityTypes.BULL_SHARK, 0x5d6b7a, 0xb4c1c6)
+        registerSpawnEgg("bull_shark_spawn_egg", HAEntityTypes.BULL_SHARK, 0x000000, 0x000000)
     val FRILLED_SHARK_SPAWN_EGG =
-        registerSpawnEgg("frilled_shark_spawn_egg", HAEntityTypes.FRILLED_SHARK, 0x5a4d50, 0x3a2f31)
+        registerSpawnEgg("frilled_shark_spawn_egg", HAEntityTypes.FRILLED_SHARK, 0x000000, 0x000000)
     val SIXGILL_SHARK_SPAWN_EGG =
-        registerSpawnEgg("sixgill_shark_spawn_egg", HAEntityTypes.SIXGILL_SHARK, 0x6e666a, 0xc5d4d0)
+        registerSpawnEgg("sixgill_shark_spawn_egg", HAEntityTypes.SIXGILL_SHARK, 0x000000, 0x000000)
     val SLEEPER_SHARK_SPAWN_EGG =
-        registerSpawnEgg("sleeper_shark_spawn_egg", HAEntityTypes.SLEEPER_SHARK, 0x222830, 0x709ae0)
+        registerSpawnEgg("sleeper_shark_spawn_egg", HAEntityTypes.SLEEPER_SHARK, 0x000000, 0x000000)
     val GOBLIN_SHARK_SPAWN_EGG =
-        registerSpawnEgg("goblin_shark_spawn_egg", HAEntityTypes.GOBLIN_SHARK, 0xb57060, 0xe1cdb5)
+        registerSpawnEgg("goblin_shark_spawn_egg", HAEntityTypes.GOBLIN_SHARK, 0x000000, 0x000000)
     val LANTERN_SHARK_SPAWN_EGG =
-        registerSpawnEgg("lantern_shark_spawn_egg", HAEntityTypes.LANTERN_SHARK, 0x543f46, 0x84d5fe)
+        registerSpawnEgg("lantern_shark_spawn_egg", HAEntityTypes.LANTERN_SHARK, 0x000000, 0x000000)
     val GREAT_WHITE_SHARK_SPAWN_EGG =
-        registerSpawnEgg("great_white_shark_spawn_egg", HAEntityTypes.GREAT_WHITE_SHARK, 0x5e6e7d, 0xf3f3f8)
+        registerSpawnEgg("great_white_shark_spawn_egg", HAEntityTypes.GREAT_WHITE_SHARK, 0x000000, 0x000000)
     val HAMMERHEAD_SHARK_SPAWN_EGG =
-        registerSpawnEgg("hammerhead_shark_spawn_egg", HAEntityTypes.HAMMERHEAD_SHARK, 0x78909a, 0xd7e1dd)
-    val HOUND_SHARK_SHARK_SPAWN_EGG =
-        registerSpawnEgg("hound_shark_spawn_egg", HAEntityTypes.HOUND_SHARK, 0xa18469, 0x5e453a)
+        registerSpawnEgg("hammerhead_shark_spawn_egg", HAEntityTypes.HAMMERHEAD_SHARK, 0x000000, 0x000000)
+    val HOUND_SHARK_SPAWN_EGG =
+        registerSpawnEgg("hound_shark_spawn_egg", HAEntityTypes.HOUND_SHARK, 0x000000, 0x000000)
     val THRESHER_SHARK_SPAWN_EGG =
-        registerSpawnEgg("thresher_shark_spawn_egg", HAEntityTypes.THRESHER_SHARK, 0x5591af, 0xd7e1dd)
+        registerSpawnEgg("thresher_shark_spawn_egg", HAEntityTypes.THRESHER_SHARK, 0x000000, 0x000000)
     val TIGER_SHARK_SPAWN_EGG =
-        registerSpawnEgg("sand_tiger_shark_spawn_egg", HAEntityTypes.SAND_TIGER_SHARK, 0xb79167, 0xf0f3e6)
+        registerSpawnEgg("sand_tiger_shark_spawn_egg", HAEntityTypes.SAND_TIGER_SHARK, 0x000000, 0x000000)
     val WHALE_SHARK_SPAWN_EGG =
-        registerSpawnEgg("whale_shark_spawn_egg", HAEntityTypes.WHALE_SHARK, 0x4c6d98, 0xeff0f4)
+        registerSpawnEgg("whale_shark_spawn_egg", HAEntityTypes.WHALE_SHARK, 0x000000, 0x000000)
     //#endregion
 
     //#region Cephalopod Spawn Eggs
     val CUTTLEFISH_SPAWN_EGG =
-        registerSpawnEgg("cuttlefish_spawn_egg", HAEntityTypes.CUTTLEFISH, 0x8a4836, 0xf6deae)
+        registerSpawnEgg("cuttlefish_spawn_egg", HAEntityTypes.CUTTLEFISH, 0x000000, 0x000000)
     val ARROW_SQUID_SPAWN_EGG =
-        registerSpawnEgg("arrow_squid_spawn_egg", HAEntityTypes.ARROW_SQUID, 0x761f31, 0xd56360)
+        registerSpawnEgg("arrow_squid_spawn_egg", HAEntityTypes.ARROW_SQUID, 0x000000, 0x000000)
     val COLOSSAL_SQUID_SPAWN_EGG =
-        registerSpawnEgg("colossal_squid_spawn_egg", HAEntityTypes.COLOSSAL_SQUID, 0x9c0a31, 0x9c0a31)
+        registerSpawnEgg("colossal_squid_spawn_egg", HAEntityTypes.COLOSSAL_SQUID, 0x000000, 0x000000)
     val GIANT_SQUID_SPAWN_EGG =
-        registerSpawnEgg("giant_squid_spawn_egg", HAEntityTypes.GIANT_SQUID, 0xab0f32, 0xf6b2ab)
+        registerSpawnEgg("giant_squid_spawn_egg", HAEntityTypes.GIANT_SQUID, 0x000000, 0x000000)
     val FIREFLY_SQUID_SPAWN_EGG =
-        registerSpawnEgg("firefly_squid_spawn_egg", HAEntityTypes.FIREFLY_SQUID, 0xc93a61, 0x4ec0e8)
+        registerSpawnEgg("firefly_squid_spawn_egg", HAEntityTypes.FIREFLY_SQUID, 0x000000, 0x000000)
     val OCTOPUS_SPAWN_EGG =
-        registerSpawnEgg("octopus_spawn_egg", HAEntityTypes.OCTOPUS, 0x73275c, 0xc34e69)
+        registerSpawnEgg("octopus_spawn_egg", HAEntityTypes.OCTOPUS, 0x000000, 0x000000)
     val NAUTILUS_SPAWN_EGG =
-        registerSpawnEgg("nautilus_spawn_egg", HAEntityTypes.NAUTILUS, 0xd4ccc3, 0xae4635)
+        registerSpawnEgg("nautilus_spawn_egg", HAEntityTypes.NAUTILUS, 0x000000, 0x000000)
     val UMBRELLA_OCTOPUS_SPAWN_EGG =
-        registerSpawnEgg("umbrella_octopus_spawn_egg", HAEntityTypes.UMBRELLA_OCTOPUS, 0xffaf25, 0xfeff92)
+        registerSpawnEgg("umbrella_octopus_spawn_egg", HAEntityTypes.UMBRELLA_OCTOPUS, 0x000000, 0x000000)
     val VAMPIRE_SQUID_SPAWN_EGG =
-        registerSpawnEgg("vampire_squid_spawn_egg", HAEntityTypes.VAMPIRE_SQUID, 0x73363c, 0xc3e9e2)
+        registerSpawnEgg("vampire_squid_spawn_egg", HAEntityTypes.VAMPIRE_SQUID, 0x000000, 0x000000)
     //#endregion
 
     //#region Jellyfish Spawn Eggs
     val BARREL_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("barrel_jellyfish_spawn_egg", HAEntityTypes.BARREL_JELLYFISH, 0xd6f3ea, 0x413c83)
+        registerSpawnEgg("barrel_jellyfish_spawn_egg", HAEntityTypes.BARREL_JELLYFISH, 0x000000, 0x000000)
     val BLUE_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("blue_jellyfish_spawn_egg", HAEntityTypes.BLUE_JELLYFISH, 0x4dc0e8, 0xff6b97)
+        registerSpawnEgg("blue_jellyfish_spawn_egg", HAEntityTypes.BLUE_JELLYFISH, 0x000000, 0x000000)
     val CEPHEIDAE_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg(
-            "cepheidae_jellyfish_spawn_egg",
-            HAEntityTypes.CEPHEIDAE_JELLYFISH,
-            0x623062,
-            0x89a1d8
-        )
+        registerSpawnEgg("cepheidae_jellyfish_spawn_egg", HAEntityTypes.CEPHEIDAE_JELLYFISH, 0x000000, 0x000000)
     val LIONS_MANE_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg(
-            "lions_mane_jellyfish_spawn_egg",
-            HAEntityTypes.LIONS_MANE_JELLYFISH,
-            0xf6d5b1,
-            0x541e48
-        )
+        registerSpawnEgg("lions_mane_jellyfish_spawn_egg", HAEntityTypes.LIONS_MANE_JELLYFISH, 0x000000, 0x000000)
     val MOON_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("moon_jellyfish_spawn_egg", HAEntityTypes.MOON_JELLYFISH, 0xa293f3, 0xe0caf8)
+        registerSpawnEgg("moon_jellyfish_spawn_egg", HAEntityTypes.MOON_JELLYFISH, 0x000000, 0x000000)
     val NOMURA_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("nomura_jellyfish_spawn_egg", HAEntityTypes.NOMURA_JELLYFISH, 0xe5dccf, 0x64353b)
+        registerSpawnEgg("nomura_jellyfish_spawn_egg", HAEntityTypes.NOMURA_JELLYFISH, 0x000000, 0x000000)
     val SEA_NETTLE_SPAWN_EGG =
-        registerSpawnEgg("sea_nettle_spawn_egg", HAEntityTypes.SEA_NETTLE, 0xf7bc78, 0x76435f)
+        registerSpawnEgg("sea_nettle_spawn_egg", HAEntityTypes.SEA_NETTLE, 0x000000, 0x000000)
     val BOX_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("box_jellyfish_spawn_egg", HAEntityTypes.BOX_JELLYFISH, 0x9ba6de, 0xebeff8)
+        registerSpawnEgg("box_jellyfish_spawn_egg", HAEntityTypes.BOX_JELLYFISH, 0x000000, 0x000000)
     val MAUVE_STINGER_SPAWN_EGG =
-        registerSpawnEgg("mauve_stinger_spawn_egg", HAEntityTypes.MAUVE_STINGER, 0x633063, 0xbc787a)
+        registerSpawnEgg("mauve_stinger_spawn_egg", HAEntityTypes.MAUVE_STINGER, 0x000000, 0x000000)
     val CROWN_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("crown_jellyfish_spawn_egg", HAEntityTypes.CROWN_JELLYFISH, 0xa32858, 0x4dc0e8)
+        registerSpawnEgg("crown_jellyfish_spawn_egg", HAEntityTypes.CROWN_JELLYFISH, 0x000000, 0x000000)
     val BIG_RED_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("big_red_jellyfish_spawn_egg", HAEntityTypes.BIG_RED_JELLYFISH, 0xf4e5e5, 0xe72e46)
+        registerSpawnEgg("big_red_jellyfish_spawn_egg", HAEntityTypes.BIG_RED_JELLYFISH, 0x000000, 0x000000)
     val COSMIC_JELLYFISH_SPAWN_EGG =
-        registerSpawnEgg("cosmic_jellyfish_spawn_egg", HAEntityTypes.COSMIC_JELLYFISH, 0xe7debb, 0xffd375)
+        registerSpawnEgg("cosmic_jellyfish_spawn_egg", HAEntityTypes.COSMIC_JELLYFISH, 0x000000, 0x000000)
     val COMB_JELLY_SPAWN_EGG =
-        registerSpawnEgg("comb_jelly_spawn_egg", HAEntityTypes.COMB_JELLY, 0x9de1df, 0xff6e76)
+        registerSpawnEgg("comb_jelly_spawn_egg", HAEntityTypes.COMB_JELLY, 0x000000, 0x000000)
     val FIREWORK_JELLYFISH_SPAWN_EGG =
         registerSpawnEgg(
-            "firework_jellyfish_spawn_egg", HAEntityTypes.FIREWORK_JELLYFISH, 0x6975e8, 0xfc7fb7)
+            "firework_jellyfish_spawn_egg", HAEntityTypes.FIREWORK_JELLYFISH, 0x000000, 0x000000)
     //#endregion
 
     //#region Crustacean Spawn Eggs
     val COCONUT_CRAB_SPAWN_EGG =
-        registerSpawnEgg("coconut_crab_spawn_egg", HAEntityTypes.COCONUT_CRAB, 0x3e2d25, 0x3c546d)
+        registerSpawnEgg("coconut_crab_spawn_egg", HAEntityTypes.COCONUT_CRAB, 0x000000, 0x000000)
     val DUNGENESS_CRAB_SPAWN_EGG =
-        registerSpawnEgg("dungeness_crab_spawn_egg", HAEntityTypes.DUNGENESS_CRAB, 0x81353f, 0xeecfce)
+        registerSpawnEgg("dungeness_crab_spawn_egg", HAEntityTypes.DUNGENESS_CRAB, 0x000000, 0x000000)
     val CRAYFISH_SPAWN_EGG =
-        registerSpawnEgg("crayfish_spawn_egg", HAEntityTypes.CRAYFISH, 0x697152, 0x7c4452)
+        registerSpawnEgg("crayfish_spawn_egg", HAEntityTypes.CRAYFISH, 0x000000, 0x000000)
     val FIDDLER_CRAB_SPAWN_EGG =
-        registerSpawnEgg("fiddler_crab_spawn_egg", HAEntityTypes.FIDDLER_CRAB, 0x80366b, 0xf39949)
+        registerSpawnEgg("fiddler_crab_spawn_egg", HAEntityTypes.FIDDLER_CRAB, 0x000000, 0x000000)
     val FLOWER_CRAB_SPAWN_EGG =
-        registerSpawnEgg("flower_crab_spawn_egg", HAEntityTypes.FLOWER_CRAB, 0x9b8a6e, 0x20a094)
+        registerSpawnEgg("flower_crab_spawn_egg", HAEntityTypes.FLOWER_CRAB, 0x000000, 0x000000)
     val DECORATOR_CRAB_SPAWN_EGG =
-        registerSpawnEgg("decorator_crab_spawn_egg", HAEntityTypes.DECORATOR_CRAB, 0xffb570, 0x314fdd)
+        registerSpawnEgg("decorator_crab_spawn_egg", HAEntityTypes.DECORATOR_CRAB, 0x000000, 0x000000)
     val GHOST_CRAB_SPAWN_EGG =
-        registerSpawnEgg("ghost_crab_spawn_egg", HAEntityTypes.GHOST_CRAB, 0xf2be69, 0xf5fcd9)
+        registerSpawnEgg("ghost_crab_spawn_egg", HAEntityTypes.GHOST_CRAB, 0x000000, 0x000000)
     val HERMIT_CRAB_SPAWN_EGG =
-        registerSpawnEgg("hermit_crab_spawn_egg", HAEntityTypes.HERMIT_CRAB, 0xe97b13, 0xf2a65e)
+        registerSpawnEgg("hermit_crab_spawn_egg", HAEntityTypes.HERMIT_CRAB, 0x000000, 0x000000)
     val HORSESHOE_CRAB_SPAWN_EGG =
-        registerSpawnEgg("horseshoe_crab_spawn_egg", HAEntityTypes.HORSESHOE_CRAB, 0x6e6b55, 0x403b31)
+        registerSpawnEgg("horseshoe_crab_spawn_egg", HAEntityTypes.HORSESHOE_CRAB, 0x000000, 0x000000)
     val LIGHTFOOT_CRAB_SPAWN_EGG =
-        registerSpawnEgg("lightfoot_crab_spawn_egg", HAEntityTypes.LIGHTFOOT_CRAB, 0xb0305c, 0xff8c41)
+        registerSpawnEgg("lightfoot_crab_spawn_egg", HAEntityTypes.LIGHTFOOT_CRAB, 0x000000, 0x000000)
     val LOBSTER_SPAWN_EGG =
-        registerSpawnEgg("lobster_spawn_egg", HAEntityTypes.LOBSTER, 0x421b2f, 0x8a4836)
+        registerSpawnEgg("lobster_spawn_egg", HAEntityTypes.LOBSTER, 0x000000, 0x000000)
     val SHRIMP_SPAWN_EGG =
-        registerSpawnEgg("shrimp_spawn_egg", HAEntityTypes.SHRIMP, 0xeb564b, 0xff9166)
+        registerSpawnEgg("shrimp_spawn_egg", HAEntityTypes.SHRIMP, 0x000000, 0x000000)
     val VAMPIRE_CRAB_SPAWN_EGG =
-        registerSpawnEgg("vampire_crab_spawn_egg", HAEntityTypes.VAMPIRE_CRAB, 0x322947, 0x752053)
+        registerSpawnEgg("vampire_crab_spawn_egg", HAEntityTypes.VAMPIRE_CRAB, 0x000000, 0x000000)
     val GIANT_ISOPOD_SPAWN_EGG =
-        registerSpawnEgg("giant_isopod_spawn_egg", HAEntityTypes.GIANT_ISOPOD, 0xe6d3d6, 0x3c2236)
+        registerSpawnEgg("giant_isopod_spawn_egg", HAEntityTypes.GIANT_ISOPOD, 0x000000, 0x000000)
     val SPIDER_CRAB_SPAWN_EGG =
-        registerSpawnEgg("spider_crab_spawn_egg", HAEntityTypes.SPIDER_CRAB, 0x9d3e41, 0xc6836f)
+        registerSpawnEgg("spider_crab_spawn_egg", HAEntityTypes.SPIDER_CRAB, 0x000000, 0x000000)
     val YETI_CRAB_SPAWN_EGG =
-        registerSpawnEgg("yeti_crab_spawn_egg", HAEntityTypes.YETI_CRAB, 0xfff4dd, 0xffd16b)
+        registerSpawnEgg("yeti_crab_spawn_egg", HAEntityTypes.YETI_CRAB, 0x000000, 0x000000)
     //#endregion
 
     //#region Critter Spawn Eggs
     val SEA_SLUG_SPAWN_EGG =
-        registerSpawnEgg("sea_slug_spawn_egg", HAEntityTypes.SEA_SLUG, 0xf7be47, 0xb853a3)
+        registerSpawnEgg("sea_slug_spawn_egg", HAEntityTypes.SEA_SLUG, 0x000000, 0x000000)
     val SCALYFOOT_SNAIL_SPAWN_EGG =
-        registerSpawnEgg("scalyfoot_snail_spawn_egg", HAEntityTypes.SCALYFOOT_SNAIL, 0x39302d, 0xbe1433)
+        registerSpawnEgg("scalyfoot_snail_spawn_egg", HAEntityTypes.SCALYFOOT_SNAIL, 0x000000, 0x000000)
     val SEA_CUCUMBER_SPAWN_EGG =
-        registerSpawnEgg("sea_cucumber_spawn_egg", HAEntityTypes.SEA_CUCUMBER, 0x225b6d, 0x0c2627)
+        registerSpawnEgg("sea_cucumber_spawn_egg", HAEntityTypes.SEA_CUCUMBER, 0x000000, 0x000000)
     val SEA_URCHIN_SPAWN_EGG =
-        registerSpawnEgg("sea_urchin_spawn_egg", HAEntityTypes.SEA_URCHIN, 0x994066, 0x41142c)
+        registerSpawnEgg("sea_urchin_spawn_egg", HAEntityTypes.SEA_URCHIN, 0x000000, 0x000000)
     val STARFISH_SPAWN_EGG =
-        registerSpawnEgg("starfish_spawn_egg", HAEntityTypes.STARFISH, 0x994066, 0x592645)
+        registerSpawnEgg("starfish_spawn_egg", HAEntityTypes.STARFISH, 0x000000, 0x000000)
     val SEA_ANGEL_SPAWN_EGG =
-        registerSpawnEgg("sea_angel_spawn_egg", HAEntityTypes.SEA_ANGEL, 0xc6d5f9, 0xf38135)
+        registerSpawnEgg("sea_angel_spawn_egg", HAEntityTypes.SEA_ANGEL, 0x000000, 0x000000)
     //#endregion
 
     //#region Mammal Spawn Eggs
     val OTTER_SPAWN_EGG =
-        registerSpawnEgg("otter_spawn_egg", HAEntityTypes.OTTER, 0x60352f, 0xeebf80)
+        registerSpawnEgg("otter_spawn_egg", HAEntityTypes.OTTER, 0x000000, 0x000000)
 
     val DUGONG_SPAWN_EGG =
-        registerSpawnEgg("dugong_spawn_egg", HAEntityTypes.DUGONG, 0x807b75, 0xa9a18e)
+        registerSpawnEgg("dugong_spawn_egg", HAEntityTypes.DUGONG, 0x000000, 0x000000)
 
     val MANATEE_SPAWN_EGG =
-        registerSpawnEgg("manatee_spawn_egg", HAEntityTypes.MANATEE, 0x3e3935, 0x56534f)
+        registerSpawnEgg("manatee_spawn_egg", HAEntityTypes.MANATEE, 0x000000, 0x000000)
 
     val ORCA_SPAWN_EGG =
-        registerSpawnEgg("orca_spawn_egg", HAEntityTypes.ORCA, 0x282a32, 0xc5c6ca)
+        registerSpawnEgg("orca_spawn_egg", HAEntityTypes.ORCA, 0x000000, 0x000000)
     //#endregion
 
     //#region Miniboss & Minion Spawn Eggs
     val KARKINOS_SPAWN_EGG =
-        registerSpawnEgg("karkinos_spawn_egg", HAEntityTypes.KARKINOS, 0x852c2a, 0x3d1031)
+        registerSpawnEgg("karkinos_spawn_egg", HAEntityTypes.KARKINOS, 0x000000, 0x000000)
     val KARCINOGEN_SPAWN_EGG =
-        registerSpawnEgg("karcinogen_spawn_egg", HAEntityTypes.KARCINOGEN, 0x852c2a, 0x3d1031)
+        registerSpawnEgg("karcinogen_spawn_egg", HAEntityTypes.KARCINOGEN, 0x000000, 0x000000)
     val KARCINOMA_SPAWN_EGG =
-        registerSpawnEgg("karcinoma_spawn_egg", HAEntityTypes.KARCINOMA, 0x852c2a, 0x3d1031)
+        registerSpawnEgg("karcinoma_spawn_egg", HAEntityTypes.KARCINOMA, 0x000000, 0x000000)
     val SHELL_BEAST_SPAWN_EGG =
-        registerSpawnEgg("shell_beast_spawn_egg", HAEntityTypes.SHELL_BEAST, 0xbbb490, 0x972f2e)
+        registerSpawnEgg("shell_beast_spawn_egg", HAEntityTypes.SHELL_BEAST, 0x000000, 0x000000)
     // val HYPNAUTILUS_SPAWN_EGG =
-    //     registerSpawnEgg("hypnautilus_spawn_egg", HAEntityTypes.HYPNAUTILUS, 0xbbb490, 0x972f2e)
+    //     registerSpawnEgg("hypnautilus_spawn_egg", HAEntityTypes.HYPNAUTILUS, 0x000000, 0x000000)
     val BEAKLING_SPAWN_EGG =
-        registerSpawnEgg("beakling_spawn_egg", HAEntityTypes.BEAKLING, 0xbbb490, 0x972f2e)
+        registerSpawnEgg("beakling_spawn_egg", HAEntityTypes.BEAKLING, 0x000000, 0x000000)
     //#endregion
     //#endregion
 
