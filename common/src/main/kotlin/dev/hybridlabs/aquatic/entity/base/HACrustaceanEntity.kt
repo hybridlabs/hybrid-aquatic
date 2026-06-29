@@ -251,8 +251,6 @@ open class HACrustaceanEntity(
     }
 
     companion object {
-        val ATTEMPT_ATTACK: EntityDataAccessor<Boolean> =
-            SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.BOOLEAN)
         val SHELL_ITEM: EntityDataAccessor<ItemStack> =
             SynchedEntityData.defineId(HACrustaceanEntity::class.java, EntityDataSerializers.ITEM_STACK)
 

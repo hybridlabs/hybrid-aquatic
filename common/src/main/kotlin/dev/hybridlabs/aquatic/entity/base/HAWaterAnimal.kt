@@ -366,7 +366,7 @@ abstract class HAWaterAnimal protected constructor(
         compound.putBoolean("Feeding", isFeeding())
         this.setGrazing(compound.getBoolean("Grazing"))
         this.setDigging(compound.getBoolean("Digging"))
-        this.setDigging(compound.getBoolean("Performing"))
+        this.setPerformingTrick(compound.getBoolean("Performing"))
 
         if (this.loveCause != null) {
             compound.putUUID("LoveCause", this.loveCause)
@@ -386,7 +386,7 @@ abstract class HAWaterAnimal protected constructor(
         this.setFeeding(compound.getBoolean("Feeding"))
         this.setGrazing(compound.getBoolean("Grazing"))
         this.setDigging(compound.getBoolean("Digging"))
-        this.setDigging(compound.getBoolean("Performing"))
+        this.setPerformingTrick(compound.getBoolean("Performing"))
     }
     //#endregion
 
