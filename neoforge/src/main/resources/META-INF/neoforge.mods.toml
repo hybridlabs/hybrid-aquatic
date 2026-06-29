@@ -52,3 +52,6 @@ modId = "lithostitched"
 mandatory = true
 versionRange = "[1.4.11,)"
 side = "SERVER"
+
+[[mixins]]
+config = "${mod_id}.forge.mixins.json"
