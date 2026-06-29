@@ -51,6 +51,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .filter(filterHybridAquatic(BuiltInRegistries.ITEM))
                 .filter { item ->
                     item in setOf(
+                        HAItems.GARDEN_EEL_SPAWN_EGG.get(),
                         HAItems.CORYDORA_SPAWN_EGG.get(),
                         HAItems.TREVALLY_SPAWN_EGG.get(),
                         HAItems.VIPERFISH_SPAWN_EGG.get(),
@@ -650,7 +651,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.TROUT_SPAWN_EGG.get(),
             HAItems.SUNFISH_SPAWN_EGG.get(),
             HAItems.CLOWNFISH_SPAWN_EGG.get(),
-            HAItems.GARDEN_EEL_SPAWN_EGG.get(),
             HAItems.BOXFISH_SPAWN_EGG.get(),
             HAItems.DANIO_SPAWN_EGG.get(),
             HAItems.DISCUS_SPAWN_EGG.get(),
@@ -705,7 +705,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.HAMMERHEAD_SHARK_SPAWN_EGG.get(),
             HAItems.HOUND_SHARK_SPAWN_EGG.get(),
             HAItems.THRESHER_SHARK_SPAWN_EGG.get(),
-            HAItems.TIGER_SHARK_SPAWN_EGG.get(),
+            HAItems.SAND_TIGER_SHARK_SPAWN_EGG.get(),
             HAItems.WHALE_SHARK_SPAWN_EGG.get(),
 
             HAItems.CUTTLEFISH_SPAWN_EGG.get(),
