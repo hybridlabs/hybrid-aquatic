@@ -166,7 +166,7 @@ class PlacedFeatureProvider(
             PlacementUtils.register(
                 bootstrap,
                 HAPlacedFeatures.WATER_HYACINTH,
-                reg.get(HAConfiguredFeatures.WATER_LETTUCE).get(), listOf(
+                reg.get(HAConfiguredFeatures.WATER_HYACINTH).get(), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                     CountPlacement.of(3),
