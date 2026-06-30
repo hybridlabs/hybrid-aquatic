@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 class CarpPatternEntityLayer(
     renderer: HAFishEntityRenderer<CarpEntity>
@@ -37,8 +38,17 @@ class CarpPatternEntityLayer(
         val patternTexture = getPatternTexture(animatable, animatable.getPatternTextureName())
         val patternRenderType = RenderType.entityTranslucent(patternTexture)
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, patternRenderType,
-            bufferSource.getBuffer(patternRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1)
+        getRenderer().reRender(
+            getDefaultBakedModel(animatable),
+            poseStack,
+            bufferSource,
+            animatable,
+            patternRenderType,
+            bufferSource.getBuffer(patternRenderType),
+            partialTick,
+            packedLight,
+            OverlayTexture.NO_OVERLAY,
+            Color.WHITE.argbInt
+        )
     }
 }

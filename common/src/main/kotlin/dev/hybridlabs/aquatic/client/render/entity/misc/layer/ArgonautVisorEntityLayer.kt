@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 class ArgonautVisorEntityLayer<T: ArgonautEntity>(
     renderer: ArgonautEntityRenderer<T>
@@ -34,8 +35,17 @@ class ArgonautVisorEntityLayer<T: ArgonautEntity>(
         val visorTexture = getVisorTexture()
         val visorRenderType = RenderType.entityTranslucentCull(visorTexture)
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, visorRenderType,
-            bufferSource.getBuffer(visorRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1)
+        getRenderer().reRender(
+            getDefaultBakedModel(animatable),
+            poseStack,
+            bufferSource,
+            animatable,
+            visorRenderType,
+            bufferSource.getBuffer(visorRenderType),
+            partialTick,
+            packedLight,
+            OverlayTexture.NO_OVERLAY,
+            Color.WHITE.argbInt
+        )
     }
 }

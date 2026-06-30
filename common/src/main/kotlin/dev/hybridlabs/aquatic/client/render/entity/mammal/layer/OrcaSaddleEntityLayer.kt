@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 class OrcaSaddleEntityLayer(
     renderer: HADolphinEntityRenderer<OrcaEntity>
@@ -36,8 +37,17 @@ class OrcaSaddleEntityLayer(
         val saddleTexture = getSaddleTexture(animatable, animatable.getSaddleTextureName())
         val saddleRenderType = RenderType.entityTranslucent(saddleTexture)
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, saddleRenderType,
-            bufferSource.getBuffer(saddleRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1)
+        getRenderer().reRender(
+            getDefaultBakedModel(animatable),
+            poseStack,
+            bufferSource,
+            animatable,
+            saddleRenderType,
+            bufferSource.getBuffer(saddleRenderType),
+            partialTick,
+            packedLight,
+            OverlayTexture.NO_OVERLAY,
+            Color.WHITE.argbInt
+        )
     }
 }

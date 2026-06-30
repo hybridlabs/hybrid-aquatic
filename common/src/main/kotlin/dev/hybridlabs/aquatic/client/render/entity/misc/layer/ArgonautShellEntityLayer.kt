@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 class ArgonautShellEntityLayer<T: ArgonautEntity>(
     renderer: ArgonautEntityRenderer<T>
@@ -35,8 +36,17 @@ class ArgonautShellEntityLayer<T: ArgonautEntity>(
         val shellRenderType = RenderType.entityTranslucent(shellTexture)
         if (animatable.getShellColor() == ArgonautEntity.ShellColor.NONE) return
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, shellRenderType,
-            bufferSource.getBuffer(shellRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1)
+        getRenderer().reRender(
+            getDefaultBakedModel(animatable),
+            poseStack,
+            bufferSource,
+            animatable,
+            shellRenderType,
+            bufferSource.getBuffer(shellRenderType),
+            partialTick,
+            packedLight,
+            OverlayTexture.NO_OVERLAY,
+            Color.WHITE.argbInt
+        )
     }
 }

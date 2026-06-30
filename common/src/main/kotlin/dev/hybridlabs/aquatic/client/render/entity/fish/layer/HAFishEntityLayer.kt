@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import software.bernie.geckolib.util.Color
 
 class HAFishEntityLayer<T: HAFishEntity>(
     renderer: HAFishEntityRenderer<T>
@@ -38,8 +39,17 @@ class HAFishEntityLayer<T: HAFishEntity>(
         val layerTexture: ResourceLocation = getLayerTextureResource(animatable.getOverlayTextureName())
         val layerRenderType = RenderType.entityTranslucent(layerTexture)
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderType,
-            bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1)
+        getRenderer().reRender(
+            getDefaultBakedModel(animatable),
+            poseStack,
+            bufferSource,
+            animatable,
+            layerRenderType,
+            bufferSource.getBuffer(layerRenderType),
+            partialTick,
+            packedLight,
+            OverlayTexture.NO_OVERLAY,
+            Color.WHITE.argbInt
+        )
     }
 }
