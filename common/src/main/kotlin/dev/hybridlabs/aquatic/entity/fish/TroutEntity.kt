@@ -82,7 +82,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
         }
 
         val TYPE: EntityDataAccessor<Int> =
-            SynchedEntityData.defineId(TunaEntity::class.java, EntityDataSerializers.INT)
+            SynchedEntityData.defineId(TroutEntity::class.java, EntityDataSerializers.INT)
 
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             BULL_TROUT(0, "bull_trout"),
