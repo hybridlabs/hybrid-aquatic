@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastRangedAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonBeaklingsGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
-import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity.Companion.SUMMONING
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
@@ -297,7 +296,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
         private val DATA_IS_CHARGING: EntityDataAccessor<Boolean> =
             SynchedEntityData.defineId(ShellBeastEntity::class.java, EntityDataSerializers.BOOLEAN)
-
+        private val SUMMONING: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(ShellBeastEntity::class.java, EntityDataSerializers.BOOLEAN)
     }
 
     enum class SummonType {
