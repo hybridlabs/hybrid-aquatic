@@ -478,7 +478,8 @@ open class ArgonautEntity(
 
 
     override fun getPassengerAttachmentPoint(entity: Entity, dimensions: EntityDimensions, partialTick: Float): Vec3 {
-        return super.getPassengerAttachmentPoint(entity, dimensions, partialTick).add(0.0,0.65,0.0);
+        return Vec3(0.0, 0.65, 0.0)
+            .yRot(-this.yRot * Mth.DEG_TO_RAD);
     }
 
     protected fun clampRotation(entityToUpdate: Entity) {
@@ -550,15 +551,11 @@ open class ArgonautEntity(
     }
 
     override fun positionRider(passenger: Entity, callback: MoveFunction) {
-        if (this.hasPassenger(passenger)) {
-            callback.accept(
-                passenger,
-                this.x,
-                this.y + this.getPassengerRidingPosition(passenger).y,
-                this.z
-            )
-        }
+        super.positionRider(passenger, callback);
+        if (passenger is LivingEntity)
+            passenger.yBodyRot = this.yRot
     }
+
 
     override fun canAddPassenger(passenger: Entity): Boolean {
         return this.passengers.isEmpty()
