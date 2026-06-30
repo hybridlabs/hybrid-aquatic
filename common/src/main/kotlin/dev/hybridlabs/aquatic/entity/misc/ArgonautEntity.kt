@@ -51,7 +51,7 @@ open class ArgonautEntity(
     type: EntityType<out ArgonautEntity>,
     world: Level,
 ) :
-    LivingEntity(type, world), PlayerRideable, HasCustomInventoryScreen, ContainerEntity,
+    Entity(type, world), HasCustomInventoryScreen, ContainerEntity,
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
     private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(28, ItemStack.EMPTY)
@@ -256,7 +256,7 @@ open class ArgonautEntity(
         }
     }
 
-    override fun tickRidden(player: Player, travelVector: Vec3) {
+    fun tickRidden(player: Player, travelVector: Vec3) {
         val vec2 = getRiddenRotation(player)
 
         val pitch = if (this.onGround() && !this.isInWater) 0f else vec2.x
@@ -476,17 +476,10 @@ open class ArgonautEntity(
         return true
     }
 
-    override fun getMainArm(): HumanoidArm {
-        TODO("Not yet implemented")
-    }
 
-    override fun getPassengerRidingPosition(entity: Entity): Vec3 {
-        return super.getPassengerRidingPosition(entity)
+    override fun getPassengerAttachmentPoint(entity: Entity, dimensions: EntityDimensions, partialTick: Float): Vec3 {
+        return super.getPassengerAttachmentPoint(entity, dimensions, partialTick).add(0.0,0.65,0.0);
     }
-
-//    override fun getPassengersRidingOffset(): Double {
-//        return 0.65
-//    }
 
     protected fun clampRotation(entityToUpdate: Entity) {
         entityToUpdate.setYBodyRot(this.yRot)
@@ -610,21 +603,6 @@ open class ArgonautEntity(
 
     override fun getLootTableSeed(): Long {
         return argonautLootTableSeed
-    }
-
-    override fun getArmorSlots(): Iterable<ItemStack?> {
-        TODO("Not yet implemented")
-    }
-
-    override fun getItemBySlot(slot: EquipmentSlot): ItemStack {
-        TODO("Not yet implemented")
-    }
-
-    override fun setItemSlot(
-        slot: EquipmentSlot,
-        stack: ItemStack
-    ) {
-        TODO("Not yet implemented")
     }
 
     override fun setLootTableSeed(seed: Long) {
