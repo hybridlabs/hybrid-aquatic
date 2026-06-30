@@ -55,7 +55,7 @@ open class ArgonautEntity(
     GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
     private var itemStacks: NonNullList<ItemStack> = NonNullList.withSize(28, ItemStack.EMPTY)
-    private var argonautLootTable: ResourceKey<LootTable> = BuiltInLootTables.EMPTY
+    private var argonautLootTable: ResourceKey<LootTable>? = null
     private var argonautLootTableSeed: Long = 0
     private var inputLeft = false
     private var inputRight = false
@@ -590,7 +590,7 @@ open class ArgonautEntity(
         }
     }
 
-    override fun getLootTable(): ResourceKey<LootTable> {
+    override fun getLootTable(): ResourceKey<LootTable>? {
         return argonautLootTable
     }
 
@@ -649,7 +649,7 @@ open class ArgonautEntity(
         playerInventory: Inventory,
         player: Player,
     ): AbstractContainerMenu? {
-        if (this.lootTable == BuiltInLootTables.EMPTY && player.isSpectator) {
+        if (this.lootTable == null && player.isSpectator) {
             return null
         } else {
             this.unpackLootTable(playerInventory.player)
