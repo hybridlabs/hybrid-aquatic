@@ -6,7 +6,6 @@ import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.tags.TagEntry.tag
 import net.minecraft.tags.TagKey
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -15,6 +14,7 @@ import net.minecraft.world.item.Instrument
 import net.minecraft.world.item.InstrumentItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.Level
 
 class OminousConchItem(
@@ -33,14 +33,14 @@ class OminousConchItem(
         lines: MutableList<Component>,
         tooltipFlag: TooltipFlag
     ) {
-        val customData = stack.get(DataComponents.CUSTOM_DATA) ?: return
-
         lines.add(
             Component.translatable("item.hybrid_aquatic.ominous_conch.function")
                 .withStyle(ChatFormatting.GRAY)
         )
 
-        val hasSummoned = customData.contains("hasSummoned")
+        val hasSummoned = stack.get(DataComponents.CUSTOM_DATA)
+            ?.contains(TAG_HAS_SUMMONED)
+            ?: false
 
         if (!hasSummoned) {
             lines.add(
@@ -69,7 +69,11 @@ class OminousConchItem(
         if (!biome.`is`(HABiomeTags.CAN_SUMMON_SHELL_BEAST)) return result
         if (!player.isUnderWater) return result
 
-        tag.putBoolean(TAG_HAS_SUMMONED, true)
+        stack.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY) { data ->
+            data.update { tag ->
+                tag.putBoolean(TAG_HAS_SUMMONED, true)
+            }
+        }
 
         val serverLevel = level as ServerLevel
         val pos = player.blockPosition()
