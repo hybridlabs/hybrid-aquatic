@@ -119,6 +119,8 @@
     "hybrid_aquatic:moon_jellyfish",
     "hybrid_aquatic:nomura_jellyfish",
     "hybrid_aquatic:sea_nettle",
-    "hybrid_aquatic:box_jellyfish"
+    "hybrid_aquatic:box_jellyfish",
+    "hybrid_aquatic:shell_beast",
+    "hybrid_aquatic:beakling"
   ]
 }

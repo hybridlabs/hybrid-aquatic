@@ -148,6 +148,8 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.NOMURA_JELLYFISH.get(),
                 HAEntityTypes.SEA_NETTLE.get(),
                 HAEntityTypes.BOX_JELLYFISH.get(),
+                HAEntityTypes.SHELL_BEAST.get(),
+                HAEntityTypes.BEAKLING.get(),
             )
         //#endregion
 
