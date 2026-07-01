@@ -8,14 +8,13 @@ import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.entity.*
-import net.minecraft.world.entity.item.PrimedTnt
 import net.minecraft.world.level.Level
 import kotlin.math.cos
 import kotlin.math.sin
 
 open class PrimedDepthChargeEntity(
     entityType: EntityType<out PrimedDepthChargeEntity>,
-    level: Level
+    level: Level,
 ) : Entity(entityType, level), TraceableEntity {
 
     constructor(level: Level, x: Double, y: Double, z: Double, owner: LivingEntity?)
@@ -103,8 +102,7 @@ open class PrimedDepthChargeEntity(
 
     var fuse: Int
         get() = this.entityData.get<Int?>(DATA_FUSE_ID) as Int
-        set(life) {
-            this.entityData.set<Int?>(DATA_FUSE_ID, life)
+        set(life) { this.entityData.set<Int?>(DATA_FUSE_ID, life)
         }
 
     init {
@@ -113,6 +111,6 @@ open class PrimedDepthChargeEntity(
 
     companion object {
         private val DATA_FUSE_ID: EntityDataAccessor<Int?> =
-            SynchedEntityData.defineId<Int?>(PrimedTnt::class.java, EntityDataSerializers.INT)
+            SynchedEntityData.defineId<Int?>(PrimedDepthChargeEntity::class.java, EntityDataSerializers.INT)
     }
 }
