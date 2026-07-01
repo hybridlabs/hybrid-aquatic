@@ -1087,6 +1087,28 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
+        export(exporter, HAEntityTypes.TETRA.get().defaultLootTable){
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.TETRA.get())
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.AFRICAN_BUTTERFLYFISH.get().defaultLootTable){
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.AFRICAN_BUTTERFLYFISH.get())
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
+                    ).build()
+            )
+        }
+
         export(exporter, HAEntityTypes.DISCUS.get().defaultLootTable){
             pool(
                 LootPool.lootPool()

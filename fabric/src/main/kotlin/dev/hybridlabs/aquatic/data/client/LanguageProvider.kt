@@ -624,6 +624,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
             HAItems.LIONFISH.get() to "Lionfish",
             HAItems.TETRA.get() to "Neon Tetra",
+            HAItems.AFRICAN_BUTTERFLYFISH.get() to "African Butterflyfish",
             HAItems.DAMSELFISH.get() to "Damselfish",
             HAItems.DRAGONFISH.get() to "Dragonfish",
             HAItems.BLOBFISH.get() to "Blobfish",

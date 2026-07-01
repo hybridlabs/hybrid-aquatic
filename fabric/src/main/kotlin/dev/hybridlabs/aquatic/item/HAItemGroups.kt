@@ -338,6 +338,7 @@ object HAItemGroups {
                 entries.accept(HAItems.MUSSEL.get())
                 entries.accept(HAItems.COOKED_MUSSEL.get())
 
+                entries.accept(HAItems.AFRICAN_BUTTERFLYFISH.get())
                 entries.accept(HAItems.BETTA.get())
                 entries.accept(HAItems.DANIO.get())
                 entries.accept(HAItems.TETRA.get())

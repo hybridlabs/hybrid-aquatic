@@ -1421,6 +1421,20 @@ object HAItems {
         )
     }
 
+    val AFRICAN_BUTTERFLYFISH = register(
+        "african_butterflyfish"
+    ) {
+        Item(
+            Item.Properties()
+                .food(
+                    FoodProperties.Builder()
+                        .nutrition(1)
+                        .saturationModifier(0.2F)
+                        .build()
+                )
+        )
+    }
+
     val TIGER_BARB = register(
         "tiger_barb"
     ) {
