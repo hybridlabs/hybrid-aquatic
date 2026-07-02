@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.block.HABlockFamilies
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
@@ -14,7 +13,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
-import net.minecraft.data.models.model.ModelLocationUtils
 import net.minecraft.data.models.model.ModelTemplates
 import net.minecraft.data.models.model.TextureMapping
 import net.minecraft.data.models.model.TexturedModel
@@ -44,48 +42,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                     if (id.namespace == Constants.MOD_ID) {
                         createNonTemplateModelBlock(block)
                     }
-                }
-
-            //#region Spawn Eggs
-            BuiltInRegistries.ITEM
-                .filter(filterHybridAquatic(BuiltInRegistries.ITEM))
-                .filter { item ->
-                    item in setOf(
-                        HAItems.GARDEN_EEL_SPAWN_EGG.get(),
-                        HAItems.CORYDORA_SPAWN_EGG.get(),
-                        HAItems.TREVALLY_SPAWN_EGG.get(),
-                        HAItems.VIPERFISH_SPAWN_EGG.get(),
-                        HAItems.HATCHETFISH_SPAWN_EGG.get(),
-                        HAItems.BLOBFISH_SPAWN_EGG.get(),
-                        HAItems.HAGFISH_SPAWN_EGG.get(),
-                        HAItems.TRIPOD_FISH_SPAWN_EGG.get(),
-                        HAItems.FANGTOOTH_SPAWN_EGG.get(),
-                        HAItems.SLICKHEAD_SPAWN_EGG.get(),
-
-                        HAItems.SIXGILL_SHARK_SPAWN_EGG.get(),
-                        HAItems.SLEEPER_SHARK_SPAWN_EGG.get(),
-                        HAItems.GOBLIN_SHARK_SPAWN_EGG.get(),
-
-                        HAItems.COLOSSAL_SQUID_SPAWN_EGG.get(),
-                        HAItems.GIANT_SQUID_SPAWN_EGG.get(),
-
-                        HAItems.COMB_JELLY_SPAWN_EGG.get(),
-
-                        HAItems.SCALYFOOT_SNAIL_SPAWN_EGG.get(),
-
-                        HAItems.DUGONG_SPAWN_EGG.get(),
-                        HAItems.MANATEE_SPAWN_EGG.get(),
-                        HAItems.ORCA_SPAWN_EGG.get(),
-
-                        HAItems.SHELL_BEAST_SPAWN_EGG.get(),
-                        HAItems.BEAKLING_SPAWN_EGG.get()
-                    )
-                }
-                .forEach { item ->
-                    delegateItemModel(
-                        item,
-                        ModelLocationUtils.decorateItemModelLocation("template_spawn_egg")
-                    )
                 }
 
             // builtin
@@ -697,6 +653,34 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.SNAILFISH_SPAWN_EGG.get(),
             HAItems.OARFISH_SPAWN_EGG.get(),
             HAItems.RATFISH_SPAWN_EGG.get(),
+            HAItems.GARDEN_EEL_SPAWN_EGG.get(),
+            HAItems.CORYDORA_SPAWN_EGG.get(),
+            HAItems.TREVALLY_SPAWN_EGG.get(),
+            HAItems.VIPERFISH_SPAWN_EGG.get(),
+            HAItems.HATCHETFISH_SPAWN_EGG.get(),
+            HAItems.BLOBFISH_SPAWN_EGG.get(),
+            HAItems.HAGFISH_SPAWN_EGG.get(),
+            HAItems.TRIPOD_FISH_SPAWN_EGG.get(),
+            HAItems.FANGTOOTH_SPAWN_EGG.get(),
+            HAItems.SLICKHEAD_SPAWN_EGG.get(),
+
+            HAItems.SIXGILL_SHARK_SPAWN_EGG.get(),
+            HAItems.SLEEPER_SHARK_SPAWN_EGG.get(),
+            HAItems.GOBLIN_SHARK_SPAWN_EGG.get(),
+
+            HAItems.COLOSSAL_SQUID_SPAWN_EGG.get(),
+            HAItems.GIANT_SQUID_SPAWN_EGG.get(),
+
+            HAItems.COMB_JELLY_SPAWN_EGG.get(),
+
+            HAItems.SCALYFOOT_SNAIL_SPAWN_EGG.get(),
+
+            HAItems.DUGONG_SPAWN_EGG.get(),
+            HAItems.MANATEE_SPAWN_EGG.get(),
+            HAItems.ORCA_SPAWN_EGG.get(),
+
+            HAItems.SHELL_BEAST_SPAWN_EGG.get(),
+            HAItems.BEAKLING_SPAWN_EGG.get(),
 
             HAItems.BASKING_SHARK_SPAWN_EGG.get(),
             HAItems.BULL_SHARK_SPAWN_EGG.get(),
