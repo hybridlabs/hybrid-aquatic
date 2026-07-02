@@ -312,6 +312,7 @@ open class HAOctopusEntity(type: EntityType<out HAOctopusEntity>, world: Level) 
         ): Boolean {
             val seaLevel = world.level.chunkSource.generator.seaLevel
             return pos.y in (seaLevel - 64)..(seaLevel - 3) &&
+                    world.isWaterAt(pos) &&
                     world.getBlockState(pos.below()).isSolid
         }
     }
