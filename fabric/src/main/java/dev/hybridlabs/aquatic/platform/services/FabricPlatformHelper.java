@@ -120,5 +120,4 @@ public class FabricPlatformHelper implements PlatformHelper {
         if (ClientPlayNetworking.canSend(packetId))
             ClientPlayNetworking.send(packetId, packetData);
     }
-
 }
