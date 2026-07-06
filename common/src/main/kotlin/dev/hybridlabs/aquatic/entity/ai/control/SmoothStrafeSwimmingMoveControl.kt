@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.control
 
+import net.minecraft.core.BlockPos
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -52,9 +53,7 @@ open class SmoothStrafeSwimmingMoveControl(
             mob.xxa = strafeRight
 
             operation = Operation.WAIT
-        }
-
-        else if (operation == Operation.MOVE_TO && !mob.navigation.isDone) {
+        } else if (operation == Operation.MOVE_TO && !mob.navigation.isDone) {
 
             val dx = wantedX - mob.x
             val dy = wantedY - mob.y
@@ -99,16 +98,13 @@ open class SmoothStrafeSwimmingMoveControl(
 
                 mob.zza = cosPitch * baseSpeed
                 mob.yya = -sinPitch * baseSpeed
-            }
-            else {
+            } else {
                 val yawDiff = abs(Mth.wrapDegrees(mob.yRot - targetYaw))
                 val factor = getTurningSpeedFactor(yawDiff)
 
                 mob.speed = baseSpeed * outsideWaterSpeedModifier * factor
             }
-        }
-
-        else {
+        } else {
             mob.speed = 0f
             mob.xxa = 0f
             mob.yya = 0f
@@ -120,12 +116,13 @@ open class SmoothStrafeSwimmingMoveControl(
         val pathnavigation = this.mob.getNavigation()
         if (pathnavigation != null) {
             val nodeevaluator = pathnavigation.getNodeEvaluator()
-            if (nodeevaluator != null && nodeevaluator.getPathTypeOfMob(
-                    TODO("NEEDS FIXING"),
-                    Mth.floor(this.mob.x + relativeX.toDouble()),
-                    this.mob.blockY,
-                    Mth.floor(this.mob.z + relativeZ.toDouble()),
-                    this.mob
+            if (nodeevaluator != null && nodeevaluator.getPathType(
+                    this.mob,
+                    BlockPos(
+                        Mth.floor(this.mob.x + relativeX.toDouble()),
+                        this.mob.blockY,
+                        Mth.floor(this.mob.z + relativeZ.toDouble()),
+                    )
                 ) == PathType.BLOCKED
             ) {
                 return false
