@@ -166,10 +166,14 @@
     "hybrid_aquatic:bone_wall",
     "hybrid_aquatic:bone_slab",
     "hybrid_aquatic:bone_stairs",
+    "hybrid_aquatic:white_sandstone",
     "hybrid_aquatic:white_sandstone_wall",
     "hybrid_aquatic:white_sandstone_slab",
     "hybrid_aquatic:white_sandstone_stairs",
+    "hybrid_aquatic:chiseled_white_sandstone",
+    "hybrid_aquatic:cut_white_sandstone",
     "hybrid_aquatic:cut_white_sandstone_slab",
+    "hybrid_aquatic:smooth_white_sandstone",
     "hybrid_aquatic:smooth_white_sandstone_slab",
     "hybrid_aquatic:smooth_white_sandstone_stairs"
   ]

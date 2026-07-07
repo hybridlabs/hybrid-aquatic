@@ -478,10 +478,14 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BONE_SLAB.get())
             .add(HABlocks.BONE_STAIRS.get())
 
+            .add(HABlocks.WHITE_SANDSTONE.get())
             .add(HABlocks.WHITE_SANDSTONE_WALL.get())
             .add(HABlocks.WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
+            .add(HABlocks.CHISELED_WHITE_SANDSTONE.get())
+            .add(HABlocks.CUT_WHITE_SANDSTONE.get())
             .add(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get())
+            .add(HABlocks.SMOOTH_WHITE_SANDSTONE.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get())
 
