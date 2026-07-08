@@ -87,54 +87,29 @@ public class EntityMixin {
             return;
         }
 
-        if (state.is(HAFluidTags.INSTANCE.getBRINE())) {
-
-                //with reinforced diving suit
-            if (isWearingReinforcedDivingSet(entity)) {
-                entity.addEffect(new MobEffectInstance(
-                        HAMobEffects.INSTANCE.getCORROSION().asHolder(),
-                        120,
-                        0
-                ));
-
-                //with normal diving suit
-            } else if (isWearingDivingSet(entity)) {
-                entity.addEffect(new MobEffectInstance(
-                        MobEffects.POISON,
-                        120,
-                        0
-                ));
-
-                entity.addEffect(new MobEffectInstance(
-                        HAMobEffects.INSTANCE.getCORROSION().asHolder(),
-                        120,
-                        0
-                ));
-
-                //without diving suit
-            } else {
-                entity.addEffect(new MobEffectInstance(
-                        MobEffects.POISON,
-                        120,
-                        1
-                ));
-
-                entity.addEffect(new MobEffectInstance(
-                        HAMobEffects.INSTANCE.getCORROSION().asHolder(),
-                        120,
-                        0
-                ));
-            }
+        if (!state.is(HAFluidTags.INSTANCE.getBRINE())) return;
+        
+        entity.addEffect(new MobEffectInstance(
+                HAMobEffects.INSTANCE.getCORROSION().asHolder(),
+                120,
+                0
+        ));
+        if (!hybrid_aquatic$isWearingReinforcedDivingSet(entity)) {
+            entity.addEffect(new MobEffectInstance(
+                    MobEffects.POISON,
+                    120,
+                    hybrid_aquatic$isWearingDivingSet(entity) ? 0 : 1
+            ));
         }
     }
 
     @Unique
-    private boolean isWearingDivingSet(LivingEntity entity) {
+    private boolean hybrid_aquatic$isWearingDivingSet(LivingEntity entity) {
         ItemStack helmet = entity.getItemBySlot(EquipmentSlot.HEAD);
         ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
         ItemStack legs = entity.getItemBySlot(EquipmentSlot.LEGS);
         ItemStack boots = entity.getItemBySlot(EquipmentSlot.FEET);
-
+        
         return helmet.is(HAItems.INSTANCE.getDIVING_HELMET().get())
                 && chest.is(HAItems.INSTANCE.getDIVING_SUIT().get())
                 && legs.is(HAItems.INSTANCE.getDIVING_LEGGINGS().get())
@@ -142,7 +117,7 @@ public class EntityMixin {
     }
 
     @Unique
-    private boolean isWearingReinforcedDivingSet(LivingEntity entity) {
+    private boolean hybrid_aquatic$isWearingReinforcedDivingSet(LivingEntity entity) {
         ItemStack helmet = entity.getItemBySlot(EquipmentSlot.HEAD);
         ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
         ItemStack legs = entity.getItemBySlot(EquipmentSlot.LEGS);

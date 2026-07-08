@@ -15,11 +15,11 @@ class ThornsMobEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0x695672) {
 
     override fun applyEffectTick(entity: LivingEntity, amplifier: Int): Boolean {
         val level = amplifier + 1
-        val damageSource = entity.lastDamageSource ?: return false
-        val attacker = damageSource.directEntity as? LivingEntity ?: return false
+        val damageSource = entity.lastDamageSource ?: return true
+        val attacker = damageSource.directEntity as? LivingEntity ?: return true
 
-        if (attacker.isDeadOrDying) return false
-        if (damageSource.`is`(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) || damageSource.`is`(DamageTypes.THORNS)) return false
+        if (attacker.isDeadOrDying) return true
+        if (damageSource.`is`(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) || damageSource.`is`(DamageTypes.THORNS)) return true
 
         if (shouldHit(level, entity.random)) {
             attacker.hurt(entity.damageSources().thorns(entity), getDamage(level))

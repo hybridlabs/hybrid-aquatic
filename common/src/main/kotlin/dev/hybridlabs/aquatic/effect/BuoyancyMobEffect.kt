@@ -17,6 +17,6 @@ class BuoyancyMobEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0xffe478) {
             entity.deltaMovement = Vec3(entity.deltaMovement.x, upwardForce, entity.deltaMovement.z)
             return true
         }
-        return false
+        return true
     }
 }

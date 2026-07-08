@@ -11,10 +11,10 @@ class BleedingMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0xee4049) {
     }
 
     override fun applyEffectTick(entity: LivingEntity, amplifier: Int): Boolean {
-        if (entity.health > entity.maxHealth / 1.3) {
-            entity.health = maxOf(entity.maxHealth / 1.3F)
+        if (entity.health > entity.maxHealth / (1.3 + 0.3 * amplifier)) {
+            entity.health = entity.maxHealth / (1.3 + 0.3 * amplifier).toFloat()
             return true
         }
-        return false
+        return true
     }
 }

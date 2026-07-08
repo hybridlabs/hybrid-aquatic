@@ -9,7 +9,8 @@ import net.minecraft.world.entity.LivingEntity
 class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
 
     override fun applyEffectTick(entity: LivingEntity, amplifier: Int): Boolean {
-        if (entity.level().isClientSide) return false
+        if (entity.level().isClientSide) return true
+
         val damage = amplifier + 1
         corrodeTool(entity, damage)
         corrodeArmor(entity, damage)
