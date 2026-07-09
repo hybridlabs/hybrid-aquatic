@@ -325,7 +325,6 @@ class PlacedFeatureProvider(
                 HAPlacedFeatures.THERMAL_VENT_CAVES,
                 reg.get(HAConfiguredFeatures.THERMAL_VENT_PATCH).get(), listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(3),
                     SurfaceRelativeThresholdFilter.of(
                         Heightmap.Types.WORLD_SURFACE_WG,
                         Int.MIN_VALUE,
