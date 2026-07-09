@@ -317,18 +317,21 @@ class PlacedFeatureProvider(
             HAPlacedFeatures.THERMAL_VENT_CAVES, PlacedFeature(
                 entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(3),
+                    CountPlacement.of(3),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
                 )
             )
+
         )
 
         entries.add(
             HAPlacedFeatures.THERMAL_VENT_TRENCHES, PlacedFeature(
                 entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(1),
+                    CountPlacement.of(3),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
                     BiomeFilter.biome()
                 )
@@ -341,7 +344,6 @@ class PlacedFeatureProvider(
                 entries.ref(HAConfiguredFeatures.BRINE_POOL),
                 listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(1),
                     SurfaceRelativeThresholdFilter.of(
                         Heightmap.Types.WORLD_SURFACE_WG,
                         Int.MIN_VALUE,
@@ -358,7 +360,6 @@ class PlacedFeatureProvider(
                 entries.ref(HAConfiguredFeatures.BRINE_POOL),
                 listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(3),
                     SurfaceRelativeThresholdFilter.of(
                         Heightmap.Types.WORLD_SURFACE_WG,
                         Int.MIN_VALUE,
