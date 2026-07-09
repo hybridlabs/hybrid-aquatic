@@ -1,8 +1,4 @@
 {
   "feature": "hybrid_aquatic:orange_brine_pool",
-  "placement": [
-    {
-      "type": "minecraft:in_square"
-    }
-  ]
+  "placement": []
 }

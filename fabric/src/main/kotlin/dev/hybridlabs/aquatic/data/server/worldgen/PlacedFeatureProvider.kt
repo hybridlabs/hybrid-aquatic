@@ -345,6 +345,7 @@ class PlacedFeatureProvider(
             PlacementUtils.register(
                 bootstrap,
                 HAPlacedFeatures.TRENCH_BRINE_POOLS,
+
                 reg.get(HAConfiguredFeatures.BRINE_POOL).get(),
                 listOf(
                     InSquarePlacement.spread(),
@@ -361,6 +362,7 @@ class PlacedFeatureProvider(
             PlacementUtils.register(
                 bootstrap,
                 HAPlacedFeatures.CAVE_BRINE_POOLS,
+
                 reg.get(HAConfiguredFeatures.BRINE_POOL).get(),
                 listOf(
                     InSquarePlacement.spread(),
@@ -378,24 +380,21 @@ class PlacedFeatureProvider(
                 bootstrap,
                 HAPlacedFeatures.RED_BRINE_POOL,
                 reg.get(HAConfiguredFeatures.RED_BRINE_POOL).get(),
-                listOf(
-                    InSquarePlacement.spread())
+                listOf()
             )
 
             PlacementUtils.register(
                 bootstrap,
                 HAPlacedFeatures.ORANGE_BRINE_POOL,
                 reg.get(HAConfiguredFeatures.ORANGE_BRINE_POOL).get(),
-                listOf(
-                    InSquarePlacement.spread())
+                listOf()
             )
 
             PlacementUtils.register(
                 bootstrap,
                 HAPlacedFeatures.YELLOW_BRINE_POOL,
                 reg.get(HAConfiguredFeatures.YELLOW_BRINE_POOL).get(),
-                listOf(
-                    InSquarePlacement.spread())
+                listOf()
             )
             //#endregion
 
