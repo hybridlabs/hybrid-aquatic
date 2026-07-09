@@ -107,7 +107,7 @@ object HABlocks {
             .mapColor(DyeColor.WHITE)) }
 
     val CHISELED_WHITE_SANDSTONE = register("chiseled_white_sandstone") {
-        SlabBlock(Properties
+        Block(Properties
             .ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
 
