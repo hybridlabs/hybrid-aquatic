@@ -326,7 +326,11 @@ class PlacedFeatureProvider(
                 reg.get(HAConfiguredFeatures.THERMAL_VENT_PATCH).get(), listOf(
                     InSquarePlacement.spread(),
                     CountOnEveryLayerPlacement.of(3),
-                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    SurfaceRelativeThresholdFilter.of(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        Int.MIN_VALUE,
+                        -64
+                    ),
                     BiomeFilter.biome()
                 )
             )
@@ -336,8 +340,11 @@ class PlacedFeatureProvider(
                 HAPlacedFeatures.THERMAL_VENT_TRENCHES,
                 reg.get(HAConfiguredFeatures.THERMAL_VENT_PATCH).get(), listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(1),
-                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    SurfaceRelativeThresholdFilter.of(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        Int.MIN_VALUE,
+                        -64
+                    ),
                     BiomeFilter.biome()
                 )
             )
@@ -345,11 +352,11 @@ class PlacedFeatureProvider(
             PlacementUtils.register(
                 bootstrap,
                 HAPlacedFeatures.TRENCH_BRINE_POOLS,
-
                 reg.get(HAConfiguredFeatures.BRINE_POOL).get(),
                 listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(1),
+                    CountPlacement.of(3),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     SurfaceRelativeThresholdFilter.of(
                         Heightmap.Types.WORLD_SURFACE_WG,
                         Int.MIN_VALUE,
@@ -362,11 +369,11 @@ class PlacedFeatureProvider(
             PlacementUtils.register(
                 bootstrap,
                 HAPlacedFeatures.CAVE_BRINE_POOLS,
-
                 reg.get(HAConfiguredFeatures.BRINE_POOL).get(),
                 listOf(
                     InSquarePlacement.spread(),
-                    CountOnEveryLayerPlacement.of(3),
+                    CountPlacement.of(3),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     SurfaceRelativeThresholdFilter.of(
                         Heightmap.Types.WORLD_SURFACE_WG,
                         Int.MIN_VALUE,
