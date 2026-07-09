@@ -669,11 +669,12 @@ class ConfiguredFeatureProvider(
             HAConfiguredFeatures.THERMAL_VENT_PATCH,
             ConfiguredFeature(
                 HAFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
+                    5,
                     SimpleStateProvider.simple(HABlocks.CHIMNEYSTONE.get()),
                     SimpleStateProvider.simple(HABlocks.THERMAL_VENT.get()),
                     SimpleStateProvider.simple(HABlocks.GIANT_THERMAL_VENT.get()),
                     SimpleStateProvider.simple(HABlocks.TUBE_WORM.get()),
-                    UniformInt.of(3, 5),
+                    UniformInt.of(1, 2),
                     ConstantInt.of(2),
                     UniformInt.of(1, 3),
                     ConstantInt.of(4),

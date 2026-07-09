@@ -8,6 +8,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
 data class VentPatchFeatureConfig(
+    val floorSearchRange: Int = 0,
     val baseProvider: BlockStateProvider,
     val ventProvider: BlockStateProvider,
     val giantVentProvider: BlockStateProvider,
@@ -21,6 +22,7 @@ data class VentPatchFeatureConfig(
     companion object {
         val CODEC: Codec<VentPatchFeatureConfig> = RecordCodecBuilder.create { instance ->
             instance.group(
+                Codec.intRange(0, 512).fieldOf("floor_search_range").forGetter(VentPatchFeatureConfig::floorSearchRange),
                 BlockStateProvider.CODEC.fieldOf("base_block").forGetter(VentPatchFeatureConfig::baseProvider),
                 BlockStateProvider.CODEC.fieldOf("vent_block").forGetter(VentPatchFeatureConfig::ventProvider),
                 BlockStateProvider.CODEC.fieldOf("giant_vent_block").forGetter(VentPatchFeatureConfig::giantVentProvider),

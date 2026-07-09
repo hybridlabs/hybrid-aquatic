@@ -317,23 +317,20 @@ class PlacedFeatureProvider(
             HAPlacedFeatures.THERMAL_VENT_CAVES, PlacedFeature(
                 entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
                     InSquarePlacement.spread(),
-                    CountPlacement.of(3),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
+                    CountPlacement.of(50),
+                    PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
                     BiomeFilter.biome()
                 )
             )
-
         )
 
         entries.add(
             HAPlacedFeatures.THERMAL_VENT_TRENCHES, PlacedFeature(
                 entries.ref(HAConfiguredFeatures.THERMAL_VENT_PATCH), listOf(
                     InSquarePlacement.spread(),
-                    CountPlacement.of(3),
+                    CountPlacement.of(2),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     SurfaceRelativeThresholdFilter.of(Heightmap.Types.WORLD_SURFACE_WG, Int.MIN_VALUE, -64),
-                    BiomeFilter.biome()
                 )
             )
         )
@@ -344,6 +341,8 @@ class PlacedFeatureProvider(
                 entries.ref(HAConfiguredFeatures.BRINE_POOL),
                 listOf(
                     InSquarePlacement.spread(),
+                    CountPlacement.of(3),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     SurfaceRelativeThresholdFilter.of(
                         Heightmap.Types.WORLD_SURFACE_WG,
                         Int.MIN_VALUE,
@@ -360,6 +359,8 @@ class PlacedFeatureProvider(
                 entries.ref(HAConfiguredFeatures.BRINE_POOL),
                 listOf(
                     InSquarePlacement.spread(),
+                    CountPlacement.of(3),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     SurfaceRelativeThresholdFilter.of(
                         Heightmap.Types.WORLD_SURFACE_WG,
                         Int.MIN_VALUE,

@@ -6,7 +6,7 @@
     },
     {
       "type": "minecraft:count",
-      "count": 3
+      "count": 2
     },
     {
       "type": "minecraft:heightmap",
@@ -16,9 +16,6 @@
       "type": "minecraft:surface_relative_threshold_filter",
       "heightmap": "WORLD_SURFACE_WG",
       "max_inclusive": -64
-    },
-    {
-      "type": "minecraft:biome"
     }
   ]
 }

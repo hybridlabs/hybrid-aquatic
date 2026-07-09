@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.GiantThermalVentBlock
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.ThermalVentBlock
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import net.minecraft.core.BlockPos
@@ -10,13 +11,17 @@ import net.minecraft.core.Vec3i
 import net.minecraft.util.RandomSource
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.WorldGenLevel
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.world.level.levelgen.Column
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
+import java.util.*
+import java.util.function.Predicate
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -28,57 +33,86 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         const val MIN_VENT_CLEARANCE = 2
     }
 
+    private fun getFloorY(
+        level: WorldGenLevel,
+        pos: BlockPos,
+        config: VentPatchFeatureConfig
+    ): OptionalInt {
+        val water = Predicate<BlockState> { it.`is`(Blocks.WATER) }
+        val nonWater = Predicate<BlockState> { !it.`is`(Blocks.WATER) }
+
+        return Column.scan(level, pos, config.floorSearchRange, water, nonWater)
+            .map(Column::getFloor)
+            .orElseGet { OptionalInt.empty() }
+    }
+
     override fun place(context: FeaturePlaceContext<VentPatchFeatureConfig>): Boolean {
         var generated = false
+
         val world = context.level()
         val origin = context.origin()
         val random = context.random()
+        val config = context.config()
 
-        val (baseProvider,
-            ventProvider,
-            giantVentProvider,
-            wormProvider,
-            countProvider,
-            radiusProvider,
-            wormCountProvider,
-            wormRadiusProvider,
-            wormCountPerBlockProvider
-        ) = context.config()
+        val ventCount = config.count.sample(random)
 
-        val ventCount = countProvider.sample(random)
         repeat(ventCount) {
-            val radius = radiusProvider.sample(random)
+            val radius = config.spreadRadius.sample(random)
+
             val offsetX = random.nextInt(radius * 2 + 1) - radius
             val offsetZ = random.nextInt(radius * 2 + 1) - radius
+
             val candidatePos = origin.offset(offsetX, 0, offsetZ)
+
+            val floorY = getFloorY(world, candidatePos, config)
+            if (floorY.isEmpty) return@repeat
+
+            val floorPos = candidatePos.atY(floorY.asInt)
 
             val distanceFromCenter = sqrt((offsetX * offsetX + offsetZ * offsetZ).toDouble())
             val heightMultiplier = 1.0 - (distanceFromCenter / radius).coerceIn(0.0, 1.0)
 
-            if (generateSingleVent(world, candidatePos, random, heightMultiplier, baseProvider, ventProvider)) {
-                val wormCount = wormCountProvider.sample(random)
-                val wormRadius = wormRadiusProvider.sample(random)
+            if (
+                generateSingleVent(
+                    world,
+                    floorPos.above(),
+                    random,
+                    heightMultiplier,
+                    config.baseProvider,
+                    config.ventProvider
+                )
+            ) {
+                val wormCount = config.wormCount.sample(random)
+                val wormRadius = config.wormSpreadRadius.sample(random)
+
                 generateTubeWormPatch(
                     world,
-                    candidatePos,
+                    floorPos,
                     random,
                     wormCount,
-                    wormCountPerBlockProvider,
+                    config.wormCountPerBlock,
                     wormRadius,
-                    wormProvider
+                    config.wormProvider
                 )
+
                 generated = true
             }
         }
 
         val giantVentCount = random.nextInt(2)
+
         repeat(giantVentCount) {
-            val radius = radiusProvider.sample(random)
+            val radius = config.spreadRadius.sample(random)
 
             val offsetX = random.nextInt(radius * 2 + 1) - radius
             val offsetZ = random.nextInt(radius * 2 + 1) - radius
 
             val candidatePos = origin.offset(offsetX, 0, offsetZ)
+
+            val floorY = getFloorY(world, candidatePos, config)
+            if (floorY.isEmpty) return@repeat
+
+            val floorPos = candidatePos.atY(floorY.asInt)
 
             val distanceFromCenter = sqrt((offsetX * offsetX + offsetZ * offsetZ).toDouble())
             val heightMultiplier = 1.0 - (distanceFromCenter / radius).coerceIn(0.0, 1.0)
@@ -86,10 +120,10 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
             if (
                 generateGiantVent(
                     world,
-                    candidatePos,
+                    floorPos.above(),
                     random,
                     heightMultiplier,
-                    giantVentProvider
+                    config.giantVentProvider
                 )
             ) {
                 generated = true
@@ -107,7 +141,10 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         baseProvider: BlockStateProvider,
         ventProvider: BlockStateProvider,
     ): Boolean {
-        if (!world.isWaterAt(rootPos)) {
+        val belowPos = rootPos.below()
+        if (!world.getBlockState(belowPos).isFaceSturdy(world, belowPos, Direction.UP) ||
+            world.getBlockState(belowPos).`is`(HABlocks.THERMAL_VENT.get()) ||
+            world.getBlockState(belowPos).`is`(HABlocks.GIANT_THERMAL_VENT.get())) {
             return false
         }
 
@@ -150,7 +187,10 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         heightMultiplier: Double,
         giantVentProvider: BlockStateProvider,
     ): Boolean {
-        if (!world.isWaterAt(rootPos)) {
+        val belowPos = rootPos.below()
+        if (!world.getBlockState(belowPos).isFaceSturdy(world, belowPos, Direction.UP) ||
+            world.getBlockState(belowPos).`is`(HABlocks.THERMAL_VENT.get()) ||
+            world.getBlockState(belowPos).`is`(HABlocks.GIANT_THERMAL_VENT.get())) {
             return false
         }
 
