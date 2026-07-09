@@ -439,7 +439,7 @@ object HABiomes {
             BiomePlacement.addSubOverworld(
                 Biomes.DEEP_OCEAN,
                 SULFURIC_CAVES, CriterionBuilder.value(
-                    BiomeParameterTargets.CONTINENTALNESS,
+                    BiomeParameterTargets.DEPTH,
                     0.2f,
                     0.5f,
                 )
@@ -448,25 +448,25 @@ object HABiomes {
             BiomePlacement.addSubOverworld(
                 Biomes.DEEP_LUKEWARM_OCEAN,
                 SULFURIC_CAVES, CriterionBuilder.value(
-                    BiomeParameterTargets.CONTINENTALNESS,
-                    0.1f,
-                    0.6f,
+                    BiomeParameterTargets.DEPTH,
+                    0.2f,
+                    0.5f
                 )
             )
 
             BiomePlacement.addSubOverworld(
                 DEEP_WARM_OCEAN,
                 SULFURIC_CAVES, CriterionBuilder.value(
-                    BiomeParameterTargets.CONTINENTALNESS,
-                    0.1f,
-                    0.6f,
+                    BiomeParameterTargets.DEPTH,
+                    0.2f,
+                    0.5f,
                 )
             )
 
             BiomePlacement.addSubOverworld(
                 Biomes.DEEP_COLD_OCEAN,
                 SULFURIC_CAVES, CriterionBuilder.value(
-                    BiomeParameterTargets.CONTINENTALNESS,
+                    BiomeParameterTargets.DEPTH,
                     0.2f,
                     0.5f,
                 )
@@ -475,7 +475,7 @@ object HABiomes {
             BiomePlacement.addSubOverworld(
                 Biomes.DEEP_FROZEN_OCEAN,
                 SULFURIC_CAVES, CriterionBuilder.value(
-                    BiomeParameterTargets.CONTINENTALNESS,
+                    BiomeParameterTargets.DEPTH,
                     0.2f,
                     0.5f,
                 )
@@ -484,7 +484,7 @@ object HABiomes {
             BiomePlacement.addSubOverworld(
                 DEEP_WARM_OCEAN,
                 SULFURIC_CAVES, CriterionBuilder.value(
-                    BiomeParameterTargets.CONTINENTALNESS,
+                    BiomeParameterTargets.DEPTH,
                     0.2f,
                     0.5f,
                 )
