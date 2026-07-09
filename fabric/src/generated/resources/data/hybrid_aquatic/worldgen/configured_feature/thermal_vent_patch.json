@@ -12,6 +12,7 @@
       "max_inclusive": 5,
       "min_inclusive": 3
     },
+    "floor_search_range": 5,
     "giant_vent_block": {
       "type": "minecraft:simple_state_provider",
       "state": {

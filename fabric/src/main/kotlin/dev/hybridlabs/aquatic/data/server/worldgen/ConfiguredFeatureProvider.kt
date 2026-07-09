@@ -673,6 +673,7 @@ class ConfiguredFeatureProvider(
                 HAConfiguredFeatures.THERMAL_VENT_PATCH,
 
                 HAFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
+                    5,
                     SimpleStateProvider.simple(HABlocks.CHIMNEYSTONE.get()),
                     SimpleStateProvider.simple(HABlocks.THERMAL_VENT.get()),
                     SimpleStateProvider.simple(HABlocks.GIANT_THERMAL_VENT.get()),
