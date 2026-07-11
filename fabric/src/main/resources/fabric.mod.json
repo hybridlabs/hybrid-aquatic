@@ -61,7 +61,7 @@
         "java": ">=21",
         "fabric-language-kotlin": "*",
         "fabric-api": ">=0.116",
-        "geckolib": ">=4.8",
+        "geckolib": ">=4.8.3",
         "lithostitched": ">=1.5.0",
         "biolith": "*",
         "trinkets": ">=3.10.0"
