@@ -26,10 +26,10 @@ import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
+import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.world.entity.EquipmentSlot
@@ -40,11 +40,13 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.registries.DataPackRegistryEvent
+import software.bernie.geckolib.animatable.client.GeoRenderProvider
+import software.bernie.geckolib.renderer.GeoArmorRenderer
+import software.bernie.geckolib.util.Color
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
 import top.theillusivec4.curios.api.SlotContext
@@ -219,6 +221,7 @@ object HybridAquaticModBusEvents {
     }
 
     private class HACurioRenderer(val equipmentSlot: EquipmentSlot) : ICurioRenderer {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : LivingEntity?, M : EntityModel<T?>?> render(
             itemStack: ItemStack,
             slotContext: SlotContext,
@@ -233,16 +236,20 @@ object HybridAquaticModBusEvents {
             netHeadYaw: Float,
             headPitch: Float
         ) {
-            val itemExtension = IClientItemExtensions.of(itemStack.item)
-            val model = itemExtension.getGenericArmorModel(
-                slotContext.entity, itemStack, equipmentSlot,
-                (renderLayerParent.model) as HumanoidModel<*>
-            )
-            val vertexConsumer =
-                ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false)
-            model.renderToBuffer(
-                poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY
-            )
+            if (slotContext.entity is AbstractClientPlayer) {
+                val renderer = GeoRenderProvider.of(itemStack)
+                val originalModel = renderLayerParent.model as HumanoidModel<LivingEntity>
+                val armorModel = renderer.getGeoArmorRenderer(
+                    slotContext.entity, itemStack, equipmentSlot,
+                    originalModel
+                ) as HumanoidModel<AbstractClientPlayer>?
+                if (armorModel == null) return
+
+                if (armorModel is GeoArmorRenderer<*>) armorModel.prepForRender(slotContext.entity, itemStack, equipmentSlot, originalModel, bufferSource, partialTicks, limbSwing, limbSwingAmount, netHeadYaw, headPitch)
+                (originalModel as HumanoidModel<AbstractClientPlayer>).copyPropertiesTo(armorModel)
+
+                armorModel.renderToBuffer(poseStack, null, light, OverlayTexture.NO_OVERLAY, Color.WHITE.argbInt)
+            }
         }
     }
 }
