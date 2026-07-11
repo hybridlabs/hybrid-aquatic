@@ -60,7 +60,9 @@ object HABlocks {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") {
         MessageInABottleBlock(Properties.ofFullCopy(Blocks.GLASS)
             .instabreak()
-            .pushReaction(PushReaction.DESTROY))
+            .pushReaction(PushReaction.DESTROY)
+            .noCollission()
+        )
     }
 
     val CLAMS = register("clams") { ClamBlock(Properties.ofFullCopy(Blocks.CARROTS)) }
