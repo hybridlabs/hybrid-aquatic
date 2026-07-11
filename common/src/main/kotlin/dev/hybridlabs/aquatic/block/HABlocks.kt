@@ -15,7 +15,6 @@ import net.minecraft.world.level.material.MapColor
 import net.minecraft.world.level.material.PushReaction
 import java.util.function.Supplier
 
-
 /**
  * The registry of all blocks in Hybrid Aquatic.
  */
@@ -59,7 +58,9 @@ object HABlocks {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") {
         MessageInABottleBlock(Properties.copy(Blocks.GLASS)
             .instabreak()
-            .pushReaction(PushReaction.DESTROY))
+            .pushReaction(PushReaction.DESTROY)
+            .noCollission()
+        )
     }
 
     val CLAMS = register("clams") { ClamBlock(Properties.copy(Blocks.CARROTS)) }
