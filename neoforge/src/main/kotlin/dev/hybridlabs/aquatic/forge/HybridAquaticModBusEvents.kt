@@ -239,6 +239,7 @@ object HybridAquaticModBusEvents {
             if (slotContext.entity is AbstractClientPlayer) {
                 val renderer = GeoRenderProvider.of(itemStack)
                 val originalModel = renderLayerParent.model as HumanoidModel<LivingEntity>
+
                 val armorModel = renderer.getGeoArmorRenderer(
                     slotContext.entity, itemStack, equipmentSlot,
                     originalModel
