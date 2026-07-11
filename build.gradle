@@ -1,5 +1,3 @@
-import org.jetbrains.changelog.Changelog
-
 plugins {
     id 'fabric-loom' version '1.9-SNAPSHOT' apply(false)
     id 'net.neoforged.moddev' version '2.0.49-beta' apply false

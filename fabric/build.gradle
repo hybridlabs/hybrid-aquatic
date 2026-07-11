@@ -4,6 +4,7 @@ plugins {
     id "me.modmuss50.mod-publish-plugin" version "0.8.4"
     id "org.jetbrains.kotlin.jvm"
 }
+
 repositories {
     maven {
         url "https://maven.terraformersmc.com/releases/"
