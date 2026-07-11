@@ -14,17 +14,17 @@ import net.neoforged.neoforge.registries.DeferredRegister
 import net.neoforged.neoforge.registries.NeoForgeRegistries
 import java.util.function.Supplier
 
-
 object HAPlatformFluids {
     val FLUID_TYPES: DeferredRegister<FluidType> =
         DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, Constants.MOD_ID)
 
+    val BRINE_FLOWING = registerFluid("flowing_brine") { BrineFluid.Flowing() }
+    val BRINE_STILL = registerFluid("brine") { BrineFluid.Source() }
+
+    //TODO: Kind of a boilerplate code, HybridAquaticModBusEvents::132-134
     val BRINE_FLUIDTYPE = registerFluidType("brine") {
         BrineFluidType(FluidType.Properties.create())
     }
-
-    val BRINE_FLOWING = registerFluid("flowing_brine") { BrineFluid.Flowing() }
-    val BRINE_STILL = registerFluid("brine") { BrineFluid.Source() }
 
     val BRINE = registerFluidBlock("brine") {
         LiquidBlock(
@@ -37,7 +37,7 @@ object HAPlatformFluids {
         return CommonClass.FLUIDS.register(id, fluid)
     }
 
-    private fun <T: FluidType> registerFluidType(id: String, fluid: Supplier<T>): DeferredHolder<FluidType?, T?> {
+    private fun <T: FluidType> registerFluidType(id: String, fluid: Supplier<T>): DeferredHolder<FluidType, T> {
         return FLUID_TYPES.register(id, fluid)
     }
 

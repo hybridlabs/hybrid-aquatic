@@ -19,6 +19,7 @@ import dev.hybridlabs.aquatic.client.render.block.HABlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.aquatic.fluid.BrineFluidType
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
@@ -40,7 +41,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
+import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.registries.DataPackRegistryEvent
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
@@ -60,6 +63,7 @@ object HybridAquaticModBusEvents {
                 MOD_BUS.addListener(::registerModelLayers)
                 MOD_BUS.addListener(::registerSkullModels)
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
+                MOD_BUS.addListener(::registerFluidTypes)
                 HybridAquaticEntityRenderers
             },
             serverTarget = {
@@ -123,6 +127,10 @@ object HybridAquaticModBusEvents {
             ::BellBuoyBlockEntityRenderer)
 
         HABlockRenderers.registerRenderShapes()
+    }
+
+    private fun registerFluidTypes(event: RegisterClientExtensionsEvent) {
+        event.registerFluidType(BrineFluidType(FluidType.Properties.create()), HAPlatformFluids.BRINE_FLUIDTYPE.get())
     }
 
     private fun registerSkullModels(event: EntityRenderersEvent.CreateSkullModels) {
