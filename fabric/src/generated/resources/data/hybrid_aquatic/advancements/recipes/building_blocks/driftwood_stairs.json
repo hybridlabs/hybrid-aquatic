@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_driftwood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hybrid_aquatic:driftwood_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:driftwood_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_driftwood_planks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:driftwood_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

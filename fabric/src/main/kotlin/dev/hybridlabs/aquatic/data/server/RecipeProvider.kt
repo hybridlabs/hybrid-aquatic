@@ -9,12 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
 import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.data.recipes.FinishedRecipe
-import net.minecraft.data.recipes.RecipeCategory
-import net.minecraft.data.recipes.ShapedRecipeBuilder
-import net.minecraft.data.recipes.ShapelessRecipeBuilder
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
-import net.minecraft.data.recipes.SmithingTransformRecipeBuilder
+import net.minecraft.data.recipes.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
@@ -23,6 +18,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.AbstractCookingRecipe
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import java.util.function.Consumer
@@ -31,14 +27,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun buildRecipes(exporter: Consumer<FinishedRecipe>) {
 
         //#region Sandstone Block Recipes
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HAItems.WHITE_SANDSTONE.get())
+            HAItems.WHITE_SANDSTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HAItems.SMOOTH_WHITE_SANDSTONE.get())
+            HAItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         slab(
@@ -181,14 +179,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.POLISHED_RED_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.RED_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.RED_BRINESTONE.get())
+            HABlocks.RED_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_RED_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_RED_BRINESTONE.get())
+            HABlocks.POLISHED_RED_BRINESTONE.get()
         )
         //#endregion
 
@@ -262,9 +262,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.RED_BRINESTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.RED_BRINESTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.RED_BRINESTONE_BRICKS.get())
+            HABlocks.RED_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -346,14 +347,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.POLISHED_ORANGE_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.ORANGE_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.ORANGE_BRINESTONE.get())
+            HABlocks.ORANGE_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_ORANGE_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_ORANGE_BRINESTONE.get())
+            HABlocks.POLISHED_ORANGE_BRINESTONE.get()
         )
         //#endregion
 
@@ -427,9 +430,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.ORANGE_BRINESTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.ORANGE_BRINESTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.ORANGE_BRINESTONE_BRICKS.get())
+            HABlocks.ORANGE_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -510,14 +514,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.POLISHED_YELLOW_BRINESTONE.get()
         )
         
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.YELLOW_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.YELLOW_BRINESTONE.get())
+            HABlocks.YELLOW_BRINESTONE.get()
         )
         
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_YELLOW_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
+            HABlocks.POLISHED_YELLOW_BRINESTONE.get()
         )
         //#endregion
 
@@ -591,9 +597,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.YELLOW_BRINESTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.YELLOW_BRINESTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.YELLOW_BRINESTONE_BRICKS.get())
+            HABlocks.YELLOW_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -676,14 +683,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.POLISHED_SCHIST.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.SCHIST_STAIRS.get(),
-            Ingredient.of(HABlocks.SCHIST.get())
+            HABlocks.SCHIST.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_SCHIST_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_SCHIST.get())
+            HABlocks.POLISHED_SCHIST.get()
         )
         //#endregion
 
@@ -757,9 +766,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.SCHIST_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.SCHIST_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.SCHIST_BRICKS.get())
+            HABlocks.SCHIST_BRICKS.get()
         )
         //#endregion
 
@@ -841,14 +851,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.POLISHED_CHIMNEYSTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.CHIMNEYSTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.CHIMNEYSTONE.get())
+            HABlocks.CHIMNEYSTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_CHIMNEYSTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_CHIMNEYSTONE.get())
+            HABlocks.POLISHED_CHIMNEYSTONE.get()
         )
         //#endregion
 
@@ -922,9 +934,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAItems.CHIMNEYSTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.CHIMNEYSTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.CHIMNEYSTONE_BRICKS.get())
+            HABlocks.CHIMNEYSTONE_BRICKS.get()
         )
         //#endregion
 
@@ -1374,9 +1387,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter)
 
         //#regione Bone Set Recipes
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.BONE_STAIRS.get(),
-            Ingredient.of(Blocks.BONE_BLOCK)
+            Blocks.BONE_BLOCK
         )
 
         slab(
@@ -1455,9 +1469,10 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
             .save(exporter)
 
-        stairBuilder(
+        stair(
+            exporter,
             HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
-            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         slab(
@@ -1467,14 +1482,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
-        fenceBuilder(
+        fence(
+            exporter,
             HAPlatformBlocks.DRIFTWOOD_FENCE.get(),
-            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
-        fenceGateBuilder(
+        fenceGate(
+            exporter,
             HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(),
-            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         woodFromLogs(
@@ -2121,4 +2138,19 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         }
     }
     //#endregion
+
+    private fun stair(exporter: Consumer<FinishedRecipe>, result: ItemLike, material: ItemLike) {
+        stairBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(exporter)
+    }
+
+    private fun fence(exporter: Consumer<FinishedRecipe>, result: ItemLike, material: ItemLike) {
+        fenceBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(exporter)
+    }
+
+    private fun fenceGate(exporter: Consumer<FinishedRecipe>, result: ItemLike, material: ItemLike) {
+        fenceGateBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(exporter)
+    }
 }
