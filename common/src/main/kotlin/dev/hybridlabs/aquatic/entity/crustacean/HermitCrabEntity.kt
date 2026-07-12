@@ -120,7 +120,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         val playerStack = player.getItemInHand(hand)
 
         if (shellItem.`is`(HAItems.OMINOUS_CONCH.get()) &&
-            !playerStack.`is`(HAItemTags.CRAB_WEARABLES)
+            !playerStack.`is`(HAItemTags.CRAB_TRADEABLES)
         ) {
             return InteractionResult.PASS
         }
