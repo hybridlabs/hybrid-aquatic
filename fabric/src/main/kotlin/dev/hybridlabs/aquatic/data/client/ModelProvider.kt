@@ -34,48 +34,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                     delegateItemModel(block, TEMPLATE_PLUSHIE)
                 }
 
-            //#region Spawn Eggs
-            BuiltInRegistries.ITEM
-                .filter(filterHybridAquatic(BuiltInRegistries.ITEM))
-                .filter { item ->
-                    item in setOf(
-                        HAItems.GARDEN_EEL_SPAWN_EGG.get(),
-                        HAItems.CORYDORA_SPAWN_EGG.get(),
-                        HAItems.TREVALLY_SPAWN_EGG.get(),
-                        HAItems.VIPERFISH_SPAWN_EGG.get(),
-                        HAItems.HATCHETFISH_SPAWN_EGG.get(),
-                        HAItems.BLOBFISH_SPAWN_EGG.get(),
-                        HAItems.HAGFISH_SPAWN_EGG.get(),
-                        HAItems.TRIPOD_FISH_SPAWN_EGG.get(),
-                        HAItems.FANGTOOTH_SPAWN_EGG.get(),
-                        HAItems.SLICKHEAD_SPAWN_EGG.get(),
-
-                        HAItems.SIXGILL_SHARK_SPAWN_EGG.get(),
-                        HAItems.SLEEPER_SHARK_SPAWN_EGG.get(),
-                        HAItems.GOBLIN_SHARK_SPAWN_EGG.get(),
-
-                        HAItems.COLOSSAL_SQUID_SPAWN_EGG.get(),
-                        HAItems.GIANT_SQUID_SPAWN_EGG.get(),
-
-                        HAItems.COMB_JELLY_SPAWN_EGG.get(),
-
-                        HAItems.SCALYFOOT_SNAIL_SPAWN_EGG.get(),
-
-                        HAItems.DUGONG_SPAWN_EGG.get(),
-                        HAItems.MANATEE_SPAWN_EGG.get(),
-                        HAItems.ORCA_SPAWN_EGG.get(),
-
-                        HAItems.SHELL_BEAST_SPAWN_EGG.get(),
-                        HAItems.BEAKLING_SPAWN_EGG.get()
-                    )
-                }
-                .forEach { item ->
-                    delegateItemModel(
-                        item,
-                        ModelLocationUtils.decorateItemModelLocation("template_spawn_egg")
-                    )
-                }
-
             // builtin
             mapOf<Block, Pair<Block?, ResourceLocation>>(
                 HABlocks.ANEMONE.get() to (null to TEMPLATE_ANEMONE),
@@ -746,6 +704,34 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.KARKINOS_SPAWN_EGG.get(),
             HAItems.KARCINOGEN_SPAWN_EGG.get(),
             HAItems.KARCINOMA_SPAWN_EGG.get(),
+            HAItems.GARDEN_EEL_SPAWN_EGG.get(),
+            HAItems.CORYDORA_SPAWN_EGG.get(),
+            HAItems.TREVALLY_SPAWN_EGG.get(),
+            HAItems.VIPERFISH_SPAWN_EGG.get(),
+            HAItems.HATCHETFISH_SPAWN_EGG.get(),
+            HAItems.BLOBFISH_SPAWN_EGG.get(),
+            HAItems.HAGFISH_SPAWN_EGG.get(),
+            HAItems.TRIPOD_FISH_SPAWN_EGG.get(),
+            HAItems.FANGTOOTH_SPAWN_EGG.get(),
+            HAItems.SLICKHEAD_SPAWN_EGG.get(),
+
+            HAItems.SIXGILL_SHARK_SPAWN_EGG.get(),
+            HAItems.SLEEPER_SHARK_SPAWN_EGG.get(),
+            HAItems.GOBLIN_SHARK_SPAWN_EGG.get(),
+
+            HAItems.COLOSSAL_SQUID_SPAWN_EGG.get(),
+            HAItems.GIANT_SQUID_SPAWN_EGG.get(),
+
+            HAItems.COMB_JELLY_SPAWN_EGG.get(),
+
+            HAItems.SCALYFOOT_SNAIL_SPAWN_EGG.get(),
+
+            HAItems.DUGONG_SPAWN_EGG.get(),
+            HAItems.MANATEE_SPAWN_EGG.get(),
+            HAItems.ORCA_SPAWN_EGG.get(),
+
+            HAItems.SHELL_BEAST_SPAWN_EGG.get(),
+            HAItems.BEAKLING_SPAWN_EGG.get()
         ).forEach { item ->
             generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
         }
