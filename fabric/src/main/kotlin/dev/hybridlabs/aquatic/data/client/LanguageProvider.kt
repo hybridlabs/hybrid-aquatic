@@ -94,7 +94,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             "advancements.hybrid_aquatic.seashell_tools.description" to "Craft a tool out of nautilus shells",
 
             "advancements.hybrid_aquatic.ominous_conch.title" to "If You Listen Closely..",
-            "advancements.hybrid_aquatic.ominous_conch.description" to "Trade shelsl with a hermit crab for an Ominous Conch",
+            "advancements.hybrid_aquatic.ominous_conch.description" to "Trade shells with a hermit crab for an Ominous Conch",
 
             "advancements.hybrid_aquatic.shell_beast.title" to "Shell-Shocked",
             "advancements.hybrid_aquatic.shell_beast.description" to "Kill the Shell Beast",
