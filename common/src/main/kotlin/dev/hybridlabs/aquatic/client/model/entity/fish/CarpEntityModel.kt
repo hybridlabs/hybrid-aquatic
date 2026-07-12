@@ -19,7 +19,6 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             CarpEntity.Companion.Type.COMMON -> COMMON_TEXTURE
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_TEXTURE
             CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
-            CarpEntity.Companion.Type.SMALL_KOI -> smallKoiTextures[random.nextInt(smallKoiTextures.size)]
         }
     }
 
@@ -30,7 +29,6 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
 
         return when (animatable.variant) {
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_CARP_MODEL
-            CarpEntity.Companion.Type.SMALL_KOI -> PRUSSIAN_CARP_MODEL
             CarpEntity.Companion.Type.KOI -> COMMON_CARP_MODEL
             CarpEntity.Companion.Type.COMMON -> COMMON_CARP_MODEL
         }
@@ -39,7 +37,6 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
     override fun getAnimationResource(animatable: CarpEntity): ResourceLocation {
         return when (animatable.variant) {
             CarpEntity.Companion.Type.PRUSSIAN -> CARP_ANIMATION
-            CarpEntity.Companion.Type.SMALL_KOI -> CARP_ANIMATION
             CarpEntity.Companion.Type.KOI -> CARP_ANIMATION
             CarpEntity.Companion.Type.COMMON -> CARP_ANIMATION
         }
@@ -47,7 +44,6 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
 
     fun getPatternTextureResource(animatable: CarpEntity, layer: String): ResourceLocation {
         return when (animatable.variant) {
-            CarpEntity.Companion.Type.SMALL_KOI -> CommonClass.locate("textures/entity/fish/carp/layer/small_$layer.png")
             CarpEntity.Companion.Type.KOI -> CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
             else -> CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
         }
@@ -79,16 +75,6 @@ class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
             ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_yellow.png"),
             ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_black.png"),
             ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_white.png")
-        )
-
-        private val smallKoiTextures = listOf(
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/small_koi_silver.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/small_koi_gold.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/small_koi_orange.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/small_koi_red.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/small_koi_yellow.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/small_koi_black.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/small_koi_white.png")
         )
     }
 }

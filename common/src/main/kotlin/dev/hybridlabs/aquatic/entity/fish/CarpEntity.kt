@@ -59,14 +59,19 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         }
     }
 
-    override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): AgeableMob? {
-        if (p1 is CarpEntity) {
-            if (this.variant == Type.SMALL_KOI && p1.variant == Type.SMALL_KOI) {
-                return HAEntityTypes.GOLDFISH.get().create(p0)
+    override fun getBreedOffspring(level: ServerLevel, partner: AgeableMob): AgeableMob? {
+        if (partner is CarpEntity &&
+            this.variant == Type.KOI &&
+            partner.variant == Type.KOI
+        ) {
+            return if (level.random.nextBoolean()) {
+                HAEntityTypes.GOLDFISH.get().create(level)
+            } else {
+                HAEntityTypes.CARP.get().create(level)
             }
         }
 
-        return HAEntityTypes.CARP.get().create(p0)
+        return HAEntityTypes.CARP.get().create(level)
     }
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -95,7 +100,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
             Type.PRUSSIAN,
             Type.COMMON -> PatternTextures.NONE
 
-            Type.KOI, Type.SMALL_KOI -> {
+            Type.KOI -> {
                 val patternID = world.random.nextIntBetweenInclusive(
                     0, PatternTextures.entries.size - 1
                 )
@@ -122,7 +127,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
                 Type.PRUSSIAN,
                 Type.COMMON -> PatternTextures.NONE
 
-                Type.KOI, Type.SMALL_KOI -> {
+                Type.KOI -> {
                     val patternID = level.random.nextIntBetweenInclusive(
                         0, PatternTextures.entries.size - 1
                     )
@@ -139,20 +144,14 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
         return when (parent) {
             Type.COMMON -> {
-                if (roll < 0.75) Type.KOI else Type.SMALL_KOI
+                if (roll < 0.75) Type.COMMON else Type.KOI
             }
 
             Type.PRUSSIAN -> {
-                if (roll < 0.75) Type.SMALL_KOI else Type.KOI
+                if (roll < 0.75) Type.PRUSSIAN else Type.KOI
             }
 
-            Type.KOI -> {
-                if (roll < 0.60) Type.KOI else Type.SMALL_KOI
-            }
-
-            Type.SMALL_KOI -> {
-                Type.SMALL_KOI
-            }
+            Type.KOI -> { Type.KOI }
         }
     }
 
@@ -182,8 +181,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         enum class Type(val id: Int, private val key: String) : StringRepresentable {
             COMMON(0, "common"),
             PRUSSIAN(1, "prussian"),
-            KOI(2, "koi"),
-            SMALL_KOI(3, "small_koi");
+            KOI(2, "koi");
 
             override fun getSerializedName(): String {
                 return this.key
@@ -228,25 +226,33 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         enum class PatternTextures(val id: Int, val key: String) : StringRepresentable {
             NONE(0, ""),
 
-            BLACK_CREEPER(1, "black_creeper"),
-            BLACK_HEART(2, "black_heart"),
-            BLACK_SADDLE(3, "black_saddle"),
-            BLACK_SPOT(4, "black_spot"),
+            BLACK_HEART(1, "black_heart"),
+            BLACK_SADDLE(2, "black_saddle"),
+            BLACK_SPOT(3, "black_spot"),
 
-            RED_CREEPER(5, "red_creeper"),
-            RED_HEART(6, "red_heart"),
-            RED_SADDLE(7, "red_saddle"),
-            RED_SPOT(8, "red_spot"),
+            RED_HEART(4, "red_heart"),
+            RED_SADDLE(5, "red_saddle"),
+            RED_SPOT(6, "red_spot"),
 
-            WHITE_CREEPER(9, "white_creeper"),
-            WHITE_HEART(10, "white_heart"),
-            WHITE_SADDLE(11, "white_saddle"),
-            WHITE_SPOT(12, "white_spot"),
+            WHITE_HEART(7, "white_heart"),
+            WHITE_SADDLE(8, "white_saddle"),
+            WHITE_SPOT(9, "white_spot"),
 
-            ORANGE_CREEPER(13, "orange_creeper"),
-            ORANGE_HEART(14, "orange_heart"),
-            ORANGE_SADDLE(15, "orange_saddle"),
-            ORANGE_SPOT(16, "orange_spot");
+            ORANGE_HEART(10, "orange_heart"),
+            ORANGE_SADDLE(11, "orange_saddle"),
+            ORANGE_SPOT(12, "orange_spot"),
+
+            YELLOW_HEART(13, "yellow_heart"),
+            YELLOW_SADDLE(14, "yellow_saddle"),
+            YELLOW_SPOT(15, "yellow_spot"),
+
+            GOLD_HEART(16, "gold_heart"),
+            GOLD_SADDLE(17, "gold_saddle"),
+            GOLD_SPOT(18, "gold_spot"),
+
+            SILVER_HEART(19, "silver_heart"),
+            SILVER_SADDLE(20, "silver_saddle"),
+            SILVER_SPOT(21, "silver_spot");
 
             override fun getSerializedName(): String {
                 return this.key
