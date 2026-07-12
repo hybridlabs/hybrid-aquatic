@@ -1450,10 +1450,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
             .save(exporter)
 
-        stairBuilder(
-            HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
-            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
-        )
+        stairBuilder(HAPlatformBlocks.DRIFTWOOD_STAIRS.get(), Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
+            .unlockedBy("got_driftwood_planks", InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
+            .save(exporter)
 
         slab(
             exporter,
@@ -1462,15 +1461,13 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
-        fenceBuilder(
-            HAPlatformBlocks.DRIFTWOOD_FENCE.get(),
-            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
-        )
+        fenceBuilder(HAPlatformBlocks.DRIFTWOOD_FENCE.get(), Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),)
+            .unlockedBy("got_driftwood_planks", InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
+            .save(exporter)
 
-        fenceGateBuilder(
-            HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(),
-            Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),
-        )
+        fenceGateBuilder(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),)
+            .unlockedBy("got_driftwood_planks", InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
+            .save(exporter)
 
         woodFromLogs(
             exporter,

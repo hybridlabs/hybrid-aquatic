@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "got_driftwood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "hybrid_aquatic:driftwood_planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hybrid_aquatic:driftwood_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "got_driftwood_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hybrid_aquatic:driftwood_fence"
+    ]
+  }
+}
