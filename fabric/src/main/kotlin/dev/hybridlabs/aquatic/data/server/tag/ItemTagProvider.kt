@@ -668,6 +668,11 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 Items.YELLOW_SHULKER_BOX,
             )
 
+        getOrCreateTagBuilder(HAItemTags.CRAB_TRADEABLES)
+            .add(
+                Items.NAUTILUS_SHELL,
+            )
+
         setOf(
             Items.NOTE_BLOCK,
             Items.REDSTONE_LAMP,
