@@ -70,7 +70,6 @@ object HybridAquaticModBusEvents {
             },
             serverTarget = {
                 MOD_BUS.addListener(::onServerSetup)
-                HABiomes.addBiomes()
             })
 
         HAPlatformFluids.FLUID_TYPES.register(MOD_BUS)

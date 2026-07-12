@@ -36,7 +36,10 @@ object HybridAquaticNetworkingForge {
     object ClientPayloadHandler {
         fun handleDataOnMain(data: FishingBobberPayload, context: IPayloadContext) {
             val client = Minecraft.getInstance()
+
+            if (client.level == null) return
             val foundEntity = client.level!!.getEntity(data.id)
+
             val lureItem = data.lure
             if (foundEntity == null || foundEntity !is FishingHook) return
 
