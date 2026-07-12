@@ -43,6 +43,7 @@ object HAItemTags {
     val FISHING_TREASURE = create("fishing_treasure")
 
     val CRAB_WEARABLES = create("crab_wearables")
+    val CRAB_TRADEABLES = create("crab_tradeables")
     val REDSTONE_COMPONENTS = create("redstone_components")
 
     val RAW_FISH = createConventional("foods/raw_fish")
