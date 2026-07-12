@@ -37,12 +37,11 @@ object HybridAquaticNetworkingForge {
         fun handleDataOnMain(data: FishingBobberPayload, context: IPayloadContext) {
             val client = Minecraft.getInstance()
             val foundEntity = client.level!!.getEntity(data.id)
-            val itemStack = data.lure
+            val lureItem = data.lure
             if (foundEntity == null || foundEntity !is FishingHook) return
 
             val additionalBobberData = foundEntity as CustomFishingBobberEntityData
-            additionalBobberData.lureItem
-            sendHookPacket(data.id, itemStack)
+            additionalBobberData.lureItem = lureItem
         }
     }
 
