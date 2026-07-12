@@ -8,13 +8,13 @@
             "_constructor_comment": "The constructor to be used",
             "constructor": "(Ljava/lang/String;IZZI)V",
             "_parameters_comment": "Constant parameters provided directly.",
-            "parameters": [ "hybrid_aquatic:fish", 16, true, false, 64 ]
+            "parameters": [ "hybrid_aquatic:fish", 10, true, false, 64 ]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_RIVER_FISH",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [ "hybrid_aquatic:river_fish", 10, true, false, 64]
+            "parameters": [ "hybrid_aquatic:river_fish", 6, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
@@ -32,19 +32,19 @@
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_SHARK",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [ "hybrid_aquatic:shark", 8, true, true, 128]
+            "parameters": [ "hybrid_aquatic:shark", 4, true, true, 128]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_CRUSTACEAN",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [ "hybrid_aquatic:crustacean", 8, true, false, 64]
+            "parameters": [ "hybrid_aquatic:crustacean", 4, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_CRITTER",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [ "hybrid_aquatic:critter", 8, true, false, 64]
+            "parameters": [ "hybrid_aquatic:critter", 4, true, false, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
@@ -56,7 +56,7 @@
             "enum": "net/minecraft/world/entity/MobCategory",
             "name": "HYBRID_AQUATIC_MINION",
             "constructor": "(Ljava/lang/String;IZZI)V",
-            "parameters": [ "hybrid_aquatic:minion", 8, false, true, 128]
+            "parameters": [ "hybrid_aquatic:minion", 8, false, true, 64]
         },
         {
             "enum": "net/minecraft/world/entity/MobCategory",
