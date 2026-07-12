@@ -22,6 +22,9 @@ import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.fluid.BrineFluidType
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.network.FishingBobberPayload
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ClientPayloadHandler
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ServerPayloadHandler
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
@@ -43,6 +46,8 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.fluids.FluidType
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler
 import net.neoforged.neoforge.registries.DataPackRegistryEvent
 import software.bernie.geckolib.animatable.client.GeoRenderProvider
 import software.bernie.geckolib.renderer.GeoArmorRenderer
@@ -58,6 +63,7 @@ object HybridAquaticModBusEvents {
         MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerSpawnPlacements)
         MOD_BUS.addListener(::addBiomes)
+        MOD_BUS.addListener(::registerNetworking)
 
         runForDist(
             clientTarget = {
@@ -251,5 +257,17 @@ object HybridAquaticModBusEvents {
                 armorModel.renderToBuffer(poseStack, null, light, OverlayTexture.NO_OVERLAY, Color.WHITE.argbInt)
             }
         }
+    }
+
+    private fun registerNetworking(event: RegisterPayloadHandlersEvent) {
+        val registrar = event.registrar("1")
+        registrar.playBidirectional(
+            FishingBobberPayload.type,
+            FishingBobberPayload.CODEC,
+            DirectionalPayloadHandler(
+                ClientPayloadHandler::handleDataOnMain,
+                ServerPayloadHandler::handleDataOnMain,
+            )
+        )
     }
 }

@@ -15,7 +15,7 @@ data class FishingBobberPayload(val id: Int, val lure: ItemStack) : CustomPacket
         val CODEC: StreamCodec<RegistryFriendlyByteBuf, FishingBobberPayload> =
             StreamCodec.composite(
                 ByteBufCodecs.INT, FishingBobberPayload::id,
-                ItemStack.STREAM_CODEC, FishingBobberPayload::lure,
+                ItemStack.OPTIONAL_STREAM_CODEC, FishingBobberPayload::lure,
                 ::FishingBobberPayload
             )
     }

@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.platform.Services;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FishingBobberEntityClientMixin {
 
     @Unique
-    private static final ItemStack hybrid_aquatic$DUMMY = new ItemStack(Blocks.STONE);
+    private static final ItemStack hybrid_aquatic$DUMMY = ItemStack.EMPTY;
 
     // Sends a packet that asks server to send custom lure item of fishing bobber after a spawning packet
     @Inject(method = "recreateFromPacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity" +
