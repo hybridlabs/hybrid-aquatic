@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_driftwood_planks": {
+    "has_polished_yellow_brinestone": {
       "conditions": {
         "items": [
           {
-            "items": "hybrid_aquatic:driftwood_planks"
+            "items": "hybrid_aquatic:polished_yellow_brinestone"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:driftwood_stairs"
+        "recipe": "hybrid_aquatic:yellow_brinestone_bricks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_driftwood_planks"
+      "has_polished_yellow_brinestone"
     ]
   ],
   "rewards": {
     "recipes": [
-      "hybrid_aquatic:driftwood_stairs"
+      "hybrid_aquatic:yellow_brinestone_bricks"
     ]
   }
 }

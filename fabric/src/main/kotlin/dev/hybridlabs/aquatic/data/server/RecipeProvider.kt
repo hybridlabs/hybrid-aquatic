@@ -17,6 +17,7 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.*
+import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import java.util.concurrent.CompletableFuture
@@ -26,14 +27,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
     override fun buildRecipes(exporter: RecipeOutput) {
 
         //#region Sandstone Block Recipes
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HAItems.WHITE_SANDSTONE.get())
+            HAItems.WHITE_SANDSTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
-            Ingredient.of(HAItems.SMOOTH_WHITE_SANDSTONE.get())
+            HAItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         slab(
@@ -139,10 +142,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.RED_BRINESTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_RED_BRINESTONE.get(),
-            Ingredient.of(HAItems.RED_BRINESTONE.get())
+            HAItems.RED_BRINESTONE.get()
         )
         //#endregion
 
@@ -176,14 +180,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_RED_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.RED_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.RED_BRINESTONE.get())
+            HABlocks.RED_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_RED_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_RED_BRINESTONE.get())
+            HABlocks.POLISHED_RED_BRINESTONE.get()
         )
         //#endregion
 
@@ -227,10 +233,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.RED_BRINESTONE.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.RED_BRINESTONE_WALL.get(),
-            Ingredient.of(HABlocks.RED_BRINESTONE.get()),
+            HABlocks.RED_BRINESTONE.get(),
         )
         //#endregion
         
@@ -242,10 +249,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_RED_BRINESTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_BRICKS.get(),
-            Ingredient.of(HAItems.POLISHED_RED_BRINESTONE.get())
+            HAItems.POLISHED_RED_BRINESTONE.get()
         )
         //#endregion
 
@@ -257,9 +265,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.RED_BRINESTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.RED_BRINESTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.RED_BRINESTONE_BRICKS.get())
+            HABlocks.RED_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -288,10 +297,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.RED_BRINESTONE_BRICKS.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.RED_BRINESTONE_BRICK_WALL.get(),
-            Ingredient.of(HABlocks.RED_BRINESTONE_BRICKS.get()),
+            HABlocks.RED_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -304,10 +314,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.ORANGE_BRINESTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_ORANGE_BRINESTONE.get(),
-            Ingredient.of(HAItems.ORANGE_BRINESTONE.get())
+            HAItems.ORANGE_BRINESTONE.get()
         )
         //#endregion
 
@@ -341,14 +352,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_ORANGE_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.ORANGE_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.ORANGE_BRINESTONE.get())
+            HABlocks.ORANGE_BRINESTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_ORANGE_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_ORANGE_BRINESTONE.get())
+            HABlocks.POLISHED_ORANGE_BRINESTONE.get()
         )
         //#endregion
 
@@ -392,10 +405,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.ORANGE_BRINESTONE.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.ORANGE_BRINESTONE_WALL.get(),
-            Ingredient.of(HABlocks.ORANGE_BRINESTONE.get()),
+            HABlocks.ORANGE_BRINESTONE.get()
         )
         //#endregion
 
@@ -407,10 +421,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_ORANGE_BRINESTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_BRICKS.get(),
-            Ingredient.of(HAItems.POLISHED_ORANGE_BRINESTONE.get())
+            HAItems.POLISHED_ORANGE_BRINESTONE.get()
         )
         //#endregion
 
@@ -422,9 +437,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.ORANGE_BRINESTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.ORANGE_BRINESTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.ORANGE_BRINESTONE_BRICKS.get())
+            HABlocks.ORANGE_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -453,10 +469,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.ORANGE_BRINESTONE_BRICKS.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get(),
-            Ingredient.of(HABlocks.ORANGE_BRINESTONE_BRICKS.get()),
+            HABlocks.ORANGE_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -469,10 +486,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.YELLOW_BRINESTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_YELLOW_BRINESTONE.get(),
-            Ingredient.of(HAItems.YELLOW_BRINESTONE.get())
+            HAItems.YELLOW_BRINESTONE.get()
         )
         //#endregion
         
@@ -505,14 +523,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_YELLOW_BRINESTONE.get()
         )
         
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.YELLOW_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.YELLOW_BRINESTONE.get())
+            HABlocks.YELLOW_BRINESTONE.get()
         )
         
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_YELLOW_BRINESTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_YELLOW_BRINESTONE.get())
+            HABlocks.POLISHED_YELLOW_BRINESTONE.get()
         )
         //#endregion
 
@@ -556,10 +576,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.YELLOW_BRINESTONE.get()
         )
         
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.YELLOW_BRINESTONE_WALL.get(),
-            Ingredient.of(HABlocks.YELLOW_BRINESTONE.get()),
+            HABlocks.YELLOW_BRINESTONE.get()
         )
         //#endregion
 
@@ -571,10 +592,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_YELLOW_BRINESTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_BRICKS.get(),
-            Ingredient.of(HAItems.POLISHED_YELLOW_BRINESTONE.get())
+            HAItems.POLISHED_YELLOW_BRINESTONE.get()
         )
         //#endregion
 
@@ -586,9 +608,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.YELLOW_BRINESTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.YELLOW_BRINESTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.YELLOW_BRINESTONE_BRICKS.get())
+            HABlocks.YELLOW_BRINESTONE_BRICKS.get()
         )
         //#endregion
 
@@ -617,10 +640,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.YELLOW_BRINESTONE_BRICKS.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get(),
-            Ingredient.of(HABlocks.YELLOW_BRINESTONE_BRICKS.get()),
+            HABlocks.YELLOW_BRINESTONE_BRICKS.get()
         )
         //#endregion
         //#endregion
@@ -634,10 +658,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.SCHIST.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_SCHIST.get(),
-            Ingredient.of(HAItems.SCHIST.get())
+            HAItems.SCHIST.get()
         )
         //#endregion
 
@@ -671,14 +696,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_SCHIST.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.SCHIST_STAIRS.get(),
-            Ingredient.of(HABlocks.SCHIST.get())
+            HABlocks.SCHIST.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_SCHIST_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_SCHIST.get())
+            HABlocks.POLISHED_SCHIST.get()
         )
         //#endregion
 
@@ -722,10 +749,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.SCHIST.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.SCHIST_WALL.get(),
-            Ingredient.of(HABlocks.SCHIST.get()),
+            HABlocks.SCHIST.get()
         )
         //#endregion
 
@@ -737,10 +765,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_SCHIST.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_BRICKS.get(),
-            Ingredient.of(HAItems.POLISHED_SCHIST.get())
+            HAItems.POLISHED_SCHIST.get()
         )
         //#endregion
 
@@ -752,9 +781,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.SCHIST_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.SCHIST_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.SCHIST_BRICKS.get())
+            HABlocks.SCHIST_BRICKS.get()
         )
         //#endregion
 
@@ -783,10 +813,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.SCHIST_BRICKS.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.SCHIST_BRICK_WALL.get(),
-            Ingredient.of(HABlocks.SCHIST_BRICKS.get()),
+            HABlocks.SCHIST_BRICKS.get()
         )
         //#endregion
 
@@ -799,10 +830,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.CHIMNEYSTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_CHIMNEYSTONE.get(),
-            Ingredient.of(HAItems.CHIMNEYSTONE.get())
+            HAItems.CHIMNEYSTONE.get()
         )
         //#endregion
 
@@ -836,14 +868,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_CHIMNEYSTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.CHIMNEYSTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.CHIMNEYSTONE.get())
+            HABlocks.CHIMNEYSTONE.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.POLISHED_CHIMNEYSTONE_STAIRS.get(),
-            Ingredient.of(HABlocks.POLISHED_CHIMNEYSTONE.get())
+            HABlocks.POLISHED_CHIMNEYSTONE.get()
         )
         //#endregion
 
@@ -887,10 +921,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.CHIMNEYSTONE.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.CHIMNEYSTONE_WALL.get(),
-            Ingredient.of(HABlocks.CHIMNEYSTONE.get()),
+            HABlocks.CHIMNEYSTONE.get()
         )
         //#endregion
 
@@ -902,10 +937,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.POLISHED_CHIMNEYSTONE.get()
         )
 
-        polishedBuilder(
+        polished(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_BRICKS.get(),
-            Ingredient.of(HAItems.POLISHED_CHIMNEYSTONE.get())
+            HAItems.POLISHED_CHIMNEYSTONE.get()
         )
         //#endregion
 
@@ -917,9 +953,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.CHIMNEYSTONE_BRICKS.get()
         )
 
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.CHIMNEYSTONE_BRICK_STAIRS.get(),
-            Ingredient.of(HABlocks.CHIMNEYSTONE_BRICKS.get())
+            HABlocks.CHIMNEYSTONE_BRICKS.get()
         )
         //#endregion
 
@@ -948,10 +985,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAItems.CHIMNEYSTONE_BRICKS.get()
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.CHIMNEYSTONE_BRICK_WALL.get(),
-            Ingredient.of(HABlocks.CHIMNEYSTONE_BRICKS.get()),
+            HABlocks.CHIMNEYSTONE_BRICKS.get()
         )
         //#endregion
 
@@ -1369,9 +1407,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .save(exporter)
 
         //#regione Bone Set Recipes
-        stairBuilder(
+        stair(
+            exporter,
             HAItems.BONE_STAIRS.get(),
-            Ingredient.of(Blocks.BONE_BLOCK)
+            Blocks.BONE_BLOCK
         )
 
         slab(
@@ -1381,10 +1420,11 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             Blocks.BONE_BLOCK
         )
 
-        wallBuilder(
+        wall(
+            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.BONE_WALL.get(),
-            Ingredient.of(Blocks.BONE_BLOCK),
+            Blocks.BONE_BLOCK
         )
 
         stonecutterResultFromBase(
@@ -1450,10 +1490,13 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
             .save(exporter)
 
-        stairBuilder(HAPlatformBlocks.DRIFTWOOD_STAIRS.get(), Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
-            .unlockedBy("got_driftwood_planks", InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
-            .save(exporter)
+        stair(
+            exporter,
+            HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
+        )
 
+        
         slab(
             exporter,
             RecipeCategory.BUILDING_BLOCKS,
@@ -1461,13 +1504,18 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
-        fenceBuilder(HAPlatformBlocks.DRIFTWOOD_FENCE.get(), Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),)
-            .unlockedBy("got_driftwood_planks", InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
-            .save(exporter)
+        fence(
+            exporter,
+            HAPlatformBlocks.DRIFTWOOD_FENCE.get(),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
+        )
 
-        fenceGateBuilder(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(), Ingredient.of(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()),)
-            .unlockedBy("got_driftwood_planks", InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get()))
-            .save(exporter)
+
+        fenceGate(
+            exporter,
+            HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
+        )
 
         woodFromLogs(
             exporter,
@@ -2126,4 +2174,19 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         }
     }
     //#endregion
+
+    private fun stair(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+        stairBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(recipeOutput)
+    }
+
+    private fun fence(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+        fenceBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(recipeOutput)
+    }
+
+    private fun fenceGate(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+        fenceGateBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(recipeOutput)
+    }
 }

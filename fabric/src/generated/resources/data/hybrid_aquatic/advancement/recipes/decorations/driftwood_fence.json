@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "got_driftwood_planks": {
+    "has_driftwood_planks": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "got_driftwood_planks"
+      "has_driftwood_planks"
     ]
   ],
   "rewards": {
