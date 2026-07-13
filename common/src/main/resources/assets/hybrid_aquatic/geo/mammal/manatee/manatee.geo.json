@@ -4,59 +4,78 @@
 		{
 			"description": {
 				"identifier": "geometry.unknown",
-				"texture_width": 128,
-				"texture_height": 128,
-				"visible_bounds_width": 7,
-				"visible_bounds_height": 2.5,
-				"visible_bounds_offset": [0, 0.75, 0]
+				"texture_width": 256,
+				"texture_height": 256,
+				"visible_bounds_width": 8,
+				"visible_bounds_height": 3,
+				"visible_bounds_offset": [0, 0.5, 0]
 			},
 			"bones": [
 				{
 					"name": "body",
-					"pivot": [0, 8.5, 0],
-					"cubes": [
-						{"origin": [-9, 0, -14.5], "size": [18, 17, 29], "uv": [0, 0]}
-					]
+					"pivot": [0, 7, -6]
 				},
 				{
-					"name": "tail",
+					"name": "torso",
 					"parent": "body",
-					"pivot": [0, 7, 14.5],
+					"pivot": [0, 7, -6],
 					"cubes": [
-						{"origin": [-7.5, 2, 14.5], "size": [15, 10, 12], "uv": [0, 62]}
-					]
-				},
-				{
-					"name": "tail_flipper",
-					"parent": "tail",
-					"pivot": [0, 6.5, 26.5],
-					"cubes": [
-						{"origin": [-9.5, 5, 26.5], "size": [19, 3, 13], "uv": [0, 46]}
-					]
-				},
-				{
-					"name": "right_flipper",
-					"parent": "body",
-					"pivot": [-9, 1, -13],
-					"cubes": [
-						{"origin": [-23, 0, -13.5], "size": [14, 2, 9], "uv": [64, 46]}
-					]
-				},
-				{
-					"name": "left_flipper",
-					"parent": "body",
-					"pivot": [9, 1, -13],
-					"cubes": [
-						{"origin": [9, 0, -13.5], "size": [14, 2, 9], "uv": [64, 46], "mirror": true}
+						{"origin": [-11, 0, -24], "size": [22, 22, 33], "uv": [0, 0]},
+						{"origin": [-11, 0, -24], "size": [22, 22, 33], "inflate": 0.5, "uv": [132, 0]}
 					]
 				},
 				{
 					"name": "head",
-					"parent": "body",
-					"pivot": [0, 6.75, -14.5],
+					"parent": "torso",
+					"pivot": [0, 14, -24],
 					"cubes": [
-						{"origin": [-7, 1, -24.5], "size": [14, 11, 10], "uv": [54, 62]},
-						{"origin": [-5, 1, -28.5], "size": [10, 8, 4], "uv": [54, 83]}
+						{"origin": [-7, 8, -38], "size": [14, 13, 14], "uv": [60, 72]},
+						{"origin": [-7, 8, -38], "size": [14, 13, 14], "inflate": 0.5, "uv": [190, 55]},
+						{"origin": [-7, 6, -38], "size": [14, 2, 14], "uv": [48, 99]},
+						{"origin": [-5, 5, -37], "size": [10, 3, 13], "uv": [104, 99]}
+					]
+				},
+				{
+					"name": "torso_2",
+					"parent": "torso",
+					"pivot": [0, 14, 9],
+					"cubes": [
+						{"origin": [-7.5, 6, 9], "size": [15, 15, 14], "uv": [1, 56]},
+						{"origin": [-7.5, 6, 9], "size": [15, 15, 14], "inflate": 0.5, "uv": [132, 55]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "torso_2",
+					"pivot": [0, 15.5, 23],
+					"cubes": [
+						{"origin": [-5.5, 11, 23], "size": [11, 9, 16], "uv": [0, 85]},
+						{"origin": [-5.5, 11, 23], "size": [11, 9, 16], "inflate": 0.5, "uv": [190, 82]}
+					]
+				},
+				{
+					"name": "paddle",
+					"parent": "tail",
+					"pivot": [0, 17, 35.5],
+					"cubes": [
+						{"origin": [-10.5, 16, 33], "size": [21, 2, 15], "uv": [60, 55]},
+						{"origin": [-10.5, 16, 33], "size": [21, 2, 15], "inflate": 0.5, "uv": [135, 100]}
+					]
+				},
+				{
+					"name": "left_fin",
+					"parent": "torso",
+					"pivot": [11, 4, -18.5],
+					"cubes": [
+						{"origin": [11, -10, -22], "size": [2, 16, 7], "uv": [0, 110]}
+					]
+				},
+				{
+					"name": "right_fin",
+					"parent": "torso",
+					"pivot": [-11, 4, -18.5],
+					"cubes": [
+						{"origin": [-13, -10, -22], "size": [2, 16, 7], "uv": [110, 0]}
 					]
 				}
 			]
