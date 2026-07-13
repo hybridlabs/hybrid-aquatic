@@ -29,7 +29,7 @@ import static net.minecraft.client.renderer.LevelRenderer.getLightColor;
 public abstract class WeatherDisplayMixin implements ResourceManagerReloadListener, AutoCloseable {
 
 	@Unique
-	private static final ResourceLocation MARINE_SNOW = CommonClass.locate("textures/environment/marine_snow.png");
+	private static ResourceLocation MARINE_SNOW = null;
 
 	@Shadow private int ticks;
 	@Final @Shadow private float[] rainSizeX;
@@ -39,6 +39,9 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 	@Inject(method = "renderSnowAndRain", at=@At("HEAD"))
 	void renderWeatherInject(LightTexture manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
 		if (minecraft.player != null && minecraft.level != null) {
+			// modernfix loads this class too early
+			if (MARINE_SNOW == null) MARINE_SNOW = CommonClass.locate("textures/environment/marine_snow.png");
+			
 			float f = this.minecraft.level.getRainLevel(tickDelta);
 			Level world = this.minecraft.level;
 			if (f > 0.0f && cameraY < world.getSeaLevel() && world.getBiome(minecraft.player.blockPosition()).is(HABiomeTags.INSTANCE.getALL_TRENCHES())) {
