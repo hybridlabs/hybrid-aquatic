@@ -4,17 +4,27 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.syncher.EntityDataAccessor
+import net.minecraft.network.syncher.EntityDataSerializers
+import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
+import net.minecraft.util.ByIdMap
+import net.minecraft.util.StringRepresentable
+import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.AgeableMob
-import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
+import net.minecraft.world.level.ServerLevelAccessor
+import java.util.function.IntFunction
+import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class ManateeEntity(type: EntityType<out ManateeEntity>, world: Level) : HASirenianEntity(type, world) {
+class ManateeEntity(type: EntityType<out ManateeEntity>, world: Level) : HASirenianEntity(type, world),
+    VariantHolder<ManateeEntity.Companion.Type> {
 
     override fun registerGoals() {
         super.registerGoals()
@@ -47,8 +57,18 @@ class ManateeEntity(type: EntityType<out ManateeEntity>, world: Level) : HASiren
     }
     //#endregion
 
-    companion object {
+    override fun finalizeSpawn(
+        world: ServerLevelAccessor,
+        difficulty: DifficultyInstance,
+        spawnReason: MobSpawnType,
+        entityData: SpawnGroupData?,
+        entityNbt: CompoundTag?
+    ): SpawnGroupData? {
+        variant = Type.entries.random(Random)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+    }
 
+    companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 32.0)
@@ -57,5 +77,58 @@ class ManateeEntity(type: EntityType<out ManateeEntity>, world: Level) : HASiren
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 12.0)
         }
+
+        val TYPE: EntityDataAccessor<Int> =
+            SynchedEntityData.defineId(ManateeEntity::class.java, EntityDataSerializers.INT)
+
+        enum class Type(val id: Int, private val key: String) : StringRepresentable {
+            PLAIN(0, "plain"),
+            MOSSY(1, "mossy");
+
+            override fun getSerializedName(): String {
+                return this.key
+            }
+
+            companion object {
+                val CODEC: StringRepresentable.EnumCodec<Type> = StringRepresentable.fromEnum { entries.toTypedArray() }
+                private val BY_ID: IntFunction<Type> = ByIdMap.continuous(
+                    { obj: Type -> obj.id },
+                    entries.toTypedArray(),
+                    ByIdMap.OutOfBoundsStrategy.ZERO
+                )
+
+                fun byName(name: String?): Type {
+                    return CODEC.byName(name, PLAIN) as Type
+                }
+
+                fun fromId(id: Int): Type {
+                    return BY_ID.apply(id) as Type
+                }
+            }
+        }
+    }
+
+    override fun defineSynchedData() {
+        entityData.define(TYPE, 0)
+        super.defineSynchedData()
+    }
+
+    override fun addAdditionalSaveData(compound: CompoundTag) {
+        compound.putString("Type", this.variant.serializedName)
+
+        super.addAdditionalSaveData(compound)
+    }
+
+    override fun readAdditionalSaveData(compound: CompoundTag) {
+        this.variant = Type.byName(compound.getString("Type"))
+        super.readAdditionalSaveData(compound)
+    }
+
+    override fun getVariant(): Type {
+        return Type.fromId((entityData.get(TYPE) as Int))
+    }
+
+    override fun setVariant(type: Type) {
+        entityData.set(TYPE, type.id)
     }
 }
