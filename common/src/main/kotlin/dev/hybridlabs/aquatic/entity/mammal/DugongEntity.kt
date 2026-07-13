@@ -61,11 +61,10 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HASirenia
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
         spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
+        entityData: SpawnGroupData?
     ): SpawnGroupData? {
         variant = Type.entries.random(Random)
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
+        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {
@@ -108,9 +107,9 @@ class DugongEntity(type: EntityType<out DugongEntity>, world: Level) : HASirenia
         }
     }
 
-    override fun defineSynchedData() {
-        entityData.define(TYPE, 0)
-        super.defineSynchedData()
+    override fun defineSynchedData(builder: SynchedEntityData.Builder) {
+        super.defineSynchedData(builder)
+        builder.define(TYPE, 0)
     }
 
     override fun addAdditionalSaveData(compound: CompoundTag) {
