@@ -18,7 +18,7 @@ class ForgeMixinPlugin: IMixinConfigPlugin {
     }
 
     override fun shouldApplyMixin(targetClassName: String, mixinClassName: String): Boolean {
-        if (hasModernFix && mixinClassName.contains("client.WeatherDisplayMixin")) return false
+        //if (hasModernFix && mixinClassName.contains("client.WeatherDisplayMixin")) return false
         return true
     }
 
