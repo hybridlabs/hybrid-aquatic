@@ -33,6 +33,6 @@ class TetraEntityModel : HAFishEntityModel<TetraEntity>("tetra") {
         private val CARDINAL_TETRA_TEXTURE =
             ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/cardinal_tetra.png")
         private val BLIND_CAVE_TETRA_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/cave_tetra.png")
+            ResourceLocation("hybrid_aquatic", "textures/entity/fish/tetra/blind_cave_tetra.png")
     }
 }
