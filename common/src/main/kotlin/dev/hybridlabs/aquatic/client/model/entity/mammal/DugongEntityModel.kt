@@ -16,11 +16,11 @@ class DugongEntityModel : HASirenianEntityModel<DugongEntity>("dugong") {
 
     companion object {
         private val BABY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/dugong/baby_dugong.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/dugong/baby_dugong.png")
 
         private val PLAIN_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/dugong/dugong.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/dugong/dugong.png")
         private val MOSSY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/dugong/mossy_dugong.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/dugong/mossy_dugong.png")
     }
 }

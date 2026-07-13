@@ -16,11 +16,11 @@ class ManateeEntityModel : HASirenianEntityModel<ManateeEntity>("manatee") {
 
     companion object {
         private val BABY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/manatee/baby_manatee.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/manatee/baby_manatee.png")
 
         private val PLAIN_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/manatee/manatee.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/manatee/manatee.png")
         private val MOSSY_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/mammal/manatee/mossy_manatee.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/manatee/mossy_manatee.png")
     }
 }
