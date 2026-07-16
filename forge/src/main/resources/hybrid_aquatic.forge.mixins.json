@@ -16,7 +16,8 @@
         "ResourceLocationMixin",
         "SeagrassBlockMixin",
         "ServerPlayerEntityMixin",
-        "TallSeagrassBlockMixin"
+        "TallSeagrassBlockMixin",
+        "PaintingMixin"
     ],
     "client": [
         "client.BookScreenMixin",

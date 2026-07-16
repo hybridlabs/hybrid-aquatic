@@ -21,6 +21,7 @@
         "ServerPlayerEntityMixin",
         "SpawnGroupMixin",
         "TallSeagrassBlockMixin",
+        "PaintingMixin",
         "compat.carpet.HoneyCarpetHACompatMixin",
         "compat.carpet.SlimeCarpetHACompatMixin",
         "compat.carpet.StickyBlockCarpetHACompatMixin"
