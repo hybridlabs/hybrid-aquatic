@@ -20,6 +20,8 @@
         "ServerGamePacketListenerImplMixin",
         "ServerPlayerEntityMixin",
         "SpawnGroupMixin",
+        "TallSeagrassBlockMixin",
+        "PaintingMixin",
         "TallSeagrassBlockMixin"
     ],
     "client": [
