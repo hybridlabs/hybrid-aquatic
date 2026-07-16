@@ -2,5 +2,6 @@
   "author": "MysticKoko",
   "has_title": true,
   "infinite": false,
+  "melon": false,
   "translation_key": "hybrid_aquatic.sea_message.mylo"
 }

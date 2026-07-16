@@ -27,6 +27,11 @@ data class GeneratedSeaMessageData(
      * Whether this sea message is infinite.
      */
     val infinite: Boolean = false,
+
+    /**
+     * Melon.
+     */
+    val melon: Boolean = false,
 ) {
     /**
      * The automated translation key for this message.

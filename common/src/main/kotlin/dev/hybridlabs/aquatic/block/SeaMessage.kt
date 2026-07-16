@@ -27,6 +27,11 @@ data class SeaMessage(
     val infinite: Boolean,
 
     /**
+     * Melon.
+     */
+    val melon: Boolean,
+
+    /**
      * The author of this message.
      */
     val author: Optional<String>
@@ -48,6 +53,7 @@ data class SeaMessage(
                 Codec.STRING.fieldOf("translation_key").forGetter(SeaMessage::translationKey),
                 Codec.BOOL.fieldOf("has_title").orElse(false).forGetter(SeaMessage::hasTitle),
                 Codec.BOOL.fieldOf("infinite").orElse(false).forGetter(SeaMessage::infinite),
+                Codec.BOOL.fieldOf("melon").orElse(false).forGetter(SeaMessage::melon),
                 Codec.STRING.optionalFieldOf("author").orElse(Optional.empty()).forGetter(SeaMessage::author)
             ).apply(instance, ::SeaMessage)
         }

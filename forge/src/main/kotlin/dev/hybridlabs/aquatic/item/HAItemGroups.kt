@@ -6,10 +6,7 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
-import dev.hybridlabs.aquatic.block.MessageInABottleBlock
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
-import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.CreativeModeTab
@@ -25,18 +22,8 @@ object HAItemGroups {
             .title(Component.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
             .icon { ItemStack(HAItems.ANEMONE.get()) }
             .displayItems { _, entries ->
-                // message in a bottle variants
-                MessageInABottleBlock.Variant.entries.forEach { variant ->
-                    val blockEntity = MessageInABottleBlockEntity(
-                        BlockPos.ZERO,
-                        HABlocks.MESSAGE_IN_A_BOTTLE.get().defaultBlockState()
-                    )
-                        .also { blockEntity -> blockEntity.variant = variant }
-                    val stack = MessageInABottleBlock.createItemStack(blockEntity)
-                    entries.accept(stack)
-                }
-
                 // blocks
+                entries.accept(HABlocks.MESSAGE_IN_A_BOTTLE.get())
                 entries.accept(HABlocks.SUSPICIOUS_RED_SAND.get())
                 entries.accept(HABlocks.AERATED_SAND.get())
                 entries.accept(HABlocks.BUBBLE_GEYSER.get())

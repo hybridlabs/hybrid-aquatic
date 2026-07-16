@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceKey
-import java.util.*
+import java.util.Optional
 import java.util.concurrent.CompletableFuture
 
 class SeaMessageProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
@@ -18,7 +18,7 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
                 HARegistryKeys.SEA_MESSAGE,
                 CommonClass.locate(message.id)
             )
-            entries.add(key, SeaMessage(message.translationKey, message.englishTitle != null, message.infinite, Optional.ofNullable(message.author)))
+            entries.add(key, SeaMessage(message.translationKey, message.englishTitle != null, message.infinite, message.melon, Optional.ofNullable(message.author)))
         }
     }
 
@@ -49,9 +49,9 @@ class SeaMessageProvider(output: FabricDataOutput, registriesFuture: Completable
             GeneratedSeaMessageData("cryptic_gun_message", "< You/We wield the Gun/You >", "The Board", englishTitle = "Hotline"),
             GeneratedSeaMessageData("boo", "Boo"),
             GeneratedSeaMessageData("yashaa", "Why are you crying on a nice day like today? I mean, it's even snowing...", "Yashaa", englishTitle = "Cepriestess"),
-            GeneratedSeaMessageData("river_to_sea", "From the river to the sea, Palestine will be free!", englishTitle = "River To Sea"),
-            GeneratedSeaMessageData("free_palestine", "#FreePalestine", englishTitle = "Freedom"),
-            GeneratedSeaMessageData("free_gaza", "#FreeGaza", englishTitle = "Freedom"),
+            GeneratedSeaMessageData("river_to_sea", "From the river to the sea, Palestine will be free!", englishTitle = "River To Sea", melon = true),
+            GeneratedSeaMessageData("free_palestine", "#FreePalestine", englishTitle = "Freedom", melon = true),
+            GeneratedSeaMessageData("free_gaza", "#FreeGaza", englishTitle = "Freedom", melon = true),
             GeneratedSeaMessageData("seafarer", "I feel like some kind of Seafarer", englishTitle = "Seafarer"),
             GeneratedSeaMessageData("rainbow_reef", "This reef is so colorful! It's like a Rainbow Reef!", englishTitle = "Rainbow Reef"),
             GeneratedSeaMessageData("fintastic", "I'm feeling Fintastic today!", englishTitle = "Fintastic"),
