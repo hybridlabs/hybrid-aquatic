@@ -858,7 +858,18 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         mapOf(
             HAPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
-            HAPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
+            HAPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua"),
+            HAPaintings.MELON to listOf("Melon", "Palestine"),
+            HAPaintings.PRAYA_DUBIA to listOf("Praya Dubia", "UnorthodoxSketch"),
+            HAPaintings.KING_OF_HERRING to listOf("King Of Herring", "UnorthodoxSketch"),
+            HAPaintings.PALESTINE_FLAG to listOf("Palestine Flag", "Palestine"),
+            HAPaintings.JOLLY_ROGER to listOf("Jolly Roger", "MysticKoko"),
+            HAPaintings.PRIDE_FLAG to listOf("Pride Flag", "Be Proud"),
+            HAPaintings.GAY_PRIDE_FLAG to listOf("Gay Pride Flag", "Be Proud"),
+            HAPaintings.LESBIAN_PRIDE_FLAG to listOf("Lesbian Pride Flag", "Be Proud"),
+            HAPaintings.ASEXUAL_PRIDE_FLAG to listOf("Asexual Pride Flag", "Be Proud"),
+            HAPaintings.BISEXUAL_PRIDE_FLAG to listOf("Bisexual Pride Flag", "Be Proud"),
+            HAPaintings.TRANS_PRIDE_FLAG to listOf("Trans Pride Flag", "Be Proud"),
         ).forEach { (painting, name) ->
             builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
             builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])

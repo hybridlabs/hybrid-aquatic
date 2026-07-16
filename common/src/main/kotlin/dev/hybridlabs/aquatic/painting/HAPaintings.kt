@@ -9,6 +9,17 @@ import java.util.function.Supplier
 object HAPaintings {
     val TEST_PAINTING1 = registerPainting("test_painting1", 2, 2)
     val TEST_PAINTING2 = registerPainting("test_painting2", 8, 8)
+    val MELON = registerPainting("melon", 1, 1)
+    val PRAYA_DUBIA = registerPainting("praya_dubia", 2, 3)
+    val KING_OF_HERRING = registerPainting("king_of_herring", 2, 2)
+    val PALESTINE_FLAG = registerPainting("palestine_flag", 2, 1)
+    val JOLLY_ROGER = registerPainting("jolly_roger", 2, 1)
+    val PRIDE_FLAG = registerPainting("pride_flag", 2, 1)
+    val GAY_PRIDE_FLAG = registerPainting("gay_pride_flag", 2, 1)
+    val LESBIAN_PRIDE_FLAG = registerPainting("lesbian_pride_flag", 2, 1)
+    val ASEXUAL_PRIDE_FLAG = registerPainting("asexual_pride_flag", 2, 1)
+    val BISEXUAL_PRIDE_FLAG = registerPainting("bisexual_pride_flag", 2, 1)
+    val TRANS_PRIDE_FLAG = registerPainting("trans_pride_flag", 2, 1)
 
     fun register(id: String, painting: Supplier<PaintingVariant>): Supplier<PaintingVariant> {
         return CommonClass.PAINTINGS.register(id, painting)
