@@ -32,7 +32,9 @@
         "client.MouseHandlerMixin",
         "client.PlayerEntityRendererMixin",
         "client.SkullBlockEntityTextureMixin",
-        "client.WeatherDisplayMixin"
+        "client.WeatherDisplayMixin",
+      "client.PaintingTransparentMixin",
+      "client.PaintingCutoutMixin"
     ],
     "injectors": {
         "defaultRequire": 1
