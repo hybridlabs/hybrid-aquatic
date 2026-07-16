@@ -7,13 +7,16 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import net.minecraft.core.Holder
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
-import net.minecraft.world.item.CreativeModeTab
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.SpawnEggItem
+import net.minecraft.world.entity.decoration.PaintingVariant
+import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Blocks
+import java.util.function.Consumer
+import kotlin.jvm.optionals.getOrNull
 
 object HAItemGroups {
     val BLOCKS = register(
@@ -21,7 +24,7 @@ object HAItemGroups {
         CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
             .title(Component.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
             .icon { ItemStack(HAItems.ANEMONE.get()) }
-            .displayItems { _, entries ->
+            .displayItems { itemDisplayParameters, entries ->
                 // blocks
                 entries.accept(HABlocks.MESSAGE_IN_A_BOTTLE.get())
                 entries.accept(HABlocks.SUSPICIOUS_RED_SAND.get())
@@ -291,6 +294,19 @@ object HAItemGroups {
                         return@forEach
                     }
                 }
+
+                itemDisplayParameters.holders()
+                    .lookup(Registries.PAINTING_VARIANT)
+                    .ifPresent(
+                        Consumer { registryLookup: HolderLookup.RegistryLookup<PaintingVariant> ->
+                            CreativeModeTabs.generatePresetPaintings(
+                                entries,
+                                registryLookup,
+                                { holder: Holder<PaintingVariant> -> holder.unwrapKey().getOrNull()?.location()?.namespace == Constants.MOD_ID },
+                                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
+                            )
+                        }
+                    )
             }
             .build()
     )
