@@ -25,7 +25,7 @@ import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.sound.HASoundEvents
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.aquatic.tag.*
 import dev.hybridlabs.aquatic.utils.HACustomTrades.registerCustomTrades
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.hybridlabs.aquatic.world.gen.feature.*
@@ -69,6 +69,12 @@ object HybridAquatic : ModInitializer {
         }
 
         HABiomeTags
+        HABlockTags
+        HAEntityTags
+        HAFluidTags
+        HAInstrumentTags
+        HAItemTags
+        HAPaintingTags
 
         HAMobEffects
         HAPotions.registerPotionRecipes()
