@@ -6,9 +6,9 @@ import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.decoration.PaintingVariant
 
 object HAPaintingTags {
-    val UNIQUE_PAINTING = create("unique_paintings")
+    val KEEPS_PAINTING_VARIANT = create("keeps_painting_variant")
 
-    fun create(id: String): TagKey<PaintingVariant> {
+    private fun create(id: String): TagKey<PaintingVariant> {
         return TagKey.create(Registries.PAINTING_VARIANT, CommonClass.locate(id))
     }
 }
