@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
@@ -288,6 +289,16 @@ object HAItemGroups {
                     if (id.namespace != Constants.MOD_ID) {
                         return@forEach
                     }
+                }
+
+                BuiltInRegistries.PAINTING_VARIANT.forEach { paintingVariant ->
+                    val id = BuiltInRegistries.PAINTING_VARIANT.getKey(paintingVariant)
+                    if (id.namespace != Constants.MOD_ID) return@forEach
+
+                    val itemStack = ItemStack(Items.PAINTING)
+                    val compoundTag = itemStack.getOrCreateTagElement(EntityType.ENTITY_TAG)
+                    compoundTag.putString("variant", id.toString())
+                    entries.accept(itemStack)
                 }
             }
             .build()

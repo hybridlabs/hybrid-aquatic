@@ -33,15 +33,11 @@ public abstract class PaintingMixin extends HangingEntity {
 			var paintingVariantOptional = getVariant().unwrapKey();
 			if (paintingVariantOptional.isEmpty() ) return;
 			
-			var itemData = new CompoundTag();
-			itemData.putString(Painting.VARIANT_TAG, paintingVariantOptional.get().location().toString());
-			
 			var painting = Items.PAINTING.getDefaultInstance();
-			var compoundTag = painting.getOrCreateTag();
-			compoundTag.put(EntityType.ENTITY_TAG, itemData);
-			painting.setTag(compoundTag);
-			
+			var compoundTag = painting.getOrCreateTagElement(EntityType.ENTITY_TAG);
+			compoundTag.putString("variant", paintingVariantOptional.get().location().toString());
 			this.spawnAtLocation(painting);
+			
 			ci.cancel();
 		}
 	}
