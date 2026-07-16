@@ -1,6 +1,17 @@
 {
   "values": [
     "hybrid_aquatic:test_painting1",
-    "hybrid_aquatic:test_painting2"
+    "hybrid_aquatic:test_painting2",
+    "hybrid_aquatic:melon",
+    "hybrid_aquatic:praya_dubia",
+    "hybrid_aquatic:king_of_herring",
+    "hybrid_aquatic:pride_flag",
+    "hybrid_aquatic:gay_pride_flag",
+    "hybrid_aquatic:lesbian_pride_flag",
+    "hybrid_aquatic:trans_pride_flag",
+    "hybrid_aquatic:asexual_pride_flag",
+    "hybrid_aquatic:bisexual_pride_flag",
+    "hybrid_aquatic:palestine_flag",
+    "hybrid_aquatic:jolly_roger"
   ]
 }
