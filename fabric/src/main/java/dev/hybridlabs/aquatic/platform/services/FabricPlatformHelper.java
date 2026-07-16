@@ -104,11 +104,6 @@ public class FabricPlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public Item createMessageInABottleItem(Item.Properties properties) {
-        return new dev.hybridlabs.aquatic.item.MessageInABottleItem(properties);
-    }
-
-    @Override
     public void sendHookToServer(int entityId, ItemStack entityData) {
         if (ClientPlayNetworking.canSend(FishingBobberPayload.Companion.getType())) {
             ClientPlayNetworking.send(new FishingBobberPayload(entityId, entityData));

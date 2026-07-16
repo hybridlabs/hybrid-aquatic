@@ -6,7 +6,6 @@ import dev.hybridlabs.aquatic.Constants;
 import dev.hybridlabs.aquatic.block.HABlocks;
 import dev.hybridlabs.aquatic.item.AnemoneBlockItem;
 import dev.hybridlabs.aquatic.item.GiantGreenAnemoneBlockItem;
-import dev.hybridlabs.aquatic.item.MessageInABottleItem;
 import dev.hybridlabs.aquatic.item.StrawberryAnemoneBlockItem;
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
@@ -126,11 +125,6 @@ public class ForgePlatformHelper implements PlatformHelper {
             return new GiantGreenAnemoneBlockItem(block, properties);
         }
         return new BlockItem(block, properties);
-    }
-
-    @Override
-    public Item createMessageInABottleItem(Item.Properties properties) {
-        return new MessageInABottleItem(properties);
     }
 
     @Override

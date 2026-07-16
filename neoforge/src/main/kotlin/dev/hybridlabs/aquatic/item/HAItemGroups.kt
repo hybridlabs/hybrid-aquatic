@@ -26,18 +26,8 @@ object HAItemGroups {
             .title(Component.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
             .icon { ItemStack(HAItems.ANEMONE.get()) }
             .displayItems { itemDisplayParameters, entries ->
-                // message in a bottle variants
-                MessageInABottleBlock.Variant.entries.forEach { variant ->
-                    val blockEntity = MessageInABottleBlockEntity(
-                        BlockPos.ZERO,
-                        HABlocks.MESSAGE_IN_A_BOTTLE.get().defaultBlockState()
-                    )
-                        .also { blockEntity -> blockEntity.variant = variant }
-                    val stack = MessageInABottleBlock.createItemStack(blockEntity)
-                    entries.accept(stack)
-                }
-
                 // blocks
+                entries.accept(HABlocks.MESSAGE_IN_A_BOTTLE.get())
                 entries.accept(HABlocks.SUSPICIOUS_RED_SAND.get())
                 entries.accept(HABlocks.AERATED_SAND.get())
                 entries.accept(HABlocks.BUBBLE_GEYSER.get())
@@ -351,7 +341,6 @@ object HAItemGroups {
                 entries.accept(HAItems.MUSSEL.get())
                 entries.accept(HAItems.COOKED_MUSSEL.get())
 
-                entries.accept(HAItems.AFRICAN_BUTTERFLYFISH.get())
                 entries.accept(HAItems.BETTA.get())
                 entries.accept(HAItems.DANIO.get())
                 entries.accept(HAItems.TETRA.get())
@@ -369,6 +358,7 @@ object HAItemGroups {
                 entries.accept(HAItems.BARRELEYE.get())
                 entries.accept(HAItems.DRAGONFISH.get())
                 entries.accept(HAItems.BLOBFISH.get())
+                entries.accept(HAItems.HAGFISH.get())
                 entries.accept(HAItems.FLASHLIGHT_FISH.get())
                 entries.accept(HAItems.RATFISH.get())
                 entries.accept(HAItems.SQUIRRELFISH.get())

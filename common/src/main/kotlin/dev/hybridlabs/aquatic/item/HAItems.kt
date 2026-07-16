@@ -616,7 +616,7 @@ object HAItems {
     val CHERRY_RAFT = registerPlaceableInWaterBlockItem("cherry_raft") { HABlocks.CHERRY_RAFT.get() }
     val DRIFTWOOD_RAFT = registerPlaceableInWaterBlockItem("driftwood_raft") { HABlocks.DRIFTWOOD_RAFT.get() }
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HABlocks.GLOWSTICK, HABlocks.WALL_GLOWSTICK)
-    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { PLATFORM.createMessageInABottleItem(Item.Properties()) }
+    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { MessageInABottleItem(Item.Properties()) }
     //#endregion
 
     //#region Nature Blocks

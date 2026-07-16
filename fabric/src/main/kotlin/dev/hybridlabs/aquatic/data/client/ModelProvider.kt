@@ -49,7 +49,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.ANEMONE.get() to (null to TEMPLATE_ANEMONE),
                 HABlocks.STRAWBERRY_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
                 HABlocks.GIANT_GREEN_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
-                HABlocks.MESSAGE_IN_A_BOTTLE.get() to (Blocks.GLASS to TEMPLATE_MESSAGE_IN_A_BOTTLE),
             ).forEach { (block, info) ->
                 val (particleBlock, template) = info
 
@@ -451,6 +450,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateItemModels(generator: ItemModelGenerators) {
         //#region Flat Items
         setOf(
+            HAItems.MESSAGE_IN_A_BOTTLE.get(),
             HAItems.BUOY.get(),
             HAItems.BELL_BUOY.get(),
             HAPlatformItems.DUNEGRASS.get(),

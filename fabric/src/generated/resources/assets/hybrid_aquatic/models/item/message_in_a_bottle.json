@@ -1,3 +1,6 @@
 {
-  "parent": "hybrid_aquatic:item/template_message_in_a_bottle"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "hybrid_aquatic:item/message_in_a_bottle"
+  }
 }

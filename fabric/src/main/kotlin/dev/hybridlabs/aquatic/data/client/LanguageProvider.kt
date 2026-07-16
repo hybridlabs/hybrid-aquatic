@@ -41,10 +41,14 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
         // message in a bottle
         HABlocks.MESSAGE_IN_A_BOTTLE.get().descriptionId.let { key ->
             builder.add(key, "Message in a Bottle")
-            builder.add("$key.jar", "Message in a Jar")
-            builder.add("$key.longneck", "Message in a Longneck Bottle")
-            builder.add("$key.potion", "Message in a Potion Bottle")
-            builder.add("$key.wine", "Message in a Wine Bottle")
+            builder.add("$key.change_hint", "Interact in-world to change variant")
+
+            val variantKey = "$key.variant"
+            builder.add("$variantKey.bottle", "Bottle")
+            builder.add("$variantKey.jar", "Jar")
+            builder.add("$variantKey.longneck", "Longneck Bottle")
+            builder.add("$variantKey.potion", "Potion Bottle")
+            builder.add("$variantKey.wine", "Wine Bottle")
         }
 
         // sea messages
