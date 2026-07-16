@@ -108,11 +108,6 @@ public class FabricPlatformHelper implements PlatformHelper {
     }
 
     @Override
-    public Item createMessageInABottleItem(Item.Properties properties) {
-        return new dev.hybridlabs.aquatic.item.MessageInABottleItem(properties);
-    }
-
-    @Override
     public void sendHookToServer(int entityId, ItemStack entityData) {
         FriendlyByteBuf packetData = PacketByteBufs.create();
         packetData.writeInt(entityId);

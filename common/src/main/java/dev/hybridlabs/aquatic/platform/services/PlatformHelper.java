@@ -72,7 +72,5 @@ public interface PlatformHelper {
 
     Item createBlockItem(Block block, Item.Properties properties);
 
-    Item createMessageInABottleItem(Item.Properties properties);
-
     void sendHookToServer(int entityId, ItemStack entityData);
 }
