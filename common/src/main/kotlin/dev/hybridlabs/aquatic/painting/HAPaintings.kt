@@ -7,6 +7,9 @@ import net.minecraft.world.entity.decoration.PaintingVariant
 import java.util.function.Supplier
 
 object HAPaintings {
+    val TEST_PAINTING1 = registerPainting("test_painting1", 2, 2)
+    val TEST_PAINTING2 = registerPainting("test_painting2", 8, 8)
+
     fun register(id: String, painting: Supplier<PaintingVariant>): Supplier<PaintingVariant> {
         return CommonClass.PAINTINGS.register(id, painting)
     }

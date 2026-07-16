@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
+import dev.hybridlabs.aquatic.painting.HAPaintings
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
@@ -855,13 +856,13 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
         // Workaround for Jade/WAILA not being able to find the mod display name on Forge
         builder.add("modmenu.nameTranslation.hybrid_aquatic", "Hybrid Aquatic")
 
-//        mapOf(
-//            HybridAquaticPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
-//            HybridAquaticPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
-//        ).forEach { (painting, name) ->
-//            builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
-//            builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])
-//        }
+        mapOf(
+            HAPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
+            HAPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
+        ).forEach { (painting, name) ->
+            builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
+            builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])
+        }
     }
 
     private fun generateEntities(builder: TranslationBuilder) {
