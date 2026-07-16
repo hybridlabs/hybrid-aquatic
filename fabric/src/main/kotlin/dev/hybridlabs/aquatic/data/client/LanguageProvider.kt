@@ -859,8 +859,8 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.TEST_PAINTING1 to listOf("Test Painting", "Aqua"),
             HAPaintings.TEST_PAINTING2 to listOf("Test Huge Painting", "Aqua")
         ).forEach { (painting, name) ->
-            builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
-            builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])
+            builder.add("painting.hybrid_aquatic.${painting.location().path}.title", name[0])
+            builder.add("painting.hybrid_aquatic.${painting.location().path}.author", name[1])
         }
     }
 

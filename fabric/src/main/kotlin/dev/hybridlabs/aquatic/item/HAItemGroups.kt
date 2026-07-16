@@ -8,14 +8,14 @@ import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.item.CreativeModeTab
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.SpawnEggItem
+import net.minecraft.world.entity.decoration.PaintingVariant
+import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Blocks
+import kotlin.jvm.optionals.getOrNull
 
 object HAItemGroups {
     val BLOCKS = register(
@@ -23,7 +23,7 @@ object HAItemGroups {
         CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
             .title(Component.translatable("itemGroup.${Constants.MOD_ID}.blocks"))
             .icon { ItemStack(HAItems.ANEMONE.get()) }
-            .displayItems { _, entries ->
+            .displayItems { itemDisplayParameters, entries ->
                 // message in a bottle variants
                 MessageInABottleBlock.Variant.entries.forEach { variant ->
                     val blockEntity = MessageInABottleBlockEntity(
@@ -304,14 +304,14 @@ object HAItemGroups {
                     }
                 }
 
-                BuiltInRegistries.PAINTING_VARIANT.forEach { paintingVariant ->
-                    val id = BuiltInRegistries.PAINTING_VARIANT.getKey(paintingVariant)
-                    if (id.namespace != Constants.MOD_ID) return@forEach
-
-                    val itemStack = ItemStack(Items.PAINTING)
-                    val compoundTag = itemStack.getOrCreateTagElement(EntityType.ENTITY_TAG)
-                    compoundTag.putString("variant", id.toString())
-                    entries.accept(itemStack)
+                itemDisplayParameters.holders().lookup(Registries.PAINTING_VARIANT).ifPresent { registryLookup ->
+                    CreativeModeTabs.generatePresetPaintings(
+                        entries,
+                        itemDisplayParameters.holders(),
+                        registryLookup,
+                        { holder: Holder<PaintingVariant> -> holder.unwrapKey().getOrNull()?.location()?.namespace == Constants.MOD_ID },
+                        CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
+                    )
                 }
             }
             .build()
@@ -513,7 +513,6 @@ object HAItemGroups {
             }
             .build()
     )
-
 
     private fun register(id: String, itemGroup: CreativeModeTab): RegistryObject<CreativeModeTab> {
         return CommonClass.CREATIVE_MODE_TABS.register(id) { itemGroup }

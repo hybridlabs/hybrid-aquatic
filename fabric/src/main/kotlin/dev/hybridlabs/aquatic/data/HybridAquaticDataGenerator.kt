@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.data.client.LanguageProvider
 import dev.hybridlabs.aquatic.data.client.ModelProvider
 import dev.hybridlabs.aquatic.data.client.SoundProvider
 import dev.hybridlabs.aquatic.data.server.AdvancementProvider
+import dev.hybridlabs.aquatic.data.server.PaintingProvider
 import dev.hybridlabs.aquatic.data.server.RecipeProvider
 import dev.hybridlabs.aquatic.data.server.loot.BlockLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.EntityTypeLootTableProvider
@@ -17,8 +18,6 @@ import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.PlacedFeatureProvider
 import dev.hybridlabs.aquatic.data.structure_spawn_modifier.StructureSpawnModifierProvider
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
-import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
-import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
@@ -49,6 +48,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::SeaMessageProvider)
         pack.addProvider(::StructureSpawnModifierProvider)
         pack.addProvider(::FluidTagProvider)
+        pack.addProvider(::PaintingProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
@@ -57,6 +57,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureProvider::bootstrapPlacedFeatures)
         registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureProvider::bootstrapConfiguredFeatures)
         registryBuilder.add(Registries.BIOME, BiomeProvider::bootstrapBiomes )
+        registryBuilder.add(Registries.PAINTING_VARIANT, PaintingProvider::bootstrapVariants)
     }
 
     fun <T> filterHybridAquatic(registry: Registry<T>): (T & Any) -> Boolean {
