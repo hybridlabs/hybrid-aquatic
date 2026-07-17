@@ -18,6 +18,7 @@ public class Services {
 
 
     public static final EelArmorProvider EEL_ARMOR_FACTORY = load(EelArmorProvider.class);
+    public static final StripedEelArmorProvider STRIPED_EEL_ARMOR_FACTORY = load(StripedEelArmorProvider.class);
     public static final PinkHatxolotlArmorProvider PINK_HATXOLOTL_ARMOR_FACTORY = load(PinkHatxolotlArmorProvider.class);
     public static final BrownHatxolotlArmorProvider BROWN_HATXOLOTL_ARMOR_FACTORY = load(BrownHatxolotlArmorProvider.class);
     public static final GoldHatxolotlArmorProvider GOLD_HATXOLOTL_ARMOR_FACTORY = load(GoldHatxolotlArmorProvider.class);

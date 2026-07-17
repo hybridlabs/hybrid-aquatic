@@ -6,7 +6,7 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.util.GeckoLibUtil
 
-abstract class EelScarfItem(settings: Properties) :
+abstract class StripedEelScarfItem(settings: Properties) :
     Item(settings),
     GeoItem {
     protected val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)

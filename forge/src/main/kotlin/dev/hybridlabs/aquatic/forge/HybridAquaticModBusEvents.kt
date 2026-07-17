@@ -184,6 +184,9 @@ object HybridAquaticModBusEvents {
             HAItems.EEL_SCARF.get(), EquipmentSlot.CHEST
         )
         registerTrinketRenderer(
+            HAItems.STRIPED_EEL_SCARF.get(), EquipmentSlot.CHEST
+        )
+        registerTrinketRenderer(
             HAItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST
         )
         registerTrinketRenderer(

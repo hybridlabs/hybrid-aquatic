@@ -21,6 +21,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "hybrid_aquatic:striped_eel_scarf"
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid_aquatic:pink_hatxolotl"
         },
         {

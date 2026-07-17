@@ -179,6 +179,14 @@ object HAItems {
         )
     }
 
+    val STRIPED_EEL_SCARF = register(
+        "striped_eel_scarf"
+    ) {
+        STRIPED_EEL_ARMOR_FACTORY.create(
+            Item.Properties().stacksTo(1)
+        )
+    }
+
     val PINK_HATXOLOTL = register(
         "pink_hatxolotl"
     ) {

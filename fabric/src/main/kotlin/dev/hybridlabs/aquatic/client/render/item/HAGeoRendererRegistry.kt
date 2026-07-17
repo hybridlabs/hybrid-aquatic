@@ -26,6 +26,8 @@ object HAGeoRendererRegistry {
             createBasicRenderProvider(::ManglerfishArmorRenderer)
         GeoRenderProviderStorage.eelArmorRenderProvider =
             createBasicRenderProvider(::EelArmorRenderer)
+        GeoRenderProviderStorage.stripedEelArmorRenderProvider =
+            createBasicRenderProvider(::StripedEelArmorRenderer)
         GeoRenderProviderStorage.pinkHatxolotlArmorRenderProvider =
             createBasicRenderProvider(::PinkHatxolotlArmorRenderer)
         GeoRenderProviderStorage.goldHatxolotlArmorRenderProvider =

@@ -7,8 +7,8 @@ import software.bernie.geckolib.animatable.GeoItem
 import java.util.function.Consumer
 import java.util.function.Supplier
 
-class FabricEelArmorItem(settings: Properties) :
-    Trinket, EelScarfItem(settings) {
+class FabricStripedEelArmorItem(settings: Properties) :
+    Trinket, StripedEelScarfItem(settings) {
     init {
         TrinketsApi.registerTrinket(this, this)
     }
@@ -16,7 +16,7 @@ class FabricEelArmorItem(settings: Properties) :
     private val renderProvider: Supplier<Any> = GeoItem.makeRenderer(this)
 
     override fun createRenderer(consumer: Consumer<Any>) {
-        consumer.accept(GeoRenderProviderStorage.eelArmorRenderProvider.invoke())
+        consumer.accept(GeoRenderProviderStorage.stripedEelArmorRenderProvider.invoke())
     }
 
     override fun getRenderProvider(): Supplier<Any> {
