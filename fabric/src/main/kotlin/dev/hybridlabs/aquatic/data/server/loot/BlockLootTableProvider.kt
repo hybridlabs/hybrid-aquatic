@@ -3,11 +3,9 @@ package dev.hybridlabs.aquatic.data.server.loot
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
 import dev.hybridlabs.aquatic.loot.HALootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
@@ -566,7 +564,11 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                             CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
                                 .copy(VARIANT_KEY, VARIANT_KEY)
                         ),
-                        LootTableReference.lootTableReference(HALootTables.MESSAGE_IN_A_BOTTLE)
+                        NestedLootTable.lootTableReference(
+                            ResourceKey.create(
+                                Registries.LOOT_TABLE,
+                                HALootTables.MESSAGE_IN_A_BOTTLE
+                            ))
                     )
                 ).build()
             )

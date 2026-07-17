@@ -9,11 +9,11 @@ import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
+import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.TagEntry
-import net.minecraft.world.level.storage.loot.functions.SetNbtFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
@@ -21,6 +21,7 @@ import java.util.function.BiConsumer
 class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     SimpleFabricLootTableProvider(output, lookupProvider, LootContextParamSets.FISHING) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
+
         exporter.accept(
             ResourceKey.create(
                 Registries.LOOT_TABLE,
@@ -54,9 +55,7 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
         )
 
         exporter.accept(
-            ResourceKey.create(
-                Registries.LOOT_TABLE,
-            HALootTables.HA_LARGE_FISH),
+            ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_LARGE_FISH),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_LARGE_FISH)
                 .pool(
@@ -71,9 +70,7 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
 
         // fishing treasure loot table extension
         exporter.accept(
-            ResourceKey.create(
-                Registries.LOOT_TABLE,
-            HALootTables.HA_CRATES),
+            ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_CRATES),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_CRATES)
                 .pool(
@@ -113,7 +110,7 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
         }
 
         exporter.accept(
-            HALootTables.MESSAGE_IN_A_BOTTLE,
+            ResourceKey.create(Registries.LOOT_TABLE, HALootTables.MESSAGE_IN_A_BOTTLE),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.MESSAGE_IN_A_BOTTLE)
                 .pool(messageInABottleLootPoolBuilder.build())
