@@ -1,9 +1,15 @@
 {
   "replace": false,
   "values": [
-    "hybrid_aquatic:test_painting1",
-    "hybrid_aquatic:test_painting2",
     "hybrid_aquatic:melon",
+    "hybrid_aquatic:conch_street",
+    "hybrid_aquatic:bold_and_brash",
+    "hybrid_aquatic:big_lure",
+    "hybrid_aquatic:preserver",
+    "hybrid_aquatic:creatures_of_the_deep",
+    "hybrid_aquatic:bigeye",
+    "hybrid_aquatic:jaws",
+    "hybrid_aquatic:fayette",
     "hybrid_aquatic:praya_dubia",
     "hybrid_aquatic:king_of_herring",
     "hybrid_aquatic:pride_flag",

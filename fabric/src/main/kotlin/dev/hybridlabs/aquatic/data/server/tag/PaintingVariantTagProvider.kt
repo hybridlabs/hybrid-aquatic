@@ -16,9 +16,15 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
 
     override fun addTags(arg: HolderLookup.Provider) {
         getOrCreateTagBuilder(HAPaintingTags.KEEPS_PAINTING_VARIANT)
-            .add(HAPaintings.TEST_PAINTING1)
-            .add(HAPaintings.TEST_PAINTING2)
             .add(HAPaintings.MELON)
+            .add(HAPaintings.CONCH_STREET)
+            .add(HAPaintings.BOLD_AND_BRASH)
+            .add(HAPaintings.BIG_LURE)
+            .add(HAPaintings.PRESERVER)
+            .add(HAPaintings.CREATURES_OF_THE_DEEP)
+            .add(HAPaintings.BIGEYE)
+            .add(HAPaintings.JAWS)
+            .add(HAPaintings.FAYETTE)
             .add(HAPaintings.PRAYA_DUBIA)
             .add(HAPaintings.KING_OF_HERRING)
             .add(HAPaintings.PRIDE_FLAG)
