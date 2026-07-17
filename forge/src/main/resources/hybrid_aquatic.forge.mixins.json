@@ -15,15 +15,12 @@
         "PlayerEntityMixin",
         "ResourceLocationMixin",
         "SeagrassBlockMixin",
-        "ServerPlayerEntityMixin",
         "TallSeagrassBlockMixin",
         "PaintingMixin",
         "HangingEntityItemMixin"
     ],
     "client": [
-        "client.BookScreenMixin",
         "client.CameraMixin",
-        "client.ClientPlayNetworkHandlerMixin",
         "client.FishingBobberEntityClientMixin",
         "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",

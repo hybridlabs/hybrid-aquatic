@@ -3,8 +3,6 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
-import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -12,7 +10,6 @@ import net.minecraft.util.StringRepresentable
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.vehicle.Boat
 import net.minecraft.world.item.BlockItem
@@ -33,7 +30,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
-import kotlin.jvm.optionals.getOrNull
 
 /**
  * Represents the Message in a Bottle block.
@@ -72,29 +68,6 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
 
         val fluidState = world.getFluidState(pos)
         return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
-    }
-
-    override fun setPlacedBy(
-        world: Level,
-        pos: BlockPos,
-        state: BlockState,
-        placer: LivingEntity?,
-        stack: ItemStack,
-    ) {
-        stack.getTagElement(BlockItem.BLOCK_ENTITY_TAG)?.let { nbt ->
-            // if not present, generate a random message
-            if (MessageInABottleBlockEntity.MESSAGE_KEY !in nbt) {
-                // get a random message
-                val registryManager = world.registryAccess()
-                val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
-                val messageKey = registry.getRandom(world.random).getOrNull()?.key() ?: return
-                val message = registry.get(messageKey) ?: return
-
-                // get block entity
-                val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
-                blockEntity.messageItemStack = SeaMessageBookItem.createItemStack(message, registryManager)
-            }
-        }
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {

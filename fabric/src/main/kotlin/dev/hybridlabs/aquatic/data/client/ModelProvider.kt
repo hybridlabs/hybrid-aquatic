@@ -580,7 +580,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.GOLD_HATXOLOTL.get(),
             HAItems.BROWN_HATXOLOTL.get(),
             HAItems.MOON_JELLYFISH_HAT.get(),
-            HAItems.SEA_MESSAGE_BOOK.get(),
         ).forEach { item ->
             generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)
         }

@@ -10,7 +10,6 @@ import dev.hybridlabs.aquatic.data.server.loot.BlockLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.EntityTypeLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.FishingLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.GenericLootTableProvider
-import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
 import dev.hybridlabs.aquatic.data.server.tag.*
 import dev.hybridlabs.aquatic.data.server.worldgen.BiomeProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
@@ -46,13 +45,11 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::ConfiguredFeatureProvider)
         pack.addProvider(::PlacedFeatureProvider)
         pack.addProvider(::RecipeProvider)
-        pack.addProvider(::SeaMessageProvider)
         pack.addProvider(::StructureSpawnModifierProvider)
         pack.addProvider(::FluidTagProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
-        registryBuilder.add(HARegistryKeys.SEA_MESSAGE) {}
         registryBuilder.add(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
         registryBuilder.add(Registries.BIOME) {
             HABiomes

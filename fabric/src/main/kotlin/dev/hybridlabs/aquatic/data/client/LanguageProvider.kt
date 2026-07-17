@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.data.client
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
-import dev.hybridlabs.aquatic.data.server.seamessage.SeaMessageProvider
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItemGroups
@@ -48,14 +47,6 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("$variantKey.potion", "Potion Bottle")
             builder.add("$variantKey.wine", "Wine Bottle")
         }
-
-        // sea messages
-        SeaMessageProvider.BUILT_IN.forEach { message ->
-            builder.add(message.translationKey, message.englishText)
-            message.englishTitle?.let { title -> builder.add(message.titleTranslationKey, title) }
-        }
-
-        builder.add(HAItems.SEA_MESSAGE_BOOK.get(), "Sea Message")
 
         //advancements
         mapOf(
@@ -858,7 +849,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
         mapOf(
             HAPaintings.MELON to listOf("Melon", "Palestine"),
-            HAPaintings.PALESTINE_FLAG to listOf("Palestine", "Palestine"),
+            HAPaintings.PALESTINE_FLAG to listOf("Palestine", "Flag"),
 
             HAPaintings.CONCH_STREET to listOf("Conch Street", "Stephen Hillenburg"),
             HAPaintings.BOLD_AND_BRASH to listOf("Bold And Brash", "Squidward Tentacles"),
@@ -866,9 +857,21 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAPaintings.PRESERVER to listOf("Life", "Preserver"),
 
             HAPaintings.CREATURES_OF_THE_DEEP to listOf("Creatures Of The Deep", "Random Rhincodon"),
+            HAPaintings.PRESSED_KELP to listOf("Pressed Kelp", "Random Rhincodon"),
+            HAPaintings.PRESSED_BULL_KELP to listOf("Pressed Bull Kelp", "Random Rhincodon"),
             HAPaintings.BIGEYE to listOf("Bigeye", "KianaK"),
+            HAPaintings.SUNSET to listOf("Sunset", "Stridey"),
+            HAPaintings.JAM to listOf("Jam", "Aim Boot"),
+            HAPaintings.SWIRLING to listOf("Swirling", "Aim Boot"),
+            HAPaintings.RIVERFISH to listOf("Riverfish", "Aim Boot"),
+            HAPaintings.POULPE_COLOSSAL to listOf("Le Poulpe Colossal", "Pierre Dénys de Montfort"),
+            HAPaintings.BELOW to listOf("Below", "finnibard"),
+            HAPaintings.SUNTIDE to listOf("Suntide", "rotten sarah"),
+            HAPaintings.MOONCATCHER to listOf("Mooncatcher", "wd"),
+            HAPaintings.NEVEN_NAIVEN to listOf("Nevein, naiven", "wd"),
+            HAPaintings.ORGANON to listOf("Organon", "wd"),
 
-            HAPaintings.FAYETTE to listOf("Fayette", "Steven Spielberg"),
+            HAPaintings.GREAT_LAKE to listOf("Great Lake", "Auri Wynn"),
             HAPaintings.JAWS to listOf("Jaws", "Steven Spielberg"),
 
             HAPaintings.PRAYA_DUBIA to listOf("Praya Dubia", "UnorthodoxSketch"),
@@ -882,6 +885,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAPaintings.ASEXUAL_PRIDE_FLAG to listOf("Asexual Pride", "Flag"),
             HAPaintings.BISEXUAL_PRIDE_FLAG to listOf("Bisexual Pride", "Flag"),
             HAPaintings.TRANS_PRIDE_FLAG to listOf("Trans Pride", "Flag"),
+            HAPaintings.NONBINARY_PRIDE_FLAG to listOf("Nonbinary Pride", "Flag"),
         ).forEach { (painting, name) ->
             builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
             builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])

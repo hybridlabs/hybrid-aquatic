@@ -5,30 +5,9 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.item.coral.CoralAxeItem
-import dev.hybridlabs.aquatic.item.coral.CoralBladeItem
-import dev.hybridlabs.aquatic.item.coral.CoralHoeItem
-import dev.hybridlabs.aquatic.item.coral.CoralPickaxeItem
-import dev.hybridlabs.aquatic.item.coral.CoralShovelItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellAxeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellHoeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellPickaxeItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellShovelItem
-import dev.hybridlabs.aquatic.item.seashell.SeashellSpearItem
-import dev.hybridlabs.aquatic.platform.Services.BLUE_HATXOLOTL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.BROWN_HATXOLOTL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.CYAN_HATXOLOTL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.DIVING_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.EEL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.GLOWING_DIVING_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.GOLD_HATXOLOTL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.MANGLERFISH_COSMETIC_PROVIDER
-import dev.hybridlabs.aquatic.platform.Services.MOON_JELLYFISH_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.PINK_HATXOLOTL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.PLATFORM
-import dev.hybridlabs.aquatic.platform.Services.REINFORCED_DIVING_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.SEASHELL_ARMOR_FACTORY
-import dev.hybridlabs.aquatic.platform.Services.TURTLE_ARMOR_FACTORY
+import dev.hybridlabs.aquatic.item.coral.*
+import dev.hybridlabs.aquatic.item.seashell.*
+import dev.hybridlabs.aquatic.platform.Services.*
 import dev.hybridlabs.aquatic.tag.HAInstrumentTags
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
@@ -36,11 +15,7 @@ import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.food.FoodProperties
-import net.minecraft.world.item.ArmorItem
-import net.minecraft.world.item.BlockItem
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.SpawnEggItem
-import net.minecraft.world.item.StandingAndWallBlockItem
+import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Block
 import java.util.function.Supplier
 
@@ -260,7 +235,6 @@ object HAItems {
     //#endregion
 
     //#region Tools - Weapons - Hooks
-    val SEA_MESSAGE_BOOK = register("sea_message_book") { SeaMessageBookItem(Item.Properties()) }
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(Item.Properties()) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }

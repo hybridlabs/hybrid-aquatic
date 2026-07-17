@@ -5,9 +5,6 @@ import com.google.gson.JsonObject
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem
-import dev.hybridlabs.aquatic.registry.HARegistryKeys
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.storage.loot.LootContext
@@ -21,31 +18,21 @@ class MessageInABottleItemEntry(
     weight: Int,
     quality: Int,
     conditions: Array<LootItemCondition>,
-    functions: Array<LootItemFunction>
+    functions: Array<LootItemFunction>,
 ) : LootPoolSingletonContainer(weight, quality, conditions, functions) {
     override fun getType(): LootPoolEntryType {
         return HybridAquaticLootPoolEntryTypes.MESSAGE_IN_A_BOTTLE.get()
     }
 
     public override fun createItemStack(consumer: Consumer<ItemStack?>, context: LootContext) {
-        val world = context.level
         val random = context.random
-        val registryManager = world.registryAccess()
-        val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
-        registry.getRandom(random).ifPresent { messageEntry ->
-            val message = messageEntry.value()
-
-            val stack = ItemStack(HAItems.MESSAGE_IN_A_BOTTLE.get())
-            stack.getOrCreateTagElement(BlockItem.BLOCK_ENTITY_TAG).apply {
-                val variants = MessageInABottleBlock.Variant.entries
-                putString(MessageInABottleBlockEntity.VARIANT_KEY, variants[random.nextInt(variants.size)].id)
-
-                val bookStack = SeaMessageBookItem.createItemStack(message, registryManager)
-                put(MessageInABottleBlockEntity.MESSAGE_KEY, bookStack.save(CompoundTag()))
-            }
-
-            consumer.accept(stack)
+        val stack = ItemStack(HAItems.MESSAGE_IN_A_BOTTLE.get())
+        stack.getOrCreateTagElement(BlockItem.BLOCK_ENTITY_TAG).apply {
+            val variants = MessageInABottleBlock.Variant.entries
+            putString(MessageInABottleBlockEntity.VARIANT_KEY, variants[random.nextInt(variants.size)].id)
         }
+
+        consumer.accept(stack)
     }
 
     class Serializer : LootPoolSingletonContainer.Serializer<MessageInABottleItemEntry>() {
@@ -55,7 +42,7 @@ class MessageInABottleItemEntry(
             weight: Int,
             quality: Int,
             conditions: Array<LootItemCondition>,
-            functions: Array<LootItemFunction>
+            functions: Array<LootItemFunction>,
         ): MessageInABottleItemEntry {
             return MessageInABottleItemEntry(weight, quality, conditions, functions)
         }

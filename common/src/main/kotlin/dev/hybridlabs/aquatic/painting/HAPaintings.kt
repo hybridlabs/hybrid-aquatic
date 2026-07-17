@@ -15,14 +15,22 @@ object HAPaintings {
     val PRESERVER = registerPainting("preserver", 1, 1)
 
     val CREATURES_OF_THE_DEEP = registerPainting("creatures_of_the_deep", 1, 2)
+    val PRESSED_KELP = registerPainting("pressed_kelp", 2, 1)
+    val PRESSED_BULL_KELP = registerPainting("pressed_bull_kelp", 1, 3)
     val BIGEYE = registerPainting("bigeye", 3, 2)
 
     val JAWS = registerPainting("jaws", 1, 2)
-    val FAYETTE = registerPainting("fayette", 2, 2)
+    val GREAT_LAKE = registerPainting("great_lake", 2, 2)
     val SUNSET = registerPainting("sunset", 2, 1)
-    val RIVERFISH = registerPainting("riverfish", 2, 3)
+    val RIVERFISH = registerPainting("riverfish", 2, 2)
     val JAM = registerPainting("jam", 2, 3)
+    val SWIRLING = registerPainting("swirling", 3, 3)
     val POULPE_COLOSSAL = registerPainting("poulpe_colossal", 2, 3)
+    val BELOW = registerPainting("below", 2, 3)
+    val SUNTIDE = registerPainting("suntide", 4, 2)
+    val MOONCATCHER = registerPainting("mooncatcher", 4, 4)
+    val NEVEN_NAIVEN = registerPainting("neven_naiven", 3, 3)
+    val ORGANON = registerPainting("organon", 3, 3)
 
     val PRAYA_DUBIA = registerPainting("praya_dubia", 2, 3)
     val KING_OF_HERRING = registerPainting("king_of_herring", 2, 2)
@@ -35,6 +43,7 @@ object HAPaintings {
     val ASEXUAL_PRIDE_FLAG = registerPainting("asexual_pride_flag", 2, 1)
     val BISEXUAL_PRIDE_FLAG = registerPainting("bisexual_pride_flag", 2, 1)
     val TRANS_PRIDE_FLAG = registerPainting("trans_pride_flag", 2, 1)
+    val NONBINARY_PRIDE_FLAG = registerPainting("nonbinary_pride_flag", 2, 1)
 
     fun register(id: String, painting: Supplier<PaintingVariant>): Supplier<PaintingVariant> {
         return CommonClass.PAINTINGS.register(id, painting)

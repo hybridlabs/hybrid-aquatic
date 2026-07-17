@@ -40,16 +40,11 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
     override fun saveAdditional(nbt: CompoundTag) {
         super.saveAdditional(nbt)
         nbt.putString(VARIANT_KEY, variant.id)
-
-        if (!messageItemStack.isEmpty) {
-            nbt.put(MESSAGE_KEY, messageItemStack.save(CompoundTag()))
-        }
     }
 
     override fun load(nbt: CompoundTag) {
         super.load(nbt)
         variant = MessageInABottleBlock.Variant.byId(nbt.getString(VARIANT_KEY))
-        messageItemStack = ItemStack.of(nbt.getCompound(MESSAGE_KEY))
     }
 
     private fun <E> predicate(event: software.bernie.geckolib.core.animation.AnimationState<E>): PlayState where E : BlockEntity?, E : GeoAnimatable {
@@ -86,11 +81,6 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
          * The nbt key for the variant id.
          */
         const val VARIANT_KEY = "variant"
-
-        /**
-         * The nbt key for the message text.
-         */
-        const val MESSAGE_KEY = "message"
 
         val WATER_BOB_ANIMATION: RawAnimation = RawAnimation.begin().then("water_bob", Animation.LoopType.LOOP)
     }

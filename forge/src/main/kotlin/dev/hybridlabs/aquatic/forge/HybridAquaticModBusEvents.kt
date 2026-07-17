@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.forge
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
@@ -26,7 +25,6 @@ import dev.hybridlabs.aquatic.particle.BrineBubblePopParticle
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.particle.SargassumParticle
 import dev.hybridlabs.aquatic.potions.HAPotions
-import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
@@ -47,7 +45,6 @@ import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
-import net.minecraftforge.registries.DataPackRegistryEvent
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
 import top.theillusivec4.curios.api.SlotContext
@@ -56,7 +53,6 @@ import top.theillusivec4.curios.api.client.ICurioRenderer
 
 object HybridAquaticModBusEvents {
     init {
-        MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerPotionsRecipes)
         MOD_BUS.addListener(::registerSpawnPlacements)
         MOD_BUS.addListener(::addBiomes)
@@ -75,14 +71,6 @@ object HybridAquaticModBusEvents {
             })
 
         HAPlatformFluids.FLUID_TYPES.register(MOD_BUS)
-    }
-
-    private fun loadSeaMessages(event: DataPackRegistryEvent.NewRegistry) {
-        event.dataPackRegistry(
-            HARegistryKeys.SEA_MESSAGE,
-            SeaMessage.CODEC,
-            SeaMessage.CODEC,
-        )
     }
 
     private fun registerPotionsRecipes(event: FMLCommonSetupEvent) {
