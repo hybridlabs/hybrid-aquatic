@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.TagEntry
-import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction
+import net.minecraft.world.level.storage.loot.functions.SetNbtFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
@@ -101,9 +101,14 @@ class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: Complet
             val variantKey = BuiltInRegistries.PAINTING_VARIANT.getKey(variant)
             if (variantKey.namespace != Constants.MOD_ID) return@forEach
 
+            // looks stupid but works and it's only for datagen anyway
+            val compoundTag = CompoundTag()
+            val entityTagCompound = compoundTag.getCompound(EntityType.ENTITY_TAG)
+            entityTagCompound.putString(Painting.VARIANT_TAG, variantKey.toString())
+            compoundTag.put(EntityType.ENTITY_TAG, entityTagCompound)
+
             messageInABottleLootPoolBuilder.add(LootItem.lootTableItem(Items.PAINTING).apply(
-                CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                    .copy("$variantKey", Painting.VARIANT_TAG)
+                SetNbtFunction.setTag(compoundTag)
             ))
         }
 
