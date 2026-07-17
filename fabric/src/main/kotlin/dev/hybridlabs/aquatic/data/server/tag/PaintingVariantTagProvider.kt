@@ -35,5 +35,17 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
             .add(HAPaintings.BISEXUAL_PRIDE_FLAG)
             .add(HAPaintings.PALESTINE_FLAG)
             .add(HAPaintings.JOLLY_ROGER)
+
+        getOrCreateTagBuilder(HAPaintingTags.TRANSPARENT_PAINTING)
+            .add(HAPaintings.ASEXUAL_PRIDE_FLAG)
+            .add(HAPaintings.BISEXUAL_PRIDE_FLAG)
+            .add(HAPaintings.GAY_PRIDE_FLAG)
+            .add(HAPaintings.LESBIAN_PRIDE_FLAG)
+            .add(HAPaintings.PALESTINE_FLAG)
+            .add(HAPaintings.PRIDE_FLAG)
+            .add(HAPaintings.TRANS_PRIDE_FLAG)
+            .add(HAPaintings.BIG_LURE)
+            .add(HAPaintings.JOLLY_ROGER)
+            .add(HAPaintings.PRESERVER)
     }
 }
