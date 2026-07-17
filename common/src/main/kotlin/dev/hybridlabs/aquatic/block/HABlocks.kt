@@ -62,6 +62,7 @@ object HABlocks {
             .instabreak()
             .pushReaction(PushReaction.DESTROY)
             .noCollission()
+            .noParticlesOnBreak()
         )
     }
 

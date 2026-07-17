@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.forge
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
@@ -26,7 +25,6 @@ import dev.hybridlabs.aquatic.network.FishingBobberPayload
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ClientPayloadHandler
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ServerPayloadHandler
 import dev.hybridlabs.aquatic.particle.*
-import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
@@ -62,7 +60,6 @@ import top.theillusivec4.curios.api.client.ICurioRenderer
 
 object HybridAquaticModBusEvents {
     init {
-        MOD_BUS.addListener(::loadSeaMessages)
         MOD_BUS.addListener(::registerSpawnPlacements)
         MOD_BUS.addListener(::addBiomes)
         MOD_BUS.addListener(::registerNetworking)
@@ -82,14 +79,6 @@ object HybridAquaticModBusEvents {
             })
 
         HAPlatformFluids.FLUID_TYPES.register(MOD_BUS)
-    }
-
-    private fun loadSeaMessages(event: DataPackRegistryEvent.NewRegistry) {
-        event.dataPackRegistry(
-            HARegistryKeys.SEA_MESSAGE,
-            SeaMessage.CODEC,
-            SeaMessage.CODEC,
-        )
     }
 
     private fun registerSpawnPlacements(event: RegisterSpawnPlacementsEvent) {

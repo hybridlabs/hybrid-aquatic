@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
@@ -29,21 +28,14 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
      */
     var variant: MessageInABottleBlock.Variant = MessageInABottleBlock.Variant.BOTTLE
 
-    /**
-     * The message item inside this bottle.
-     */
-    var messageId: ResourceLocation? = null
-
     override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.saveAdditional(tag, registries)
         tag.putString(VARIANT_KEY, variant.id)
-        tag.putString(MESSAGE_KEY, messageId.toString())
     }
 
     override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
         super.loadAdditional(tag, registries)
         variant = MessageInABottleBlock.Variant.byId(tag.getString(VARIANT_KEY))
-        messageId = ResourceLocation.tryParse(tag.getString(MESSAGE_KEY))
     }
 
     private fun <E> predicate(
@@ -82,11 +74,6 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
          * The nbt key for the variant id.
          */
         const val VARIANT_KEY = "variant"
-
-        /**
-         * The nbt key for the message text.
-         */
-        const val MESSAGE_KEY = "message"
 
         val WATER_BOB_ANIMATION: RawAnimation = RawAnimation.begin().then("water_bob", Animation.LoopType.LOOP)
     }

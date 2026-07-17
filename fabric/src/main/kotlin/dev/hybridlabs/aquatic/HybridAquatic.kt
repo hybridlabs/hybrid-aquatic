@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
-import dev.hybridlabs.aquatic.block.SeaMessage
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.property.FlammableProperty
 import dev.hybridlabs.aquatic.block.property.StrippableProperty
@@ -123,7 +122,6 @@ object HybridAquatic : ModInitializer {
     }
 
     private fun registerDynamicRegistries() {
-        DynamicRegistries.registerSynced(HARegistryKeys.SEA_MESSAGE, SeaMessage.CODEC)
         DynamicRegistries.register(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER, SpawnModifier.CODEC)
     }
 

@@ -28,22 +28,13 @@ class MessageInABottleItemEntry(
     }
 
     public override fun createItemStack(consumer: Consumer<ItemStack?>, context: LootContext) {
-        val world = context.level
         val random = context.random
-        val registryManager = world.registryAccess()
-        val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
-        registry.getRandom(random).ifPresent { messageEntry ->
-
-            val stack = ItemStack(HAItems.MESSAGE_IN_A_BOTTLE.get())
-
-            val stuff = CompoundTag().apply {
-                val variants = MessageInABottleBlock.Variant.entries
-                putString(MessageInABottleBlockEntity.VARIANT_KEY, variants[random.nextInt(variants.size)].id)
-                putString(MessageInABottleBlockEntity.MESSAGE_KEY, messageEntry.key().location().toString())
-            }
-            stack.set(DataComponents.CUSTOM_DATA, CustomData.of(stuff))
-            consumer.accept(stack)
+        val stack = ItemStack(HAItems.MESSAGE_IN_A_BOTTLE.get())
+        val stuff = CompoundTag().apply {
+            val variants = MessageInABottleBlock.Variant.entries
+            putString(MessageInABottleBlockEntity.VARIANT_KEY, variants[random.nextInt(variants.size)].id)
         }
+        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(stuff))
     }
 
     companion object {

@@ -18,7 +18,6 @@
         "ResourceLocationMixin",
         "SeagrassBlockMixin",
         "ServerGamePacketListenerImplMixin",
-        "ServerPlayerEntityMixin",
         "SpawnGroupMixin",
         "TallSeagrassBlockMixin",
         "PaintingMixin",

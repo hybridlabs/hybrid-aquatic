@@ -10,7 +10,11 @@ import net.minecraft.core.Direction
 import net.minecraft.core.RegistryAccess
 import net.minecraft.core.component.DataComponents
 import net.minecraft.util.StringRepresentable
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.item.context.BlockPlaceContext
@@ -26,6 +30,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties.WAT
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
+import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 import kotlin.jvm.optionals.getOrNull
@@ -62,25 +67,16 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
-    override fun setPlacedBy(
-        world: Level,
-        pos: BlockPos,
+    override fun useWithoutItem(
         state: BlockState,
-        placer: LivingEntity?,
-        stack: ItemStack
-    ) {
-        stack.get(DataComponents.BLOCK_ENTITY_DATA)?.let { component ->
-            // if not present, generate a random message
-            component.copyTag()[MessageInABottleBlockEntity.MESSAGE_KEY]?.let {
-                // get a random message
-                val registryManager = world.registryAccess()
-                val registry = registryManager.registryOrThrow(HARegistryKeys.SEA_MESSAGE)
-                val messageKey = registry.getRandom(world.random).getOrNull()?.key() ?: return
-
-                // get block entity
-                val blockEntity = world.getBlockEntity(pos) as? MessageInABottleBlockEntity ?: return
-                blockEntity.messageId = messageKey.location()
-            }
+        level: Level,
+        pos: BlockPos,
+        player: Player,
+        hitResult: BlockHitResult
+    ): InteractionResult {
+        (level.getBlockEntity(pos) as? MessageInABottleBlockEntity)?.let { blockEntity ->
+            blockEntity.variant = blockEntity.variant.next
+            return InteractionResult.sidedSuccess(level.isClientSide)
         }
     }
 
