@@ -37,8 +37,7 @@
         "client.PlayerEntityRendererMixin",
         "client.SkullBlockEntityModelMixin",
         "client.WeatherDisplayMixin",
-      "client.PaintingTransparentMixin",
-      "client.PaintingCutoutMixin"
+        "client.PaintingRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1
