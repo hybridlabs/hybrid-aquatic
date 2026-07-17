@@ -31,8 +31,26 @@ class PaintingProvider(output: FabricDataOutput,
         }
 
         fun bootstrapVariants(context: BootstrapContext<PaintingVariant>) {
-            register(context, HAPaintings.TEST_PAINTING1, 2, 2)
-            register(context, HAPaintings.TEST_PAINTING2, 8, 8)
+            register(context, HAPaintings.MELON, 1, 1)
+            register(context, HAPaintings.CONCH_STREET, 2, 1)
+            register(context, HAPaintings.BOLD_AND_BRASH, 1, 2)
+            register(context, HAPaintings.BIG_LURE, 3, 2)
+            register(context, HAPaintings.PRESERVER, 1, 1)
+            register(context, HAPaintings.CREATURES_OF_THE_DEEP, 1, 2)
+            register(context, HAPaintings.BIGEYE, 3, 2)
+            register(context, HAPaintings.JAWS, 1, 2)
+            register(context, HAPaintings.FAYETTE, 2, 2)
+            register(context, HAPaintings.PRAYA_DUBIA, 2, 3)
+            register(context, HAPaintings.KING_OF_HERRING, 2, 2)
+            register(context, HAPaintings.PALESTINE_FLAG, 2, 1)
+            register(context, HAPaintings.JOLLY_ROGER, 2, 1)
+            register(context, HAPaintings.PRIDE_FLAG, 2, 1)
+            register(context, HAPaintings.GAY_PRIDE_FLAG, 2, 1)
+            register(context, HAPaintings.LESBIAN_PRIDE_FLAG, 2, 1)
+            register(context, HAPaintings.ASEXUAL_PRIDE_FLAG, 2, 1)
+            register(context, HAPaintings.BISEXUAL_PRIDE_FLAG, 2, 1)
+            register(context, HAPaintings.TRANS_PRIDE_FLAG, 2, 1)
+
         }
     }
 }
