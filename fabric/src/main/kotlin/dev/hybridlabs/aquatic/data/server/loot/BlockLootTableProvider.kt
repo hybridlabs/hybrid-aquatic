@@ -3,11 +3,9 @@ package dev.hybridlabs.aquatic.data.server.loot
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
-import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.MESSAGE_KEY
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion.VARIANT_KEY
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.item.SeaMessageBookItem.Companion.SEA_MESSAGE_KEY
 import dev.hybridlabs.aquatic.loot.HALootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
@@ -565,12 +563,8 @@ class BlockLootTableProvider(output: FabricDataOutput) : FabricBlockLootTablePro
                         LootItem.lootTableItem(block).`when`(HAS_SILK_TOUCH).apply(
                             CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
                                 .copy(VARIANT_KEY, "$BLOCK_ENTITY_TAG.$VARIANT_KEY")
-                                .copy(MESSAGE_KEY, "$BLOCK_ENTITY_TAG.$MESSAGE_KEY")
                         ),
-                        LootItem.lootTableItem(HAItems.SEA_MESSAGE_BOOK.get()).apply(
-                            CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                .copy("$MESSAGE_KEY.tag.$SEA_MESSAGE_KEY", SEA_MESSAGE_KEY)
-                        )
+                        LootTableReference.lootTableReference(HALootTables.MESSAGE_IN_A_BOTTLE)
                     )
                 ).build()
             )
