@@ -6,11 +6,22 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.decoration.PaintingVariant
 
 object HAPaintings {
-    val TEST_PAINTING1 = key("test_painting1")
-    val TEST_PAINTING2 = key("test_painting2")
     val MELON = key("melon")
+
+    val CONCH_STREET = key("conch_street")
+    val BOLD_AND_BRASH = key("bold_and_brash")
+    val BIG_LURE = key("big_lure")
+    val PRESERVER = key("preserver")
+
+    val CREATURES_OF_THE_DEEP = key("creatures_of_the_deep")
+    val BIGEYE = key("bigeye")
+
+    val JAWS = key("jaws")
+    val FAYETTE = key("fayette")
+
     val PRAYA_DUBIA = key("praya_dubia")
     val KING_OF_HERRING = key("king_of_herring")
+
     val PALESTINE_FLAG = key("palestine_flag")
     val JOLLY_ROGER = key("jolly_roger")
     val PRIDE_FLAG = key("pride_flag")
