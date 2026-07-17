@@ -586,6 +586,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.MANGLERFISH_FIN.get(),
             HAItems.TURTLE_CHESTPLATE.get(),
             HAItems.EEL_SCARF.get(),
+            HAItems.STRIPED_EEL_SCARF.get(),
             HAItems.PINK_HATXOLOTL.get(),
             HAItems.BROWN_HATXOLOTL.get(),
             HAItems.CYAN_HATXOLOTL.get(),

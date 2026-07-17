@@ -466,6 +466,7 @@ object HAItemGroups {
                 entries.accept(HAItems.MANGLERFISH_LURE.get())
                 entries.accept(HAItems.MANGLERFISH_FIN.get())
                 entries.accept(HAItems.EEL_SCARF.get())
+                entries.accept(HAItems.STRIPED_EEL_SCARF.get())
                 entries.accept(HAItems.PINK_HATXOLOTL.get())
                 entries.accept(HAItems.CYAN_HATXOLOTL.get())
                 entries.accept(HAItems.BLUE_HATXOLOTL.get())

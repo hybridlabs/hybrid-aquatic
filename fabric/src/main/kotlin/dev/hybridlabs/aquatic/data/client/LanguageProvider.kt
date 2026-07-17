@@ -732,6 +732,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAItems.MANGLERFISH_LURE.get() to "Manglerfish Lure",
             HAItems.MANGLERFISH_FIN.get() to "Manglerfish Fin",
             HAItems.EEL_SCARF.get() to "Eel Scarf",
+            HAItems.STRIPED_EEL_SCARF.get() to "Striped Eel Scarf",
             HAItems.PINK_HATXOLOTL.get() to "Pink Hatxolotl",
             HAItems.GOLD_HATXOLOTL.get() to "Gold Hatxolotl",
             HAItems.BROWN_HATXOLOTL.get() to "Brown Hatxolotl",

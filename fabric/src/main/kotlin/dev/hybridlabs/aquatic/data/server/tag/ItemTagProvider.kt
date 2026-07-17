@@ -581,6 +581,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
 
         setOf(
             HAItems.EEL_SCARF.get(),
+            HAItems.STRIPED_EEL_SCARF.get(),
         ).forEach { item ->
             getOrCreateTagBuilder(HAItemTags.SCARF).add(item)
         }
@@ -595,6 +596,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.MANGLERFISH_LURE.get(),
             HAItems.MANGLERFISH_FIN.get(),
             HAItems.EEL_SCARF.get(),
+            HAItems.STRIPED_EEL_SCARF.get(),
             HAItems.PINK_HATXOLOTL.get(),
             HAItems.MOON_JELLYFISH_HAT.get(),
             HAItems.NAUTILUS_HELMET.get(),

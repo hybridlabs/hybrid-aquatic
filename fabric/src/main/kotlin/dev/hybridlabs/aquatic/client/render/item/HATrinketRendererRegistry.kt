@@ -16,6 +16,7 @@ object HATrinketRendererRegistry {
 
     init {
         registerTrinketRenderer(HAItems.EEL_SCARF.get(), EquipmentSlot.CHEST)
+        registerTrinketRenderer(HAItems.STRIPED_EEL_SCARF.get(), EquipmentSlot.CHEST)
         registerTrinketRenderer(HAItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST)
         registerTrinketRenderer(HAItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD)
         registerTrinketRenderer(HAItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD)

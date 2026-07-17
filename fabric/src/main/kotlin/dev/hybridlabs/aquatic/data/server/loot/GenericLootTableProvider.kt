@@ -145,6 +145,7 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
                         .add(LootItem.lootTableItem(HAItems.MANGLERFISH_FIN.get()))
                         .add(LootItem.lootTableItem(HAItems.MANGLERFISH_LURE.get()))
                         .add(LootItem.lootTableItem(HAItems.EEL_SCARF.get()))
+                        .add(LootItem.lootTableItem(HAItems.STRIPED_EEL_SCARF.get()))
                         .add(LootItem.lootTableItem(HAItems.PINK_HATXOLOTL.get()))
                         .add(LootItem.lootTableItem(HAItems.GOLD_HATXOLOTL.get()))
                         .add(LootItem.lootTableItem(HAItems.BROWN_HATXOLOTL.get()))
