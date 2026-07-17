@@ -19,6 +19,10 @@ object HAPaintings {
 
     val JAWS = registerPainting("jaws", 1, 2)
     val FAYETTE = registerPainting("fayette", 2, 2)
+    val SUNSET = registerPainting("sunset", 2, 1)
+    val RIVERFISH = registerPainting("riverfish", 2, 3)
+    val JAM = registerPainting("jam", 2, 3)
+    val POULPE_COLOSSAL = registerPainting("poulpe_colossal", 2, 3)
 
     val PRAYA_DUBIA = registerPainting("praya_dubia", 2, 3)
     val KING_OF_HERRING = registerPainting("king_of_herring", 2, 2)
