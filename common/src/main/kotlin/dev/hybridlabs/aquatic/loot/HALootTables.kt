@@ -23,6 +23,8 @@ object HALootTables {
     val CHERRY_CRATE_TREASURE_ID: ResourceLocation = CommonClass.locate("gameplay/cherry_crate_treasure")
     //#endregion
 
+    val MESSAGE_IN_A_BOTTLE: ResourceLocation = CommonClass.locate("gameplay/message_in_a_bottle")
+
     val VENT_LOOT_ID: ResourceLocation = CommonClass.locate("gameplay/vent_drops")
     val BEACH_ARCHAEOLOGY_ID: ResourceLocation = CommonClass.locate("gameplay/beach_archaeology")
     val PLACER_RIVER_ARCHAEOLOGY_ID: ResourceLocation = CommonClass.locate("gameplay/placer_river_archaeology")

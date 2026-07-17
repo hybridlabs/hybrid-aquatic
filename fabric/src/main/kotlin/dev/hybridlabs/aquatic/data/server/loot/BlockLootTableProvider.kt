@@ -357,8 +357,6 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
             )
         }
 
-
-
         for (block in listOf(
             HABlocks.LOPHELIA_CORAL.get(),
             HABlocks.DEAD_LOPHELIA_CORAL.get(),
@@ -567,12 +565,8 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         LootItem.lootTableItem(block).`when`(hasSilkTouch()).apply(
                             CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
                                 .copy(VARIANT_KEY, VARIANT_KEY)
-                                .copy(MESSAGE_KEY, MESSAGE_KEY)
                         ),
-                        LootItem.lootTableItem(HAItems.SEA_MESSAGE_BOOK.get()).apply(
-                            CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                                .copy(MESSAGE_KEY, SEA_MESSAGE_KEY)
-                        )
+                        LootTableReference.lootTableReference(HALootTables.MESSAGE_IN_A_BOTTLE)
                     )
                 ).build()
             )
