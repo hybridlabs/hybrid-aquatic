@@ -8,15 +8,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:melon",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:melon\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -25,15 +18,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:conch_street",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:conch_street\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -42,15 +28,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:bold_and_brash",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:bold_and_brash\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -59,15 +38,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:big_lure",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:big_lure\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -76,15 +48,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:preserver",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:preserver\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -93,15 +58,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:creatures_of_the_deep",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:creatures_of_the_deep\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -110,15 +68,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:bigeye",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:bigeye\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -127,15 +78,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:jaws",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:jaws\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -144,15 +88,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:fayette",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:fayette\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -161,15 +98,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:praya_dubia",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:praya_dubia\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -178,15 +108,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:king_of_herring",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:king_of_herring\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -195,15 +118,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:palestine_flag",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:palestine_flag\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -212,15 +128,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:jolly_roger",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:jolly_roger\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -229,15 +138,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:pride_flag",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:pride_flag\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -246,15 +148,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:gay_pride_flag",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:gay_pride_flag\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -263,15 +158,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:lesbian_pride_flag",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:lesbian_pride_flag\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -280,15 +168,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:asexual_pride_flag",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:asexual_pride_flag\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -297,15 +178,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:bisexual_pride_flag",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:bisexual_pride_flag\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -314,15 +188,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:copy_nbt",
-              "ops": [
-                {
-                  "op": "replace",
-                  "source": "hybrid_aquatic:trans_pride_flag",
-                  "target": "variant"
-                }
-              ],
-              "source": "block_entity"
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:trans_pride_flag\"}}"
             }
           ],
           "name": "minecraft:painting"

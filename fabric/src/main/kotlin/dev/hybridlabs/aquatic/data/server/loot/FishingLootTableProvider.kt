@@ -7,16 +7,17 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.decoration.Painting
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.TagEntry
-import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction
+import net.minecraft.world.level.storage.loot.functions.SetNbtFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
-import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider
 import java.util.function.BiConsumer
 
 class FishingLootTableProvider(output: FabricDataOutput) :
@@ -94,9 +95,14 @@ class FishingLootTableProvider(output: FabricDataOutput) :
             val variantKey = BuiltInRegistries.PAINTING_VARIANT.getKey(variant)
             if (variantKey.namespace != Constants.MOD_ID) return@forEach
 
+            // looks stupid but works and it's only for datagen anyway
+            val compoundTag = CompoundTag()
+            val entityTagCompound = compoundTag.getCompound(EntityType.ENTITY_TAG)
+            entityTagCompound.putString(Painting.VARIANT_TAG, variantKey.toString())
+            compoundTag.put(EntityType.ENTITY_TAG, entityTagCompound)
+
             messageInABottleLootPoolBuilder.add(LootItem.lootTableItem(Items.PAINTING).apply(
-                CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
-                    .copy("$variantKey", Painting.VARIANT_TAG)
+                SetNbtFunction.setTag(compoundTag)
             ))
         }
 
