@@ -24,7 +24,8 @@
         "PaintingMixin",
         "compat.carpet.HoneyCarpetHACompatMixin",
         "compat.carpet.SlimeCarpetHACompatMixin",
-        "compat.carpet.StickyBlockCarpetHACompatMixin"
+        "compat.carpet.StickyBlockCarpetHACompatMixin",
+        "HangingEntityItemMixin"
     ],
     "client": [
         "client.BookScreenMixin",
