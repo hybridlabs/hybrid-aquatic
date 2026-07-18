@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "hybrid_aquatic:eel_scarf"
+        "hybrid_aquatic:eel_scarf",
+        "hybrid_aquatic:striped_eel_scarf"
     ]
 }
