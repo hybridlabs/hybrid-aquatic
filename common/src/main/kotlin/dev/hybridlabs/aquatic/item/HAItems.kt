@@ -188,7 +188,7 @@ object HAItems {
     }
 
     val STRIPED_EEL_SCARF = register(
-        "eel_scarf"
+        "striped_eel_scarf"
     ) {
         StripedEelScarfItem(
             ArmorItem.Type.CHESTPLATE,
