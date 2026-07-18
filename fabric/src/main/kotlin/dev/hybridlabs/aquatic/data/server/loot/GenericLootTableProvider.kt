@@ -1,17 +1,24 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
+import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.loot.HALootTables
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtOps
 import net.minecraft.resources.ResourceKey
+import net.minecraft.world.entity.decoration.Painting
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
+import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
@@ -20,9 +27,10 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class GenericLootTableProvider(output: FabricDataOutput,lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     SimpleFabricLootTableProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
+        val lookup = lookupProvider.join()
 
         //#region Universal Crate Loot
         fun universalCratePool(): LootPool.Builder {
@@ -587,5 +595,35 @@ class GenericLootTableProvider(output: FabricDataOutput,lookupProvider: Completa
                 )
         )
         //#endregion
+
+        // message in a bottle loot table
+        // TODO: Actually check if variant is in HAPaintingTags.KEEPS_PAINTING_VARIANT.
+        //  Couldn't find a way to do it but we don't need this right now
+        val messageInABottleLootPoolBuilder = LootPool.lootPool()
+        val paintingRegistry = lookup.lookup(Registries.PAINTING_VARIANT).get()
+        paintingRegistry.listElements()
+            .forEach { painting ->
+                // This just doesnt work for some reason?
+                //if (!painting.`is`(HAPaintingTags.KEEPS_PAINTING_VARIANT)) return@forEach
+                if (painting.key().location().namespace != Constants.MOD_ID) return@forEach
+
+                val customData = CustomData.EMPTY
+                    .update(NbtOps.INSTANCE, Painting.VARIANT_MAP_CODEC, painting)
+                    .getOrThrow()
+                    .update { compoundTag: CompoundTag -> compoundTag.putString("id", "minecraft:painting") }
+
+                messageInABottleLootPoolBuilder.add(
+                    LootItem.lootTableItem(Items.PAINTING).apply(
+                        SetComponentsFunction.setComponent(DataComponents.CUSTOM_DATA, customData)
+                    )
+                )
+            }
+
+        exporter.accept(
+            ResourceKey.create(Registries.LOOT_TABLE, HALootTables.MESSAGE_IN_A_BOTTLE),
+            LootTable.lootTable()
+                .setRandomSequence(HALootTables.MESSAGE_IN_A_BOTTLE)
+                .pool(messageInABottleLootPoolBuilder.build())
+        )
     }
 }

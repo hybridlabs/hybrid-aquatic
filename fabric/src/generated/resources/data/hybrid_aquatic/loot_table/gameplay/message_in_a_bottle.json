@@ -1,9 +1,370 @@
 {
-  "type": "minecraft:fishing",
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "entries": [],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:bold_and_brash",
+                    "height": 2,
+                    "width": 1
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:bisexual_pride_flag",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:palestine_flag",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:big_lure",
+                    "height": 2,
+                    "width": 3
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:bigeye",
+                    "height": 2,
+                    "width": 3
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:pride_flag",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:melon",
+                    "height": 1,
+                    "width": 1
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:gay_pride_flag",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:lesbian_pride_flag",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:conch_street",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:fayette",
+                    "height": 2,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:creatures_of_the_deep",
+                    "height": 2,
+                    "width": 1
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:jolly_roger",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:jaws",
+                    "height": 2,
+                    "width": 1
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:trans_pride_flag",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:asexual_pride_flag",
+                    "height": 1,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:praya_dubia",
+                    "height": 3,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:preserver",
+                    "height": 1,
+                    "width": 1
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:custom_data": {
+                  "id": "minecraft:painting",
+                  "variant": {
+                    "asset_id": "hybrid_aquatic:king_of_herring",
+                    "height": 2,
+                    "width": 2
+                  }
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        }
+      ],
       "rolls": 1.0
     }
   ],
