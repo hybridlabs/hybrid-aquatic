@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class CoralPickaxeItem(settings: Properties) : PickaxeItem(
-    HAToolMaterials.SEASHELL,
+    HAToolMaterials.CORAL,
     1,
     -2.8f,
     settings) {

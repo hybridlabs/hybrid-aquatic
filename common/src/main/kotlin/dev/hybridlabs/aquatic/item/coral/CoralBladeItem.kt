@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class CoralBladeItem(settings: Properties) : SwordItem(
-    HAToolMaterials.SEASHELL,
+    HAToolMaterials.CORAL,
     3,
     -2.4f,
     settings) {
