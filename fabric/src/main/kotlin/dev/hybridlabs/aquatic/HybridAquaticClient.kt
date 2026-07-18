@@ -26,8 +26,8 @@ import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.fluid.HAFluidRenderer
 import dev.hybridlabs.aquatic.client.render.item.HATrinketRendererRegistry
-import dev.hybridlabs.aquatic.platform.ClientServices
 import dev.hybridlabs.aquatic.client.render.particle.HAParticleRendererRegistry
+import dev.hybridlabs.aquatic.platform.ClientServices
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
@@ -42,7 +42,6 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticClientNetworking
 
         HABlockRendererRegistry
-        HAItemRendererRegistry
         HAParticleRendererRegistry
         HybridAquaticEntityRenderers
         registerWeatherRenderers()
