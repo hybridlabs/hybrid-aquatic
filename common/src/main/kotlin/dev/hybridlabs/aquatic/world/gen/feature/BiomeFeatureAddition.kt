@@ -57,13 +57,13 @@ data class BiomeFeatureAddition(
                 ),
             )
 
-                add(
-                    BiomeFeatureAddition(
-                        HABiomeTags.ALL_TRENCHES,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.PING_PONG_SPONGE_PATCH
-                    ),
-                )
+            add(
+                BiomeFeatureAddition(
+                    HABiomeTags.ALL_TRENCHES,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.PING_PONG_SPONGE_PATCH
+                ),
+            )
 
             if (config.config.featureConfig.generateBrinePools) {
                 add(
@@ -324,15 +324,13 @@ data class BiomeFeatureAddition(
                 )
             }
 
-            if (config.config.featureConfig.generateBottles) {
-                add(
-                    BiomeFeatureAddition(
-                        HABiomeTags.BOTTLE_SPAWN_BIOMES,
-                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                        HAPlacedFeatures.MESSAGE_IN_A_BOTTLE
-                    )
+            add(
+                BiomeFeatureAddition(
+                    HABiomeTags.BOTTLE_SPAWN_BIOMES,
+                    GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                    HAPlacedFeatures.MESSAGE_IN_A_BOTTLE
                 )
-            }
+            )
         }
     }
 }
