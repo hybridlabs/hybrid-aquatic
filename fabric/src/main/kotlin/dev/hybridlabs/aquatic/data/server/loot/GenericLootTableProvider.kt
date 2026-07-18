@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
@@ -12,7 +13,7 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.NbtOps
 import net.minecraft.resources.ResourceKey
-import net.minecraft.world.entity.decoration.Painting
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.storage.loot.LootPool
@@ -606,7 +607,7 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
                 if (painting.key().location().namespace != Constants.MOD_ID) return@forEach
 
                 val customData = CustomData.EMPTY
-                    .update(NbtOps.INSTANCE, Painting.VARIANT_MAP_CODEC, painting)
+                    .update(NbtOps.INSTANCE, PAINTINGVARIANTMAPCODEC, painting.key().location())
                     .getOrThrow()
                     .update { compoundTag: CompoundTag -> compoundTag.putString("id", "minecraft:painting") }
 
@@ -623,5 +624,9 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
                 .setRandomSequence(HALootTables.MESSAGE_IN_A_BOTTLE)
                 .pool(messageInABottleLootPoolBuilder.build())
         )
+    }
+
+    companion object {
+        val PAINTINGVARIANTMAPCODEC: MapCodec<ResourceLocation> = ResourceLocation.CODEC.fieldOf("variant")
     }
 }
