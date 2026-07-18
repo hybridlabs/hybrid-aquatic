@@ -19,17 +19,21 @@ import dev.hybridlabs.aquatic.client.render.block.HABlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
+import dev.hybridlabs.aquatic.fluid.BrineFluidType
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.potions.HAPotions
+import dev.hybridlabs.aquatic.network.FishingBobberPayload
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ClientPayloadHandler
+import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ServerPayloadHandler
+import dev.hybridlabs.aquatic.particle.*
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
+import net.minecraft.client.player.AbstractClientPlayer
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.texture.OverlayTexture
 import net.minecraft.world.entity.EquipmentSlot
@@ -40,6 +44,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.fluids.FluidType
@@ -184,6 +189,9 @@ object HybridAquaticModBusEvents {
         }
         event.registerSpriteSet(HAParticleTypes.BRINE_BUBBLE_POP.get()) { sprites ->
             BrineBubblePopParticle.Companion.Provider(sprites)
+        }
+        event.registerSpriteSet(HAParticleTypes.VENT_SMOKE.get()) { sprites ->
+            VentSmokeParticle.Companion.Provider(sprites)
         }
     }
 
