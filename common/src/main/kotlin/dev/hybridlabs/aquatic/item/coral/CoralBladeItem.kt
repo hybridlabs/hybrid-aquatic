@@ -9,8 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class CoralBladeItem(settings: Properties) : SwordItem(
-    HAToolMaterials.SEASHELL,
-    settings) {
+    HAToolMaterials.CORAL, settings) {
 
     override fun appendHoverText(
         stack: ItemStack,

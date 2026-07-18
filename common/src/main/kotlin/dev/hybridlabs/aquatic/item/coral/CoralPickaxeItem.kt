@@ -6,9 +6,10 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.PickaxeItem
 import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.Level
 
 class CoralPickaxeItem(settings: Properties) : PickaxeItem(
-    HAToolMaterials.SEASHELL,
+    HAToolMaterials.CORAL,
     settings) {
 
     override fun appendHoverText(
