@@ -99,6 +99,26 @@
           "functions": [
             {
               "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:the_watchful\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:lighthouse\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:jaws\"}}"
             }
           ],

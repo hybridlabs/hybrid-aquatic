@@ -18,6 +18,8 @@ object HAPaintings {
     val PRESSED_KELP = registerPainting("pressed_kelp", 2, 1)
     val PRESSED_BULL_KELP = registerPainting("pressed_bull_kelp", 1, 3)
     val BIGEYE = registerPainting("bigeye", 3, 2)
+    val THE_WATCHFUL = registerPainting("the_watchful", 3, 3)
+    val LIGHTHOUSE = registerPainting("lighthouse", 1, 2)
 
     val JAWS = registerPainting("jaws", 1, 2)
     val GREAT_LAKE = registerPainting("great_lake", 2, 2)
