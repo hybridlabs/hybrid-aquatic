@@ -859,6 +859,8 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.BOLD_AND_BRASH to listOf("Bold And Brash", "Squidward Tentacles"),
             HAPaintings.BIG_LURE to listOf("Big Lure", "Stephen Hillenburg"),
             HAPaintings.PRESERVER to listOf("Life", "Preserver"),
+            HAPaintings.THE_WATCHFUL to listOf("The Watchful", "RagnoGal"),
+            HAPaintings.LIGHTHOUSE to listOf("Lighthouse", "MysticKoko"),
 
             HAPaintings.CREATURES_OF_THE_DEEP to listOf("Creatures Of The Deep", "Random Rhincodon"),
             HAPaintings.PRESSED_KELP to listOf("Pressed Kelp", "Random Rhincodon"),
