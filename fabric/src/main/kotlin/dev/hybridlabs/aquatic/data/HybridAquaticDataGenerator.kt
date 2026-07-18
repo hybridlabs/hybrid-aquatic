@@ -30,10 +30,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::LanguageProvider)
         pack.addProvider(::ModelProvider)
         pack.addProvider(::SoundProvider)
-        pack.addProvider(::BlockLootTableProvider)
-        pack.addProvider(::EntityTypeLootTableProvider)
-        pack.addProvider(::FishingLootTableProvider)
-        pack.addProvider(::GenericLootTableProvider)
+        pack.addProvider(::PaintingProvider)
         pack.addProvider(::AdvancementProvider)
         pack.addProvider(::BiomeProvider)
         pack.addProvider(::BiomeTagProvider)
@@ -48,7 +45,10 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::SeaMessageProvider)
         pack.addProvider(::StructureSpawnModifierProvider)
         pack.addProvider(::FluidTagProvider)
-        pack.addProvider(::PaintingProvider)
+        pack.addProvider(::BlockLootTableProvider)
+        pack.addProvider(::EntityTypeLootTableProvider)
+        pack.addProvider(::FishingLootTableProvider)
+        pack.addProvider(::GenericLootTableProvider)
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {

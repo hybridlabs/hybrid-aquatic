@@ -603,8 +603,6 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
         val paintingRegistry = lookup.lookup(Registries.PAINTING_VARIANT).get()
         paintingRegistry.listElements()
             .forEach { painting ->
-                // This just doesnt work for some reason?
-                //if (!painting.`is`(HAPaintingTags.KEEPS_PAINTING_VARIANT)) return@forEach
                 if (painting.key().location().namespace != Constants.MOD_ID) return@forEach
 
                 val customData = CustomData.EMPTY
@@ -614,7 +612,7 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
 
                 messageInABottleLootPoolBuilder.add(
                     LootItem.lootTableItem(Items.PAINTING).apply(
-                        SetComponentsFunction.setComponent(DataComponents.CUSTOM_DATA, customData)
+                        SetComponentsFunction.setComponent(DataComponents.ENTITY_DATA, customData)
                     )
                 )
             }
