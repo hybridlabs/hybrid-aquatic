@@ -4,16 +4,12 @@ package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
-import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.RegistryAccess
 import net.minecraft.core.component.DataComponents
 import net.minecraft.util.StringRepresentable
-import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
-import net.minecraft.world.ItemInteractionResult
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.CustomData
@@ -33,7 +29,6 @@ import net.minecraft.world.level.pathfinder.PathComputationType
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
-import kotlin.jvm.optionals.getOrNull
 
 /**
  * Represents the Message in a Bottle block.
@@ -78,6 +73,8 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
             blockEntity.variant = blockEntity.variant.next
             return InteractionResult.sidedSuccess(level.isClientSide)
         }
+
+        return InteractionResult.PASS
     }
 
     override fun getStateForPlacement(ctx: BlockPlaceContext): BlockState {
@@ -150,12 +147,16 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         POTION("potion"),
         WINE("wine");
 
+        val next: Variant by lazy { NEXT_MAP[this] ?: entries[0] }
+
         override fun getSerializedName(): String {
             return id
         }
 
         companion object {
             private val BY_ID = entries.associateBy(Variant::id)
+
+            private val NEXT_MAP = entries.zipWithNext().toMap()
 
             fun byId(id: String): Variant {
                 return BY_ID[id] ?: BOTTLE

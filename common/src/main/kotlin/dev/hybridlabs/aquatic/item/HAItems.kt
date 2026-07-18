@@ -188,9 +188,10 @@ object HAItems {
     }
 
     val STRIPED_EEL_SCARF = register(
-        "striped_eel_scarf"
+        "eel_scarf"
     ) {
-        STRIPED_EEL_ARMOR_FACTORY.create(
+        StripedEelScarfItem(
+            ArmorItem.Type.CHESTPLATE,
             Item.Properties().stacksTo(1)
         )
     }
@@ -252,7 +253,6 @@ object HAItems {
     //#endregion
 
     //#region Tools - Weapons - Hooks
-    val SEA_MESSAGE_BOOK = register("sea_message_book") { SeaMessageBookItem(Item.Properties()) }
     val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(Item.Properties()) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
