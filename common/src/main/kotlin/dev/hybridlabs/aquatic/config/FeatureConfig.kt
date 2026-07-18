@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 
 data class FeatureConfig(
-    val generateBottles: Boolean = true,
     val generateFloatingSargassum: Boolean = true,
     val generateSargassum: Boolean = true,
     val generateBullKelp: Boolean = true,
@@ -17,7 +16,6 @@ data class FeatureConfig(
     companion object {
         val CODEC: Codec<FeatureConfig> = RecordCodecBuilder.create { instance ->
             instance.group(
-                Codec.BOOL.fieldOf("generateBottles").forGetter(FeatureConfig::generateBottles),
                 Codec.BOOL.fieldOf("generateFloatingSargassum").forGetter(FeatureConfig::generateFloatingSargassum),
                 Codec.BOOL.fieldOf("generateSargassum").forGetter(FeatureConfig::generateSargassum),
                 Codec.BOOL.fieldOf("generateBullKelp").forGetter(FeatureConfig::generateBullKelp),
