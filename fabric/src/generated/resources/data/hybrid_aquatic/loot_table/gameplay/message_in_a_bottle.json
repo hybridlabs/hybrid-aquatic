@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "hybrid_aquatic:gameplay/message_in_a_bottle"
+}

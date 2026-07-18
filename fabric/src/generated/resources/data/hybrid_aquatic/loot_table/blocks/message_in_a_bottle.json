@@ -34,11 +34,6 @@
                       "op": "replace",
                       "source": "variant",
                       "target": "variant"
-                    },
-                    {
-                      "op": "replace",
-                      "source": "message",
-                      "target": "message"
                     }
                   ],
                   "source": "block_entity"
@@ -47,21 +42,8 @@
               "name": "hybrid_aquatic:message_in_a_bottle"
             },
             {
-              "type": "minecraft:item",
-              "functions": [
-                {
-                  "function": "minecraft:copy_custom_data",
-                  "ops": [
-                    {
-                      "op": "replace",
-                      "source": "message",
-                      "target": "sea_message"
-                    }
-                  ],
-                  "source": "block_entity"
-                }
-              ],
-              "name": "hybrid_aquatic:sea_message_book"
+              "type": "minecraft:loot_table",
+              "value": "hybrid_aquatic:gameplay/message_in_a_bottle"
             }
           ]
         }

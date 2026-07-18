@@ -1,20 +1,25 @@
 package dev.hybridlabs.aquatic.data.server.loot
 
-import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.loot.HALootTables
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.aquatic.tag.HAPaintingTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtOps
 import net.minecraft.resources.ResourceKey
-import net.minecraft.world.item.enchantment.Enchantment
+import net.minecraft.world.entity.decoration.Painting
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
 import net.minecraft.world.level.storage.loot.entries.TagEntry
+import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
@@ -22,6 +27,7 @@ import java.util.function.BiConsumer
 class FishingLootTableProvider(output: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     SimpleFabricLootTableProvider(output, lookupProvider, LootContextParamSets.FISHING) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
+        val lookup = lookupProvider.join()
 
         exporter.accept(
             ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_SMALL_FISH),
@@ -90,25 +96,23 @@ class FishingLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
         // message in a bottle loot table
         // TODO: Actually check if variant is in HAPaintingTags.KEEPS_PAINTING_VARIANT.
         //  Couldn't find a way to do it but we don't need this right now
-
-        this.lookupProvider.completeAsync 
-
         val messageInABottleLootPoolBuilder = LootPool.lootPool()
-        Registries.PAINTING_VARIANT
-        BuiltInRegistries.PAINTING_VARIANT.forEach { variant ->
-            val variantKey = BuiltInRegistries.PAINTING_VARIANT.getKey(variant)
-            if (variantKey.namespace != Constants.MOD_ID) return@forEach
+        val paintingRegistry = lookup.lookup(Registries.PAINTING_VARIANT).get()
+        paintingRegistry.listElements()
+            .forEach { painting ->
+                if (!painting.`is`(HAPaintingTags.KEEPS_PAINTING_VARIANT)) return@forEach
+                val customData = CustomData.EMPTY
+                    .update(NbtOps.INSTANCE, Painting.VARIANT_MAP_CODEC, painting)
+                    .getOrThrow()
+                    .update { compoundTag: CompoundTag -> compoundTag.putString("id", "minecraft:painting") }
 
-            // looks stupid but works and it's only for datagen anyway
-            val compoundTag = CompoundTag()
-            val entityTagCompound = compoundTag.getCompound(EntityType.ENTITY_TAG)
-            entityTagCompound.putString(Painting.VARIANT_TAG, variantKey.toString())
-            compoundTag.put(EntityType.ENTITY_TAG, entityTagCompound)
-
-            messageInABottleLootPoolBuilder.add(LootItem.lootTableItem(Items.PAINTING).apply(
-                SetNbtFunction.setTag(compoundTag)
-            ))
-        }
+                messageInABottleLootPoolBuilder.add(
+                    LootItem.lootTableItem(Items.PAINTING).apply(
+                        SetComponentsFunction.setComponent(DataComponents.CUSTOM_DATA, customData)
+                    )
+                )
+            }
+        messageInABottleLootPoolBuilder.build()
 
         exporter.accept(
             ResourceKey.create(Registries.LOOT_TABLE, HALootTables.MESSAGE_IN_A_BOTTLE),
