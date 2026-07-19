@@ -5,9 +5,7 @@ import dev.hybridlabs.aquatic.tag.HAPaintingTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
-import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.decoration.PaintingVariant
 import java.util.concurrent.CompletableFuture
 
@@ -50,6 +48,15 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
             .add(HAPaintings.JOLLY_ROGER)
             .add(HAPaintings.THE_WATCHFUL)
             .add(HAPaintings.LIGHTHOUSE)
+            .add(HAPaintings.ABYSSAL)
+            .add(HAPaintings.CHASM)
+            .add(HAPaintings.DIORAMA)
+            .add(HAPaintings.JONA_SAXISA)
+            .add(HAPaintings.LIGHTHOUSE_AFTER_DUSK)
+            .add(HAPaintings.RED_DEVIL)
+            .add(HAPaintings.SEASHELL_SEASHELF)
+            .add(HAPaintings.SHALLOWS)
+            .add(HAPaintings.THE_FAST_REGIMENT)
 
         getOrCreateTagBuilder(HAPaintingTags.TRANSPARENT_PAINTING)
             .add(HAPaintings.ASEXUAL_PRIDE_FLAG)

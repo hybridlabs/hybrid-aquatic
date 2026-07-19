@@ -859,25 +859,44 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.BOLD_AND_BRASH to listOf("Bold And Brash", "Squidward Tentacles"),
             HAPaintings.BIG_LURE to listOf("Big Lure", "Stephen Hillenburg"),
             HAPaintings.PRESERVER to listOf("Life", "Preserver"),
+
             HAPaintings.THE_WATCHFUL to listOf("The Watchful", "RagnoGal"),
             HAPaintings.LIGHTHOUSE to listOf("Lighthouse", "MysticKoko"),
+            HAPaintings.THE_FAST_REGIMENT to listOf("The Fast Regiment", "woakey"),
 
             HAPaintings.CREATURES_OF_THE_DEEP to listOf("Creatures Of The Deep", "Random Rhincodon"),
             HAPaintings.PRESSED_KELP to listOf("Pressed Kelp", "Random Rhincodon"),
             HAPaintings.PRESSED_BULL_KELP to listOf("Pressed Bull Kelp", "Random Rhincodon"),
-            HAPaintings.BIGEYE to listOf("Bigeye", "KianaK"),
+            HAPaintings.SEASHELL_SEASHELF to listOf("Seashell Seashelf", "Random Rhincodon"),
+
             HAPaintings.SUNSET to listOf("Sunset", "Stridey"),
+
             HAPaintings.JAM to listOf("Jam", "Aim Boot"),
             HAPaintings.SWIRLING to listOf("Swirling", "Aim Boot"),
             HAPaintings.RIVERFISH to listOf("Riverfish", "Aim Boot"),
+
             HAPaintings.POULPE_COLOSSAL to listOf("Le Poulpe Colossal", "Pierre Dénys de Montfort"),
             HAPaintings.BELOW to listOf("Below", "finnibard"),
             HAPaintings.SUNTIDE to listOf("Suntide", "rotten sarah"),
+
             HAPaintings.MOONCATCHER to listOf("Mooncatcher", "wd"),
             HAPaintings.NEVEN_NAIVEN to listOf("Nevein, naiven", "wd"),
             HAPaintings.ORGANON to listOf("Organon", "wd"),
 
+            HAPaintings.CHASM to listOf("Chasm", "Lawrziepan"),
+            HAPaintings.DIORAMA to listOf("Diorama", "Lawrziepan"),
+
+            HAPaintings.JONA_SAXISA to listOf("Jona Saxisa", "Josax"),
+
+            HAPaintings.ABYSSAL to listOf("Abyssal", "KianaK"),
+            HAPaintings.RED_DEVIL to listOf("Red Devil", "KianaK"),
+            HAPaintings.BIGEYE to listOf("Bigeye", "KianaK"),
+            HAPaintings.SHALLOWS to listOf("Shallows", "KianaK"),
+
             HAPaintings.GREAT_LAKE to listOf("Great Lake", "Auri Wynn"),
+            HAPaintings.LIGHTHOUSE_AFTER_DUSK to listOf("Lighthouse After Dusk", "Auri Wynn"),
+            HAPaintings.CALM_WATERS to listOf("Calm Waters", "Auri Wynn"),
+
             HAPaintings.JAWS to listOf("Jaws", "Steven Spielberg"),
 
             HAPaintings.PRAYA_DUBIA to listOf("Praya Dubia", "UnorthodoxSketch"),
