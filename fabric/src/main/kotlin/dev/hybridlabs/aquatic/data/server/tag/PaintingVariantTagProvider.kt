@@ -57,6 +57,7 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
             .add(HAPaintings.SEASHELL_SEASHELF)
             .add(HAPaintings.SHALLOWS)
             .add(HAPaintings.THE_FAST_REGIMENT)
+            .add(HAPaintings.GONE_FISHING)
 
         getOrCreateTagBuilder(HAPaintingTags.TRANSPARENT_PAINTING)
             .add(HAPaintings.ASEXUAL_PRIDE_FLAG)

@@ -882,6 +882,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.MOONCATCHER to listOf("Mooncatcher", "wd"),
             HAPaintings.NEVEN_NAIVEN to listOf("Nevein, naiven", "wd"),
             HAPaintings.ORGANON to listOf("Organon", "wd"),
+            HAPaintings.GONE_FISHING to listOf("Gone Fishing", "Lightning64"),
 
             HAPaintings.CHASM to listOf("Chasm", "Lawrziepan"),
             HAPaintings.DIORAMA to listOf("Diorama", "Lawrziepan"),
@@ -894,7 +895,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.SHALLOWS to listOf("Shallows", "KianaK"),
 
             HAPaintings.GREAT_LAKE to listOf("Great Lake", "Auri Wynn"),
-            HAPaintings.LIGHTHOUSE_AFTER_DUSK to listOf("Lighthouse After Dusk", "Auri Wynn"),
+            HAPaintings.LIGHTHOUSE_AFTER_DUSK to listOf("Lighthouse After Dusk", "papillonjunkie"),
             HAPaintings.CALM_WATERS to listOf("Calm Waters", "Auri Wynn"),
 
             HAPaintings.JAWS to listOf("Jaws", "Steven Spielberg"),

@@ -43,6 +43,7 @@ class PaintingProvider(output: FabricDataOutput,
             register(context, HAPaintings.PRESERVER, "preserver", 1, 1)
 
             register(context, HAPaintings.CREATURES_OF_THE_DEEP, "creatures_of_the_deep", 1, 2)
+            register(context, HAPaintings.GONE_FISHING, "gone_fishing", 1, 2)
             register(context, HAPaintings.PRESSED_KELP, "pressed_kelp", 2, 1)
             register(context, HAPaintings.PRESSED_BULL_KELP, "pressed_bull_kelp", 1, 3)
             register(context, HAPaintings.BIGEYE, "bigeye", 3, 2)

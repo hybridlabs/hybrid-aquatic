@@ -10,6 +10,7 @@ object HAPaintings {
 
     val CONCH_STREET = registerPainting("conch_street", 2, 1)
     val BOLD_AND_BRASH = registerPainting("bold_and_brash", 1, 2)
+    val GONE_FISHING = registerPainting("gone_fishing", 1, 2)
     val BIG_LURE = registerPainting("big_lure", 3, 2)
     val PRESERVER = registerPainting("preserver", 1, 1)
     val JONA_SAXISA = registerPainting("jona_saxisa", 1, 1)
