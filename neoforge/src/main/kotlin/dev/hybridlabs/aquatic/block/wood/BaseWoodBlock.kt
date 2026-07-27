@@ -11,28 +11,28 @@ import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.neoforge.common.ItemAbility
 
 open class BaseWoodBlock(settings: Properties) : RotatedPillarBlock(settings) {
-    override fun isFlammable(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Boolean {
+    override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
         return true
     }
 
-    override fun getFlammability(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Int {
+    override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
         return 5
     }
 
     override fun getFireSpreadSpeed(
-        state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+        state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
     ): Int {
         return 5
     }
 
     override fun getToolModifiedState(
-        state: BlockState?,
-        context: UseOnContext?,
-        toolAction: ItemAbility?,
+        state: BlockState,
+        context: UseOnContext,
+        toolAction: ItemAbility,
         simulate: Boolean
     ): BlockState? {
-        if (context!!.itemInHand.item is AxeItem) {
-            if (state!!.block == HAPlatformBlocks.DRIFTWOOD_LOG.get())
+        if (context.itemInHand.item is AxeItem) {
+            if (state.block == HAPlatformBlocks.DRIFTWOOD_LOG.get())
                 return HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get().defaultBlockState()
                     .setValue(AXIS, state.getValue(AXIS))
             if (state.block == HAPlatformBlocks.DRIFTWOOD_WOOD.get())

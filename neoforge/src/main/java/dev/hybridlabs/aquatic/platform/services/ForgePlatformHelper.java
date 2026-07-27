@@ -24,12 +24,10 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
-import net.neoforged.neoforgespi.language.IModFileInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -161,5 +159,4 @@ public class ForgePlatformHelper implements PlatformHelper {
             }
         }
     }
-
 }

@@ -12,8 +12,6 @@ import net.neoforged.neoforge.common.world.BiomeModifier
 import net.neoforged.neoforge.common.world.BiomeModifiers
 import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.BIOME_MODIFIERS
 
-
-
 class BiomeModifierProvider(context: BootstrapContext<BiomeModifier>) {
     init {
         registerBiomeSpawns(context)

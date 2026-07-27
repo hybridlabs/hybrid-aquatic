@@ -495,7 +495,6 @@ class PlacedFeatureProvider(
         }
     }
 
-
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
         val reg = registries.lookup(Registries.PLACED_FEATURE).get()
 
