@@ -47,6 +47,7 @@ import net.minecraft.world.level.levelgen.placement.CaveSurface
 import net.minecraft.world.level.levelgen.placement.CountPlacement
 import net.minecraft.world.level.levelgen.placement.HeightmapPlacement
 import net.minecraft.world.level.levelgen.placement.PlacementModifier
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockStateMatchTest
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 import net.minecraft.world.level.levelgen.synth.NormalNoise
 import java.util.concurrent.CompletableFuture
@@ -498,11 +499,19 @@ class ConfiguredFeatureProvider(
                 RandomPatchConfiguration(
                     16, 4, 4,
                     PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            BlockStateProvider.simple(
-                                HABlocks.WILD_MUSSELS.get().defaultBlockState()
-                                    .setValue(WATERLOGGED, false)
+                        Feature.REPLACE_SINGLE_BLOCK,
+                        ReplaceBlockConfiguration(
+                            listOf(
+                                OreConfiguration.target(
+                                    BlockStateMatchTest(Blocks.WATER.defaultBlockState()),
+                                    HABlocks.WILD_MUSSELS.get().defaultBlockState()
+                                        .setValue(WATERLOGGED, true)
+                                ),
+                                OreConfiguration.target(
+                                    BlockStateMatchTest(Blocks.AIR.defaultBlockState()),
+                                    HABlocks.WILD_MUSSELS.get().defaultBlockState()
+                                        .setValue(WATERLOGGED, false)
+                                )
                             )
                         ),
                         BlockPredicate.hasSturdyFace(Vec3i(0, -1, 0), Direction.UP)
