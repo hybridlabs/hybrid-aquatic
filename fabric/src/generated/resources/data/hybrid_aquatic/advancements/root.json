@@ -8,7 +8,7 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
+    "announce_to_chat": false,
     "background": "hybrid_aquatic:textures/block/coralstone.png",
     "description": {
       "translate": "advancements.hybrid_aquatic.enter_water.description"
@@ -18,7 +18,7 @@
     "icon": {
       "item": "hybrid_aquatic:tuna"
     },
-    "show_toast": true,
+    "show_toast": false,
     "title": {
       "translate": "advancements.hybrid_aquatic.enter_water.title"
     }

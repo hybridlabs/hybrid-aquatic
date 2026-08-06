@@ -9,14 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.FrameType
 import net.minecraft.advancements.RequirementsStrategy
-import net.minecraft.advancements.critereon.BlockPredicate
-import net.minecraft.advancements.critereon.EnterBlockTrigger
-import net.minecraft.advancements.critereon.EntityPredicate
-import net.minecraft.advancements.critereon.InventoryChangeTrigger
-import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger
-import net.minecraft.advancements.critereon.KilledTrigger
-import net.minecraft.advancements.critereon.LocationPredicate
+import net.minecraft.advancements.critereon.*
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
@@ -33,8 +26,8 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
                 Component.translatable("advancements.hybrid_aquatic.enter_water.description"),
                 ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
                 FrameType.TASK,
-                true,
-                true,
+                false,
+                false,
                 false
             )
             .addCriterion(
