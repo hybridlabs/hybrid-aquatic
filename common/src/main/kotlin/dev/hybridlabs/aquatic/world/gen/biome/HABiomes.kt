@@ -480,15 +480,6 @@ object HABiomes {
                     0.5f,
                 )
             )
-
-            BiomePlacement.addSubOverworld(
-                DEEP_WARM_OCEAN,
-                SULFURIC_CAVES, CriterionBuilder.value(
-                    BiomeParameterTargets.DEPTH,
-                    0.2f,
-                    0.5f,
-                )
-            )
         }
         //#endregion
 
