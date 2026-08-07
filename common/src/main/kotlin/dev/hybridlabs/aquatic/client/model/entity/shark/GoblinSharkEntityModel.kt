@@ -13,13 +13,13 @@ class GoblinSharkEntityModel : HASharkEntityModel<GoblinSharkEntity>("goblin_sha
 
     companion object {
         private val GOBLIN_SHARK_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/shark/goblin_shark/goblin_shark.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/shark/goblin_shark/goblin_shark.png")
         private val DEPRESSURIZED_TEXTURE =
-            ResourceLocation("hybrid_aquatic", "textures/entity/shark/goblin_shark/goblin_shark_depressurized.png")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/shark/goblin_shark/goblin_shark_depressurized.png")
 
         private val GOBLIN_SHARK_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/shark/goblin_shark/goblin_shark.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/shark/goblin_shark/goblin_shark.geo.json")
         private val DEPRESSURIZED_MODEL =
-            ResourceLocation("hybrid_aquatic", "geo/shark/goblin_shark/goblin_shark_depressurized.geo.json")
+            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/shark/goblin_shark/goblin_shark_depressurized.geo.json")
     }
 }

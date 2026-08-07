@@ -593,6 +593,200 @@ object HABiomes {
             )
         )
         //#endregion
+
+        //#region Still Life Compat
+        // trenches
+        BiomePlacement.addSubOverworld(
+            ResourceKey.create(
+                Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath("still_life", "temperate_deep_ocean")
+            ),
+            TRENCH, CriterionBuilder.value(
+                BiomeParameterTargets.CONTINENTALNESS,
+                -0.72f,
+                -0.62f,
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            ResourceKey.create(
+                Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_deep_ocean")
+            ),
+            LUKEWARM_TRENCH, CriterionBuilder.value(
+                BiomeParameterTargets.CONTINENTALNESS,
+                -0.72f,
+                -0.62f,
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            ResourceKey.create(
+                Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath("still_life", "tropical_deep_ocean")
+            ),
+            WARM_TRENCH, CriterionBuilder.value(
+                BiomeParameterTargets.CONTINENTALNESS,
+                -0.72f,
+                -0.62f
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            ResourceKey.create(
+                Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath("still_life", "cold_deep_ocean")
+            ),
+            COLD_TRENCH, CriterionBuilder.value(
+                BiomeParameterTargets.CONTINENTALNESS,
+                -0.72f,
+                -0.62f
+            )
+        )
+
+        BiomePlacement.addSubOverworld(
+            ResourceKey.create(
+                Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath("still_life", "arctic_deep_ocean")
+            ),
+            FROZEN_TRENCH, CriterionBuilder.value(
+                BiomeParameterTargets.CONTINENTALNESS,
+                -0.72f,
+                -0.62f,
+            )
+        )
+        // deep coral reefs
+        if (config.config.biomeConfig.generateDeepCoralReef) {
+            BiomePlacement.replaceOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "temperate_deep_ocean")
+                ),
+                DEEP_CORAL_REEF,
+                0.1
+            )
+
+            BiomePlacement.replaceOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_deep_ocean")
+                ),
+                TROPICAL_DEEP_CORAL_REEF,
+                0.1
+            )
+
+            BiomePlacement.replaceOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "cold_deep_ocean")
+                ),
+                DEEP_CORAL_REEF,
+                0.1
+            )
+
+            BiomePlacement.replaceOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "arctic_deep_ocean")
+                ),
+                DEEP_CORAL_REEF,
+                0.1
+            )
+        }
+
+        // warm ocean biomes
+        if (config.config.biomeConfig.generateSeagrassBed) {
+            BiomePlacement.replaceOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "tropical_shallow_ocean")
+                ),
+                SEAGRASS_BED,
+                0.25
+            )
+        }
+
+        BiomePlacement.replaceOverworld(
+            ResourceKey.create(
+                Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath("still_life", "tropical_shallow_ocean")
+            ),
+            CORAL_REEF,
+            0.25
+        )
+
+
+        BiomePlacement.replaceOverworld(
+            ResourceKey.create(
+                Registries.BIOME,
+                ResourceLocation.fromNamespaceAndPath("still_life", "tropical_shallow_ocean")
+            ),
+            RED_MEADOW,
+            0.25
+        )
+
+        // sulfuric caves
+        if (config.config.biomeConfig.generateSulfuricCave) {
+            BiomePlacement.addSubOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "temperate_deep_ocean")
+                ),
+                SULFURIC_CAVES, CriterionBuilder.value(
+                    BiomeParameterTargets.DEPTH,
+                    0.2f,
+                    0.5f,
+                )
+            )
+
+            BiomePlacement.addSubOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "subtropical_deep_ocean")
+                ),
+                SULFURIC_CAVES, CriterionBuilder.value(
+                    BiomeParameterTargets.DEPTH,
+                    0.2f,
+                    0.5f
+                )
+            )
+
+            BiomePlacement.addSubOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "tropical_deep_ocean")
+                ),
+                SULFURIC_CAVES, CriterionBuilder.value(
+                    BiomeParameterTargets.DEPTH,
+                    0.2f,
+                    0.5f
+                )
+            )
+
+            BiomePlacement.addSubOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "cold_deep_ocean")
+                ),
+                SULFURIC_CAVES, CriterionBuilder.value(
+                    BiomeParameterTargets.DEPTH,
+                    0.2f,
+                    0.5f
+                )
+            )
+
+            BiomePlacement.addSubOverworld(
+                ResourceKey.create(
+                    Registries.BIOME,
+                    ResourceLocation.fromNamespaceAndPath("still_life", "arctic_deep_ocean")
+                ),
+                SULFURIC_CAVES, CriterionBuilder.value(
+                    BiomeParameterTargets.DEPTH,
+                    0.2f,
+                    0.5f,
+                )
+            )
+        }
         //#endregion
 
         //#region Surface Rule Generation
