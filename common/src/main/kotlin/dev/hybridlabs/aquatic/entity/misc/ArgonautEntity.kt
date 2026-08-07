@@ -34,7 +34,6 @@ import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 import net.minecraft.world.level.gameevent.GameEvent
-import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
@@ -535,12 +534,20 @@ open class ArgonautEntity(
         }
 
         //#region Riding
-        return if (player.isSecondaryUseActive) {
-            InteractionResult.PASS
-        } else if (this.isVehicle) {
-            InteractionResult.PASS
-        } else if (!this.level().isClientSide) {
-            if (player.startRiding(this)) InteractionResult.CONSUME else InteractionResult.PASS
+        if (player.isSecondaryUseActive) {
+            val containerResult = interactWithContainerVehicle(player)
+            if (containerResult.consumesAction()) {
+                gameEvent(GameEvent.CONTAINER_OPEN, player)
+            }
+            return containerResult
+        }
+
+        return if (!level().isClientSide) {
+            if (player.startRiding(this)) {
+                InteractionResult.CONSUME
+            } else {
+                InteractionResult.PASS
+            }
         } else {
             InteractionResult.SUCCESS
         }
