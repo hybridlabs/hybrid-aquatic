@@ -530,6 +530,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.ROCKFISH.get(),
             HAItems.SEA_BASS.get(),
             HAItems.TETRA.get(),
+            HAItems.AFRICAN_BUTTERFLYFISH.get(),
             HAItems.TIGER_BARB.get(),
             HAItems.TRIGGERFISH.get(),
             HAItems.TREVALLY.get(),

@@ -39,6 +39,16 @@
           "functions": [
             {
               "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:gone_fishing\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:big_lure\"}}"
             }
           ],
@@ -50,6 +60,26 @@
             {
               "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:preserver\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:jona_saxisa\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:calm_waters\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -139,6 +169,16 @@
           "functions": [
             {
               "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:selgio\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:sunset\"}}"
             }
           ],
@@ -149,7 +189,77 @@
           "functions": [
             {
               "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:seashell_seashelf\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:shallows\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:riverfish\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:diorama\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:red_devil\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:abyssal\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:the_fast_regiment\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:lighthouse_after_dusk\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -199,7 +309,47 @@
           "functions": [
             {
               "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:chasm\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:admiral_skellington\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:admiral_steve\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:suntide\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:steve_and_the_sea\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -230,6 +380,16 @@
             {
               "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:organon\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:majestic_behemoth\"}}"
             }
           ],
           "name": "minecraft:painting"
@@ -340,6 +500,16 @@
             {
               "function": "minecraft:set_nbt",
               "tag": "{EntityTag:{variant:\"hybrid_aquatic:nonbinary_pride_flag\"}}"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{EntityTag:{variant:\"hybrid_aquatic:pansexual_pride_flag\"}}"
             }
           ],
           "name": "minecraft:painting"

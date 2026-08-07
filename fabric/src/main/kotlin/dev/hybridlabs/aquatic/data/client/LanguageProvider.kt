@@ -920,8 +920,8 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAPaintings.NONBINARY_PRIDE_FLAG to listOf("Nonbinary Pride", "Flag"),
             HAPaintings.PANSEXUAL_PRIDE_FLAG to listOf("Pansexual Pride", "Flag"),
         ).forEach { (painting, name) ->
-            builder.add("painting.hybrid_aquatic.${painting.location().path}.title", name[0])
-            builder.add("painting.hybrid_aquatic.${painting.location().path}.author", name[1])
+            builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
+            builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])
         }
     }
 
