@@ -869,6 +869,10 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.PRESSED_BULL_KELP to listOf("Pressed Bull Kelp", "Random Rhincodon"),
             HAPaintings.SEASHELL_SEASHELF to listOf("Seashell Seashelf", "Random Rhincodon"),
 
+            HAPaintings.ADMIRAL_STEVE to listOf("Admiral Steve", "Poyo"),
+            HAPaintings.ADMIRAL_SKELLINGTON to listOf("Admiral Skellington", "Poyo"),
+            HAPaintings.STEVE_AND_THE_SEA to listOf("Steve And The Sea", "Edmund Valtman"),
+
             HAPaintings.SUNSET to listOf("Sunset", "Stridey"),
 
             HAPaintings.JAM to listOf("Jam", "Aim Boot"),
@@ -896,9 +900,11 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
 
             HAPaintings.GREAT_LAKE to listOf("Great Lake", "Auri Wynn"),
             HAPaintings.LIGHTHOUSE_AFTER_DUSK to listOf("Lighthouse After Dusk", "papillonjunkie"),
+            HAPaintings.MAJESTIC_BEHEMOTH to listOf("Majestic Behemoth", "papillonjunkie"),
             HAPaintings.CALM_WATERS to listOf("Calm Waters", "Auri Wynn"),
 
             HAPaintings.JAWS to listOf("Jaws", "Steven Spielberg"),
+            HAPaintings.SELGIO to listOf("Selgio", "Dave The Diver"),
 
             HAPaintings.PRAYA_DUBIA to listOf("Praya Dubia", "UnorthodoxSketch"),
             HAPaintings.KING_OF_HERRING to listOf("King Of Herring", "UnorthodoxSketch"),
@@ -912,6 +918,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.BISEXUAL_PRIDE_FLAG to listOf("Bisexual Pride", "Flag"),
             HAPaintings.TRANS_PRIDE_FLAG to listOf("Trans Pride", "Flag"),
             HAPaintings.NONBINARY_PRIDE_FLAG to listOf("Nonbinary Pride", "Flag"),
+            HAPaintings.PANSEXUAL_PRIDE_FLAG to listOf("Pansexual Pride", "Flag"),
         ).forEach { (painting, name) ->
             builder.add("painting.hybrid_aquatic.${painting.location().path}.title", name[0])
             builder.add("painting.hybrid_aquatic.${painting.location().path}.author", name[1])

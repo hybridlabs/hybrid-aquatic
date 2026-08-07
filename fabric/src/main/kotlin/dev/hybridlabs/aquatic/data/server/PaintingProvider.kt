@@ -52,6 +52,7 @@ class PaintingProvider(output: FabricDataOutput,
 
             register(context, HAPaintings.JAWS, "jaws", 1, 2)
             register(context, HAPaintings.GREAT_LAKE, "great_lake", 2, 2)
+            register(context, HAPaintings.SELGIO, "selgio", 2, 2)
             register(context, HAPaintings.SUNSET, "sunset", 2, 1)
             register(context, HAPaintings.DIORAMA, "diorama", 2, 2)
             register(context, HAPaintings.RED_DEVIL, "red_devil", 2, 2)
@@ -60,13 +61,17 @@ class PaintingProvider(output: FabricDataOutput,
             register(context, HAPaintings.LIGHTHOUSE_AFTER_DUSK, "lighthouse_after_dark", 2, 2)
             register(context, HAPaintings.RIVERFISH, "riverfish", 2, 2)
             register(context, HAPaintings.JAM, "jam", 2, 3)
+            register(context, HAPaintings.ADMIRAL_STEVE, "admiral_steve", 2, 3)
+            register(context, HAPaintings.ADMIRAL_SKELLINGTON, "admiral_skellington", 2, 3)
             register(context, HAPaintings.SWIRLING, "swirling", 3, 3)
             register(context, HAPaintings.POULPE_COLOSSAL, "poulpe_colossal", 2, 3)
             register(context, HAPaintings.BELOW, "below", 2, 3)
             register(context, HAPaintings.CHASM, "chasm", 2, 3)
             register(context, HAPaintings.SUNTIDE, "suntide", 4, 2)
+            register(context, HAPaintings.STEVE_AND_THE_SEA, "steve_and_the_sea", 4, 2)
             register(context, HAPaintings.MOONCATCHER, "mooncatcher", 4, 4)
             register(context, HAPaintings.NEVEN_NAIVEN, "neven_naiven", 3, 3)
+            register(context, HAPaintings.MAJESTIC_BEHEMOTH, "majestic_behemoth", 3, 3)
             register(context, HAPaintings.ORGANON, "organon", 3, 3)
 
             register(context, HAPaintings.PRAYA_DUBIA, "praya_dubia", 2, 3)
@@ -81,6 +86,7 @@ class PaintingProvider(output: FabricDataOutput,
             register(context, HAPaintings.BISEXUAL_PRIDE_FLAG, "bisexual_pride_flag", 2, 1)
             register(context, HAPaintings.TRANS_PRIDE_FLAG, "trans_pride_flag", 2, 1)
             register(context, HAPaintings.NONBINARY_PRIDE_FLAG, "nonbinary_pride_flag", 2, 1)
+            register(context, HAPaintings.PANSEXUAL_PRIDE_FLAG, "pansexual_pride_flag", 2, 1)
 
         }
     }
