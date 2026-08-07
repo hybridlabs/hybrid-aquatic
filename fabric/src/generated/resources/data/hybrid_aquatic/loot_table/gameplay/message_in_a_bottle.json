@@ -10,637 +10,7 @@
               "components": {
                 "minecraft:entity_data": {
                   "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:below"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:the_watchful"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:lighthouse_after_dusk"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:seashell_seashelf"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:king_of_herring"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:preserver"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:poulpe_colossal"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:praya_dubia"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:suntide"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:palestine_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:jolly_roger"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:swirling"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:creatures_of_the_deep"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
                   "variant": "hybrid_aquatic:riverfish"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:jam"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:pressed_kelp"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:the_fast_regiment"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:shallows"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:diorama"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:gay_pride_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:lighthouse"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:organon"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:chasm"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:melon"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:bisexual_pride_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:red_devil"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:abyssal"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:great_lake"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:bold_and_brash"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:gone_fishing"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:neven_naiven"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:big_lure"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:pride_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:asexual_pride_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:jona_saxisa"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:pressed_bull_kelp"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:trans_pride_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:lesbian_pride_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:bigeye"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:nonbinary_pride_flag"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:mooncatcher"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:calm_waters"
-                }
-              },
-              "function": "minecraft:set_components"
-            }
-          ],
-          "name": "minecraft:painting"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "components": {
-                "minecraft:entity_data": {
-                  "id": "minecraft:painting",
-                  "variant": "hybrid_aquatic:sunset"
                 }
               },
               "function": "minecraft:set_components"
@@ -670,7 +40,637 @@
               "components": {
                 "minecraft:entity_data": {
                   "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:red_devil"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:gone_fishing"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:asexual_pride_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:suntide"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:lighthouse"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:the_watchful"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:jolly_roger"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:calm_waters"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:diorama"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:lesbian_pride_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:melon"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:big_lure"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:pressed_bull_kelp"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:lighthouse_after_dusk"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:the_fast_regiment"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:seashell_seashelf"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:poulpe_colossal"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:sunset"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:jona_saxisa"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:mooncatcher"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:creatures_of_the_deep"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:shallows"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:chasm"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:pressed_kelp"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:below"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:gay_pride_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:praya_dubia"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:jam"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:swirling"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:bold_and_brash"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:nonbinary_pride_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:bigeye"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:palestine_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
                   "variant": "hybrid_aquatic:jaws"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:organon"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:neven_naiven"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:king_of_herring"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:pride_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:great_lake"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:bisexual_pride_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:trans_pride_flag"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:preserver"
+                }
+              },
+              "function": "minecraft:set_components"
+            }
+          ],
+          "name": "minecraft:painting"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "components": {
+                "minecraft:entity_data": {
+                  "id": "minecraft:painting",
+                  "variant": "hybrid_aquatic:abyssal"
                 }
               },
               "function": "minecraft:set_components"
