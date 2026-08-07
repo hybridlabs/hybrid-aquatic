@@ -167,6 +167,10 @@ abstract class HAWaterAnimal protected constructor(
         }
     }
 
+    override fun canRide(vehicle: Entity): Boolean {
+        return false
+    }
+
     override fun canTakeItem(itemstack: ItemStack): Boolean {
         val equipmentslot = getEquipmentSlotForItem(itemstack)
         return if (!this.getItemBySlot(equipmentslot).isEmpty) {
