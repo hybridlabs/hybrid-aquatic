@@ -9,7 +9,6 @@
     "hybrid_aquatic:coelacanth",
     "hybrid_aquatic:slickhead",
     "hybrid_aquatic:golden_dorado",
-    "minecraft:player",
     "minecraft:turtle",
     {
       "id": "bountiful_critters:sunfish",

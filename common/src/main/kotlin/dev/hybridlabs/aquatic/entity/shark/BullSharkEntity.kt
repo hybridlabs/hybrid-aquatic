@@ -16,6 +16,7 @@ class BullSharkEntity(type: EntityType<out BullSharkEntity>, world: Level) :
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
         HAEntityTags.MEDIUM_CREATURES,
         HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.PLAYERS,
         HAEntityTags.SMALL_SHARK,
         HAEntityTags.MEDIUM_SHARK,
         HAEntityTags.SEAL,

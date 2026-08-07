@@ -292,7 +292,6 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
                 HAEntityTypes.COELACANTH.get(),
                 HAEntityTypes.SLICKHEAD.get(),
                 HAEntityTypes.GOLDEN_DORADO.get(),
-                EntityType.PLAYER,
                 EntityType.TURTLE,
             )
             .addOptional(ResourceLocation.fromNamespaceAndPath("bountiful_critters", "sunfish"))
@@ -305,6 +304,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation.fromNamespaceAndPath("spawn", "sea_cow"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("alexsmobs", "catfish"))
             .addOptional(ResourceLocation.fromNamespaceAndPath("alexsmobs", "seal"))
+
+        getOrCreateTagBuilder(HAEntityTags.PLAYERS)
+            .add(
+                EntityType.PLAYER
+            )
 
         getOrCreateTagBuilder(HAEntityTags.OTTER_PREY)
             .add(HAEntityTypes.SEA_URCHIN.get())

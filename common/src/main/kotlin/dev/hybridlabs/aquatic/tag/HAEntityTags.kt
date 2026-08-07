@@ -11,6 +11,7 @@ object HAEntityTags {
     val SMALL_CREATURES = create("small_creatures")
     val MEDIUM_CREATURES = create("medium_creatures")
     val LARGE_CREATURES = create("large_creatures")
+    val PLAYERS = create("players")
     val TOXIC_ANIMALS = create("toxic_animals")
     val OTTER_PREY = create("otter_prey")
 

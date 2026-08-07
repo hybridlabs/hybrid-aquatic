@@ -17,6 +17,7 @@ class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
         HAEntityTags.MEDIUM_CREATURES,
         HAEntityTags.LARGE_CREATURES,
+        HAEntityTags.PLAYERS,
         HAEntityTags.SMALL_SHARK,
         HAEntityTags.MEDIUM_SHARK,
         HAEntityTags.SEAL,
