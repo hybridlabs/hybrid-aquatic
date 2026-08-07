@@ -4,6 +4,7 @@ import dev.hybridlabs.aquatic.client.model.entity.misc.ArgonautEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautSailEntityLayer
 import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautShellEntityLayer
 import dev.hybridlabs.aquatic.client.render.entity.misc.layer.ArgonautVisorEntityLayer
+import dev.hybridlabs.aquatic.client.render.entity.misc.layer.WaterPatchEntityLayer
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.renderer.GeoEntityRenderer
@@ -14,6 +15,7 @@ class ArgonautEntityRenderer<T : ArgonautEntity>(
 ) : GeoEntityRenderer<T>(context, ArgonautEntityModel()) {
 
     init {
+        addRenderLayer(WaterPatchEntityLayer(this))
         addRenderLayer(ArgonautVisorEntityLayer(this))
         addRenderLayer(ArgonautSailEntityLayer(this))
         addRenderLayer(ArgonautShellEntityLayer(this))
