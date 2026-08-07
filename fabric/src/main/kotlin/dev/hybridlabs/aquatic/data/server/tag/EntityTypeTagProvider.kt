@@ -176,6 +176,11 @@ class EntityTypeTagProvider(output: FabricDataOutput, registriesFuture: Completa
             .addOptional(ResourceLocation("alexsmobs", "catfish"))
             .addOptional(ResourceLocation("alexsmobs", "seal"))
 
+        getOrCreateTagBuilder(HAEntityTags.PLAYERS)
+            .add(
+                EntityType.PLAYER,
+            )
+
         getOrCreateTagBuilder(HAEntityTags.OTTER_PREY)
             .add(HAEntityTypes.SEA_URCHIN.get())
             .forceAddTag(HAEntityTags.ALL_CRUSTACEANS)
