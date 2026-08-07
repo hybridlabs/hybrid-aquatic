@@ -13,9 +13,11 @@ import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.Util
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
+import java.util.concurrent.CompletableFuture
 
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
@@ -618,6 +620,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.COOKED_CRAYFISH.get() to "Cooked Crayfish",
             HAItems.LIONFISH.get() to "Lionfish",
             HAItems.TETRA.get() to "Neon Tetra",
+            HAItems.AFRICAN_BUTTERFLYFISH.get() to "African Butterflyfish",
             HAItems.DAMSELFISH.get() to "Damselfish",
             HAItems.DRAGONFISH.get() to "Dragonfish",
             HAItems.BLOBFISH.get() to "Blobfish",
@@ -856,26 +859,52 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAPaintings.BOLD_AND_BRASH to listOf("Bold And Brash", "Squidward Tentacles"),
             HAPaintings.BIG_LURE to listOf("Big Lure", "Stephen Hillenburg"),
             HAPaintings.PRESERVER to listOf("Life", "Preserver"),
+
             HAPaintings.THE_WATCHFUL to listOf("The Watchful", "RagnoGal"),
             HAPaintings.LIGHTHOUSE to listOf("Lighthouse", "MysticKoko"),
+            HAPaintings.THE_FAST_REGIMENT to listOf("The Fast Regiment", "woakey"),
 
             HAPaintings.CREATURES_OF_THE_DEEP to listOf("Creatures Of The Deep", "Random Rhincodon"),
             HAPaintings.PRESSED_KELP to listOf("Pressed Kelp", "Random Rhincodon"),
             HAPaintings.PRESSED_BULL_KELP to listOf("Pressed Bull Kelp", "Random Rhincodon"),
-            HAPaintings.BIGEYE to listOf("Bigeye", "KianaK"),
+            HAPaintings.SEASHELL_SEASHELF to listOf("Seashell Seashelf", "Random Rhincodon"),
+
+            HAPaintings.ADMIRAL_STEVE to listOf("Admiral Steve", "Poyo"),
+            HAPaintings.ADMIRAL_SKELLINGTON to listOf("Admiral Skellington", "Poyo"),
+            HAPaintings.STEVE_AND_THE_SEA to listOf("Steve And The Sea", "Edmund Valtman"),
+
             HAPaintings.SUNSET to listOf("Sunset", "Stridey"),
+
             HAPaintings.JAM to listOf("Jam", "Aim Boot"),
             HAPaintings.SWIRLING to listOf("Swirling", "Aim Boot"),
             HAPaintings.RIVERFISH to listOf("Riverfish", "Aim Boot"),
+
             HAPaintings.POULPE_COLOSSAL to listOf("Le Poulpe Colossal", "Pierre Dénys de Montfort"),
             HAPaintings.BELOW to listOf("Below", "finnibard"),
             HAPaintings.SUNTIDE to listOf("Suntide", "rotten sarah"),
+
             HAPaintings.MOONCATCHER to listOf("Mooncatcher", "wd"),
             HAPaintings.NEVEN_NAIVEN to listOf("Nevein, naiven", "wd"),
             HAPaintings.ORGANON to listOf("Organon", "wd"),
+            HAPaintings.GONE_FISHING to listOf("Gone Fishing", "Lightning64"),
+
+            HAPaintings.CHASM to listOf("Chasm", "Lawrziepan"),
+            HAPaintings.DIORAMA to listOf("Diorama", "Lawrziepan"),
+
+            HAPaintings.JONA_SAXISA to listOf("Jona Saxisa", "Josax"),
+
+            HAPaintings.ABYSSAL to listOf("Abyssal", "KianaK"),
+            HAPaintings.RED_DEVIL to listOf("Red Devil", "KianaK"),
+            HAPaintings.BIGEYE to listOf("Bigeye", "KianaK"),
+            HAPaintings.SHALLOWS to listOf("Shallows", "KianaK"),
 
             HAPaintings.GREAT_LAKE to listOf("Great Lake", "Auri Wynn"),
+            HAPaintings.LIGHTHOUSE_AFTER_DUSK to listOf("Lighthouse After Dusk", "papillonjunkie"),
+            HAPaintings.MAJESTIC_BEHEMOTH to listOf("Majestic Behemoth", "papillonjunkie"),
+            HAPaintings.CALM_WATERS to listOf("Calm Waters", "Auri Wynn"),
+
             HAPaintings.JAWS to listOf("Jaws", "Steven Spielberg"),
+            HAPaintings.SELGIO to listOf("Selgio", "Dave The Diver"),
 
             HAPaintings.PRAYA_DUBIA to listOf("Praya Dubia", "UnorthodoxSketch"),
             HAPaintings.KING_OF_HERRING to listOf("King Of Herring", "UnorthodoxSketch"),
@@ -889,9 +918,10 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAPaintings.BISEXUAL_PRIDE_FLAG to listOf("Bisexual Pride", "Flag"),
             HAPaintings.TRANS_PRIDE_FLAG to listOf("Trans Pride", "Flag"),
             HAPaintings.NONBINARY_PRIDE_FLAG to listOf("Nonbinary Pride", "Flag"),
+            HAPaintings.PANSEXUAL_PRIDE_FLAG to listOf("Pansexual Pride", "Flag"),
         ).forEach { (painting, name) ->
-            builder.add("painting.hybrid_aquatic.${painting.path}.title", name[0])
-            builder.add("painting.hybrid_aquatic.${painting.path}.author", name[1])
+            builder.add("painting.hybrid_aquatic.${painting.location().path}.title", name[0])
+            builder.add("painting.hybrid_aquatic.${painting.location().path}.author", name[1])
         }
     }
 
