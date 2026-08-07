@@ -13,11 +13,9 @@ import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.Util
-import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
-import java.util.concurrent.CompletableFuture
 
 class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output) {
     override fun generateTranslations(builder: TranslationBuilder) {
@@ -796,7 +794,7 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             HAItems.CORAL_SHOVEL.get().descriptionId to "Repairs itself when underwater",
 
             HAItems.SEASHELL_AXE.get().descriptionId to "Increased mining speed underwater",
-            HAItems.SEASHELL_SPEAR.get().descriptionId to "Increased mining speed underwater",
+            HAItems.SEASHELL_SPEAR.get().descriptionId to "Increased use speed underwater",
             HAItems.SEASHELL_HOE.get().descriptionId to "Increased mining speed underwater",
             HAItems.SEASHELL_PICKAXE.get().descriptionId to "Increased mining speed underwater",
             HAItems.SEASHELL_SHOVEL.get().descriptionId to "Increased mining speed underwater",
