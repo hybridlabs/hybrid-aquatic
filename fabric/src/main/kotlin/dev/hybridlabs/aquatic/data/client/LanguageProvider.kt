@@ -796,7 +796,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAItems.CORAL_SHOVEL.get().descriptionId to "Repairs itself when underwater",
 
             HAItems.SEASHELL_AXE.get().descriptionId to "Increased mining speed underwater",
-            HAItems.SEASHELL_SPEAR.get().descriptionId to "Increased mining speed underwater",
+            HAItems.SEASHELL_SPEAR.get().descriptionId to "Increased swing speed underwater",
             HAItems.SEASHELL_HOE.get().descriptionId to "Increased mining speed underwater",
             HAItems.SEASHELL_PICKAXE.get().descriptionId to "Increased mining speed underwater",
             HAItems.SEASHELL_SHOVEL.get().descriptionId to "Increased mining speed underwater",
