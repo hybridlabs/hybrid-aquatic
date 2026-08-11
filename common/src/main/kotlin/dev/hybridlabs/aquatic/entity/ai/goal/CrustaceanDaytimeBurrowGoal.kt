@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.level.ServerLevel
@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.goal.Goal
 import java.util.*
 
 class CrustaceanDaytimeBurrowGoal(
-    private val crustacean: HACrustaceanEntity
+    private val crustacean: BaseCrustaceanEntity
 ) : Goal() {
     private var burrowTime = 0
     private var burrowCooldown: Int

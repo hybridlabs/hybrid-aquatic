@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
-abstract class HAOctopusEntityModel<T : HAOctopusEntity>(private val id: String) :
+abstract class HAOctopusEntityModel<T : BaseOctopusEntity>(private val id: String) :
     GeoModel<T>() {
 
     override fun getModelResource(animatable: T): ResourceLocation {

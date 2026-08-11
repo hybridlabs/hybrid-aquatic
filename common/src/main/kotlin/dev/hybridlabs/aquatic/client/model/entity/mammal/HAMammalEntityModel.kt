@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseMammalEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.animation.AnimationState
@@ -9,7 +9,7 @@ import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
-abstract class HAMammalEntityModel<T : HAMammalEntity>(private val id: String) :
+abstract class HAMammalEntityModel<T : BaseMammalEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
         return if (animatable.isBaby) {

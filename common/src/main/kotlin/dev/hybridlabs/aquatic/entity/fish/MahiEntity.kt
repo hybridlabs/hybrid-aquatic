@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
@@ -29,7 +29,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
-    HASchoolingFishEntity(type, world),
+    BaseSchoolingFishEntity(type, world),
     VariantHolder<MahiEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG

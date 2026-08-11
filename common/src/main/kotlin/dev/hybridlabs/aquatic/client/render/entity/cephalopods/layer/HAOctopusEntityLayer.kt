@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.cephalopod.HAOctopusEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.cephalopods.HAOctopusEntityRenderer
-import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.LivingEntityRenderer
@@ -17,7 +17,7 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 import software.bernie.geckolib.util.Color
 
 
-class HAOctopusEntityLayer<T: HAOctopusEntity>(
+class HAOctopusEntityLayer<T: BaseOctopusEntity>(
     renderer: HAOctopusEntityRenderer<T>,
 ) : GeoRenderLayer<T>(renderer) {
 

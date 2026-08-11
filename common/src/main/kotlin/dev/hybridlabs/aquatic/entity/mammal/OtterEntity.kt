@@ -1,15 +1,15 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowParentGoal
-import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalFollowParentGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseMammalEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -53,7 +53,7 @@ import java.util.*
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : HAMammalEntity(entityType, world),
+class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseMammalEntity(entityType, world),
     VariantHolder<OtterEntity.Companion.Type> {
     override fun getTargetConfig() = TARGET_CONFIG
 

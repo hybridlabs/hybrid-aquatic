@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
+import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -27,7 +28,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctopusEntity(type, world),
+class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : BaseOctopusEntity(type, world),
     VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
     override fun getTargetConfig() = TARGET_CONFIG
 

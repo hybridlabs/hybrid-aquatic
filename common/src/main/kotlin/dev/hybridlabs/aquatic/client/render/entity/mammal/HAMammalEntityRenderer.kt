@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.entity.mammal
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
-import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.hapi.entity.water.base.BaseMammalEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.world.item.ItemDisplayContext
@@ -15,7 +15,7 @@ import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.BlockAndItemGeoLayer
 
-open class HAMammalEntityRenderer<T : HAMammalEntity>(
+open class HAMammalEntityRenderer<T : BaseMammalEntity>(
     context: EntityRendererProvider.Context,
     model: GeoModel<T>,
     private var variableSize: Boolean = false
@@ -86,7 +86,7 @@ open class HAMammalEntityRenderer<T : HAMammalEntity>(
         packedLight: Int
     ) {
         if(variableSize) {
-            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
+            val size = BaseWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

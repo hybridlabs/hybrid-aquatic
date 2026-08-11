@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -24,7 +24,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) :
-    HASchoolingFishEntity(type, world),
+    BaseSchoolingFishEntity(type, world),
     VariantHolder<RockfishEntity.Companion.Type> {
 
     override fun getTargetConfig() =

@@ -1,22 +1,18 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.hapi.entity.ai.goal.PassiveFeedingGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.PlayState
 
 class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level) :
-    HASharkEntity(type, world) {
+    BaseSharkEntity(type, world) {
 
     override fun registerGoals() {
         super.registerGoals()
@@ -33,7 +29,7 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
         controllers.add(
             AnimationController(
                 this, "Feeding",
-                AnimationStateHandler { state: AnimationState<HASharkEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseSharkEntity> ->
                     if (this.isFeeding())
                         return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
                     PlayState.STOP

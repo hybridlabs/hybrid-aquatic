@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseSirenianEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
@@ -10,7 +10,7 @@ import software.bernie.geckolib.model.GeoModel
 import kotlin.math.abs
 
 @Suppress("OVERRIDE_DEPRECATION")
-abstract class HASirenianEntityModel<T : HASirenianEntity>(private val id: String) :
+abstract class HASirenianEntityModel<T : BaseSirenianEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
         return if (animatable.isBaby) {

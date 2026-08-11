@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
@@ -10,7 +10,7 @@ import software.bernie.geckolib.model.GeoModel
 import kotlin.math.abs
 
 @Suppress("OVERRIDE_DEPRECATION")
-abstract class HASharkEntityModel<T : HASharkEntity>(
+abstract class HASharkEntityModel<T : BaseSharkEntity>(
     private val id: String
 ) : GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {

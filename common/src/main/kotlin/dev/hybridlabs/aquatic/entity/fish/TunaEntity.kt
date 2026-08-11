@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -32,7 +32,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
-    HASchoolingFishEntity(type, world),
+    BaseSchoolingFishEntity(type, world),
     VariantHolder<TunaEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -23,7 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class BoxfishEntity(type: EntityType<out BoxfishEntity>, world: Level) :
-    HAFishEntity(type, world), VariantHolder<BoxfishEntity.Companion.Type> {
+    BaseFishEntity(type, world), VariantHolder<BoxfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.MEDIUM_CREATURES,

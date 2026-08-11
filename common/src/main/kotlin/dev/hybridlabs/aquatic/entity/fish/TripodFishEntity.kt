@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
-    HAFishEntity(type, world) {
+    BaseFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.MEDIUM_CREATURES,
@@ -43,7 +43,7 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
         }
 
         fun canSpawn(
-            type: EntityType<out HAWaterAnimal>,
+            type: EntityType<out BaseWaterAnimal>,
             world: ServerLevelAccessor,
             reason: MobSpawnType,
             pos: BlockPos,

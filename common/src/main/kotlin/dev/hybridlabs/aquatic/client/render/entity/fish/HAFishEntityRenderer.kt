@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.entity.fish
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.world.item.ItemDisplayContext
@@ -17,7 +17,7 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 import software.bernie.geckolib.renderer.layer.BlockAndItemGeoLayer
 
 @Suppress("LeakingThis")
-open class HAFishEntityRenderer<T : HAFishEntity>(
+open class HAFishEntityRenderer<T : BaseFishEntity>(
     context: Context,
     model: GeoModel<T>,
     private var variableSize: Boolean = false,
@@ -101,7 +101,7 @@ open class HAFishEntityRenderer<T : HAFishEntity>(
         packedLight: Int,
     ) {
         if (variableSize) {
-            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
+            val size = BaseWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

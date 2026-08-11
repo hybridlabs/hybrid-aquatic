@@ -1,21 +1,21 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.constant.DefaultAnimations
 
-class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, false) {
+class GiantIsopodEntity(entityType: EntityType<out GiantIsopodEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, false) {
 
     //#region Hiding
     private var isHiding: Boolean = false
@@ -61,7 +61,7 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
         controllerRegistrar.add(
             AnimationController(
                 this, "Spawning",
-                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.tickCount < 20)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
@@ -72,7 +72,7 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
 
         controllerRegistrar.add(
             AnimationController(this, "Hide", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationController.AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.isHiding) {
                         return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
                     } else {

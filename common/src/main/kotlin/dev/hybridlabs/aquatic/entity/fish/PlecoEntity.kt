@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalGrazeGoal
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -25,7 +25,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 class PlecoEntity(type: EntityType<out PlecoEntity>, world: Level) :
-    HAFishEntity(type, world),
+    BaseFishEntity(type, world),
     VariantHolder<PlecoEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(

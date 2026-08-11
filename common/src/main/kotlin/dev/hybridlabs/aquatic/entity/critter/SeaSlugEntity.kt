@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -22,7 +22,7 @@ import net.minecraft.world.level.biome.Biome
 import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
-class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : HACritterEntity(type, world),
+class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : BaseCritterEntity(type, world),
     VariantHolder<SeaSlugEntity.Companion.Type> {
 
     companion object {

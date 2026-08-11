@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import net.minecraft.core.BlockPos
@@ -29,7 +29,7 @@ import software.bernie.geckolib.constant.DefaultAnimations
 
 @Suppress("unused", "DEPRECATION")
 class GardenEelEntity(type: EntityType<out GardenEelEntity>, world: Level) :
-    HAFishEntity(type, world) {
+    BaseFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.MEDIUM_CREATURES,

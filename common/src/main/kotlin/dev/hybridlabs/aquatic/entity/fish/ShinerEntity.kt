@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 
 class ShinerEntity(type: EntityType<out ShinerEntity>, world: Level) :
-    HASchoolingFishEntity(type, world) {
+    BaseSchoolingFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.MEDIUM_CREATURES,

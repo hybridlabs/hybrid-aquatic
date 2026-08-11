@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.hapi.entity.ai.goal.PassiveFeedingGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -29,7 +29,7 @@ import software.bernie.geckolib.animation.PlayState
 import java.util.function.IntFunction
 
 class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
-    HASharkEntity(type, world), OverlayTextureFeature {
+    BaseSharkEntity(type, world), OverlayTextureFeature {
 
     override fun registerGoals() {
         super.registerGoals()
@@ -63,7 +63,7 @@ class WhaleSharkEntity(type: EntityType<out WhaleSharkEntity>, world: Level) :
         controllers.add(
             AnimationController(
                 this, "Feeding",
-                AnimationStateHandler { state: AnimationState<HASharkEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseSharkEntity> ->
                     if (this.isFeeding())
                         return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
                     PlayState.STOP

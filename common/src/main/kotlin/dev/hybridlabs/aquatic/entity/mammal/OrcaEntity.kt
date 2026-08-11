@@ -2,15 +2,15 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
-import dev.hybridlabs.aquatic.entity.base.HADolphinEntity
 import dev.hybridlabs.aquatic.entity.feature.OrcaEyeTextureFeature
 import dev.hybridlabs.aquatic.entity.feature.OrcaSaddleTextureFeature
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseDolphinEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -34,7 +34,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : HADolphinEntity(type, world),
+class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : BaseDolphinEntity(type, world),
     OrcaEyeTextureFeature, OrcaSaddleTextureFeature, VariantHolder<OrcaEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(

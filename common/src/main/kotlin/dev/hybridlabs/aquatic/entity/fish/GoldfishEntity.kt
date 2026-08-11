@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalGrazeGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
@@ -26,7 +26,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class GoldfishEntity(type: EntityType<out GoldfishEntity>, world: Level) :
-    HAFishEntity(type, world), VariantHolder<GoldfishEntity.Companion.Type> {
+    BaseFishEntity(type, world), VariantHolder<GoldfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.MEDIUM_CREATURES,

@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
 import net.minecraft.core.particles.ParticleTypes
@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Block
 import java.util.*
 
 class UrchinEatKelpGoal(
-    private val waterAnimal: HAWaterAnimal,
+    private val waterAnimal: BaseWaterAnimal,
     private val targetKelp: TagKey<Block>
 ) : Goal() {
 

@@ -1,22 +1,22 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalDigGoal
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalDigGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.animal.Turtle
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.animation.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.constant.DefaultAnimations
 
-class FlowerCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, true) {
+class FlowerCrabEntity(entityType: EntityType<out FlowerCrabEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, true) {
 
     override fun registerGoals() {
         super.registerGoals()
@@ -33,7 +33,7 @@ class FlowerCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         controllerRegistrar.add(
             AnimationController(
                 this, "Spawning",
-                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.tickCount < 20)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
@@ -46,7 +46,7 @@ class FlowerCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         controllerRegistrar.add(
             AnimationController(
                 this, "Digging",
-                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.isDigging())
                         return@AnimationStateHandler state.setAndContinue(DIG_ANIMATION)
                     PlayState.STOP

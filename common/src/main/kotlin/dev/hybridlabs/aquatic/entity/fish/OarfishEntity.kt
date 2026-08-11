@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
@@ -18,7 +18,7 @@ import software.bernie.geckolib.animation.AnimationState
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
-    HAFishEntity(type, world) {
+    BaseFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.ALL_SHARKS

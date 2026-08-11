@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.base.HACritterEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
-abstract class HACritterEntityModel<T : HACritterEntity>(private val id: String) :
+abstract class HACritterEntityModel<T : BaseCritterEntity>(private val id: String) :
     GeoModel<T>() {
 
     override fun getModelResource(animatable: T): ResourceLocation {

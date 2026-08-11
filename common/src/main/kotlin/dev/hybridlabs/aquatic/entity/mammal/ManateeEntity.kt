@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalBreedGoal
-import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseSirenianEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -23,7 +23,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class ManateeEntity(type: EntityType<out ManateeEntity>, world: Level) : HASirenianEntity(type, world),
+class ManateeEntity(type: EntityType<out ManateeEntity>, world: Level) : BaseSirenianEntity(type, world),
     VariantHolder<ManateeEntity.Companion.Type> {
 
     override fun registerGoals() {

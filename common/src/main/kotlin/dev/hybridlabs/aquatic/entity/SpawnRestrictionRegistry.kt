@@ -7,6 +7,17 @@ import dev.hybridlabs.aquatic.entity.crustacean.GhostCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.HorseshoeCrabEntity
 import dev.hybridlabs.aquatic.entity.crustacean.SpiderCrabEntity
 import dev.hybridlabs.aquatic.entity.fish.*
+import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseDolphinEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseJellyfishEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseMammalEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseSirenianEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.SpawnPlacementType
@@ -231,80 +242,80 @@ object SpawnRestrictionRegistry {
         ).forEach { registerMinion(it) }
     }
 
-    private fun <T : HAWaterAnimal> registerShallowFish(entityType: EntityType<T>) {
-        registerFish(entityType, HAFishEntity::canShallowSpawn)
+    private fun <T : BaseWaterAnimal> registerShallowFish(entityType: EntityType<T>) {
+        registerFish(entityType, BaseFishEntity::canShallowSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerFish(entityType: EntityType<T>) {
-        registerFish(entityType, HAFishEntity::canSpawn)
+    private fun <T : BaseWaterAnimal> registerFish(entityType: EntityType<T>) {
+        registerFish(entityType, BaseFishEntity::canSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerNightFish(entityType: EntityType<T>) {
-        registerFish(entityType, HAFishEntity::canNightSpawn)
+    private fun <T : BaseWaterAnimal> registerNightFish(entityType: EntityType<T>) {
+        registerFish(entityType, BaseFishEntity::canNightSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerDeepFish(entityType: EntityType<T>) {
-        registerFish(entityType, HAFishEntity::canDeepSpawn)
+    private fun <T : BaseWaterAnimal> registerDeepFish(entityType: EntityType<T>) {
+        registerFish(entityType, BaseFishEntity::canDeepSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerCephalopod(entityType: EntityType<T>) {
-        registerCephalopod(entityType, HACephalopodEntity::canSpawn)
+    private fun <T : BaseWaterAnimal> registerCephalopod(entityType: EntityType<T>) {
+        registerCephalopod(entityType, BaseCephalopodEntity::canSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerOctopus(entityType: EntityType<T>) {
-        registerOctopus(entityType, HAOctopusEntity::canSpawn)
+    private fun <T : BaseWaterAnimal> registerOctopus(entityType: EntityType<T>) {
+        registerOctopus(entityType, BaseOctopusEntity::canSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerDeepCephalopod(entityType: EntityType<T>) {
-        registerCephalopod(entityType, HACephalopodEntity::canDeepSpawn)
+    private fun <T : BaseWaterAnimal> registerDeepCephalopod(entityType: EntityType<T>) {
+        registerCephalopod(entityType, BaseCephalopodEntity::canDeepSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerShallowShark(entityType: EntityType<T>) {
-        registerShark(entityType, HASharkEntity::canShallowSpawn)
+    private fun <T : BaseWaterAnimal> registerShallowShark(entityType: EntityType<T>) {
+        registerShark(entityType, BaseSharkEntity::canShallowSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerShark(entityType: EntityType<T>) {
-        registerShark(entityType, HASharkEntity::canSpawn)
+    private fun <T : BaseWaterAnimal> registerShark(entityType: EntityType<T>) {
+        registerShark(entityType, BaseSharkEntity::canSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerDeepShark(entityType: EntityType<T>) {
-        registerShark(entityType, HASharkEntity::canDeepSpawn)
+    private fun <T : BaseWaterAnimal> registerDeepShark(entityType: EntityType<T>) {
+        registerShark(entityType, BaseSharkEntity::canDeepSpawn)
     }
 
-    private fun <T : HAMammalEntity> registerMammal(entityType: EntityType<T>) {
-        registerMammalEntity(entityType, HAMammalEntity::canSpawn)
+    private fun <T : BaseMammalEntity> registerMammal(entityType: EntityType<T>) {
+        registerMammalEntity(entityType, BaseMammalEntity::canSpawn)
     }
 
-    private fun <T : HASirenianEntity> registerSirenian(entityType: EntityType<T>) {
-        registerSirenianEntity(entityType, HASirenianEntity::canSpawn)
+    private fun <T : BaseSirenianEntity> registerSirenian(entityType: EntityType<T>) {
+        registerSirenianEntity(entityType, BaseSirenianEntity::canSpawn)
     }
 
-    private fun <T : HADolphinEntity> registerDolphin(entityType: EntityType<T>) {
-        registerDolphinEntity(entityType, HADolphinEntity::canSpawn)
+    private fun <T : BaseDolphinEntity> registerDolphin(entityType: EntityType<T>) {
+        registerDolphinEntity(entityType, BaseDolphinEntity::canSpawn)
     }
 
-    private fun <T : HAJellyfishEntity> registerJelly(entityType: EntityType<T>) {
-        registerJellyfish(entityType, HAJellyfishEntity::canSpawn)
+    private fun <T : BaseJellyfishEntity> registerJelly(entityType: EntityType<T>) {
+        registerJellyfish(entityType, BaseJellyfishEntity::canSpawn)
     }
 
-    private fun <T : HAJellyfishEntity> registerDeepJelly(entityType: EntityType<T>) {
-        registerJellyfish(entityType, HAJellyfishEntity::canDeepSpawn)
+    private fun <T : BaseJellyfishEntity> registerDeepJelly(entityType: EntityType<T>) {
+        registerJellyfish(entityType, BaseJellyfishEntity::canDeepSpawn)
     }
 
-    private fun <T : HAWaterAnimal> registerTerrestrialCrustacean(entityType: EntityType<T>) {
-        registerCrustacean(entityType, HACrustaceanEntity::canSpawnOnLand)
+    private fun <T : BaseWaterAnimal> registerTerrestrialCrustacean(entityType: EntityType<T>) {
+        registerCrustacean(entityType, BaseCrustaceanEntity::canSpawnOnLand)
     }
 
-    private fun <T : HAWaterAnimal> registerAquaticCrustacean(entityType: EntityType<T>) {
-        registerCrustacean(entityType, HACrustaceanEntity::canSpawnInWater)
+    private fun <T : BaseWaterAnimal> registerAquaticCrustacean(entityType: EntityType<T>) {
+        registerCrustacean(entityType, BaseCrustaceanEntity::canSpawnInWater)
     }
 
-    private fun <T : HAWaterAnimal> registerDeepCrustacean(entityType: EntityType<T>) {
-        registerCrustacean(entityType, HACrustaceanEntity::canSpawnInDeepWater)
+    private fun <T : BaseWaterAnimal> registerDeepCrustacean(entityType: EntityType<T>) {
+        registerCrustacean(entityType, BaseCrustaceanEntity::canSpawnInDeepWater)
     }
 
-    private fun <T : HACritterEntity> registerCritter(entityType: EntityType<T>) {
-        registerCritter(entityType, HACritterEntity::canSpawn)
+    private fun <T : BaseCritterEntity> registerCritter(entityType: EntityType<T>) {
+        registerCritter(entityType, BaseCritterEntity::canSpawn)
     }
 
     private fun <T : Monster> registerMiniboss(entityType: EntityType<T>) {
@@ -326,7 +337,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerFish(
+    private fun <T : BaseWaterAnimal> registerFish(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -337,7 +348,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerCritter(
+    private fun <T : BaseWaterAnimal> registerCritter(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -348,7 +359,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerCrustacean(
+    private fun <T : BaseWaterAnimal> registerCrustacean(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -359,7 +370,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerCephalopod(
+    private fun <T : BaseWaterAnimal> registerCephalopod(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -370,7 +381,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerJellyfish(
+    private fun <T : BaseWaterAnimal> registerJellyfish(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -381,7 +392,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerOctopus(
+    private fun <T : BaseWaterAnimal> registerOctopus(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -392,7 +403,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerShark(
+    private fun <T : BaseWaterAnimal> registerShark(
         entityType: EntityType<T>,
         predicate: SpawnPlacements.SpawnPredicate<T>,
     ) {
@@ -425,7 +436,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+    private fun <T : BaseWaterAnimal> registerMammalEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacementTypes.NO_RESTRICTIONS,
@@ -433,7 +444,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerSirenianEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+    private fun <T : BaseWaterAnimal> registerSirenianEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacementTypes.IN_WATER,
@@ -441,7 +452,7 @@ object SpawnRestrictionRegistry {
         )
     }
 
-    private fun <T : HAWaterAnimal> registerDolphinEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
+    private fun <T : BaseWaterAnimal> registerDolphinEntity(entityType: EntityType<T>, predicate: SpawnPlacements.SpawnPredicate<T>) {
         register(
             entityType,
             SpawnPlacementTypes.IN_WATER,

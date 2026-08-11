@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -23,7 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class WrasseEntity(type: EntityType<out WrasseEntity>, world: Level) :
-    HAFishEntity(type, world),
+    BaseFishEntity(type, world),
     VariantHolder<WrasseEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG

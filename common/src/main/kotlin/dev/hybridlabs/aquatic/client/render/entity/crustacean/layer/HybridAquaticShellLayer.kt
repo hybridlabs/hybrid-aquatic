@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import com.mojang.math.Axis
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.HACrustaceanEntityRenderer
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemDisplayContext
 import software.bernie.geckolib.cache.`object`.GeoBone
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-class HybridAquaticShellLayer<T: HACrustaceanEntity>(
+class HybridAquaticShellLayer<T: BaseCrustaceanEntity>(
     renderer: HACrustaceanEntityRenderer<T>,
     val defaultItem: Item
 ) : GeoRenderLayer<T>(renderer) {

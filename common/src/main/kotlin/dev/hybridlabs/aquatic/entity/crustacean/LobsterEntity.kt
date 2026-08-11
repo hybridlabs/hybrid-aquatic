@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.loot.HALootTables
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -24,8 +24,8 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class LobsterEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, false),
+class LobsterEntity(entityType: EntityType<out LobsterEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, false),
     VariantHolder<LobsterEntity.Companion.Type> {
 
     override fun finalizeSpawn(

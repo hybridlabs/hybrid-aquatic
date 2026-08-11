@@ -1,27 +1,18 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.hapi.entity.water.base.*
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityDimensions
-import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.Pose
-import net.minecraft.world.entity.SpawnGroupData
+import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.GameRules
@@ -29,7 +20,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 class DamselfishEntity(type: EntityType<out DamselfishEntity>, world: Level) :
-    HASchoolingFishEntity(type, world) {
+    BaseSchoolingFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.MEDIUM_CREATURES,
@@ -165,10 +156,10 @@ class DamselfishEntity(type: EntityType<out DamselfishEntity>, world: Level) :
 
             if (newFishCount in 1..<oldFishCount &&
                 level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS) &&
-                attacker !is HAFishEntity &&
-                attacker !is HASharkEntity &&
-                attacker !is HACephalopodEntity &&
-                attacker !is HAMammalEntity) {
+                attacker !is BaseFishEntity &&
+                attacker !is BaseSharkEntity &&
+                attacker !is BaseCephalopodEntity &&
+                attacker !is BaseMammalEntity) {
                 spawnAtLocation(HAItems.DAMSELFISH.get())
             }
         }

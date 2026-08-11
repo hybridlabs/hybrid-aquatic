@@ -66,11 +66,13 @@ repositories {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/releases/"
     }
-    mavenCentral()
     maven {
         name = "Curios"
         url = "https://maven.theillusivec4.top/"
     }
+
+    mavenCentral()
+    mavenLocal()
 }
 sourceSets.main.resources.srcDirs += 'src/generated/resources'
 
@@ -92,6 +94,8 @@ dependencies {
     }
     implementation 'org.jetbrains:annotations:25.0.0'
     implementation "thedarkcolour:kotlinforforge-neoforge:${kotlin_for_forge_version}"
+    implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.0.0")
+
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 }

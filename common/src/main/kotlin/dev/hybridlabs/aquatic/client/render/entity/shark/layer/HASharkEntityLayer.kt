@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.shark.HASharkEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.shark.HASharkEntityRenderer
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -14,7 +14,7 @@ import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 import software.bernie.geckolib.util.Color
 
-class HASharkEntityLayer<T: HASharkEntity>(
+class HASharkEntityLayer<T: BaseSharkEntity>(
     renderer: HASharkEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 

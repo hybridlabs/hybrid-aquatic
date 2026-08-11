@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
-abstract class HACrustaceanEntityModel<T : HACrustaceanEntity>(private val id: String) :
+abstract class HACrustaceanEntityModel<T : BaseCrustaceanEntity>(private val id: String) :
     GeoModel<T>() {
     override fun getModelResource(animatable: T): ResourceLocation {
         return CommonClass.locate("geo/crustacean/$id/$id.geo.json")

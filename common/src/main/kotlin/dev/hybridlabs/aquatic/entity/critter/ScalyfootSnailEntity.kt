@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.entity.base.HACritterEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 @Suppress("DEPRECATION")
-class ScalyfootSnailEntity(entityType: EntityType<out ScalyfootSnailEntity>, world: Level) :
-    HACritterEntity(entityType, world) {
+class ScalyfootSnailEntity(entityType: EntityType<out ScalyfootSnailEntity>, world: Level
+) : BaseCritterEntity(entityType, world) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

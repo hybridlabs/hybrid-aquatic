@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.critter.HACritterEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.critter.HACritterEntityRenderer
-import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-class HACritterEntityLayer<T: HACritterEntity>(
+class HACritterEntityLayer<T: BaseCritterEntity>(
     renderer: HACritterEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 

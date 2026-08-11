@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
@@ -31,7 +31,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) :
-    HAFishEntity(type, world),
+    BaseFishEntity(type, world),
     VariantHolder<OceanSunfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG

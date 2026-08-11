@@ -1,12 +1,13 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalPerformTrickGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalPerformTrickGoal
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -26,7 +27,7 @@ import net.minecraft.world.level.ServerLevelAccessor
 import java.util.function.IntFunction
 
 class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
-    HAFishEntity(type, world), OverlayTextureFeature {
+    BaseFishEntity(type, world), OverlayTextureFeature {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.ALL_SHARKS

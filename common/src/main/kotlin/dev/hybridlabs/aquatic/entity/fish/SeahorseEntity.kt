@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
@@ -25,7 +25,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeahorseEntity(type: EntityType<out SeahorseEntity>, world: Level) :
-    HASchoolingFishEntity(type, world),
+    BaseSchoolingFishEntity(type, world),
     VariantHolder<SeahorseEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(

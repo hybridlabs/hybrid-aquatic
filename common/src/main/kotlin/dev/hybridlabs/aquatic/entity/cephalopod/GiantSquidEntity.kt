@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -13,7 +14,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "unused")
-class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : BaseCephalopodEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT

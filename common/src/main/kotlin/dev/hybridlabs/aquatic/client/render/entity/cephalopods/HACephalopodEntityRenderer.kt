@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.client.render.entity.cephalopods
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel
@@ -10,7 +10,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
 @Suppress("LeakingThis")
-open class HACephalopodEntityRenderer<T : HACephalopodEntity>(
+open class HACephalopodEntityRenderer<T : BaseCephalopodEntity>(
     context: EntityRendererProvider.Context,
     model: GeoModel<T>,
     private var variableSize: Boolean = false,
@@ -30,7 +30,7 @@ open class HACephalopodEntityRenderer<T : HACephalopodEntity>(
         packedLight: Int
     ) {
         if (variableSize) {
-            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
+            val size = BaseWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.loot.HALootTables
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.tag.HAEntityTags
@@ -30,7 +30,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
-    HAFishEntity(type, world),
+    BaseFishEntity(type, world),
     VariantHolder<StingrayEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG

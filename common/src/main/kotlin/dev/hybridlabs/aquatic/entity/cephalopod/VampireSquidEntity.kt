@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.PassiveFeedingGoal
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.PassiveFeedingGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -14,7 +14,7 @@ import software.bernie.geckolib.animation.AnimationController.AnimationStateHand
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.PlayState
 
-class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : BaseCephalopodEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
 
     override fun registerGoals() {
@@ -27,7 +27,7 @@ class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level)
         controllers.add(
             AnimationController(
                 this, "Feeding",
-                AnimationStateHandler { state: AnimationState<HACephalopodEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseCephalopodEntity> ->
                     if (this.isFeeding())
                         return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
                     PlayState.STOP

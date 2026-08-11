@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowCreatureGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalFollowCreatureGoal
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType

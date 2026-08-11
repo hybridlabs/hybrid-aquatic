@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.ai.goal.ShrimpCleanGoal
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -22,8 +22,8 @@ import software.bernie.geckolib.animation.*
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
 import java.util.function.IntFunction
 
-class ShrimpEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, false),
+class ShrimpEntity(entityType: EntityType<out ShrimpEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, false),
     OverlayTextureFeature {
 
     fun isCleaning(): Boolean {

@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.world.WorldHelper
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -13,8 +13,8 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("UNUSED_PARAMETER", "DEPRECATION")
-class SpiderCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, false) {
+class SpiderCrabEntity(entityType: EntityType<out SpiderCrabEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, false) {
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {

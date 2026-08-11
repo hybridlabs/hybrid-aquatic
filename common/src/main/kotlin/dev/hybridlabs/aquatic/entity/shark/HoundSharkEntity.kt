@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -25,7 +25,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) :
-    HASharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
+    BaseSharkEntity(type, world), VariantHolder<HoundSharkEntity.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
 

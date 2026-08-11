@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
@@ -25,7 +25,7 @@ import software.bernie.geckolib.constant.DefaultAnimations
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
-    HASchoolingFishEntity(type, world) {
+    BaseSchoolingFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
         HAEntityTags.MEDIUM_CREATURES,
@@ -102,7 +102,7 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
         controllers.add(
             AnimationController(
                 this, "Fly/Swim/Idle", 5
-            ) { state: AnimationState<HAFishEntity> ->
+            ) { state: AnimationState<BaseFishEntity> ->
                 when {
                     this.isGliding -> state.setAndContinue(DefaultAnimations.FLY)
                     state.isMoving -> state.setAndContinue(DefaultAnimations.SWIM)

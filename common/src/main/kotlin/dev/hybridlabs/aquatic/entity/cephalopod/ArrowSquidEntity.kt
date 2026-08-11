@@ -1,14 +1,15 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : BaseCephalopodEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
 

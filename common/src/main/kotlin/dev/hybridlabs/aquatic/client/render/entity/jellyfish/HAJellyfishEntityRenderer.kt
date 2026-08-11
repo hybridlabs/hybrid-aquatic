@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.math.Axis
-import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
+import dev.hybridlabs.hapi.entity.water.base.BaseJellyfishEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.util.Mth
@@ -12,7 +12,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
 
 @Suppress("LeakingThis")
-open class HAJellyfishEntityRenderer<T : HAJellyfishEntity>(
+open class HAJellyfishEntityRenderer<T : BaseJellyfishEntity>(
     context: Context,
     model: GeoModel<T>,
     private var variableSize: Boolean = false,
@@ -51,7 +51,7 @@ open class HAJellyfishEntityRenderer<T : HAJellyfishEntity>(
         packedLight: Int
     ) {
         if (variableSize) {
-            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
+            val size = BaseWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

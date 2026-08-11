@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("unused", "DEPRECATION")
-class UmbrellaOctopusEntity(type: EntityType<out UmbrellaOctopusEntity>, world: Level) : HAOctopusEntity(type, world) {
+class UmbrellaOctopusEntity(type: EntityType<out UmbrellaOctopusEntity>, world: Level) : BaseOctopusEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
 
     companion object {

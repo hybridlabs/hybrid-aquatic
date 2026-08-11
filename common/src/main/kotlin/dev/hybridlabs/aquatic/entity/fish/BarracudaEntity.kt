@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalEatItemGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.Difficulty
@@ -25,7 +25,7 @@ import net.minecraft.world.level.Level
 import java.util.*
 
 class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
-    HAFishEntity(type, world),
+    BaseFishEntity(type, world),
     NeutralMob {
 
     private var angerTime = 0

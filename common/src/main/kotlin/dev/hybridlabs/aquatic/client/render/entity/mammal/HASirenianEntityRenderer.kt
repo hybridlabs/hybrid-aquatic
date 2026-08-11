@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.client.render.entity.mammal
 
 import com.mojang.blaze3d.vertex.PoseStack
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
-import dev.hybridlabs.aquatic.entity.base.HASirenianEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseSirenianEntity
+import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel
 import software.bernie.geckolib.renderer.GeoEntityRenderer
 
-open class HASirenianEntityRenderer<T : HASirenianEntity>(
+open class HASirenianEntityRenderer<T : BaseSirenianEntity>(
     context: EntityRendererProvider.Context,
     model: GeoModel<T>,
     private var variableSize: Boolean = false
@@ -23,7 +23,7 @@ open class HASirenianEntityRenderer<T : HASirenianEntity>(
         packedLight: Int
     ) {
         if(variableSize) {
-            val size = HAWaterAnimal.getScaleAdjustment(entity, 0.05f)
+            val size = BaseWaterAnimal.getScaleAdjustment(entity, 0.05f)
             poseStack.scale(size, size, size)
         }
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)

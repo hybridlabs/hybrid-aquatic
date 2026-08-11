@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalDigGoal
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
+import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalDigGoal
+import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -13,8 +13,8 @@ import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.PlayState
 import software.bernie.geckolib.constant.DefaultAnimations
 
-class VampireCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, true) {
+class VampireCrabEntity(entityType: EntityType<out VampireCrabEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, true) {
 
     override fun registerGoals() {
         super.registerGoals()
@@ -28,7 +28,7 @@ class VampireCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
         controllerRegistrar.add(
             AnimationController(
                 this, "Spawning",
-                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.tickCount < 20)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
@@ -40,7 +40,7 @@ class VampireCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
         controllerRegistrar.add(
             AnimationController(
                 this, "Digging",
-                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.isDigging())
                         return@AnimationStateHandler state.setAndContinue(DIG_ANIMATION)
                     PlayState.STOP

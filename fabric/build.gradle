@@ -34,6 +34,8 @@ repositories {
         name = 'Fabric'
         url = 'https://maven.fabricmc.net/'
     }
+
+    mavenLocal()
 }
 
 dependencies {
@@ -47,6 +49,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     modImplementation "net.fabricmc:fabric-language-kotlin:$fabric_kotlin_version+kotlin.$kotlin_version"
+    modImplementation("dev.hybridlabs.hapi:hapi-fabric-1.21.1:1.0.0")
     implementation 'org.jetbrains:annotations:25.0.0'
 
     //We still have to load the loader-specific version of any mods included in common
