@@ -3,9 +3,10 @@ package dev.hybridlabs.aquatic.mixin;
 import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity;
+
 import dev.hybridlabs.aquatic.item.HAItems;
 import dev.hybridlabs.aquatic.item.HAToolMaterials;
+import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -96,7 +97,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             LivingEntity foundEntity =
                     object.level()
                             .getNearestEntity(
-                                    HASharkEntity.class,
+                                    BaseSharkEntity.class,
                                     TargetingConditions.forNonCombat()
                                             .range(32)
                                             .selector(Entity::isUnderWater),
