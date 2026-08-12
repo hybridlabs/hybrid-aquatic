@@ -4,7 +4,6 @@ import dev.hybridlabs.aquatic.entity.ai.goal.MinionAttackGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
-import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalFollowCreatureGoal
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -36,7 +35,6 @@ class BeaklingEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         super.registerGoals()
         goalSelector.addGoal(0, MinionAttackGoal(this, 0.6, true))
         goalSelector.addGoal(1, MoveTowardsTargetGoal(this, 1.0, 16.0F))
-        goalSelector.addGoal(3, WaterAnimalFollowCreatureGoal(this, ShellBeastEntity::class.java, 1.5, 4.0F, 8.0F))
         goalSelector.addGoal(4, RandomSwimmingGoal(this, 1.0, 2))
     }
 

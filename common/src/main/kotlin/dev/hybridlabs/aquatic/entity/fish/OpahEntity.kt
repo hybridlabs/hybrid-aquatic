@@ -3,7 +3,6 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalFollowCreatureGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -22,7 +21,6 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(2, WaterAnimalFollowCreatureGoal(this, TunaEntity::class.java, 1.5, 4.0F, 16.0F))
     }
 
     override fun isFood(stack: ItemStack): Boolean {
