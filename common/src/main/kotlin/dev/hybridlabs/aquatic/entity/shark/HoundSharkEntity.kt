@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
@@ -55,13 +55,13 @@ class HoundSharkEntity(type: EntityType<out HoundSharkEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES
+                HAPIEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HAEntityTags.MEDIUM_CREATURES,
-                HAEntityTags.LARGE_CREATURES,
-                HAEntityTags.MEDIUM_SHARK,
-                HAEntityTags.LARGE_SHARK
+                HAPIEntityTags.MEDIUM_CREATURES,
+                HAPIEntityTags.LARGE_CREATURES,
+                HAPIEntityTags.MEDIUM_SHARK,
+                HAPIEntityTags.LARGE_SHARK
             ),
         )
 

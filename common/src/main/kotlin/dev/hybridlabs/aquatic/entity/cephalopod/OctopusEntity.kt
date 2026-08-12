@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
 import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
@@ -55,10 +55,10 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : BaseOct
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.ALL_CRUSTACEANS
+                HAPIEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 
@@ -126,11 +126,11 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : BaseOct
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HAPIBiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 
-                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.LUKEWARM_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 2))
                         }
 

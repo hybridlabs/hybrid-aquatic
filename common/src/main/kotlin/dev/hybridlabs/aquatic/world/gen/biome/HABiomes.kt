@@ -8,7 +8,7 @@ import com.terraformersmc.biolith.api.surface.SurfaceGeneration
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -295,7 +295,7 @@ object HABiomes {
                         0.5f
                     ),
                     CriterionBuilder
-                        .neighbor(HABiomeTags.LUKEWARM_OCEANS)
+                        .neighbor(HAPIBiomeTags.LUKEWARM_OCEANS)
                 )
             )
         }

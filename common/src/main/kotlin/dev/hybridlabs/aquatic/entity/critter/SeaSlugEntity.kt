@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.critter
 
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -65,11 +65,11 @@ class SeaSlugEntity(type: EntityType<out SeaSlugEntity>, world: Level) : BaseCri
                 fun fromBiome(biome: Holder<Biome>): Type {
                     return when {
 
-                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HAPIBiomeTags.CORAL_REEF) -> {
                             NUDIBRANCH
                         }
 
-                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.LUKEWARM_OCEANS) -> {
                             NUDIBRANCH
                             SEA_HARE
                         }

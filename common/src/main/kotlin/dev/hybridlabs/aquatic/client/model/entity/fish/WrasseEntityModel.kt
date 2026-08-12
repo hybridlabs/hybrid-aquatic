@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.WrasseEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class WrasseEntityModel : HAFishEntityModel<WrasseEntity>("wrasse") {
+class WrasseEntityModel : BaseFishEntityModel<WrasseEntity>("hybrid_aquatic", "wrasse") {
 
     companion object {
         private val CALIFORNIA_SHEEPSHEAD_TEXTURE =

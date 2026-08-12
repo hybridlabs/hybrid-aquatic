@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
@@ -89,7 +89,7 @@ class GiantIsopodEntity(entityType: EntityType<out GiantIsopodEntity>, world: Le
         val level = this.level()
         val biome = level.getBiome(this.blockPosition())
 
-        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+        return if (biome.`is`(HAPIBiomeTags.ALL_TRENCHES)) {
             5
         } else {
             0
@@ -100,7 +100,7 @@ class GiantIsopodEntity(entityType: EntityType<out GiantIsopodEntity>, world: Le
         val level = this.level()
         val biome = level.getBiome(this.blockPosition())
 
-        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+        return if (biome.`is`(HAPIBiomeTags.ALL_TRENCHES)) {
             0
         } else {
             -5

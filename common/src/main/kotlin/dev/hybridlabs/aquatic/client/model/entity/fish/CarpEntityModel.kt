@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.CarpEntity
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class CarpEntityModel : HAFishEntityModel<CarpEntity>("carp") {
+class CarpEntityModel : BaseFishEntityModel<CarpEntity>("hybrid_aquatic", "carp") {
 
     override fun getTextureResource(animatable: CarpEntity): ResourceLocation {
         if (animatable.isBaby) {

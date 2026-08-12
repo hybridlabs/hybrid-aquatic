@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
 import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
@@ -20,10 +20,10 @@ class ArrowSquidEntity(type: EntityType<out ArrowSquidEntity>, world: Level) : B
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.ALL_CRUSTACEANS
+                HAPIEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

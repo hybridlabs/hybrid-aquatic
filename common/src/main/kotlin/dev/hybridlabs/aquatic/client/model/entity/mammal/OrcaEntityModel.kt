@@ -2,9 +2,10 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseDolphinEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class OrcaEntityModel : HADolphinEntityModel<OrcaEntity>("orca") {
+class OrcaEntityModel : BaseDolphinEntityModel<OrcaEntity>("hybrid_aquatic", "orca") {
 
     companion object {
         private val BLACK_ORCA_TEXTURE = ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/orca/black_orca.png")

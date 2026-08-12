@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -12,9 +12,9 @@ class HatchetfishEntity(entityType: EntityType<out HatchetfishEntity>, world: Le
     BaseFishEntity(entityType, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_SHARKS
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_SHARKS
     )
 
     override fun getMaxSpawnClusterSize(): Int {

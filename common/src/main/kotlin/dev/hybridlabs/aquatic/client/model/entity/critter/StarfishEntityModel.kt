@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class StarfishEntityModel : HACritterEntityModel<StarfishEntity>("starfish") {
+class StarfishEntityModel : BaseCritterEntityModel<StarfishEntity>("hybrid_aquatic", "starfish") {
 
     companion object {
         private val brittlestarTextures = listOf(

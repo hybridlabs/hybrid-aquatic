@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import net.minecraft.world.entity.EntityType
@@ -30,12 +30,12 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.ALL_CEPHALOPODS
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HAEntityTags.MEDIUM_CREATURES,
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.MEDIUM_CREATURES,
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

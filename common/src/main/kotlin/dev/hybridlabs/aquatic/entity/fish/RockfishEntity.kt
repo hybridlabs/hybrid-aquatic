@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -29,8 +29,8 @@ class RockfishEntity(type: EntityType<out RockfishEntity>, world: Level) :
 
     override fun getTargetConfig() =
         MobTargetConfiguration.ofPrey(
-            HAEntityTags.LARGE_CREATURES,
-            HAEntityTags.ALL_SHARKS
+            HAPIEntityTags.LARGE_CREATURES,
+            HAPIEntityTags.ALL_SHARKS
         )
 
     override fun getMaxSpawnClusterSize(): Int {

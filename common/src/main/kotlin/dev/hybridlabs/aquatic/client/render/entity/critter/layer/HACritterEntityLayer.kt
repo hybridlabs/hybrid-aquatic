@@ -2,9 +2,9 @@ package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
-import dev.hybridlabs.aquatic.client.model.entity.critter.HACritterEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.critter.HACritterEntityRenderer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
+import dev.hybridlabs.hapi.client.render.entity.BaseCritterEntityRenderer
 import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
@@ -14,11 +14,11 @@ import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class HACritterEntityLayer<T: BaseCritterEntity>(
-    renderer: HACritterEntityRenderer<T>
+    renderer: BaseCritterEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HACritterEntityModel).getLayerTextureResource(layer.lowercase())
+        return (geoModel as BaseCritterEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

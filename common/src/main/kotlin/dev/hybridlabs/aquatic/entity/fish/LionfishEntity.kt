@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -24,12 +24,12 @@ class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.ALL_CRUSTACEANS
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HAEntityTags.LARGE_CREATURES,
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.LARGE_CREATURES,
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

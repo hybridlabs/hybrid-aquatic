@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:lukewarm_ocean",
-    {
-      "id": "still_life:subtropical_shallow_ocean",
-      "required": false
-    }
-  ]
-}

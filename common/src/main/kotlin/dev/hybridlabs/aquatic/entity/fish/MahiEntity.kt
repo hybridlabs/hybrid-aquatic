@@ -6,7 +6,7 @@ import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -83,11 +83,11 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.ALL_CEPHALOPODS
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

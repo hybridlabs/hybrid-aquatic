@@ -2,9 +2,9 @@ package dev.hybridlabs.aquatic.client.render.entity.mammal.layer
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
-import dev.hybridlabs.aquatic.client.model.entity.mammal.HADolphinEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.mammal.HADolphinEntityRenderer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.hapi.client.model.entity.BaseDolphinEntityModel
+import dev.hybridlabs.hapi.client.render.entity.BaseDolphinEntityRenderer
 import dev.hybridlabs.hapi.entity.water.base.BaseDolphinEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
@@ -15,11 +15,11 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 import software.bernie.geckolib.util.Color
 
 class HADolphinEntityLayer<T: BaseDolphinEntity>(
-    renderer: HADolphinEntityRenderer<T>
+    renderer: BaseDolphinEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(animatable: T, layer: String): ResourceLocation {
-        return (geoModel as HADolphinEntityModel<T>).getLayerTextureResource(animatable, layer.lowercase())
+        return (geoModel as BaseDolphinEntityModel<T>).getLayerTextureResource(animatable, layer.lowercase())
     }
 
     override fun render(

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -104,7 +104,7 @@ class SeaCucumberEntity(type: EntityType<out SeaCucumberEntity>, world: Level) :
                             SEA_PIG
                         }
 
-                        biome.`is`(HABiomeTags.ALL_TRENCHES) -> {
+                        biome.`is`(HAPIBiomeTags.ALL_TRENCHES) -> {
                             SEA_PIG
                         }
 

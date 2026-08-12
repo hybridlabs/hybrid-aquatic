@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.LobsterEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseCrustaceanEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class LobsterEntityModel : HACrustaceanEntityModel<LobsterEntity>("lobster") {
+class LobsterEntityModel : BaseCrustaceanEntityModel<LobsterEntity>("hybrid_aquatic", "lobster") {
 
     companion object {
         private val clawlessTextures = listOf(

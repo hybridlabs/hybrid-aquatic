@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
 import dev.hybridlabs.aquatic.entity.shark.GoblinSharkEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseSharkEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class GoblinSharkEntityModel : HASharkEntityModel<GoblinSharkEntity>("goblin_shark") {
+class GoblinSharkEntityModel : BaseSharkEntityModel<GoblinSharkEntity>("hybrid_aquatic", "goblin_shark") {
 
     override fun getTextureResource(animatable: GoblinSharkEntity): ResourceLocation =
         if (animatable.moistness < 590) DEPRESSURIZED_TEXTURE else GOBLIN_SHARK_TEXTURE

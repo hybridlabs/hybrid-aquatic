@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
 import dev.hybridlabs.aquatic.entity.shark.BullSharkEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseSharkEntityModel
 
-class BullSharkEntityModel : HASharkEntityModel<BullSharkEntity>("bull_shark")
+class BullSharkEntityModel : BaseSharkEntityModel<BullSharkEntity>("hybrid_aquatic", "bull_shark")

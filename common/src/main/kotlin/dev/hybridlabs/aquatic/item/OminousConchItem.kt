@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.item
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.nbt.CompoundTag
@@ -68,7 +68,7 @@ class OminousConchItem(
         if (tag != null && tag.getBoolean(TAG_HAS_SUMMONED)) return result
 
         val biome = level.getBiome(player.blockPosition())
-        if (!biome.`is`(HABiomeTags.CAN_SUMMON_SHELL_BEAST)) return result
+        if (!biome.`is`(HAPIBiomeTags.CAN_SUMMON_SHELL_BEAST)) return result
         if (!player.isUnderWater) return result
 
         stack.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY) { data ->

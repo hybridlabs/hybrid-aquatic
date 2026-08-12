@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.tag.HABlockTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalGrazeGoal
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
@@ -15,9 +15,9 @@ class CorydoraEntity(type: EntityType<out CorydoraEntity>, world: Level) :
     BaseFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_SHARKS
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {

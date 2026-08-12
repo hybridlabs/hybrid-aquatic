@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.SeaUrchinEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class SeaUrchinEntityModel : HACritterEntityModel<SeaUrchinEntity>("sea_urchin") {
+class SeaUrchinEntityModel : BaseCritterEntityModel<SeaUrchinEntity>("hybrid_aquatic", "sea_urchin") {
 
     companion object {
         private val largeTextures = listOf(

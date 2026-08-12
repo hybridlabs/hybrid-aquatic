@@ -4,7 +4,7 @@ import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.hapi.entity.water.base.BaseWaterAnimal
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -18,9 +18,9 @@ class TripodFishEntity(type: EntityType<out TripodFishEntity>, world: Level) :
     BaseFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_SHARKS
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {

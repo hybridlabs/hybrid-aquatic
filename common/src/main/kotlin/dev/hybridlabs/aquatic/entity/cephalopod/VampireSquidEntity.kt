@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.PassiveFeedingGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
@@ -15,7 +15,7 @@ import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.animation.PlayState
 
 class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : BaseCephalopodEntity(type, world) {
-    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAEntityTags.ALL_SHARKS)
+    override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAPIEntityTags.ALL_SHARKS)
 
     override fun registerGoals() {
         super.registerGoals()

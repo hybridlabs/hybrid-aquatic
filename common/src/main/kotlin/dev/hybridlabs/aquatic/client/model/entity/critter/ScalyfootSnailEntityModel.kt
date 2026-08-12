@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.ScalyfootSnailEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
 
-class ScalyfootSnailEntityModel : HACritterEntityModel<ScalyfootSnailEntity>("scalyfoot_snail")
+class ScalyfootSnailEntityModel : BaseCritterEntityModel<ScalyfootSnailEntity>("hybrid_aquatic", "scalyfoot_snail")

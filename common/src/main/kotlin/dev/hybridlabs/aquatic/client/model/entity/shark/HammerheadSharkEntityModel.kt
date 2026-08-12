@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.shark
 
 import dev.hybridlabs.aquatic.entity.shark.HammerheadSharkEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseSharkEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class HammerheadSharkEntityModel : HASharkEntityModel<HammerheadSharkEntity>("hammerhead_shark") {
+class HammerheadSharkEntityModel : BaseSharkEntityModel<HammerheadSharkEntity>("hybrid_aquatic", "hammerhead_shark") {
 
     companion object {
         private val commonTextures = listOf(

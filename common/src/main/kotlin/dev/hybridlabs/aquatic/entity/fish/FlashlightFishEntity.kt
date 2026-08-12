@@ -5,7 +5,7 @@ import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.hapi.entity.ai.goal.boids.StayInWaterGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -31,9 +31,9 @@ class FlashlightFishEntity(type: EntityType<out FlashlightFishEntity>, world: Le
     BaseSchoolingFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_SHARKS
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {

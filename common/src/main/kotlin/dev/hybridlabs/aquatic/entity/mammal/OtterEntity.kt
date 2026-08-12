@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
@@ -239,10 +239,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.OTTER_PREY
+                HAPIEntityTags.OTTER_PREY
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 
@@ -329,11 +329,11 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
                             SEA
                         }
 
-                        biome.`is`(HABiomeTags.ROCKY_BEACHES) -> {
+                        biome.`is`(HAPIBiomeTags.ROCKY_BEACHES) -> {
                             SEA
                         }
 
-                        biome.`is`(HABiomeTags.SANDY_BEACHES) -> {
+                        biome.`is`(HAPIBiomeTags.SANDY_BEACHES) -> {
                             SEA
                         }
 

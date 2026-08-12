@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -28,11 +28,11 @@ class SeadragonEntity(type: EntityType<out SeadragonEntity>, world: Level) :
     BaseFishEntity(type, world), VariantHolder<SeadragonEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.SMALL_CREATURES,
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_CEPHALOPODS,
-        HAEntityTags.ALL_SHARKS,
+        HAPIEntityTags.SMALL_CREATURES,
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_CEPHALOPODS,
+        HAPIEntityTags.ALL_SHARKS,
     )
 
     override fun getMaxSpawnClusterSize(): Int {

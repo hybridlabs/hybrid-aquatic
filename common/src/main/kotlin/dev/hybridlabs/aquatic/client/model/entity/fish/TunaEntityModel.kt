@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.TunaEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class TunaEntityModel : HAFishEntityModel<TunaEntity>("tuna") {
+class TunaEntityModel : BaseFishEntityModel<TunaEntity>("hybrid_aquatic", "tuna") {
 
     override fun getTextureResource(animatable: TunaEntity): ResourceLocation {
         return when (animatable.variant) {

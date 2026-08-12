@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
 import net.minecraft.world.entity.EntityType
@@ -25,12 +25,12 @@ class FrilledSharkEntity(type: EntityType<out FrilledSharkEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.SMALL_SHARK,
-                HAEntityTags.OCTOPUS,
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.SMALL_SHARK,
+                HAPIEntityTags.OCTOPUS,
             ),
             listOf(
-                HAEntityTags.LARGE_SHARK
+                HAPIEntityTags.LARGE_SHARK
             ),
         )
         fun createMobAttributes(): AttributeSupplier.Builder {

@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -116,7 +116,7 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
             val entity = context.entity
             if (
                 entity != null &&
-                entity.type.`is`(HAEntityTags.CAN_USE_FISHING_NET_ON)
+                entity.type.`is`(HAPIEntityTags.CAN_USE_FISHING_NET_ON)
             ) {
                 return Shapes.block()
             }

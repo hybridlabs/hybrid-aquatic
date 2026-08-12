@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
 import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
@@ -22,12 +22,12 @@ class GiantSquidEntity(type: EntityType<out GiantSquidEntity>, world: Level) : B
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.MEDIUM_CREATURES,
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.MEDIUM_CREATURES,
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS,
-                HAEntityTags.WHALE,
+                HAPIEntityTags.ALL_SHARKS,
+                HAPIEntityTags.WHALE,
             ),
         )
 

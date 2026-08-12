@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:deep_cold_ocean",
-    {
-      "id": "still_life:cold_deep_ocean",
-      "required": false
-    }
-  ]
-}

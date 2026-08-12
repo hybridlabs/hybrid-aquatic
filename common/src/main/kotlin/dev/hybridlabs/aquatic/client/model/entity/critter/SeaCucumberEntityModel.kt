@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class SeaCucumberEntityModel : HACritterEntityModel<SeaCucumberEntity>("sea_cucumber") {
+class SeaCucumberEntityModel : BaseCritterEntityModel<SeaCucumberEntity>("hybrid_aquatic", "sea_cucumber") {
 
     override fun getRenderType(animatable: SeaCucumberEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)

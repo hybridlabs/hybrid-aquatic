@@ -3,18 +3,18 @@ package dev.hybridlabs.aquatic.client.render.entity.mammal.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.mammal.OrcaEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.mammal.HADolphinEntityRenderer
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
+import dev.hybridlabs.hapi.client.render.entity.BaseDolphinEntityRenderer
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 import software.bernie.geckolib.util.Color
 
 class OrcaSaddleEntityLayer(
-    renderer: HADolphinEntityRenderer<OrcaEntity>
+    renderer: BaseDolphinEntityRenderer<OrcaEntity>
 ) : GeoRenderLayer<OrcaEntity>(renderer) {
 
     private fun getSaddleTexture(animatable: OrcaEntity, layer: String): ResourceLocation {

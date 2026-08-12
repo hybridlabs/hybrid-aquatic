@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.entity.fish
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -30,12 +30,12 @@ class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES
+                HAPIEntityTags.SMALL_CREATURES
             ),
             listOf(
-                HAEntityTags.MEDIUM_CREATURES,
-                HAEntityTags.LARGE_CREATURES,
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.MEDIUM_CREATURES,
+                HAPIEntityTags.LARGE_CREATURES,
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

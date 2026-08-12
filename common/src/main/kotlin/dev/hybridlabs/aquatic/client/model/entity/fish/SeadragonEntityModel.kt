@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.SeadragonEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
@@ -7,7 +8,7 @@ import net.minecraft.util.Mth
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DataTickets
 
-class SeadragonEntityModel : HAFishEntityModel<SeadragonEntity>("seadragon") {
+class SeadragonEntityModel : BaseFishEntityModel<SeadragonEntity>("hybrid_aquatic", "seadragon") {
     override fun getRenderType(animatable: SeadragonEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

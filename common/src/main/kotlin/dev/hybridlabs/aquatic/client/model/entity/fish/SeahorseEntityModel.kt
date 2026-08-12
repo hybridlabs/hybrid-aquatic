@@ -1,12 +1,13 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.animation.AnimationState
 import software.bernie.geckolib.constant.DataTickets
 
-class SeahorseEntityModel : HAFishEntityModel<SeahorseEntity>("seahorse") {
+class SeahorseEntityModel : BaseFishEntityModel<SeahorseEntity>("hybrid_aquatic", "seahorse") {
 
     override fun getTextureResource(animatable: SeahorseEntity): ResourceLocation {
         return when (animatable.variant) {

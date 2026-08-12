@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.DragonfishEntity
 
-class DragonfishEntityModel : HAFishEntityModel<DragonfishEntity>("dragonfish")
+class DragonfishEntityModel : BaseFishEntityModel<DragonfishEntity>("hybrid_aquatic", "dragonfish")

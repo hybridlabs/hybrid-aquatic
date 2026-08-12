@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
 import net.minecraft.world.entity.EntityType
@@ -33,13 +33,13 @@ class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.CRAB,
-                HAEntityTags.LOBSTER,
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.RAY,
+                HAPIEntityTags.CRAB,
+                HAPIEntityTags.LOBSTER,
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.RAY,
             ),
             listOf(
-                HAEntityTags.LARGE_SHARK
+                HAPIEntityTags.LARGE_SHARK
             ),
         )
 

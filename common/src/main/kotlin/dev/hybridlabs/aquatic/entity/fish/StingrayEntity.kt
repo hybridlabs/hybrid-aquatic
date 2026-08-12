@@ -4,8 +4,8 @@ import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
 import dev.hybridlabs.aquatic.loot.HALootTables
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -77,11 +77,11 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.ALL_CRUSTACEANS
+                HAPIEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HAEntityTags.LARGE_CREATURES,
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.LARGE_CREATURES,
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 
@@ -123,7 +123,7 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HAPIBiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 

@@ -2,10 +2,11 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.HermitCrabEntity
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.hapi.client.model.entity.BaseCrustaceanEntityModel
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 
-class HermitCrabEntityModel : HACrustaceanEntityModel<HermitCrabEntity>("hermit_crab") {
+class HermitCrabEntityModel : BaseCrustaceanEntityModel<HermitCrabEntity>("hybrid_aquatic", "hermit_crab") {
 
     companion object {
         private val SHELL_TEXTURE =

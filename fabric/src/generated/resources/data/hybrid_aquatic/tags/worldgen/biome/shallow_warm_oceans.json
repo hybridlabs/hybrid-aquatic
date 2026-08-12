@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:warm_ocean",
-    {
-      "id": "still_life:tropical_shallow_ocean",
-      "required": false
-    }
-  ]
-}

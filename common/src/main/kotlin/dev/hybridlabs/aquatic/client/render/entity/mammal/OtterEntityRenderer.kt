@@ -2,9 +2,10 @@ package dev.hybridlabs.aquatic.client.render.entity.mammal
 
 import dev.hybridlabs.aquatic.client.model.entity.mammal.OtterEntityModel
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
+import dev.hybridlabs.hapi.client.render.entity.BaseMammalEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
-class OtterEntityRenderer(context: Context) : HAMammalEntityRenderer<OtterEntity>(context, OtterEntityModel()) {
+class OtterEntityRenderer(context: Context) : BaseMammalEntityRenderer<OtterEntity>(context, OtterEntityModel()) {
 
     init {
         this.shadowRadius = 0.5f

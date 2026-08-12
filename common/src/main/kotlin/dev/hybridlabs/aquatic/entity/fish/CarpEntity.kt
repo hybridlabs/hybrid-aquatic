@@ -4,9 +4,9 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.CarpBreedGoal
 import dev.hybridlabs.aquatic.entity.feature.CarpPatternTextureFeature
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.aquatic.tag.HABlockTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalGrazeGoal
@@ -38,9 +38,9 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
     CarpPatternTextureFeature, VariantHolder<CarpEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_SHARKS
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {
@@ -205,7 +205,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.CHERRY) -> {
+                        biome.`is`(HAPIBiomeTags.CHERRY) -> {
                             Type.fromId(random.nextInt(2, 4))
                         }
 

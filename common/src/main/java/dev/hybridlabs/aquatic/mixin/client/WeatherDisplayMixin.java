@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.mixin.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import dev.hybridlabs.aquatic.CommonClass;
-import dev.hybridlabs.aquatic.tag.HABiomeTags;
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -44,7 +44,7 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 			
 			float f = this.minecraft.level.getRainLevel(tickDelta);
 			Level world = this.minecraft.level;
-			if (f > 0.0f && cameraY < world.getSeaLevel() && world.getBiome(minecraft.player.blockPosition()).is(HABiomeTags.INSTANCE.getALL_TRENCHES())) {
+			if (f > 0.0f && cameraY < world.getSeaLevel() && world.getBiome(minecraft.player.blockPosition()).is(HAPIBiomeTags.INSTANCE.getALL_TRENCHES())) {
 				manager.turnOnLightLayer();
 				int xFloored = Mth.floor(cameraX);
 				int yFloored = Mth.floor(cameraY);

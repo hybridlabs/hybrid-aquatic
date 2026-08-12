@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABlockTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalGrazeGoal
@@ -22,8 +22,8 @@ class ParrotfishEntity(type: EntityType<out ParrotfishEntity>, world: Level) :
 
     override fun getTargetConfig() =
         MobTargetConfiguration.ofPrey(
-            HAEntityTags.LARGE_CREATURES,
-            HAEntityTags.ALL_SHARKS
+            HAPIEntityTags.LARGE_CREATURES,
+            HAPIEntityTags.ALL_SHARKS
         )
 
     override fun registerGoals() {

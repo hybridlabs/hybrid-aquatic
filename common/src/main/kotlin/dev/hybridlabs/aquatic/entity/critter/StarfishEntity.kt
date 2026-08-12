@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.critter
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -124,11 +124,11 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                             BRITTLESTAR
                         }
 
-                        biome.`is`(HABiomeTags.ALL_TRENCHES) -> {
+                        biome.`is`(HAPIBiomeTags.ALL_TRENCHES) -> {
                             BRITTLESTAR
                         }
 
-                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HAPIBiomeTags.CORAL_REEF) -> {
                             REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                         }
 

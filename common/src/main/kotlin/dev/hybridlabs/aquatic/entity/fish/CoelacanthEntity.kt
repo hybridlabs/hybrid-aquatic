@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.water.base.BaseFishEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -20,11 +20,11 @@ class CoelacanthEntity(type: EntityType<out CoelacanthEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.ALL_CEPHALOPODS
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseOctopusEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class UmbrellaOctopusEntityModel : HAOctopusEntityModel<UmbrellaOctopusEntity>("umbrella_octopus") {
+class UmbrellaOctopusEntityModel : BaseOctopusEntityModel<UmbrellaOctopusEntity>("hybrid_aquatic","umbrella_octopus") {
 
     companion object {
         private val commonTextures = listOf(

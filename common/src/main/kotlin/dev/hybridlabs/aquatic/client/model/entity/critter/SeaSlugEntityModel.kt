@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.SeaSlugEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class SeaSlugEntityModel : HACritterEntityModel<SeaSlugEntity>("sea_slug") {
+class SeaSlugEntityModel : BaseCritterEntityModel<SeaSlugEntity>("hybrid_aquatic", "sea_slug") {
 
     companion object {
         private val SPOTTED_SEA_HARE_TEXTURE =

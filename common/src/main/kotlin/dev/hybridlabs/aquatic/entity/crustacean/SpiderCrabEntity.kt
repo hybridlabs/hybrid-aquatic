@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
 import net.minecraft.core.BlockPos
@@ -53,7 +53,7 @@ class SpiderCrabEntity(entityType: EntityType<out SpiderCrabEntity>, world: Leve
         val level = this.level()
         val biome = level.getBiome(this.blockPosition())
 
-        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+        return if (biome.`is`(HAPIBiomeTags.ALL_TRENCHES)) {
             8
         } else {
             3
@@ -64,7 +64,7 @@ class SpiderCrabEntity(entityType: EntityType<out SpiderCrabEntity>, world: Leve
         val level = this.level()
         val biome = level.getBiome(this.blockPosition())
 
-        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+        return if (biome.`is`(HAPIBiomeTags.ALL_TRENCHES)) {
             0
         } else {
             -3

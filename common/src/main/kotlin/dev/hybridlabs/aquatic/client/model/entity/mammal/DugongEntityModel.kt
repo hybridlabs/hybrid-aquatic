@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
+import dev.hybridlabs.hapi.client.model.entity.BaseSirenianEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class DugongEntityModel : HASirenianEntityModel<DugongEntity>("dugong") {
+class DugongEntityModel : BaseSirenianEntityModel<DugongEntity>("hybrid_aquatic", "dugong") {
 
     override fun getTextureResource(animatable: DugongEntity): ResourceLocation {
         return if (animatable.isBaby) {

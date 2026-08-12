@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import dev.hybridlabs.aquatic.tag.HABiomeTags
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes.config
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey
@@ -17,7 +17,7 @@ data class BiomeFeatureAddition(
             //#region Anemones
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.CORAL_REEF,
+                    HAPIBiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.ANEMONES
                 ),
@@ -25,7 +25,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                    HAPIBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.ANEMONES
                 ),
@@ -43,7 +43,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.ALL_TRENCHES,
+                    HAPIBiomeTags.ALL_TRENCHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.GLASS_SPONGE_PATCH
                 ),
@@ -51,7 +51,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.ALL_TRENCHES,
+                    HAPIBiomeTags.ALL_TRENCHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.HARP_SPONGE_PATCH
                 ),
@@ -59,7 +59,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.ALL_TRENCHES,
+                    HAPIBiomeTags.ALL_TRENCHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.PING_PONG_SPONGE_PATCH
                 ),
@@ -68,7 +68,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateBrinePools) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.ALL_TRENCHES,
+                        HAPIBiomeTags.ALL_TRENCHES,
                         GenerationStep.Decoration.LAKES,
                         HAPlacedFeatures.TRENCH_BRINE_POOLS
                     ),
@@ -76,7 +76,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.SULFURIC_CAVE,
+                        HAPIBiomeTags.SULFURIC_CAVE,
                         GenerationStep.Decoration.LAKES,
                         HAPlacedFeatures.CAVE_BRINE_POOLS
                     ),
@@ -87,7 +87,7 @@ data class BiomeFeatureAddition(
             //#region Shellfish
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.TIDE_POOLS,
+                    HAPIBiomeTags.TIDE_POOLS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.TIDE_POOL_MUSSEL_PATCH
                 ),
@@ -95,7 +95,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.CORAL_REEF,
+                    HAPIBiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.GIANT_CLAM_PATCH
                 ),
@@ -103,7 +103,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SEAGRASS_BED,
+                    HAPIBiomeTags.SEAGRASS_BED,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.GIANT_CLAM_PATCH
                 ),
@@ -111,7 +111,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.RED_MEADOW,
+                    HAPIBiomeTags.RED_MEADOW,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.GIANT_CLAM_PATCH
                 ),
@@ -121,7 +121,7 @@ data class BiomeFeatureAddition(
             //#region Oyster Beds
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SHALLOW_COLD_OCEANS,
+                    HAPIBiomeTags.SHALLOW_COLD_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.OYSTER_BED
                 ),
@@ -129,7 +129,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SHALLOW_WARM_OCEANS,
+                    HAPIBiomeTags.SHALLOW_WARM_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.OYSTER_BED
                 ),
@@ -137,7 +137,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.CORAL_REEF,
+                    HAPIBiomeTags.CORAL_REEF,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.OYSTER_BED
                 ),
@@ -145,7 +145,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SEAGRASS_BED,
+                    HAPIBiomeTags.SEAGRASS_BED,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.OYSTER_BED
                 ),
@@ -153,7 +153,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.RED_MEADOW,
+                    HAPIBiomeTags.RED_MEADOW,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.OYSTER_BED
                 ),
@@ -161,7 +161,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                    HAPIBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.OYSTER_BED
                 ),
@@ -171,7 +171,7 @@ data class BiomeFeatureAddition(
             //#region River Plants
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SEAGRASS_BED,
+                    HAPIBiomeTags.SEAGRASS_BED,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.SEA_LETTUCE_PATCH
                 ),
@@ -180,7 +180,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateRiverPlants) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.RIVERS,
+                        HAPIBiomeTags.RIVERS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.WATER_LETTUCE
                     ),
@@ -188,7 +188,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.SWAMP,
+                        HAPIBiomeTags.SWAMP,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.WATER_LETTUCE
                     ),
@@ -196,7 +196,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.MARSHES,
+                        HAPIBiomeTags.MARSHES,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.WATER_LETTUCE
                     ),
@@ -204,7 +204,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.TROPICAL_RIVERS,
+                        HAPIBiomeTags.TROPICAL_RIVERS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.JUNGLE_LILY_PAD
                     ),
@@ -212,7 +212,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.TROPICAL_RIVERS,
+                        HAPIBiomeTags.TROPICAL_RIVERS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.WATER_HYACINTH
                     ),
@@ -224,7 +224,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateSargassum) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                        HAPIBiomeTags.SHALLOW_LUKEWARM_OCEANS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.SARGASSUM
                     ),
@@ -234,7 +234,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateFloatingSargassum) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.DEEP_LUKEWARM_OCEANS,
+                        HAPIBiomeTags.DEEP_LUKEWARM_OCEANS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.FLOATING_SARGASSUM
                     ),
@@ -244,7 +244,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateBullKelp) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                        HAPIBiomeTags.SHALLOW_TEMPERATE_OCEANS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.BULL_KELP
                     ),
@@ -254,7 +254,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateDelesseria) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.SHALLOW_COLD_OCEANS,
+                        HAPIBiomeTags.SHALLOW_COLD_OCEANS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.DELESSERIA
                     ),
@@ -265,7 +265,7 @@ data class BiomeFeatureAddition(
             //#region Vents & Sulfur
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SULFURIC_CAVE,
+                    HAPIBiomeTags.SULFURIC_CAVE,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
                     HAPlacedFeatures.SULFUR_DEPOSIT
                 ),
@@ -274,7 +274,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateThermalVents) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.SULFURIC_CAVE,
+                        HAPIBiomeTags.SULFURIC_CAVE,
                         GenerationStep.Decoration.SURFACE_STRUCTURES,
                         HAPlacedFeatures.THERMAL_VENT_CAVES
                     )
@@ -282,7 +282,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.ALL_TRENCHES,
+                        HAPIBiomeTags.ALL_TRENCHES,
                         GenerationStep.Decoration.SURFACE_STRUCTURES,
                         HAPlacedFeatures.THERMAL_VENT_TRENCHES
                     )
@@ -292,7 +292,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SANDY_BEACHES,
+                    HAPIBiomeTags.SANDY_BEACHES,
                     GenerationStep.Decoration.VEGETAL_DECORATION,
                     HAPlacedFeatures.DUNEGRASS_PATCH
                 ),
@@ -300,7 +300,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.SANDY_BEACHES,
+                    HAPIBiomeTags.SANDY_BEACHES,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
                     HAPlacedFeatures.DISK_SUSPICIOUS_SAND
                 ),
@@ -309,7 +309,7 @@ data class BiomeFeatureAddition(
             if (config.config.featureConfig.generateMounds) {
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.HA_DEEP_OCEANS,
+                        HAPIBiomeTags.HAPI_DEEP_OCEANS,
                         GenerationStep.Decoration.SURFACE_STRUCTURES,
                         HAPlacedFeatures.MOUND
                     ),
@@ -317,7 +317,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HABiomeTags.SEAGRASS_BED,
+                        HAPIBiomeTags.SEAGRASS_BED,
                         GenerationStep.Decoration.SURFACE_STRUCTURES,
                         HAPlacedFeatures.MOUND
                     ),
@@ -326,7 +326,7 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
-                    HABiomeTags.BOTTLE_SPAWN_BIOMES,
+                    HAPIBiomeTags.BOTTLE_SPAWN_BIOMES,
                     GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                     HAPlacedFeatures.MESSAGE_IN_A_BOTTLE
                 )

@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.feature.OrcaEyeTextureFeature
 import dev.hybridlabs.aquatic.entity.feature.OrcaSaddleTextureFeature
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
@@ -38,12 +38,12 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : BaseDolphinEn
     OrcaEyeTextureFeature, OrcaSaddleTextureFeature, VariantHolder<OrcaEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
-        HAEntityTags.SMALL_CREATURES,
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.SEAL,
-        HAEntityTags.SMALL_SHARK,
-        HAEntityTags.MEDIUM_SHARK
+        HAPIEntityTags.SMALL_CREATURES,
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.SEAL,
+        HAPIEntityTags.SMALL_SHARK,
+        HAPIEntityTags.MEDIUM_SHARK
     )
 
     override fun registerGoals() {
@@ -155,15 +155,15 @@ class OrcaEntity(type: EntityType<out OrcaEntity>, world: Level) : BaseDolphinEn
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.FROZEN_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.FROZEN_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 2))
                         }
 
-                        biome.`is`(HABiomeTags.COLD_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.COLD_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 4))
                         }
 
-                        biome.`is`(HABiomeTags.TEMPERATE_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.TEMPERATE_OCEANS) -> {
                             Type.fromId(random.nextInt(1, 6))
                         }
 

@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.DanioEntity
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class DanioEntityModel : HAFishEntityModel<DanioEntity>("danio") {
+class DanioEntityModel : BaseFishEntityModel<DanioEntity>("hybrid_aquatic", "danio") {
     override fun getRenderType(animatable: DanioEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }
