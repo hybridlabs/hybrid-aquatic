@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:tropical_rivers",
+  "biomes": "#hapi:tropical_rivers",
   "spawners": {
     "type": "hybrid_aquatic:tiger_barb",
     "maxCount": 3,

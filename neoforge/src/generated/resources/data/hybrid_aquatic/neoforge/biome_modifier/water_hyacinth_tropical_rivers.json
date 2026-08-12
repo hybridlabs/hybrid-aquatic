@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#hybrid_aquatic:tropical_rivers",
+  "biomes": "#hapi:tropical_rivers",
   "features": "hybrid_aquatic:water_hyacinth",
   "step": "vegetal_decoration"
 }

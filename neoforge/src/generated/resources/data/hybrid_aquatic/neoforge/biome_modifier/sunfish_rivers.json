@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:rivers",
+  "biomes": "#hapi:rivers",
   "spawners": {
     "type": "hybrid_aquatic:sunfish",
     "maxCount": 2,

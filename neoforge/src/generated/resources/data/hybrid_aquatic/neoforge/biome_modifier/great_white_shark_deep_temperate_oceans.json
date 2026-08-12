@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:deep_temperate_oceans",
+  "biomes": "#hapi:deep_temperate_oceans",
   "spawners": {
     "type": "hybrid_aquatic:great_white_shark",
     "maxCount": 1,

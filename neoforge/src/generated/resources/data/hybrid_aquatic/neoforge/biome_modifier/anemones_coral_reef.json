@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#hybrid_aquatic:coral_reef",
+  "biomes": "#hapi:coral_reef",
   "features": "hybrid_aquatic:anemones",
   "step": "vegetal_decoration"
 }

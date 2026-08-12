@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#hybrid_aquatic:red_meadow",
+  "biomes": "#hapi:red_meadow",
   "features": "hybrid_aquatic:oyster_bed",
   "step": "vegetal_decoration"
 }

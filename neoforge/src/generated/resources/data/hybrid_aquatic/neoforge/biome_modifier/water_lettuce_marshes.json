@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#hybrid_aquatic:marshes",
+  "biomes": "#hapi:marshes",
   "features": "hybrid_aquatic:water_lettuce",
   "step": "vegetal_decoration"
 }

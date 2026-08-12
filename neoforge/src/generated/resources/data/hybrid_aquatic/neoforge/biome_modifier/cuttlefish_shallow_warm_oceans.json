@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:shallow_warm_oceans",
+  "biomes": "#hapi:shallow_warm_oceans",
   "spawners": {
     "type": "hybrid_aquatic:cuttlefish",
     "maxCount": 1,

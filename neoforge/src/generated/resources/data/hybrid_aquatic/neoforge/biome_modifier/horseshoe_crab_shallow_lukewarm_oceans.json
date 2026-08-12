@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:shallow_lukewarm_oceans",
+  "biomes": "#hapi:shallow_lukewarm_oceans",
   "spawners": {
     "type": "hybrid_aquatic:horseshoe_crab",
     "maxCount": 2,

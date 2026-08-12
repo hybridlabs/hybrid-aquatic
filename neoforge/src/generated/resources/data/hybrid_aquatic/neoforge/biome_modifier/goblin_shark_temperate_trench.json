@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:temperate_trench",
+  "biomes": "#hapi:temperate_trench",
   "spawners": {
     "type": "hybrid_aquatic:goblin_shark",
     "maxCount": 1,

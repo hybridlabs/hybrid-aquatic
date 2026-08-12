@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:temperate_oceans",
+  "biomes": "#hapi:temperate_oceans",
   "spawners": {
     "type": "hybrid_aquatic:hammerhead_shark",
     "maxCount": 2,

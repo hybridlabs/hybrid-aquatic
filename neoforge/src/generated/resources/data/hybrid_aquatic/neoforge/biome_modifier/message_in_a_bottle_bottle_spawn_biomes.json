@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#hybrid_aquatic:bottle_spawn_biomes",
+  "biomes": "#hapi:bottle_spawn_biomes",
   "features": "hybrid_aquatic:message_in_a_bottle",
   "step": "top_layer_modification"
 }

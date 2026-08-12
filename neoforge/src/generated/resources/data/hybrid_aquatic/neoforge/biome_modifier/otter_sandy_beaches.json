@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:sandy_beaches",
+  "biomes": "#hapi:sandy_beaches",
   "spawners": {
     "type": "hybrid_aquatic:otter",
     "maxCount": 2,

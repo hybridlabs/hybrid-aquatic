@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:swamp",
+  "biomes": "#hapi:swamp",
   "spawners": {
     "type": "hybrid_aquatic:tiger_barb",
     "maxCount": 3,

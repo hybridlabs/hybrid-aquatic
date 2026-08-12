@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:rocky_beaches",
+  "biomes": "#hapi:rocky_beaches",
   "spawners": {
     "type": "hybrid_aquatic:lightfoot_crab",
     "maxCount": 2,

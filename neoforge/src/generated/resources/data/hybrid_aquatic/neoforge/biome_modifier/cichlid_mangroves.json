@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:mangroves",
+  "biomes": "#hapi:mangroves",
   "spawners": {
     "type": "hybrid_aquatic:cichlid",
     "maxCount": 1,

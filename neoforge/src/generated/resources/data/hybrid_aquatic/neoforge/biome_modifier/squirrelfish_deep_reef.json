@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:deep_reef",
+  "biomes": "#hapi:deep_reef",
   "spawners": {
     "type": "hybrid_aquatic:squirrelfish",
     "maxCount": 12,

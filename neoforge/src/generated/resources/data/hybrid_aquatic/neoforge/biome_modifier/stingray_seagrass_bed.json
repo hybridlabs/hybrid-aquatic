@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:seagrass_bed",
+  "biomes": "#hapi:seagrass_bed",
   "spawners": {
     "type": "hybrid_aquatic:stingray",
     "maxCount": 2,

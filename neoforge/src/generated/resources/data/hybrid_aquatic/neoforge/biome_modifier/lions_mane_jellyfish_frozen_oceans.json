@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:frozen_oceans",
+  "biomes": "#hapi:frozen_oceans",
   "spawners": {
     "type": "hybrid_aquatic:lions_mane_jellyfish",
     "maxCount": 1,

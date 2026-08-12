@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:red_meadow",
+  "biomes": "#hapi:red_meadow",
   "spawners": {
     "type": "hybrid_aquatic:hermit_crab",
     "maxCount": 2,

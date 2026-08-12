@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:coral_reef",
+  "biomes": "#hapi:coral_reef",
   "spawners": {
     "type": "hybrid_aquatic:lobster",
     "maxCount": 2,

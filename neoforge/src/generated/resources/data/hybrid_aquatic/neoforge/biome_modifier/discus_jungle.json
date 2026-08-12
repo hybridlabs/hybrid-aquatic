@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:jungle",
+  "biomes": "#hapi:jungle",
   "spawners": {
     "type": "hybrid_aquatic:discus",
     "maxCount": 1,

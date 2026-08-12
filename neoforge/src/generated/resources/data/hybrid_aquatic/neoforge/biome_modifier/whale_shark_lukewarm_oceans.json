@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:lukewarm_oceans",
+  "biomes": "#hapi:lukewarm_oceans",
   "spawners": {
     "type": "hybrid_aquatic:whale_shark",
     "maxCount": 1,

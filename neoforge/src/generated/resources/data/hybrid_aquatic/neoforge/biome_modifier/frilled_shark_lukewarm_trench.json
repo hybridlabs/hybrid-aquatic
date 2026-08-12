@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:lukewarm_trench",
+  "biomes": "#hapi:lukewarm_trench",
   "spawners": {
     "type": "hybrid_aquatic:frilled_shark",
     "maxCount": 1,

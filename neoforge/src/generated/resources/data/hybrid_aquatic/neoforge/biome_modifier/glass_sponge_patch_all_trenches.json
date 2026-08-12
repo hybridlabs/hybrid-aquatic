@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#hybrid_aquatic:all_trenches",
+  "biomes": "#hapi:all_trenches",
   "features": "hybrid_aquatic:glass_sponge_patch",
   "step": "vegetal_decoration"
 }

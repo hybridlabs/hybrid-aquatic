@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:shallow_cold_oceans",
+  "biomes": "#hapi:shallow_cold_oceans",
   "spawners": {
     "type": "hybrid_aquatic:sea_slug",
     "maxCount": 2,

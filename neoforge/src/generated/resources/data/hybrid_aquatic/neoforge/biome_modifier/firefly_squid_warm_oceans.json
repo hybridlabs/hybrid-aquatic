@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hybrid_aquatic:warm_oceans",
+  "biomes": "#hapi:warm_oceans",
   "spawners": {
     "type": "hybrid_aquatic:firefly_squid",
     "maxCount": 2,

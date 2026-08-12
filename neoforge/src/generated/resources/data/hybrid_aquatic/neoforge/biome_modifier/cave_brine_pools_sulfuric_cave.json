@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#hybrid_aquatic:sulfuric_cave",
+  "biomes": "#hapi:sulfuric_cave",
   "features": "hybrid_aquatic:cave_brine_pools",
   "step": "lakes"
 }
