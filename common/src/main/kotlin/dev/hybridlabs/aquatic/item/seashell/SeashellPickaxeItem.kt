@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item.seashell
 
-import dev.hybridlabs.aquatic.item.HAToolMaterials
+import dev.hybridlabs.hapi.item.HAPIToolMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class SeashellPickaxeItem(settings: Properties) : PickaxeItem(
-    HAToolMaterials.SEASHELL,
+    HAPIToolMaterials.SEASHELL,
     settings) {
 
     override fun appendHoverText(

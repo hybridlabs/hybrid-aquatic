@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item.coral
 
-import dev.hybridlabs.aquatic.item.HAToolMaterials
+import dev.hybridlabs.hapi.item.HAPIToolMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class CoralBladeItem(settings: Properties) : SwordItem(
-    HAToolMaterials.CORAL, settings) {
+    HAPIToolMaterials.CORAL, settings) {
 
     override fun appendHoverText(
         stack: ItemStack,

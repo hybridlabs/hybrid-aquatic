@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
 
 import dev.hybridlabs.aquatic.item.HAItems;
-import dev.hybridlabs.aquatic.item.HAToolMaterials;
+import dev.hybridlabs.hapi.item.HAPIToolMaterials;
 import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
@@ -133,7 +133,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof TieredItem tieredItem)) return;
 
-        if (tieredItem.getTier() != HAToolMaterials.SEASHELL) return;
+        if (tieredItem.getTier() != HAPIToolMaterials.SEASHELL) return;
 
         if (player.isEyeInFluid(FluidTags.WATER)) {
             var aquaAffinity = player.level()
@@ -250,7 +250,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
                 for (List<ItemStack> list : combinedInventory) {
                     for (ItemStack itemStack : list) {
                         if (itemStack.getItem() instanceof TieredItem tool
-                                && tool.getTier() == HAToolMaterials.CORAL
+                                && tool.getTier() == HAPIToolMaterials.CORAL
                                 && itemStack.isDamaged()) {
                             coralItems.add(itemStack);
                         }

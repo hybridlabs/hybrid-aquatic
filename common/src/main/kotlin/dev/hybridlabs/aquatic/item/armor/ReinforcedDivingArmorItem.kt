@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.armor.ReinforcedDivingArmorRenderer
-import dev.hybridlabs.aquatic.item.HAArmorMaterials
+import dev.hybridlabs.hapi.item.HAPIArmorMaterials
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
@@ -16,7 +16,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
 class ReinforcedDivingArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HAArmorMaterials.REINFORCED_DIVING, type, settings),
+    ArmorItem(HAPIArmorMaterials.REINFORCED_DIVING, type, settings),
     GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 

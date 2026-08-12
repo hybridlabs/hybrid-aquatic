@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.item.cosmetic
 
 import dev.hybridlabs.aquatic.client.render.armor.ManglerfishArmorRenderer
-import dev.hybridlabs.aquatic.item.HAArmorMaterials
+import dev.hybridlabs.hapi.item.HAPIArmorMaterials
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
@@ -16,7 +16,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
 class ManglerfishArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HAArmorMaterials.MANGLERFISH, type, settings), GeoItem {
+    ArmorItem(HAPIArmorMaterials.MANGLERFISH, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {

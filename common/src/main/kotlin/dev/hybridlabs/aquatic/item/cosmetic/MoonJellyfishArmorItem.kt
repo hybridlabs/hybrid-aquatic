@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.item.cosmetic
 
 import dev.hybridlabs.aquatic.client.render.armor.MoonJellyfishArmorRenderer
-import dev.hybridlabs.aquatic.item.HAArmorMaterials
+import dev.hybridlabs.hapi.item.HAPIArmorMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.network.chat.Component
@@ -19,7 +19,7 @@ import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
 class MoonJellyfishArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HAArmorMaterials.MOONJELLYFISH, type, settings), GeoItem {
+    ArmorItem(HAPIArmorMaterials.MOONJELLYFISH, type, settings), GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 
     override fun registerControllers(registrar: AnimatableManager.ControllerRegistrar) {
