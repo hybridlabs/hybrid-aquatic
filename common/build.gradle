@@ -62,6 +62,7 @@ dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0"))
     implementation 'org.jetbrains:annotations:25.0.0'
+
     implementation("dev.hybridlabs.hapi:hapi-common-1.21.1:1.0.0")
 
     //We load the Forge version of any included mod dependencies
