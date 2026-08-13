@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
+import java.util.Locale;
 
 public class ForgePlatformHelper implements PlatformHelper {
 
@@ -110,7 +111,7 @@ public class ForgePlatformHelper implements PlatformHelper {
 
     @Override
     public MobCategory getHybridMobCategoryByName(String name) {
-        return MobCategory.valueOf((Constants.MOD_ID + '_' + name).toUpperCase());
+        return MobCategory.valueOf((Constants.MOD_ID + '_' + name).toUpperCase(Locale.ENGLISH));
     }
 
     @Override
