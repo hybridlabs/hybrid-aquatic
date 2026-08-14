@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.PassiveFeedingGoal
-import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCephalopodEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes

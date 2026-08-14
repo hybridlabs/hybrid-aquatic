@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.ai.goal.UrchinEatKelpGoal
 import dev.hybridlabs.aquatic.tag.HABlockTags
-import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCritterEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
 import net.minecraft.network.syncher.EntityDataAccessor

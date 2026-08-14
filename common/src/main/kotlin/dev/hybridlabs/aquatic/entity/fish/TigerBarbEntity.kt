@@ -4,7 +4,7 @@ import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.hapi.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier

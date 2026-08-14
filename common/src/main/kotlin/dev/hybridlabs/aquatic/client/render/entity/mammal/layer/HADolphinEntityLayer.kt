@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.hapi.client.model.entity.BaseDolphinEntityModel
 import dev.hybridlabs.hapi.client.render.entity.BaseDolphinEntityRenderer
-import dev.hybridlabs.hapi.entity.water.base.BaseDolphinEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseDolphinEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture

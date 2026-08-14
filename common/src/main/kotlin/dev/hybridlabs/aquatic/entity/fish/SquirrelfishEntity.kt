@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.world.WorldHelper
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
 import dev.hybridlabs.hapi.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.hapi.entity.water.base.*
+import dev.hybridlabs.hapi.entity.base.aquatic.*
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor

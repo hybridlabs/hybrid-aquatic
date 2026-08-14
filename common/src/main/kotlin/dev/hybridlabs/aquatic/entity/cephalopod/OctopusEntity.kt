@@ -5,8 +5,8 @@ import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
-import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseOctopusEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.InkConfiguration
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor

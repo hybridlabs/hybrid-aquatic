@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.entity.shark
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
-import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers

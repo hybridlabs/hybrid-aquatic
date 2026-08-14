@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.hapi.client.model.entity.BaseOctopusEntityModel
 import dev.hybridlabs.hapi.client.render.entity.BaseOctopusEntityRenderer
-import dev.hybridlabs.hapi.entity.water.base.BaseOctopusEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseOctopusEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.LivingEntityRenderer

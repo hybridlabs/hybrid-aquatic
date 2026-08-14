@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.hapi.entity.water.base.BaseSchoolingFishEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags

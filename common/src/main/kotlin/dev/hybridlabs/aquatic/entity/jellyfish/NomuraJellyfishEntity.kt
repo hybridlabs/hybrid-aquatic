@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
-import dev.hybridlabs.hapi.entity.water.base.BaseJellyfishEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseJellyfishEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes

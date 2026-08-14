@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.entity.ai.goal.PassiveFeedingGoal
-import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers

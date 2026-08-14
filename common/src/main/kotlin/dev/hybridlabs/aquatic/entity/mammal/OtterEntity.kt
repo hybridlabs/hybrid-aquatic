@@ -9,7 +9,7 @@ import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalEatItemGoal
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalFollowParentGoal
-import dev.hybridlabs.hapi.entity.water.base.BaseMammalEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseMammalEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.hapi.entity.water.base.BaseCrustaceanEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCrustaceanEntity
 import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor

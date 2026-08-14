@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.entity.cephalopod
 
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.water.base.BaseCephalopodEntity
-import dev.hybridlabs.hapi.entity.water.base.InkConfiguration
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.InkConfiguration
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers

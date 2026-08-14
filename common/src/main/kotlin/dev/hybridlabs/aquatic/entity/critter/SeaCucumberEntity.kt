@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
-import dev.hybridlabs.hapi.entity.water.base.BaseCritterEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCritterEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor

@@ -10,7 +10,7 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
 import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalEatItemGoal
-import dev.hybridlabs.hapi.entity.water.base.BaseDolphinEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseDolphinEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor

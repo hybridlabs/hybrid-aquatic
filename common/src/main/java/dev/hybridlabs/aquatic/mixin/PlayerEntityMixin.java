@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.effect.HAMobEffects;
 
 import dev.hybridlabs.aquatic.item.HAItems;
 import dev.hybridlabs.hapi.item.HAPIToolMaterials;
-import dev.hybridlabs.hapi.entity.water.base.BaseSharkEntity;
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
