@@ -1490,12 +1490,23 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
             .save(exporter)
 
+        trapdoor(
+            exporter,
+            HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
+            HAPlatformItems.DRIFTWOOD_PLANKS.get(),
+        )
+
+        door(
+            exporter,
+            HAPlatformBlocks.DRIFTWOOD_DOOR.get(),
+            HAPlatformItems.DRIFTWOOD_PLANKS.get(),
+        )
+
         stair(
             exporter,
             HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
-
         
         slab(
             exporter,
@@ -1509,7 +1520,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             HAPlatformBlocks.DRIFTWOOD_FENCE.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
-
 
         fenceGate(
             exporter,
@@ -2174,6 +2184,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         }
     }
     //#endregion
+
+    private fun door(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+        doorBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(recipeOutput)
+    }
+
+    private fun trapdoor(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+        trapdoorBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(recipeOutput)
+    }
 
     private fun stair(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
         stairBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))

@@ -75,9 +75,10 @@ configurations {
 
 fabricApi {
     configureDataGeneration {
+        setModId("$mod_id")
         outputDirectory = file("src/generated/resources")
-        client = true
     }
+
     dependencies {
         datagenOutput files(runDatagen)
     }
