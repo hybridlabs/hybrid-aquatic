@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCritterEntityModel
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.LivingEntityRenderer

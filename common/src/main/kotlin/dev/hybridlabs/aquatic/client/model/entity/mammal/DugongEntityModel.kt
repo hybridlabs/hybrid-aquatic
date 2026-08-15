@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseSirenianEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseSirenianEntityModel
 import net.minecraft.resources.ResourceLocation
 
 class DugongEntityModel : BaseSirenianEntityModel<DugongEntity>("hybrid_aquatic", "dugong") {

@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.hapi.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.StayInWaterGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.*
 import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag

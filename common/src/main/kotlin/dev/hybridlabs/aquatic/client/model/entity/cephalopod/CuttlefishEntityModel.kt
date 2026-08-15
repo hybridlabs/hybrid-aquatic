@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.cephalopod.CuttlefishEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseCephalopodEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCephalopodEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 

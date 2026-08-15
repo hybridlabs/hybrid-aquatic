@@ -4,9 +4,9 @@ import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalEatItemGoal
-import dev.hybridlabs.hapi.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.hapi.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalEatItemGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.StayInWaterGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel

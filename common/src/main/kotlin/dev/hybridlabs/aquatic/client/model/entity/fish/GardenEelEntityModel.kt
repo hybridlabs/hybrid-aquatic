@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.GardenEelEntity
 import net.minecraft.util.Mth
 import software.bernie.geckolib.animation.AnimationState

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseDolphinEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseDolphinEntityModel
 import net.minecraft.resources.ResourceLocation
 
 class OrcaEntityModel : BaseDolphinEntityModel<OrcaEntity>("hybrid_aquatic", "orca") {

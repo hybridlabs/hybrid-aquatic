@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastRangedAttackGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonBeaklingsGoal
-import dev.hybridlabs.hapi.entity.ai.goal.boids.StayInWaterGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.nbt.CompoundTag

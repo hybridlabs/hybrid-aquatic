@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseOctopusEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseOctopusEntityModel
 import net.minecraft.resources.ResourceLocation
 
 class OctopusEntityModel : BaseOctopusEntityModel<OctopusEntity>("hybrid_aquatic","octopus") {

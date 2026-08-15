@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.client.model.entity.mammal.OrcaEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.mammal.layer.OrcaEyeSpotEntityLayer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.layer.OrcaSaddleEntityLayer
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
-import dev.hybridlabs.hapi.client.render.entity.BaseDolphinEntityRenderer
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseDolphinEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class OrcaEntityRenderer(context: Context) :

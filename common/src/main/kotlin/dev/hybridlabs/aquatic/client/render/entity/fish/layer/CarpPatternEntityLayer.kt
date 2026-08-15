@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.client.render.entity.fish.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.fish.CarpEntityModel
-import dev.hybridlabs.hapi.client.render.entity.BaseFishEntityRenderer
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
 import dev.hybridlabs.aquatic.entity.fish.CarpEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType

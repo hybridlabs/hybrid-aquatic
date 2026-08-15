@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
 import dev.hybridlabs.aquatic.world.WorldHelper
-import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalDigGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalDigGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseCrustaceanEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource

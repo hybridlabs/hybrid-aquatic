@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.entity.fish.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
-import dev.hybridlabs.hapi.client.render.entity.BaseFishEntityRenderer
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType

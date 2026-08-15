@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalSitGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalSitGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.aquatic.loot.HALootTables
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags

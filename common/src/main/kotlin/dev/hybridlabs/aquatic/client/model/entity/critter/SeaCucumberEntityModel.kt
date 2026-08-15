@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.critter
 
 import dev.hybridlabs.aquatic.entity.critter.SeaCucumberEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCritterEntityModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random

@@ -7,7 +7,7 @@ import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
-import dev.hybridlabs.hapi.client.render.entity.BaseDolphinEntityRenderer
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseDolphinEntityRenderer
 import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer

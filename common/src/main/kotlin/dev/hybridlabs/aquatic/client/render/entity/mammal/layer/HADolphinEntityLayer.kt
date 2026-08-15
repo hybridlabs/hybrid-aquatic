@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.entity.mammal.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.hapi.client.model.entity.BaseDolphinEntityModel
-import dev.hybridlabs.hapi.client.render.entity.BaseDolphinEntityRenderer
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseDolphinEntityModel
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseDolphinEntityRenderer
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseDolphinEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType

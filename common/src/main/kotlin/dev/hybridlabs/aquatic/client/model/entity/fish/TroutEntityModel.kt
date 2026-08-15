@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.TroutEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
 class TroutEntityModel : BaseFishEntityModel<TroutEntity>("hybrid_aquatic", "trout") {

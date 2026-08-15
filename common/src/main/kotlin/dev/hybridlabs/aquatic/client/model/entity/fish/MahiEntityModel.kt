@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.MahiEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 

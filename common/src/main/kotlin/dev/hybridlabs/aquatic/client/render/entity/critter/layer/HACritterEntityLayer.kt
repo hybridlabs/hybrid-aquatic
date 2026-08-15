@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.hapi.client.model.entity.BaseCritterEntityModel
-import dev.hybridlabs.hapi.client.render.entity.BaseCritterEntityRenderer
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCritterEntityModel
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseCritterEntityRenderer
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseCritterEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType

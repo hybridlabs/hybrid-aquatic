@@ -2,8 +2,8 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalBreedGoal
-import dev.hybridlabs.hapi.entity.ai.goal.WaterAnimalGrazeGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalBreedGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalGrazeGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.hapi.tag.HAPIEntityTags

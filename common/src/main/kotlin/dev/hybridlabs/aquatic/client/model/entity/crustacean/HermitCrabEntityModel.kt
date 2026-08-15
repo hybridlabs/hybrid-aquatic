@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.HermitCrabEntity
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.hapi.client.model.entity.BaseCrustaceanEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCrustaceanEntityModel
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Items
 

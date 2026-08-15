@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
-import dev.hybridlabs.hapi.client.model.entity.BaseFishEntityModel
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
 class OceanSunfishEntityModel : BaseFishEntityModel<OceanSunfishEntity>("hybrid_aquatic","ocean_sunfish") {

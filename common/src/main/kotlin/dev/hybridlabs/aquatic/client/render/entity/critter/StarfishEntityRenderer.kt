@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.client.model.entity.critter.StarfishEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.critter.layer.StarfishColorLayer
 import dev.hybridlabs.aquatic.client.render.entity.critter.layer.StarfishOverlayLayer
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
-import dev.hybridlabs.hapi.client.render.entity.BaseCritterEntityRenderer
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseCritterEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class StarfishEntityRenderer(context: Context) :

@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.hapi.client.model.entity.BaseOctopusEntityModel
-import dev.hybridlabs.hapi.client.render.entity.BaseOctopusEntityRenderer
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseOctopusEntityModel
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseOctopusEntityRenderer
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseOctopusEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
