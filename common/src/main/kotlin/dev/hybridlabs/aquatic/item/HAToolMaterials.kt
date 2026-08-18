@@ -5,7 +5,6 @@ import net.minecraft.world.item.Tier
 import net.minecraft.world.item.crafting.Ingredient
 import java.util.function.Supplier
 
-
 enum class HAToolMaterials(
     private val miningLevel: Int,
     private val itemDurability: Int,
