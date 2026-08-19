@@ -108,6 +108,9 @@ dependencies {
     modImplementation("com.terraformersmc:biolith-forge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
+
+    modImplementation("dev.hybridlabs.hapi:hapi-forge-1.20.1:1.0.0")
+
     implementation 'org.jetbrains:annotations:25.0.0'
 
     implementation 'thedarkcolour:kotlinforforge:4.11.0'

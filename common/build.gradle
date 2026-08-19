@@ -49,6 +49,7 @@ repositories {
         name = "Minecraft Forge"
         url = "https://maven.minecraftforge.net/"
     }
+
     mavenCentral()
     mavenLocal()
 }
