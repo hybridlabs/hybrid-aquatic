@@ -12,6 +12,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
 import net.minecraft.world.phys.HitResult
+import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.animation.AnimatableManager
@@ -39,7 +40,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         offsetZ: Double,
         explosionPower: Int,
     ) : super(
-        HAEntityTypes.CAVITATION_BUBBLE.get(), offsetX, offsetY, offsetZ, level
+        HAEntityTypes.CAVITATION_BUBBLE.get(), shooter, Vec3(offsetX, offsetY, offsetZ), level
     ) {
         this.explosionPower = explosionPower
     }
@@ -97,7 +98,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         }
 
         if (!this.level().isClientSide) {
-            if (!isInWaterOrBubble) {
+            if (!firstTick && !isInWaterOrBubble) {
                 this.discard()
                 return
             }
