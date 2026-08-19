@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.InkConfiguration
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -13,7 +14,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
-class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level) : BaseCephalopodEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -26,10 +27,10 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.ALL_CRUSTACEANS
+                HAPIEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -11,7 +11,8 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: Level) : HASharkEntity(type, world) {
+class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: Level) :
+    BaseSharkEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val isPassive: Boolean = false
@@ -33,13 +34,13 @@ class HammerheadSharkEntity(type: EntityType<out HammerheadSharkEntity>, world: 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.CRAB,
-                HAEntityTags.LOBSTER,
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.RAY,
+                HAPIEntityTags.CRAB,
+                HAPIEntityTags.LOBSTER,
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.RAY,
             ),
             listOf(
-                HAEntityTags.LARGE_SHARK
+                HAPIEntityTags.LARGE_SHARK
             ),
         )
 

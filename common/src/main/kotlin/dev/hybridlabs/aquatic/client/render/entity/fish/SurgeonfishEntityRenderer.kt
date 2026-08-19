@@ -2,7 +2,8 @@ package dev.hybridlabs.aquatic.client.render.entity.fish
 
 import dev.hybridlabs.aquatic.client.model.entity.fish.SurgeonfishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.SurgeonfishEntity
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class SurgeonfishEntityRenderer(context: Context) :
-    HAFishEntityRenderer<SurgeonfishEntity>(context, SurgeonfishEntityModel(), true, false)
+    BaseFishEntityRenderer<SurgeonfishEntity>(context, SurgeonfishEntityModel(), true, false)

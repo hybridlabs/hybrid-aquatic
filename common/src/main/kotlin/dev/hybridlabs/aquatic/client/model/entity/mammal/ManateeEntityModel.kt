@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseSirenianEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class ManateeEntityModel : HASirenianEntityModel<ManateeEntity>("manatee") {
+class ManateeEntityModel : BaseSirenianEntityModel<ManateeEntity>("hybrid_aquatic", "manatee") {
 
     override fun getTextureResource(animatable: ManateeEntity): ResourceLocation {
         return if (animatable.isBaby) {

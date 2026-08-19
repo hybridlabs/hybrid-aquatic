@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.item.coral
 
-import dev.hybridlabs.aquatic.item.HAToolMaterials
+import dev.hybridlabs.hapi.item.HAPIToolMaterials
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.AxeItem
@@ -9,7 +9,7 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
 class CoralAxeItem(settings: Properties) : AxeItem(
-    HAToolMaterials.CORAL,
+    HAPIToolMaterials.CORAL,
     1F,
     -3.2f,
     settings) {

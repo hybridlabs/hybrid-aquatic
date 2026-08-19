@@ -13,11 +13,9 @@ import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.core.`object`.Color
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-
 class StarfishColorLayer(
     renderer: StarfishEntityRenderer,
 ) : GeoRenderLayer<StarfishEntity>(renderer) {
-
 
     private fun getLayerTextureResource(animatable: StarfishEntity): ResourceLocation {
         return (geoModel as StarfishEntityModel).getTextureResource(animatable)

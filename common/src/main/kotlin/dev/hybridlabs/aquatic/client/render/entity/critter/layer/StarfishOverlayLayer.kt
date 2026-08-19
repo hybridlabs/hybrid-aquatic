@@ -2,9 +2,9 @@ package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
-import dev.hybridlabs.aquatic.client.model.entity.critter.HACritterEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCritterEntityModel
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.LivingEntityRenderer
@@ -13,14 +13,12 @@ import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.core.`object`.Color
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-
 class StarfishOverlayLayer(
     renderer: StarfishEntityRenderer,
 ) : GeoRenderLayer<StarfishEntity>(renderer) {
 
-
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HACritterEntityModel).getLayerTextureResource(layer.lowercase())
+        return (geoModel as BaseCritterEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

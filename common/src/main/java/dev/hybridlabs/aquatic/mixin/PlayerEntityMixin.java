@@ -3,9 +3,9 @@ package dev.hybridlabs.aquatic.mixin;
 import com.google.common.collect.ImmutableList;
 import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity;
 import dev.hybridlabs.aquatic.item.HAItems;
-import dev.hybridlabs.aquatic.item.HAToolMaterials;
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity;
+import dev.hybridlabs.hapi.item.HAPIToolMaterials;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.FluidTags;
@@ -93,7 +93,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
             LivingEntity foundEntity =
                     object.level()
                             .getNearestEntity(
-                                    HASharkEntity.class,
+                                    BaseSharkEntity.class,
                                     TargetingConditions.forNonCombat()
                                             .range(32)
                                             .selector(Entity::isUnderWater),
@@ -131,7 +131,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         ItemStack stack = player.getMainHandItem();
         if (!(stack.getItem() instanceof TieredItem tieredItem)) return;
 
-        if (tieredItem.getTier() != HAToolMaterials.SEASHELL) return;
+        if (tieredItem.getTier() != HAPIToolMaterials.SEASHELL) return;
 
         if (player.isEyeInFluid(FluidTags.WATER)) {
 
@@ -240,7 +240,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
                 for (List<ItemStack> list : combinedInventory) {
                     for (ItemStack itemStack : list) {
                         if (itemStack.getItem() instanceof TieredItem tool
-                                && tool.getTier() == HAToolMaterials.CORAL
+                                && tool.getTier() == HAPIToolMaterials.CORAL
                                 && itemStack.isDamaged()) {
                             coralItems.add(itemStack);
                         }

@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import dev.hybridlabs.aquatic.entity.ai.goal.UrchinEatKelpGoal
-import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.tag.HABlockTags
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCritterEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -23,7 +23,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class SeaUrchinEntity(type: EntityType<out SeaUrchinEntity>, world: Level) :
-    HACritterEntity(type, world),
+    BaseCritterEntity(type, world),
     VariantHolder<SeaUrchinEntity.Companion.Type> {
 
     override fun finalizeSpawn(

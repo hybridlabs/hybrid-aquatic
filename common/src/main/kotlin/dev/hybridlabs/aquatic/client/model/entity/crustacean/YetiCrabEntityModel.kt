@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.YetiCrabEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCrustaceanEntityModel
 
-class YetiCrabEntityModel : HACrustaceanEntityModel<YetiCrabEntity>("yeti_crab")
+class YetiCrabEntityModel : BaseCrustaceanEntityModel<YetiCrabEntity>("hybrid_aquatic", "yeti_crab")

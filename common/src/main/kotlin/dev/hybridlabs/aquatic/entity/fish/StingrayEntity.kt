@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalSitGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.loot.HALootTables
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalSitGoal
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -30,7 +30,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
-    HAFishEntity(type, world),
+    BaseFishEntity(type, world),
     VariantHolder<StingrayEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
@@ -78,11 +78,11 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.ALL_CRUSTACEANS
+                HAPIEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HAEntityTags.LARGE_CREATURES,
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.LARGE_CREATURES,
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 
@@ -124,7 +124,7 @@ class StingrayEntity(type: EntityType<out StingrayEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HAPIBiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 

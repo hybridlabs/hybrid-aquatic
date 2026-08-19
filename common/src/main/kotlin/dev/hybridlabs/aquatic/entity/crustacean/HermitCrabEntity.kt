@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFleeFromEntityGoal
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalFleeFromEntityGoal
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCrustaceanEntity
 import net.minecraft.core.Vec3i
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
@@ -38,8 +38,8 @@ import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 
 @Suppress("DEPRECATION")
-class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, false) {
+class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, false) {
     val hasShell: Boolean = true
 
     override fun registerGoals() {
@@ -257,7 +257,7 @@ class HermitCrabEntity(entityType: EntityType<out HACrustaceanEntity>, world: Le
         controllerRegistrar.add(
             AnimationController(
                 this, "Hide", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationController.AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.isHiding) {
                         return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
                     } else {

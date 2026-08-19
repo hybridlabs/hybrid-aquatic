@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -31,7 +31,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level) :
-    HAFishEntity(type, world),
+    BaseFishEntity(type, world),
     VariantHolder<OceanSunfishEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
@@ -65,10 +65,10 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.ALL_JELLYFISH
+                HAPIEntityTags.ALL_JELLYFISH
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 
@@ -130,19 +130,19 @@ class OceanSunfishEntity(type: EntityType<out OceanSunfishEntity>, world: Level)
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.SHALLOW_LUKEWARM_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.SHALLOW_LUKEWARM_OCEANS) -> {
                             HOODWINKER
                         }
 
-                        biome.`is`(HABiomeTags.DEEP_LUKEWARM_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.DEEP_LUKEWARM_OCEANS) -> {
                             SHARPTAIL
                         }
 
-                        biome.`is`(HABiomeTags.SHALLOW_TEMPERATE_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.SHALLOW_TEMPERATE_OCEANS) -> {
                             OCEAN
                         }
 
-                        biome.`is`(HABiomeTags.DEEP_TEMPERATE_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.DEEP_TEMPERATE_OCEANS) -> {
                             GIANT
                         }
 

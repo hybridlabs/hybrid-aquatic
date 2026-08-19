@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.RatfishEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class RatfishEntityModel : HAFishEntityModel<RatfishEntity>("ratfish") {
+class RatfishEntityModel : BaseFishEntityModel<RatfishEntity>("hybrid_aquatic", "ratfish") {
     override fun getRenderType(animatable: RatfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

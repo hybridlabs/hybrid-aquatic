@@ -2,10 +2,10 @@ package dev.hybridlabs.aquatic.client.render.entity.fish.layer
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
-import dev.hybridlabs.aquatic.client.model.entity.fish.HAFishEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.fish.HAFishEntityRenderer
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -13,12 +13,12 @@ import net.minecraft.resources.ResourceLocation
 import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
-class HAFishEntityLayer<T: HAFishEntity>(
-    renderer: HAFishEntityRenderer<T>
+class HAFishEntityLayer<T: BaseFishEntity>(
+    renderer: BaseFishEntityRenderer<T>
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as HAFishEntityModel).getLayerTextureResource(layer.lowercase())
+        return (geoModel as BaseFishEntityModel).getLayerTextureResource(layer.lowercase())
     }
 
     override fun render(

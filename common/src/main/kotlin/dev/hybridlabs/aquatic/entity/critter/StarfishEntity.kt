@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.critter
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.base.HACritterEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCritterEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -27,7 +27,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
-    HACritterEntity(entityType, world),
+    BaseCritterEntity(entityType, world),
     VariantHolder<StarfishEntity.Companion.Type>, OverlayTextureFeature {
 
     override fun getDimensions(pose: Pose): EntityDimensions {
@@ -124,11 +124,11 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                             BRITTLESTAR
                         }
 
-                        biome.`is`(HABiomeTags.ALL_TRENCHES) -> {
+                        biome.`is`(HAPIBiomeTags.ALL_TRENCHES) -> {
                             BRITTLESTAR
                         }
 
-                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HAPIBiomeTags.CORAL_REEF) -> {
                             REEF_VARIANTS[random.nextInt(REEF_VARIANTS.size)]
                         }
 

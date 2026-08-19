@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.client.render.entity.fish.layer
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
 import dev.hybridlabs.aquatic.client.model.entity.fish.CarpEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.fish.HAFishEntityRenderer
 import dev.hybridlabs.aquatic.entity.fish.CarpEntity
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -13,7 +13,7 @@ import software.bernie.geckolib.cache.`object`.BakedGeoModel
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 class CarpPatternEntityLayer(
-    renderer: HAFishEntityRenderer<CarpEntity>
+    renderer: BaseFishEntityRenderer<CarpEntity>
 ) : GeoRenderLayer<CarpEntity>(renderer) {
 
     private fun getPatternTexture(animatable: CarpEntity, layer: String): ResourceLocation {

@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
-import dev.hybridlabs.aquatic.entity.base.HACrustaceanEntity
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCrustaceanEntity
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -14,8 +14,8 @@ import software.bernie.geckolib.core.animation.AnimationController.AnimationStat
 import software.bernie.geckolib.core.animation.AnimationState
 import software.bernie.geckolib.core.`object`.PlayState
 
-class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: Level) :
-    HACrustaceanEntity(entityType, world, false) {
+class GiantIsopodEntity(entityType: EntityType<out GiantIsopodEntity>, world: Level) :
+    BaseCrustaceanEntity(entityType, world, false) {
 
     //#region Hiding
     private var isHiding: Boolean = false
@@ -61,7 +61,7 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
         controllerRegistrar.add(
             AnimationController(
                 this, "Spawning",
-                AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.tickCount < 20)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
@@ -72,7 +72,7 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
 
         controllerRegistrar.add(
             AnimationController(this, "Hide", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<HACrustaceanEntity> ->
+                AnimationController.AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
                     if (this.isHiding) {
                         return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
                     } else {
@@ -89,7 +89,7 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
         val level = this.level()
         val biome = level.getBiome(this.blockPosition())
 
-        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+        return if (biome.`is`(HAPIBiomeTags.ALL_TRENCHES)) {
             5
         } else {
             0
@@ -100,7 +100,7 @@ class GiantIsopodEntity(entityType: EntityType<out HACrustaceanEntity>, world: L
         val level = this.level()
         val biome = level.getBiome(this.blockPosition())
 
-        return if (biome.`is`(HABiomeTags.ALL_TRENCHES)) {
+        return if (biome.`is`(HAPIBiomeTags.ALL_TRENCHES)) {
             0
         } else {
             -5

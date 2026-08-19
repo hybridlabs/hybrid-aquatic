@@ -1,14 +1,14 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalEatItemGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalJumpGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalEatItemGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -32,7 +32,7 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
-    HASchoolingFishEntity(type, world),
+    BaseSchoolingFishEntity(type, world),
     VariantHolder<TunaEntity.Companion.Type> {
 
     override fun getTargetConfig() = TARGET_CONFIG
@@ -69,11 +69,11 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.ALL_CEPHALOPODS
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 
@@ -115,11 +115,11 @@ class TunaEntity(type: EntityType<out TunaEntity>, world: Level) :
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.TEMPERATE_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.TEMPERATE_OCEANS) -> {
                             BLUEFIN
                         }
 
-                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.LUKEWARM_OCEANS) -> {
                             YELLOWFIN
                         }
 

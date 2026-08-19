@@ -2,13 +2,14 @@ package dev.hybridlabs.aquatic.client.model.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity.Companion.OtterAction
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseMammalEntityModel
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 
-class OtterEntityModel : HAMammalEntityModel<OtterEntity>("otter") {
+class OtterEntityModel : BaseMammalEntityModel<OtterEntity>("hybrid_aquatic", "otter") {
 
     companion object {
         private val RIVER_OTTER_TEXTURE =

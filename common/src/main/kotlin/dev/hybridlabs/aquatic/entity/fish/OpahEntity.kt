@@ -1,10 +1,10 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalFollowCreatureGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalFollowCreatureGoal
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
-    HAFishEntity(type, world) {
+    BaseFishEntity(type, world) {
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -32,12 +32,12 @@ class OpahEntity(type: EntityType<out OpahEntity>, world: Level) :
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.ALL_CEPHALOPODS
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.ALL_CEPHALOPODS
             ),
             listOf(
-                HAEntityTags.MEDIUM_CREATURES,
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.MEDIUM_CREATURES,
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 

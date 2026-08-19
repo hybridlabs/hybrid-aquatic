@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.GardenEelEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.util.Mth
 import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.core.animation.AnimationState
 
-class GardenEelEntityModel : HAFishEntityModel<GardenEelEntity>("garden_eel") {
+class GardenEelEntityModel : BaseFishEntityModel<GardenEelEntity>("hybrid_aquatic", "garden_eel") {
 
     override fun setCustomAnimations(
         animatable: GardenEelEntity,

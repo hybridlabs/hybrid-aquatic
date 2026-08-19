@@ -67,9 +67,7 @@ object HybridAquatic : ModInitializer {
             HABiomes.addBiomes()
         }
 
-        HABiomeTags
         HABlockTags
-        HAEntityTags
         HAFluidTags
         HAInstrumentTags
         HAItemTags

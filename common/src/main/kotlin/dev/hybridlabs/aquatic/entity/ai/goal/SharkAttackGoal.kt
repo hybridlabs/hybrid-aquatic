@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
 import dev.hybridlabs.aquatic.effect.HAMobEffects
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseSharkEntityRenderer
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseWaterAnimal
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.EntitySelector
@@ -17,7 +18,7 @@ import java.util.*
 import kotlin.math.max
 
 open class SharkAttackGoal(
-    protected val shark: HASharkEntity,
+    protected val shark: BaseSharkEntity,
     private val speedMultiplier: Double = 1.0,
     private val followingTargetEvenIfNotSeen: Boolean,
 ) :
@@ -158,7 +159,7 @@ open class SharkAttackGoal(
             shark.doHurtTarget(enemy)
             if (!enemy.isBlocking) { enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.get(), 200, 0), shark) }
 
-            if (enemy.health <= 0) shark.hunger = HAWaterAnimal.MAX_HUNGER
+            if (enemy.health <= 0) shark.hunger = BaseWaterAnimal.MAX_HUNGER
 
             val hasShield = enemy.mainHandItem.`is`(Items.SHIELD) || enemy.offhandItem.`is`(Items.SHIELD)
             if (hasShield && enemy.isBlocking) {

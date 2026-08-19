@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.entity.jellyfish
 
-import dev.hybridlabs.aquatic.entity.base.HAJellyfishEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseJellyfishEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
 class CrownJellyfishEntity(entityType: EntityType<out CrownJellyfishEntity>, world: Level) :
-    HAJellyfishEntity(entityType, world, true, 1) {
+    BaseJellyfishEntity(entityType, world, true, 1) {
 
     override fun getMaxSpawnClusterSize(): Int {
         return 1

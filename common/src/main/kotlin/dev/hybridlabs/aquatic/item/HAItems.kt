@@ -9,6 +9,8 @@ import dev.hybridlabs.aquatic.item.coral.*
 import dev.hybridlabs.aquatic.item.seashell.*
 import dev.hybridlabs.aquatic.platform.Services.*
 import dev.hybridlabs.aquatic.tag.HAInstrumentTags
+import dev.hybridlabs.hapi.item.PlaceableInWaterItem
+import dev.hybridlabs.hapi.item.PlaceableInWaterOrLandItem
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects

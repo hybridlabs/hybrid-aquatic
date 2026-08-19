@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.SurgeonfishEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class SurgeonfishEntityModel : HAFishEntityModel<SurgeonfishEntity>("surgeonfish") {
+class SurgeonfishEntityModel : BaseFishEntityModel<SurgeonfishEntity>("hybrid_aquatic", "surgeonfish") {
     override fun getTextureResource(animatable: SurgeonfishEntity): ResourceLocation {
         return when (animatable.variant) {
             SurgeonfishEntity.Companion.Type.BLUE_TANG -> BLUE_TANG_TEXTURE

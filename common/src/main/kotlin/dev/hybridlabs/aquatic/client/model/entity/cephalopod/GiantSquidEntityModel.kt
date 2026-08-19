@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.cephalopod.GiantSquidEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCephalopodEntityModel
 
-class GiantSquidEntityModel : HACephalopodEntityModel<GiantSquidEntity>("giant_squid")
+class GiantSquidEntityModel : BaseCephalopodEntityModel<GiantSquidEntity>("hybrid_aquatic", "giant_squid")

@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class StingrayEntityModel : HAFishEntityModel<StingrayEntity>("stingray") {
+class StingrayEntityModel : BaseFishEntityModel<StingrayEntity>("hybrid_aquatic", "stingray") {
 
     override fun getTextureResource(animatable: StingrayEntity): ResourceLocation {
         return when (animatable.variant) {

@@ -2,7 +2,8 @@ package dev.hybridlabs.aquatic.client.render.entity.jellyfish
 
 import dev.hybridlabs.aquatic.client.model.entity.jellyfish.BigRedJellyfishEntityModel
 import dev.hybridlabs.aquatic.entity.jellyfish.BigRedJellyfishEntity
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseJellyfishEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 
 class BigRedJellyfishEntityRenderer(context: Context) :
-    HAJellyfishEntityRenderer<BigRedJellyfishEntity>(context, BigRedJellyfishEntityModel(), true, false)
+    BaseJellyfishEntityRenderer<BigRedJellyfishEntity>(context, BigRedJellyfishEntityModel(), true, false)

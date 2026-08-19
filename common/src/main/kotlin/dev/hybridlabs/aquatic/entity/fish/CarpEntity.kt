@@ -2,16 +2,16 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.CarpBreedGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.WaterAnimalGrazeGoal
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.entity.base.HAWaterAnimal
 import dev.hybridlabs.aquatic.entity.feature.CarpPatternTextureFeature
-import dev.hybridlabs.aquatic.tag.HABiomeTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.aquatic.tag.HABlockTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.world.WorldHelper
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalGrazeGoal
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
@@ -34,13 +34,13 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(type, world),
+class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntity(type, world),
     CarpPatternTextureFeature, VariantHolder<CarpEntity.Companion.Type> {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_SHARKS
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {
@@ -112,7 +112,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
-    override fun spawnChildFromBreeding(level: ServerLevel, mate: HAWaterAnimal) {
+    override fun spawnChildFromBreeding(level: ServerLevel, mate: BaseWaterAnimal) {
         val baby = this.getBreedOffspring(level, mate) ?: return
 
         baby.isBaby = true
@@ -206,7 +206,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : HAFishEntity(
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.CHERRY) -> {
+                        biome.`is`(HAPIBiomeTags.CHERRY) -> {
                             Type.fromId(random.nextInt(2, 4))
                         }
 

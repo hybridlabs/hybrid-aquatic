@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.entity.crustacean.DecoratorCrabEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCrustaceanEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class DecoratorCrabEntityModel : HACrustaceanEntityModel<DecoratorCrabEntity>("decorator_crab") {
+class DecoratorCrabEntityModel : BaseCrustaceanEntityModel<DecoratorCrabEntity>("hybrid_aquatic", "decorator_crab") {
 
     companion object {
         private val coralTextures = listOf(

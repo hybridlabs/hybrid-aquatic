@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.InkConfiguration
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
@@ -13,7 +14,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 @Suppress("DEPRECATION", "unused")
-class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Level) : HACephalopodEntity(type, world) {
+class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Level) : BaseCephalopodEntity(type, world) {
     override fun getTargetConfig() = TARGET_CONFIG
 
     override val inkConfig: InkConfiguration = InkConfiguration.DEFAULT
@@ -21,12 +22,12 @@ class ColossalSquidEntity(type: EntityType<out ColossalSquidEntity>, world: Leve
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.SMALL_CREATURES,
-                HAEntityTags.MEDIUM_CREATURES,
+                HAPIEntityTags.SMALL_CREATURES,
+                HAPIEntityTags.MEDIUM_CREATURES,
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS,
-                HAEntityTags.WHALE,
+                HAPIEntityTags.ALL_SHARKS,
+                HAPIEntityTags.WHALE,
             ),
         )
 

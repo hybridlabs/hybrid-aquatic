@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.TetraEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class TetraEntityModel : HAFishEntityModel<TetraEntity>("tetra") {
+class TetraEntityModel : BaseFishEntityModel<TetraEntity>("hybrid_aquatic", "tetra") {
     override fun getTextureResource(animatable: TetraEntity): ResourceLocation {
         return when (animatable.variant) {
             TetraEntity.Companion.Type.NEON_TETRA -> NEON_TETRA_TEXTURE

@@ -1,11 +1,12 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
 import com.mojang.serialization.Codec
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.aquatic.tag.HABiomeTags
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.tag.HAPIBiomeTags
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseOctopusEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.InkConfiguration
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.Holder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
@@ -27,7 +28,7 @@ import java.util.function.IntFunction
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
-class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctopusEntity(type, world),
+class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : BaseOctopusEntity(type, world),
     VariantHolder<OctopusEntity.Companion.Type>, OverlayTextureFeature {
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -55,10 +56,10 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
             listOf(
-                HAEntityTags.ALL_CRUSTACEANS
+                HAPIEntityTags.ALL_CRUSTACEANS
             ),
             listOf(
-                HAEntityTags.ALL_SHARKS
+                HAPIEntityTags.ALL_SHARKS
             ),
         )
 
@@ -126,11 +127,11 @@ class OctopusEntity(type: EntityType<out OctopusEntity>, world: Level) : HAOctop
 
                 fun fromBiome(biome: Holder<Biome>, random: Random.Default): Type {
                     return when {
-                        biome.`is`(HABiomeTags.CORAL_REEF) -> {
+                        biome.`is`(HAPIBiomeTags.CORAL_REEF) -> {
                             Type.fromId(random.nextInt(0, 3))
                         }
 
-                        biome.`is`(HABiomeTags.LUKEWARM_OCEANS) -> {
+                        biome.`is`(HAPIBiomeTags.LUKEWARM_OCEANS) -> {
                             Type.fromId(random.nextInt(0, 2))
                         }
 

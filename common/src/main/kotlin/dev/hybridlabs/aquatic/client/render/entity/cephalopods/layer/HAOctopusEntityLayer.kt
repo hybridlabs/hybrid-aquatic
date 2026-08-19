@@ -2,11 +2,11 @@ package dev.hybridlabs.aquatic.client.render.entity.cephalopods.layer
 
 import com.mojang.blaze3d.vertex.PoseStack
 import com.mojang.blaze3d.vertex.VertexConsumer
-import dev.hybridlabs.aquatic.client.model.entity.cephalopod.HAOctopusEntityModel
-import dev.hybridlabs.aquatic.client.render.entity.cephalopods.HAOctopusEntityRenderer
-import dev.hybridlabs.aquatic.entity.base.HAOctopusEntity
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseOctopusEntityModel
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseOctopusEntityRenderer
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseOctopusEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.entity.LivingEntityRenderer
@@ -17,12 +17,12 @@ import software.bernie.geckolib.core.`object`.Color
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer
 
 
-class HAOctopusEntityLayer<T: HAOctopusEntity>(
-    renderer: HAOctopusEntityRenderer<T>,
+class HAOctopusEntityLayer<T: BaseOctopusEntity>(
+    renderer: BaseOctopusEntityRenderer<T>,
 ) : GeoRenderLayer<T>(renderer) {
 
     private fun getLayerTextureResource(): ResourceLocation {
-        return (geoModel as HAOctopusEntityModel).getLayerTextureResource()
+        return (geoModel as BaseOctopusEntityModel).getLayerTextureResource()
     }
 
     override fun render(

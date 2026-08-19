@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.jellyfish
 
 import dev.hybridlabs.aquatic.entity.jellyfish.CrownJellyfishEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseJellyfishEntityModel
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.resources.ResourceLocation
 
-class CrownJellyfishEntityModel : HAJellyfishEntityModel<CrownJellyfishEntity>("crown_jellyfish") {
+class CrownJellyfishEntityModel : BaseJellyfishEntityModel<CrownJellyfishEntity>("hybrid_aquatic", "crown_jellyfish") {
     override fun getRenderType(animatable: CrownJellyfishEntity, texture: ResourceLocation): RenderType {
         return RenderType.entityTranslucent(texture)
     }

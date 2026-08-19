@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.cephalopod
 
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseOctopusEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class OctopusEntityModel : HAOctopusEntityModel<OctopusEntity>("octopus") {
+class OctopusEntityModel : BaseOctopusEntityModel<OctopusEntity>("hybrid_aquatic", "octopus") {
 
     companion object {
         private val OCTOPUS_TEXTURE =

@@ -1,15 +1,15 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.BoidGoal
-import dev.hybridlabs.aquatic.entity.ai.goal.boids.StayInWaterGoal
-import dev.hybridlabs.aquatic.entity.base.HACephalopodEntity
-import dev.hybridlabs.aquatic.entity.base.HAFishEntity
-import dev.hybridlabs.aquatic.entity.base.HAMammalEntity
-import dev.hybridlabs.aquatic.entity.base.HASchoolingFishEntity
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseCephalopodEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseWaterAnimal
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -29,12 +29,12 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
 class DamselfishEntity(type: EntityType<out DamselfishEntity>, world: Level) :
-    HASchoolingFishEntity(type, world) {
+    BaseSchoolingFishEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(
-        HAEntityTags.MEDIUM_CREATURES,
-        HAEntityTags.LARGE_CREATURES,
-        HAEntityTags.ALL_SHARKS
+        HAPIEntityTags.MEDIUM_CREATURES,
+        HAPIEntityTags.LARGE_CREATURES,
+        HAPIEntityTags.ALL_SHARKS
     )
 
     override fun registerGoals() {
@@ -170,10 +170,7 @@ class DamselfishEntity(type: EntityType<out DamselfishEntity>, world: Level) :
 
             if (newFishCount in 1..<oldFishCount &&
                 level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS) &&
-                attacker !is HAFishEntity &&
-                attacker !is HASharkEntity &&
-                attacker !is HACephalopodEntity &&
-                attacker !is HAMammalEntity) {
+                attacker !is BaseWaterAnimal) {
                 spawnAtLocation(HAItems.DAMSELFISH.get())
             }
         }

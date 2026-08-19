@@ -1,9 +1,10 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 
-class GoldfishEntityModel : HAFishEntityModel<GoldfishEntity>("goldfish") {
+class GoldfishEntityModel : BaseFishEntityModel<GoldfishEntity>("hybrid_aquatic", "goldfish") {
 
     override fun getTextureResource(animatable: GoldfishEntity): ResourceLocation {
         if (animatable.isBaby) {

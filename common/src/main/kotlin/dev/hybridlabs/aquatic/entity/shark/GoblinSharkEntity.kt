@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.entity.shark
 
-import dev.hybridlabs.aquatic.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.aquatic.entity.base.HASharkEntity
+import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HAItems
-import dev.hybridlabs.aquatic.tag.HAEntityTags
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -12,14 +12,14 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
 class GoblinSharkEntity(type: EntityType<out GoblinSharkEntity>, world: Level) :
-    HASharkEntity(type, world) {
+    BaseSharkEntity(type, world) {
 
     override fun getTargetConfig() = MobTargetConfiguration.ofPredator(
-        HAEntityTags.CRAB,
-        HAEntityTags.LOBSTER,
-        HAEntityTags.RAY,
-        HAEntityTags.SMALL_CREATURES,
-        HAEntityTags.OCTOPUS,
+        HAPIEntityTags.CRAB,
+        HAPIEntityTags.LOBSTER,
+        HAPIEntityTags.RAY,
+        HAPIEntityTags.SMALL_CREATURES,
+        HAPIEntityTags.OCTOPUS,
     )
 
     override val isPassive: Boolean = false

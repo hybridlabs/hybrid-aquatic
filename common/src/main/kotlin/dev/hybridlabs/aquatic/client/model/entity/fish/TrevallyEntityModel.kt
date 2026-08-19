@@ -1,10 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.entity.fish.TrevallyEntity
+import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.resources.ResourceLocation
 import kotlin.random.Random
 
-class TrevallyEntityModel : HAFishEntityModel<TrevallyEntity>("trevally") {
+class TrevallyEntityModel : BaseFishEntityModel<TrevallyEntity>("hybrid_aquatic", "trevally") {
 
     override fun getTextureResource(animatable: TrevallyEntity): ResourceLocation {
         val seed = animatable.uuid.leastSignificantBits
