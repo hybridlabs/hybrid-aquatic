@@ -83,6 +83,7 @@ configurations {
 
 fabricApi {
     configureDataGeneration {
+        setModId("$mod_id")
         outputDirectory = file("src/generated/resources")
         client = true
     }
@@ -123,6 +124,14 @@ loom {
             setConfigName("Fabric Server")
             ideConfigGenerated(true)
             runDir("run")
+        }
+        datagen {
+            name "Fabric Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}"
+
+            ideConfigGenerated(true)
+            runDir "build/datagen"
         }
     }
 }

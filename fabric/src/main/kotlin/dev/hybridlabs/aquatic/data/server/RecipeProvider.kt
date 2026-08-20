@@ -1469,6 +1469,18 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
             .save(exporter)
 
+        door(
+            exporter,
+            HAPlatformBlocks.DRIFTWOOD_DOOR.get(),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
+        )
+
+        trapdoor(
+            exporter,
+            HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
+            HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
+        )
+
         stair(
             exporter,
             HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
@@ -2138,6 +2150,16 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
         }
     }
     //#endregion
+
+    private fun door(exporter: Consumer<FinishedRecipe>, result: ItemLike, material: ItemLike) {
+        doorBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(exporter)
+    }
+
+    private fun trapdoor(exporter: Consumer<FinishedRecipe>, result: ItemLike, material: ItemLike) {
+        trapdoorBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
+            .save(exporter)
+    }
 
     private fun stair(exporter: Consumer<FinishedRecipe>, result: ItemLike, material: ItemLike) {
         stairBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
