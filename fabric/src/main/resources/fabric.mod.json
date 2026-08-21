@@ -59,7 +59,8 @@
         "geckolib": ">=4.4",
         "lithostitched": ">=1.4.11",
         "biolith": "*",
-        "trinkets": ">=3.7.1"
+        "trinkets": ">=3.7.1",
+        "hapi": ">=1.0.0"
     },
 
     "custom": {
