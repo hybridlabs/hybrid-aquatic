@@ -10,6 +10,7 @@ import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.painting.HAPaintings
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
 import net.minecraft.Util
@@ -844,6 +845,25 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
             builder.add("item.minecraft.splash_potion.effect.$potion", "Splash Potion of $translation")
             builder.add("item.minecraft.lingering_potion.effect.$potion", "Lingering Potion of $translation")
             builder.add("item.minecraft.tipped_arrow.effect.$potion", "Arrow of $translation")
+        }
+
+        mapOf(
+            HABiomes.COLD_TRENCH to "Cold Trench",
+            HABiomes.CORAL_REEF to "Coral Reef",
+            HABiomes.DEEP_CORAL_REEF to "Deep Coral Reef",
+            HABiomes.DEEP_WARM_OCEAN to "Deep Warm Ocean",
+            HABiomes.FROZEN_TRENCH to "Frozen Trench",
+            HABiomes.LUKEWARM_TRENCH to "Lukewarm Trench",
+            HABiomes.RED_MEADOW to "Red Meadow",
+            HABiomes.SEAGRASS_BED to "Seagrass Bed",
+            HABiomes.SULFURIC_CAVES to "Sulfuric Caves",
+            HABiomes.TIDE_POOLS to "Tide Pools",
+            HABiomes.TRENCH to "Trench",
+            HABiomes.TROPICAL_DEEP_CORAL_REEF to "Tropical Deep Coral Reef",
+            HABiomes.TROPICAL_RIVER to "Tropical River",
+            HABiomes.WARM_TRENCH to "Warm Trench",
+        ).forEach { (biome, name) ->
+            builder.add("biome.hybrid_aquatic.${biome.location().path}", name)
         }
 
         // Workaround for Jade/WAILA not being able to find the mod display name on Forge
