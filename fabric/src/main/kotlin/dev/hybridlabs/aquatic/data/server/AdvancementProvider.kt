@@ -37,27 +37,8 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
             .build(ResourceLocation("hybrid_aquatic", "root"))
         consumer?.accept(rootAdvancement)
 
-        val fishingNetAdvancement = Advancement.Builder.advancement()
-            .parent(rootAdvancement)
-            .display(
-                HAItems.FISHING_NET.get(),
-                Component.translatable("advancements.hybrid_aquatic.fishing_net.title"),
-                Component.translatable("advancements.hybrid_aquatic.fishing_net.description"),
-                ResourceLocation("hybrid_aquatic", "textures/block/coralstone.png"),
-                FrameType.TASK,
-                true,
-                true,
-                false
-            )
-            .addCriterion(
-                "fishing_net",
-                InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.FISHING_NET.get())
-            )
-            .build(ResourceLocation("hybrid_aquatic", "fishing_net"))
-        consumer?.accept(fishingNetAdvancement)
-
         val divingWeightAdvancement = Advancement.Builder.advancement()
-            .parent(fishingNetAdvancement)
+            .parent(rootAdvancement)
             .display(
                 HAItems.DIVING_WEIGHT.get(),
                 Component.translatable("advancements.hybrid_aquatic.diving_weight.title"),
@@ -76,7 +57,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
         consumer?.accept(divingWeightAdvancement)
 
         val fishingHookAdvancement = Advancement.Builder.advancement()
-            .parent(fishingNetAdvancement)
+            .parent(divingWeightAdvancement)
             .display(
                 HAItems.BARBED_HOOK.get(),
                 Component.translatable("advancements.hybrid_aquatic.hook.title"),
@@ -346,7 +327,7 @@ class AdvancementProvider(output: FabricDataOutput) : FabricAdvancementProvider(
 
         //#region Diving Set Advancement Tree
         val divingSuitAdvancement = Advancement.Builder.advancement()
-            .parent(fishingNetAdvancement)
+            .parent(divingWeightAdvancement)
             .display(
                 HAItems.DIVING_HELMET.get(),
                 Component.translatable("advancements.hybrid_aquatic.diving_suit.title"),

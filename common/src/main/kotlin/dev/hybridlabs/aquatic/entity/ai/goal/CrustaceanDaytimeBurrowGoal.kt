@@ -22,7 +22,7 @@ class CrustaceanDaytimeBurrowGoal(
     override fun canUse(): Boolean {
         if (burrowCooldown > this.crustacean.tickCount ||
             !crustacean.onGround() ||
-            crustacean.fromFishingNet ||
+            crustacean.fromCreatureNet ||
             crustacean.hasCustomName() ||
             crustacean.level().isNight ||
             crustacean.level().getNearestPlayer(crustacean, 32.0) == null) {

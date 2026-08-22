@@ -34,8 +34,6 @@ public class HACustomTrades {
                     new ItemStack(HAItems.INSTANCE.getRAW_FISH_STEAK().get(), 2), 4, 5, 0.05f));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FISHERMAN, 2, factories -> {
-            factories.add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 6),
-                    new ItemStack(HAItems.INSTANCE.getFISHING_NET().get(), 1), 1, 10, 0.05f));
             factories.add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 3),
                     new ItemStack(HAItems.INSTANCE.getBARBED_HOOK().get(), 1), 1, 10, 0.05f));
             factories.add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 3),

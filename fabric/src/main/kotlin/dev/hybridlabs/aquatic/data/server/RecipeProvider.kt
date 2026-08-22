@@ -1768,15 +1768,6 @@ class RecipeProvider(output: FabricDataOutput) : FabricRecipeProvider(output) {
             .save(exporter)
         //#endregion
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.FISHING_NET.get())
-            .pattern("  S")
-            .pattern(" IS")
-            .pattern("I  ")
-            .define('I', Items.STICK)
-            .define('S', Items.STRING)
-            .unlockedBy("string", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STRING))
-            .save(exporter)
-
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.GLOWSLIME.get())
             .requires(Items.SLIME_BALL)
             .requires(Items.GLOW_INK_SAC)

@@ -245,7 +245,6 @@ object HAItems {
     //#endregion
 
     //#region Tools - Weapons - Hooks
-    val FISHING_NET = register("fishing_net") { FishingNetItem(Item.Properties().stacksTo(1)) }
     val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(Item.Properties()) }
     val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
     val OMINOUS_CONCH = register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), HAInstrumentTags.OMINOUS_CONCH) }

@@ -33,7 +33,7 @@ class UrchinEatKelpGoal(
             return false
         }
 
-        if (waterAnimal.fromFishingNet) {
+        if (waterAnimal.fromCreatureNet) {
             return false
         }
 
