@@ -37,18 +37,18 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 	@Final @Shadow private Minecraft minecraft;
 
 	@Inject(method = "renderSnowAndRain", at=@At("HEAD"))
-	void renderWeatherInject(LightTexture manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo ci) {
+	void renderWeatherInject(LightTexture lightTexture, float partialTick, double camX, double camY, double camZ, CallbackInfo ci) {
 		if (minecraft.player != null && minecraft.level != null) {
 			// modernfix loads this class too early
 			if (MARINE_SNOW == null) MARINE_SNOW = CommonClass.locate("textures/environment/marine_snow.png");
 			
-			float f = this.minecraft.level.getRainLevel(tickDelta);
+			float f = this.minecraft.level.getRainLevel(partialTick);
 			Level world = this.minecraft.level;
-			if (f > 0.0f && cameraY < world.getSeaLevel() && world.getBiome(minecraft.player.blockPosition()).is(HAPIBiomeTags.INSTANCE.getALL_TRENCHES())) {
-				manager.turnOnLightLayer();
-				int xFloored = Mth.floor(cameraX);
-				int yFloored = Mth.floor(cameraY);
-				int zFloored = Mth.floor(cameraZ);
+			if (f > 0.0f && camY < world.getSeaLevel() && world.getBiome(minecraft.player.blockPosition()).is(HAPIBiomeTags.INSTANCE.getALL_TRENCHES())) {
+				lightTexture.turnOnLightLayer();
+				int xFloored = Mth.floor(camX);
+				int yFloored = Mth.floor(camY);
+				int zFloored = Mth.floor(camZ);
                 Tesselator tesselator = Tesselator.getInstance();
                 BufferBuilder bufferbuilder = null;
 				RenderSystem.disableCull();
@@ -63,14 +63,14 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 				int m = -1;
 				RenderSystem.setShader(GameRenderer::getParticleShader);
 				BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-                float f1 = (float)this.ticks + tickDelta;
+                float f1 = (float)this.ticks + partialTick;
 
 				for (int n = zFloored - layers; n <= zFloored + layers; ++n) {
 					for (int o = xFloored - layers; o <= xFloored + layers; ++o) {
 						int p = (n - zFloored + 16) * 32 + o - xFloored + 16;
 						double d = (double) this.rainSizeX[p] * 0.5;
 						double e = (double) this.rainSizeZ[p] * 0.5;
-						mutable.set(o, cameraY, n);
+						mutable.set(o, camY, n);
 						Biome biome = world.getBiome(mutable).value();
 						if (biome.hasPrecipitation()) {
 							int height = world.getHeight(Heightmap.Types.OCEAN_FLOOR, o, n);
@@ -98,14 +98,14 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
                                         bufferbuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
 									}
 
-                                    float f5 = -((float)(this.ticks + tickDelta)) / 768.0F;
+                                    float f5 = -((float)(this.ticks + partialTick)) / 768.0F;
                                     float f6 = (float)(random.nextDouble() + (double)f1 * 0.001 * (double)((float)random.nextGaussian()));
                                     float f7 = (float)(random.nextDouble() + (double)(f1 * (float)random.nextGaussian()) * 0.0001);
 
-                                    double dx = (double)o + 0.5 - cameraX;
-                                    double dz = (double)n + 0.5 - cameraZ;
+                                    double dx = (double)o + 0.5 - camX;
+                                    double dz = (double)n + 0.5 - camZ;
                                     float distanceFactor = (float)Math.sqrt(dx * dx + dz * dz) / (float)layers;
-                                    float fade = Mth.clamp((float)(world.getSeaLevel() - cameraY) / 48.0f, 0.0f, 0.8f);
+                                    float fade = Mth.clamp((float)(world.getSeaLevel() - camY) / 48.0f, 0.0f, 0.8f);
                                     float alpha = (((1.0F - distanceFactor * distanceFactor) * 0.3F + 0.5F) * f) * fade;
 
                                     mutable.set(o, t, n);
@@ -115,19 +115,19 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
                                     int j4 = (l3 * 3 + 240) / 4;
                                     int k4 = (i4 * 3 + 240) / 4;
 
-                                    bufferbuilder.addVertex((float)((double)o - cameraX - d + 0.5), (float)((double)s - cameraY), (float)((double)n - cameraZ - e + 0.5))
+                                    bufferbuilder.addVertex((float)((double)o - camX - d + 0.5), (float)((double)s - camY), (float)((double)n - camZ - e + 0.5))
                                             .setUv(0.0F + f6, (float)r * 0.25F + f5 + f7)
                                             .setColor(1.0F, 1.0F, 1.0F, alpha)
                                             .setUv2(k4, j4);
-                                    bufferbuilder.addVertex((float)((double)o - cameraX + d + 0.5), (float)((double)s - cameraY), (float)((double)n - cameraZ + e + 0.5))
+                                    bufferbuilder.addVertex((float)((double)o - camX + d + 0.5), (float)((double)s - camY), (float)((double)n - camZ + e + 0.5))
                                             .setUv(1.0F + f6, (float)r * 0.25F + f5 + f7)
                                             .setColor(1.0F, 1.0F, 1.0F, alpha)
                                             .setUv2(k4, j4);
-                                    bufferbuilder.addVertex((float)((double)o - cameraX + d + 0.5), (float)((double)r - cameraY), (float)((double)n - cameraZ + e + 0.5))
+                                    bufferbuilder.addVertex((float)((double)o - camX + d + 0.5), (float)((double)r - camY), (float)((double)n - camZ + e + 0.5))
                                             .setUv(1.0F + f6, (float)s * 0.25F + f5 + f7)
                                             .setColor(1.0F, 1.0F, 1.0F, alpha)
                                             .setUv2(k4, j4);
-                                    bufferbuilder.addVertex((float)((double)o - cameraX - d + 0.5), (float)((double)r - cameraY), (float)((double)n - cameraZ - e + 0.5))
+                                    bufferbuilder.addVertex((float)((double)o - camX - d + 0.5), (float)((double)r - camY), (float)((double)n - camZ - e + 0.5))
                                             .setUv(0.0F + f6, (float)s * 0.25F + f5 + f7)
                                             .setColor(1.0F, 1.0F, 1.0F, alpha)
                                             .setUv2(k4, j4);
@@ -144,7 +144,7 @@ public abstract class WeatherDisplayMixin implements ResourceManagerReloadListen
 				RenderSystem.enableCull();
 				RenderSystem.enableBlend();
 				RenderSystem.enableDepthTest();
-				manager.turnOffLightLayer();
+				lightTexture.turnOffLightLayer();
 			}
 		}
 	}

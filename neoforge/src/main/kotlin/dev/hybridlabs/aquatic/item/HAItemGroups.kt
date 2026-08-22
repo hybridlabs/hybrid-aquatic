@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
+import dev.hybridlabs.hapi.item.HAPIItems
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries
@@ -444,7 +445,7 @@ object HAItemGroups {
                 entries.accept(HAItems.CORAL_AXE.get())
                 entries.accept(HAItems.CORAL_SHOVEL.get())
                 entries.accept(HAItems.CORAL_HOE.get())
-                entries.accept(HAItems.FISHING_NET.get())
+                entries.accept(HAPIItems.CREATURE_NET.get())
                 entries.accept(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
 
                 entries.accept(HAItems.DIVING_HELMET.get())

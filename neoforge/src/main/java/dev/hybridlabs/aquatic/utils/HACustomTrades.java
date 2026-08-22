@@ -44,8 +44,7 @@ public class HACustomTrades {
                                     0.05f)));
 
             trades.get(2).addAll(trades.get(2).size() - 1,
-                    Arrays.asList(new BasicItemListing(new ItemStack(Items.EMERALD, 6),
-                            new ItemStack(HAItems.INSTANCE.getFISHING_NET().get(), 1), 1, 10, 0.05f),
+                    Arrays.asList(
                             new BasicItemListing(new ItemStack(Items.EMERALD, 3),
                                     new ItemStack(HAItems.INSTANCE.getBARBED_HOOK().get(), 1), 1, 10,
                                     0.05f), new BasicItemListing(new ItemStack(Items.EMERALD, 3),

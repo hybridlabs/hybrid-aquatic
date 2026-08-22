@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
+import dev.hybridlabs.hapi.item.HAPIItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.critereon.InventoryChangeTrigger
@@ -1788,15 +1789,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             )
             .save(exporter)
         //#endregion
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.FISHING_NET.get())
-            .pattern("  S")
-            .pattern(" IS")
-            .pattern("I  ")
-            .define('I', Items.STICK)
-            .define('S', Items.STRING)
-            .unlockedBy("string", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STRING))
-            .save(exporter)
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.GLOWSLIME.get())
             .requires(Items.SLIME_BALL)

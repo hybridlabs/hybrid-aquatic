@@ -8,7 +8,6 @@ import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.client.data.HypnoticEntities
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.item.HAItemProperties
-import dev.hybridlabs.aquatic.client.item.tooltip.FishingNetTooltip
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BULL_SHARK_PLUSHIE
@@ -59,10 +58,6 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerWeatherRenderers() {
         // TODO: hook up renderer to make this thing easier
-    }
-
-    private fun registerTooltips() {
-        ItemTooltipCallback.EVENT.register(FishingNetTooltip())
     }
 
     private fun registerRenderShapes() {

@@ -1,5 +1,5 @@
 {
-  "parent": "hybrid_aquatic:fishing_net",
+  "parent": "hybrid_aquatic:diving_weight",
   "criteria": {
     "obtain_hook": {
       "conditions": {

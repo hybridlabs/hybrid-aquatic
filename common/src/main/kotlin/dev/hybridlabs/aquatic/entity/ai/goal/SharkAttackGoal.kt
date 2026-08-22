@@ -37,7 +37,7 @@ open class SharkAttackGoal(
     }
 
     override fun canUse(): Boolean {
-        if (shark.fromFishingNet) {
+        if (shark.fromCreatureNet) {
             return false
         }
 

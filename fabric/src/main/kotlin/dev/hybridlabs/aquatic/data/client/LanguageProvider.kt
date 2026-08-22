@@ -56,8 +56,8 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             "advancements.hybrid_aquatic.enter_water.title" to "Hybrid Aquatic",
             "advancements.hybrid_aquatic.enter_water.description" to "Discover an expanded world beneath the waves",
 
-            "advancements.hybrid_aquatic.fishing_net.title" to "Not Quite A Bucket",
-            "advancements.hybrid_aquatic.fishing_net.description" to "Craft a fishing net to pick up and transport sea creatures",
+            "advancements.hybrid_aquatic.creature_net.title" to "Not Quite A Bucket",
+            "advancements.hybrid_aquatic.creature_net.description" to "Craft a creature net to pick up and transport sea creatures",
 
             "advancements.hybrid_aquatic.glowstick.title" to "Better Than Torches!",
             "advancements.hybrid_aquatic.glowstick.description" to "Craft a glowstick to light your way in the deep sea",
@@ -704,7 +704,6 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAItems.CREEPERMAGNET_HOOK.get() to "CreeperMagnet Hook",
             HAItems.OMINOUS_HOOK.get() to "Ominous Hook",
             HAItems.OMINOUS_CONCH.get() to "Ominous Conch",
-            HAItems.FISHING_NET.get() to "Fishing Net",
             HAItems.KARKINOS_CLAW.get() to "Karkinos Claw",
             HAItems.SEASHELL_SPEAR.get() to "Seashell Spear",
             HAItems.SEASHELL_PICKAXE.get() to "Seashell Pickaxe",
@@ -787,7 +786,6 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABlocks.CHERRY_CRATE.get().descriptionId to "Break with an axe to open",
             HABlocks.BAMBOO_CRATE.get().descriptionId to "Break with an axe to open",
 
-            HAItems.FISHING_NET.get().descriptionId to "Stored Entity: %s",
             HAItems.DIVING_WEIGHT.get().descriptionId to "Quite heavy",
 
             HAItems.CORAL_AXE.get().descriptionId to "Repairs itself when underwater",
@@ -818,16 +816,9 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
 
         // Item Functions
         mapOf(
-            HAItems.FISHING_NET.get().descriptionId to "Lets you catch and move aquatic creatures",
             HAItems.OMINOUS_CONCH.get().descriptionId to "Summons the Shell Beast",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".function"), translation)
-        }
-
-        mapOf(
-            HAItems.FISHING_NET.get().descriptionId to "Placed creatures become passive and don't despawn",
-        ).forEach { (itemTranslationKey, translation) ->
-            builder.add(itemTranslationKey.plus(".properties"), translation)
         }
 
         mapOf(
