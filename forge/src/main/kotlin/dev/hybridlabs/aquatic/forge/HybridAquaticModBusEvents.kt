@@ -26,18 +26,23 @@ import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.particle.SargassumParticle
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
+import net.minecraft.client.Minecraft
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.blockentity.SkullBlockRenderer
 import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.texture.OverlayTexture
+import net.minecraft.util.Mth
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.block.AbstractSkullBlock
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent
 import net.minecraftforge.client.extensions.common.IClientItemExtensions
@@ -45,6 +50,7 @@ import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+import org.joml.Quaternionf
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
 import top.theillusivec4.curios.api.SlotContext
@@ -207,6 +213,14 @@ object HybridAquaticModBusEvents {
         registerTrinketRenderer(
             HAItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
         )
+        registerPlushieRenderer(HAItems.BASKING_SHARK_PLUSHIE.get() as BlockItem)
+        registerPlushieRenderer(HAItems.BULL_SHARK_PLUSHIE.get() as BlockItem)
+        registerPlushieRenderer(HAItems.FRILLED_SHARK_PLUSHIE.get() as BlockItem)
+        registerPlushieRenderer(HAItems.GREAT_WHITE_SHARK_PLUSHIE.get() as BlockItem)
+        registerPlushieRenderer(HAItems.HAMMERHEAD_SHARK_PLUSHIE.get() as BlockItem)
+        registerPlushieRenderer(HAItems.THRESHER_SHARK_PLUSHIE.get() as BlockItem)
+        registerPlushieRenderer(HAItems.TIGER_SHARK_PLUSHIE.get() as BlockItem)
+        registerPlushieRenderer(HAItems.WHALE_SHARK_PLUSHIE.get() as BlockItem)
 
         listOf(
             HAPlatformFluids.BRINE_STILL,
@@ -224,6 +238,9 @@ object HybridAquaticModBusEvents {
 
     private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot) {
         CuriosRendererRegistry.register(item) { HACurioRenderer(equipmentSlot) }
+    }
+    private fun registerPlushieRenderer(item: Item) {
+        CuriosRendererRegistry.register(item) { HAPlushieRenderer() }
     }
 
     private class HACurioRenderer(val equipmentSlot: EquipmentSlot) : ICurioRenderer {
@@ -251,6 +268,38 @@ object HybridAquaticModBusEvents {
             model.renderToBuffer(
                 poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
             )
+        }
+    }
+
+    private class HAPlushieRenderer(): ICurioRenderer{
+        val models = SkullBlockRenderer.createSkullRenderers(Minecraft.getInstance().entityModels)!!
+        override fun <T : LivingEntity?, M : EntityModel<T?>?> render(
+            itemStack: ItemStack,
+            slotContext: SlotContext,
+            poseStack: PoseStack,
+            renderLayerParent: RenderLayerParent<T?, M?>,
+            bufferSource: MultiBufferSource,
+            light: Int,
+            limbSwing: Float,
+            limbSwingAmount: Float,
+            partialTicks: Float,
+            ageInTicks: Float,
+            netHeadYaw: Float,
+            headPitch: Float
+        ) {
+            val blockItem = itemStack.item as BlockItem
+            val skull = blockItem.block as AbstractSkullBlock
+            val type = skull.type
+            poseStack.pushPose()
+            poseStack.mulPose(Quaternionf().rotationZYX(0F, netHeadYaw * Mth.DEG_TO_RAD, headPitch * Mth.DEG_TO_RAD))
+            poseStack.scale(1.1875f, -1.1875f, -1.1875f)
+            poseStack.translate(-0.5, 0.425, -0.5)
+            val renderType = SkullBlockRenderer.getRenderType(type, null)
+            SkullBlockRenderer.renderSkull(
+                null, 180F, 0f, poseStack, bufferSource, light,
+                models[type], renderType
+            )
+            poseStack.popPose()
         }
     }
 }
