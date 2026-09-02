@@ -516,6 +516,8 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
 
         getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
             .add(HABlocks.GRASSY_SAND.get())
+            .add(HABlocks.MARINE_SNOW.get())
+            .add(HABlocks.WHITE_SAND.get())
 
         getOrCreateTagBuilder(BlockTags.LOGS)
             .add(HAPlatformBlocks.DRIFTWOOD_LOG.get())
