@@ -28,6 +28,8 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
             .add(HAPaintings.GONE_FISHING)
             .add(HAPaintings.JONA_SAXISA)
             .add(HAPaintings.DIORAMA)
+            .add(HAPaintings.THE_FAST_REGIMENT)
+            .add(HAPaintings.LIGHTHOUSE_AFTER_DUSK)
             .add(HAPaintings.BIG_LURE)
             .add(HAPaintings.PRESERVER)
             .add(HAPaintings.SUNSET)
