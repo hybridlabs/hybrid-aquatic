@@ -34,7 +34,6 @@
         "client.HeadFeatureRendererMixin",
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
-        "client.MouseHandlerMixin",
         "client.PlayerEntityRendererMixin",
         "client.SkullBlockEntityModelMixin",
         "client.WeatherDisplayMixin",
