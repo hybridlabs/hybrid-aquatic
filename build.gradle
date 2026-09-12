@@ -1,12 +1,12 @@
 plugins {
-    id 'fabric-loom' apply(false)
-    id 'net.neoforged.moddev.legacyforge' version '2.0.77' apply(false)
-    id 'org.jetbrains.changelog' version '2.2.1'
+    id 'fabric-loom' apply false
+    id 'net.neoforged.moddev.legacyforge' apply false
+    id 'org.jetbrains.changelog'
 }
 
 changelog {
     version = version
-    path = file("CHANGELOG.md").canonicalPath
-    groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
-    lineSeparator = "\n"
+    path = file('CHANGELOG.md').canonicalPath
+    groups = ['Added', 'Changed', 'Deprecated', 'Removed', 'Fixed', 'Security']
+    lineSeparator = '\n'
 }

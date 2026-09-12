@@ -12,8 +12,6 @@ dependencies {
 }
 
 legacyForge {
-    apply plugin: 'org.jetbrains.kotlin.jvm'
-    apply plugin: 'kotlin'
     version = "${minecraft_version}-${forge_version}"
 
     mixin {
@@ -75,11 +73,6 @@ repositories {
     }
 
     maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven/"
-    }
-
-    maven {
         name = "Terraformers"
         url = "https://maven.terraformersmc.com/releases/"
     }
@@ -87,12 +80,6 @@ repositories {
     maven {
         name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
-    }
-
-    mavenCentral()
-    maven {
-        name = "Hybrid Labs"
-        url = "https://maven.dvitski.cc/releases"
     }
 }
 

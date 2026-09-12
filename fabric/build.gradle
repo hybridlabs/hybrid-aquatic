@@ -1,7 +1,7 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
-    id "org.jetbrains.kotlin.jvm"
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 repositories {
@@ -25,24 +25,8 @@ repositories {
     }
 
     maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven/"
-    }
-
-    maven {
         name = "Debug Utils (GitLab)"
         url = "https://gitlab.com/api/v4/projects/21830712/packages/maven/"
-    }
-
-    maven {
-        name = 'Fabric'
-        url = 'https://maven.fabricmc.net/'
-    }
-
-    mavenCentral()
-    maven {
-        name = "Hybrid Labs"
-        url = "https://maven.dvitski.cc/releases"
     }
 }
 

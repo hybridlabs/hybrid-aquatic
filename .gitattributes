@@ -1,15 +1,32 @@
-* text eol=lf
-*.bat text eol=crlf
-*.patch text eol=lf
-*.java text eol=lf
-*.gradle text eol=crlf
-*.png binary
-*.gif binary
-*.exe binary
-*.dll binary
-*.jar binary
-*.lzma binary
-*.zip binary
-*.pyd binary
-*.cfg text eol=lf
-*.jks binary
+# Normalise every text file to LF in the repository and in the working tree.
+# LF works on Linux, macOS and Windows (Git for Windows, IntelliJ and Gradle all handle it),
+# so there is no reason to let CRLF into the tree and produce whitespace-only diffs.
+* text=auto eol=lf
+
+# Windows batch files are the one exception - cmd.exe requires CRLF.
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+
+# The Gradle start script must stay LF or it will not execute.
+/gradlew        text eol=lf
+
+# Binary assets: never touch these.
+*.png           binary
+*.gif           binary
+*.jpg           binary
+*.jpeg          binary
+*.ogg           binary
+*.wav           binary
+*.exe           binary
+*.dll           binary
+*.jar           binary
+*.zip           binary
+*.lzma          binary
+*.pyd           binary
+*.jks           binary
+*.nbt           binary
+*.dat           binary
+*.blend         binary
+
+# Generated datagen output - collapse it in diffs and reviews.
+*/src/generated/resources/** linguist-generated=true
