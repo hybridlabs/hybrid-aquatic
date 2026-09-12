@@ -51,7 +51,10 @@ repositories {
     }
 
     mavenCentral()
-    mavenLocal()
+    maven {
+        name = "Hybrid Labs"
+        url = "https://maven.dvitski.cc/releases"
+    }
 }
 
 dependencies {

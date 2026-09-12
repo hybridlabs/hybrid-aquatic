@@ -90,7 +90,10 @@ repositories {
     }
 
     mavenCentral()
-    mavenLocal()
+    maven {
+        name = "Hybrid Labs"
+        url = "https://maven.dvitski.cc/releases"
+    }
 }
 
 sourceSets.main.resources.srcDirs += 'src/generated/resources'
