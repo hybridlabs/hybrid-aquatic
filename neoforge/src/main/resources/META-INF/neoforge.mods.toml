@@ -2,13 +2,13 @@ modLoader = "kotlinforforge"
 
 loaderVersion = "[4,)"
 license = "${license}"
-issueTrackerURL="https://github.com/hybridlabs/hybrid_aquatic/issues"
+issueTrackerURL="https://github.com/hybridlabs/hybrid-aquatic/issues"
 
 [[mods]]
 modId = "${mod_id}"
 version = "${version}"
 displayName = "${mod_name}"
-displayURL= "https://github.com/hybridlabs/hybrid_aquatic"
+displayURL="https://hybridlabs.net/"
 logoFile = "${mod_id}.png"
 credits = '''${credits}'''
 authors = "${mod_author}"

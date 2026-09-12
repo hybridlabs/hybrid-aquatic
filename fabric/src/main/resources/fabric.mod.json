@@ -11,9 +11,9 @@
     ],
 
     "contact": {
-        "homepage": "https://github.com/hybridlabs/hybrid_aquatic",
-        "sources": "https://github.com/hybridlabs/hybrid_aquatic",
-        "issues": "https://github.com/hybridlabs/hybrid_aquatic/issues"
+        "homepage": "https://hybridlabs.net/",
+        "sources": "https://github.com/hybridlabs/hybrid-aquatic",
+        "issues": "https://github.com/hybridlabs/hybrid-aquatic/issues"
     },
 
     "license": "ARR",
