@@ -13,19 +13,13 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
     private val argonautRows: Int = menu.rowCount
 
     init {
-        val totalGUIHeight = 222
-        val firstSlotFromBottomHeight = 115
-
-        // size of screen in pixels
-        imageHeight = firstSlotFromBottomHeight + this.argonautRows * 18 + 71
+        // The background is drawn as a header (fuel slot and title), one strip per cargo row, and
+        // then the player inventory section, so the screen has to be exactly as tall as those add
+        // up to. Getting this wrong offsets the whole window and leaves a gap at the bottom.
+        imageHeight = HEADER_HEIGHT + this.argonautRows * 18 + PLAYER_INVENTORY_HEIGHT
         imageWidth = 182
 
-        inventoryLabelY = imageHeight - 112
-    }
-
-
-    override fun init() {
-        super.init()
+        inventoryLabelY = imageHeight - 94
     }
 
     override fun renderBg(
@@ -37,9 +31,10 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
         val leftDrawPos = (this.width - this.imageWidth) / 2
         val topDrawPos = (this.height - this.imageHeight) / 2
         guiGraphics.blit(ARGONAUT_BACKGROUND, leftDrawPos,
-            topDrawPos, 16, 0, this.imageWidth,  argonautRows * 18 + 71)
+            topDrawPos, 16, 0, this.imageWidth, HEADER_HEIGHT + argonautRows * 18)
         guiGraphics.blit(ARGONAUT_BACKGROUND,
-            leftDrawPos, topDrawPos + this.argonautRows * 18 + 71, 16, 126, this.imageWidth, 96)
+            leftDrawPos, topDrawPos + HEADER_HEIGHT + this.argonautRows * 18,
+            16, 126, this.imageWidth, PLAYER_INVENTORY_HEIGHT)
 
         if (this.menu.isLit()) {
             val litProgress = this.menu.getLitProgress()
@@ -61,6 +56,12 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
     }
 
     companion object {
+        /** Title bar plus the fuel slot row, above the cargo rows. */
+        private const val HEADER_HEIGHT = 71
+
+        /** Inventory label, the three inventory rows and the hotbar, below the cargo rows. */
+        private const val PLAYER_INVENTORY_HEIGHT = 96
+
         val ARGONAUT_BACKGROUND: ResourceLocation = CommonClass.locate("textures/gui/container/argonaut_3row.png")
     }
 }

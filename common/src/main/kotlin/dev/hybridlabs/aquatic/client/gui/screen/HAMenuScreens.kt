@@ -6,5 +6,6 @@ import net.minecraft.client.gui.screens.MenuScreens
 object HAMenuScreens {
     init {
         MenuScreens.register(HAMenuTypes.ARGONAUT_MENU_3ROW.get(), ::ArgonautScreen)
+        MenuScreens.register(HAMenuTypes.ARGONAUT_MENU_2ROW.get(), ::ArgonautScreen)
     }
 }

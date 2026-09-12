@@ -33,6 +33,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::AdvancementProvider)
         pack.addProvider(::BiomeProvider)
         pack.addProvider(::BlockTagProvider)
+        pack.addProvider(::EntityTypeTagProvider)
         pack.addProvider(::PaintingVariantTagProvider)
         pack.addProvider(::ItemTagProvider)
         pack.addProvider(::InstrumentTagProvider)
