@@ -21,9 +21,10 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v7
 
-      # Gradle itself runs on the newest JDK listed; the others are here so the Java toolchain
-      # this project requests (java_version in gradle.properties) is already present and Gradle
-      # does not have to download it on every run.
+      # setup-java points JAVA_HOME at the LAST version listed, and that is the JVM Gradle runs
+      # on - it must be 21 or newer or Loom refuses to load. The earlier entry is the toolchain
+      # this project compiles against (java_version in gradle.properties), installed here so
+      # Gradle does not download a JDK on every run.
       - name: set up jdks
         uses: actions/setup-java@v6
         with:
@@ -37,7 +38,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: build
-        run: ./gradlew build
+        run: ./gradlew build "-Dorg.gradle.java.installations.fromEnv=JAVA_HOME_21_X64"
 
       - name: capture build artifacts
         uses: actions/upload-artifact@v7
