@@ -4,6 +4,7 @@ import com.google.common.collect.Maps
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.world.inventory.ArgonautMenu
+import java.util.function.IntFunction
 import net.minecraft.SharedConstants
 import net.minecraft.Util
 import net.minecraft.core.Direction
@@ -24,13 +25,24 @@ import net.minecraft.world.Containers
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
-import net.minecraft.world.entity.*
+import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.EntityDimensions
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.HasCustomInventoryScreen
+import net.minecraft.world.entity.LivingEntity
+import net.minecraft.world.entity.MoverType
+import net.minecraft.world.entity.PlayerRideable
+import net.minecraft.world.entity.Pose
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.vehicle.ContainerEntity
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.item.*
+import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.DyeItem
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.Level
@@ -45,7 +57,6 @@ import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache
 import software.bernie.geckolib.core.animation.AnimatableManager
 import software.bernie.geckolib.core.animation.AnimationController
 import software.bernie.geckolib.util.GeckoLibUtil
-import java.util.function.IntFunction
 
 open class ArgonautEntity(
     type: EntityType<out ArgonautEntity>,
@@ -112,6 +123,7 @@ open class ArgonautEntity(
         tag.putString("ShellColor", this.getShellColor().serializedName)
         tag.putString("SailColor", this.getSailColor().serializedName)
         tag.putInt("BurnTime", this.litTime)
+        tag.putInt("BurnDuration", this.litDuration)
         this.addChestVehicleSaveData(tag)
     }
 
@@ -132,6 +144,7 @@ open class ArgonautEntity(
         }
 
         this.litTime = tag.getInt("BurnTime")
+        this.litDuration = tag.getInt("BurnDuration")
         setLit(litTime > 0)
         this.readChestVehicleSaveData(tag)
     }
@@ -310,7 +323,10 @@ open class ArgonautEntity(
     override fun tick() {
         super.tick()
 
-        burnTick()
+        // Burning is server authoritative. The client only ever has the contents of the fuel slot
+        // while the menu is open, so ticking this on both sides consumed fuel twice over and left
+        // the lit state flickering against the synced value.
+        if (!this.level().isClientSide) burnTick()
 
         val passenger = this.firstPassenger
         if (passenger is LivingEntity) {
