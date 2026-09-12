@@ -1,13 +1,13 @@
 plugins {
-    id 'fabric-loom' version '1.9-SNAPSHOT' apply(false)
-    id 'net.neoforged.moddev' version '2.0.49-beta' apply false
-    id 'org.jetbrains.changelog' version '2.2.1'
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
+    id 'fabric-loom' apply false
+    id 'net.neoforged.moddev' apply false
+    id 'me.modmuss50.mod-publish-plugin' apply false
+    id 'org.jetbrains.changelog'
 }
 
 changelog {
     version = version
-    path = file("CHANGELOG.md").canonicalPath
-    groups = ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"]
-    lineSeparator = "\n"
+    path = file('CHANGELOG.md').canonicalPath
+    groups = ['Added', 'Changed', 'Deprecated', 'Removed', 'Fixed', 'Security']
+    lineSeparator = '\n'
 }

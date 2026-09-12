@@ -10,21 +10,22 @@ base {
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(java_version)
     withSourcesJar()
-    withJavadocJar()
 }
 
+// Repositories shared by every subproject. Loom and ModDevGradle inject their own project-level
+// repositories, which makes settings-level dependencyResolutionManagement unreliable here
+// (PREFER_PROJECT drops the settings repositories for any project that declares one), so the
+// shared list lives in this convention plugin instead. Loader-specific repositories stay in the
+// loader's own build script.
 repositories {
     mavenCentral()
+
     // https://docs.gradle.org/current/userguide/declaring_repositories.html#declaring_content_exclusively_found_in_one_repository
     exclusiveContent {
         forRepository {
             maven {
                 name = 'Sponge'
                 url = 'https://repo.spongepowered.org/repository/maven-public'
-            }
-            maven {
-                name = "NeoForge"
-                url = 'https://maven.neoforged.net/releases'
             }
         }
         filter { includeGroupAndSubgroups('org.spongepowered') }
@@ -36,21 +37,46 @@ repositories {
                     url = 'https://maven.parchmentmc.org/'
                 },
                 maven {
-                    name = "NeoForge"
+                    name = 'NeoForge'
                     url = 'https://maven.neoforged.net/releases'
                 }
         )
         filter { includeGroup('org.parchmentmc.data') }
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
+            }
+        }
+        filter { includeGroup('maven.modrinth') }
+    }
+    maven {
+        name = 'NeoForged'
+        url = 'https://maven.neoforged.net/releases'
+    }
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'Minecraft Forge'
+        url = 'https://maven.minecraftforge.net/'
+    }
     maven {
         name = 'BlameJared'
         url = 'https://maven.blamejared.com'
+    }
+    maven {
+        name = 'Hybrid Labs'
+        url = 'https://maven.dvitski.cc/releases'
     }
 }
 
 // Declare capabilities on the outgoing configurations.
 // Read more about capabilities here: https://docs.gradle.org/current/userguide/component_capabilities.html#sec:declaring-additional-capabilities-for-a-local-component
-['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
+['apiElements', 'runtimeElements', 'sourcesElements'].each { variant ->
     configurations."$variant".outgoing {
         capability("$group:${project.name}:$version")
         capability("$group:${base.archivesName.get()}:$version")
@@ -87,30 +113,30 @@ jar {
 }
 
 processResources {
-    var expandProps = [
-            'version'                      : version,
-            'group'                        : project.group, //Else we target the task's group.
-            'minecraft_version'            : minecraft_version,
-            'minecraft_version_range'      : minecraft_version_range,
-            'fabric_version'               : fabric_version,
-            'fabric_loader_version'        : fabric_loader_version,
-            'mod_name'                     : mod_name,
-            'mod_author'                   : mod_author,
-            'mod_id'                       : mod_id,
-            'license'                      : license,
-            'description'                  : project.description,
-            'neoforge_version'             : neoforge_version,
-            'neoforge_loader_version_range': neoforge_loader_version_range,
-            "forge_version"                : forge_version,
-            "forge_loader_version_range"   : forge_loader_version_range,
-            'credits'                      : credits,
-            'java_version'                 : java_version,
-            'kotlin_version'               : kotlin_version,
-    ]
+    // Every key in gradle.properties is exposed to the metadata templates, so adding a new
+    // placeholder to fabric.mod.json or the mods.toml only means adding the property - there is
+    // no matching list to keep in sync here.
+    var expandProps = new Properties()
+    rootProject.file('gradle.properties').withInputStream { expandProps.load(it) }
+    expandProps.keySet().removeIf { it.toString().startsWith('org.gradle.') }
+    expandProps.putAll([
+            'version'    : version,
+            'group'      : project.group, // Else we target the task's group.
+            'description': project.description,
+    ])
 
-    filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
+    var jsonExpandProps = expandProps.collectEntries { key, value ->
+        [(key): value instanceof String ? value.replace('\n', '\\\\n') : value]
+    }
+
+    filesMatching(['META-INF/mods.toml', 'META-INF/neoforge.mods.toml']) {
         expand expandProps
     }
+
+    filesMatching(['pack.mcmeta', 'fabric.mod.json', '*.mixins.json']) {
+        expand jsonExpandProps
+    }
+
     inputs.properties(expandProps)
 }
 
@@ -123,7 +149,12 @@ publishing {
     }
     repositories {
         maven {
-            url System.getenv('local_maven_url')
+            name = 'HybridLabs'
+            url = 'https://maven.dvitski.cc/releases'
+            credentials {
+                username = project.findProperty('hybridlabsMavenUser') ?: System.getenv('HYBRIDLABS_MAVEN_USER')
+                password = project.findProperty('hybridlabsMavenPassword') ?: System.getenv('HYBRIDLABS_MAVEN_PASSWORD')
+            }
         }
     }
 }

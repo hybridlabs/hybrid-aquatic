@@ -1,8 +1,8 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
-    id "org.jetbrains.kotlin.jvm"
+    id 'me.modmuss50.mod-publish-plugin'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 repositories {
@@ -21,18 +21,8 @@ repositories {
     }
 
     maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven/"
-    }
-
-    maven {
         name = "Debug Utils (GitLab)"
         url = "https://gitlab.com/api/v4/projects/21830712/packages/maven/"
-    }
-
-    maven {
-        name = 'Fabric'
-        url = 'https://maven.fabricmc.net/'
     }
 
     mavenLocal()

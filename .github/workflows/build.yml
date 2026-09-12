@@ -1,41 +1,49 @@
+# Builds the mod on every push and pull request, as a first line of defence against bad commits.
+#
+# Linux only: that is the only platform the team develops and ships from. The mod jars themselves
+# are platform-independent, so a second OS in the matrix only bought us a slower pipeline.
 name: build
-on: [pull_request, push]
+on: [push, pull_request]
+
+# A newer push to the same ref makes an in-flight run redundant. Cancel PR runs; let pushes to a
+# real branch finish so their artifacts stay available.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    strategy:
-      matrix:
-        java: [
-          21  # Current Java LTS & minimum supported by Minecraft
-        ]
-        os: [ubuntu-22.04]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-24.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: checkout repository
+        uses: actions/checkout@v7
 
-      - name: Validate Gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
-      - name: Setup JDK ${{ matrix.java }}
-        uses: actions/setup-java@v3
+      # Gradle itself runs on the newest JDK listed; the others are here so the Java toolchain
+      # this project requests (java_version in gradle.properties) is already present and Gradle
+      # does not have to download it on every run.
+      - name: set up jdks
+        uses: actions/setup-java@v6
         with:
-          java-version: ${{ matrix.java }}
-          distribution: 'microsoft'
+          java-version: |
+            21
+          distribution: temurin
 
-      - name: Make Gradle wrapper executable
-        if: runner.os != 'Windows'
-        run: chmod +x ./gradlew
+      # Validates the wrapper checksum, and caches ~/.gradle plus the Gradle build cache between
+      # runs - the single biggest saving available to this pipeline.
+      - name: set up gradle
+        uses: gradle/actions/setup-gradle@v6
 
-      - name: Build
+      - name: build
         run: ./gradlew build
 
-      - name: Capture build artifacts
-        if: runner.os == 'Linux' && matrix.java == '21'
-        uses: actions/upload-artifact@v4
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v7
         with:
-          name: Artifacts
+          name: artifacts
           path: |
             fabric/build/libs/
             neoforge/build/libs/
-          compression-level: 6
+          if-no-files-found: error

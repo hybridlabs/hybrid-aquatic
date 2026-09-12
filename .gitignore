@@ -43,3 +43,13 @@ replay_*.log
 
 # kotlin
 .kotlin/
+
+# Dev-run output: logs, crash dumps, world saves and per-machine configs. Regenerated on every
+# run and never useful in the repository.
+run/
+*/run/
+runs/
+*/runs/
+*.log
+hs_err_pid*.log
+replay_pid*.log
