@@ -17,6 +17,16 @@ java {
 // (PREFER_PROJECT drops the settings repositories for any project that declares one), so the
 // shared list lives in this convention plugin instead. Loader-specific repositories stay in the
 // loader's own build script.
+//
+// Loom's remapped mods live in a local repository it appends after these, so every remote repo
+// would be asked for them first, and a 5xx from any of them fails resolution instead of falling
+// through. Keep remote repositories from ever being queried for them.
+repositories.configureEach { repo ->
+    if (!repo.name.startsWith('Loom')) {
+        repo.content { excludeGroupByRegex('remapped\\..*') }
+    }
+}
+
 repositories {
     mavenCentral()
 
