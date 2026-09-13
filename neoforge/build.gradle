@@ -1,111 +1,18 @@
 plugins {
-    id 'multiloader-loader'
-    id 'net.neoforged.moddev'
+    id 'dev.hybridlabs.neoforge'
     id 'org.jetbrains.kotlin.jvm'
-    id 'me.modmuss50.mod-publish-plugin'
-}
-
-neoForge {
-    version = neoforge_version
-    // Automatically enable neoforge AccessTransformers if the file exists
-    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
-    if (at.exists()) {
-        accessTransformers.from(at.absolutePath)
-    }
-    parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
-    }
-
-    sourceSets {
-        main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
-    }
-
-    runs {
-        configureEach {
-            systemProperty('neoforge.enabledGameTestNamespaces', mod_id)
-            ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
-        }
-        client {
-            client()
-        }
-        data {
-            data()
-            programArguments.addAll '--mod', 'hybrid_aquatic', '--all',
-                    '--output', file('src/generated/resources/').getAbsolutePath(),
-                    '--existing', file('src/main/resources/').getAbsolutePath(),
-                    '--existing', file("../fabric/src/generated/resources").getAbsolutePath()
-        }
-        server {
-            server()
-        }
-    }
-
-    mods {
-        "${mod_id}" {
-            sourceSet sourceSets.main
-        }
-    }
-}
-
-repositories {
-    maven {
-        name = 'Kotlin for Forge'
-        url = 'https://thedarkcolour.github.io/KotlinForForge/'
-    }
-
-    maven {
-        name = "Geckolib"
-        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
-    }
-
-    maven {
-        name = "Terraformers"
-        url = "https://maven.terraformersmc.com/releases/"
-    }
-
-    maven {
-        name = "Curios"
-        url = "https://maven.theillusivec4.top/"
-    }
-
-    mavenLocal()
-}
-sourceSets.main.resources.srcDirs += 'src/generated/resources'
-
-configurations.create('fabricDatagen')
-dependencies {
-    fabricDatagen project(path: ':fabric', configuration: 'datagenOutput')
-}
-
-processResources {
-    from configurations.fabricDatagen.singleFile
 }
 
 dependencies {
-    compileOnly project(":common")
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
     implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-1.21.1"
     implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
-    implementation 'org.jetbrains:annotations:25.0.0'
-    implementation "thedarkcolour:kotlinforforge-neoforge:${kotlin_for_forge_version}"
     implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.0.0")
 
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
-}
-
-jar {
-    manifest.attributes([
-            "MixinConfigs": "${mod_id}.forge.mixins.json"
-    ])
-}
-
-compileKotlin {
-    source(project(":common").sourceSets.main.allSource)
-    inputs.file "../gradle.properties"
 }
 
 publishMods.platforms.configureEach {
