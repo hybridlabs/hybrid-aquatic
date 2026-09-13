@@ -107,3 +107,7 @@ compileKotlin {
     source(project(":common").sourceSets.main.allSource)
     inputs.file "../gradle.properties"
 }
+
+publishMods.platforms.configureEach {
+    requires 'kotlin-for-forge', 'curios', 'geckolib', 'biolith', 'lithostitched', 'hybrid-api'
+}

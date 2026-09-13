@@ -1,4 +1,4 @@
-# Changelog for [ExampleMod](https://github.com/murphy-slaw/examplemod)
+# Changelog for [Hybrid Aquatic](https://github.com/hybridlabs/hybrid-aquatic)
 
 All notable changes to this project will be documented in this file.
 

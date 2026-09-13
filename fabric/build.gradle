@@ -106,3 +106,7 @@ loom {
         }
     }
 }
+
+publishMods.platforms.configureEach {
+    requires 'fabric-api', 'fabric-language-kotlin', 'trinkets', 'geckolib', 'biolith', 'lithostitched', 'hybrid-api'
+}
