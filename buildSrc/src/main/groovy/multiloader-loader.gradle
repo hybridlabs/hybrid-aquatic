@@ -37,3 +37,37 @@ tasks.named('sourcesJar', Jar) {
     dependsOn(configurations.commonResources)
     from(configurations.commonResources)
 }
+
+// Publishing to Modrinth and CurseForge: `./gradlew publishMods`, or add `-PdryRun` to rehearse
+// without uploading. Tokens come from ~/.gradle/gradle.properties or the environment, like the Maven
+// credentials. Each loader only lists its dependencies, by the slug they share on both sites, in a
+// `publishMods.platforms.configureEach` block.
+pluginManager.withPlugin('me.modmuss50.mod-publish-plugin') {
+    publishMods {
+        // Loom remaps and legacy Forge reobfuscates the jar; the processed one is what players install.
+        file = project.provider { ['remapJar', 'reobfJar', 'jar'].findResult { project.tasks.findByName(it) } }
+                .flatMap { it.archiveFile }
+        changelog = rootProject.releaseNotes
+        type = STABLE
+        version = "mc${minecraft_version}-${project.version}-${project.name}"
+        displayName = "[${minecraft_version}-${project.name.capitalize()}] ${mod_name} ${project.version}"
+        modLoaders.add(project.name)
+        dryRun = project.hasProperty('dryRun')
+
+        modrinth {
+            projectId = modrinth_id
+            accessToken = project.findProperty('modrinthToken') ?: System.getenv('MODRINTH_TOKEN')
+            minecraftVersions.add(minecraft_version)
+            environment = CLIENT_AND_SERVER
+        }
+
+        curseforge {
+            projectId = curseforge_id
+            accessToken = project.findProperty('curseforgeToken') ?: System.getenv('CURSEFORGE_TOKEN')
+            minecraftVersions.add(minecraft_version)
+            javaVersions.add(JavaVersion.toVersion(java_version))
+            client = true
+            server = true
+        }
+    }
+}

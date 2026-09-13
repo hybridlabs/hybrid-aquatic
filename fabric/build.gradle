@@ -1,6 +1,7 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
+    id 'me.modmuss50.mod-publish-plugin'
     id 'org.jetbrains.kotlin.jvm'
 }
 
@@ -121,4 +122,8 @@ loom {
             runDir "build/datagen"
         }
     }
+}
+
+publishMods.platforms.configureEach {
+    requires 'fabric-api', 'fabric-language-kotlin', 'trinkets', 'geckolib', 'biolith', 'lithostitched', 'hybrid-api'
 }

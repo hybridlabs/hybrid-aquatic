@@ -1,6 +1,9 @@
+import org.jetbrains.changelog.Changelog
+
 plugins {
     id 'fabric-loom' apply false
     id 'net.neoforged.moddev.legacyforge' apply false
+    id 'me.modmuss50.mod-publish-plugin' apply false
     id 'org.jetbrains.changelog'
 }
 
@@ -9,4 +12,18 @@ changelog {
     path = file('CHANGELOG.md').canonicalPath
     groups = ['Added', 'Changed', 'Deprecated', 'Removed', 'Fixed', 'Security']
     lineSeparator = '\n'
+}
+
+// The release notes publishMods uploads: this version's section of CHANGELOG.md. Only resolved when
+// publishing, which fails until a section for the new version has been written.
+ext.releaseNotes = provider {
+    if (!changelog.has(version.toString())) {
+        throw new GradleException("CHANGELOG.md has no section for $version, add one before publishing")
+    }
+    def item = changelog.get(version.toString()).withHeader(false).withEmptySections(false)
+    def notes = changelog.renderItem(item, Changelog.OutputType.MARKDOWN).trim()
+    if (notes.isEmpty()) {
+        throw new GradleException("The CHANGELOG.md section for $version is empty")
+    }
+    notes
 }
