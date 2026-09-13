@@ -38,7 +38,7 @@ side = "BOTH"
 modId = "biolith"
 mandatory = true
 versionRange = "[1.0.1-alpha.1,)"
-side = "SERVER"
+side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "curios"
@@ -50,10 +50,10 @@ side = "BOTH"
 modId = "lithostitched"
 mandatory = true
 versionRange = "[1.4.11,)"
-side = "SERVER"
+side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "hapi"
 mandatory = true
-versionRange = "[1.0.0,)"
+versionRange = "[1.1.0,)"
 side = "BOTH"
