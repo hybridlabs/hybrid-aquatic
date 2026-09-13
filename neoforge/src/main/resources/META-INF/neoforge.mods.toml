@@ -17,45 +17,45 @@ enumExtensions="META-INF/enumextensions.json"
 
 [[dependencies.${mod_id}]]
 modId = "neoforge"
-mandatory = true
+type = "required"
 versionRange = "[${neoforge_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "minecraft"
-mandatory = true
+type = "required"
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "geckolib"
-mandatory = true
+type = "required"
 versionRange = "[4.8.3,)"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "biolith"
-mandatory = true
+type = "required"
 versionRange = "[1.0.1-alpha.1,)"
-side = "SERVER"
+side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "curios"
-mandatory = true
+type = "required"
 versionRange = "[5.9.1+1.20.1,)"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "lithostitched"
-mandatory = true
+type = "required"
 versionRange = "[1.4.11,)"
-side = "SERVER"
+side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "hapi"
-mandatory = true
+type = "required"
 versionRange = "[1.0.0,)"
 side = "BOTH"
 
