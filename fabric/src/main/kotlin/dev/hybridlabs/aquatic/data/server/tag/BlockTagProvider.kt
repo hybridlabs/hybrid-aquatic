@@ -5,13 +5,13 @@ import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.tag.HABlockTags
+import java.util.concurrent.CompletableFuture
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.Blocks
-import java.util.concurrent.CompletableFuture
 
 class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider.BlockTagProvider(output, registriesFuture) {
@@ -478,10 +478,14 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BONE_SLAB.get())
             .add(HABlocks.BONE_STAIRS.get())
 
+            .add(HABlocks.WHITE_SANDSTONE.get())
             .add(HABlocks.WHITE_SANDSTONE_WALL.get())
             .add(HABlocks.WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
+            .add(HABlocks.CHISELED_WHITE_SANDSTONE.get())
+            .add(HABlocks.CUT_WHITE_SANDSTONE.get())
             .add(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get())
+            .add(HABlocks.SMOOTH_WHITE_SANDSTONE.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get())
 
