@@ -2,7 +2,9 @@
   "replace": false,
   "values": [
     "hybrid_aquatic:grassy_sand",
-    "hybrid_aquatic:marine_snow",
-    "hybrid_aquatic:white_sand"
+    "hybrid_aquatic:bubble_geyser",
+    "hybrid_aquatic:aerated_sand",
+    "hybrid_aquatic:white_sand",
+    "hybrid_aquatic:marine_snow"
   ]
 }
