@@ -5,6 +5,8 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.loot.HALootTables
+import java.util.concurrent.CompletableFuture
+import java.util.function.BiConsumer
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
 import net.minecraft.core.HolderLookup
@@ -25,8 +27,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
-import java.util.concurrent.CompletableFuture
-import java.util.function.BiConsumer
 
 class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     SimpleFabricLootTableProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
@@ -604,6 +604,8 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
         val messageInABottleLootPoolBuilder = LootPool.lootPool()
         val paintingRegistry = lookup.lookup(Registries.PAINTING_VARIANT).get()
         paintingRegistry.listElements()
+            .toList()
+            .sortedBy { it.key().location().toString() }
             .forEach { painting ->
                 if (painting.key().location().namespace != Constants.MOD_ID) return@forEach
 
