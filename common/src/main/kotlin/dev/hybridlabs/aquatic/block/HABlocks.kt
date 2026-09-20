@@ -769,7 +769,7 @@ object HABlocks {
     val GLOWSTICK = register("glowstick") {
         GlowstickBlock(Properties.ofFullCopy(Blocks.TORCH)
             .noCollission()
-            .lightLevel(GlowstickBlock::luminance)
+            .lightLevel { 12 }
             .noOcclusion())
     }
 
@@ -777,7 +777,7 @@ object HABlocks {
         WallGlowstickBlock(Properties.ofFullCopy(Blocks.WALL_TORCH)
             .dropsLike(GLOWSTICK.get())
             .noCollission()
-            .lightLevel(GlowstickBlock::luminance)
+            .lightLevel { 12 }
             .noOcclusion())
     }
 

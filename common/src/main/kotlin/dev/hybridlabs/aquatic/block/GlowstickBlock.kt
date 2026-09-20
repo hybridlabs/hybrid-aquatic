@@ -15,7 +15,6 @@ import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.pathfinder.PathComputationType
 
-
 class GlowstickBlock(settings: Properties) : TorchBlock(GLOW, settings), SimpleWaterloggedBlock {
     init {
         this.registerDefaultState(
@@ -50,12 +49,6 @@ class GlowstickBlock(settings: Properties) : TorchBlock(GLOW, settings), SimpleW
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
         builder.add(WATERLOGGED)
-    }
-
-    companion object {
-        fun luminance(state: BlockState): Int {
-            return if (state.getValue(WATERLOGGED)) 14 else 0
-        }
     }
 
     override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
