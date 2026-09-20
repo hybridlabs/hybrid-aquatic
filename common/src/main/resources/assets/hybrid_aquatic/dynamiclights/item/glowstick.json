@@ -1,0 +1,10 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:glowstick"
+  },
+  "luminance": {
+    "type": "block",
+    "block": "hybrid_aquatic:glowstick"
+  },
+  "water_sensitive": false
+}

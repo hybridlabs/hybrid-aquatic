@@ -1,0 +1,10 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:glowslime_block"
+  },
+  "luminance": {
+    "type": "block",
+    "block": "hybrid_aquatic:glowslime_block"
+  },
+  "water_sensitive": false
+}

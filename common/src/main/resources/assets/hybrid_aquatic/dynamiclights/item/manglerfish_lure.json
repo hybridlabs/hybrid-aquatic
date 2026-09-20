@@ -1,0 +1,7 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:manglerfish_lure"
+  },
+  "luminance": 10,
+  "water_sensitive": false
+}
