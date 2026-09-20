@@ -1,0 +1,7 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:glowslime"
+  },
+  "luminance": 8,
+  "water_sensitive": false
+}

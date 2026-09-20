@@ -1,0 +1,7 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:anglerfish"
+  },
+  "luminance": 6,
+  "water_sensitive": false
+}

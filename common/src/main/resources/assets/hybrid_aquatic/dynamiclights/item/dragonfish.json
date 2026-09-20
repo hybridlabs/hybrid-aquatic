@@ -1,0 +1,7 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:dragonfish"
+  },
+  "luminance": 6,
+  "water_sensitive": false
+}

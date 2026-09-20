@@ -1,0 +1,10 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:buoy"
+  },
+  "luminance": {
+    "type": "block",
+    "block": "hybrid_aquatic:buoy"
+  },
+  "water_sensitive": false
+}

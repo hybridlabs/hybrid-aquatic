@@ -1,0 +1,7 @@
+{
+  "match": {
+    "items": "hybrid_aquatic:glowing_diving_helmet"
+  },
+  "luminance": 10,
+  "water_sensitive": false
+}
