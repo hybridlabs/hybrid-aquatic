@@ -52,12 +52,6 @@ class GlowstickBlock(settings: Properties) : TorchBlock(settings, GLOW), SimpleW
         builder.add(WATERLOGGED)
     }
 
-    companion object {
-        fun luminance(state: BlockState): Int {
-            return if (state.getValue(WATERLOGGED)) 14 else 0
-        }
-    }
-
     override fun isPathfindable(
         state: BlockState,
         level: BlockGetter,
