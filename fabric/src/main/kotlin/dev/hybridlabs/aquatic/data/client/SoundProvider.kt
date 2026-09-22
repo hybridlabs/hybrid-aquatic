@@ -34,6 +34,10 @@ class SoundProvider(
             HASoundEvents.DUGONG_SWIM to CommonClass.locate("entity/sirenian_swim"),
             HASoundEvents.DUGONG_SPLASH to CommonClass.locate("entity/sirenian_splash"),
 
+            HASoundEvents.OTTER_AMBIENT to SoundEvents.FOX_AMBIENT,
+            HASoundEvents.OTTER_HURT to SoundEvents.FOX_HURT,
+            HASoundEvents.OTTER_DIE to SoundEvents.FOX_DEATH,
+
             HASoundEvents.KARKINOS_AMBIENT to CommonClass.locate("entity/karkinos_ambient"),
             HASoundEvents.KARKINOS_DIE to CommonClass.locate("entity/karkinos_die"),
             HASoundEvents.KARKINOS_HURT to CommonClass.locate("entity/karkinos_hurt"),

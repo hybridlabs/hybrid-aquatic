@@ -167,6 +167,10 @@ class LanguageProvider(output: FabricDataOutput) : FabricLanguageProvider(output
 
             HASoundEvents.SIRENIAN_EAT to "Sirenian eats",
 
+            HASoundEvents.OTTER_AMBIENT to "Otter squeaks",
+            HASoundEvents.OTTER_HURT to "Otter hurts",
+            HASoundEvents.OTTER_DIE to "Otter dies",
+
             HASoundEvents.KARKINOS_AMBIENT to "Karkinos chitters",
             HASoundEvents.KARKINOS_HURT to "Karkinos hurts",
             HASoundEvents.KARKINOS_DIE to "Karkinos dies",

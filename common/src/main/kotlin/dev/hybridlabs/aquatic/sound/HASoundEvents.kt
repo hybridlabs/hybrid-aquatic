@@ -22,6 +22,10 @@ object HASoundEvents {
 
     val SIRENIAN_EAT = register("entity.sirenian.eat")
 
+    val OTTER_AMBIENT = register("entity.otter.ambient")
+    val OTTER_HURT = register("entity.otter.hurt")
+    val OTTER_DIE = register("entity.otter.die")
+
     val KARKINOS_AMBIENT = register("entity.karkinos.ambient")
     val KARKINOS_HURT = register("entity.karkinos.hurt")
     val KARKINOS_DIE = register("entity.karkinos.die")
