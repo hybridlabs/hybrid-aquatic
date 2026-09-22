@@ -11,6 +11,7 @@ import dev.hybridlabs.aquatic.item.cosmetic.*
 import dev.hybridlabs.aquatic.item.seashell.*
 import dev.hybridlabs.aquatic.platform.Services.PLATFORM
 import dev.hybridlabs.aquatic.tag.HAInstrumentTags
+import dev.hybridlabs.hapi.item.HAPIToolMaterials
 import net.minecraft.core.Direction
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
@@ -29,7 +30,7 @@ object HAItems {
     ) {
         DivingArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -38,7 +39,7 @@ object HAItems {
     ) {
         DivingArmorItem(
             ArmorItem.Type.CHESTPLATE,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
         )
     }
 
@@ -47,7 +48,7 @@ object HAItems {
     ) {
         DivingArmorItem(
             ArmorItem.Type.LEGGINGS,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.LEGGINGS, 15)
         )
     }
 
@@ -56,7 +57,7 @@ object HAItems {
     ) {
         DivingArmorItem(
             ArmorItem.Type.BOOTS,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.BOOTS, 15)
         )
     }
     //#endregion
@@ -67,7 +68,7 @@ object HAItems {
     ) {
         ReinforcedDivingArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 25)
         )
     }
 
@@ -75,7 +76,8 @@ object HAItems {
         "reinforced_diving_suit"
     ) {
         ReinforcedDivingArmorItem(
-            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+            ArmorItem.Type.CHESTPLATE,
+            armorProperties(ArmorItem.Type.CHESTPLATE, 25)
         )
     }
 
@@ -83,7 +85,8 @@ object HAItems {
         "reinforced_diving_leggings"
     ) {
         ReinforcedDivingArmorItem(
-            ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
+            ArmorItem.Type.LEGGINGS,
+            armorProperties(ArmorItem.Type.LEGGINGS, 25)
         )
     }
 
@@ -91,7 +94,8 @@ object HAItems {
         "reinforced_diving_boots"
     ) {
         ReinforcedDivingArmorItem(
-            ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
+            ArmorItem.Type.BOOTS,
+            armorProperties(ArmorItem.Type.BOOTS, 25)
         )
     }
     //#endregion
@@ -102,7 +106,7 @@ object HAItems {
     ) {
         GlowingDivingArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -110,7 +114,8 @@ object HAItems {
         "glowing_diving_suit"
     ) {
         GlowingDivingArmorItem(
-            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+            ArmorItem.Type.CHESTPLATE,
+            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
         )
     }
 
@@ -118,7 +123,8 @@ object HAItems {
         "glowing_diving_leggings"
     ) {
         GlowingDivingArmorItem(
-            ArmorItem.Type.LEGGINGS, Item.Properties().stacksTo(1)
+            ArmorItem.Type.LEGGINGS,
+            armorProperties(ArmorItem.Type.LEGGINGS, 15)
         )
     }
 
@@ -126,7 +132,8 @@ object HAItems {
         "glowing_diving_boots"
     ) {
         GlowingDivingArmorItem(
-            ArmorItem.Type.BOOTS, Item.Properties().stacksTo(1)
+            ArmorItem.Type.BOOTS,
+            armorProperties(ArmorItem.Type.BOOTS, 15)
         )
     }
     //#endregion
@@ -136,7 +143,8 @@ object HAItems {
         "nautilus_helmet"
     ) {
         SeashellArmorItem(
-            ArmorItem.Type.HELMET, Item.Properties().stacksTo(1)
+            ArmorItem.Type.HELMET,
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -144,7 +152,8 @@ object HAItems {
         "nautilus_pauldrons"
     ) {
         SeashellArmorItem(
-            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+            ArmorItem.Type.CHESTPLATE,
+            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
         )
     }
     //#endregion
@@ -154,7 +163,8 @@ object HAItems {
         "turtle_chestplate"
     ) {
         TurtleArmorItem(
-            ArmorItem.Type.CHESTPLATE, Item.Properties().stacksTo(1)
+            ArmorItem.Type.CHESTPLATE,
+            armorProperties(ArmorItem.Type.CHESTPLATE, 25)
         )
     }
     //#endregion
@@ -165,7 +175,7 @@ object HAItems {
     ) {
         ManglerfishArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -174,7 +184,7 @@ object HAItems {
     ) {
         ManglerfishArmorItem(
             ArmorItem.Type.CHESTPLATE,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
         )
     }
 
@@ -183,7 +193,7 @@ object HAItems {
     ) {
         EelArmorItem(
             ArmorItem.Type.CHESTPLATE,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
         )
     }
 
@@ -192,7 +202,7 @@ object HAItems {
     ) {
         StripedEelScarfItem(
             ArmorItem.Type.CHESTPLATE,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
         )
     }
 
@@ -201,7 +211,7 @@ object HAItems {
     ) {
         PinkHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -210,7 +220,7 @@ object HAItems {
     ) {
         BrownHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -219,7 +229,7 @@ object HAItems {
     ) {
         GoldHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -228,7 +238,7 @@ object HAItems {
     ) {
         BlueHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -237,7 +247,7 @@ object HAItems {
     ) {
         CyanHatxolotlArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
 
@@ -246,7 +256,7 @@ object HAItems {
     ) {
         MoonJellyfishArmorItem(
             ArmorItem.Type.HELMET,
-            Item.Properties().stacksTo(1)
+            armorProperties(ArmorItem.Type.HELMET, 15)
         )
     }
     //#endregion
@@ -267,47 +277,105 @@ object HAItems {
     //#region Seashell Set
     val SEASHELL_SPEAR = register(
         "seashell_spear"
-    ) { SeashellSpearItem(Item.Properties()) }
+    ) {
+        SeashellSpearItem(
+            Item.Properties().attributes(
+                SwordItem.createAttributes(HAPIToolMaterials.SEASHELL, 2, -2.4f)
+            )
+        )
+    }
 
     val SEASHELL_PICKAXE = register(
         "seashell_pickaxe"
-    ) { SeashellPickaxeItem(Item.Properties()) }
+    ) {
+        SeashellPickaxeItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 1.0f, -2.8f)
+            )
+        )
+    }
 
     val SEASHELL_AXE = register(
         "seashell_axe"
-    ) { SeashellAxeItem(Item.Properties()) }
+    ) {
+        SeashellAxeItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 7.0f, -3.2f)
+            )
+        )
+    }
 
     val SEASHELL_SHOVEL = register(
         "seashell_shovel"
-    ) { SeashellShovelItem(Item.Properties()) }
+    ) {
+        SeashellShovelItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 1.5f, -3.0f)
+            )
+        )
+    }
 
     val SEASHELL_HOE = register(
         "seashell_hoe"
     ) {
-        SeashellHoeItem(Item.Properties())
+        SeashellHoeItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 1.0f, -2.0f)
+            )
+        )
     }
     //#endregion
 
     //#region Coral Set
     val CORAL_BLADE = register(
         "coral_blade"
-    ) { CoralBladeItem(Item.Properties()) }
+    ) {
+        CoralBladeItem(
+            Item.Properties().attributes(
+                SwordItem.createAttributes(HAPIToolMaterials.CORAL, 3, -2.4f)
+            )
+        )
+    }
 
     val CORAL_PICKAXE = register(
         "coral_pickaxe"
-    ) { CoralPickaxeItem(Item.Properties()) }
+    ) {
+        CoralPickaxeItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.0f, -2.8f)
+            )
+        )
+    }
 
     val CORAL_AXE = register(
         "coral_axe"
-    ) { CoralAxeItem(Item.Properties()) }
+    ) {
+        CoralAxeItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.0f, -3.2f)
+            )
+        )
+    }
 
     val CORAL_SHOVEL = register(
         "coral_shovel"
-    ) { CoralShovelItem(Item.Properties()) }
+    ) {
+        CoralShovelItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.5f, -3.0f)
+            )
+        )
+    }
 
     val CORAL_HOE = register(
         "coral_hoe"
-    ) { CoralHoeItem(Item.Properties()) }
+    ) {
+        CoralHoeItem(
+            Item.Properties().attributes(
+                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.0f, -2.0f)
+            )
+        )
+    }
     //#endregion
     //#endregion
 
@@ -2165,6 +2233,14 @@ object HAItems {
 
     fun registerBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
         return register(id) { BlockItem(block.get(), Item.Properties()) }
+    }
+
+    /**
+     * Armor durability is no longer carried by the armor material, so each piece has to declare it
+     * here. [durabilityFactor] is the per-material multiplier the armor set used before the port.
+     */
+    private fun armorProperties(type: ArmorItem.Type, durabilityFactor: Int): Item.Properties {
+        return Item.Properties().stacksTo(1).durability(type.getDurability(durabilityFactor))
     }
 
     private fun registerPlaceableInWaterBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
