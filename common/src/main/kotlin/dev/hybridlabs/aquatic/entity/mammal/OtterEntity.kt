@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.sound.HASoundEvents
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
@@ -180,15 +181,15 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
 
     //#region SFX
     override fun getAmbientSound(): SoundEvent? {
-        return SoundEvents.FOX_AMBIENT
+        return HASoundEvents.OTTER_AMBIENT.get()
     }
 
     override fun getHurtSound(damageSource: DamageSource): SoundEvent? {
-        return SoundEvents.FOX_HURT
+        return HASoundEvents.OTTER_HURT.get()
     }
 
     override fun getDeathSound(): SoundEvent? {
-        return SoundEvents.FOX_DEATH
+        return HASoundEvents.OTTER_DIE.get()
     }
 
     override fun getSwimSplashSound(): SoundEvent {

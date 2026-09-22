@@ -182,6 +182,33 @@
     ],
     "subtitle": "subtitles.hybrid_aquatic.entity.manatee.swim"
   },
+  "entity.otter.ambient": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.fox.ambient"
+      }
+    ],
+    "subtitle": "subtitles.hybrid_aquatic.entity.otter.ambient"
+  },
+  "entity.otter.die": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.fox.death"
+      }
+    ],
+    "subtitle": "subtitles.hybrid_aquatic.entity.otter.die"
+  },
+  "entity.otter.hurt": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "minecraft:entity.fox.hurt"
+      }
+    ],
+    "subtitle": "subtitles.hybrid_aquatic.entity.otter.hurt"
+  },
   "entity.shell_beast.ambient": {
     "sounds": [
       "hybrid_aquatic:entity/shell_beast_ambient"
