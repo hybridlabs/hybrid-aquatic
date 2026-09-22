@@ -59,7 +59,7 @@
         "lithostitched": ">=1.5.0",
         "biolith": "*",
         "trinkets": ">=3.10.0",
-        "hapi": ">=1.0.0"
+        "hapi": ">=1.1.2"
     },
 
     "custom": {

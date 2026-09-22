@@ -9,7 +9,7 @@ dependencies {
     implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
-    implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.0.0")
+    implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.1.2")
 
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"

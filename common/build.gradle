@@ -6,7 +6,7 @@ plugins {
 dependencies {
     implementation 'com.google.code.findbugs:jsr305:3.0.1'
 
-    implementation("dev.hybridlabs.hapi:hapi-common-1.21.1:1.0.0")
+    implementation("dev.hybridlabs.hapi:hapi-common-1.21.1:1.1.2")
 
     implementation "software.bernie.geckolib:geckolib-neoforge-${geckolib_version}"
 
