@@ -37,11 +37,10 @@ class OtterFollowOwnerGoal(
 
     override fun canContinueToUse(): Boolean {
         val current = owner ?: return false
-        return !otter.navigation.isDone &&
-                otter.isTame() &&
-                !otter.isSitting() &&
-                !otter.isLeashed &&
-                otter.distanceToSqr(current) > (stopDistance * stopDistance)
+        if (!otter.isTame() || otter.isSitting() || otter.isLeashed) return false
+        if (otter.distanceToSqr(current) <= (stopDistance * stopDistance)) return false
+
+        return !otter.navigation.isDone || otter.distanceToSqr(current) >= TELEPORT_DISTANCE_SQR
     }
 
     override fun start() {
@@ -63,14 +62,14 @@ class OtterFollowOwnerGoal(
         repathDelay = adjustedTickDelay(REPATH_INTERVAL)
 
         if (otter.distanceToSqr(current) >= TELEPORT_DISTANCE_SQR) {
-            teleportToOwner(current)
+            if (!teleportToOwner(current)) repathDelay = adjustedTickDelay(TELEPORT_RETRY_INTERVAL)
             return
         }
 
         otter.navigation.moveTo(current, speedModifier)
     }
 
-    private fun teleportToOwner(current: LivingEntity) {
+    private fun teleportToOwner(current: LivingEntity): Boolean {
         val ownerPos = current.blockPosition()
 
         repeat(TELEPORT_ATTEMPTS) {
@@ -84,8 +83,10 @@ class OtterFollowOwnerGoal(
 
             otter.moveTo(pos.x + 0.5, pos.y.toDouble(), pos.z + 0.5, otter.yRot, otter.xRot)
             otter.navigation.stop()
-            return
+            return true
         }
+
+        return false
     }
 
     private fun randomOffset(min: Int, max: Int): Int {
@@ -106,6 +107,7 @@ class OtterFollowOwnerGoal(
 
     companion object {
         private const val REPATH_INTERVAL = 10
+        private const val TELEPORT_RETRY_INTERVAL = 2
         private const val TELEPORT_DISTANCE_SQR = 144.0
         private const val TELEPORT_ATTEMPTS = 10
     }
