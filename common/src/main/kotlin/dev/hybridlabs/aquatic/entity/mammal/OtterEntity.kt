@@ -44,6 +44,7 @@ import net.minecraft.world.entity.ai.goal.*
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.util.DefaultRandomPos
+import net.minecraft.world.entity.item.ItemEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
@@ -109,10 +110,13 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
     }
 
+    private var fetchCooldown = 0
+
     override fun tick() {
         super.tick()
 
         if (hunger > 0) hunger -= 1
+        if (fetchCooldown > 0) fetchCooldown -= 1
     }
 
     override fun isFood(stack: ItemStack): Boolean {
@@ -230,6 +234,30 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
     override fun canHoldItem(stack: ItemStack): Boolean {
         if (isTame() && getItemBySlot(EquipmentSlot.MAINHAND).isEmpty) return true
         return super.canHoldItem(stack)
+    }
+
+    /**
+     * Whether this otter should fetch an item for its owner.
+     *
+     * Mob.aiStep picks loot up regardless of what the fetch goal is doing, so this gates both.
+     * Without it an otter takes back the stack it just delivered the moment the pickup delay ends.
+     */
+    fun wantsToFetch(itemEntity: ItemEntity): Boolean {
+        if (!isTame() || fetchCooldown > 0) return false
+        if (isFood(itemEntity.item)) return false
+
+        /* Anything already lying with the owner has been delivered. */
+        val owner = this.owner ?: return false
+        return owner.distanceToSqr(itemEntity) > FETCH_DELIVERY_DISTANCE_SQR
+    }
+
+    fun startFetchCooldown() {
+        fetchCooldown = FETCH_COOLDOWN
+    }
+
+    override fun pickUpItem(itemEntity: ItemEntity) {
+        if (isTame() && !isFood(itemEntity.item) && !wantsToFetch(itemEntity)) return
+        super.pickUpItem(itemEntity)
     }
     //#endregion
 
@@ -408,6 +436,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         const val HEAL_PER_FEED = 4.0f
         const val TAME_KEY = "Tame"
         const val OWNER_KEY = "Owner"
+
+        /* How close a fetched item counts as delivered, and how long an otter rests after. */
+        const val FETCH_DELIVERY_DISTANCE_SQR = 4.0
+        const val FETCH_COOLDOWN = 200
 
         private const val ENTITY_EVENT_TAME_FAILURE: Byte = 6
         private const val ENTITY_EVENT_TAME_SUCCESS: Byte = 7
