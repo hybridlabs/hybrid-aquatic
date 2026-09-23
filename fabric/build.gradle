@@ -17,7 +17,8 @@ dependencies {
 
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     //modRuntimeOnly "maven.modrinth:cyanide:5.0.0-fabric"
-    modImplementation "dev.emi:trinkets:${trinkets_version}"
+    modCompileOnly "dev.emi:trinkets:${trinkets_version}"
+    modLocalRuntime "dev.emi:trinkets:${trinkets_version}"
 }
 
 fabricApi {
@@ -28,5 +29,6 @@ fabricApi {
 }
 
 publishMods.platforms.configureEach {
-    requires 'fabric-api', 'fabric-language-kotlin', 'trinkets', 'geckolib', 'biolith', 'lithostitched', 'hybrid-api'
+    requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'biolith', 'lithostitched', 'hybrid-api'
+    optional 'trinkets'
 }
