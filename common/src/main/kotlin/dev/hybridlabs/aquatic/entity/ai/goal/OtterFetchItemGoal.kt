@@ -34,7 +34,7 @@ class OtterFetchItemGoal(
 
         itemTarget = otter.level()
             .getEntitiesOfClass(ItemEntity::class.java, otter.boundingBox.inflate(SEARCH_RANGE)) { item ->
-                item.isAlive && !item.hasPickUpDelay() && !otter.isFood(item.item)
+                item.isAlive && !item.hasPickUpDelay() && otter.wantsToFetch(item)
             }
             .minByOrNull { it.distanceToSqr(otter) }
 
@@ -44,7 +44,9 @@ class OtterFetchItemGoal(
     override fun canContinueToUse(): Boolean {
         if (!otter.isTame() || otter.isSitting() || otter.owner == null) return false
         if (isCarrying()) return true
-        return itemTarget?.isAlive == true && heldItem().isEmpty
+
+        val item = itemTarget ?: return false
+        return item.isAlive && heldItem().isEmpty && otter.wantsToFetch(item)
     }
 
     override fun stop() {
@@ -79,10 +81,11 @@ class OtterFetchItemGoal(
         val held = heldItem()
         otter.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY)
         otter.spawnAtLocation(held)
+        otter.startFetchCooldown()
     }
 
     companion object {
         private const val SEARCH_RANGE = 8.0
-        private const val DELIVERY_DISTANCE_SQR = 4.0
+        private const val DELIVERY_DISTANCE_SQR = OtterEntity.FETCH_DELIVERY_DISTANCE_SQR
     }
 }
