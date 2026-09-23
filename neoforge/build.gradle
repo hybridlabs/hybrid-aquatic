@@ -5,7 +5,8 @@ plugins {
 
 dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
-    implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
+    // Bundled unmodified under LGPL-3.0; see https://github.com/TerraformersMC/Biolith
+    jarJar implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
     implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.1.2")
@@ -15,6 +16,7 @@ dependencies {
 }
 
 publishMods.platforms.configureEach {
-    requires 'kotlin-for-forge', 'geckolib', 'biolith', 'hybrid-api'
+    requires 'kotlin-for-forge', 'geckolib', 'hybrid-api'
+    embeds 'biolith'
     optional 'curios'
 }

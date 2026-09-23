@@ -1,0 +1,12 @@
+Hybrid Aquatic bundles Biolith, unmodified, as a nested jar
+(META-INF/jars/biolith-fabric-<version>.jar on Fabric,
+META-INF/jarjar/biolith-neoforge-<version>.jar on NeoForge).
+
+Biolith is Copyright (c) 2022 TerraformersMC, gniftygnome, and is licensed under the
+GNU Lesser General Public License version 3 or later. The full license text, including
+the GNU General Public License it incorporates, is in the LICENSE file next to this one.
+
+Source code: https://github.com/TerraformersMC/Biolith
+
+Biolith is a separate library. You can replace the bundled copy by installing any
+compatible Biolith version as its own mod; the mod loader then uses that copy instead.
