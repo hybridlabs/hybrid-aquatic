@@ -4,6 +4,8 @@
     "compatibilityLevel": "JAVA_17",
     "plugin": "dev.hybridlabs.aquatic.mixin.FabricMixinPlugin",
     "mixins": [
+        "HolderReferenceInvoker",
+        "MinecraftServerMixin",
         "BreathAirGoalMixin",
         "EnchantmentMixin",
         "EntityMixin",

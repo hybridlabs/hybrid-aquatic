@@ -10,7 +10,6 @@ mixin {
 
 dependencies {
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
-    modImplementation "maven.modrinth:lithostitched:${lithostitched_version}-forge-1.20"
     modImplementation("com.terraformersmc:biolith-forge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
@@ -22,6 +21,6 @@ dependencies {
 }
 
 publishMods.platforms.configureEach {
-    requires 'kotlin-for-forge', 'geckolib', 'biolith', 'lithostitched', 'hybrid-api'
+    requires 'kotlin-for-forge', 'geckolib', 'biolith', 'hybrid-api'
     optional 'curios'
 }

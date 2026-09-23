@@ -5,6 +5,8 @@
     "minVersion": "0.8.5",
     "refmap": "hybrid_aquatic.refmap.json",
     "mixins": [
+        "HolderReferenceInvoker",
+        "MinecraftServerMixin",
         "BreathAirGoalMixin",
         "EnchantmentMixin",
         "EntityMixin",
