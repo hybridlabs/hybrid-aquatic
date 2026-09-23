@@ -10,7 +10,8 @@ mixin {
 
 dependencies {
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
-    modImplementation("com.terraformersmc:biolith-forge:${biolith_version}") {
+    // Bundled unmodified under LGPL-3.0; see https://github.com/TerraformersMC/Biolith
+    jarJar modImplementation("com.terraformersmc:biolith-forge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
 
@@ -21,6 +22,7 @@ dependencies {
 }
 
 publishMods.platforms.configureEach {
-    requires 'kotlin-for-forge', 'geckolib', 'biolith', 'hybrid-api'
+    requires 'kotlin-for-forge', 'geckolib', 'hybrid-api'
+    embeds 'biolith'
     optional 'curios'
 }

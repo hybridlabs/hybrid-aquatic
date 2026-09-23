@@ -10,7 +10,8 @@ dependencies {
     modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$reach_entity_attributes_version")
     modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
-    modImplementation("com.terraformersmc:biolith-fabric:${biolith_version}") {
+    // Bundled unmodified under LGPL-3.0; see https://github.com/TerraformersMC/Biolith
+    include modImplementation("com.terraformersmc:biolith-fabric:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
     modRuntimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
@@ -37,6 +38,7 @@ loom {
 }
 
 publishMods.platforms.configureEach {
-    requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'biolith', 'hybrid-api'
+    requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'hybrid-api'
+    embeds 'biolith'
     optional 'trinkets'
 }
