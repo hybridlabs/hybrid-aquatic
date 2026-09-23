@@ -103,7 +103,9 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
         goalSelector.addGoal(0, OtterSitGoal(this))
         goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
-        goalSelector.addGoal(2, OtterFollowOwnerGoal(this, 1.0, 10.0f, 2.0f))
+        /* Above the ambient swim, dive and float goals, which would hold MOVE for hundreds of
+        ticks while the owner walks away. */
+        goalSelector.addGoal(1, OtterFollowOwnerGoal(this, 1.0, 10.0f, 2.0f))
         goalSelector.addGoal(3, OtterFetchItemGoal(this, 1.0))
         targetSelector.addGoal(0, OtterOwnerHurtByTargetGoal(this))
         targetSelector.addGoal(0, OtterOwnerHurtTargetGoal(this))
