@@ -1,6 +1,11 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.entity.ai.goal.OtterFetchItemGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.OtterFollowOwnerGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.OtterOwnerHurtByTargetGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.OtterOwnerHurtTargetGoal
+import dev.hybridlabs.aquatic.entity.ai.goal.OtterSitGoal
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.sound.HASoundEvents
@@ -13,6 +18,8 @@ import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalFollowParentGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseMammalEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
+import net.minecraft.core.particles.ParticleOptions
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -26,6 +33,7 @@ import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -55,7 +63,7 @@ import java.util.function.IntFunction
 
 @Suppress("DEPRECATION")
 class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseMammalEntity(entityType, world),
-    VariantHolder<OtterEntity.Companion.Type> {
+    VariantHolder<OtterEntity.Companion.Type>, OwnableEntity {
     override fun getTargetConfig() = TARGET_CONFIG
 
     private val swimControl = OtterMoveControl(
@@ -92,7 +100,12 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
+        goalSelector.addGoal(0, OtterSitGoal(this))
         goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
+        goalSelector.addGoal(2, OtterFollowOwnerGoal(this, 1.0, 10.0f, 2.0f))
+        goalSelector.addGoal(3, OtterFetchItemGoal(this, 1.0))
+        targetSelector.addGoal(0, OtterOwnerHurtByTargetGoal(this))
+        targetSelector.addGoal(0, OtterOwnerHurtTargetGoal(this))
         getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, OtterEntity::hunger)
     }
 
@@ -106,6 +119,119 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         return stack.`is`(HAItems.CLAM.get()) ||
                 stack.`is`(HAItemTags.SMALL_FISH)
     }
+
+    //#region Taming
+    /* Feeding a wild adult tames it one time in three. Feeding a tamed otter heals it, and an
+    empty hand tells it to stay or to follow again. */
+    override fun mobInteract(player: Player, hand: InteractionHand): InteractionResult {
+        val stack = player.getItemInHand(hand)
+
+        if (isTame()) {
+            if (isOwnedBy(player)) {
+                if (isFood(stack) && health < maxHealth) {
+                    if (!level().isClientSide) {
+                        usePlayerItem(player, hand, stack)
+                        heal(HEAL_PER_FEED)
+                    }
+                    return InteractionResult.sidedSuccess(level().isClientSide)
+                }
+
+                if (!isFood(stack)) {
+                    if (!level().isClientSide) {
+                        if (isSitting()) stopSitting() else startSitting()
+                        target = null
+                    }
+                    return InteractionResult.sidedSuccess(level().isClientSide)
+                }
+            }
+
+            return super.mobInteract(player, hand)
+        }
+
+        if (isFood(stack) && !isBaby) {
+            if (!level().isClientSide) {
+                usePlayerItem(player, hand, stack)
+
+                if (random.nextInt(TAME_CHANCE) == 0) {
+                    tame(player)
+                    level().broadcastEntityEvent(this, ENTITY_EVENT_TAME_SUCCESS)
+                } else {
+                    level().broadcastEntityEvent(this, ENTITY_EVENT_TAME_FAILURE)
+                }
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide)
+        }
+
+        return super.mobInteract(player, hand)
+    }
+
+    private fun tame(player: Player) {
+        setTame(true)
+        setOwnerUUID(player.uuid)
+        target = null
+        navigation.stop()
+        health = maxHealth
+    }
+
+    fun isTame(): Boolean {
+        return entityData.get(TAME)
+    }
+
+    fun setTame(tame: Boolean) {
+        entityData.set(TAME, tame)
+    }
+
+    fun isOwnedBy(entity: LivingEntity): Boolean {
+        return entity == this.owner
+    }
+
+    override fun getOwnerUUID(): UUID? {
+        return entityData.get(OWNER).orElse(null)
+    }
+
+    fun setOwnerUUID(uuid: UUID?) {
+        entityData.set(OWNER, Optional.ofNullable(uuid))
+    }
+
+    /* Never let a pet vanish because its owner wandered off. */
+    override fun removeWhenFarAway(distanceSquared: Double): Boolean {
+        return !isTame() && super.removeWhenFarAway(distanceSquared)
+    }
+
+    override fun canAttack(target: LivingEntity): Boolean {
+        if (isOwnedBy(target)) return false
+        return super.canAttack(target)
+    }
+
+    /* Taming feedback, which vanilla only implements on TamableAnimal. */
+    override fun handleEntityEvent(id: Byte) {
+        when (id) {
+            ENTITY_EVENT_TAME_SUCCESS -> spawnTamingParticles(ParticleTypes.HEART)
+            ENTITY_EVENT_TAME_FAILURE -> spawnTamingParticles(ParticleTypes.SMOKE)
+            else -> super.handleEntityEvent(id)
+        }
+    }
+
+    private fun spawnTamingParticles(particle: ParticleOptions) {
+        for (i in 0 until 7) {
+            level().addParticle(
+                particle,
+                getRandomX(1.0),
+                randomY + 0.5,
+                getRandomZ(1.0),
+                random.nextGaussian() * 0.02,
+                random.nextGaussian() * 0.02,
+                random.nextGaussian() * 0.02
+            )
+        }
+    }
+
+    /* Tamed otters carry anything home, not just the food wild otters hold. */
+    override fun canHoldItem(stack: ItemStack): Boolean {
+        if (isTame() && getItemBySlot(EquipmentSlot.MAINHAND).isEmpty) return true
+        return super.canHoldItem(stack)
+    }
+    //#endregion
 
     /**
      * Override hurt() to disable drowning damage.
@@ -208,7 +334,15 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
     //#endregion
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): OtterEntity? {
-        return HAEntityTypes.OTTER.get().create(p0)
+        val child = HAEntityTypes.OTTER.get().create(p0) ?: return null
+
+        val mate = p1 as? OtterEntity
+        if (isTame() && mate?.isTame() == true && ownerUUID != null && ownerUUID == mate.ownerUUID) {
+            child.setTame(true)
+            child.setOwnerUUID(ownerUUID)
+        }
+
+        return child
     }
 
     override fun getStandingEyeHeight(pose: Pose, dimensions: EntityDimensions): Float {
@@ -269,6 +403,15 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         const val MAX_HUNGER = 4800
         const val HUNGER_KEY = "Hunger"
 
+        /* One feed in this many tames a wild adult otter. */
+        const val TAME_CHANCE = 3
+        const val HEAL_PER_FEED = 4.0f
+        const val TAME_KEY = "Tame"
+        const val OWNER_KEY = "Owner"
+
+        private const val ENTITY_EVENT_TAME_FAILURE: Byte = 6
+        private const val ENTITY_EVENT_TAME_SUCCESS: Byte = 7
+
         val FLOAT_ANIMATION: RawAnimation = RawAnimation.begin().thenPlay("misc.float_idle")
         val TYPE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.INT)
@@ -278,6 +421,10 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
             OtterEntity::class.java,
             EntityDataSerializers.INT
         )
+        val TAME: EntityDataAccessor<Boolean> =
+            SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.BOOLEAN)
+        val OWNER: EntityDataAccessor<Optional<UUID>> =
+            SynchedEntityData.defineId(OtterEntity::class.java, EntityDataSerializers.OPTIONAL_UUID)
 
         /** Enum for the action state machine, with codec to store in NBT */
         enum class OtterAction(val id: Int, private val key: String) : StringRepresentable {
@@ -365,6 +512,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         entityData.define(TYPE, 0)
         entityData.define(HUNGER, MAX_HUNGER)
         entityData.define(ACTION, 0) // OtterAction.IDLE
+        entityData.define(TAME, false)
+        entityData.define(OWNER, Optional.empty())
         super.defineSynchedData()
     }
 
@@ -372,6 +521,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         compound.putString("Type", this.variant.serializedName)
         compound.putInt(HUNGER_KEY, hunger)
         compound.putString("Action", this.getAction().serializedName)
+        compound.putBoolean(TAME_KEY, isTame())
+        ownerUUID?.let { compound.putUUID(OWNER_KEY, it) }
 
         super.addAdditionalSaveData(compound)
     }
@@ -380,6 +531,8 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         this.variant = Type.byName(compound.getString("Type"))
         hunger = compound.getInt(HUNGER_KEY)
         this.setAction(OtterAction.byName(compound.getString("Action")))
+        setTame(compound.getBoolean(TAME_KEY))
+        setOwnerUUID(if (compound.hasUUID(OWNER_KEY)) compound.getUUID(OWNER_KEY) else null)
         super.readAdditionalSaveData(compound)
     }
 
@@ -418,6 +571,14 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         otter,
         speedModifier, followingTargetEvenIfNotSeen
     ) {
+        override fun canUse(): Boolean {
+            return !otter.isSitting() && super.canUse()
+        }
+
+        override fun canContinueToUse(): Boolean {
+            return !otter.isSitting() && super.canContinueToUse()
+        }
+
         override fun checkAndPerformAttack(enemy: LivingEntity, distToEnemySqr: Double) {
             val d0 = this.getAttackReachSqr(enemy)
             if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
