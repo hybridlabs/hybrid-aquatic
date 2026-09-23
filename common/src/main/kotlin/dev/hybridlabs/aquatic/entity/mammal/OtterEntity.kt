@@ -535,6 +535,13 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
     }
 
     fun setAction(action: OtterAction) {
+        /* Floating pitches the otter onto its back, and OtterLookControl will not reset xRot
+        while its head is under water, so clear it here or the otter stays belly-up. */
+        if (getAction() == OtterAction.FLOATING && action != OtterAction.FLOATING) {
+            xRot = 0.0f
+            xRotO = 0.0f
+        }
+
         entityData.set(ACTION, action.id)
     }
 
