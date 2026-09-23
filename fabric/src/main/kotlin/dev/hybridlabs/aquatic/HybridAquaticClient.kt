@@ -15,6 +15,7 @@ import dev.hybridlabs.aquatic.client.render.item.HAGeoRendererRegistry
 import dev.hybridlabs.aquatic.client.render.item.HAItemRendererRegistry
 import dev.hybridlabs.aquatic.client.render.item.HATrinketRendererRegistry
 import dev.hybridlabs.aquatic.client.render.particle.HAParticleRendererRegistry
+import dev.hybridlabs.aquatic.platform.Services
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 
@@ -30,7 +31,7 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticEntityRenderers
         registerWeatherRenderers()
         HAGeoRendererRegistry
-        HATrinketRendererRegistry
+        if (Services.PLATFORM.isModLoaded("trinkets")) HATrinketRendererRegistry
         HAModelLayerRegistry
         HAItemProperties
         HAFluidRenderer()

@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.forge
 
-import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
@@ -19,37 +18,24 @@ import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
-import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.forge.compat.HACuriosCompat
 import dev.hybridlabs.aquatic.particle.BrineBubbleParticle
 import dev.hybridlabs.aquatic.particle.BrineBubblePopParticle
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.particle.SargassumParticle
+import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
-import net.minecraft.client.model.EntityModel
-import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.renderer.ItemBlockRenderTypes
-import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.entity.ItemRenderer
-import net.minecraft.client.renderer.entity.RenderLayerParent
-import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
 import net.minecraftforge.client.event.EntityRenderersEvent
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent
-import net.minecraftforge.client.extensions.common.IClientItemExtensions
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.runForDist
-import top.theillusivec4.curios.api.SlotContext
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry
-import top.theillusivec4.curios.api.client.ICurioRenderer
 
 object HybridAquaticModBusEvents {
     init {
@@ -177,36 +163,7 @@ object HybridAquaticModBusEvents {
 
     private fun onClientSetup(event: FMLClientSetupEvent) {
         Constants.LOGGER.info("Initializing client...")
-        registerTrinketRenderer(
-            HAItems.MOON_JELLYFISH_HAT.get(), EquipmentSlot.HEAD
-        )
-        registerTrinketRenderer(
-            HAItems.EEL_SCARF.get(), EquipmentSlot.CHEST
-        )
-        registerTrinketRenderer(
-            HAItems.STRIPED_EEL_SCARF.get(), EquipmentSlot.CHEST
-        )
-        registerTrinketRenderer(
-            HAItems.MANGLERFISH_FIN.get(), EquipmentSlot.CHEST
-        )
-        registerTrinketRenderer(
-            HAItems.MANGLERFISH_LURE.get(), EquipmentSlot.HEAD
-        )
-        registerTrinketRenderer(
-            HAItems.BROWN_HATXOLOTL.get(), EquipmentSlot.HEAD
-        )
-        registerTrinketRenderer(
-            HAItems.BLUE_HATXOLOTL.get(), EquipmentSlot.HEAD
-        )
-        registerTrinketRenderer(
-            HAItems.CYAN_HATXOLOTL.get(), EquipmentSlot.HEAD
-        )
-        registerTrinketRenderer(
-            HAItems.GOLD_HATXOLOTL.get(), EquipmentSlot.HEAD
-        )
-        registerTrinketRenderer(
-            HAItems.PINK_HATXOLOTL.get(), EquipmentSlot.HEAD
-        )
+        if (Services.PLATFORM.isModLoaded("curios")) HACuriosCompat.registerRenderers()
 
         listOf(
             HAPlatformFluids.BRINE_STILL,
@@ -220,37 +177,5 @@ object HybridAquaticModBusEvents {
 
     private fun onServerSetup(event: FMLDedicatedServerSetupEvent) {
         Constants.LOGGER.info("Server starting...")
-    }
-
-    private fun registerTrinketRenderer(item: Item, equipmentSlot: EquipmentSlot) {
-        CuriosRendererRegistry.register(item) { HACurioRenderer(equipmentSlot) }
-    }
-
-    private class HACurioRenderer(val equipmentSlot: EquipmentSlot) : ICurioRenderer {
-        override fun <T : LivingEntity?, M : EntityModel<T?>?> render(
-            itemStack: ItemStack,
-            slotContext: SlotContext,
-            poseStack: PoseStack,
-            renderLayerParent: RenderLayerParent<T?, M?>,
-            bufferSource: MultiBufferSource,
-            light: Int,
-            limbSwing: Float,
-            limbSwingAmount: Float,
-            partialTicks: Float,
-            ageInTicks: Float,
-            netHeadYaw: Float,
-            headPitch: Float
-        ) {
-            val itemExtension = IClientItemExtensions.of(itemStack.item)
-            val model = itemExtension.getGenericArmorModel(
-                slotContext.entity, itemStack, equipmentSlot,
-                (renderLayerParent.model) as HumanoidModel<*>
-            )
-            val vertexConsumer =
-                ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.cutout(), false, false)
-            model.renderToBuffer(
-                poseStack, vertexConsumer, light, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f
-            )
-        }
     }
 }
