@@ -5,7 +5,6 @@ plugins {
 
 dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
-    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-1.21.1"
     implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
@@ -16,6 +15,6 @@ dependencies {
 }
 
 publishMods.platforms.configureEach {
-    requires 'kotlin-for-forge', 'geckolib', 'biolith', 'lithostitched', 'hybrid-api'
+    requires 'kotlin-for-forge', 'geckolib', 'biolith', 'hybrid-api'
     optional 'curios'
 }

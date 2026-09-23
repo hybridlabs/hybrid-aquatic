@@ -1,5 +1,4 @@
 {
-  "type": "lithostitched:wrap_density_function",
   "target_function": "minecraft:overworld/offset",
   "wrapper_function": {
     "type": "minecraft:clamp",
@@ -12,7 +11,7 @@
           "type": "minecraft:add",
           "argument1": 0.5,
           "argument2": {
-            "type": "lithostitched:wrapped_marker"
+            "type": "hybrid_aquatic:wrapped_marker"
           }
         },
         "argument2": {

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic;
 
+import com.mojang.serialization.MapCodec;
 import dev.hybridlabs.aquatic.platform.Services;
 import dev.hybridlabs.aquatic.platform.registration.RegistrationProvider;
 import net.minecraft.core.particles.ParticleType;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
@@ -60,6 +62,8 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
     public static final RegistrationProvider<Feature<?>> FEATURE =
             RegistrationProvider.get(BuiltInRegistries.FEATURE, MOD_ID);
+    public static final RegistrationProvider<MapCodec<? extends DensityFunction>> DENSITY_FUNCTION_TYPES =
+            RegistrationProvider.get(BuiltInRegistries.DENSITY_FUNCTION_TYPE, MOD_ID);
     public static final RegistrationProvider<LootPoolEntryType> LOOT_POOL_ENTRY_TYPE =
             RegistrationProvider.get(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, MOD_ID);
 	public static final RegistrationProvider<ParticleType<?>> PARTICLE_TYPE =
