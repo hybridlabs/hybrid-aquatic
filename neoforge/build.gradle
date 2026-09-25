@@ -9,6 +9,7 @@ dependencies {
     jarJar implementation("com.terraformersmc:biolith-neoforge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
+    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.1"
     implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.1.2")
 
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
@@ -16,7 +17,7 @@ dependencies {
 }
 
 publishMods.platforms.configureEach {
-    requires 'kotlin-for-forge', 'geckolib', 'hybrid-api'
+    requires 'kotlin-for-forge', 'geckolib', 'lithostitched', 'hybrid-api'
     embeds 'biolith'
     optional 'curios'
 }

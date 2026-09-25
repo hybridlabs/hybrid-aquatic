@@ -48,6 +48,12 @@ versionRange = "[9.5.1,)"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
+modId = "lithostitched"
+type = "required"
+versionRange = "[1.8.0,)"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
 modId = "hapi"
 type = "required"
 versionRange = "[1.1.2,)"

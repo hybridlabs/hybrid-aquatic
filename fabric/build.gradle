@@ -13,6 +13,8 @@ dependencies {
     include modImplementation("com.terraformersmc:biolith-fabric:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
+    // Dev runs load the release jar from run/mods, since Loom skips the Apollib jar nested inside it
+    modCompileOnly "maven.modrinth:lithostitched:${lithostitched_version}-fabric-21.1"
     modCompileOnly "maven.modrinth:carpet:$carpet_version"
     modLocalRuntime "maven.modrinth:carpet:$carpet_version"
 
@@ -30,7 +32,7 @@ fabricApi {
 }
 
 publishMods.platforms.configureEach {
-    requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'hybrid-api'
+    requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'lithostitched', 'hybrid-api'
     embeds 'biolith'
     optional 'trinkets'
 }

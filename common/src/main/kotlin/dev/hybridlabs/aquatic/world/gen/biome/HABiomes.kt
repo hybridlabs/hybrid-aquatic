@@ -3,12 +3,10 @@ package dev.hybridlabs.aquatic.world.gen.biome
 import com.terraformersmc.biolith.api.biome.BiomePlacement
 import com.terraformersmc.biolith.api.biome.sub.BiomeParameterTargets
 import com.terraformersmc.biolith.api.biome.sub.CriterionBuilder
-import com.terraformersmc.biolith.api.biome.sub.RatioTargets
 import com.terraformersmc.biolith.api.surface.SurfaceGeneration
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
-import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
@@ -188,6 +186,8 @@ object HABiomes {
     //#endregion
 
     fun addBiomes() {
+        HABiomeInjectors.register()
+
         //#region River Generation Fixes
         BiomePlacement.addSubOverworld(
             Biomes.RIVER,
@@ -283,24 +283,6 @@ object HABiomes {
         }
         //#endregion
 
-        //#region Beach Biomes
-        if (config.config.biomeConfig.generateTidePools) {
-            BiomePlacement.addSubOverworld(
-                Biomes.BEACH,
-                TIDE_POOLS,
-                CriterionBuilder.allOf(
-                    CriterionBuilder.ratio(
-                        RatioTargets.EDGE,
-                        0.0f,
-                        0.5f
-                    ),
-                    CriterionBuilder
-                        .neighbor(HAPIBiomeTags.LUKEWARM_OCEANS)
-                )
-            )
-        }
-        //#endregion
-
         //#region Warm Ocean Biomes
         if (config.config.biomeConfig.generateSeagrassBed) {
             BiomePlacement.replaceOverworld(
@@ -309,12 +291,6 @@ object HABiomes {
                 0.25
             )
         }
-
-        BiomePlacement.replaceOverworld(
-            Biomes.WARM_OCEAN,
-            CORAL_REEF,
-            0.25
-        )
 
 
         if (config.config.biomeConfig.generateDeepCoralReef) {
