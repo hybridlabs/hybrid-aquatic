@@ -1,0 +1,19 @@
+{
+    "schemaVersion": 1,
+    "id": "hybrid_aquatic_biome_survey",
+    "version": "1.0.0",
+    "name": "Hybrid Aquatic Biome Survey",
+    "description": "Dev-only check that samples overworld biome placement and stops the server.",
+    "environment": "server",
+    "entrypoints": {
+        "main": [
+            {
+                "value": "dev.hybridlabs.aquatic.survey.BiomeSurvey",
+                "adapter": "kotlin"
+            }
+        ]
+    },
+    "depends": {
+        "hybrid_aquatic": "*"
+    }
+}
