@@ -28,6 +28,7 @@ import dev.hybridlabs.aquatic.tag.*
 import dev.hybridlabs.aquatic.utils.HACustomTrades.registerCustomTrades
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.hybridlabs.aquatic.world.gen.densityfunction.DensityFunctionWrappers
+import dev.hybridlabs.aquatic.world.gen.densityfunction.TrenchCarver
 import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.structure.FabricSpawnModifiers
 import dev.hybridlabs.aquatic.world.gen.structure.SpawnModifier
@@ -88,6 +89,7 @@ object HybridAquatic : ModInitializer {
 
         HAFeatures
         DensityFunctionWrappers
+        TrenchCarver
         HAPlacedFeatures
         HAConfiguredFeatures
 
