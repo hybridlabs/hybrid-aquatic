@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:interpolated",
+  "argument": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:max",
+      "argument1": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_y": -50,
+        "to_y": -10,
+        "from_value": 0.5,
+        "to_value": -0.5
+      },
+      "argument2": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_y": 30,
+        "to_y": 60,
+        "from_value": -0.5,
+        "to_value": 0.5
+      }
+    },
+    "argument2": {
+      "type": "minecraft:spline",
+      "spline": {
+        "coordinate": {
+          "type": "hybrid_aquatic:continents_marker"
+        },
+        "points": [
+          {
+            "location": -0.688,
+            "derivative": 0,
+            "value": 1
+          },
+          {
+            "location": -0.68,
+            "derivative": 0,
+            "value": 0
+          },
+          {
+            "location": -0.66,
+            "derivative": 0,
+            "value": 0
+          },
+          {
+            "location": -0.652,
+            "derivative": 0,
+            "value": 1
+          }
+        ]
+      }
+    }
+  }
+}

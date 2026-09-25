@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:y_clamped_gradient",
+    "from_y": -64,
+    "to_y": 320,
+    "from_value": 0.203125,
+    "to_value": -2.796875
+  },
+  "argument2": {
+    "type": "minecraft:spline",
+    "spline": {
+      "coordinate": {
+        "type": "hybrid_aquatic:continents_marker"
+      },
+      "points": [
+        {
+          "location": -0.725,
+          "derivative": 0,
+          "value": 10
+        },
+        {
+          "location": -0.72,
+          "derivative": 0,
+          "value": 0
+        },
+        {
+          "location": -0.62,
+          "derivative": 0,
+          "value": 0
+        },
+        {
+          "location": -0.615,
+          "derivative": 0,
+          "value": 10
+        }
+      ]
+    }
+  }
+}
