@@ -36,3 +36,46 @@ publishMods.platforms.configureEach {
     embeds 'biolith'
     optional 'trinkets'
 }
+
+// Dev-only server runs that sample overworld biome placement and fail when one of our biomes never generates.
+// The compat run adds Biomes O' Plenty and TerraBlender; each run leaves biome-survey-report.txt in its run dir
+sourceSets {
+    biomeSurvey {
+        compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
+        runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
+    }
+}
+
+def biomeSurveys = [
+    biomeSurvey      : [name: 'Biome Survey', dir: 'run/biome-survey', mods: []],
+    biomeSurveyCompat: [name: 'Biome Survey (BOP + TerraBlender)', dir: 'run/biome-survey-compat', mods: [
+        'https://cdn.modrinth.com/data/HXF82T3G/versions/fhyqphwv/BiomesOPlenty-fabric-1.21.1-21.1.0.14.jar',
+        'https://cdn.modrinth.com/data/s3dmwKy5/versions/sux8kYHe/GlitchCore-fabric-1.21.1-2.1.0.2.jar',
+        'https://cdn.modrinth.com/data/kkmrDlKT/versions/XNtIBXyQ/TerraBlender-fabric-1.21.1-4.1.0.8.jar',
+    ]],
+]
+
+biomeSurveys.each { run, survey ->
+    loom.runs.create(run) {
+        server()
+        configName = survey.name
+        source sourceSets.biomeSurvey
+        runDir survey.dir
+    }
+
+    def prepare = tasks.register("prepare${run.capitalize()}") {
+        def dir = file(survey.dir)
+        doLast {
+            delete(new File(dir, 'world'), new File(dir, 'biome-survey-report.txt'))
+            new File(dir, 'mods').mkdirs()
+            // Accepts the Minecraft EULA for this throwaway server
+            new File(dir, 'eula.txt').text = 'eula=true\n'
+            new File(dir, 'server.properties').text = 'level-seed=424242\nonline-mode=false\nserver-port=25598\n'
+            survey.mods.each { url ->
+                def jar = new File(dir, "mods/${url.substring(url.lastIndexOf('/') + 1)}")
+                if (!jar.exists()) new URL(url).withInputStream { input -> jar.withOutputStream { it << input } }
+            }
+        }
+    }
+    tasks.named("run${run.capitalize()}") { dependsOn prepare }
+}
