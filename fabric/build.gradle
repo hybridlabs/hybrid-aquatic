@@ -31,6 +31,17 @@ fabricApi {
     }
 }
 
+// Datagen writes our Lithostitched biome injectors, so its run needs the release jar in its mods folder too
+def lithostitchedRelease = configurations.detachedConfiguration(
+    dependencies.create("maven.modrinth:lithostitched:${lithostitched_version}-fabric-21.1"))
+lithostitchedRelease.transitive = false
+
+def prepareDatagen = tasks.register('prepareDatagen', Copy) {
+    from lithostitchedRelease
+    into 'run/datagen/mods'
+}
+tasks.named('runDatagen') { dependsOn prepareDatagen }
+
 publishMods.platforms.configureEach {
     requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'lithostitched', 'hybrid-api'
     embeds 'biolith'

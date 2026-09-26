@@ -186,8 +186,6 @@ object HABiomes {
     //#endregion
 
     fun addBiomes() {
-        HABiomeInjectors.register()
-
         //#region River Generation Fixes
         BiomePlacement.addSubOverworld(
             Biomes.RIVER,

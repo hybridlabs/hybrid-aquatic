@@ -26,6 +26,7 @@ import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import dev.hybridlabs.aquatic.tag.*
 import dev.hybridlabs.aquatic.utils.HACustomTrades.registerCustomTrades
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.hybridlabs.aquatic.world.gen.densityfunction.DensityFunctionWrappers
 import dev.hybridlabs.aquatic.world.gen.densityfunction.TrenchCarver
@@ -90,6 +91,7 @@ object HybridAquatic : ModInitializer {
         HAFeatures
         DensityFunctionWrappers
         TrenchCarver
+        HABiomeInjectors
         HAPlacedFeatures
         HAConfiguredFeatures
 
