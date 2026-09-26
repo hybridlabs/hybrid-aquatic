@@ -59,6 +59,17 @@ object HABiomeInjectors {
     val FROZEN_TRENCH: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("frozen_trench"))
 
+    val WARM_SULFURIC_CAVES: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("warm_sulfuric_caves"))
+    val LUKEWARM_SULFURIC_CAVES: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lukewarm_sulfuric_caves"))
+    val SULFURIC_CAVES: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("sulfuric_caves"))
+    val COLD_SULFURIC_CAVES: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("cold_sulfuric_caves"))
+    val FROZEN_SULFURIC_CAVES: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("frozen_sulfuric_caves"))
+
     val TROPICAL_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("tropical_river"))
 
@@ -170,6 +181,57 @@ object HABiomeInjectors {
                 biomes.getOrThrow(HABiomes.FROZEN_TRENCH),
                 ParameterBuilder.create()
                     .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
+            )
+        )
+
+        // Add sulfuric caves biomes to the appropriate deep ocean types
+        context.register(
+            WARM_SULFURIC_CAVES,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
+                biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
+                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+            )
+        )
+
+        context.register(
+            LUKEWARM_SULFURIC_CAVES,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
+                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+            )
+        )
+
+        context.register(
+            SULFURIC_CAVES,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_OCEAN),
+                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+            )
+        )
+
+        context.register(
+            COLD_SULFURIC_CAVES,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
+                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+            )
+        )
+
+        context.register(
+            FROZEN_SULFURIC_CAVES,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
+                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
             )
         )
 

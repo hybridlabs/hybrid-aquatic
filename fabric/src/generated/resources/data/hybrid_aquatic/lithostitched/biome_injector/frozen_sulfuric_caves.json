@@ -1,0 +1,16 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "depth": [
+      0.2,
+      0.5
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:sulfuric_caves"
+  },
+  "replacement": "hybrid_aquatic:sulfuric_caves",
+  "targets": "minecraft:deep_frozen_ocean"
+}
