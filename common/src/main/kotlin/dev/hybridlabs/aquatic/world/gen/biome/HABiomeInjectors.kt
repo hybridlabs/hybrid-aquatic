@@ -45,6 +45,21 @@ object HABiomeInjectors {
     val CORAL_REEF: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("coral_reef"))
 
+    val WARM_TROPICAL_DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("warm_tropical_deep_coral_reef"))
+
+    val LUKEWARM_TROPICAL_DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lukewarm_tropical_deep_coral_reef"))
+
+    val DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_coral_reef"))
+
+    val COLD_DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("cold_deep_coral_reef"))
+
+    val FROZEN_DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("frozen_deep_coral_reef"))
+
     val DEEP_WARM_OCEAN: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_warm_ocean"))
 
@@ -122,6 +137,56 @@ object HABiomeInjectors {
             )
         )
 
+        context.register(
+            WARM_TROPICAL_DEEP_CORAL_REEF,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TROPICAL_DEEP_CORAL_REEF)).replacePartially(
+                biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
+                biomes.getOrThrow(HABiomes.TROPICAL_DEEP_CORAL_REEF),
+                ParameterBuilder.create()
+                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+            )
+        )
+
+        context.register(
+            LUKEWARM_TROPICAL_DEEP_CORAL_REEF,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TROPICAL_DEEP_CORAL_REEF)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
+                biomes.getOrThrow(HABiomes.TROPICAL_DEEP_CORAL_REEF),
+                ParameterBuilder.create()
+                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+            )
+        )
+
+        context.register(
+            DEEP_CORAL_REEF,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.DEEP_CORAL_REEF)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_OCEAN),
+                biomes.getOrThrow(HABiomes.DEEP_CORAL_REEF),
+                ParameterBuilder.create()
+                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+            )
+        )
+
+        context.register(
+            COLD_DEEP_CORAL_REEF,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.DEEP_CORAL_REEF)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
+                biomes.getOrThrow(HABiomes.DEEP_CORAL_REEF),
+                ParameterBuilder.create()
+                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+            )
+        )
+
+        context.register(
+            FROZEN_DEEP_CORAL_REEF,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.DEEP_CORAL_REEF)).replacePartially(
+                biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
+                biomes.getOrThrow(HABiomes.DEEP_CORAL_REEF),
+                ParameterBuilder.create()
+                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+            )
+        )
+
         //
         context.register(
             DEEP_WARM_OCEAN,
@@ -137,7 +202,7 @@ object HABiomeInjectors {
         context.register(
             WARM_TRENCH,
             BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.WARM_TRENCH)).replacePartially(
-                biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
+                biomes.getOrThrow(Biomes.WARM_OCEAN),
                 biomes.getOrThrow(HABiomes.WARM_TRENCH),
                 ParameterBuilder.create()
                     .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)

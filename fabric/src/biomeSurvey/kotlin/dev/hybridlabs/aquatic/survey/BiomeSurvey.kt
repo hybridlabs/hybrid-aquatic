@@ -42,7 +42,7 @@ object BiomeSurvey : ModInitializer {
     private const val NEIGHBOUR_REACH = 64
     private const val MIN_TIDE_POOLS_BY_LUKEWARM = 0.9
 
-    private val LUKEWARM = setOf(Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN)
+    private val TIDEPOOL_BORDERABLE = setOf(Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.WARM_OCEAN, HABiomes.DEEP_WARM_OCEAN)
 
     /** Columns generated per biome when checking its floor block. */
     private const val FLOOR_SAMPLES = 8
@@ -173,7 +173,7 @@ object BiomeSurvey : ModInitializer {
     private fun bordersLukewarm(x: Int, z: Int, biomeAt: (Int, Int, Int) -> ResourceKey<Biome>): Boolean {
         for (distance in 16..NEIGHBOUR_REACH step 16) {
             for (dx in -1..1) for (dz in -1..1) {
-                if ((dx != 0 || dz != 0) && biomeAt(x + dx * distance, SURFACE_Y, z + dz * distance) in LUKEWARM) {
+                if ((dx != 0 || dz != 0) && biomeAt(x + dx * distance, SURFACE_Y, z + dz * distance) in TIDEPOOL_BORDERABLE) {
                     return true
                 }
             }

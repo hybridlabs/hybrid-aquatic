@@ -172,41 +172,5 @@ object HABiomes {
                 0.25
             )
         }
-
-
-        if (config.config.biomeConfig.generateDeepCoralReef) {
-            BiomePlacement.replaceOverworld(
-                Biomes.WARM_OCEAN,
-                RED_MEADOW,
-                0.25
-            )
-        }
-
-        if (config.config.biomeConfig.generateDeepCoralReef) {
-            BiomePlacement.replaceOverworld(
-                Biomes.DEEP_OCEAN,
-                DEEP_CORAL_REEF,
-                0.1
-            )
-
-            BiomePlacement.replaceOverworld(
-                Biomes.DEEP_LUKEWARM_OCEAN,
-                TROPICAL_DEEP_CORAL_REEF,
-                0.1
-            )
-
-            BiomePlacement.replaceOverworld(
-                Biomes.DEEP_COLD_OCEAN,
-                DEEP_CORAL_REEF,
-                0.1
-            )
-
-            BiomePlacement.replaceOverworld(
-                Biomes.DEEP_FROZEN_OCEAN,
-                DEEP_CORAL_REEF,
-                0.1
-            )
-        }
-        //#endregion
     }
 }
