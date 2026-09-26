@@ -45,6 +45,12 @@ object HABiomeInjectors {
     val CORAL_REEF: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("coral_reef"))
 
+    val RED_MEADOW: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("red_meadow"))
+
+    val SEAGRASS_BED: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("seagrass_bed"))
+
     val WARM_TROPICAL_DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("warm_tropical_deep_coral_reef"))
 
@@ -133,7 +139,27 @@ object HABiomeInjectors {
                 biomes.getOrThrow(Biomes.WARM_OCEAN),
                 biomes.getOrThrow(HABiomes.CORAL_REEF),
                 ParameterBuilder.create()
-                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+                    .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), -1.0, -0.68)
+            )
+        )
+
+        context.register(
+            SEAGRASS_BED,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SEAGRASS_BED)).replacePartially(
+                biomes.getOrThrow(Biomes.WARM_OCEAN),
+                biomes.getOrThrow(HABiomes.SEAGRASS_BED),
+                ParameterBuilder.create()
+                    .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), -0.34, 0.32)
+            )
+        )
+
+        context.register(
+            RED_MEADOW,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.RED_MEADOW)).replacePartially(
+                biomes.getOrThrow(Biomes.WARM_OCEAN),
+                biomes.getOrThrow(HABiomes.RED_MEADOW),
+                ParameterBuilder.create()
+                    .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), 0.64, 0.96)
             )
         )
 

@@ -3,14 +3,14 @@
   "dimension": "minecraft:overworld",
   "parameters": {
     "hybrid_aquatic:biome/reef_selector": [
-      -1.0,
-      -0.68
+      0.64,
+      0.96
     ]
   },
   "predicate": {
     "type": "hybrid_aquatic:biome_enabled",
-    "biome": "hybrid_aquatic:coral_reef"
+    "biome": "hybrid_aquatic:red_meadow"
   },
-  "replacement": "hybrid_aquatic:coral_reef",
+  "replacement": "hybrid_aquatic:red_meadow",
   "targets": "minecraft:warm_ocean"
 }

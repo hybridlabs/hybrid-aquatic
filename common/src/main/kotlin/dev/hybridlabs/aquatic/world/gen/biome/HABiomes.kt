@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.world.gen.biome
 
-import com.terraformersmc.biolith.api.biome.BiomePlacement
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
@@ -160,17 +159,5 @@ object HABiomes {
                 ifTrue(abovePreliminarySurface(), ifTrue(isBiome(biome), rule))
             )
         )
-    }
-
-
-    fun addBiomes() {
-        //#region Warm Ocean Biomes
-        if (config.config.biomeConfig.generateSeagrassBed) {
-            BiomePlacement.replaceOverworld(
-                Biomes.WARM_OCEAN,
-                SEAGRASS_BED,
-                0.25
-            )
-        }
     }
 }

@@ -70,10 +70,6 @@ object HybridAquatic : ModInitializer {
         HAPaintings
         HAParticleTypes
 
-        if (configHandler.config.biomeConfig.enableBiomes) {
-            HABiomes.addBiomes()
-        }
-
         HABlockTags
         HAFluidTags
         HAInstrumentTags

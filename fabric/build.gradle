@@ -9,10 +9,7 @@ dependencies {
 
     modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
-    // Bundled unmodified under LGPL-3.0; see https://github.com/TerraformersMC/Biolith
-    include modImplementation("com.terraformersmc:biolith-fabric:${biolith_version}") {
-        exclude(group: "com.github.glitchfiend")
-    }
+
     // Dev runs load the release jar from run/mods, since Loom skips the Apollib jar nested inside it
     modCompileOnly "maven.modrinth:lithostitched:${lithostitched_version}-fabric-21.1"
     modCompileOnly "maven.modrinth:carpet:$carpet_version"
@@ -44,7 +41,6 @@ tasks.named('runDatagen') { dependsOn prepareDatagen }
 
 publishMods.platforms.configureEach {
     requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'lithostitched', 'hybrid-api'
-    embeds 'biolith'
     optional 'trinkets'
 }
 

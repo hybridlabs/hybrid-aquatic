@@ -18,6 +18,7 @@ class BiomeInjectorProvider(
     ) {
         entries.add(registries.lookupOrThrow(Registries.NOISE).getOrThrow(HABiomeInjectors.REEF_SELECTOR_NOISE))
         entries.add(registries.lookupOrThrow(Registries.DENSITY_FUNCTION).getOrThrow(HABiomeInjectors.REEF_SELECTOR))
+
         entries.addAll(registries.lookupOrThrow(LithostitchedRegistries.BIOME_INJECTOR))
         entries.addAll(registries.lookupOrThrow(LithostitchedRegistries.WORLDGEN_MODIFIER))
     }
