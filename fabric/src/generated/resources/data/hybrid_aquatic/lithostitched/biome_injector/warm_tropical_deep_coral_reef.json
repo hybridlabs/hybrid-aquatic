@@ -2,6 +2,10 @@
   "type": "lithostitched:replace_partially",
   "dimension": "minecraft:overworld",
   "parameters": {
+    "continentalness": [
+      -1.05,
+      -0.455
+    ],
     "hybrid_aquatic:biome/reef_selector": [
       0.2,
       1.7976931348623157E308
@@ -12,5 +16,5 @@
     "biome": "hybrid_aquatic:tropical_deep_coral_reef"
   },
   "replacement": "hybrid_aquatic:tropical_deep_coral_reef",
-  "targets": "hybrid_aquatic:deep_warm_ocean"
+  "targets": "minecraft:warm_ocean"
 }

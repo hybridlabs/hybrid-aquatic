@@ -11,6 +11,7 @@
     "type": "hybrid_aquatic:biome_enabled",
     "biome": "hybrid_aquatic:sulfuric_caves"
   },
+  "priority": 950,
   "replacement": "hybrid_aquatic:sulfuric_caves",
   "targets": "minecraft:deep_lukewarm_ocean"
 }

@@ -11,6 +11,7 @@
     "type": "hybrid_aquatic:biome_enabled",
     "biome": "hybrid_aquatic:lukewarm_trench"
   },
+  "priority": 900,
   "replacement": "hybrid_aquatic:lukewarm_trench",
   "targets": "minecraft:deep_lukewarm_ocean"
 }

@@ -55,7 +55,10 @@ object HABiomeInjectors {
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("warm_tropical_deep_coral_reef"))
 
     val LUKEWARM_TROPICAL_DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lukewarm_tropical_deep_coral_reef"))
+        ResourceKey.create(
+            LithostitchedRegistries.BIOME_INJECTOR,
+            CommonClass.locate("lukewarm_tropical_deep_coral_reef")
+        )
 
     val DEEP_CORAL_REEF: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_coral_reef"))
@@ -94,6 +97,19 @@ object HABiomeInjectors {
     val TROPICAL_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("tropical_river"))
 
+    // Lithostitched samples the base biome once and applies only the first matching
+    // replace_partially injector, lowest priority first. Injectors cannot target a
+    // biome another injector places, so everything carved out of warm ocean targets
+    // it directly, and the ordering keeps specific biomes ahead of broad ones
+    private const val TRENCH_PRIORITY = 900
+    private const val SULFURIC_CAVES_PRIORITY = 950
+    private const val DEEP_WARM_OCEAN_PRIORITY = 1100
+    private const val SHALLOW_REEF_PRIORITY = 1200
+
+    // Vanilla's deep ocean continentalness band; warm ocean has no deep variant there
+    private const val DEEP_OCEAN_MIN_CONTINENTALNESS = -1.05
+    private const val DEEP_OCEAN_MAX_CONTINENTALNESS = -0.455
+
     fun bootstrapNoises(context: BootstrapContext<NormalNoise.NoiseParameters>) {
         context.register(REEF_SELECTOR_NOISE, NormalNoise.NoiseParameters(-9, 1.0, 1.0))
     }
@@ -131,56 +147,70 @@ object HABiomeInjectors {
             )
         )
 
-        // Runs after Biolith has taken its seagrass bed and red meadow shares, so
-        // the reef keeps roughly the share it had with Biolith
+        // Reef selector values cluster around 0 (roughly normal, sd ~0.33), so these
+        // bands give coral reef and red meadow ~15% of warm ocean each and seagrass
+        // bed ~28%, with plain warm ocean left in the gaps between them
         context.register(
             CORAL_REEF,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.CORAL_REEF)).replacePartially(
-                biomes.getOrThrow(Biomes.WARM_OCEAN),
-                biomes.getOrThrow(HABiomes.CORAL_REEF),
-                ParameterBuilder.create()
-                    .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), -1.0, -0.68)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.CORAL_REEF))
+                .priority(SHALLOW_REEF_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.WARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.CORAL_REEF),
+                    ParameterBuilder.create()
+                        .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), -1.0, -0.32)
+                )
         )
 
         context.register(
             SEAGRASS_BED,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SEAGRASS_BED)).replacePartially(
-                biomes.getOrThrow(Biomes.WARM_OCEAN),
-                biomes.getOrThrow(HABiomes.SEAGRASS_BED),
-                ParameterBuilder.create()
-                    .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), -0.34, 0.32)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SEAGRASS_BED))
+                .priority(SHALLOW_REEF_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.WARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.SEAGRASS_BED),
+                    ParameterBuilder.create()
+                        .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), -0.12, 0.12)
+                )
         )
 
         context.register(
             RED_MEADOW,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.RED_MEADOW)).replacePartially(
-                biomes.getOrThrow(Biomes.WARM_OCEAN),
-                biomes.getOrThrow(HABiomes.RED_MEADOW),
-                ParameterBuilder.create()
-                    .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), 0.64, 0.96)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.RED_MEADOW))
+                .priority(SHALLOW_REEF_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.WARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.RED_MEADOW),
+                    ParameterBuilder.create()
+                        .densityFunctionRange(densityFunctions.getOrThrow(REEF_SELECTOR), 0.32, 1.0)
+                )
         )
 
         context.register(
             WARM_TROPICAL_DEEP_CORAL_REEF,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TROPICAL_DEEP_CORAL_REEF)).replacePartially(
-                biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
-                biomes.getOrThrow(HABiomes.TROPICAL_DEEP_CORAL_REEF),
-                ParameterBuilder.create()
-                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TROPICAL_DEEP_CORAL_REEF))
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.WARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.TROPICAL_DEEP_CORAL_REEF),
+                    ParameterBuilder.create()
+                        .climateRange(
+                            ClimateParameter.CONTINENTALNESS,
+                            DEEP_OCEAN_MIN_CONTINENTALNESS,
+                            DEEP_OCEAN_MAX_CONTINENTALNESS
+                        )
+                        .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+                )
         )
 
         context.register(
             LUKEWARM_TROPICAL_DEEP_CORAL_REEF,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TROPICAL_DEEP_CORAL_REEF)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
-                biomes.getOrThrow(HABiomes.TROPICAL_DEEP_CORAL_REEF),
-                ParameterBuilder.create()
-                    .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TROPICAL_DEEP_CORAL_REEF))
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.TROPICAL_DEEP_CORAL_REEF),
+                    ParameterBuilder.create()
+                        .densityFunctionMin(densityFunctions.getOrThrow(REEF_SELECTOR), 0.2)
+                )
         )
 
         context.register(
@@ -213,117 +243,148 @@ object HABiomeInjectors {
             )
         )
 
-        //
+        // Whatever deep warm ocean the trench, cave and deep reef injectors leave
         context.register(
             DEEP_WARM_OCEAN,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.DEEP_WARM_OCEAN)).replacePartially(
-                biomes.getOrThrow(Biomes.WARM_OCEAN),
-                biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -1.05, -0.455)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.DEEP_WARM_OCEAN))
+                .priority(DEEP_WARM_OCEAN_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.WARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
+                    ParameterBuilder.create()
+                        .climateRange(
+                            ClimateParameter.CONTINENTALNESS,
+                            DEEP_OCEAN_MIN_CONTINENTALNESS,
+                            DEEP_OCEAN_MAX_CONTINENTALNESS
+                        )
+                )
         )
 
         // Add trench biomes to the appropriate deep ocean types
         context.register(
             WARM_TRENCH,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.WARM_TRENCH)).replacePartially(
-                biomes.getOrThrow(Biomes.WARM_OCEAN),
-                biomes.getOrThrow(HABiomes.WARM_TRENCH),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.WARM_TRENCH))
+                .priority(TRENCH_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.WARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.WARM_TRENCH),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
+                )
         )
 
         context.register(
             LUKEWARM_TRENCH,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.LUKEWARM_TRENCH)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
-                biomes.getOrThrow(HABiomes.LUKEWARM_TRENCH),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.LUKEWARM_TRENCH))
+                .priority(TRENCH_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.LUKEWARM_TRENCH),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
+                )
         )
 
         context.register(
             TRENCH,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TRENCH)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_OCEAN),
-                biomes.getOrThrow(HABiomes.TRENCH),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TRENCH))
+                .priority(TRENCH_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_OCEAN),
+                    biomes.getOrThrow(HABiomes.TRENCH),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
+                )
         )
 
         context.register(
             COLD_TRENCH,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.COLD_TRENCH)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
-                biomes.getOrThrow(HABiomes.COLD_TRENCH),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.COLD_TRENCH))
+                .priority(TRENCH_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
+                    biomes.getOrThrow(HABiomes.COLD_TRENCH),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
+                )
         )
 
         context.register(
             FROZEN_TRENCH,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.FROZEN_TRENCH)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
-                biomes.getOrThrow(HABiomes.FROZEN_TRENCH),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.FROZEN_TRENCH))
+                .priority(TRENCH_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
+                    biomes.getOrThrow(HABiomes.FROZEN_TRENCH),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.CONTINENTALNESS, -0.71, -0.63)
+                )
         )
 
         // Add sulfuric caves biomes to the appropriate deep ocean types
         context.register(
             WARM_SULFURIC_CAVES,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
-                biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
-                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES))
+                .priority(SULFURIC_CAVES_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.WARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                    ParameterBuilder.create()
+                        .climateRange(
+                            ClimateParameter.CONTINENTALNESS,
+                            DEEP_OCEAN_MIN_CONTINENTALNESS,
+                            DEEP_OCEAN_MAX_CONTINENTALNESS
+                        )
+                        .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+                )
         )
 
         context.register(
             LUKEWARM_SULFURIC_CAVES,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
-                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES))
+                .priority(SULFURIC_CAVES_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
+                    biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+                )
         )
 
         context.register(
             SULFURIC_CAVES,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_OCEAN),
-                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES))
+                .priority(SULFURIC_CAVES_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_OCEAN),
+                    biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+                )
         )
 
         context.register(
             COLD_SULFURIC_CAVES,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
-                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES))
+                .priority(SULFURIC_CAVES_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
+                    biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+                )
         )
 
         context.register(
             FROZEN_SULFURIC_CAVES,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES)).replacePartially(
-                biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
-                biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
-            )
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.SULFURIC_CAVES))
+                .priority(SULFURIC_CAVES_PRIORITY)
+                .replacePartially(
+                    biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
+                    biomes.getOrThrow(HABiomes.SULFURIC_CAVES),
+                    ParameterBuilder.create()
+                        .climateRange(ClimateParameter.DEPTH, 0.2, 0.5)
+                )
         )
 
         context.register(

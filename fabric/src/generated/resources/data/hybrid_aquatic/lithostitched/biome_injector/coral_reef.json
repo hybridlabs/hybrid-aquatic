@@ -4,13 +4,14 @@
   "parameters": {
     "hybrid_aquatic:biome/reef_selector": [
       -1.0,
-      -0.68
+      -0.32
     ]
   },
   "predicate": {
     "type": "hybrid_aquatic:biome_enabled",
     "biome": "hybrid_aquatic:coral_reef"
   },
+  "priority": 1200,
   "replacement": "hybrid_aquatic:coral_reef",
   "targets": "minecraft:warm_ocean"
 }
