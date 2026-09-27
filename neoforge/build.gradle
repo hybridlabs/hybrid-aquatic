@@ -15,6 +15,5 @@ dependencies {
 
 publishMods.platforms.configureEach {
     requires 'kotlin-for-forge', 'geckolib', 'lithostitched', 'hybrid-api'
-    embeds 'biolith'
     optional 'curios'
 }
