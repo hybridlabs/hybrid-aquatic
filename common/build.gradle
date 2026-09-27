@@ -8,7 +8,5 @@ dependencies {
 
     implementation "software.bernie.geckolib:geckolib-neoforge-${geckolib_version}"
 
-    implementation("com.terraformersmc:biolith-forge:${biolith_version}") {
-        exclude(group: "com.github.glitchfiend")
-    }
+    compileOnly "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.1"
 }

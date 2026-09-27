@@ -21,6 +21,7 @@ import dev.hybridlabs.aquatic.painting.HAPaintings
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.sound.HASoundEvents
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors
 import dev.hybridlabs.aquatic.world.gen.densityfunction.DensityFunctionWrappers
 import dev.hybridlabs.aquatic.world.gen.densityfunction.TrenchCarver
 import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
@@ -66,6 +67,7 @@ object HybridAquaticForge {
         HAFeatures
         DensityFunctionWrappers
         TrenchCarver
+        HABiomeInjectors
         HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
         HAPlacedFeatures
         HAConfiguredFeatures

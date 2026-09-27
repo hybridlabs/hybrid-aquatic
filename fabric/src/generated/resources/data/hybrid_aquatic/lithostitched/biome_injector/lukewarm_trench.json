@@ -1,0 +1,17 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "continentalness": [
+      -0.71,
+      -0.63
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:lukewarm_trench"
+  },
+  "priority": 900,
+  "replacement": "hybrid_aquatic:lukewarm_trench",
+  "targets": "minecraft:deep_lukewarm_ocean"
+}

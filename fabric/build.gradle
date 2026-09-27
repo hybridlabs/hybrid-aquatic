@@ -9,10 +9,9 @@ dependencies {
 
     modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
-    // Bundled unmodified under LGPL-3.0; see https://github.com/TerraformersMC/Biolith
-    include modImplementation("com.terraformersmc:biolith-fabric:${biolith_version}") {
-        exclude(group: "com.github.glitchfiend")
-    }
+
+    // Dev runs load the release jar from run/mods, since Loom skips the Apollib jar nested inside it
+    modCompileOnly "maven.modrinth:lithostitched:${lithostitched_version}-fabric-21.1"
     modCompileOnly "maven.modrinth:carpet:$carpet_version"
     modLocalRuntime "maven.modrinth:carpet:$carpet_version"
 
@@ -29,9 +28,19 @@ fabricApi {
     }
 }
 
+// Datagen writes our Lithostitched biome injectors, so its run needs the release jar in its mods folder too
+def lithostitchedRelease = configurations.detachedConfiguration(
+    dependencies.create("maven.modrinth:lithostitched:${lithostitched_version}-fabric-21.1"))
+lithostitchedRelease.transitive = false
+
+def prepareDatagen = tasks.register('prepareDatagen', Copy) {
+    from lithostitchedRelease
+    into 'run/datagen/mods'
+}
+tasks.named('runDatagen') { dependsOn prepareDatagen }
+
 publishMods.platforms.configureEach {
-    requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'hybrid-api'
-    embeds 'biolith'
+    requires 'fabric-api', 'fabric-language-kotlin', 'geckolib', 'lithostitched', 'hybrid-api'
     optional 'trinkets'
 }
 
@@ -59,6 +68,7 @@ biomeSurveys.each { run, survey ->
         configName = survey.name
         source sourceSets.biomeSurvey
         runDir survey.dir
+        programArgs 'nogui'
     }
 
     def prepare = tasks.register("prepare${run.capitalize()}") {
@@ -68,7 +78,7 @@ biomeSurveys.each { run, survey ->
             new File(dir, 'mods').mkdirs()
             // Accepts the Minecraft EULA for this throwaway server
             new File(dir, 'eula.txt').text = 'eula=true\n'
-            new File(dir, 'server.properties').text = 'level-seed=424242\nonline-mode=false\nserver-port=25598\n'
+            new File(dir, 'server.properties').text = 'level-seed=424242\nonline-mode=false\nserver-port=25598\nmax-tick-time=-1\n'
             survey.mods.each { url ->
                 def jar = new File(dir, "mods/${url.substring(url.lastIndexOf('/') + 1)}")
                 if (!jar.exists()) new URL(url).withInputStream { input -> jar.withOutputStream { it << input } }

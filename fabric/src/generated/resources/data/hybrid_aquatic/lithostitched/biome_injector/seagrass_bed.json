@@ -1,0 +1,17 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "hybrid_aquatic:biome/reef_selector": [
+      -0.12,
+      0.12
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:seagrass_bed"
+  },
+  "priority": 1200,
+  "replacement": "hybrid_aquatic:seagrass_bed",
+  "targets": "minecraft:warm_ocean"
+}

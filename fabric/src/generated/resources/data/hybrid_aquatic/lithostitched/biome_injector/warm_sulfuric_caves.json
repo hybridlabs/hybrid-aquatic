@@ -1,0 +1,21 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "continentalness": [
+      -1.05,
+      -0.455
+    ],
+    "depth": [
+      0.2,
+      0.5
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:sulfuric_caves"
+  },
+  "priority": 950,
+  "replacement": "hybrid_aquatic:sulfuric_caves",
+  "targets": "minecraft:warm_ocean"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "hybrid_aquatic:biome/reef_selector": [
+      0.2,
+      1.7976931348623157E308
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:deep_coral_reef"
+  },
+  "replacement": "hybrid_aquatic:deep_coral_reef",
+  "targets": "minecraft:deep_frozen_ocean"
+}

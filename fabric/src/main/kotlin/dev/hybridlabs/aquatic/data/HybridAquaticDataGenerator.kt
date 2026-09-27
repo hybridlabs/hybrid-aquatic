@@ -11,12 +11,21 @@ import dev.hybridlabs.aquatic.data.server.loot.BlockLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.EntityTypeLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.FishingLootTableProvider
 import dev.hybridlabs.aquatic.data.server.loot.GenericLootTableProvider
-import dev.hybridlabs.aquatic.data.server.tag.*
+import dev.hybridlabs.aquatic.data.server.tag.BlockTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.EntityTypeTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.FluidTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.InstrumentTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.ItemTagProvider
+import dev.hybridlabs.aquatic.data.server.tag.PaintingVariantTagProvider
+import dev.hybridlabs.aquatic.data.server.worldgen.BiomeInjectorProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.BiomeProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.ConfiguredFeatureProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.PlacedFeatureProvider
 import dev.hybridlabs.aquatic.data.structure_spawn_modifier.StructureSpawnModifierProvider
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
+import dev.worldgen.lithostitched.api.registry.LithostitchedRegistries
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.minecraft.core.Registry
@@ -32,6 +41,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::PaintingProvider)
         pack.addProvider(::AdvancementProvider)
         pack.addProvider(::BiomeProvider)
+        pack.addProvider(::BiomeInjectorProvider)
         pack.addProvider(::BlockTagProvider)
         pack.addProvider(::EntityTypeTagProvider)
         pack.addProvider(::PaintingVariantTagProvider)
@@ -53,6 +63,10 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureProvider::bootstrapPlacedFeatures)
         registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureProvider::bootstrapConfiguredFeatures)
         registryBuilder.add(Registries.BIOME, BiomeProvider::bootstrapBiomes )
+        registryBuilder.add(Registries.NOISE, HABiomeInjectors::bootstrapNoises)
+        registryBuilder.add(Registries.DENSITY_FUNCTION, HABiomeInjectors::bootstrapDensityFunctions)
+        registryBuilder.add(LithostitchedRegistries.BIOME_INJECTOR, HABiomeInjectors::bootstrap)
+        registryBuilder.add(LithostitchedRegistries.WORLDGEN_MODIFIER, HABiomes::bootstrapSurfaceRules)
         registryBuilder.add(Registries.PAINTING_VARIANT, PaintingProvider::bootstrapVariants)
     }
 

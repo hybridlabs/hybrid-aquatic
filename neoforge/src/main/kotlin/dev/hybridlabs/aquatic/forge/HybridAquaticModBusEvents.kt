@@ -45,7 +45,6 @@ import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
 object HybridAquaticModBusEvents {
     init {
         MOD_BUS.addListener(::registerSpawnPlacements)
-        MOD_BUS.addListener(::addBiomes)
         MOD_BUS.addListener(::registerNetworking)
 
         runForDist(
@@ -67,10 +66,6 @@ object HybridAquaticModBusEvents {
 
     private fun registerSpawnPlacements(event: RegisterSpawnPlacementsEvent) {
         SpawnRestrictionRegistry.registerSpawnRestrictions()
-    }
-
-    private fun addBiomes(event: FMLCommonSetupEvent) {
-        HABiomes.addBiomes()
     }
 
     private fun registerModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions) {
