@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import net.minecraft.world.DifficultyInstance
@@ -42,8 +43,8 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, BreathAirGoal(this))
-        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 10, 1.5))
+        goalSelector.addGoal(0, SeekSurfaceGoal(this))
+        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 50, 1.5))
     }
 
     override fun tick() {

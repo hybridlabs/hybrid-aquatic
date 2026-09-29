@@ -1,20 +1,18 @@
 package dev.hybridlabs.aquatic.entity.fish
 
-import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
-import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
@@ -41,16 +39,12 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, BreathAirGoal(this))
+        goalSelector.addGoal(0, SeekSurfaceGoal(this))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
-        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 10, 1.5))    }
+        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 50, 1.5))    }
 
     override fun tick() {
         super.tick()
-
-        if (this.isNoAi) {
-            this.airSupply = this.maxAirSupply
-        }
 
         if (!this.wasTouchingWater && !onGround()) {
             if (!isGliding) {
@@ -82,22 +76,6 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
         this.deltaMovement = newMotion
     }
 
-    override fun handleAirSupply(air: Int) {
-        if (isInWater && !isNoAi) {
-            this.airSupply = air - 1
-        } else {
-            this.airSupply = this.maxAirSupply
-        }
-    }
-
-    override fun getMaxAirSupply(): Int {
-        return 900
-    }
-
-    override fun increaseAirSupply(currentAir: Int): Int {
-        return this.maxAirSupply
-    }
-
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
             AnimationController(
@@ -110,16 +88,6 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
                 }
             }
         )
-    }
-
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-    ): SpawnGroupData? {
-        this.airSupply = this.maxAirSupply
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
     companion object {

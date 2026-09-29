@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
 import net.minecraft.world.entity.EntityType
@@ -21,7 +22,8 @@ class ThresherSharkEntity(type: EntityType<out ThresherSharkEntity>, world: Leve
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
+        goalSelector.addGoal(0, SeekSurfaceGoal(this))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 25, 5.0))
     }
 
     companion object {

@@ -2,6 +2,8 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.PassiveFeedingGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
@@ -17,6 +19,8 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, PassiveFeedingGoal(this))
+        goalSelector.addGoal(0, SeekSurfaceGoal(this))
+        goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 25, 5.0))
     }
 
     override fun isFood(stack: ItemStack): Boolean {
