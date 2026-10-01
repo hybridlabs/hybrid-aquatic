@@ -5,7 +5,6 @@ import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
-import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalPerformTrickGoal
 import net.minecraft.nbt.CompoundTag
@@ -35,7 +34,6 @@ class MantaRayEntity(type: EntityType<out MantaRayEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, SeekSurfaceGoal(this))
         goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 10, 5.0))
         goalSelector.addGoal(1, HurtByTargetGoal(this))
         goalSelector.addGoal(1, WaterAnimalPerformTrickGoal(this))

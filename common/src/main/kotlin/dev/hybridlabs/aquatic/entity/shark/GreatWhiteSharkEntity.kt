@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic.entity.shark
 
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
 import net.minecraft.world.entity.EntityType
@@ -33,7 +32,6 @@ class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: 
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
         goalSelector.addGoal(8, FollowBoatGoal(this))
-        goalSelector.addGoal(0, SeekSurfaceGoal(this))
         goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 25, 5.0))
     }
 
