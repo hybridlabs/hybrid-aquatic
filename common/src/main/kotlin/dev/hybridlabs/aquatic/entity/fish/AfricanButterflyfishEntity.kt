@@ -50,10 +50,6 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
     override fun tick() {
         super.tick()
 
-        if (this.isNoAi) {
-            this.airSupply = this.maxAirSupply
-        }
-
         if (!this.wasTouchingWater && !onGround()) {
             if (!isGliding) {
                 startGliding()
@@ -82,21 +78,6 @@ class AfricanButterflyfishEntity(type: EntityType<out AfricanButterflyfishEntity
             motion.z * 1.1
         )
         this.deltaMovement = newMotion
-    }
-
-    override fun increaseAirSupply(currentAir: Int): Int {
-        return this.maxAirSupply
-    }
-
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?
-    ): SpawnGroupData? {
-        this.airSupply = this.maxAirSupply
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {

@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.util.RandomSource
 import net.minecraft.world.DifficultyInstance
+import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
@@ -49,10 +50,6 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
     override fun tick() {
         super.tick()
 
-        if (this.isNoAi) {
-            this.airSupply = this.maxAirSupply
-        }
-
         if (!this.wasTouchingWater && !onGround()) {
             if (!isGliding) {
                 startGliding()
@@ -83,22 +80,6 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
         this.deltaMovement = newMotion
     }
 
-    override fun handleAirSupply(air: Int) {
-        if (isInWater && !isNoAi) {
-            this.airSupply = air - 1
-        } else {
-            this.airSupply = this.maxAirSupply
-        }
-    }
-
-    override fun getMaxAirSupply(): Int {
-        return 900
-    }
-
-    override fun increaseAirSupply(currentAir: Int): Int {
-        return this.maxAirSupply
-    }
-
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
             AnimationController(
@@ -111,17 +92,6 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
                 }
             }
         )
-    }
-
-    override fun finalizeSpawn(
-        world: ServerLevelAccessor,
-        difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
-        entityData: SpawnGroupData?,
-        entityNbt: CompoundTag?,
-    ): SpawnGroupData? {
-        this.airSupply = this.maxAirSupply
-        return super.finalizeSpawn(world, difficulty, spawnReason, entityData, entityNbt)
     }
 
     companion object {
