@@ -25,7 +25,7 @@ import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.particle.SargassumParticle
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.potions.HAPotions
-import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomePlacement
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.RenderType
 import net.minecraftforge.client.event.EntityRenderersEvent
@@ -70,7 +70,7 @@ object HybridAquaticModBusEvents {
     }
 
     private fun addBiomes(event: FMLCommonSetupEvent) {
-        HABiomes.addBiomes()
+        HABiomePlacement.register()
     }
 
     private fun registerModelLayers(event: EntityRenderersEvent.RegisterLayerDefinitions) {

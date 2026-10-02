@@ -5,19 +5,15 @@ import com.mojang.serialization.JsonOps
 import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.mixin.HolderReferenceInvoker
-import net.minecraft.core.Holder
+import dev.hybridlabs.aquatic.world.gen.OverworldGenerator
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.RegistryOps
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.KeyDispatchDataCodec
-import net.minecraft.world.level.dimension.LevelStem
 import net.minecraft.world.level.levelgen.DensityFunction
 import net.minecraft.world.level.levelgen.DensityFunctions
-import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator
-import net.minecraft.world.level.levelgen.NoiseGeneratorSettings
 import net.minecraft.world.level.levelgen.NoiseRouter
 
 /**
@@ -29,8 +25,8 @@ import net.minecraft.world.level.levelgen.NoiseRouter
  * its floor count as surface, so it gets the trench biomes instead of cave biomes.
  *
  * Carvers apply as a minimum over the router's final and initial density, so they only ever remove terrain. Inside them,
- * `{"type": "hybrid_aquatic:continents_marker"}` stands for the router's continentalness, the same value Biolith places
- * the trench biomes by, so the carved trench always lines up with the trench biomes.
+ * `{"type": "hybrid_aquatic:continents_marker"}` stands for the router's continentalness, the same value the trench biomes
+ * are placed by, so the carved trench always lines up with the trench biomes.
  */
 object TrenchCarver {
     private val CARVER = ResourceKey.create(Registries.DENSITY_FUNCTION, CommonClass.locate("trench/carver"))
@@ -43,11 +39,8 @@ object TrenchCarver {
 
     @JvmStatic
     fun apply(server: MinecraftServer) {
-        val overworld = server.registryAccess().registryOrThrow(Registries.LEVEL_STEM).get(LevelStem.OVERWORLD) ?: return
-        val generator = overworld.generator() as? NoiseBasedChunkGenerator ?: return
-
-        // Inline settings have no registry holder to rebind, which only happens with hand-written world presets
-        val settings = generator.generatorSettings() as? Holder.Reference<NoiseGeneratorSettings> ?: run {
+        val generator = OverworldGenerator.find(server) ?: return
+        val settings = OverworldGenerator.registeredSettings(generator) ?: run {
             Constants.LOGGER.warn("Overworld noise settings are not registered, so trenches will not be carved")
             return
         }
@@ -81,24 +74,7 @@ object TrenchCarver {
             router.veinGap(),
         )
 
-        val current = settings.value()
-        @Suppress("DEPRECATION")
-        val carved = NoiseGeneratorSettings(
-            current.noiseSettings(),
-            current.defaultBlock(),
-            current.defaultFluid(),
-            carvedRouter,
-            current.surfaceRule(),
-            current.spawnTarget(),
-            current.seaLevel(),
-            current.disableMobGeneration(),
-            current.isAquifersEnabled(),
-            current.oreVeinsEnabled(),
-            current.useLegacyRandomSource(),
-        )
-
-        @Suppress("UNCHECKED_CAST")
-        (settings as HolderReferenceInvoker<NoiseGeneratorSettings>).`hybridAquatic$bindValue`(carved)
+        OverworldGenerator.rebindSettings(settings, noiseRouter = carvedRouter)
     }
 
     /**
