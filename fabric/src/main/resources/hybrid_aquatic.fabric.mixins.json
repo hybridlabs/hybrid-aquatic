@@ -6,6 +6,9 @@
     "mixins": [
         "HolderReferenceInvoker",
         "MinecraftServerMixin",
+        "BiomeSourceAccessor",
+        "MultiNoiseBiomeSourceInvoker",
+        "MultiNoiseBiomeSourceMixin",
         "BreathAirGoalMixin",
         "EnchantmentMixin",
         "EntityMixin",

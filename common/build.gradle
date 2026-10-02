@@ -8,7 +8,8 @@ dependencies {
 
     modImplementation "software.bernie.geckolib:geckolib-forge-$geckolib_version"
 
-    implementation("com.terraformersmc:biolith-forge:${biolith_version}") {
+    // Only used when another mod brings Biolith along
+    compileOnly("com.terraformersmc:biolith-forge:${biolith_version}") {
         exclude(group: "com.github.glitchfiend")
     }
 }

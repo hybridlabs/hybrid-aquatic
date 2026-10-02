@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.mixin;
 
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomePlacement;
+import dev.hybridlabs.aquatic.world.gen.biome.HABiomes;
 import dev.hybridlabs.aquatic.world.gen.densityfunction.DensityFunctionWrappers;
 import dev.hybridlabs.aquatic.world.gen.densityfunction.TrenchCarver;
 import net.minecraft.server.MinecraftServer;
@@ -15,5 +17,7 @@ public abstract class MinecraftServerMixin {
     private void modifyWorldgen(CallbackInfo ci) {
         DensityFunctionWrappers.apply((MinecraftServer) (Object) this);
         TrenchCarver.apply((MinecraftServer) (Object) this);
+        HABiomes.applySurfaceRules((MinecraftServer) (Object) this);
+        HABiomePlacement.apply((MinecraftServer) (Object) this);
     }
 }
