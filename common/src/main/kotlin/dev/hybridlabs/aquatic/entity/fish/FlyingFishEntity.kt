@@ -1,8 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
-import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.MobSpawnType
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.BreathAirGoal
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
@@ -42,9 +42,9 @@ class FlyingFishEntity(type: EntityType<out FlyingFishEntity>, world: Level) :
 
     override fun registerGoals() {
         super.registerGoals()
-        goalSelector.addGoal(0, BreathAirGoal(this))
+        goalSelector.addGoal(0, SeekSurfaceGoal(this))
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
-        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 10, 1.5))    }
+        goalSelector.addGoal(4, WaterAnimalJumpGoal(this, 50, 1.5))    }
 
     override fun tick() {
         super.tick()
