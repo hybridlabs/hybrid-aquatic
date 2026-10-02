@@ -43,5 +43,5 @@ side = "BOTH"
 [[dependencies.${mod_id}]]
 modId = "hapi"
 mandatory = true
-versionRange = "[1.1.2,)"
+versionRange = "[1.1.3,)"
 side = "BOTH"
