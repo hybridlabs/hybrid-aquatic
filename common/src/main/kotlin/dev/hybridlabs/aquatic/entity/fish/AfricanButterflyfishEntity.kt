@@ -2,20 +2,15 @@ package dev.hybridlabs.aquatic.entity.fish
 
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.SeekSurfaceGoal
-import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
-import net.minecraft.nbt.CompoundTag
-import net.minecraft.world.DifficultyInstance
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
-import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.core.animation.AnimatableManager
