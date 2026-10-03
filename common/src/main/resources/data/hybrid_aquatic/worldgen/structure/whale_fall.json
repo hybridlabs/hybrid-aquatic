@@ -1,6 +1,6 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes": "#hybrid_aquatic:has_whale_fall",
+  "biomes": "#hapi:has_whale_fall",
   "step": "surface_structures",
   "spawn_overrides": {
     "hybrid_aquatic:crustacean": {
