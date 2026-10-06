@@ -96,6 +96,8 @@ object HABiomeInjectors {
 
     val TROPICAL_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("tropical_river"))
+    val COLD_RIVER: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("cold_river"))
 
     // Lithostitched samples the base biome once and applies only the first matching
     // replace_partially injector, lowest priority first. Injectors cannot target a
@@ -393,7 +395,18 @@ object HABiomeInjectors {
                 biomes.getOrThrow(Biomes.RIVER),
                 biomes.getOrThrow(HABiomes.TROPICAL_RIVER),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.2, 1.0)
+                    .climateRange(ClimateParameter.TEMPERATURE, 0.2, 0.55)
+                    .climateRange(ClimateParameter.HUMIDITY, 0.1, 1.0)
+            )
+        )
+
+        context.register(
+            COLD_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.COLD_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.COLD_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, -0.45, -0.15)
                     .climateRange(ClimateParameter.HUMIDITY, 0.1, 1.0)
             )
         )

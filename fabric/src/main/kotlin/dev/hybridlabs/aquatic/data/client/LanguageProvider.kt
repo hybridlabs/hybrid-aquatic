@@ -483,7 +483,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABlocks.LOPHELIA_CORAL_FAN.get() to "Lophelia Coral Fan",
             HABlocks.DEAD_LOPHELIA_CORAL_FAN.get() to "Dead Lophelia Coral Fan",
             HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get() to "Bleached Lophelia Coral Fan",
-            
+
             HABlocks.BAMBOO_CORAL_BLOCK.get() to "Bamboo Coral Block",
             HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get() to "Dead Bamboo Coral Block",
             HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get() to "Bleached Bamboo Coral Block",
@@ -858,6 +858,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABiomes.TRENCH to "Trench",
             HABiomes.TROPICAL_DEEP_CORAL_REEF to "Tropical Deep Coral Reef",
             HABiomes.TROPICAL_RIVER to "Tropical River",
+            HABiomes.COLD_RIVER to "Cold River",
             HABiomes.WARM_TRENCH to "Warm Trench",
         ).forEach { (biome, name) ->
             builder.add("biome.hybrid_aquatic.${biome.location().path}", name)

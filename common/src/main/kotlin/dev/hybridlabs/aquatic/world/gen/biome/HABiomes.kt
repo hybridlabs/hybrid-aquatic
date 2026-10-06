@@ -35,6 +35,7 @@ object HABiomes {
     val RED_MEADOW: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("red_meadow"))
     val CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("coral_reef"))
     val TROPICAL_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_river"))
+    val COLD_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_river"))
     val TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val WARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("warm_trench"))
     val LUKEWARM_TRENCH: ResourceKey<Biome> =
@@ -124,6 +125,7 @@ object HABiomes {
 
         //#region River Biome Surface Rules
         context.surfaceRule(TROPICAL_RIVER, ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
+        context.surfaceRule(COLD_RIVER, ifTrue(ON_FLOOR, state(Blocks.GRAVEL.defaultBlockState())))
         //#endregion
 
         //#region Trench Rules

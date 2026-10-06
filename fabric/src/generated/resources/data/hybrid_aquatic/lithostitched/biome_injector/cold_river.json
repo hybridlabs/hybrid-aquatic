@@ -7,14 +7,14 @@
       1.0
     ],
     "temperature": [
-      0.2,
-      0.55
+      -0.45,
+      -0.15
     ]
   },
   "predicate": {
     "type": "hybrid_aquatic:biome_enabled",
-    "biome": "hybrid_aquatic:tropical_river"
+    "biome": "hybrid_aquatic:cold_river"
   },
-  "replacement": "hybrid_aquatic:tropical_river",
+  "replacement": "hybrid_aquatic:cold_river",
   "targets": "minecraft:river"
 }
