@@ -1,0 +1,8 @@
+{
+  "type": "lithostitched:replace_effects",
+  "biomes": "#minecraft:is_savanna",
+  "effects": {
+    "water_color": 2919324,
+    "water_fog_color": 2919324
+  }
+}

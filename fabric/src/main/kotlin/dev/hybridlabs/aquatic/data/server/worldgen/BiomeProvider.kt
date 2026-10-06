@@ -40,8 +40,8 @@ class BiomeProvider(
                     carversGetter,
                     temperature = 0.95f,
                     downfall = 0.9f,
-                    waterColor = 0x3A7A6A,
-                    waterFogColor = 0x4D7A60,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
                     listOf(
                         Pair(
                             MobCategory.CREATURE,
@@ -65,10 +65,91 @@ class BiomeProvider(
                 create(
                     featuresGetter,
                     carversGetter,
-                    temperature = 0.95f,
-                    downfall = 0.9f,
-                    waterColor = 0x3A7A6A,
-                    waterFogColor = 0x4D7A60,
+                    temperature = 0.25f,
+                    downfall = 0.8f,
+                    waterColor = 0x287082,
+                    waterFogColor = 0x287082,
+                    listOf(
+                        Pair(
+                            MobCategory.WATER_AMBIENT,
+                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
+                        )
+                    )
+                ) {
+                    addFeature(
+                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                        featuresGetter.get(MiscOverworldPlacements.FOREST_ROCK).get()
+                    )
+                    addFeature(
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        featuresGetter.get(AquaticPlacements.SEAGRASS_RIVER).get()
+                    )
+                }
+            )
+
+            bootstrap.register(
+                HABiomes.EXOTIC_RIVER,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 2.0f,
+                    downfall = 0.0f,
+                    waterColor = 0x2C8B9C,
+                    waterFogColor = 0x2C8B9C,
+                    listOf(
+                        Pair(
+                            MobCategory.WATER_AMBIENT,
+                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
+                        )
+                    )
+                ) {
+                    addFeature(
+                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                        featuresGetter.get(MiscOverworldPlacements.FOREST_ROCK).get()
+                    )
+                    addFeature(
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        featuresGetter.get(AquaticPlacements.SEAGRASS_RIVER).get()
+                    )
+                }
+            )
+
+            bootstrap.register(
+                HABiomes.EXOTIC_DESERT_RIVER,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 2.0f,
+                    downfall = 0.0f,
+                    waterColor = 0x32A598,
+                    waterFogColor = 0x32A598,
+                    listOf(
+                        Pair(
+                            MobCategory.WATER_AMBIENT,
+                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
+                        )
+                    )
+                ) {
+                    addFeature(
+                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                        featuresGetter.get(MiscOverworldPlacements.FOREST_ROCK).get()
+                    )
+                    addFeature(
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        featuresGetter.get(AquaticPlacements.SEAGRASS_RIVER).get()
+                    )
+                }
+            )
+
+            bootstrap.register(
+                HABiomes.EXOTIC_BADLANDS_RIVER,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 2.0f,
+                    downfall = 0.0f,
+                    waterColor = 0x4E7F81,
+                    waterFogColor = 0x4E7F81,
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
@@ -966,6 +1047,9 @@ class BiomeProvider(
         entries.add(reg.getOrThrow(HABiomes.CORAL_REEF))
         entries.add(reg.getOrThrow(HABiomes.TROPICAL_RIVER))
         entries.add(reg.getOrThrow(HABiomes.COLD_RIVER))
+        entries.add(reg.getOrThrow(HABiomes.EXOTIC_RIVER))
+        entries.add(reg.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER))
+        entries.add(reg.getOrThrow(HABiomes.EXOTIC_BADLANDS_RIVER))
         entries.add(reg.getOrThrow(HABiomes.TRENCH))
         entries.add(reg.getOrThrow(HABiomes.TIDE_POOLS))
         entries.add(reg.getOrThrow(HABiomes.COLD_TRENCH))

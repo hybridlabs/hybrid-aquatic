@@ -6,12 +6,12 @@
       "minecraft:canyon"
     ]
   },
-  "downfall": 0.9,
+  "downfall": 0.0,
   "effects": {
     "fog_color": 12638463,
     "sky_color": 7907327,
-    "water_color": 1352389,
-    "water_fog_color": 1352389
+    "water_color": 2919324,
+    "water_fog_color": 2919324
   },
   "features": [
     [],
@@ -85,14 +85,7 @@
       }
     ],
     "axolotls": [],
-    "creature": [
-      {
-        "type": "minecraft:frog",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
+    "creature": [],
     "hybrid_aquatic:cephalopod": [],
     "hybrid_aquatic:critter": [],
     "hybrid_aquatic:crustacean": [],
@@ -162,8 +155,15 @@
         "weight": 5
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "minecraft:salmon",
+        "maxCount": 4,
+        "minCount": 2,
+        "weight": 1
+      }
+    ],
     "water_creature": []
   },
-  "temperature": 0.95
+  "temperature": 2.0
 }

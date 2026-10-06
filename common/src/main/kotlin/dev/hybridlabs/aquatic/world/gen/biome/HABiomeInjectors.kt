@@ -98,6 +98,12 @@ object HABiomeInjectors {
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("tropical_river"))
     val COLD_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("cold_river"))
+    val EXOTIC_RIVER: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_river"))
+    val EXOTIC_DESERT_RIVER: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_desert_river"))
+    val EXOTIC_BADLANDS_RIVER: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_badlands_river"))
 
     // Lithostitched samples the base biome once and applies only the first matching
     // replace_partially injector, lowest priority first. Injectors cannot target a
@@ -408,6 +414,41 @@ object HABiomeInjectors {
                 ParameterBuilder.create()
                     .climateRange(ClimateParameter.TEMPERATURE, -0.45, -0.15)
                     .climateRange(ClimateParameter.HUMIDITY, 0.1, 1.0)
+            )
+        )
+
+        context.register(
+            EXOTIC_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, 0.2, 0.55)
+                    .climateRange(ClimateParameter.HUMIDITY, -1.0, -0.1)
+            )
+        )
+
+        context.register(
+            EXOTIC_DESERT_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_DESERT_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, 0.55, 1.0)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.19, 0.11)
+                    .climateRange(ClimateParameter.EROSION, 0.05, 1.0)
+            )
+        )
+
+        context.register(
+            EXOTIC_BADLANDS_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_BADLANDS_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_BADLANDS_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, 0.55, 1.0)
+                    .climateRange(ClimateParameter.HUMIDITY, -0.1, 1.0)
+                    .climateRange(ClimateParameter.EROSION, -1.0, 0.05)
             )
         )
     }

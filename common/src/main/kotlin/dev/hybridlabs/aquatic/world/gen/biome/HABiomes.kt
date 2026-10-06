@@ -29,25 +29,25 @@ object HABiomes {
     val config = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
 
     val TIDE_POOLS: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tide_pools"))
-    val DEEP_WARM_OCEAN: ResourceKey<Biome> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_warm_ocean"))
+    val DEEP_WARM_OCEAN: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_warm_ocean"))
     val SEAGRASS_BED: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("seagrass_bed"))
     val RED_MEADOW: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("red_meadow"))
     val CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("coral_reef"))
+
     val TROPICAL_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_river"))
     val COLD_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_river"))
+    val EXOTIC_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_river"))
+    val EXOTIC_DESERT_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_desert_river"))
+    val EXOTIC_BADLANDS_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_badlands_river"))
+
     val TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val WARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("warm_trench"))
-    val LUKEWARM_TRENCH: ResourceKey<Biome> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_trench"))
+    val LUKEWARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_trench"))
     val COLD_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_trench"))
     val FROZEN_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("frozen_trench"))
-    val SULFURIC_CAVES: ResourceKey<Biome> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_caves"))
-    val DEEP_CORAL_REEF: ResourceKey<Biome> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_coral_reef"))
-    val TROPICAL_DEEP_CORAL_REEF: ResourceKey<Biome> =
-        ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_deep_coral_reef"))
+    val SULFURIC_CAVES: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("sulfuric_caves"))
+    val DEEP_CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_coral_reef"))
+    val TROPICAL_DEEP_CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_deep_coral_reef"))
 
     /**
      * Registers each biome's surface rule as a Lithostitched `add_surface_rule` worldgen modifier named
@@ -126,6 +126,28 @@ object HABiomes {
         //#region River Biome Surface Rules
         context.surfaceRule(TROPICAL_RIVER, ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
         context.surfaceRule(COLD_RIVER, ifTrue(ON_FLOOR, state(Blocks.GRAVEL.defaultBlockState())))
+
+        context.surfaceRule(EXOTIC_RIVER,
+            sequence(
+                ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())),
+                ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+            )
+        )
+
+        context.surfaceRule(EXOTIC_DESERT_RIVER,
+            sequence(
+                ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
+                ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+            )
+        )
+
+        context.surfaceRule(EXOTIC_BADLANDS_RIVER,
+            sequence(
+                ifTrue(ON_FLOOR, state(Blocks.RED_SAND.defaultBlockState())),
+                ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+            )
+        )
+
         //#endregion
 
         //#region Trench Rules

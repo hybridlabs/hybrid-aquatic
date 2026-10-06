@@ -2,19 +2,23 @@
   "type": "lithostitched:replace_partially",
   "dimension": "minecraft:overworld",
   "parameters": {
+    "erosion": [
+      -1.0,
+      0.05
+    ],
     "humidity": [
-      0.1,
+      -0.1,
       1.0
     ],
     "temperature": [
-      -0.45,
-      -0.15
+      0.55,
+      1.0
     ]
   },
   "predicate": {
     "type": "hybrid_aquatic:biome_enabled",
-    "biome": "hybrid_aquatic:cold_river"
+    "biome": "hybrid_aquatic:exotic_badlands_river"
   },
-  "replacement": "hybrid_aquatic:cold_river",
+  "replacement": "hybrid_aquatic:exotic_badlands_river",
   "targets": "minecraft:river"
 }

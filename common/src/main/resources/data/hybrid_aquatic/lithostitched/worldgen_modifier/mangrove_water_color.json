@@ -1,0 +1,8 @@
+{
+  "type": "lithostitched:replace_effects",
+  "biomes": "minecraft:mangrove_swamp",
+  "effects": {
+    "water_color": 3832426,
+    "water_fog_color": 5077600
+  }
+}

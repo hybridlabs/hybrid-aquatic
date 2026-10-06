@@ -1,0 +1,8 @@
+{
+  "type": "lithostitched:replace_effects",
+  "biomes": "minecraft:desert",
+  "effects": {
+    "water_color": 3319192,
+    "water_fog_color": 3319192
+  }
+}

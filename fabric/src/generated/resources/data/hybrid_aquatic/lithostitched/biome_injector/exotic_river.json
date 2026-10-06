@@ -3,18 +3,18 @@
   "dimension": "minecraft:overworld",
   "parameters": {
     "humidity": [
-      0.1,
-      1.0
+      -1.0,
+      -0.1
     ],
     "temperature": [
-      -0.45,
-      -0.15
+      0.2,
+      0.55
     ]
   },
   "predicate": {
     "type": "hybrid_aquatic:biome_enabled",
-    "biome": "hybrid_aquatic:cold_river"
+    "biome": "hybrid_aquatic:exotic_river"
   },
-  "replacement": "hybrid_aquatic:cold_river",
+  "replacement": "hybrid_aquatic:exotic_river",
   "targets": "minecraft:river"
 }

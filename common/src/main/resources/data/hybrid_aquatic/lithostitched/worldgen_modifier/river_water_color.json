@@ -1,0 +1,8 @@
+{
+  "type": "lithostitched:replace_effects",
+  "biomes": "minecraft:river",
+  "effects": {
+    "water_color": 34047,
+    "water_fog_color": 34047
+  }
+}
