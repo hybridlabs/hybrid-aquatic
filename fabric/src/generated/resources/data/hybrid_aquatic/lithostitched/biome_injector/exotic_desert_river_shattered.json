@@ -2,17 +2,17 @@
   "type": "lithostitched:replace_partially",
   "dimension": "minecraft:overworld",
   "parameters": {
+    "continentalness": [
+      0.03,
+      1.7976931348623157E308
+    ],
     "erosion": [
       0.05,
-      1.0
-    ],
-    "humidity": [
-      -1.0,
-      1.0
+      1.7976931348623157E308
     ],
     "temperature": [
       0.55,
-      1.0
+      1.7976931348623157E308
     ]
   },
   "predicate": {

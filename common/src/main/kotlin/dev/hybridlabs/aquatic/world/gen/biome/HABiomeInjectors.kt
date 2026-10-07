@@ -102,12 +102,12 @@ object HABiomeInjectors {
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_river"))
     val EXOTIC_DESERT_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_desert_river"))
-    val EXOTIC_DESERT_RIVER_COAST: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_desert_river_coast"))
     val EXOTIC_DESERT_RIVER_SHATTERED: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_desert_river_shattered"))
     val EXOTIC_BADLANDS_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_badlands_river"))
+    val EXOTIC_BADLANDS_RIVER_SHATTERED: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_badlands_river_shattered"))
 
     val WARM_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("warm_ocean_river_replacer"))
@@ -454,25 +454,14 @@ object HABiomeInjectors {
         )
 
         context.register(
-            EXOTIC_DESERT_RIVER_COAST,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_DESERT_RIVER)).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.55, 1.0)
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.19, 0.11)
-                    .climateRange(ClimateParameter.EROSION, 0.05, 1.0)
-            )
-        )
-
-        context.register(
             EXOTIC_DESERT_RIVER,
             BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_DESERT_RIVER)).replacePartially(
                 biomes.getOrThrow(Biomes.RIVER),
                 biomes.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.55, 1.0)
-                    .climateRange(ClimateParameter.HUMIDITY, -1.0, 1.0)
+                    .climateMax(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMin(ClimateParameter.EROSION, (-0.375))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
             )
         )
 
@@ -482,9 +471,33 @@ object HABiomeInjectors {
                 biomes.getOrThrow(Biomes.RIVER),
                 biomes.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.55, 1.0)
-                    .climateRange(ClimateParameter.HUMIDITY, -1.0, 1.0)
-                    .climateRange(ClimateParameter.EROSION, 0.05, 1.0)
+                    .climateMin(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMin(ClimateParameter.EROSION, (0.05))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
+            )
+        )
+
+        context.register(
+            EXOTIC_BADLANDS_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_BADLANDS_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_BADLANDS_RIVER),
+                ParameterBuilder.create()
+                    .climateMin(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMax(ClimateParameter.EROSION, (0.05))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
+            )
+        )
+
+        context.register(
+            EXOTIC_BADLANDS_RIVER_SHATTERED,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_BADLANDS_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_BADLANDS_RIVER),
+                ParameterBuilder.create()
+                    .climateMax(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMax(ClimateParameter.EROSION, (-0.0375))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
             )
         )
 

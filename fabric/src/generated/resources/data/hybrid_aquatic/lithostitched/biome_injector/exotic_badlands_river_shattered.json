@@ -7,8 +7,8 @@
       0.03
     ],
     "erosion": [
-      -0.375,
-      1.7976931348623157E308
+      -1.7976931348623157E308,
+      -0.0375
     ],
     "temperature": [
       0.55,
@@ -17,8 +17,8 @@
   },
   "predicate": {
     "type": "hybrid_aquatic:biome_enabled",
-    "biome": "hybrid_aquatic:exotic_desert_river"
+    "biome": "hybrid_aquatic:exotic_badlands_river"
   },
-  "replacement": "hybrid_aquatic:exotic_desert_river",
+  "replacement": "hybrid_aquatic:exotic_badlands_river",
   "targets": "minecraft:river"
 }
