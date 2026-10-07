@@ -98,6 +98,18 @@ object HABiomeInjectors {
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("tropical_river"))
     val COLD_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("cold_river"))
+    val BLACKWATER_RIVER: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("blackwater_river"))
+    val FORESTED_RIVER: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("forested_river"))
+    val FORESTED_RIVER_PLATEAU: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("forested_river_weird"))
+    val FORESTED_RIVER_BIRCH: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("forested_river_birch"))
+    val FORESTED_RIVER_BIRCH_PLATEAU: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("forested_river_birch_plateau"))
+    val FLORAL_RIVER: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("floral_river"))
     val EXOTIC_RIVER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_river"))
     val EXOTIC_DESERT_RIVER: ResourceKey<BiomeInjector> =
@@ -439,6 +451,51 @@ object HABiomeInjectors {
                 ParameterBuilder.create()
                     .climateRange(ClimateParameter.TEMPERATURE, -0.45, -0.15)
                     .climateRange(ClimateParameter.HUMIDITY, 0.1, 1.0)
+            )
+        )
+
+        context.register(
+            BLACKWATER_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.BLACKWATER_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.BLACKWATER_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, -0.15, 0.2)
+                    .climateRange(ClimateParameter.HUMIDITY, 0.3, 1.0)
+            )
+        )
+
+        context.register(
+            FORESTED_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.FORESTED_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.FORESTED_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, -0.45, 0.2)
+                    .climateRange(ClimateParameter.HUMIDITY, -0.1, 0.1)
+            )
+        )
+
+        context.register(
+            FORESTED_RIVER_BIRCH,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.FORESTED_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.FORESTED_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, -0.15, 0.2)
+                    .climateRange(ClimateParameter.HUMIDITY, 0.1, 0.3)
+            )
+        )
+
+        context.register(
+            FLORAL_RIVER,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.FLORAL_RIVER)).replacePartially(
+                biomes.getOrThrow(Biomes.RIVER),
+                biomes.getOrThrow(HABiomes.FLORAL_RIVER),
+                ParameterBuilder.create()
+                    .climateRange(ClimateParameter.TEMPERATURE, -0.15, 0.2)
+                    .climateMax(ClimateParameter.HUMIDITY, -0.35)
+                    .climateMax(ClimateParameter.WEIRDNESS, -0.01)
             )
         )
 

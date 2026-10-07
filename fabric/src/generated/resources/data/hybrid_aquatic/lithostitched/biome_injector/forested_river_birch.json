@@ -1,0 +1,20 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "humidity": [
+      0.1,
+      0.3
+    ],
+    "temperature": [
+      -0.15,
+      0.2
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:forested_river"
+  },
+  "replacement": "hybrid_aquatic:forested_river",
+  "targets": "minecraft:river"
+}

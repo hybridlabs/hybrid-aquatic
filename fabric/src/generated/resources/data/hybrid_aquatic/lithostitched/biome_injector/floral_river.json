@@ -1,0 +1,24 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "humidity": [
+      -1.7976931348623157E308,
+      -0.35
+    ],
+    "temperature": [
+      -0.15,
+      0.2
+    ],
+    "weirdness": [
+      -1.7976931348623157E308,
+      -0.01
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:floral_river"
+  },
+  "replacement": "hybrid_aquatic:floral_river",
+  "targets": "minecraft:river"
+}

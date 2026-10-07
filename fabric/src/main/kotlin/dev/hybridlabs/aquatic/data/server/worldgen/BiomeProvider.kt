@@ -88,6 +88,87 @@ class BiomeProvider(
             )
 
             bootstrap.register(
+                HABiomes.BLACKWATER_RIVER,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.25f,
+                    downfall = 0.8f,
+                    waterColor = 0x3B6CD1,
+                    waterFogColor = 0x3B6CD1,
+                    listOf(
+                        Pair(
+                            MobCategory.WATER_AMBIENT,
+                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
+                        )
+                    )
+                ) {
+                    addFeature(
+                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                        featuresGetter.get(MiscOverworldPlacements.FOREST_ROCK).get()
+                    )
+                    addFeature(
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        featuresGetter.get(AquaticPlacements.SEAGRASS_RIVER).get()
+                    )
+                }
+            )
+
+            bootstrap.register(
+                HABiomes.FORESTED_RIVER,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.25f,
+                    downfall = 0.8f,
+                    waterColor = 0x1E97F2,
+                    waterFogColor = 0x1E97F2,
+                    listOf(
+                        Pair(
+                            MobCategory.WATER_AMBIENT,
+                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
+                        )
+                    )
+                ) {
+                    addFeature(
+                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                        featuresGetter.get(MiscOverworldPlacements.FOREST_ROCK).get()
+                    )
+                    addFeature(
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        featuresGetter.get(AquaticPlacements.SEAGRASS_RIVER).get()
+                    )
+                }
+            )
+
+            bootstrap.register(
+                HABiomes.FLORAL_RIVER,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.25f,
+                    downfall = 0.8f,
+                    waterColor = 0x20A3CC,
+                    waterFogColor = 0x20A3CC,
+                    listOf(
+                        Pair(
+                            MobCategory.WATER_AMBIENT,
+                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
+                        )
+                    )
+                ) {
+                    addFeature(
+                        GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                        featuresGetter.get(MiscOverworldPlacements.FOREST_ROCK).get()
+                    )
+                    addFeature(
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        featuresGetter.get(AquaticPlacements.SEAGRASS_RIVER).get()
+                    )
+                }
+            )
+
+            bootstrap.register(
                 HABiomes.EXOTIC_RIVER,
                 create(
                     featuresGetter,
@@ -1047,6 +1128,9 @@ class BiomeProvider(
         entries.add(reg.getOrThrow(HABiomes.CORAL_REEF))
         entries.add(reg.getOrThrow(HABiomes.TROPICAL_RIVER))
         entries.add(reg.getOrThrow(HABiomes.COLD_RIVER))
+        entries.add(reg.getOrThrow(HABiomes.BLACKWATER_RIVER))
+        entries.add(reg.getOrThrow(HABiomes.FORESTED_RIVER))
+        entries.add(reg.getOrThrow(HABiomes.FLORAL_RIVER))
         entries.add(reg.getOrThrow(HABiomes.EXOTIC_RIVER))
         entries.add(reg.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER))
         entries.add(reg.getOrThrow(HABiomes.EXOTIC_BADLANDS_RIVER))

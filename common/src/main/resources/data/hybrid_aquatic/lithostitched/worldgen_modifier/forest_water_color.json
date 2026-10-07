@@ -1,0 +1,11 @@
+{
+  "type": "lithostitched:replace_effects",
+  "biomes": [
+    "minecraft:forest",
+    "minecraft:windswept_forest"
+  ],
+  "effects": {
+    "water_color": 2004978,
+    "water_fog_color": 2004978
+  }
+}
