@@ -3,11 +3,11 @@
   "dimension": "minecraft:overworld",
   "parameters": {
     "erosion": [
-      -1.0,
-      0.05
+      0.05,
+      1.0
     ],
     "humidity": [
-      -0.1,
+      -1.0,
       1.0
     ],
     "temperature": [
@@ -17,8 +17,8 @@
   },
   "predicate": {
     "type": "hybrid_aquatic:biome_enabled",
-    "biome": "hybrid_aquatic:exotic_badlands_river"
+    "biome": "hybrid_aquatic:exotic_desert_river"
   },
-  "replacement": "hybrid_aquatic:exotic_badlands_river",
+  "replacement": "hybrid_aquatic:exotic_desert_river",
   "targets": "minecraft:river"
 }
