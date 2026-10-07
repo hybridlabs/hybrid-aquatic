@@ -94,8 +94,8 @@ class BiomeProvider(
                     carversGetter,
                     temperature = 0.25f,
                     downfall = 0.8f,
-                    waterColor = 0x3B6CD1,
-                    waterFogColor = 0x3B6CD1,
+                    waterColor = 0x2e3e69,
+                    waterFogColor = 0x36282b,
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
