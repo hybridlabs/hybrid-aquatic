@@ -1,0 +1,16 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "continentalness": [
+      -0.455,
+      -0.19
+    ],
+    "temperature": [
+      0.55,
+      1.0
+    ]
+  },
+  "replacement": "minecraft:warm_ocean",
+  "targets": "minecraft:river"
+}

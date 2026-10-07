@@ -1,0 +1,20 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "continentalness": [
+      -1.05,
+      -0.455
+    ],
+    "temperature": [
+      0.55,
+      1.0
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:deep_warm_ocean"
+  },
+  "replacement": "hybrid_aquatic:deep_warm_ocean",
+  "targets": "minecraft:river"
+}
