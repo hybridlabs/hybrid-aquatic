@@ -43,6 +43,8 @@ object HABiomes {
     val EXOTIC_DESERT_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_desert_river"))
     val EXOTIC_BADLANDS_RIVER: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_badlands_river"))
 
+    val LUSH_DESERT: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lush_desert"))
+
     val TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val WARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("warm_trench"))
     val LUKEWARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_trench"))
@@ -141,6 +143,13 @@ object HABiomes {
             sequence(
                 ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
                 ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+            )
+        )
+
+        context.surfaceRule(LUSH_DESERT,
+            sequence(
+                ifTrue(ON_FLOOR, state(Blocks.GRASS_BLOCK.defaultBlockState())),
+                ifTrue(UNDER_FLOOR, state(Blocks.COARSE_DIRT.defaultBlockState())),
             )
         )
 

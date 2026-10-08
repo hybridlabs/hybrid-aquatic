@@ -867,6 +867,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABiomes.EXOTIC_RIVER to "Exotic River",
             HABiomes.EXOTIC_DESERT_RIVER to "Exotic Desert River",
             HABiomes.EXOTIC_BADLANDS_RIVER to "Exotic Badlands River",
+            HABiomes.LUSH_DESERT to "Lush Desert",
             HABiomes.WARM_TRENCH to "Warm Trench",
         ).forEach { (biome, name) ->
             builder.add("biome.hybrid_aquatic.${biome.location().path}", name)

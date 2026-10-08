@@ -121,6 +121,15 @@ object HABiomeInjectors {
     val EXOTIC_BADLANDS_RIVER_SHATTERED: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_badlands_river_shattered"))
 
+    val LUSH_DESERT: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lush_desert"))
+    val LUSH_DESERT_2: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lush_desert_2"))
+    val LUSH_DESERT_SHATTERED: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lush_desert_shattered"))
+    val LUSH_DESERT_SHATTERED_2: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lush_desert_shattered_2"))
+
     val WARM_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("warm_ocean_river_replacer"))
     val DEEP_WARM_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
@@ -531,6 +540,58 @@ object HABiomeInjectors {
                     .climateMin(ClimateParameter.CONTINENTALNESS, (0.03))
                     .climateMin(ClimateParameter.EROSION, (0.05))
                     .climateMin(ClimateParameter.TEMPERATURE, (0.55))
+            )
+        )
+
+        context.register(
+            LUSH_DESERT,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.LUSH_DESERT)).replacePartially(
+                biomes.getOrThrow(Biomes.DESERT),
+                biomes.getOrThrow(HABiomes.LUSH_DESERT),
+                ParameterBuilder.create()
+                    .climateMax(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMin(ClimateParameter.EROSION, (-0.375))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
+                    .climateRange(ClimateParameter.WEIRDNESS, 0.05, 0.125)
+            )
+        )
+
+        context.register(
+            LUSH_DESERT_2,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.LUSH_DESERT)).replacePartially(
+                biomes.getOrThrow(Biomes.DESERT),
+                biomes.getOrThrow(HABiomes.LUSH_DESERT),
+                ParameterBuilder.create()
+                    .climateMax(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMin(ClimateParameter.EROSION, (-0.375))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
+                    .climateRange(ClimateParameter.WEIRDNESS, -0.125, -0.05)
+            )
+        )
+
+        context.register(
+            LUSH_DESERT_SHATTERED,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.LUSH_DESERT)).replacePartially(
+                biomes.getOrThrow(Biomes.DESERT),
+                biomes.getOrThrow(HABiomes.LUSH_DESERT),
+                ParameterBuilder.create()
+                    .climateMin(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMin(ClimateParameter.EROSION, (0.05))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
+                    .climateRange(ClimateParameter.WEIRDNESS, 0.05, 0.125)
+            )
+        )
+
+        context.register(
+            LUSH_DESERT_SHATTERED_2,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.LUSH_DESERT)).replacePartially(
+                biomes.getOrThrow(Biomes.DESERT),
+                biomes.getOrThrow(HABiomes.LUSH_DESERT),
+                ParameterBuilder.create()
+                    .climateMin(ClimateParameter.CONTINENTALNESS, (0.03))
+                    .climateMin(ClimateParameter.EROSION, (0.05))
+                    .climateMin(ClimateParameter.TEMPERATURE, (0.55))
+                    .climateRange(ClimateParameter.WEIRDNESS, -0.125, -0.05)
             )
         )
 

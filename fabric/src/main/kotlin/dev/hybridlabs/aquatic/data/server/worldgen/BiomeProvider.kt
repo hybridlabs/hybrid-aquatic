@@ -42,6 +42,7 @@ class BiomeProvider(
                     downfall = 0.9f,
                     waterColor = 0x14A2C5,
                     waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             MobCategory.CREATURE,
@@ -69,6 +70,7 @@ class BiomeProvider(
                     downfall = 0.8f,
                     waterColor = 0x287082,
                     waterFogColor = 0x287082,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
@@ -96,12 +98,7 @@ class BiomeProvider(
                     downfall = 0.8f,
                     waterColor = 0x2e3e69,
                     waterFogColor = 0x36282b,
-                    listOf(
-                        Pair(
-                            MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
-                        )
-                    )
+                    grassColor = 0x020217,
                 ) {
                     addFeature(
                         GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -123,12 +120,7 @@ class BiomeProvider(
                     downfall = 0.8f,
                     waterColor = 0x1E97F2,
                     waterFogColor = 0x1E97F2,
-                    listOf(
-                        Pair(
-                            MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
-                        )
-                    )
+                    grassColor = 0x020217,
                 ) {
                     addFeature(
                         GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -150,12 +142,7 @@ class BiomeProvider(
                     downfall = 0.8f,
                     waterColor = 0x20A3CC,
                     waterFogColor = 0x20A3CC,
-                    listOf(
-                        Pair(
-                            MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
-                        )
-                    )
+                    grassColor = 0x020217,
                 ) {
                     addFeature(
                         GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -177,12 +164,7 @@ class BiomeProvider(
                     downfall = 0.0f,
                     waterColor = 0x2C8B9C,
                     waterFogColor = 0x2C8B9C,
-                    listOf(
-                        Pair(
-                            MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
-                        )
-                    )
+                    grassColor = 0x020217,
                 ) {
                     addFeature(
                         GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -204,12 +186,7 @@ class BiomeProvider(
                     downfall = 0.0f,
                     waterColor = 0x32A598,
                     waterFogColor = 0x32A598,
-                    listOf(
-                        Pair(
-                            MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
-                        )
-                    )
+                    grassColor = 0xB9B75B,
                 ) {
                     addFeature(
                         GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -223,6 +200,19 @@ class BiomeProvider(
             )
 
             bootstrap.register(
+                HABiomes.LUSH_DESERT,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 2.0f,
+                    downfall = 0.0f,
+                    waterColor = 0x32A598,
+                    waterFogColor = 0x32A598,
+                    grassColor = 0xB9B75B
+                )
+            )
+
+            bootstrap.register(
                 HABiomes.EXOTIC_BADLANDS_RIVER,
                 create(
                     featuresGetter,
@@ -231,12 +221,7 @@ class BiomeProvider(
                     downfall = 0.0f,
                     waterColor = 0x4E7F81,
                     waterFogColor = 0x4E7F81,
-                    listOf(
-                        Pair(
-                            MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
-                        )
-                    )
+                    grassColor = 0xB9B75B,
                 ) {
                     addFeature(
                         GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
@@ -258,6 +243,7 @@ class BiomeProvider(
                     downfall = 0.5f,
                     waterColor = 0x43D5EE,
                     waterFogColor = 0x041F33,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
@@ -301,6 +287,7 @@ class BiomeProvider(
                     downfall = 0.5f,
                     waterColor = 0x43D5EE,
                     waterFogColor = 0x3DB872,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             MobCategory.WATER_CREATURE,
@@ -343,7 +330,8 @@ class BiomeProvider(
                     temperature = 0.5f,
                     downfall = 0.5f,
                     waterColor = 0x43D5EE,
-                    waterFogColor = 0x041F33
+                    waterFogColor = 0x041F33,
+                    grassColor = 0x020217,
                 )
                 {
                     addFeature(
@@ -372,7 +360,8 @@ class BiomeProvider(
                     temperature = 0.5f,
                     downfall = 0.5f,
                     waterColor = 0x48B3C7,
-                    waterFogColor = 0x418794
+                    waterFogColor = 0x418794,
+                    grassColor = 0x020217,
                 )
             )
 
@@ -383,7 +372,8 @@ class BiomeProvider(
                     temperature = 1.1f,
                     downfall = 0.6f,
                     waterColor = 0x3FA7D6,
-                    waterFogColor = 0x2E5D73
+                    waterFogColor = 0x2E5D73,
+                    grassColor = 0x020217,
                 )
                 {
                     addFeature(
@@ -404,7 +394,8 @@ class BiomeProvider(
                     temperature = 1.0f,
                     downfall = 0.0f,
                     waterColor = 0xc9b147,
-                    waterFogColor = 0xadb148
+                    waterFogColor = 0xadb148,
+                    grassColor = 0x020217,
                 )
             )
 
@@ -416,6 +407,7 @@ class BiomeProvider(
                     downfall = 0.0f,
                     waterColor = 0x1A4EB7,
                     waterFogColor = 0x020217,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
@@ -540,6 +532,7 @@ class BiomeProvider(
                     downfall = 0.5f,
                     waterColor = 0x37808C,
                     waterFogColor = 0x1b2447,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
@@ -665,6 +658,7 @@ class BiomeProvider(
                     downfall = 0.5f,
                     waterColor = 0x4787BF,
                     waterFogColor = 0x1b2447,
+                    grassColor = 0x1b2447,
                     listOf(
                         Pair(
                             Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
@@ -790,6 +784,7 @@ class BiomeProvider(
                     downfall = 0.5f,
                     waterColor = 0x1D2E87,
                     waterFogColor = 0x020217,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
@@ -879,6 +874,7 @@ class BiomeProvider(
                     downfall = 0.5f,
                     waterColor = 0x232380,
                     waterFogColor = 0x020217,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
@@ -952,6 +948,7 @@ class BiomeProvider(
                     downfall = 0.0f,
                     waterColor = 0x3F76E4,
                     waterFogColor = 0x050533,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
@@ -983,6 +980,7 @@ class BiomeProvider(
                     downfall = 0.5f,
                     waterColor = 0x45ADF2,
                     waterFogColor = 0x041633,
+                    grassColor = 0x020217,
                     listOf(
                         Pair(
                             Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
@@ -1016,6 +1014,7 @@ class BiomeProvider(
             downfall: Float,
             waterColor: Int,
             waterFogColor: Int,
+            grassColor: Int,
             extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>> = ArrayList(),
             extraSpawnCosts: List<Triple<EntityType<*>, Double, Double>> = emptyList(),
             extraFeatures: (BiomeGenerationSettings.Builder.() -> Unit)? = null,
@@ -1134,6 +1133,7 @@ class BiomeProvider(
         entries.add(reg.getOrThrow(HABiomes.EXOTIC_RIVER))
         entries.add(reg.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER))
         entries.add(reg.getOrThrow(HABiomes.EXOTIC_BADLANDS_RIVER))
+        entries.add(reg.getOrThrow(HABiomes.LUSH_DESERT))
         entries.add(reg.getOrThrow(HABiomes.TRENCH))
         entries.add(reg.getOrThrow(HABiomes.TIDE_POOLS))
         entries.add(reg.getOrThrow(HABiomes.COLD_TRENCH))

@@ -1,0 +1,28 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "continentalness": [
+      0.03,
+      1.7976931348623157E308
+    ],
+    "erosion": [
+      0.05,
+      1.7976931348623157E308
+    ],
+    "temperature": [
+      0.55,
+      1.7976931348623157E308
+    ],
+    "weirdness": [
+      -0.125,
+      -0.05
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:lush_desert"
+  },
+  "replacement": "hybrid_aquatic:lush_desert",
+  "targets": "minecraft:desert"
+}
