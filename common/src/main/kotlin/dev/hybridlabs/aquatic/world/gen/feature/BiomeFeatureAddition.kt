@@ -230,7 +230,7 @@ data class BiomeFeatureAddition(
                     BiomeFeatureAddition(
                         HAPIBiomeTags.BLACKWATER_RIVERS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.FLOATING_LEAVES
+                        HAPlacedFeatures.BLACKWATER_FLOATING_LEAVES
                     ),
                 )
 
