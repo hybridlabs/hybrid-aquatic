@@ -44,6 +44,8 @@ object HABlockRendererRegistry {
             HABlocks.SARGASSUM.get(),
             HABlocks.SARGASSUM_PLANT.get(),
             HABlocks.FLOATING_SARGASSUM.get(),
+            HABlocks.FLOATING_PETALS.get(),
+            HABlocks.FLOATING_LEAVES.get(),
 
             HABlocks.HARP_SPONGE.get(),
             HABlocks.PING_PONG_SPONGE.get(),

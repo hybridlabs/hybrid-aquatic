@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hybrid_aquatic:block/floating_leaves"
+      },
+      {
+        "model": "hybrid_aquatic:block/floating_leaves",
+        "y": 90
+      },
+      {
+        "model": "hybrid_aquatic:block/floating_leaves",
+        "y": 180
+      },
+      {
+        "model": "hybrid_aquatic:block/floating_leaves",
+        "y": 270
+      }
+    ]
+  }
+}

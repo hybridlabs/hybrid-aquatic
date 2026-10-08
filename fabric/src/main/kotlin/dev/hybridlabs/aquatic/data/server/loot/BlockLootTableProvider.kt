@@ -162,6 +162,24 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
             )
         }
 
+        add(HABlocks.FLOATING_PETALS.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(hasShearsOrSilkTouch().build())
+                    .build()
+            )
+        }
+
+        add(HABlocks.FLOATING_LEAVES.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(hasShearsOrSilkTouch().build())
+                    .build()
+            )
+        }
+
         add(HABlocks.BONE_WORMS.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()

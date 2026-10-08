@@ -142,6 +142,39 @@ class PlacedFeatureProvider(
 
             PlacementUtils.register(
                 bootstrap,
+                HAPlacedFeatures.FLOATING_PETALS,
+                reg.get(HAConfiguredFeatures.FLOATING_PETALS).get(), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    NoiseBasedCountPlacement.of(30, 80.0, 0.0),
+                    BiomeFilter.biome()
+                )
+            )
+
+            PlacementUtils.register(
+                bootstrap,
+                HAPlacedFeatures.FLOATING_LEAVES,
+                reg.get(HAConfiguredFeatures.FLOATING_LEAVES).get(), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    NoiseBasedCountPlacement.of(30, 80.0, 0.0),
+                    BiomeFilter.biome()
+                )
+            )
+
+            PlacementUtils.register(
+                bootstrap,
+                HAPlacedFeatures.BLACKWATER_FLOATING_LEAVES,
+                reg.get(HAConfiguredFeatures.FLOATING_LEAVES).get(), listOf(
+                    InSquarePlacement.spread(),
+                    PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                    NoiseBasedCountPlacement.of(60, 80.0, 0.0),
+                    BiomeFilter.biome()
+                )
+            )
+
+            PlacementUtils.register(
+                bootstrap,
                 HAPlacedFeatures.WATER_LETTUCE,
                 reg.get(HAConfiguredFeatures.WATER_LETTUCE).get(), listOf(
                     InSquarePlacement.spread(),
@@ -511,6 +544,8 @@ class PlacedFeatureProvider(
         entries.add(reg.getOrThrow(HAPlacedFeatures.DISK_SUSPICIOUS_SAND))
         entries.add(reg.getOrThrow(HAPlacedFeatures.DUNEGRASS_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_SARGASSUM))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_PETALS))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_LEAVES))
         entries.add(reg.getOrThrow(HAPlacedFeatures.GIANT_CLAM_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.GLASS_SPONGE_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.HARP_SPONGE_PATCH))

@@ -217,6 +217,30 @@ data class BiomeFeatureAddition(
                         HAPlacedFeatures.WATER_HYACINTH
                     ),
                 )
+
+                add(
+                    BiomeFeatureAddition(
+                        HAPIBiomeTags.FORESTED_RIVERS,
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        HAPlacedFeatures.FLOATING_LEAVES
+                    ),
+                )
+
+                add(
+                    BiomeFeatureAddition(
+                        HAPIBiomeTags.BLACKWATER_RIVERS,
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        HAPlacedFeatures.FLOATING_LEAVES
+                    ),
+                )
+
+                add(
+                    BiomeFeatureAddition(
+                        HAPIBiomeTags.FLORAL_RIVERS,
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        HAPlacedFeatures.FLOATING_PETALS
+                    ),
+                )
             }
             //#endregion
 

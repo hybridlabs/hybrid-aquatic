@@ -429,6 +429,20 @@ object HABlocks {
             .mapColor(MapColor.WOOD))
     }
 
+    val FLOATING_PETALS = register("floating_petals") {
+        FloatingPetalsBlock(Properties.ofFullCopy(Blocks.PINK_PETALS)
+            .noCollission()
+            .instabreak()
+            .mapColor(MapColor.COLOR_PINK))
+    }
+
+    val FLOATING_LEAVES = register("floating_leaves") {
+        FloatingPetalsBlock(Properties.ofFullCopy(Blocks.OAK_LEAVES)
+            .noCollission()
+            .instabreak()
+            .mapColor(MapColor.COLOR_GREEN))
+    }
+
     val WATER_LETTUCE = register("water_lettuce") {
         WaterLettuceBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
             .noCollission()

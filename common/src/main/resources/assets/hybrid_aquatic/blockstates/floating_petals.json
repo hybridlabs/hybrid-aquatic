@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hybrid_aquatic:block/floating_petals"
+      },
+      {
+        "model": "hybrid_aquatic:block/floating_petals",
+        "y": 90
+      },
+      {
+        "model": "hybrid_aquatic:block/floating_petals",
+        "y": 180
+      },
+      {
+        "model": "hybrid_aquatic:block/floating_petals",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -400,6 +400,8 @@ object HAItems {
     val BULL_KELP = registerBlockItem("bull_kelp") { HABlocks.BULL_KELP.get() }
     val DELESSERIA = registerBlockItem("delesseria") { HABlocks.DELESSERIA.get() }
     val FLOATING_SARGASSUM = registerPlaceableInWaterBlockItem("floating_sargassum") { HABlocks.FLOATING_SARGASSUM.get() }
+    val FLOATING_PETALS = registerPlaceableInWaterBlockItem("floating_petals") { HABlocks.FLOATING_PETALS.get() }
+    val FLOATING_LEAVES = registerPlaceableInWaterBlockItem("floating_leaves") { HABlocks.FLOATING_LEAVES.get() }
     val WATER_LETTUCE = registerPlaceableInWaterBlockItem("water_lettuce") { HABlocks.WATER_LETTUCE.get() }
     val WATER_HYACINTH = registerPlaceableInWaterBlockItem("water_hyacinth") { HABlocks.WATER_HYACINTH.get() }
     val JUNGLE_LILY_PAD = registerPlaceableInWaterBlockItem("jungle_lily_pad") { HABlocks.JUNGLE_LILY_PAD.get() }

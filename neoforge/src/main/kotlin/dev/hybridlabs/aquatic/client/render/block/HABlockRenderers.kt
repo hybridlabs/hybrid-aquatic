@@ -44,6 +44,8 @@ object HABlockRenderers {
             HABlocks.SARGASSUM.get(),
             HABlocks.SARGASSUM_PLANT.get(),
             HABlocks.FLOATING_SARGASSUM.get(),
+            HABlocks.FLOATING_PETALS.get(),
+            HABlocks.FLOATING_LEAVES.get(),
 
             HABlocks.WATER_LETTUCE.get(),
             HABlocks.WATER_HYACINTH.get(),

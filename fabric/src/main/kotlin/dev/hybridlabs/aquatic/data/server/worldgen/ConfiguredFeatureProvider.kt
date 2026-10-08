@@ -435,6 +435,52 @@ class ConfiguredFeatureProvider(
 
             FeatureUtils.register(
                 bootstrap,
+                HAConfiguredFeatures.FLOATING_LEAVES,
+
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    100, 10, 10,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            NoiseProvider(
+                                237L,
+                                NormalNoise.NoiseParameters(-5, 5.0, *DoubleArray(0)),
+                                1.0f,
+                                listOf<BlockState>(
+                                    HABlocks.FLOATING_LEAVES.get().defaultBlockState()
+                                )
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.FLOATING_PETALS,
+
+                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                    100, 10, 10,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            NoiseProvider(
+                                237L,
+                                NormalNoise.NoiseParameters(-5, 5.0, *DoubleArray(0)),
+                                1.0f,
+                                listOf<BlockState>(
+                                    HABlocks.FLOATING_PETALS.get().defaultBlockState()
+                                )
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+
+            FeatureUtils.register(
+                bootstrap,
                 HAConfiguredFeatures.WATER_LETTUCE,
 
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
@@ -922,6 +968,8 @@ class ConfiguredFeatureProvider(
         entries.add(reg.getOrThrow(HAConfiguredFeatures.DUNEGRASS_PATCH))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.SARGASSUM))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_SARGASSUM))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_PETALS))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_LEAVES))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.BULL_KELP))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.DELESSERIA))
 
