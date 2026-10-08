@@ -438,7 +438,7 @@ class ConfiguredFeatureProvider(
                 HAConfiguredFeatures.FLOATING_LEAVES,
 
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    75, 10, 10,
+                    50, 5, 5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
@@ -461,7 +461,7 @@ class ConfiguredFeatureProvider(
                 HAConfiguredFeatures.FLOATING_PETALS,
 
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    75, 10, 10,
+                    50, 5, 5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
