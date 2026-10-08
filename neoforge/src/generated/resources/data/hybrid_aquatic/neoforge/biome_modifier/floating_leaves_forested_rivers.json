@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hapi:forested_rivers",
+  "features": "hybrid_aquatic:floating_leaves",
+  "step": "vegetal_decoration"
+}

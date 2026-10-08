@@ -146,7 +146,7 @@ class PlacedFeatureProvider(
                 reg.get(HAConfiguredFeatures.FLOATING_PETALS).get(), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    NoiseBasedCountPlacement.of(30, 80.0, 0.0),
+                    NoiseBasedCountPlacement.of(15, 80.0, 0.0),
                     BiomeFilter.biome()
                 )
             )
@@ -157,7 +157,7 @@ class PlacedFeatureProvider(
                 reg.get(HAConfiguredFeatures.FLOATING_LEAVES).get(), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    NoiseBasedCountPlacement.of(30, 80.0, 0.0),
+                    NoiseBasedCountPlacement.of(15, 80.0, 0.0),
                     BiomeFilter.biome()
                 )
             )
@@ -168,7 +168,7 @@ class PlacedFeatureProvider(
                 reg.get(HAConfiguredFeatures.FLOATING_LEAVES).get(), listOf(
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                    NoiseBasedCountPlacement.of(60, 80.0, 0.0),
+                    NoiseBasedCountPlacement.of(40, 80.0, 0.0),
                     BiomeFilter.biome()
                 )
             )
@@ -546,6 +546,7 @@ class PlacedFeatureProvider(
         entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_SARGASSUM))
         entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_PETALS))
         entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_LEAVES))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.BLACKWATER_FLOATING_LEAVES))
         entries.add(reg.getOrThrow(HAPlacedFeatures.GIANT_CLAM_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.GLASS_SPONGE_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.HARP_SPONGE_PATCH))

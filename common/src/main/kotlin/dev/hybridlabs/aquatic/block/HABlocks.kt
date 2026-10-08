@@ -430,14 +430,14 @@ object HABlocks {
     }
 
     val FLOATING_PETALS = register("floating_petals") {
-        FloatingPetalsBlock(Properties.ofFullCopy(Blocks.PINK_PETALS)
+        FloatingPetalsBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
             .noCollission()
             .instabreak()
             .mapColor(MapColor.COLOR_PINK))
     }
 
     val FLOATING_LEAVES = register("floating_leaves") {
-        FloatingPetalsBlock(Properties.ofFullCopy(Blocks.OAK_LEAVES)
+        FloatingPetalsBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
             .noCollission()
             .instabreak()
             .mapColor(MapColor.COLOR_GREEN))

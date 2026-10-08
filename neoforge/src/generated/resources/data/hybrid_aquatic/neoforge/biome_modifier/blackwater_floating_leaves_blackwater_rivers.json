@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hapi:blackwater_rivers",
+  "features": "hybrid_aquatic:blackwater_floating_leaves",
+  "step": "vegetal_decoration"
+}
