@@ -34,6 +34,97 @@ class BiomeProvider(
             val featuresGetter = bootstrap.lookup(Registries.PLACED_FEATURE)
 
             bootstrap.register(
+                HABiomes.ESTUARY,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.95f,
+                    downfall = 0.9f,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
+                )
+            )
+
+            bootstrap.register(
+                HABiomes.TROPICAL_ESTUARY,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.95f,
+                    downfall = 0.9f,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
+                )
+            )
+
+            bootstrap.register(
+                HABiomes.COLD_ESTUARY,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.95f,
+                    downfall = 0.9f,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
+                )
+            )
+
+            bootstrap.register(
+                HABiomes.BLACKWATER_ESTUARY,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.95f,
+                    downfall = 0.9f,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
+                )
+            )
+
+            bootstrap.register(
+                HABiomes.EXOTIC_ESTUARY,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.95f,
+                    downfall = 0.9f,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
+                )
+            )
+
+            bootstrap.register(
+                HABiomes.EXOTIC_DESERT_ESTUARY,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.95f,
+                    downfall = 0.9f,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
+                )
+            )
+
+            bootstrap.register(
+                HABiomes.EXOTIC_BADLANDS_ESTUARY,
+                create(
+                    featuresGetter,
+                    carversGetter,
+                    temperature = 0.95f,
+                    downfall = 0.9f,
+                    waterColor = 0x14A2C5,
+                    waterFogColor = 0x14A2C5,
+                    grassColor = 0x020217,
+                )
+            )
+
+            bootstrap.register(
                 HABiomes.TROPICAL_RIVER,
                 create(
                     featuresGetter,
@@ -1115,8 +1206,6 @@ class BiomeProvider(
                 .fogColor(0xC0D8FF)
                 .skyColor(0x78A7FF)
         }
-
-
     }
 
     override fun configure(
@@ -1125,6 +1214,13 @@ class BiomeProvider(
     ) {
         val reg = registries.lookup(Registries.BIOME).get()
         entries.add(reg.getOrThrow(HABiomes.CORAL_REEF))
+        entries.add(reg.getOrThrow(HABiomes.ESTUARY))
+        entries.add(reg.getOrThrow(HABiomes.TROPICAL_ESTUARY))
+        entries.add(reg.getOrThrow(HABiomes.COLD_ESTUARY))
+        entries.add(reg.getOrThrow(HABiomes.BLACKWATER_ESTUARY))
+        entries.add(reg.getOrThrow(HABiomes.EXOTIC_ESTUARY))
+        entries.add(reg.getOrThrow(HABiomes.EXOTIC_DESERT_ESTUARY))
+        entries.add(reg.getOrThrow(HABiomes.EXOTIC_BADLANDS_ESTUARY))
         entries.add(reg.getOrThrow(HABiomes.TROPICAL_RIVER))
         entries.add(reg.getOrThrow(HABiomes.COLD_RIVER))
         entries.add(reg.getOrThrow(HABiomes.BLACKWATER_RIVER))

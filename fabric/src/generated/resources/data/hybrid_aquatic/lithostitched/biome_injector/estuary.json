@@ -4,13 +4,13 @@
   "parameters": {
     "continentalness": [
       -0.455,
-      -0.19
-    ],
-    "temperature": [
-      0.55,
-      1.0
+      -0.0975
     ]
   },
-  "replacement": "minecraft:warm_ocean",
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:estuary"
+  },
+  "replacement": "hybrid_aquatic:estuary",
   "targets": "minecraft:river"
 }

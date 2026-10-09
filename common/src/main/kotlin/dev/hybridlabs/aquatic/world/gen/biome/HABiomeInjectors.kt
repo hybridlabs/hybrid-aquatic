@@ -130,26 +130,24 @@ object HABiomeInjectors {
     val LUSH_DESERT_SHATTERED_2: ResourceKey<BiomeInjector> =
         ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lush_desert_shattered_2"))
 
-    val WARM_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("warm_ocean_river_replacer"))
-    val DEEP_WARM_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_warm_ocean_river_replacer"))
-    val LUKEWARM_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("lukewarm_ocean_river_replacer"))
-    val DEEP_LUKEWARM_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_lukewarm_ocean_river_replacer"))
-    val OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("ocean_river_replacer"))
-    val DEEP_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_ocean_river_replacer"))
-    val COLD_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("cold_ocean_river_replacer"))
-    val DEEP_COLD_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_cold_ocean_river_replacer"))
-    val FROZEN_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("frozen_ocean_river_replacer"))
-    val DEEP_FROZEN_OCEAN_RIVER_REPLACER: ResourceKey<BiomeInjector> =
-        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("deep_frozen_ocean_river_replacer"))
+    val ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("estuary"))
+    val TROPICAL_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("tropical_estuary"))
+    val FORESTED_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("forested_estuary"))
+    val FLORAL_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("floral_estuary"))
+    val BLACKWATER_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("blackwater_estuary"))
+    val COLD_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("cold_estuary"))
+    val EXOTIC_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_estuary"))
+    val EXOTIC_DESERT_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_desert_estuary"))
+    val EXOTIC_BADLANDS_ESTUARY: ResourceKey<BiomeInjector> =
+        ResourceKey.create(LithostitchedRegistries.BIOME_INJECTOR, CommonClass.locate("exotic_badlands_estuary"))
 
     // Lithostitched samples the base biome once and applies only the first matching
     // replace_partially injector, lowest priority first. Injectors cannot target a
@@ -619,114 +617,93 @@ object HABiomeInjectors {
             )
         )
 
-        //#region River Fixes
         context.register(
-            WARM_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
+            ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.ESTUARY)).replacePartially(
                 biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.WARM_OCEAN),
+                biomes.getOrThrow(HABiomes.ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.55, 1.0)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            DEEP_WARM_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.DEEP_WARM_OCEAN)).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(HABiomes.DEEP_WARM_OCEAN),
+            FORESTED_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.FORESTED_RIVER),
+                biomes.getOrThrow(HABiomes.ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -1.05, -0.455)
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.55, 1.0)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            LUKEWARM_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.LUKEWARM_OCEAN),
+            FLORAL_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.FLORAL_RIVER),
+                biomes.getOrThrow(HABiomes.ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.2, 0.55)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            DEEP_LUKEWARM_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.DEEP_LUKEWARM_OCEAN),
+            TROPICAL_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.TROPICAL_ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.TROPICAL_RIVER),
+                biomes.getOrThrow(HABiomes.TROPICAL_ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -1.05, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, 0.2, 0.55)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.OCEAN),
+            BLACKWATER_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.BLACKWATER_ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.BLACKWATER_RIVER),
+                biomes.getOrThrow(HABiomes.BLACKWATER_ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, -0.15, 0.2)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            DEEP_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.DEEP_OCEAN),
+            COLD_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.COLD_ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.COLD_RIVER),
+                biomes.getOrThrow(HABiomes.COLD_ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -1.05, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, -0.15, 0.2)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            COLD_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.COLD_OCEAN),
+            EXOTIC_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.EXOTIC_RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, -0.45, -0.15)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            DEEP_COLD_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
+            EXOTIC_DESERT_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_DESERT_ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.EXOTIC_DESERT_RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_DESERT_ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -1.05, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, -0.45, -0.15)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
 
         context.register(
-            FROZEN_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.FROZEN_OCEAN),
+            EXOTIC_BADLANDS_ESTUARY,
+            BiomeInjector.builder(Level.OVERWORLD, BiomeEnabledPredicate(HABiomes.EXOTIC_BADLANDS_ESTUARY)).replacePartially(
+                biomes.getOrThrow(HABiomes.EXOTIC_BADLANDS_RIVER),
+                biomes.getOrThrow(HABiomes.EXOTIC_BADLANDS_ESTUARY),
                 ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, -0.45, -0.15)
-            )
-        )
-
-        context.register(
-            DEEP_FROZEN_OCEAN_RIVER_REPLACER,
-            BiomeInjector.builder(Level.OVERWORLD).replacePartially(
-                biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
-                ParameterBuilder.create()
-                    .climateRange(ClimateParameter.CONTINENTALNESS, -1.05, -0.19)
-                    .climateRange(ClimateParameter.TEMPERATURE, -1.0, -0.45)
+                    .climateRange(ClimateParameter.CONTINENTALNESS, -0.455, -0.0975)
             )
         )
     }

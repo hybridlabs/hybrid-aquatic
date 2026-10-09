@@ -853,6 +853,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABiomes.DEEP_WARM_OCEAN to "Deep Warm Ocean",
             HABiomes.FROZEN_TRENCH to "Frozen Trench",
             HABiomes.LUKEWARM_TRENCH to "Lukewarm Trench",
+            HABiomes.WARM_TRENCH to "Warm Trench",
             HABiomes.RED_MEADOW to "Red Meadow",
             HABiomes.SEAGRASS_BED to "Seagrass Bed",
             HABiomes.SULFURIC_CAVES to "Sulfuric Caves",
@@ -868,7 +869,14 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABiomes.EXOTIC_DESERT_RIVER to "Exotic Desert River",
             HABiomes.EXOTIC_BADLANDS_RIVER to "Exotic Badlands River",
             HABiomes.LUSH_DESERT to "Lush Desert",
-            HABiomes.WARM_TRENCH to "Warm Trench",
+            HABiomes.ESTUARY to "Estuary",
+            HABiomes.ESTUARY to "Estuary",
+            HABiomes.COLD_ESTUARY to "Cold Estuary",
+            HABiomes.TROPICAL_ESTUARY to "Tropical Estuary",
+            HABiomes.EXOTIC_ESTUARY to "Exotic Estuary",
+            HABiomes.EXOTIC_DESERT_ESTUARY to "Exotic Desert Estuary",
+            HABiomes.EXOTIC_BADLANDS_ESTUARY to "Exotic Badlands Estuary",
+            HABiomes.BLACKWATER_ESTUARY to "Blackwater Estuary",
         ).forEach { (biome, name) ->
             builder.add("biome.hybrid_aquatic.${biome.location().path}", name)
         }

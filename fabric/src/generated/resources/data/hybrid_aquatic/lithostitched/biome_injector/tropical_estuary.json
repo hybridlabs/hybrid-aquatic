@@ -1,0 +1,16 @@
+{
+  "type": "lithostitched:replace_partially",
+  "dimension": "minecraft:overworld",
+  "parameters": {
+    "continentalness": [
+      -0.455,
+      -0.0975
+    ]
+  },
+  "predicate": {
+    "type": "hybrid_aquatic:biome_enabled",
+    "biome": "hybrid_aquatic:tropical_estuary"
+  },
+  "replacement": "hybrid_aquatic:tropical_estuary",
+  "targets": "hybrid_aquatic:tropical_river"
+}

@@ -45,6 +45,14 @@ object HABiomes {
 
     val LUSH_DESERT: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lush_desert"))
 
+    val ESTUARY: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("estuary"))
+    val COLD_ESTUARY: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("cold_estuary"))
+    val TROPICAL_ESTUARY: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_estuary"))
+    val EXOTIC_ESTUARY: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_estuary"))
+    val EXOTIC_DESERT_ESTUARY: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_desert_estuary"))
+    val EXOTIC_BADLANDS_ESTUARY: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("exotic_badlands_estuary"))
+    val BLACKWATER_ESTUARY: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("blackwater_estuary"))
+
     val TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("trench"))
     val WARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("warm_trench"))
     val LUKEWARM_TRENCH: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("lukewarm_trench"))
