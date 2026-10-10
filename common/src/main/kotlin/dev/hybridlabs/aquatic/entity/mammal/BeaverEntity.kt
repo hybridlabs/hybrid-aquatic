@@ -21,6 +21,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.tags.BiomeTags
+import net.minecraft.tags.ItemTags
 import net.minecraft.util.ByIdMap
 import net.minecraft.util.Mth
 import net.minecraft.util.StringRepresentable
@@ -92,8 +93,6 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
-        goalSelector.addGoal(0, OtterAttackGoal(this, 1.0, true))
-        getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, BeaverEntity::hunger)
     }
 
     override fun tick() {
@@ -103,8 +102,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(HAItems.CLAM.get()) ||
-                stack.`is`(HAItemTags.SMALL_FISH)
+        return stack.`is`(ItemTags.LOGS)
     }
 
     /**
