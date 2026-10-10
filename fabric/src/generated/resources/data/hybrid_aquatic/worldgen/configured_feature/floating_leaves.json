@@ -6,21 +6,183 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:noise_provider",
-            "noise": {
-              "amplitudes": [
-                5.0
-              ],
-              "firstOctave": -5
-            },
-            "scale": 1.0,
-            "seed": 237,
-            "states": [
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
               {
-                "Name": "hybrid_aquatic:floating_leaves",
-                "Properties": {
-                  "waterlogged": "true"
-                }
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "north",
+                    "flower_amount": "1",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "east",
+                    "flower_amount": "1",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "south",
+                    "flower_amount": "1",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "west",
+                    "flower_amount": "1",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "north",
+                    "flower_amount": "2",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "east",
+                    "flower_amount": "2",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "south",
+                    "flower_amount": "2",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "west",
+                    "flower_amount": "2",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "north",
+                    "flower_amount": "3",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "east",
+                    "flower_amount": "3",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "south",
+                    "flower_amount": "3",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "west",
+                    "flower_amount": "3",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "north",
+                    "flower_amount": "4",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "east",
+                    "flower_amount": "4",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "south",
+                    "flower_amount": "4",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "hybrid_aquatic:floating_leaves",
+                  "Properties": {
+                    "facing": "west",
+                    "flower_amount": "4",
+                    "waterlogged": "true"
+                  }
+                },
+                "weight": 1
               }
             ]
           }

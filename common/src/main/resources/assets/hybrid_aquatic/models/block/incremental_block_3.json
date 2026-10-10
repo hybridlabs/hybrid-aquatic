@@ -1,0 +1,19 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#texture"
+	},
+	"elements": [
+		{
+			"from": [8, 16, 8],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 14, 0]},
+			"faces": {
+				"up": {"uv": [8, 8, 16, 16], "texture": "#texture"},
+				"down": {"uv": [8, 16, 16, 8], "texture": "#texture"}
+			}
+		}
+	]
+}

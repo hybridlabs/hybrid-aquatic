@@ -1,0 +1,7 @@
+{
+  "parent": "hybrid_aquatic:block/incremental_block_3",
+  "textures": {
+    "particle": "hybrid_aquatic:block/floating_leaves",
+    "texture": "hybrid_aquatic:block/floating_leaves"
+  }
+}

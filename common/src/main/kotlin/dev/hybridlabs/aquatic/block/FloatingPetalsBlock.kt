@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.MapCodec
-import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.core.particles.ParticleTypes
@@ -17,7 +16,6 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.block.BushBlock
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
@@ -28,14 +26,17 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-    class FloatingPetalsBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
+class FloatingPetalsBlock(settings: Properties) : IncrementableBlock(settings), SimpleWaterloggedBlock {
+
     init {
-        this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
+        registerDefaultState(
+            defaultBlockState().setValue(WATERLOGGED, true)
+        )
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
-        if (!fluidStateAbove.`is`( Fluids.EMPTY)) {
+        if (!fluidStateAbove.`is`(Fluids.EMPTY)) {
             return false
         }
 
@@ -99,6 +100,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+        super.createBlockStateDefinition(builder)
         builder.add(WATERLOGGED)
     }
 
@@ -113,8 +115,8 @@ import net.minecraft.world.phys.shapes.VoxelShape
         }
     }
 
-    override fun codec(): MapCodec<out BushBlock> {
-        return CODEC
+    override fun isValidBonemealTarget(levelReader: LevelReader, blockPos: BlockPos, blockState: BlockState): Boolean {
+        return false
     }
 
     companion object {

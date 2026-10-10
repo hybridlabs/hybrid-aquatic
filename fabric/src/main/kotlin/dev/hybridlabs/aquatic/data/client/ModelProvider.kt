@@ -5,14 +5,22 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlockFamilies
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.IncrementableBlock
 import dev.hybridlabs.aquatic.block.PlushieBlock
+import dev.hybridlabs.aquatic.client.model.HAModelTemplates
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
+import net.minecraft.data.models.blockstates.Condition
+import net.minecraft.data.models.blockstates.MultiPartGenerator
+import net.minecraft.data.models.blockstates.Variant
+import net.minecraft.data.models.blockstates.VariantProperties
+import net.minecraft.data.models.model.ModelTemplate
 import net.minecraft.data.models.model.ModelTemplates
 import net.minecraft.data.models.model.TextureMapping
 import net.minecraft.data.models.model.TexturedModel
@@ -21,6 +29,8 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.CropBlock
 import net.minecraft.world.level.block.LiquidBlock
+import net.minecraft.world.level.block.Rotation
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
 class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockModelGenerators) {
@@ -264,6 +274,169 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get()
             )
             //#endregion
+
+            fun createIncrementalBlock(
+                block: Block,
+                template1: ModelTemplate,
+                template2: ModelTemplate,
+                template3: ModelTemplate,
+                template4: ModelTemplate
+            ) {
+                createSimpleFlatItemModel(block.asItem())
+
+                val model1 = template1.createWithSuffix(
+                    block, "_1", TextureMapping.cube(block), modelOutput
+                )
+                val model2 = template2.createWithSuffix(
+                    block, "_2", TextureMapping.cube(block), modelOutput
+                )
+                val model3 = template3.createWithSuffix(
+                    block, "_3", TextureMapping.cube(block), modelOutput
+                )
+                val model4 = template4.createWithSuffix(
+                    block, "_4", TextureMapping.cube(block), modelOutput
+                )
+
+                blockStateOutput.accept(
+                    MultiPartGenerator.multiPart(block)
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
+                            Variant.variant().with(VariantProperties.MODEL, model1)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model1)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model1)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model1)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
+                            Variant.variant().with(VariantProperties.MODEL, model2)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model2)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model2)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model2)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
+                            Variant.variant().with(VariantProperties.MODEL, model3)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model3)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model3)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model3)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
+                            Variant.variant().with(VariantProperties.MODEL, model4)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model4)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model4)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
+                        )
+                        .with(
+                            Condition.condition()
+                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
+                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
+                            Variant.variant()
+                                .with(VariantProperties.MODEL, model4)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
+                        )
+                )
+            }
+
+            createIncrementalBlock(
+                HABlocks.FLOATING_LEAVES.get(),
+                HAModelTemplates.INCREMENTAL_BLOCK_1,
+                HAModelTemplates.INCREMENTAL_BLOCK_2,
+                HAModelTemplates.INCREMENTAL_BLOCK_3,
+                HAModelTemplates.INCREMENTAL_BLOCK_4
+            )
+
+            createIncrementalBlock(
+                HABlocks.FLOATING_PETALS.get(),
+                HAModelTemplates.INCREMENTAL_BLOCK_1,
+                HAModelTemplates.INCREMENTAL_BLOCK_2,
+                HAModelTemplates.INCREMENTAL_BLOCK_3,
+                HAModelTemplates.INCREMENTAL_BLOCK_4
+            )
 
             // wood
             val driftwoodPool = family(HAPlatformBlocks.DRIFTWOOD_PLANKS.get())

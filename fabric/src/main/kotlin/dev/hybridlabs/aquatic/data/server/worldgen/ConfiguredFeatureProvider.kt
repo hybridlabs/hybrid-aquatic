@@ -3,7 +3,9 @@
 package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.HybridAquatic
+import dev.hybridlabs.aquatic.block.FloatingPetalsBlock
 import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.block.IncrementableBlock
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.tag.HABlockTags
@@ -30,6 +32,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.levelgen.GeodeBlockSettings
 import net.minecraft.world.level.levelgen.GeodeCrackSettings
@@ -433,22 +436,36 @@ class ConfiguredFeatureProvider(
                 )
             )
 
+            val floatingLeavesStates = buildList {
+                for (amount in 1..4) {
+                    for (direction in Direction.Plane.HORIZONTAL) {
+                        add(
+                            HABlocks.FLOATING_LEAVES.get().defaultBlockState()
+                                .setValue(IncrementableBlock.AMOUNT, amount)
+                                .setValue(IncrementableBlock.FACING, direction)
+                                .setValue(WATERLOGGED, true)
+                        )
+                    }
+                }
+            }
+
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.FLOATING_LEAVES,
-
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    50, 5, 5,
+                Feature.RANDOM_PATCH,
+                RandomPatchConfiguration(
+                    50,
+                    5,
+                    5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
-                            NoiseProvider(
-                                237L,
-                                NormalNoise.NoiseParameters(-5, 5.0, *DoubleArray(0)),
-                                1.0f,
-                                listOf<BlockState>(
-                                    HABlocks.FLOATING_LEAVES.get().defaultBlockState()
-                                )
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>().apply {
+                                    floatingLeavesStates.forEach { state ->
+                                        add(state, 1)
+                                    }
+                                }.build()
                             )
                         ),
                         BlockPredicate.matchesBlocks(Blocks.WATER)
@@ -456,22 +473,36 @@ class ConfiguredFeatureProvider(
                 )
             )
 
+            val floatingPetalsStates = buildList {
+                for (amount in 1..4) {
+                    for (direction in Direction.Plane.HORIZONTAL) {
+                        add(
+                            HABlocks.FLOATING_PETALS.get().defaultBlockState()
+                                .setValue(IncrementableBlock.AMOUNT, amount)
+                                .setValue(IncrementableBlock.FACING, direction)
+                                .setValue(WATERLOGGED, true)
+                        )
+                    }
+                }
+            }
+
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.FLOATING_PETALS,
-
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
-                    50, 5, 5,
+                Feature.RANDOM_PATCH,
+                RandomPatchConfiguration(
+                    50,
+                    5,
+                    5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
-                            NoiseProvider(
-                                237L,
-                                NormalNoise.NoiseParameters(-5, 5.0, *DoubleArray(0)),
-                                1.0f,
-                                listOf<BlockState>(
-                                    HABlocks.FLOATING_PETALS.get().defaultBlockState()
-                                )
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>().apply {
+                                    floatingPetalsStates.forEach { state ->
+                                        add(state, 1)
+                                    }
+                                }.build()
                             )
                         ),
                         BlockPredicate.matchesBlocks(Blocks.WATER)
