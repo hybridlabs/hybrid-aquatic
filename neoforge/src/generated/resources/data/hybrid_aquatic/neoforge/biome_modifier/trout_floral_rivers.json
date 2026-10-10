@@ -5,6 +5,6 @@
     "type": "hybrid_aquatic:trout",
     "maxCount": 1,
     "minCount": 1,
-    "weight": 2
+    "weight": 5
   }
 }

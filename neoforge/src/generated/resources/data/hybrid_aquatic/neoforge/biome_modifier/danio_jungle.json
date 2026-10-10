@@ -5,6 +5,6 @@
     "type": "hybrid_aquatic:danio",
     "maxCount": 3,
     "minCount": 2,
-    "weight": 3
+    "weight": 5
   }
 }
