@@ -1,8 +1,8 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hapi:marshes",
+  "biomes": "#hapi:floral_rivers",
   "spawners": {
-    "type": "hybrid_aquatic:african_butterflyfish",
+    "type": "hybrid_aquatic:trout",
     "maxCount": 1,
     "minCount": 1,
     "weight": 2

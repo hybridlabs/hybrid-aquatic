@@ -23,8 +23,7 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HAPIBiomeTags.TROPICAL_RIVERS,
                 HAPIBiomeTags.JUNGLE,
-                HAPIBiomeTags.MARSHES,
-                HAPIBiomeTags.MANGROVES),
+                ),
             2, 1, 1
         )
 
@@ -43,13 +42,17 @@ class EntitySpawnConfigGenerator {
                 HAPIBiomeTags.MARSHES,
                 HAPIBiomeTags.MANGROVES,
                 HAPIBiomeTags.TROPICAL_RIVERS,
+                HAPIBiomeTags.BLACKWATER_RIVERS,
                 HAPIBiomeTags.CAVES),
             3, 2, 3
         )
 
         addRiverFish(
             HAEntityTypes.PUPFISH.get(),
-            listOf(BiomeTags.IS_BADLANDS),
+            listOf(
+                BiomeTags.IS_BADLANDS,
+                HAPIBiomeTags.BADLANDS_RIVERS,
+            ),
             1, 1, 1)
 
         addRiverFish(
@@ -59,7 +62,9 @@ class EntitySpawnConfigGenerator {
                 HAPIBiomeTags.SWAMP,
                 HAPIBiomeTags.MANGROVES,
                 HAPIBiomeTags.MARSHES,
-                HAPIBiomeTags.TROPICAL_RIVERS),
+                HAPIBiomeTags.TROPICAL_RIVERS,
+                HAPIBiomeTags.BLACKWATER_RIVERS,
+            ),
             3, 2, 3
         )
 
@@ -69,7 +74,8 @@ class EntitySpawnConfigGenerator {
                 HAPIBiomeTags.JUNGLE,
                 HAPIBiomeTags.MANGROVES,
                 HAPIBiomeTags.MARSHES,
-                HAPIBiomeTags.TROPICAL_RIVERS),
+                HAPIBiomeTags.TROPICAL_RIVERS
+            ),
             1, 1, 1
         )
 
@@ -80,7 +86,9 @@ class EntitySpawnConfigGenerator {
                 HAPIBiomeTags.MANGROVES,
                 HAPIBiomeTags.JUNGLE,
                 HAPIBiomeTags.TROPICAL_RIVERS,
-                HAPIBiomeTags.MARSHES),
+                HAPIBiomeTags.BLACKWATER_RIVERS,
+                HAPIBiomeTags.MARSHES
+            ),
             1, 1, 2
         )
 
@@ -89,7 +97,8 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HAPIBiomeTags.JUNGLE,
                 HAPIBiomeTags.MANGROVES,
-                HAPIBiomeTags.TROPICAL_RIVERS),
+                HAPIBiomeTags.TROPICAL_RIVERS,
+                ),
             1, 1, 1
         )
 
@@ -97,7 +106,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.CORYDORA.get(),
             listOf(
                 HAPIBiomeTags.JUNGLE,
-                HAPIBiomeTags.TROPICAL_RIVERS),
+                HAPIBiomeTags.TROPICAL_RIVERS,
+                ),
             2, 1, 3
         )
 
@@ -105,7 +115,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.PIRANHA.get(),
             listOf(
                 HAPIBiomeTags.JUNGLE,
-                HAPIBiomeTags.TROPICAL_RIVERS),
+                HAPIBiomeTags.TROPICAL_RIVERS,
+            ),
             2, 4, 8
         )
 
@@ -114,7 +125,11 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HAPIBiomeTags.JUNGLE,
                 HAPIBiomeTags.MANGROVES,
-                HAPIBiomeTags.TROPICAL_RIVERS),
+                HAPIBiomeTags.TROPICAL_RIVERS,
+                HAPIBiomeTags.SAVANNA_RIVERS,
+                HAPIBiomeTags.DESERT_RIVERS,
+                HAPIBiomeTags.BADLANDS_RIVERS,
+                ),
             1, 1, 1
         )
 
@@ -124,7 +139,8 @@ class EntitySpawnConfigGenerator {
                 HAPIBiomeTags.JUNGLE,
                 HAPIBiomeTags.MANGROVES,
                 HAPIBiomeTags.MARSHES,
-                HAPIBiomeTags.TROPICAL_RIVERS),
+                HAPIBiomeTags.TROPICAL_RIVERS,
+                ),
             3, 2, 3
         )
 
@@ -133,14 +149,16 @@ class EntitySpawnConfigGenerator {
             listOf(
                 HAPIBiomeTags.SWAMP,
                 HAPIBiomeTags.MANGROVES,
-                HAPIBiomeTags.MARSHES),
+                HAPIBiomeTags.MARSHES,
+                ),
             1, 1, 1
         )
 
         addRiverFish(
             HAEntityTypes.CARP.get(),
             listOf(
-                HAPIBiomeTags.RIVERS),
+                HAPIBiomeTags.RIVERS,
+                ),
             3, 1, 2
         )
 
@@ -153,7 +171,8 @@ class EntitySpawnConfigGenerator {
         addRiverFish(
             HAEntityTypes.SUNFISH.get(),
             listOf(
-                HAPIBiomeTags.RIVERS),
+                HAPIBiomeTags.RIVERS,
+                ),
             3, 1, 2
         )
 
@@ -161,6 +180,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.TROUT.get(),
             listOf(
                 HAPIBiomeTags.COLD_RIVERS,
+                HAPIBiomeTags.FORESTED_RIVERS,
+                HAPIBiomeTags.FLORAL_RIVERS,
                 BiomeTags.IS_RIVER),
             2, 1, 1
         )
@@ -169,7 +190,8 @@ class EntitySpawnConfigGenerator {
             HAEntityTypes.SHINER.get(),
             listOf(
                 HAPIBiomeTags.COLD_RIVERS,
-                BiomeTags.IS_RIVER),
+                BiomeTags.IS_RIVER,
+                ),
             3, 1, 2
         )
         //#endregion
