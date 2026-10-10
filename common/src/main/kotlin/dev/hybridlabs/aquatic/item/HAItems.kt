@@ -2193,6 +2193,9 @@ object HAItems {
     val OTTER_SPAWN_EGG =
         registerSpawnEgg("otter_spawn_egg", HAEntityTypes.OTTER, 0xFFFFFF, 0xFFFFFF)
 
+    val BEAVER_SPAWN_EGG =
+        registerSpawnEgg("beaver_spawn_egg", HAEntityTypes.BEAVER, 0xFFFFFF, 0xFFFFFF)
+
     val DUGONG_SPAWN_EGG =
         registerSpawnEgg("dugong_spawn_egg", HAEntityTypes.DUGONG, 0xFFFFFF, 0xFFFFFF)
 

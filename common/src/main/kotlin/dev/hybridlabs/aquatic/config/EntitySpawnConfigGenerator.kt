@@ -934,6 +934,16 @@ class EntitySpawnConfigGenerator {
             1, 1, 2
         )
 
+        addMammal(
+            HAEntityTypes.BEAVER.get(),
+            listOf(
+                HAPIBiomeTags.COLD_RIVERS,
+                HAPIBiomeTags.FORESTED_RIVERS,
+                HAPIBiomeTags.FLORAL_RIVERS
+            ),
+            1, 1, 2
+        )
+
         addSirenian(
             HAEntityTypes.DUGONG.get(),
             listOf(

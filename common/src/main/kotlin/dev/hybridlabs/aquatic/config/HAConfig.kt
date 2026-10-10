@@ -8,7 +8,7 @@ data class HAConfig(
      * The version of the data stored.
      * Increase when the config needs to be reset, i.e. when new entity spawn configs are added.
      */
-    val dataVersion: Int = 8,
+    val dataVersion: Int = 9,
     val enableWanderingTraderTrades: Boolean = true,
     val enableVillagerTrades: Boolean = true,
     val addFishingLoot: Boolean = true,

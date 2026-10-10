@@ -6,6 +6,7 @@ import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
+import dev.hybridlabs.aquatic.entity.mammal.BeaverEntity
 import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
 import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
@@ -920,6 +921,13 @@ object HAEntityTypes {
         ::OtterEntity,
         EntityDimensions.fixed(0.6f, 0.6f),
         OtterEntity::createMobAttributes
+    )
+
+    val BEAVER = registerMammal(
+        "beaver",
+        ::BeaverEntity,
+        EntityDimensions.fixed(0.8f, 0.8f),
+        BeaverEntity::createMobAttributes
     )
 
     val DUGONG = registerSirenian(

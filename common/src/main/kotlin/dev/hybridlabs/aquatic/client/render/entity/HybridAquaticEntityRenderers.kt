@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.client.render.entity.critter.*
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
 import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
+import dev.hybridlabs.aquatic.client.render.entity.mammal.BeaverEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.DugongEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.ManateeEntityRenderer
 import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
@@ -768,6 +769,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.OTTER,
             ::OtterEntityRenderer
+        )
+
+    val BEAVER =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.BEAVER,
+            ::BeaverEntityRenderer
         )
 
     val DUGONG =

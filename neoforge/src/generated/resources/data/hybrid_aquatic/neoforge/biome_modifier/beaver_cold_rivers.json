@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#hapi:cold_rivers",
+  "spawners": {
+    "type": "hybrid_aquatic:beaver",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 1
+  }
+}

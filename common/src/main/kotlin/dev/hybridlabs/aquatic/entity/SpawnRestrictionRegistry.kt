@@ -182,6 +182,7 @@ object SpawnRestrictionRegistry {
 
         setOf(
             HAEntityTypes.OTTER.get(),
+            HAEntityTypes.BEAVER.get(),
         ).forEach { registerMammal(it) }
 
         setOf(
