@@ -22,6 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 class RaftBlock(settings: Properties) : Block(settings), SimpleWaterloggedBlock {
+
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
