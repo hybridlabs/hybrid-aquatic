@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.forge
 
 import dev.hybridlabs.aquatic.Constants
+import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
@@ -25,20 +26,19 @@ import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ClientPayload
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ServerPayloadHandler
 import dev.hybridlabs.aquatic.particle.*
 import dev.hybridlabs.aquatic.platform.Services
-import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
+import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.ItemBlockRenderTypes
 import net.minecraft.client.renderer.RenderType
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
 import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler
-import net.neoforged.neoforge.registries.DataPackRegistryEvent
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
 
@@ -55,6 +55,7 @@ object HybridAquaticModBusEvents {
                 MOD_BUS.addListener(::registerSkullModels)
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
                 MOD_BUS.addListener(::registerFluidTypes)
+                MOD_BUS.addListener(::registerBlockColors)
                 HybridAquaticEntityRenderers
             },
             serverTarget = {
@@ -190,6 +191,20 @@ object HybridAquaticModBusEvents {
                 ClientPayloadHandler::handleDataOnMain,
                 ServerPayloadHandler::handleDataOnMain,
             )
+        )
+    }
+
+    fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
+        event.register(
+            { _, level, pos, _ ->
+                if (level != null && pos != null) {
+                    BiomeColors.getAverageFoliageColor(level, pos)
+                } else {
+                    -1
+                }
+            },
+            HABlocks.WATER_LETTUCE.get(),
+            HABlocks.FLOATING_LEAVES.get()
         )
     }
 }

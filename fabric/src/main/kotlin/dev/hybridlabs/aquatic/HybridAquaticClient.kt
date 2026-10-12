@@ -30,8 +30,10 @@ import dev.hybridlabs.aquatic.platform.ClientServices
 import dev.hybridlabs.aquatic.platform.Services
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
+import net.minecraft.client.color.block.BlockColor
+import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 
@@ -45,6 +47,7 @@ object HybridAquaticClient : ClientModInitializer {
         HAParticleRendererRegistry
         HybridAquaticEntityRenderers
         registerWeatherRenderers()
+        registerBlockColors()
         if (Services.PLATFORM.isModLoaded("trinkets")) HATrinketRendererRegistry
         HAModelLayerRegistry
         HAItemProperties
@@ -170,6 +173,21 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerEntityRenderers() {
         HybridAquaticEntityRenderers
+    }
+
+    private fun registerBlockColors() {
+        ColorProviderRegistry.BLOCK.register(
+            BlockColor { state, level, pos, tintIndex ->
+                if (level != null && pos != null) {
+                    BiomeColors.getAverageFoliageColor(level, pos)
+                } else {
+                    -1
+                }
+            },
+
+            HABlocks.WATER_LETTUCE.get(),
+            HABlocks.FLOATING_LEAVES.get(),
+        )
     }
 
     private fun registerModelLayers() {
