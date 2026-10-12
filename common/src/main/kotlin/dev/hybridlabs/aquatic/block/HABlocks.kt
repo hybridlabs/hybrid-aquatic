@@ -440,23 +440,26 @@ object HABlocks {
         FloatingPetalsBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
             .noCollission()
             .instabreak()
-            .mapColor(MapColor.COLOR_GREEN))
+            .mapColor(MapColor.PLANT))
     }
 
     val WATER_LETTUCE = register("water_lettuce") {
         WaterLettuceBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
+            .mapColor(MapColor.PLANT)
             .noCollission()
             .instabreak())
     }
 
     val WATER_HYACINTH = register("water_hyacinth") {
         WaterHyacinthBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
+            .mapColor(MapColor.PLANT)
             .noCollission()
             .instabreak())
     }
 
     val JUNGLE_LILY_PAD = register("jungle_lily_pad") {
         JungleLilyPadBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
+            .mapColor(MapColor.PLANT)
             .instabreak())
     }
 
