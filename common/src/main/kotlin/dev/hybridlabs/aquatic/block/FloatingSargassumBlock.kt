@@ -28,8 +28,13 @@ import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
     class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), SimpleWaterloggedBlock {
+
     init {
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
+    }
+
+    override fun getLightBlock(state: BlockState, level: BlockGetter, pos: BlockPos): Int {
+        return 1
     }
 
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {

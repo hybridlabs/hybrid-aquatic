@@ -34,6 +34,10 @@ class FloatingPetalsBlock(settings: Properties) : IncrementableBlock(settings), 
         )
     }
 
+    override fun getLightBlock(state: BlockState, level: BlockGetter, pos: BlockPos): Int {
+        return 1
+    }
+
     override fun canSurvive(state: BlockState, world: LevelReader, pos: BlockPos): Boolean {
         val fluidStateAbove = world.getFluidState(pos.above())
         if (!fluidStateAbove.`is`(Fluids.EMPTY)) {
