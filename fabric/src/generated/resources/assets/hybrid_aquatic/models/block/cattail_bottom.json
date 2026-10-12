@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hybrid_aquatic:block/cattail_bottom"
+  }
+}

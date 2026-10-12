@@ -12,34 +12,35 @@ object HAPlatformItems {
 
     //#region Wood Blocks
     val DRIFTWOOD_PLANKS =
-        HAItems.registerBlockItem("driftwood_planks") { HAPlatformBlocks.DRIFTWOOD_PLANKS.get() }
+        registerBlockItem("driftwood_planks") { HAPlatformBlocks.DRIFTWOOD_PLANKS.get() }
     val DRIFTWOOD_LOG =
-        HAItems.registerBlockItem("driftwood_log") { HAPlatformBlocks.DRIFTWOOD_LOG.get() }
+        registerBlockItem("driftwood_log") { HAPlatformBlocks.DRIFTWOOD_LOG.get() }
     val DRIFTWOOD_WOOD =
-        HAItems.registerBlockItem("driftwood_wood") { HAPlatformBlocks.DRIFTWOOD_WOOD.get() }
+        registerBlockItem("driftwood_wood") { HAPlatformBlocks.DRIFTWOOD_WOOD.get() }
     val STRIPPED_DRIFTWOOD_LOG =
-        HAItems.registerBlockItem("stripped_driftwood_log") { HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get() }
+        registerBlockItem("stripped_driftwood_log") { HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get() }
     val STRIPPED_DRIFTWOOD_WOOD =
-        HAItems.registerBlockItem("stripped_driftwood_wood") { HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get() }
+        registerBlockItem("stripped_driftwood_wood") { HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get() }
     val DRIFTWOOD_DOOR =
-        HAItems.registerBlockItem("driftwood_door") { HAPlatformBlocks.DRIFTWOOD_DOOR.get() }
+        registerBlockItem("driftwood_door") { HAPlatformBlocks.DRIFTWOOD_DOOR.get() }
     val DRIFTWOOD_TRAPDOOR =
-        HAItems.registerBlockItem("driftwood_trapdoor") { HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get() }
+        registerBlockItem("driftwood_trapdoor") { HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get() }
     val DRIFTWOOD_SLAB =
-        HAItems.registerBlockItem("driftwood_slab") { HAPlatformBlocks.DRIFTWOOD_SLAB.get() }
+        registerBlockItem("driftwood_slab") { HAPlatformBlocks.DRIFTWOOD_SLAB.get() }
     val DRIFTWOOD_STAIRS =
-        HAItems.registerBlockItem("driftwood_stairs") { HAPlatformBlocks.DRIFTWOOD_STAIRS.get() }
+        registerBlockItem("driftwood_stairs") { HAPlatformBlocks.DRIFTWOOD_STAIRS.get() }
     val DRIFTWOOD_FENCE =
-        HAItems.registerBlockItem("driftwood_fence") { HAPlatformBlocks.DRIFTWOOD_FENCE.get() }
+        registerBlockItem("driftwood_fence") { HAPlatformBlocks.DRIFTWOOD_FENCE.get() }
     val DRIFTWOOD_FENCE_GATE =
-        HAItems.registerBlockItem("driftwood_fence_gate") { HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get() }
+        registerBlockItem("driftwood_fence_gate") { HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get() }
     val DRIFTWOOD_PRESSURE_PLATE =
-        HAItems.registerBlockItem("driftwood_pressure_plate") { HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get() }
+        registerBlockItem("driftwood_pressure_plate") { HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get() }
     val DRIFTWOOD_BUTTON =
-        HAItems.registerBlockItem("driftwood_button") { HAPlatformBlocks.DRIFTWOOD_BUTTON.get() }
+        registerBlockItem("driftwood_button") { HAPlatformBlocks.DRIFTWOOD_BUTTON.get() }
     val DUNEGRASS = registerBlockItem("dunegrass") { HAPlatformBlocks.DUNEGRASS.get() }
     val TALL_DUNEGRASS = registerBlockItem("tall_dunegrass") { HAPlatformBlocks.TALL_DUNEGRASS.get() }
     val CATTAIL = registerBlockItem("cattail") { HAPlatformBlocks.CATTAIL.get() }
+    val PAPYRUS = registerBlockItem("papyrus") { HAPlatformBlocks.PAPYRUS.get() }
     //#endregion
 
     val GLOWSLIME_BLOCK = registerBlockItem("glowslime_block") { HAPlatformBlocks.GLOWSLIME_BLOCK.get() }

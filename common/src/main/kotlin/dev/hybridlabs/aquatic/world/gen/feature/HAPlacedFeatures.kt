@@ -28,6 +28,8 @@ object HAPlacedFeatures {
     val RED_ALGAE_PATCH = register("red_algae_patch")
     val SEA_LETTUCE_PATCH = register("sea_lettuce_patch")
     val DUNEGRASS_PATCH = register("dunegrass_patch")
+    val CATTAIL_PATCH = register("cattail_patch")
+    val PAPYRUS_PATCH = register("papyrus_patch")
 
     val AERATED_SAND_CIRCLE = register("aerated_sand_circle")
     val SAND_CIRCLE = register("sand_circle")

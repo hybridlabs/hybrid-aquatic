@@ -608,6 +608,16 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 BlockModelGenerators.TintState.NOT_TINTED,
             )
 
+            createDoublePlant(
+                HAPlatformBlocks.PAPYRUS.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
+            createDoublePlant(
+                HAPlatformBlocks.CATTAIL.get(),
+                BlockModelGenerators.TintState.NOT_TINTED,
+            )
+
             createNonTemplateModelBlock(
                 HABlocks.DECORATIVE_BUBBLE_COLUMN.get(),
                 Blocks.WATER
@@ -628,7 +638,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.BELL_BUOY.get(),
             HAPlatformItems.DUNEGRASS.get(),
             HAPlatformItems.TALL_DUNEGRASS.get(),
-            HAPlatformItems.CATTAIL.get(),
             HAItems.RED_ALGAE.get(),
             HAItems.SHORT_RED_ALGAE.get(),
             HAItems.SEA_LETTUCE.get(),

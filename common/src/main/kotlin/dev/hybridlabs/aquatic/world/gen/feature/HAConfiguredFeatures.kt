@@ -17,6 +17,8 @@ object HAConfiguredFeatures {
     val RED_ALGAE_PATCH = register("red_algae_patch")
 
     val DUNEGRASS_PATCH = register("dunegrass_patch")
+    val PAPYRUS_PATCH = register("papyrus_patch")
+    val CATTAIL_PATCH = register("cattail_patch")
     val SARGASSUM = register("sargassum")
     val FLOATING_SARGASSUM = register("floating_sargassum")
     val FLOATING_PETALS = register("floating_petals")

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hapi:desert_rivers",
+  "features": "hybrid_aquatic:papyrus_patch",
+  "step": "vegetal_decoration"
+}

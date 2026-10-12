@@ -24,10 +24,12 @@ import dev.hybridlabs.aquatic.sound.HASoundEvents
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors
 import dev.hybridlabs.aquatic.world.gen.densityfunction.DensityFunctionWrappers
 import dev.hybridlabs.aquatic.world.gen.densityfunction.TrenchCarver
+import dev.hybridlabs.aquatic.world.gen.feature.CattailFeature
 import dev.hybridlabs.aquatic.world.gen.feature.DunegrassFeature
 import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HAFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.feature.PapyrusFeature
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import dev.hybridlabs.aquatic.world.inventory.HAMenuTypes
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
@@ -69,6 +71,8 @@ object HybridAquaticForge {
         TrenchCarver
         HABiomeInjectors
         HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
+        HAFeatures.register("papyrus_patch", PapyrusFeature(ProbabilityFeatureConfiguration.CODEC))
+        HAFeatures.register("cattail_patch", CattailFeature(ProbabilityFeatureConfiguration.CODEC))
         HAPlacedFeatures
         HAConfiguredFeatures
 

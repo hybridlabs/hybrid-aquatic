@@ -11,6 +11,7 @@ object FlammableProperty {
         registerGrass(HAPlatformBlocks.DUNEGRASS.get())
         registerGrass(HAPlatformBlocks.TALL_DUNEGRASS.get())
         registerGrass(HAPlatformBlocks.CATTAIL.get())
+        registerGrass(HAPlatformBlocks.PAPYRUS.get())
 
         registerLogs(HAPlatformBlocks.DRIFTWOOD_LOG.get())
         registerLogs(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())

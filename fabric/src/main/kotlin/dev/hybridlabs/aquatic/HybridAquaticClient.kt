@@ -76,6 +76,7 @@ object HybridAquaticClient : ClientModInitializer {
             HAPlatformBlocks.TALL_DUNEGRASS.get(),
 
             HAPlatformBlocks.CATTAIL.get(),
+            HAPlatformBlocks.PAPYRUS.get(),
 
             HABlocks.RED_ALGAE.get(),
             HABlocks.TALL_RED_ALGAE.get(),

@@ -39,6 +39,7 @@ object HAPlatformItems {
         registerBlockItem("driftwood_button") { HAPlatformBlocks.DRIFTWOOD_BUTTON.get() }
     val DUNEGRASS = registerBlockItem("dunegrass") { HAPlatformBlocks.DUNEGRASS.get() }
     val TALL_DUNEGRASS = registerBlockItem("tall_dunegrass") { HAPlatformBlocks.TALL_DUNEGRASS.get() }
+    val PAPYRUS = registerBlockItem("papyrus") { HAPlatformBlocks.PAPYRUS.get() }
     val CATTAIL = registerBlockItem("cattail") { HAPlatformBlocks.CATTAIL.get() }
 
     //#endregion

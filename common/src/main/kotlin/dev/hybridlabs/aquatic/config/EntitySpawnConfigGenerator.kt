@@ -927,7 +927,10 @@ class EntitySpawnConfigGenerator {
         addMammal(
             HAEntityTypes.OTTER.get(),
             listOf(
-                HAPIBiomeTags.RIVERS,
+                HAPIBiomeTags.BLACKWATER_RIVERS,
+                HAPIBiomeTags.FORESTED_RIVERS,
+                HAPIBiomeTags.FLORAL_RIVERS,
+                HAPIBiomeTags.TROPICAL_RIVERS,
                 HAPIBiomeTags.SANDY_BEACHES,
                 HAPIBiomeTags.ROCKY_BEACHES
             ),

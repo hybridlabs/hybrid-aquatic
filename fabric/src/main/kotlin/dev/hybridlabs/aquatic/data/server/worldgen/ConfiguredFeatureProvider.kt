@@ -380,8 +380,23 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.DUNEGRASS_PATCH,
-
                 HybridAquatic.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
+                    0.5f
+                )
+            )
+
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.PAPYRUS_PATCH,
+                HybridAquatic.PAPYRUS_PATCH.get(), ProbabilityFeatureConfiguration(
+                    0.5f
+                )
+            )
+
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.CATTAIL_PATCH,
+                HybridAquatic.CATTAIL_PATCH.get(), ProbabilityFeatureConfiguration(
                     0.5f
                 )
             )
@@ -513,7 +528,6 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.WATER_LETTUCE,
-
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     30, 5, 5,
                     PlacementUtils.filtered(
@@ -529,7 +543,6 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.WATER_HYACINTH,
-
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     30, 5, 5,
                     PlacementUtils.filtered(
@@ -545,7 +558,6 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.JUNGLE_LILY_PAD,
-
                 Feature.RANDOM_PATCH, RandomPatchConfiguration(
                     10, 5, 5,
                     PlacementUtils.filtered(
@@ -997,6 +1009,8 @@ class ConfiguredFeatureProvider(
         entries.add(reg.getOrThrow(HAConfiguredFeatures.RED_ALGAE_PATCH))
 
         entries.add(reg.getOrThrow(HAConfiguredFeatures.DUNEGRASS_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.CATTAIL_PATCH))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.PAPYRUS_PATCH))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.SARGASSUM))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_SARGASSUM))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_PETALS))

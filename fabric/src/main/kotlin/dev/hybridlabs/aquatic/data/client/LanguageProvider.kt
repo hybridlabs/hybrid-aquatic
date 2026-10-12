@@ -444,6 +444,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPlatformBlocks.TALL_DUNEGRASS.get() to "Tall Dunegrass",
 
             HAPlatformBlocks.CATTAIL.get() to "Cattail",
+            HAPlatformBlocks.PAPYRUS.get() to "Papyrus",
 
             HABlocks.SARGASSUM.get() to "Sargassum",
             HABlocks.SARGASSUM_PLANT.get() to "Sargassum Plant",

@@ -25,6 +25,7 @@ object HABlockRendererRegistry {
             HAPlatformBlocks.TALL_DUNEGRASS.get(),
 
             HAPlatformBlocks.CATTAIL.get(),
+            HAPlatformBlocks.PAPYRUS.get(),
 
             HABlocks.CLAMS.get(),
             HABlocks.MUSSELS.get(),

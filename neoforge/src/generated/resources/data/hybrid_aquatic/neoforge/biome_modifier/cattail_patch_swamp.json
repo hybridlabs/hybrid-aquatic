@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hapi:swamp",
+  "features": "hybrid_aquatic:cattail_patch",
+  "step": "vegetal_decoration"
+}

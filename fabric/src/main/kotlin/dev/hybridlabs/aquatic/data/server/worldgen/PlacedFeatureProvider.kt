@@ -93,6 +93,26 @@ class PlacedFeatureProvider(
                 )
             )
 
+            PlacementUtils.register(
+                bootstrap,
+                HAPlacedFeatures.PAPYRUS_PATCH,
+                reg.get(HAConfiguredFeatures.PAPYRUS_PATCH).get(), listOf(
+                    NoiseBasedCountPlacement.of(150, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    BiomeFilter.biome()
+                )
+            )
+
+            PlacementUtils.register(
+                bootstrap,
+                HAPlacedFeatures.CATTAIL_PATCH,
+                reg.get(HAConfiguredFeatures.CATTAIL_PATCH).get(), listOf(
+                    NoiseBasedCountPlacement.of(150, 80.0, 0.0),
+                    InSquarePlacement.spread(),
+                    BiomeFilter.biome()
+                )
+            )
+
             //#region Kelp
             PlacementUtils.register(
                 bootstrap,
@@ -543,6 +563,8 @@ class PlacedFeatureProvider(
         entries.add(reg.getOrThrow(HAPlacedFeatures.DELESSERIA))
         entries.add(reg.getOrThrow(HAPlacedFeatures.DISK_SUSPICIOUS_SAND))
         entries.add(reg.getOrThrow(HAPlacedFeatures.DUNEGRASS_PATCH))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.CATTAIL_PATCH))
+        entries.add(reg.getOrThrow(HAPlacedFeatures.PAPYRUS_PATCH))
         entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_SARGASSUM))
         entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_PETALS))
         entries.add(reg.getOrThrow(HAPlacedFeatures.FLOATING_LEAVES))

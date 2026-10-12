@@ -97,7 +97,14 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
             LootTable.lootTable().pool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
+                    .build()
+            )
+        }
+
+        add(HAPlatformBlocks.PAPYRUS.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
                     .build()
             )
         }

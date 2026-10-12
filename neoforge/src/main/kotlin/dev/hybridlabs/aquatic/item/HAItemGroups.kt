@@ -162,6 +162,8 @@ object HAItemGroups {
 
                 entries.accept(HAPlatformItems.DUNEGRASS.get())
                 entries.accept(HAPlatformItems.TALL_DUNEGRASS.get())
+                entries.accept(HAPlatformItems.PAPYRUS.get())
+                entries.accept(HAPlatformItems.CATTAIL.get())
                 entries.accept(HAItems.SEA_LETTUCE.get())
                 entries.accept(HAItems.SHORT_RED_ALGAE.get())
                 entries.accept(HAItems.RED_ALGAE.get())

@@ -51,6 +51,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeat
 
 object HybridAquatic : ModInitializer {
     val DUNEGRASS_PATCH = HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
+    val CATTAIL_PATCH = HAFeatures.register("cattail_patch", CattailFeature(ProbabilityFeatureConfiguration.CODEC))
+    val PAPYRUS_PATCH = HAFeatures.register("papyrus_patch", PapyrusFeature(ProbabilityFeatureConfiguration.CODEC))
 
     private val logger = Constants.LOGGER
 
@@ -142,6 +144,7 @@ object HybridAquatic : ModInitializer {
         registry.add(HAPlatformBlocks.DUNEGRASS.get(), 60, 100)
         registry.add(HAPlatformBlocks.TALL_DUNEGRASS.get(), 60, 100)
         registry.add(HAPlatformBlocks.CATTAIL.get(), 60, 100)
+        registry.add(HAPlatformBlocks.PAPYRUS.get(), 60, 100)
         // same as vanilla logs
         registry.add(HAPlatformBlocks.DRIFTWOOD_LOG.get(), 5, 5)
         registry.add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5)

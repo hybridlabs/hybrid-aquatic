@@ -64,10 +64,14 @@ object HAPlatformBlocks {
             )
         }
 
-    val DUNEGRASS = HABlocks.register("dunegrass") { DunegrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS)) }
+    val DUNEGRASS =
+        HABlocks.register("dunegrass") { DunegrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS)) }
     val TALL_DUNEGRASS =
         HABlocks.register("tall_dunegrass") { TallDunegrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS)) }
-    val CATTAIL = HABlocks.register("cattail") { CattailBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS)) }
+    val CATTAIL =
+        HABlocks.register("cattail") { CattailBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS)) }
+    val PAPYRUS =
+        HABlocks.register("papyrus") { PapyrusBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS)) }
 
     val GLOWSLIME_BLOCK = HABlocks.register("glowslime_block") {
         GlowslimeBlock(

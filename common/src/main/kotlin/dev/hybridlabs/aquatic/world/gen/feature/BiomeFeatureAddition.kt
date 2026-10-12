@@ -324,6 +324,78 @@ data class BiomeFeatureAddition(
 
             add(
                 BiomeFeatureAddition(
+                    HAPIBiomeTags.SWAMP,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.CATTAIL_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.MARSHES,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.CATTAIL_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    BiomeTags.IS_FOREST,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.CATTAIL_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.BLACKWATER_RIVERS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.CATTAIL_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.LUSH_DESERT,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.PAPYRUS_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    BiomeTags.HAS_VILLAGE_DESERT,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.PAPYRUS_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.DESERT_RIVERS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.PAPYRUS_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SAVANNA_RIVERS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.PAPYRUS_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
+                    BiomeTags.IS_SAVANNA,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.PAPYRUS_PATCH
+                ),
+            )
+
+            add(
+                BiomeFeatureAddition(
                     HAPIBiomeTags.SANDY_BEACHES,
                     GenerationStep.Decoration.UNDERGROUND_ORES,
                     HAPlacedFeatures.DISK_SUSPICIOUS_SAND
