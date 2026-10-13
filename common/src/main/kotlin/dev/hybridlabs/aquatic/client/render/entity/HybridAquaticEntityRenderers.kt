@@ -5,11 +5,7 @@ import dev.hybridlabs.aquatic.client.render.entity.critter.*
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.*
 import dev.hybridlabs.aquatic.client.render.entity.fish.*
 import dev.hybridlabs.aquatic.client.render.entity.jellyfish.*
-import dev.hybridlabs.aquatic.client.render.entity.mammal.BeaverEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.mammal.DugongEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.mammal.ManateeEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.mammal.OrcaEntityRenderer
-import dev.hybridlabs.aquatic.client.render.entity.mammal.OtterEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.mammal.*
 import dev.hybridlabs.aquatic.client.render.entity.miniboss.*
 import dev.hybridlabs.aquatic.client.render.entity.misc.*
 import dev.hybridlabs.aquatic.client.render.entity.shark.*
@@ -787,6 +783,12 @@ object HybridAquaticEntityRenderers {
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.MANATEE,
             ::ManateeEntityRenderer
+        )
+
+    val HIPPO =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.HIPPO,
+            ::HippoEntityRenderer
         )
 
     val ORCA =

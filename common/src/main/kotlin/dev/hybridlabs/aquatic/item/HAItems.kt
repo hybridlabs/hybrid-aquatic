@@ -2202,6 +2202,9 @@ object HAItems {
     val MANATEE_SPAWN_EGG =
         registerSpawnEgg("manatee_spawn_egg", HAEntityTypes.MANATEE, 0xFFFFFF, 0xFFFFFF)
 
+    val HIPPO_SPAWN_EGG =
+        registerSpawnEgg("hippo_spawn_egg", HAEntityTypes.HIPPO, 0xFFFFFF, 0xFFFFFF)
+
     val ORCA_SPAWN_EGG =
         registerSpawnEgg("orca_spawn_egg", HAEntityTypes.ORCA, 0xFFFFFF, 0xFFFFFF)
     //#endregion

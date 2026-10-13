@@ -6,11 +6,7 @@ import dev.hybridlabs.aquatic.entity.critter.*
 import dev.hybridlabs.aquatic.entity.crustacean.*
 import dev.hybridlabs.aquatic.entity.fish.*
 import dev.hybridlabs.aquatic.entity.jellyfish.*
-import dev.hybridlabs.aquatic.entity.mammal.BeaverEntity
-import dev.hybridlabs.aquatic.entity.mammal.DugongEntity
-import dev.hybridlabs.aquatic.entity.mammal.ManateeEntity
-import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
-import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
+import dev.hybridlabs.aquatic.entity.mammal.*
 import dev.hybridlabs.aquatic.entity.miniboss.*
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
@@ -942,6 +938,13 @@ object HAEntityTypes {
         ::ManateeEntity,
         EntityDimensions.fixed(2.0f, 0.9f),
         ManateeEntity::createMobAttributes
+    )
+
+    val HIPPO = registerMammal(
+        "hippo",
+        ::HippoEntity,
+        EntityDimensions.fixed(2.5f, 1.75f),
+        HippoEntity::createMobAttributes
     )
 
     val ORCA = registerDolphin(

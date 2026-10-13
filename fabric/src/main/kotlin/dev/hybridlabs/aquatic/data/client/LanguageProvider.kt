@@ -1094,6 +1094,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAEntityTypes.BEAVER.get() to "Beaver",
             HAEntityTypes.DUGONG.get() to "Dugong",
             HAEntityTypes.MANATEE.get() to "Manatee",
+            HAEntityTypes.HIPPO.get() to "Hippo",
             HAEntityTypes.ORCA.get() to "Orca",
             HAEntityTypes.DEPTH_CHARGE.get() to "Depth Charge",
             HAEntityTypes.SMALL_TNT.get() to "Small TNT",
