@@ -1,7 +1,6 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
-import dev.hybridlabs.aquatic.entity.miniboss.BeaklingEntity
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalAttackGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalBreedGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalFollowParentGoal
@@ -37,9 +36,6 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
 import software.bernie.geckolib.animation.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
 import software.bernie.geckolib.constant.DefaultAnimations
 import java.util.*
 
@@ -69,6 +65,16 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
+        this.targetSelector.addGoal(
+            2,
+            NearestAttackableTargetGoal(
+                this,
+                Player::class.java,
+                10,
+                true,
+                false
+            ) { target: LivingEntity -> this.okTarget(target) }
+        )
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(1, WaterAnimalAttackGoal(this, 1.0, false))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.7, 20))
@@ -89,7 +95,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(Items.MELON)
+        return stack.`is`(Items.MELON_SLICE)
     }
 
     /**
@@ -104,12 +110,16 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
 
     /* A little boost to help short fellas get up slopes. */
     override fun maxUpStep(): Float {
-        return 1.0f
+        return 1.5f
     }
 
     //#region Air & Moistness
     override fun isPushedByFluid(): Boolean {
         return false
+    }
+
+    fun okTarget(target: LivingEntity?): Boolean {
+        return target?.isInWater ?: false
     }
     //#endregion
 
