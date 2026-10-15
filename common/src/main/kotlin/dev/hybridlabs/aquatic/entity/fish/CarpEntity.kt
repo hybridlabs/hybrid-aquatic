@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.aquatic.entity.ai.goal.CarpBreedGoal
 import dev.hybridlabs.aquatic.entity.feature.CarpPatternTextureFeature
+import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
@@ -27,6 +28,8 @@ import net.minecraft.world.entity.*
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.TemptGoal
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.biome.Biome
@@ -72,6 +75,10 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
         }
 
         return HAEntityTypes.CARP.get().create(level)
+    }
+
+    override fun isFood(stack: ItemStack): Boolean {
+        return stack.`is`(HAItems.FISH_FOOD.get())
     }
 
     override fun getMaxSpawnClusterSize(): Int {
