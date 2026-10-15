@@ -80,6 +80,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "hybrid_aquatic:diving_armor_upgrade_template",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid_aquatic:hybrid_crate",
           "weight": 3
         },
@@ -146,10 +151,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:heart_of_the_sea"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "hybrid_aquatic:diving_armor_upgrade_template"
         }
       ],
       "rolls": 1.0

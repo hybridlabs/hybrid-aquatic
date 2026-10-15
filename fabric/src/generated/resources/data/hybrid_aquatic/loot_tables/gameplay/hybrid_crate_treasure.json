@@ -9,6 +9,10 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "hybrid_aquatic:diving_armor_upgrade_template"
+        },
+        {
+          "type": "minecraft:item",
           "name": "hybrid_aquatic:manglerfish_fin"
         },
         {
