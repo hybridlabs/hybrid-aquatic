@@ -162,6 +162,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         getOrCreateTagBuilder(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
             .add(HABlocks.SCHIST.get())
             .add(HABlocks.CHIMNEYSTONE.get())
+            .add(HABlocks.RED_BRINESTONE.get())
+            .add(HABlocks.ORANGE_BRINESTONE.get())
+            .add(HABlocks.YELLOW_BRINESTONE.get())
 
         getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE.get())

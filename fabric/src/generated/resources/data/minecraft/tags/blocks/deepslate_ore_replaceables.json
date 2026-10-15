@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "hybrid_aquatic:schist",
-    "hybrid_aquatic:chimneystone"
+    "hybrid_aquatic:chimneystone",
+    "hybrid_aquatic:red_brinestone",
+    "hybrid_aquatic:orange_brinestone",
+    "hybrid_aquatic:yellow_brinestone"
   ]
 }
