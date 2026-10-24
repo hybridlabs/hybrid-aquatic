@@ -113,7 +113,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     }
 
     override fun getWaterSlowDown(): Float {
-        return 1.0f
+        return 0.85f
     }
 
     fun okTarget(target: LivingEntity?): Boolean {
@@ -122,8 +122,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
         val mainHand = target.mainHandItem.item
         val offHand = target.offhandItem.item
 
-        return !(mainHand == Items.MELON || mainHand == Items.MELON_SLICE ||
-                offHand == Items.MELON || offHand == Items.MELON_SLICE)
+        return !(mainHand == BREEDING_INGREDIENT || offHand == BREEDING_INGREDIENT)
     }
     //#endregion
 
