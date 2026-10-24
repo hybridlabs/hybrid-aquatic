@@ -3,7 +3,7 @@
   "biomes": "#hapi:tropical_rivers",
   "spawners": {
     "type": "hybrid_aquatic:cichlid",
-    "maxCount": 1,
+    "maxCount": 3,
     "minCount": 1,
     "weight": 5
   }

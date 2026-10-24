@@ -1,9 +1,9 @@
 {
   "type": "neoforge:add_spawns",
-  "biomes": "#hapi:badlands_rivers",
+  "biomes": "#hapi:exotic_rivers",
   "spawners": {
     "type": "hybrid_aquatic:cichlid",
-    "maxCount": 1,
+    "maxCount": 3,
     "minCount": 1,
     "weight": 5
   }

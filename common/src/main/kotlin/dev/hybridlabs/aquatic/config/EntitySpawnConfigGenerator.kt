@@ -123,14 +123,10 @@ class EntitySpawnConfigGenerator {
         addRiverFish(
             HAEntityTypes.CICHLID.get(),
             listOf(
-                HAPIBiomeTags.JUNGLE,
-                HAPIBiomeTags.MANGROVES,
+                HAPIBiomeTags.EXOTIC_RIVERS,
                 HAPIBiomeTags.TROPICAL_RIVERS,
-                HAPIBiomeTags.SAVANNA_RIVERS,
-                HAPIBiomeTags.DESERT_RIVERS,
-                HAPIBiomeTags.BADLANDS_RIVERS,
                 ),
-            5, 1, 1
+            5, 1, 3
         )
 
         addRiverFish(
