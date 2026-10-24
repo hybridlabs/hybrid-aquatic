@@ -24,6 +24,7 @@ import net.minecraft.world.entity.ai.control.MoveControl
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal
@@ -32,6 +33,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
@@ -65,22 +67,14 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
         targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        this.targetSelector.addGoal(
-            2,
-            NearestAttackableTargetGoal(
-                this,
-                Player::class.java,
-                10,
-                true,
-                false
-            ) { target: LivingEntity -> this.okTarget(target) }
-        )
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { target: LivingEntity -> this.okTarget(target) })
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(1, WaterAnimalAttackGoal(this, 1.0, false))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.7, 20))
         goalSelector.addGoal(4, LookAtPlayerGoal(this, Player::class.java, 5.0f, 0.1f, true))
         goalSelector.addGoal(4, RandomLookAroundGoal(this))
         goalSelector.addGoal(5, WaterAnimalFollowParentGoal(this, 1.1))
+        goalSelector.addGoal(2, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
@@ -95,7 +89,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     }
 
     override fun isFood(stack: ItemStack): Boolean {
-        return stack.`is`(Items.MELON_SLICE)
+        return stack.`is`(Items.MELON_SLICE) || stack.`is`(Items.MELON)
     }
 
     /**
@@ -118,8 +112,18 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
         return false
     }
 
+    override fun getWaterSlowDown(): Float {
+        return 1.0f
+    }
+
     fun okTarget(target: LivingEntity?): Boolean {
-        return target?.isInWater ?: false
+        if (target == null || !target.isInWater) return false
+
+        val mainHand = target.mainHandItem.item
+        val offHand = target.offhandItem.item
+
+        return !(mainHand == Items.MELON || mainHand == Items.MELON_SLICE ||
+                offHand == Items.MELON || offHand == Items.MELON_SLICE)
     }
     //#endregion
 
@@ -190,6 +194,10 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
 
         val HUNGER: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(HippoEntity::class.java, EntityDataSerializers.INT)
+
+        val BREEDING_INGREDIENT: Ingredient = Ingredient.of(
+            Items.MELON, Items.MELON_SLICE
+        )
     }
 
     override fun defineSynchedData(builder: SynchedEntityData.Builder) {
