@@ -203,7 +203,6 @@ object HybridAquaticModBusEvents {
                     -1
                 }
             },
-            HABlocks.WATER_LETTUCE.get(),
             HABlocks.FLOATING_LEAVES.get()
         )
     }

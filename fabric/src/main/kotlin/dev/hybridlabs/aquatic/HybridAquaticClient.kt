@@ -185,7 +185,6 @@ object HybridAquaticClient : ClientModInitializer {
                 }
             },
 
-            HABlocks.WATER_LETTUCE.get(),
             HABlocks.FLOATING_LEAVES.get(),
         )
     }

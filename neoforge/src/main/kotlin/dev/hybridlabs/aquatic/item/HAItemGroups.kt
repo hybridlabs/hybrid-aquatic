@@ -173,6 +173,7 @@ object HAItemGroups {
                 entries.accept(HAItems.FLOATING_SARGASSUM.get())
                 entries.accept(HAItems.FLOATING_PETALS.get())
                 entries.accept(HAItems.FLOATING_LEAVES.get())
+                entries.accept(HAItems.FLOATING_LEAF_LITTER.get())
                 entries.accept(HAItems.WATER_LETTUCE.get())
                 entries.accept(HAItems.WATER_HYACINTH.get())
                 entries.accept(HAItems.JUNGLE_LILY_PAD.get())

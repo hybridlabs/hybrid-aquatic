@@ -236,6 +236,22 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
+                        HAPIBiomeTags.FORESTED_RIVERS,
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        HAPlacedFeatures.FLOATING_LEAF_LITTER
+                    ),
+                )
+
+                add(
+                    BiomeFeatureAddition(
+                        HAPIBiomeTags.BLACKWATER_RIVERS,
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        HAPlacedFeatures.FLOATING_LEAF_LITTER
+                    ),
+                )
+
+                add(
+                    BiomeFeatureAddition(
                         HAPIBiomeTags.FLORAL_RIVERS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.FLOATING_PETALS

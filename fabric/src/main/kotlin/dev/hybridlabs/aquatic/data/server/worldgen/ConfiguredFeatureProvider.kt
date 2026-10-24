@@ -488,6 +488,43 @@ class ConfiguredFeatureProvider(
                 )
             )
 
+            val floatingLeafLitterStates = buildList {
+                for (amount in 1..4) {
+                    for (direction in Direction.Plane.HORIZONTAL) {
+                        add(
+                            HABlocks.FLOATING_LEAF_LITTER.get().defaultBlockState()
+                                .setValue(IncrementableBlock.AMOUNT, amount)
+                                .setValue(IncrementableBlock.FACING, direction)
+                                .setValue(WATERLOGGED, true)
+                        )
+                    }
+                }
+            }
+
+            FeatureUtils.register(
+                bootstrap,
+                HAConfiguredFeatures.FLOATING_LEAF_LITTER,
+                Feature.RANDOM_PATCH,
+                RandomPatchConfiguration(
+                    50,
+                    5,
+                    5,
+                    PlacementUtils.filtered(
+                        Feature.SIMPLE_BLOCK,
+                        SimpleBlockConfiguration(
+                            WeightedStateProvider(
+                                SimpleWeightedRandomList.builder<BlockState>().apply {
+                                    floatingLeafLitterStates.forEach { state ->
+                                        add(state, 1)
+                                    }
+                                }.build()
+                            )
+                        ),
+                        BlockPredicate.matchesBlocks(Blocks.WATER)
+                    )
+                )
+            )
+
             val floatingPetalsStates = buildList {
                 for (amount in 1..4) {
                     for (direction in Direction.Plane.HORIZONTAL) {
@@ -1015,6 +1052,7 @@ class ConfiguredFeatureProvider(
         entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_SARGASSUM))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_PETALS))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_LEAVES))
+        entries.add(reg.getOrThrow(HAConfiguredFeatures.FLOATING_LEAF_LITTER))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.BULL_KELP))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.DELESSERIA))
 

@@ -437,10 +437,19 @@ object HABlocks {
     }
 
     val FLOATING_LEAVES = register("floating_leaves") {
-        FloatingPetalsBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
+        FloatingLeavesBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
             .noCollission()
             .instabreak()
             .mapColor(MapColor.PLANT))
+    }
+
+    val FLOATING_LEAF_LITTER = register("floating_leaf_litter") {
+        FloatingLeafLitterBlock(Properties.ofFullCopy(Blocks.LILY_PAD)
+            .noCollission()
+            .instabreak()
+            .mapColor(MapColor.TERRACOTTA_BROWN)
+            .sound(SoundType.ROOTS)
+        )
     }
 
     val WATER_LETTUCE = register("water_lettuce") {

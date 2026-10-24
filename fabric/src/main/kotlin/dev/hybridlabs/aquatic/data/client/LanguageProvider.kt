@@ -455,6 +455,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABlocks.FLOATING_SARGASSUM.get() to "Floating Sargassum",
             HABlocks.FLOATING_PETALS.get() to "Floating Petals",
             HABlocks.FLOATING_LEAVES.get() to "Floating Leaves",
+            HABlocks.FLOATING_LEAF_LITTER.get() to "Floating Leaf Litter",
             HABlocks.WATER_LETTUCE.get() to "Water Lettuce",
             HABlocks.WATER_HYACINTH.get() to "Water Hyacinth",
             HABlocks.JUNGLE_LILY_PAD.get() to "Jungle Lily Pad",
