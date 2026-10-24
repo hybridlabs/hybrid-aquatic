@@ -260,7 +260,7 @@ data class BiomeFeatureAddition(
 
                 add(
                     BiomeFeatureAddition(
-                        HAPIBiomeTags.FORESTED_RIVERS,
+                        HAPIBiomeTags.PLAINS_RIVERS,
                         GenerationStep.Decoration.VEGETAL_DECORATION,
                         HAPlacedFeatures.DUCKWEED_PATCH
                     ),
