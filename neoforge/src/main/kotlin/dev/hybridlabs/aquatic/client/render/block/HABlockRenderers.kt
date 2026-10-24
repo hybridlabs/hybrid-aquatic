@@ -48,6 +48,7 @@ object HABlockRenderers {
             HABlocks.FLOATING_PETALS.get(),
             HABlocks.FLOATING_LEAVES.get(),
             HABlocks.FLOATING_LEAF_LITTER.get(),
+            HABlocks.DUCKWEED.get(),
 
             HABlocks.WATER_LETTUCE.get(),
             HABlocks.WATER_HYACINTH.get(),

@@ -257,6 +257,14 @@ data class BiomeFeatureAddition(
                         HAPlacedFeatures.FLOATING_PETALS
                     ),
                 )
+
+                add(
+                    BiomeFeatureAddition(
+                        HAPIBiomeTags.FORESTED_RIVERS,
+                        GenerationStep.Decoration.VEGETAL_DECORATION,
+                        HAPlacedFeatures.DUCKWEED_PATCH
+                    ),
+                )
             }
             //#endregion
 

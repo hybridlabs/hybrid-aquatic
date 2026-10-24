@@ -437,6 +437,14 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             )
 
             createIncrementalBlock(
+                HABlocks.DUCKWEED.get(),
+                HAModelTemplates.INCREMENTAL_BLOCK_1,
+                HAModelTemplates.INCREMENTAL_BLOCK_2,
+                HAModelTemplates.INCREMENTAL_BLOCK_3,
+                HAModelTemplates.INCREMENTAL_BLOCK_4
+            )
+
+            createIncrementalBlock(
                 HABlocks.FLOATING_PETALS.get(),
                 HAModelTemplates.INCREMENTAL_BLOCK_1,
                 HAModelTemplates.INCREMENTAL_BLOCK_2,

@@ -196,6 +196,15 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
             )
         }
 
+        add(HABlocks.DUCKWEED.get()) { block ->
+            LootTable.lootTable().pool(
+                LootPool.lootPool()
+                    .add(LootItem.lootTableItem(block))
+                    .conditionally(hasShearsOrSilkTouch().build())
+                    .build()
+            )
+        }
+
         add(HABlocks.BONE_WORMS.get()) { block ->
             LootTable.lootTable().pool(
                 LootPool.lootPool()

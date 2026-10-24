@@ -20,6 +20,7 @@ object HAPlacedFeatures {
     val FLOATING_PETALS = register("floating_petals")
     val FLOATING_LEAVES = register("floating_leaves")
     val FLOATING_LEAF_LITTER = register("floating_leaf_litter")
+    val DUCKWEED_PATCH = register("duckweed_patch")
     val BLACKWATER_FLOATING_LEAVES = register("blackwater_floating_leaves")
     val BULL_KELP = register("bull_kelp")
     val DELESSERIA = register("delesseria")

@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION", "DEPRECATION")
-class FloatingLeavesBlock(settings: Properties) : IncrementableBlock(settings), SimpleWaterloggedBlock {
+class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), SimpleWaterloggedBlock {
 
     init {
         registerDefaultState(
@@ -110,7 +110,7 @@ class FloatingLeavesBlock(settings: Properties) : IncrementableBlock(settings), 
     }
 
     companion object {
-        val CODEC: MapCodec<FloatingLeavesBlock> = simpleCodec(::FloatingLeavesBlock)
+        val CODEC: MapCodec<FloatingLitterBlock> = simpleCodec(::FloatingLitterBlock)
         private val SHAPE: VoxelShape = box(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }
