@@ -1003,6 +1003,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAEntityTypes.CARP.get() to "Carp",
             HAEntityTypes.GOLDFISH.get() to "Goldfish",
             HAEntityTypes.TROUT.get() to "Trout",
+            HAEntityTypes.CATFISH.get() to "Catfish",
             HAEntityTypes.SUNFISH.get() to "Sunfish",
             HAEntityTypes.NEEDLEFISH.get() to "Needlefish",
             HAEntityTypes.BARRACUDA.get() to "Barracuda",

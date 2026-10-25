@@ -802,6 +802,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             HAItems.CARP_SPAWN_EGG.get(),
             HAItems.GOLDFISH_SPAWN_EGG.get(),
             HAItems.TROUT_SPAWN_EGG.get(),
+            HAItems.CATFISH_SPAWN_EGG.get(),
             HAItems.SUNFISH_SPAWN_EGG.get(),
             HAItems.CLOWNFISH_SPAWN_EGG.get(),
             HAItems.BOXFISH_SPAWN_EGG.get(),

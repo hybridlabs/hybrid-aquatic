@@ -40,6 +40,7 @@ object SpawnRestrictionRegistry {
             HAEntityTypes.PIRANHA.get(),
             HAEntityTypes.SHINER.get(),
             HAEntityTypes.TROUT.get(),
+            HAEntityTypes.CATFISH.get(),
             HAEntityTypes.SUNFISH.get(),
             HAEntityTypes.CICHLID.get(),
             HAEntityTypes.GOURAMI.get(),

@@ -387,6 +387,12 @@ object HybridAquaticEntityRenderers {
             ::TroutEntityRenderer
         )
 
+    val CATFISH =
+        ClientServices.PLATFORM.registerEntityRenderer(
+            HAEntityTypes.CATFISH,
+            ::CatfishEntityRenderer
+        )
+
     val SUNFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.SUNFISH,

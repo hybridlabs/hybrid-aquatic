@@ -74,6 +74,13 @@ object HAEntityTypes {
         TroutEntity::createMobAttributes
     )
 
+    val CATFISH = registerRiverFish(
+        "catfish",
+        ::CatfishEntity,
+        EntityDimensions.scalable(0.8f, 0.6f),
+        CatfishEntity::createMobAttributes
+    )
+
     val SUNFISH = registerRiverFish(
         "sunfish",
         ::SunfishEntity,

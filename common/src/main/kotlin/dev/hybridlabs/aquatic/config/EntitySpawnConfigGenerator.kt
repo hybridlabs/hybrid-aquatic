@@ -183,6 +183,17 @@ class EntitySpawnConfigGenerator {
         )
 
         addRiverFish(
+            HAEntityTypes.CATFISH.get(),
+            listOf(
+                HAPIBiomeTags.BLACKWATER_RIVERS,
+                HAPIBiomeTags.TROPICAL_RIVERS,
+                HAPIBiomeTags.EXOTIC_RIVERS,
+                HAPIBiomeTags.SWAMP,
+            ),
+            3, 1, 2
+        )
+
+        addRiverFish(
             HAEntityTypes.SHINER.get(),
             listOf(
                 HAPIBiomeTags.COLD_RIVERS,

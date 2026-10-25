@@ -1943,6 +1943,8 @@ object HAItems {
         registerSpawnEgg("goldfish_spawn_egg", HAEntityTypes.GOLDFISH, 0xFFFFFF, 0xFFFFFF)
     val TROUT_SPAWN_EGG =
         registerSpawnEgg("trout_spawn_egg", HAEntityTypes.TROUT, 0xFFFFFF, 0xFFFFFF)
+    val CATFISH_SPAWN_EGG =
+        registerSpawnEgg("catfish_spawn_egg", HAEntityTypes.CATFISH, 0xFFFFFF, 0xFFFFFF)
     val SUNFISH_SPAWN_EGG =
         registerSpawnEgg("sunfish_spawn_egg", HAEntityTypes.SUNFISH, 0xFFFFFF, 0xFFFFFF)
     val CLOWNFISH_SPAWN_EGG =
