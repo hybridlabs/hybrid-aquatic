@@ -137,103 +137,16 @@
     ],
     "axolotls": [],
     "creature": [],
-    "hybrid_aquatic:cephalopod": [
-      {
-        "type": "hybrid_aquatic:colossal_squid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "hybrid_aquatic:giant_squid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "hybrid_aquatic:umbrella_octopus",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 7
-      }
-    ],
+    "hybrid_aquatic:cephalopod": [],
     "hybrid_aquatic:critter": [],
     "hybrid_aquatic:crustacean": [],
-    "hybrid_aquatic:fish": [
-      {
-        "type": "hybrid_aquatic:ratfish",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "hybrid_aquatic:snailfish",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "hybrid_aquatic:anglerfish",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:fangtooth",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:viperfish",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:hatchetfish",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:tripod_fish",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:sea_angel",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "hybrid_aquatic:slickhead",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
+    "hybrid_aquatic:fish": [],
     "hybrid_aquatic:jelly": [],
     "hybrid_aquatic:mammal": [],
     "hybrid_aquatic:miniboss": [],
     "hybrid_aquatic:minion": [],
     "hybrid_aquatic:river_fish": [],
-    "hybrid_aquatic:shark": [
-      {
-        "type": "hybrid_aquatic:sleeper_shark",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "hybrid_aquatic:goblin_shark",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      }
-    ],
+    "hybrid_aquatic:shark": [],
     "misc": [],
     "monster": [
       {
@@ -293,8 +206,94 @@
         "weight": 5
       }
     ],
-    "water_ambient": [],
-    "water_creature": []
+    "water_ambient": [
+      {
+        "type": "hybrid_aquatic:colossal_squid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "hybrid_aquatic:giant_squid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "hybrid_aquatic:umbrella_octopus",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 7
+      },
+      {
+        "type": "hybrid_aquatic:ratfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid_aquatic:snailfish",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid_aquatic:anglerfish",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:fangtooth",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:viperfish",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:hatchetfish",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:tripod_fish",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "hybrid_aquatic:sea_angel",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "hybrid_aquatic:slickhead",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
+    "water_creature": [
+      {
+        "type": "hybrid_aquatic:sleeper_shark",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "hybrid_aquatic:goblin_shark",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ]
   },
   "temperature": 0.5
 }

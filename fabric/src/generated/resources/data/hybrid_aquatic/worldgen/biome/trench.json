@@ -169,7 +169,76 @@
     ],
     "axolotls": [],
     "creature": [],
-    "hybrid_aquatic:cephalopod": [
+    "hybrid_aquatic:cephalopod": [],
+    "hybrid_aquatic:critter": [],
+    "hybrid_aquatic:crustacean": [],
+    "hybrid_aquatic:fish": [],
+    "hybrid_aquatic:jelly": [],
+    "hybrid_aquatic:mammal": [],
+    "hybrid_aquatic:miniboss": [],
+    "hybrid_aquatic:minion": [],
+    "hybrid_aquatic:river_fish": [],
+    "hybrid_aquatic:shark": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:spider",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:zombie",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 95
+      },
+      {
+        "type": "minecraft:zombie_villager",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      },
+      {
+        "type": "minecraft:skeleton",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:creeper",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:slime",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 100
+      },
+      {
+        "type": "minecraft:enderman",
+        "maxCount": 4,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "minecraft:witch",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 5
+      }
+    ],
+    "underground_water_creature": [
+      {
+        "type": "minecraft:glow_squid",
+        "maxCount": 5,
+        "minCount": 2,
+        "weight": 5
+      }
+    ],
+    "water_ambient": [
       {
         "type": "hybrid_aquatic:giant_squid",
         "maxCount": 1,
@@ -193,11 +262,7 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 10
-      }
-    ],
-    "hybrid_aquatic:critter": [],
-    "hybrid_aquatic:crustacean": [],
-    "hybrid_aquatic:fish": [
+      },
       {
         "type": "hybrid_aquatic:ratfish",
         "maxCount": 3,
@@ -283,12 +348,7 @@
         "weight": 1
       }
     ],
-    "hybrid_aquatic:jelly": [],
-    "hybrid_aquatic:mammal": [],
-    "hybrid_aquatic:miniboss": [],
-    "hybrid_aquatic:minion": [],
-    "hybrid_aquatic:river_fish": [],
-    "hybrid_aquatic:shark": [
+    "water_creature": [
       {
         "type": "hybrid_aquatic:sixgill_shark",
         "maxCount": 1,
@@ -307,68 +367,7 @@
         "minCount": 1,
         "weight": 5
       }
-    ],
-    "misc": [],
-    "monster": [
-      {
-        "type": "minecraft:spider",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:zombie",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 95
-      },
-      {
-        "type": "minecraft:zombie_villager",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "minecraft:skeleton",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:creeper",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:slime",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:enderman",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:witch",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      }
-    ],
-    "underground_water_creature": [
-      {
-        "type": "minecraft:glow_squid",
-        "maxCount": 5,
-        "minCount": 2,
-        "weight": 5
-      }
-    ],
-    "water_ambient": [],
-    "water_creature": []
+    ]
   },
   "temperature": 0.2
 }

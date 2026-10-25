@@ -178,7 +178,7 @@ class EntitySpawnConfigGenerator {
                 HAPIBiomeTags.COLD_RIVERS,
                 HAPIBiomeTags.FORESTED_RIVERS,
                 HAPIBiomeTags.FLORAL_RIVERS,
-                BiomeTags.IS_RIVER),
+            ),
             5, 1, 1
         )
 
@@ -1207,7 +1207,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+            MobCategory.WATER_AMBIENT,
             weight,
             minGroup,
             maxGroup
@@ -1224,7 +1224,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("river_fish"),
+            MobCategory.WATER_AMBIENT,
             weight,
             minGroup,
             maxGroup
@@ -1240,7 +1240,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+            MobCategory.WATER_AMBIENT,
             weight, minGroup, maxGroup
         )
     }
@@ -1254,7 +1254,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+            MobCategory.WATER_CREATURE,
             weight, minGroup, maxGroup
         )
     }
@@ -1269,7 +1269,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            MobCategory.CREATURE,
             weight,
             minGroup,
             maxGroup
@@ -1286,7 +1286,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            MobCategory.CREATURE,
             weight,
             minGroup,
             maxGroup
@@ -1303,7 +1303,7 @@ class EntitySpawnConfigGenerator {
         add(
             entityType,
             spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            MobCategory.WATER_CREATURE,
             weight,
             minGroup,
             maxGroup
@@ -1319,7 +1319,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("jelly"),
+            MobCategory.WATER_AMBIENT,
             weight, minGroup, maxGroup
         )
     }
@@ -1333,7 +1333,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("crustacean"),
+            MobCategory.WATER_AMBIENT,
             weight, minGroup, maxGroup
         )
     }
@@ -1347,7 +1347,7 @@ class EntitySpawnConfigGenerator {
     ) {
         add(
             entityType, spawnTags,
-            Services.PLATFORM.getHybridMobCategoryByName("critter"),
+            MobCategory.WATER_AMBIENT,
             weight, minGroup, maxGroup
         )
     }

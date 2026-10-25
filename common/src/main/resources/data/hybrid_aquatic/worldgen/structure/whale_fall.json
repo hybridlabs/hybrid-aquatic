@@ -3,7 +3,7 @@
   "biomes": "#hapi:has_whale_fall",
   "step": "surface_structures",
   "spawn_overrides": {
-    "hybrid_aquatic:crustacean": {
+    "water_ambient": {
       "bounding_box": "full",
       "spawns": [
         {
@@ -17,24 +17,14 @@
           "maxCount": 5,
           "minCount": 1,
           "weight": 1
-        }
-      ]
-    },
-    "hybrid_aquatic:fish": {
-      "bounding_box": "full",
-      "spawns": [
+        },
         {
           "type": "hybrid_aquatic:hagfish",
           "maxCount": 5,
           "minCount": 3,
           "weight": 2
-        }
-      ]
-    },
-    "hybrid_aquatic:critter": {
-      "bounding_box": "full",
-      "spawns": [
-        {
+        },
+      {
           "type": "hybrid_aquatic:starfish",
           "maxCount": 6,
           "minCount": 2,

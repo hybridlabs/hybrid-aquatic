@@ -501,89 +501,89 @@ class BiomeProvider(
                     grassColor = 0x020217,
                     listOf(
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                         ),
                     ),
@@ -626,90 +626,90 @@ class BiomeProvider(
                     grassColor = 0x020217,
                     listOf(
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                         ),
 
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                         ),
                     ),
@@ -752,90 +752,90 @@ class BiomeProvider(
                     grassColor = 0x1b2447,
                     listOf(
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                         ),
 
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                         ),
                     ),
@@ -878,62 +878,62 @@ class BiomeProvider(
                     grassColor = 0x020217,
                     listOf(
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 2)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                     ),
@@ -968,49 +968,49 @@ class BiomeProvider(
                     grassColor = 0x020217,
                     listOf(
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                         ),
 
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+                            MobCategory.WATER_CREATURE,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
                         ),
                     ),
@@ -1042,11 +1042,11 @@ class BiomeProvider(
                     grassColor = 0x020217,
                     listOf(
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                     ),
@@ -1074,11 +1074,11 @@ class BiomeProvider(
                     grassColor = 0x020217,
                     listOf(
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
-                            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+                            MobCategory.WATER_AMBIENT,
                             MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                     ),

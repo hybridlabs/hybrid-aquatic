@@ -1052,7 +1052,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1066,7 +1066,7 @@ object HAEntityTypes {
     ): RegistryObject<EntityType<T>> {
         return registerCustomSpawnGroup(
             id, entityFactory, dimensions, attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("river_fish"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1083,7 +1083,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("fish"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1102,7 +1102,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1119,7 +1119,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("cephalopod"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1138,7 +1138,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("crustacean"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1155,7 +1155,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("crustacean"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1174,7 +1174,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("critter"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1193,7 +1193,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("jelly"),
+            MobCategory.WATER_AMBIENT,
             trackingRange,
         )
     }
@@ -1210,7 +1210,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("jelly"),
+            MobCategory.WATER_AMBIENT,
             trackingRange
         )
     }
@@ -1229,7 +1229,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+            MobCategory.WATER_CREATURE,
             trackingRange,
             canSpawnFarFromPlayer = true
         )
@@ -1247,7 +1247,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("shark"),
+            MobCategory.WATER_CREATURE,
             trackingRange,
             canSpawnFarFromPlayer = true
         )
@@ -1267,7 +1267,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            MobCategory.CREATURE,
             trackingRange,
             canSpawnFarFromPlayer = true
         )
@@ -1285,7 +1285,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            MobCategory.CREATURE,
             trackingRange,
             canSpawnFarFromPlayer = true
         )
@@ -1303,7 +1303,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("mammal"),
+            MobCategory.WATER_CREATURE,
             trackingRange,
             canSpawnFarFromPlayer = true
         )
@@ -1323,7 +1323,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("miniboss"),
+            MobCategory.MONSTER,
             trackingRange,
         )
     }
@@ -1340,7 +1340,7 @@ object HAEntityTypes {
             entityFactory,
             dimensions,
             attributeContainer,
-            Services.PLATFORM.getHybridMobCategoryByName("minion"),
+            MobCategory.MONSTER,
             trackingRange,
         )
     }

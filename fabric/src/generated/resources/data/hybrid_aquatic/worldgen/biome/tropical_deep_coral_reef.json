@@ -94,20 +94,7 @@
     ],
     "axolotls": [],
     "creature": [],
-    "hybrid_aquatic:cephalopod": [
-      {
-        "type": "hybrid_aquatic:nautilus",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "hybrid_aquatic:umbrella_octopus",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 7
-      }
-    ],
+    "hybrid_aquatic:cephalopod": [],
     "hybrid_aquatic:critter": [],
     "hybrid_aquatic:crustacean": [],
     "hybrid_aquatic:fish": [],
@@ -176,7 +163,20 @@
         "weight": 5
       }
     ],
-    "water_ambient": [],
+    "water_ambient": [
+      {
+        "type": "hybrid_aquatic:nautilus",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hybrid_aquatic:umbrella_octopus",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 7
+      }
+    ],
     "water_creature": []
   },
   "temperature": 0.5
