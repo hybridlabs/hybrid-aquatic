@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.MapCodec
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -94,7 +95,7 @@ class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
 
     override fun entityInside(state: BlockState, world: Level, pos: BlockPos, entity: Entity) {
         super.entityInside(state, world, pos, entity)
-        if (world is ServerLevel && entity is Boat) {
+        if (world is ServerLevel && entity.type.`is`(HAPIEntityTags.BOATS)) {
             entity.makeStuckInBlock(state, Vec3(0.66, 0.66, 0.66))
             world.destroyBlock(BlockPos(pos), false, entity)
         }
