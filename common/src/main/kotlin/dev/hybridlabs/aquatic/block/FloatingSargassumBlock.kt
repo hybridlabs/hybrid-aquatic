@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.ParticleUtils
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.vehicle.Boat
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -48,7 +48,7 @@ class FloatingSargassumBlock(settings: Properties) : BushBlock(settings), Simple
 
     override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
         super.entityInside(state, level, pos, entity)
-        if (level is ServerLevel && entity is Boat) {
+        if (level is ServerLevel && entity.type.`is`(HAPIEntityTags.BOATS)) {
             level.destroyBlock(BlockPos(pos), true, entity)
         }
     }
