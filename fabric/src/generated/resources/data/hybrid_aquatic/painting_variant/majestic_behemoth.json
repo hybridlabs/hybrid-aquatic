@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:majestic_behemoth",
+  "author": {
+    "translate": "painting.hybrid_aquatic.majestic_behemoth.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.majestic_behemoth.title"
+  },
   "width": 3
 }

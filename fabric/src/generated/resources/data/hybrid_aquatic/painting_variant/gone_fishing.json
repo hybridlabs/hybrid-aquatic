@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:gone_fishing",
+  "author": {
+    "translate": "painting.hybrid_aquatic.gone_fishing.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.gone_fishing.title"
+  },
   "width": 1
 }

@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:jona_saxisa",
+  "author": {
+    "translate": "painting.hybrid_aquatic.jona_saxisa.author"
+  },
   "height": 1,
+  "title": {
+    "translate": "painting.hybrid_aquatic.jona_saxisa.title"
+  },
   "width": 1
 }

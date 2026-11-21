@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:chasm",
+  "author": {
+    "translate": "painting.hybrid_aquatic.chasm.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.chasm.title"
+  },
   "width": 2
 }

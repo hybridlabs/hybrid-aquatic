@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:admiral_skellington",
+  "author": {
+    "translate": "painting.hybrid_aquatic.admiral_skellington.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.admiral_skellington.title"
+  },
   "width": 2
 }

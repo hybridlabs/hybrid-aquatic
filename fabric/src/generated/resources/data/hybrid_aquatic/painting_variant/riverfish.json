@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:riverfish",
+  "author": {
+    "translate": "painting.hybrid_aquatic.riverfish.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.riverfish.title"
+  },
   "width": 2
 }

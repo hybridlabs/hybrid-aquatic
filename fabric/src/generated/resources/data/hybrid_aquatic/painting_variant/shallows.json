@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:shallows",
+  "author": {
+    "translate": "painting.hybrid_aquatic.shallows.author"
+  },
   "height": 1,
+  "title": {
+    "translate": "painting.hybrid_aquatic.shallows.title"
+  },
   "width": 2
 }

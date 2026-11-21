@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.decoration.painting.PaintingVariant
 import java.util.Optional
@@ -28,7 +29,17 @@ class PaintingProvider(output: FabricPackOutput,
 
     companion object {
         fun register(context: BootstrapContext<PaintingVariant>, key: ResourceKey<PaintingVariant>, id: String, width: Int, height: Int) {
-            context.register(key, PaintingVariant(width, height, key.identifier(), Optional.empty(), Optional.empty()))
+            val paintingId = key.identifier()
+            context.register(
+                key,
+                PaintingVariant(
+                    width,
+                    height,
+                    paintingId,
+                    Optional.of(Component.translatable("painting.${paintingId.namespace}.${paintingId.path}.title")),
+                    Optional.of(Component.translatable("painting.${paintingId.namespace}.${paintingId.path}.author"))
+                )
+            )
         }
 
         fun bootstrapVariants(context: BootstrapContext<PaintingVariant>) {

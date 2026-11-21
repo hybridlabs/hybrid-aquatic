@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:red_devil",
+  "author": {
+    "translate": "painting.hybrid_aquatic.red_devil.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.red_devil.title"
+  },
   "width": 2
 }

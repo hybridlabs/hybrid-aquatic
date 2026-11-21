@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:bigeye",
+  "author": {
+    "translate": "painting.hybrid_aquatic.bigeye.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.bigeye.title"
+  },
   "width": 3
 }

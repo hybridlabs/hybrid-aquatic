@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:pansexual_pride_flag",
+  "author": {
+    "translate": "painting.hybrid_aquatic.pansexual_pride_flag.author"
+  },
   "height": 1,
+  "title": {
+    "translate": "painting.hybrid_aquatic.pansexual_pride_flag.title"
+  },
   "width": 2
 }

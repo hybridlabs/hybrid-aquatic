@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:suntide",
+  "author": {
+    "translate": "painting.hybrid_aquatic.suntide.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.suntide.title"
+  },
   "width": 4
 }

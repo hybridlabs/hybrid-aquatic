@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:praya_dubia",
+  "author": {
+    "translate": "painting.hybrid_aquatic.praya_dubia.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.praya_dubia.title"
+  },
   "width": 2
 }

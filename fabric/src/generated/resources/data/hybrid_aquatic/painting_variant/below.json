@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:below",
+  "author": {
+    "translate": "painting.hybrid_aquatic.below.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.below.title"
+  },
   "width": 2
 }

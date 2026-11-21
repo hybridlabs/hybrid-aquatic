@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:king_of_herring",
+  "author": {
+    "translate": "painting.hybrid_aquatic.king_of_herring.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.king_of_herring.title"
+  },
   "width": 2
 }

@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:conch_street",
+  "author": {
+    "translate": "painting.hybrid_aquatic.conch_street.author"
+  },
   "height": 1,
+  "title": {
+    "translate": "painting.hybrid_aquatic.conch_street.title"
+  },
   "width": 2
 }

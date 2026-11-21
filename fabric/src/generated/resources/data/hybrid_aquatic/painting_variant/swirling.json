@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:swirling",
+  "author": {
+    "translate": "painting.hybrid_aquatic.swirling.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.swirling.title"
+  },
   "width": 3
 }

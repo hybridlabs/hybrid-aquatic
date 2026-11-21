@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:preserver",
+  "author": {
+    "translate": "painting.hybrid_aquatic.preserver.author"
+  },
   "height": 1,
+  "title": {
+    "translate": "painting.hybrid_aquatic.preserver.title"
+  },
   "width": 1
 }

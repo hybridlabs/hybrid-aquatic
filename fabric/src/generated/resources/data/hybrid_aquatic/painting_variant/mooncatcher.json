@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:mooncatcher",
+  "author": {
+    "translate": "painting.hybrid_aquatic.mooncatcher.author"
+  },
   "height": 4,
+  "title": {
+    "translate": "painting.hybrid_aquatic.mooncatcher.title"
+  },
   "width": 4
 }

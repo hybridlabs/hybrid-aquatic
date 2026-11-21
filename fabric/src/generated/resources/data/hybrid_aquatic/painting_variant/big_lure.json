@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:big_lure",
+  "author": {
+    "translate": "painting.hybrid_aquatic.big_lure.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.big_lure.title"
+  },
   "width": 3
 }

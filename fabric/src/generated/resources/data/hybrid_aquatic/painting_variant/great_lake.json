@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:great_lake",
+  "author": {
+    "translate": "painting.hybrid_aquatic.great_lake.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.great_lake.title"
+  },
   "width": 2
 }

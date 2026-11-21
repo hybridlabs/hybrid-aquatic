@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:lighthouse_after_dusk",
+  "author": {
+    "translate": "painting.hybrid_aquatic.lighthouse_after_dusk.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.lighthouse_after_dusk.title"
+  },
   "width": 2
 }

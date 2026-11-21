@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:jolly_roger",
+  "author": {
+    "translate": "painting.hybrid_aquatic.jolly_roger.author"
+  },
   "height": 1,
+  "title": {
+    "translate": "painting.hybrid_aquatic.jolly_roger.title"
+  },
   "width": 2
 }

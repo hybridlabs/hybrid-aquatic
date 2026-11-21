@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:neven_naiven",
+  "author": {
+    "translate": "painting.hybrid_aquatic.neven_naiven.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.neven_naiven.title"
+  },
   "width": 3
 }

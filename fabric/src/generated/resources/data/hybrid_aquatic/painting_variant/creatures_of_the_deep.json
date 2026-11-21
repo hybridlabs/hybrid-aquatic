@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:creatures_of_the_deep",
+  "author": {
+    "translate": "painting.hybrid_aquatic.creatures_of_the_deep.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.creatures_of_the_deep.title"
+  },
   "width": 1
 }

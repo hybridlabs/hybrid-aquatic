@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:organon",
+  "author": {
+    "translate": "painting.hybrid_aquatic.organon.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.organon.title"
+  },
   "width": 3
 }

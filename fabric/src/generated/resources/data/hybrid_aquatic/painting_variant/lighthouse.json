@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:lighthouse",
+  "author": {
+    "translate": "painting.hybrid_aquatic.lighthouse.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.lighthouse.title"
+  },
   "width": 1
 }

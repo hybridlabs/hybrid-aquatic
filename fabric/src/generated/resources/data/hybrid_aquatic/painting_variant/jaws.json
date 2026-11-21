@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:jaws",
+  "author": {
+    "translate": "painting.hybrid_aquatic.jaws.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.jaws.title"
+  },
   "width": 1
 }

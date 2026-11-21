@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:jam",
+  "author": {
+    "translate": "painting.hybrid_aquatic.jam.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.jam.title"
+  },
   "width": 2
 }

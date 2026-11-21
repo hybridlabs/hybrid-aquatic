@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:pressed_bull_kelp",
+  "author": {
+    "translate": "painting.hybrid_aquatic.pressed_bull_kelp.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.pressed_bull_kelp.title"
+  },
   "width": 1
 }

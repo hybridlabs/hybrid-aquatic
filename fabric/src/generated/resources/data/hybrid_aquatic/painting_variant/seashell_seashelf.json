@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:seashell_seashelf",
+  "author": {
+    "translate": "painting.hybrid_aquatic.seashell_seashelf.author"
+  },
   "height": 1,
+  "title": {
+    "translate": "painting.hybrid_aquatic.seashell_seashelf.title"
+  },
   "width": 2
 }

@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:bold_and_brash",
+  "author": {
+    "translate": "painting.hybrid_aquatic.bold_and_brash.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.bold_and_brash.title"
+  },
   "width": 1
 }

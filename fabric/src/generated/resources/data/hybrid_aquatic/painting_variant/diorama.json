@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:diorama",
+  "author": {
+    "translate": "painting.hybrid_aquatic.diorama.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.diorama.title"
+  },
   "width": 2
 }

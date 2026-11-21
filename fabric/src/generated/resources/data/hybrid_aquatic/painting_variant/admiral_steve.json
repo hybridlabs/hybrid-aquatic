@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:admiral_steve",
+  "author": {
+    "translate": "painting.hybrid_aquatic.admiral_steve.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.admiral_steve.title"
+  },
   "width": 2
 }

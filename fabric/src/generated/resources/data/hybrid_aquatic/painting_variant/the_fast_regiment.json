@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:the_fast_regiment",
+  "author": {
+    "translate": "painting.hybrid_aquatic.the_fast_regiment.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.the_fast_regiment.title"
+  },
   "width": 2
 }

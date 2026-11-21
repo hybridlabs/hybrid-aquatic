@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:the_watchful",
+  "author": {
+    "translate": "painting.hybrid_aquatic.the_watchful.author"
+  },
   "height": 3,
+  "title": {
+    "translate": "painting.hybrid_aquatic.the_watchful.title"
+  },
   "width": 3
 }

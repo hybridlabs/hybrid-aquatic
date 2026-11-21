@@ -1,5 +1,11 @@
 {
   "asset_id": "hybrid_aquatic:steve_and_the_sea",
+  "author": {
+    "translate": "painting.hybrid_aquatic.steve_and_the_sea.author"
+  },
   "height": 2,
+  "title": {
+    "translate": "painting.hybrid_aquatic.steve_and_the_sea.title"
+  },
   "width": 4
 }
