@@ -1,4 +1,4 @@
-# Changelog for [Hybrid Aquatic](https://github.com/hybridlabs/hybrid-aquatic)
+# Changelog for [Hybrid Aquatic](https://hybridlabs.net)
 
 All notable changes to this project will be documented in this file.
 
@@ -11,8 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated to Minecraft 26.1.2
 - Updated to Minecraft 26.2
 - Updated to Minecraft 26.3
+- Added beavers
+- Added channel catfish, tilapia and hippos
+- Added estuaries, including cold, tropical, exotic, exotic desert, exotic badlands and blackwater variants
+- Added the lush desert biome
+- Added duckweed, water lettuce, floating leaf litter, floating leaves and floating petals
+- Added cattails and papyrus as riverbank and swamp plants
+- Adjusted freshwater fish spawn biomes
+- Improved hippo movement in water
+- Cattails and papyrus now only generate near water on both loaders
 - Added diving armor upgrade templates to crate loot
 - Jungle lily pads now break for modded boats as well
+- Fixed pick-blocking papyrus giving cattails instead of papyrus
 - Paintings now show their title and author in the item tooltip
 
 <details>
@@ -52,6 +62,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `PoseStack.mulPose` only accepts matrices and transformations
 - Removed the Lithostitched 1.7.2 `ParameterMap` mixin; 2.0 fixed the issue upstream
 - `debugutils` has no 26.3 build, so it is not loaded in Fabric dev runs
+- Painting variants store their title and author as components; datagen fills them from the existing
+  `painting.<namespace>.<path>.title` and `.author` keys because vanilla only renders those fields
+- The Fabric and NeoForge cattail and papyrus features had drifted apart; both now use the same
+  near-water check
+- The biome survey samples through `BiomeSource.createUncachedResolver` on 26.3, and each survey run
+  loads Lithostitched from its own `mods` directory
 
 </details>
 
