@@ -3,9 +3,7 @@
   "category": "building",
   "group": "bark",
   "key": {
-    "#": {
-      "item": "hybrid_aquatic:driftwood_log"
-    }
+    "#": "hybrid_aquatic:driftwood_log"
   },
   "pattern": [
     "##",

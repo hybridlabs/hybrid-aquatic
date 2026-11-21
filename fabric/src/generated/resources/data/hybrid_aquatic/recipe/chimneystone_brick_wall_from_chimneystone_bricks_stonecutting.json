@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "hybrid_aquatic:chimneystone_bricks"
-  },
+  "ingredient": "hybrid_aquatic:chimneystone_bricks",
   "result": {
     "count": 1,
     "id": "hybrid_aquatic:chimneystone_brick_wall"

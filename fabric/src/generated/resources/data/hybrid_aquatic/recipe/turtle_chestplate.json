@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "S": {
-      "item": "minecraft:turtle_scute"
-    }
+    "S": "minecraft:turtle_scute"
   },
   "pattern": [
     "S S",

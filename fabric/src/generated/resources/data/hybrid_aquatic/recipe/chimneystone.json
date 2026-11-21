@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "minecraft:dripstone_block"
-    },
-    "S": {
-      "item": "hybrid_aquatic:sulfur"
-    }
+    "B": "minecraft:dripstone_block",
+    "S": "hybrid_aquatic:sulfur"
   },
   "pattern": [
     "BBB",

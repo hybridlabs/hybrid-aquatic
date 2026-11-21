@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 100,
   "experience": 0.15,
-  "ingredient": {
-    "tag": "hybrid_aquatic:kelps"
-  },
+  "ingredient": "#hybrid_aquatic:kelps",
   "result": {
     "id": "minecraft:dried_kelp"
   }

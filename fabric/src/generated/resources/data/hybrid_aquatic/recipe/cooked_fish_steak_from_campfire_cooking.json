@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.3,
-  "ingredient": {
-    "item": "hybrid_aquatic:raw_fish_steak"
-  },
+  "ingredient": "hybrid_aquatic:raw_fish_steak",
   "result": {
     "id": "hybrid_aquatic:cooked_fish_steak"
   }

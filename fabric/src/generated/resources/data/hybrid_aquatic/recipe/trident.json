@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "R": {
-      "item": "hybrid_aquatic:prismarine_rod"
-    },
-    "S": {
-      "item": "hybrid_aquatic:shark_tooth"
-    }
+    "R": "hybrid_aquatic:prismarine_rod",
+    "S": "hybrid_aquatic:shark_tooth"
   },
   "pattern": [
     "SSS",

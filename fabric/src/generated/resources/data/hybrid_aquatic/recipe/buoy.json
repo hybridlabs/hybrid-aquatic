@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "L": {
-      "item": "minecraft:lantern"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "tag": "minecraft:planks"
-    }
+    "L": "minecraft:lantern",
+    "S": "minecraft:stick",
+    "W": "#minecraft:planks"
   },
   "pattern": [
     " L ",

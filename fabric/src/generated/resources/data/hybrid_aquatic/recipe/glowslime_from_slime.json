@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "minecraft:slime_ball"
-    },
-    {
-      "item": "minecraft:glow_ink_sac"
-    }
+    "minecraft:slime_ball",
+    "minecraft:glow_ink_sac"
   ],
   "result": {
     "count": 1,

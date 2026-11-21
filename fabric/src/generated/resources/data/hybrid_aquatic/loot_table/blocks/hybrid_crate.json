@@ -3,27 +3,15 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
-          "type": "minecraft:alternatives",
-          "children": [
-            {
-              "type": "minecraft:loot_table",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "items": "#minecraft:axes"
-                  }
-                }
-              ],
-              "value": "hybrid_aquatic:gameplay/hybrid_crate_treasure"
-            },
-            {
-              "type": "minecraft:item",
-              "name": "hybrid_aquatic:hybrid_crate"
-            }
-          ]
+          "type": "minecraft:item",
+          "name": "hybrid_aquatic:hybrid_crate"
         }
       ],
       "rolls": 1.0

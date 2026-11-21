@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "hybrid_aquatic:white_sandstone"
-    }
+    "#": "hybrid_aquatic:white_sandstone"
   },
   "pattern": [
     "###"

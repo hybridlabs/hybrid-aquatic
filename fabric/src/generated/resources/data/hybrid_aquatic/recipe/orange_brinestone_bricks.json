@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "hybrid_aquatic:polished_orange_brinestone"
-    }
+    "S": "hybrid_aquatic:polished_orange_brinestone"
   },
   "pattern": [
     "SS",

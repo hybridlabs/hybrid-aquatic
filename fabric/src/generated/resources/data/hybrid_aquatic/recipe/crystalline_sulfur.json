@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "hybrid_aquatic:sulfur"
-    }
+    "S": "hybrid_aquatic:sulfur"
   },
   "pattern": [
     "SSS",

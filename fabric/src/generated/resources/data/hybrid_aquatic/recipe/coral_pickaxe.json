@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "hybrid_aquatic:coral_chunk"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    }
+    "C": "hybrid_aquatic:coral_chunk",
+    "S": "minecraft:stick"
   },
   "pattern": [
     "CCC",

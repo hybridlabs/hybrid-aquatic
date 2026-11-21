@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "hybrid_aquatic:yellow_brinestone"
-    }
+    "S": "hybrid_aquatic:yellow_brinestone"
   },
   "pattern": [
     "SS",

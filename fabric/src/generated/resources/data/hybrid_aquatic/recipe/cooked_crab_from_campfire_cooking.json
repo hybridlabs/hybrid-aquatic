@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.15,
-  "ingredient": {
-    "item": "hybrid_aquatic:raw_crab"
-  },
+  "ingredient": "hybrid_aquatic:raw_crab",
   "result": {
     "id": "hybrid_aquatic:cooked_crab"
   }

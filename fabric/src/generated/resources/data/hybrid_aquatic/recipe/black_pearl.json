@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "hybrid_aquatic:black_pearl_block"
-    }
+    "hybrid_aquatic:black_pearl_block"
   ],
   "result": {
     "count": 9,

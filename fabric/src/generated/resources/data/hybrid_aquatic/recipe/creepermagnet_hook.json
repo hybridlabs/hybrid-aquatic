@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "hybrid_aquatic:magnetic_hook"
-    },
-    {
-      "item": "minecraft:gunpowder"
-    }
+    "hybrid_aquatic:magnetic_hook",
+    "minecraft:gunpowder"
   ],
   "result": {
     "count": 1,

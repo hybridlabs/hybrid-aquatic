@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:dark_oak_planks"
-    }
+    "S": "minecraft:stick",
+    "W": "minecraft:dark_oak_planks"
   },
   "pattern": [
     "SS ",

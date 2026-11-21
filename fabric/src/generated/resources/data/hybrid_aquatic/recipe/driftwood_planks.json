@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "hybrid_aquatic:driftwood_log_wood"
-    }
+    "#hybrid_aquatic:driftwood_log_wood"
   ],
   "result": {
     "count": 4,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "hybrid_aquatic:aerated_sand"
-    }
+    "hybrid_aquatic:aerated_sand"
   ],
   "result": {
     "count": 1,

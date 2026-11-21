@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "equipment",
   "ingredients": [
-    {
-      "item": "hybrid_aquatic:barbed_hook"
-    },
-    {
-      "item": "hybrid_aquatic:glowslime"
-    }
+    "hybrid_aquatic:barbed_hook",
+    "hybrid_aquatic:glowslime"
   ],
   "result": {
     "count": 1,

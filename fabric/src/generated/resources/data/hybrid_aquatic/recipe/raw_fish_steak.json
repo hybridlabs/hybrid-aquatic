@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "tag": "hybrid_aquatic:large_fish"
-    }
+    "#hybrid_aquatic:large_fish"
   ],
   "result": {
     "count": 2,

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "hybrid_aquatic:schist_bricks"
-  },
+  "ingredient": "hybrid_aquatic:schist_bricks",
   "result": {
     "count": 1,
     "id": "hybrid_aquatic:schist_brick_wall"

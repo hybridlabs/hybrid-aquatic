@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "I": {
-      "item": "minecraft:iron_nugget"
-    },
-    "S": {
-      "item": "hybrid_aquatic:sulfur"
-    }
+    "I": "minecraft:iron_nugget",
+    "S": "hybrid_aquatic:sulfur"
   },
   "pattern": [
     "SIS",

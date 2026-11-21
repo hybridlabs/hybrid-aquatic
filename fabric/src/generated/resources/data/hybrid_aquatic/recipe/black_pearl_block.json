@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "P": {
-      "item": "hybrid_aquatic:black_pearl"
-    }
+    "P": "hybrid_aquatic:black_pearl"
   },
   "pattern": [
     "PPP",

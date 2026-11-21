@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "C": {
-      "item": "hybrid_aquatic:dead_sun_coral_block"
-    },
-    "W": {
-      "item": "minecraft:white_dye"
-    }
+    "C": "hybrid_aquatic:dead_sun_coral_block",
+    "W": "minecraft:white_dye"
   },
   "pattern": [
     "CCC",

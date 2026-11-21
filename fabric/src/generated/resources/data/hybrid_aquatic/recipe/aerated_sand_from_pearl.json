@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "P": {
-      "item": "hybrid_aquatic:pearl"
-    },
-    "S": {
-      "item": "minecraft:sand"
-    }
+    "P": "hybrid_aquatic:pearl",
+    "S": "minecraft:sand"
   },
   "pattern": [
     "SSS",

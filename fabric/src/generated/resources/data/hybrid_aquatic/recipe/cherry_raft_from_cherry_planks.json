@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:cherry_planks"
-    }
+    "S": "minecraft:stick",
+    "W": "minecraft:cherry_planks"
   },
   "pattern": [
     "SS ",

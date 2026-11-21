@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "P": {
-      "item": "minecraft:prismarine_shard"
-    }
+    "P": "minecraft:prismarine_shard"
   },
   "pattern": [
     "P  ",

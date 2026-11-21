@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "hybrid_aquatic:item/template_anemone",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

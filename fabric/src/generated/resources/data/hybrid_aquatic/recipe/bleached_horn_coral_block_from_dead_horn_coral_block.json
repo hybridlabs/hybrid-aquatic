@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "C": {
-      "item": "minecraft:dead_horn_coral_block"
-    },
-    "W": {
-      "item": "minecraft:white_dye"
-    }
+    "C": "minecraft:dead_horn_coral_block",
+    "W": "minecraft:white_dye"
   },
   "pattern": [
     "CCC",

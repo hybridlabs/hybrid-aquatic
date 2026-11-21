@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "hybrid_aquatic:polished_schist"
-    }
+    "#": "hybrid_aquatic:polished_schist"
   },
   "pattern": [
     "###"

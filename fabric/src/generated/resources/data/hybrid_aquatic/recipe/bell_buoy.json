@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "G": {
-      "item": "minecraft:gold_ingot"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "tag": "minecraft:planks"
-    }
+    "G": "minecraft:gold_ingot",
+    "S": "minecraft:stick",
+    "W": "#minecraft:planks"
   },
   "pattern": [
     " G ",
