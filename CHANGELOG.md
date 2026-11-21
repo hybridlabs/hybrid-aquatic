@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] Unreleased
+
+- Updated to Minecraft 1.21.11
+- All creatures, blocks and items are available again
+- Plushies can be worn on your head again
+- Ocean fog, the Argonaut's camera and its steering work again
+- Coral and seashell gear swing and deal damage like other tools again
+
+<details>
+<summary>Developer notes</summary>
+
+- Migrated to GeckoLib 5: models, renderers and layers are driven by render states, and bone
+  adjustments happen in the renderer instead of the model
+- GeckoLib assets moved to `assets/<namespace>/geckolib/{models,animations}` and resource ids use
+  the stripped form
+- Coral and seashell gear now use the 1.21.11 tool and armor item API
+- Custom bobber textures, painting variants and marine snow weather visuals are temporarily
+  disabled while their vanilla renderers are reworked
+- Trinkets/Curios support is compile-only for this release
+- Added a compatibility mixin for Lithostitched 1.7.2 biome injectors and a guard for missing
+  GeckoLib animation names
+
+</details>
+
 ## [1.7.4] 2026-10-04
 
 - Changed how some fish pathfind to the surface
