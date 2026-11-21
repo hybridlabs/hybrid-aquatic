@@ -18,6 +18,7 @@ import net.minecraft.client.data.models.blockstates.ConditionBuilder
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator
 import net.minecraft.client.data.models.model.ModelTemplate
 import net.minecraft.client.data.models.model.ItemModelUtils
+import net.minecraft.client.renderer.special.SkullSpecialRenderer
 import com.geckolib.renderer.internal.GeckolibItemSpecialRenderer
 import net.minecraft.client.renderer.item.SpecialModelWrapper
 import net.minecraft.client.data.models.model.ModelTemplates
@@ -43,7 +44,19 @@ class ModelProvider(output: FabricPackOutput) : FabricModelProvider(output) {
                 .forEach { block ->
                     val id = BuiltInRegistries.BLOCK.getKey(block)
                     createAirLikeBlock(block, TextureMapping.getBlockTexture(block))
-                    registerSimpleItemModel(block.asItem(), CommonClass.locate("item/${id.path}"))
+                    val variant = block.type as PlushieBlock.Variant
+                    itemModelOutput.accept(
+                        block.asItem(),
+                        ItemModelUtils.specialModel(
+                            TEMPLATE_PLUSHIE,
+                            PLUSHIE_ITEM_TRANSFORM,
+                            SkullSpecialRenderer.Unbaked(
+                                variant,
+                                java.util.Optional.of(CommonClass.locate("block/plushie/${variant.id}_plushie")),
+                                0.0F
+                            )
+                        )
+                    )
                 }
 
             // fluids
@@ -947,5 +960,11 @@ class ModelProvider(output: FabricPackOutput) : FabricModelProvider(output) {
         private val TEMPLATE_ANEMONE = CommonClass.locate("item/template_anemone")
         private val TEMPLATE_MESSAGE_IN_A_BOTTLE = CommonClass.locate("item/template_message_in_a_bottle")
         private val TEMPLATE_PLUSHIE = CommonClass.locate("item/template_plushie")
+        private val PLUSHIE_ITEM_TRANSFORM = com.mojang.math.Transformation(
+            org.joml.Vector3f(0.5F, 0.0F, 0.5F),
+            org.joml.Quaternionf().rotationX(Math.PI.toFloat()),
+            null,
+            null
+        )
     }
 }

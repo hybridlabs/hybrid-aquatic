@@ -35,5 +35,9 @@ class PlushieBlock(variant: Variant, settings: Properties) : SkullBlock(variant,
         val textureLocation: Identifier by lazy { CommonClass.locate("textures/entity/block/plushie/${id}_plushie.png") }
 
         override fun getSerializedName(): String = id
+
+        init {
+            SkullBlock.Type.TYPES[id] = this
+        }
     }
 }
