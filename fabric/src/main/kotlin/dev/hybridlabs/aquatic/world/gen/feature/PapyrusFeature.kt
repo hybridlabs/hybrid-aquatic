@@ -2,14 +2,15 @@ package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
-import dev.hybridlabs.aquatic.block.PapyrusBlock
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
+import dev.hybridlabs.aquatic.block.PapyrusBlock
 import net.minecraft.core.BlockPos
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
-import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.util.RandomSource
 import net.minecraft.world.level.WorldGenLevel
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.level.chunk.ChunkGenerator
+import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.feature.Feature
 
 @Suppress("DEPRECATION")
@@ -30,7 +31,17 @@ data class PapyrusFeature(val probability: Float) : Feature {
         val pos = BlockPos(origin.x + dx, posY, origin.z + dz)
         val seaLevel = world.level.chunkSource.generator.seaLevel
 
-        if (posY > seaLevel + 2 && world.isEmptyBlock(pos)) {
+        val isNearWater = BlockPos.betweenClosedStream(
+            pos.offset(-3, -2, -3),
+            pos.offset(3, 2, 3)
+        ).anyMatch { checkPos ->
+            world.getBlockState(checkPos).`is`(Blocks.WATER)
+        }
+
+        if (posY >= (seaLevel - 1) &&
+            (world.isEmptyBlock(pos) || world.getBlockState(pos).`is`(Blocks.WATER)) &&
+            isNearWater
+        ) {
             val blTall = random.nextDouble() < this.probability
 
             if (blTall) {
@@ -39,7 +50,7 @@ data class PapyrusFeature(val probability: Float) : Feature {
                 val upper = HAPlatformBlocks.PAPYRUS.get().defaultBlockState()
                     .setValue(PapyrusBlock.HALF, DoubleBlockHalf.UPPER)
 
-                if (pos.y < world.maxY - 1 &&
+                if (pos.y < world.maxY &&
                     world.isEmptyBlock(pos.above()) &&
                     lower.canSurvive(world, pos)
                 ) {
