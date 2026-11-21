@@ -81,7 +81,15 @@ biomeSurveys.each { run, survey ->
         programArgs 'nogui'
     }
 
+    // The survey runs use their own run directory, so they need their own copy of the Lithostitched release
+    // jar (see the runServer/runClient wiring above).
+    def prepareMods = tasks.register("prepare${run.capitalize()}Mods", Copy) {
+        from lithostitchedRelease
+        into "${survey.dir}/mods"
+    }
+
     def prepare = tasks.register("prepare${run.capitalize()}") {
+        dependsOn prepareMods
         def dir = file(survey.dir)
         doLast {
             delete(new File(dir, 'world'), new File(dir, 'biome-survey-report.txt'))

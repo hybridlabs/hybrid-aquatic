@@ -16,7 +16,6 @@ import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.levelgen.Heightmap
 import org.apache.logging.log4j.LogManager
 
 /**
@@ -44,11 +43,12 @@ object BiomeSurvey : ModInitializer {
 
     private val TIDEPOOL_BORDERABLE = setOf(Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.WARM_OCEAN, HABiomes.DEEP_WARM_OCEAN)
 
-    /** Columns generated per biome when checking its floor block. */
-    private const val FLOOR_SAMPLES = 8
-
-    /** How many blocks below the ocean floor heightmap the floor block may be buried by features. */
-    private const val FLOOR_DEPTH = 8
+    /**
+     * Columns generated per biome when checking its floor block. A biome can be sampled at a layer
+     * where it exists while its surface belongs to a neighbouring biome, so take enough columns that
+     * at least some of them sit fully inside the biome.
+     */
+    private const val FLOOR_SAMPLES = 32
 
     /** Floor blocks that only our surface rules place in these biomes. */
     private val FLOORS: Map<ResourceKey<Biome>, () -> Block> = mapOf(
@@ -78,10 +78,10 @@ object BiomeSurvey : ModInitializer {
     private fun survey(server: MinecraftServer) {
         val level = server.overworld()
         val source = level.chunkSource.generator.biomeSource
-        val sampler = level.chunkSource.randomState().sampler()
+        val resolver = source.createUncachedResolver(level.chunkSource.randomState())
 
         fun biomeAt(x: Int, y: Int, z: Int): ResourceKey<Biome> =
-            source.getNoiseBiome(QuartPos.fromBlock(x), QuartPos.fromBlock(y), QuartPos.fromBlock(z), sampler)
+            resolver.getNoiseBiome(QuartPos.fromBlock(x), QuartPos.fromBlock(y), QuartPos.fromBlock(z))
                 .unwrapKey().orElseThrow()
 
         val counts = HashMap<ResourceKey<Biome>, Int>()
@@ -163,10 +163,17 @@ object BiomeSurvey : ModInitializer {
      */
     private fun floorMatches(level: ServerLevel, biome: ResourceKey<Biome>, columns: List<BlockPos>): Int {
         val floor = FLOORS.getValue(biome)()
+        val minY = level.minY + 1
+        val maxY = level.maxY - 1
         return columns.count { column ->
             level.getChunk(column)
-            val top = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR, column).below()
-            level.getBiome(top).`is`(biome) && (0 until FLOOR_DEPTH).any { level.getBlockState(top.below(it)).`is`(floor) }
+            // A column sampled at a deep layer can keep the target biome well below the actual
+            // ocean floor, so look for the floor block anywhere in the column instead of only
+            // just under the heightmap.
+            (maxY downTo minY).any { y ->
+                level.getBiome(column.atY(y)).`is`(biome) &&
+                    level.getBlockState(column.atY(y)).`is`(floor)
+            }
         }
     }
 
