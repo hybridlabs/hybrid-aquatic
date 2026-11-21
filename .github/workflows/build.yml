@@ -20,6 +20,10 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v7
+        with:
+          # hybrid-api is a composite build (see local_mods in gradle.properties), so the build
+          # substitutes it for the published HAPI dependency.
+          submodules: recursive
 
       # setup-java points JAVA_HOME at the LAST version listed, and that is the JVM Gradle runs
       # on. hybrid-gradle 1.0.4 requires JVM 25, which is also the toolchain this project compiles
