@@ -62,22 +62,38 @@ sourceSets {
         compileClasspath += sourceSets.main.compileClasspath + sourceSets.main.output
         runtimeClasspath += sourceSets.main.runtimeClasspath + sourceSets.main.output
     }
+
+    // The compat survey reuses the same sources with extra worldgen mods on its runtime classpath.
+    biomeSurveyCompat {
+        compileClasspath += sourceSets.biomeSurvey.output + sourceSets.biomeSurvey.compileClasspath
+        runtimeClasspath += sourceSets.biomeSurvey.output + sourceSets.biomeSurvey.runtimeClasspath
+    }
+}
+
+dependencies {
+    // 26.x runs unobfuscated, so plain runtime dependencies are enough; Loom has no remap
+    // configurations to create. The survey classpath is the run classpath, so no jars have to be
+    // copied into run/mods.
+    biomeSurveyRuntimeOnly "maven.modrinth:lithostitched:${lithostitched_version}-fabric-26.1"
+    biomeSurveyRuntimeOnly "maven.modrinth:apollib:${apollib_version}"
+
+    // These three share one version number across loaders, so the Modrinth Maven alias with the
+    // loader suffix is the only way to get the Fabric jars; the plain versions serve NeoForge.
+    biomeSurveyCompatRuntimeOnly "maven.modrinth:biomes-o-plenty:${biomesoplenty_version}-fabric"
+    biomeSurveyCompatRuntimeOnly "maven.modrinth:glitchcore:${glitchcore_version}-fabric"
+    biomeSurveyCompatRuntimeOnly "maven.modrinth:terrablender:${terrablender_version}-fabric"
 }
 
 def biomeSurveys = [
-    biomeSurvey      : [name: 'Biome Survey', dir: 'run/biome-survey', mods: []],
-    biomeSurveyCompat: [name: 'Biome Survey (BOP + TerraBlender)', dir: 'run/biome-survey-compat', mods: [
-        'https://cdn.modrinth.com/data/HXF82T3G/versions/fhyqphwv/BiomesOPlenty-fabric-1.21.1-21.1.0.14.jar',
-        'https://cdn.modrinth.com/data/s3dmwKy5/versions/sux8kYHe/GlitchCore-fabric-1.21.1-2.1.0.2.jar',
-        'https://cdn.modrinth.com/data/kkmrDlKT/versions/XNtIBXyQ/TerraBlender-fabric-1.21.1-4.1.0.8.jar',
-    ]],
+    biomeSurvey      : [name: 'Biome Survey', dir: 'run/biome-survey', sourceSet: sourceSets.biomeSurvey],
+    biomeSurveyCompat: [name: 'Biome Survey (BOP + TerraBlender)', dir: 'run/biome-survey-compat', sourceSet: sourceSets.biomeSurveyCompat],
 ]
 
 biomeSurveys.each { run, survey ->
     loom.runs.create(run) {
         server()
         configName = survey.name
-        source sourceSets.biomeSurvey
+        source survey.sourceSet
         runDir survey.dir
         programArgs 'nogui'
     }
@@ -85,15 +101,11 @@ biomeSurveys.each { run, survey ->
     def prepare = tasks.register("prepare${run.capitalize()}") {
         def dir = file(survey.dir)
         doLast {
-            delete(new File(dir, 'world'), new File(dir, 'biome-survey-report.txt'))
+            delete(new File(dir, 'world'), new File(dir, 'biome-survey-report.txt'), new File(dir, 'mods'))
             new File(dir, 'mods').mkdirs()
             // Accepts the Minecraft EULA for this throwaway server
             new File(dir, 'eula.txt').text = 'eula=true\n'
             new File(dir, 'server.properties').text = 'level-seed=424242\nonline-mode=false\nserver-port=25598\nmax-tick-time=-1\n'
-            survey.mods.each { url ->
-                def jar = new File(dir, "mods/${url.substring(url.lastIndexOf('/') + 1)}")
-                if (!jar.exists()) new URL(url).withInputStream { input -> jar.withOutputStream { it << input } }
-            }
         }
     }
     tasks.named("run${run.capitalize()}") { dependsOn prepare }
