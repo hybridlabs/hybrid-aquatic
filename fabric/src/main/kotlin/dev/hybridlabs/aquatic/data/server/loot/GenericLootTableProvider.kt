@@ -41,6 +41,8 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .add(LootItem.lootTableItem(HAItems.BARBED_HOOK.get()))
                 .add(LootItem.lootTableItem(HAItems.GLOWING_HOOK.get()))
                 .add(LootItem.lootTableItem(HAItems.MAGNETIC_HOOK.get()))
+                .add(LootItem.lootTableItem(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 2f))))
                 .add(LootItem.lootTableItem(Items.IRON_INGOT)
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(3f, 9f))))
                 .add(LootItem.lootTableItem(Items.GOLD_INGOT)

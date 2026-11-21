@@ -4,13 +4,13 @@ import net.minecraft.world.entity.InsideBlockEffectApplier
 
 import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
+import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.ParticleUtils
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.vehicle.boat.Boat
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -64,7 +64,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
         intersects: Boolean
     ) {
         super.entityInside(state, level, pos, entity, applier, intersects)
-        if (level is ServerLevel && entity is Boat) {
+        if (level is ServerLevel && entity.type.builtInRegistryHolder().`is`(HAPIEntityTags.BOATS)) {
             level.destroyBlock(BlockPos(pos), true, entity)
         }
     }
