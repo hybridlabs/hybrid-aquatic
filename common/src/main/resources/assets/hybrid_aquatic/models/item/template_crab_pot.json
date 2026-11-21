@@ -1,6 +1,5 @@
 {
     "gui_light": "side",
-    "parent": "minecraft:builtin/entity",
     "display": {
         "thirdperson_righthand": {
             "translation": [0, -0.5, 0],

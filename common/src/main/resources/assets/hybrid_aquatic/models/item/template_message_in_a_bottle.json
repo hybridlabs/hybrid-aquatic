@@ -1,6 +1,5 @@
 {
     "gui_light": "front",
-    "parent": "minecraft:builtin/entity",
     "display": {
         "thirdperson_righthand": {
             "rotation": [0, 180, 0],
