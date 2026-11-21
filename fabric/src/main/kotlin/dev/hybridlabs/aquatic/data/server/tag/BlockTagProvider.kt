@@ -1,5 +1,14 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.Registries
+import net.minecraft.data.tags.TagAppender
+import net.minecraft.resources.Identifier
+import net.minecraft.resources.ResourceKey
+import net.minecraft.tags.BlockItemTags
+import net.minecraft.tags.TagKey
+import net.minecraft.world.level.block.Block
+
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
@@ -235,7 +244,7 @@ class BlockTagProvider(output: FabricPackOutput, registriesFuture: CompletableFu
         valueLookupBuilder(BlockTags.FENCE_GATES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
 
-        valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
+        valueLookupBuilder(BlockItemTags.LOGS_THAT_BURN.block())
             .add(HAPlatformBlocks.DRIFTWOOD_LOG.get())
             .add(HAPlatformBlocks.DRIFTWOOD_WOOD.get())
             .add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
@@ -607,4 +616,22 @@ class BlockTagProvider(output: FabricPackOutput, registriesFuture: CompletableFu
                 }
             }
     }
+
+    private class ValueTagAppender<T : Any>(
+        private val delegate: TagAppender<T>,
+        private val registryKey: ResourceKey<out Registry<T>>,
+        private val key: (T) -> ResourceKey<T>,
+    ) {
+        fun add(value: T) = apply { delegate.add(key(value)) }
+        fun addOptional(value: T) = apply { delegate.addOptional(key(value)) }
+        fun addTag(tag: TagKey<T>) = apply { delegate.addTag(tag) }
+        fun addOptionalTag(tag: TagKey<T>) = apply { delegate.addOptionalTag(tag) }
+        fun forceAddTag(tag: TagKey<T>) = addTag(tag)
+        fun addItems(vararg values: T) = apply { values.forEach { delegate.add(key(it)) } }
+        fun addOptionalItem(id: Identifier) = apply { delegate.addOptional(ResourceKey.create(registryKey, id)) }
+        fun addOptionalItemTag(id: Identifier) = apply { delegate.addOptionalTag(TagKey.create(registryKey, id)) }
+    }
+
+    private fun valueLookupBuilder(tag: TagKey<Block>) =
+        ValueTagAppender(builder(tag), Registries.BLOCK) { it.builtInRegistryHolder().key() }
 }

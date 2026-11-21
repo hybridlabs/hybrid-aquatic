@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.entity.BlockEntityTypes
 import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration
@@ -30,7 +31,7 @@ class SuspiciousRedSandDiskFeature(
             origin.offset(radius, halfHeight, radius)
         ).forEach { pos ->
             if (level.getBlockState(pos).`is`(HABlocks.SUSPICIOUS_RED_SAND.get())) {
-                level.getBlockEntity(pos, BlockEntityType.BRUSHABLE_BLOCK)
+                level.getBlockEntity(pos, BlockEntityTypes.BRUSHABLE_BLOCK)
                     .ifPresent { brushable ->
                         brushable.setLootTable(
                             (ResourceKey.create(

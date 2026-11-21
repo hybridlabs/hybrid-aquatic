@@ -11,8 +11,8 @@ import com.google.gson.JsonPrimitive
 import com.mojang.serialization.JsonOps
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider
-import net.minecraft.advancements.criterion.ItemPredicate
-import net.minecraft.advancements.criterion.StatePropertiesPredicate
+import net.minecraft.advancements.predicates.ItemPredicate
+import net.minecraft.advancements.predicates.StatePropertiesPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries

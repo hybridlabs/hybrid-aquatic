@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.Identifier
 import net.minecraft.world.item.Items
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.EntityTypes
 import net.minecraft.world.item.component.TypedEntityData
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
@@ -614,7 +615,7 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
 
                 val tag = CompoundTag()
                 tag.putString("variant", painting.key().identifier().toString())
-                val entityData: TypedEntityData<EntityType<*>> = TypedEntityData.of(EntityType.PAINTING, tag)
+                val entityData: TypedEntityData<EntityType<*>> = TypedEntityData.of(EntityTypes.PAINTING, tag)
 
                 messageInABottleLootPoolBuilder.add(
                     LootItem.lootTableItem(Items.PAINTING).apply(

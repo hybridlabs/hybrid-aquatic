@@ -16,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -110,7 +111,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
                 instance = LootTable.EMPTY;
             } else if (lureItemStack.is(
                     HAItems.INSTANCE.getCREEPERMAGNET_HOOK().get())) {
-                var creeperType = EntityType.CREEPER;
+                var creeperType = EntityTypes.CREEPER;
                 createAndLaunchEntityAtPlayer(creeperType);
 
                 instance = LootTable.EMPTY;

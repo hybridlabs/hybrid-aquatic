@@ -1,5 +1,13 @@
 package dev.hybridlabs.aquatic.data.server.tag
 
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.Registries
+import net.minecraft.data.tags.TagAppender
+import net.minecraft.resources.Identifier
+import net.minecraft.resources.ResourceKey
+import net.minecraft.tags.TagKey
+import net.minecraft.world.item.Item
+
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
@@ -9,14 +17,10 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider
 import net.minecraft.core.HolderLookup
-import net.minecraft.data.tags.TagAppender
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.core.registries.Registries
-import net.minecraft.resources.Identifier
-import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.ItemTags
-import net.minecraft.tags.TagKey
-import net.minecraft.world.item.Item
+import net.minecraft.tags.BlockItemTags
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
 
@@ -52,7 +56,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
             .addTag(HAItemTags.DIVING_LEGGINGS)
             .addTag(HAItemTags.DIVING_BOOTS)
 
-        builder(HAItemTags.DIVING_HELMET)
+        valueLookupBuilder(HAItemTags.DIVING_HELMET)
             .addItems(
                 HAItems.DIVING_HELMET.get(),
                 HAItems.REINFORCED_DIVING_HELMET.get(),
@@ -63,7 +67,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
             .addOptionalItem(Identifier.fromNamespaceAndPath("aquamirae", "three_bolt_helmet"))
             .addOptionalItem(Identifier.fromNamespaceAndPath("alexscaves", "diving_helmet"))
 
-        builder(HAItemTags.DIVING_SUIT)
+        valueLookupBuilder(HAItemTags.DIVING_SUIT)
             .addItems(
                 HAItems.DIVING_SUIT.get(),
                 HAItems.REINFORCED_DIVING_SUIT.get(),
@@ -74,7 +78,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
             .addOptionalItem(Identifier.fromNamespaceAndPath("aquamirae", "three_bolt_chestplate"))
             .addOptionalItem(Identifier.fromNamespaceAndPath("alexscaves", "diving_chestplate"))
 
-        builder(HAItemTags.DIVING_LEGGINGS)
+        valueLookupBuilder(HAItemTags.DIVING_LEGGINGS)
             .addItems(
                 HAItems.DIVING_LEGGINGS.get(),
                 HAItems.REINFORCED_DIVING_LEGGINGS.get(),
@@ -83,7 +87,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
             .addOptionalItem(Identifier.fromNamespaceAndPath("aquamirae", "three_bolt_leggings"))
             .addOptionalItem(Identifier.fromNamespaceAndPath("alexscaves", "diving_leggings"))
 
-        builder(HAItemTags.DIVING_BOOTS)
+        valueLookupBuilder(HAItemTags.DIVING_BOOTS)
             .addItems(
                 HAItems.DIVING_BOOTS.get(),
                 HAItems.REINFORCED_DIVING_BOOTS.get(),
@@ -96,7 +100,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
         //#endregion
 
         //#region Effect Tags
-        builder(HAItemTags.RESISTS_CORROSION)
+        valueLookupBuilder(HAItemTags.RESISTS_CORROSION)
             .addItems(
                 Items.DIAMOND_AXE,
                 Items.DIAMOND_PICKAXE,
@@ -184,7 +188,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
         valueLookupBuilder(ItemTags.WOODEN_TRAPDOORS)
             .add(HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
 
-        valueLookupBuilder(ItemTags.SLABS)
+        valueLookupBuilder(BlockItemTags.SLABS.item())
             .add(HABlocks.BONE_SLAB.get().asItem())
 
             .add(HABlocks.WHITE_SANDSTONE_SLAB.get().asItem())
@@ -211,7 +215,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
             .add(HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get().asItem())
             .add(HABlocks.CHIMNEYSTONE_BRICK_SLAB.get().asItem())
 
-        valueLookupBuilder(ItemTags.STAIRS)
+        valueLookupBuilder(BlockItemTags.STAIRS.item())
             .add(HABlocks.BONE_STAIRS.get().asItem())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get().asItem())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get().asItem())
@@ -615,7 +619,7 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
             valueLookupBuilder(HAItemTags.ARMORS).add(item)
         }
 
-        builder(HAItemTags.CRAB_WEARABLES)
+        valueLookupBuilder(HAItemTags.CRAB_WEARABLES)
             .addOptionalTag(ItemTags.WOOL)
             .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "skulls"))
             .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "bookshelves"))
@@ -657,22 +661,22 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
                 Items.CARVED_PUMPKIN,
                 Items.JACK_O_LANTERN,
                 Items.SHULKER_BOX,
-                Items.RED_SHULKER_BOX,
-                Items.BLUE_SHULKER_BOX,
-                Items.BLACK_SHULKER_BOX,
-                Items.BROWN_SHULKER_BOX,
-                Items.CYAN_SHULKER_BOX,
-                Items.GRAY_SHULKER_BOX,
-                Items.GREEN_SHULKER_BOX,
-                Items.LIGHT_BLUE_SHULKER_BOX,
-                Items.LIGHT_GRAY_SHULKER_BOX,
-                Items.LIME_SHULKER_BOX,
-                Items.MAGENTA_SHULKER_BOX,
-                Items.ORANGE_SHULKER_BOX,
-                Items.PINK_SHULKER_BOX,
-                Items.PURPLE_SHULKER_BOX,
-                Items.WHITE_SHULKER_BOX,
-                Items.YELLOW_SHULKER_BOX,
+                Items.DYED_SHULKER_BOX.pick(DyeColor.RED),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.BLUE),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.BLACK),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.BROWN),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.CYAN),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.GRAY),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.GREEN),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.LIGHT_BLUE),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.LIGHT_GRAY),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.LIME),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.MAGENTA),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.ORANGE),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.PINK),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.PURPLE),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.WHITE),
+                Items.DYED_SHULKER_BOX.pick(DyeColor.YELLOW),
             )
 
         valueLookupBuilder(HAItemTags.CRAB_TRADEABLES)
@@ -689,13 +693,21 @@ class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFut
         }
     }
 
-    private fun TagAppender<ResourceKey<Item>, Item>.addItems(vararg items: Item) = apply {
-        items.forEach { add(it.builtInRegistryHolder().key()) }
+    private class ValueTagAppender<T : Any>(
+        private val delegate: TagAppender<T>,
+        private val registryKey: ResourceKey<out Registry<T>>,
+        private val key: (T) -> ResourceKey<T>,
+    ) {
+        fun add(value: T) = apply { delegate.add(key(value)) }
+        fun addOptional(value: T) = apply { delegate.addOptional(key(value)) }
+        fun addTag(tag: TagKey<T>) = apply { delegate.addTag(tag) }
+        fun addOptionalTag(tag: TagKey<T>) = apply { delegate.addOptionalTag(tag) }
+        fun forceAddTag(tag: TagKey<T>) = addTag(tag)
+        fun addItems(vararg values: T) = apply { values.forEach { delegate.add(key(it)) } }
+        fun addOptionalItem(id: Identifier) = apply { delegate.addOptional(ResourceKey.create(registryKey, id)) }
+        fun addOptionalItemTag(id: Identifier) = apply { delegate.addOptionalTag(TagKey.create(registryKey, id)) }
     }
 
-    private fun TagAppender<ResourceKey<Item>, Item>.addOptionalItem(id: Identifier) =
-        addOptional(ResourceKey.create(Registries.ITEM, id))
-
-    private fun TagAppender<ResourceKey<Item>, Item>.addOptionalItemTag(id: Identifier) =
-        addOptionalTag(TagKey.create(Registries.ITEM, id))
+    private fun valueLookupBuilder(tag: TagKey<Item>) =
+        ValueTagAppender(builder(tag), Registries.ITEM) { it.builtInRegistryHolder().key() }
 }

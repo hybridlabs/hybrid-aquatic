@@ -32,7 +32,7 @@ object DensityFunctionWrappers {
     private val DENSITY_FUNCTION_TYPES = CommonClass.DENSITY_FUNCTION_TYPES
     val WRAPPED_MARKER = DENSITY_FUNCTION_TYPES.register("wrapped_marker") { WrappedMarker.CODEC.codec() }
 
-    private data class Wrapper(val targetFunction: Identifier, val wrapperFunction: Holder<DensityFunction>) {
+    private data class Wrapper(val targetFunction: Identifier, val wrapperFunction: DensityFunction) {
         companion object {
             val CODEC: Codec<Wrapper> = RecordCodecBuilder.create { instance ->
                 instance.group(
@@ -58,7 +58,7 @@ object DensityFunctionWrappers {
                 .orElseThrow { IllegalStateException("Density function wrapper $id targets unknown density function ${wrapper.targetFunction}") }
 
             val wrapped = target.value()
-            val full = wrapper.wrapperFunction.value().mapAll { function -> if (isMarker(function)) wrapped else function }
+            val full = wrapper.wrapperFunction.mapAll { function -> if (isMarker(function)) wrapped else function }
 
             @Suppress("UNCHECKED_CAST")
             (target as HolderReferenceInvoker<DensityFunction>).`hybridAquatic$bindValue`(full)

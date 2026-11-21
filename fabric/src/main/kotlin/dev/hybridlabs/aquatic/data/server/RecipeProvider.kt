@@ -8,8 +8,8 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.item.HAPIItems
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
-import net.minecraft.advancements.criterion.InventoryChangeTrigger
-import net.minecraft.advancements.criterion.ItemPredicate
+import net.minecraft.advancements.triggers.InventoryChangeTrigger
+import net.minecraft.advancements.predicates.ItemPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -19,6 +19,7 @@ import net.minecraft.resources.Identifier
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.*
 import net.minecraft.world.level.ItemLike
@@ -908,7 +909,7 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
             .pattern("TBT")
             .pattern("TTT")
             .define('B', HAPlatformItems.BRINE_BUCKET.get())
-            .define('T', Items.RED_TERRACOTTA)
+            .define('T', Items.DYED_TERRACOTTA.pick(DyeColor.RED))
             .unlockedBy(
                 "has_brine_bucket",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
@@ -920,7 +921,7 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
             .pattern("TBT")
             .pattern("TTT")
             .define('B', HAPlatformItems.BRINE_BUCKET.get())
-            .define('T', Items.ORANGE_TERRACOTTA)
+            .define('T', Items.DYED_TERRACOTTA.pick(DyeColor.ORANGE))
             .unlockedBy(
                 "has_brine_bucket",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
@@ -932,7 +933,7 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
             .pattern("TBT")
             .pattern("TTT")
             .define('B', HAPlatformItems.BRINE_BUCKET.get())
-            .define('T', Items.YELLOW_TERRACOTTA)
+            .define('T', Items.DYED_TERRACOTTA.pick(DyeColor.YELLOW))
             .unlockedBy(
                 "has_brine_bucket",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
@@ -1971,7 +1972,7 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
                 .pattern("CWC")
                 .pattern("CCC")
                 .define('C', deadCoral)
-                .define('W', Items.WHITE_DYE)
+                .define('W', Items.DYE.pick(DyeColor.WHITE))
                 .unlockedBy(
                     "has_${getItemName(deadCoral.asItem())}",
                     has(deadCoral.asItem())

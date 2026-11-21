@@ -542,7 +542,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
             pos.y = otter.level().getHeight(Heightmap.Types.OCEAN_FLOOR, pos.x, pos.z) + 1
 
             if (otter.level().getBlockState(pos) == Blocks.WATER.defaultBlockState()) {
-                target = pos.center
+                target = Vec3.atCenterOf(pos)
                 otter.navigation.moveTo(target.x, target.y, target.z, speedModifier)
             }
         }
@@ -599,7 +599,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
     internal class OtterMoveControl(
         val otter: OtterEntity, maxTurnX: Int, maxTurnY: Int, inWaterSpeedModifier: Float,
         outsideWaterSpeedModifier: Float, var applyGravity: Boolean,
-    ) : SmoothSwimmingMoveControl(otter, maxTurnX, maxTurnY, inWaterSpeedModifier, outsideWaterSpeedModifier, false) {
+     ) : SmoothSwimmingMoveControl<OtterEntity>(otter, maxTurnX, maxTurnY, inWaterSpeedModifier, outsideWaterSpeedModifier, false) {
 
         override fun tick() {
             if (this.applyGravity && otter.isInWater) {

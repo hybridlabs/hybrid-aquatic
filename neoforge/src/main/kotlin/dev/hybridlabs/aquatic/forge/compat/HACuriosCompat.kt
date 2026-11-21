@@ -100,7 +100,7 @@ object HACuriosCompat {
             renderState,
             poseStack,
             submitNodeCollector,
-            Minecraft.getInstance().gameRenderer.gameRenderState.levelRenderState.cameraRenderState
+            Minecraft.getInstance().gameRenderer.gameRenderState().levelRenderState.cameraRenderState
         )
     }
 }

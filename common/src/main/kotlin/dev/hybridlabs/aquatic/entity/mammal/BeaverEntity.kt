@@ -540,7 +540,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
             pos.y = otter.level().getHeight(Heightmap.Types.OCEAN_FLOOR, pos.x, pos.z) + 1
 
             if (otter.level().getBlockState(pos) == Blocks.WATER.defaultBlockState()) {
-                target = pos.center
+                target = Vec3.atCenterOf(pos)
                 otter.navigation.moveTo(target.x, target.y, target.z, speedModifier)
             }
         }
@@ -597,7 +597,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
     internal class OtterMoveControl(
         val otter: BeaverEntity, maxTurnX: Int, maxTurnY: Int, inWaterSpeedModifier: Float,
         outsideWaterSpeedModifier: Float, var applyGravity: Boolean,
-    ) : SmoothSwimmingMoveControl(otter, maxTurnX, maxTurnY, inWaterSpeedModifier, outsideWaterSpeedModifier, false) {
+     ) : SmoothSwimmingMoveControl<BeaverEntity>(otter, maxTurnX, maxTurnY, inWaterSpeedModifier, outsideWaterSpeedModifier, false) {
 
         override fun tick() {
             if (this.applyGravity && otter.isInWater) {

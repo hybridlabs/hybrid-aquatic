@@ -77,6 +77,7 @@ object HAPlatformBlocks {
         GlowslimeBlock(
             HABlockProperties.of()
             .friction(0.8F)
+            .bounceRestitution(1.0F)
             .instabreak()
             .noOcclusion()
             .sound(SoundType.SLIME_BLOCK)

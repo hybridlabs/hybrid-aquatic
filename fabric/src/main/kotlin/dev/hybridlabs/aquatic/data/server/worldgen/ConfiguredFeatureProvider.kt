@@ -150,7 +150,7 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.BRINE_POOL,
                 Feature.SIMPLE_RANDOM_SELECTOR,
-                SimpleRandomFeatureConfiguration(
+                CompositeFeatureConfiguration(
                     HolderSet.direct(
                         bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.RED_BRINE_POOL).get(),
                         bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.YELLOW_BRINE_POOL).get(),
@@ -164,7 +164,7 @@ class ConfiguredFeatureProvider(
                 HAConfiguredFeatures.TIDE_POOLS,
 
                 WATERLOGGED_VEGETATION_PATCH, VegetationPatchConfiguration(
-                    HABlockTags.TIDE_POOL_REPLACEABLE,
+                    bootstrap.lookup(Registries.BLOCK).getOrThrow(HABlockTags.TIDE_POOL_REPLACEABLE),
                     WeightedStateProvider(
                         WeightedList.builder<BlockState>()
                             .add(HABlocks.SHORESTONE.get().defaultBlockState(), 3)
@@ -198,8 +198,8 @@ class ConfiguredFeatureProvider(
                         BlockStateProvider.simple(Blocks.STONE),
                         BlockStateProvider.simple(HABlocks.SHORESTONE.get()),
                         mutableListOf(Blocks.STONE.defaultBlockState()),
-                        BlockTags.FEATURES_CANNOT_REPLACE,
-                        BlockTags.GEODE_INVALID_BLOCKS
+                        bootstrap.lookup(Registries.BLOCK).getOrThrow(BlockTags.FEATURES_CANNOT_REPLACE),
+                        bootstrap.lookup(Registries.BLOCK).getOrThrow(BlockTags.GEODE_INVALID_BLOCKS)
                     ),
                     GeodeLayerSettings(0.5, 1.0, 1.25, 1.75),
                     GeodeCrackSettings(0.0, 0.0, 0),
@@ -221,7 +221,7 @@ class ConfiguredFeatureProvider(
                 HAConfiguredFeatures.DEEP_OCEAN_VEGETATION,
 
                 Feature.SIMPLE_RANDOM_SELECTOR,
-                SimpleRandomFeatureConfiguration(
+                CompositeFeatureConfiguration(
                     HolderSet.direct(
                         PlacementUtils.inlinePlaced(
                             HAFeatures.DEEP_CORAL_TREE.get(),
@@ -252,7 +252,7 @@ class ConfiguredFeatureProvider(
                 HAConfiguredFeatures.BLEACHED_REEF_VEGETATION,
 
                 Feature.SIMPLE_RANDOM_SELECTOR,
-                SimpleRandomFeatureConfiguration(
+                CompositeFeatureConfiguration(
                     HolderSet.direct(
                         PlacementUtils.inlinePlaced(
                             HAFeatures.BLEACHED_CORAL_TREE.get(),
@@ -283,7 +283,7 @@ class ConfiguredFeatureProvider(
                 HAConfiguredFeatures.CORAL_REEF_VEGETATION,
 
                 Feature.SIMPLE_RANDOM_SELECTOR,
-                SimpleRandomFeatureConfiguration(
+                CompositeFeatureConfiguration(
                     HolderSet.direct(
                         PlacementUtils.inlinePlaced(
                             HAFeatures.REEF_CORAL_TREE.get(),

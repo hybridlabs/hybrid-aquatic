@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider
-import net.minecraft.advancements.criterion.EntityFlagsPredicate
-import net.minecraft.advancements.criterion.EntityPredicate
+import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate
+import net.minecraft.advancements.predicates.entity.EntityPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items

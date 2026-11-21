@@ -374,7 +374,7 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     internal class KarkinosMoveControl(
         private val karkinos: KarkinosEntity,
-    ) : MoveControl(
+    ) : MoveControl<KarkinosEntity>(
         karkinos
     ) {
         override fun tick() {

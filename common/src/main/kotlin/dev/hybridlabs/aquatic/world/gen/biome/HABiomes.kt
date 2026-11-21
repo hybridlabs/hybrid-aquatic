@@ -202,7 +202,7 @@ object HABiomes {
             WorldgenModifier.builder(BiomeEnabledPredicate(biome)).addSurfaceRule(
                 Level.OVERWORLD,
                 InjectionType.PREPEND,
-                ifTrue(abovePreliminarySurface(), ifTrue(isBiome(biome), rule))
+                ifTrue(abovePreliminarySurface(), ifTrue(isBiome(lookup(Registries.BIOME), biome), rule))
             )
         )
     }

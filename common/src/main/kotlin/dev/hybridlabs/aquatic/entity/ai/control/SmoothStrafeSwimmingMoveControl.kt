@@ -18,7 +18,7 @@ open class SmoothStrafeSwimmingMoveControl(
     private val inWaterSpeedModifier: Float,
     private val outsideWaterSpeedModifier: Float,
     private val applyGravity: Boolean,
-) : MoveControl(mob) {
+) : MoveControl<Mob>(mob) {
 
     override fun tick() {
         if (applyGravity && mob.isInWater) {

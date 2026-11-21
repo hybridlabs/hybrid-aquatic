@@ -112,7 +112,7 @@ object TrenchCarver {
 
         while (pending.isNotEmpty()) {
             // References to registered functions encode as their ID, so every string in the encoding is a candidate
-            val json = DensityFunction.HOLDER_HELPER_CODEC.encodeStart(ops, pending.removeFirst()).result().orElse(null) ?: continue
+            val json = DensityFunction.CODEC.encodeStart(ops, pending.removeFirst()).result().orElse(null) ?: continue
             for (id in strings(json).mapNotNull(Identifier::tryParse)) {
                 if (id == target) return true
                 if (visited.add(id)) densityFunctions.get(id).ifPresent { holder -> pending.add(holder.value()) }

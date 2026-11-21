@@ -3,8 +3,6 @@ package dev.hybridlabs.aquatic.block
 import dev.hybridlabs.aquatic.block.impl.StickyBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.HalfTransparentBlock
@@ -17,22 +15,6 @@ open class GlowslimeBlock(properties: Properties) : HalfTransparentBlock(propert
             super.fallOn(level, state, pos, entity, fallDistance)
         } else {
             entity.causeFallDamage(fallDistance, 0.0f, level.damageSources().fall())
-        }
-    }
-
-    override fun updateEntityMovementAfterFallOn(level: BlockGetter, entity: Entity) {
-        if (entity.isSuppressingBounce) {
-            super.updateEntityMovementAfterFallOn(level, entity)
-        } else {
-            this.bounceUp(entity)
-        }
-    }
-
-    private fun bounceUp(entity: Entity) {
-        val vec3 = entity.deltaMovement
-        if (vec3.y < 0.0) {
-            val d0 = if (entity is LivingEntity) 1.0 else 0.8
-            entity.setDeltaMovement(vec3.x, -vec3.y * d0, vec3.z)
         }
     }
 

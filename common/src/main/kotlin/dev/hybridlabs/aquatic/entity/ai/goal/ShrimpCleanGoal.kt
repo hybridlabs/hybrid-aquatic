@@ -29,19 +29,18 @@ class ShrimpCleanGoal(
             Blocks.MOSSY_STONE_BRICK_STAIRS to Blocks.STONE_BRICK_STAIRS,
             Blocks.MOSSY_STONE_BRICK_WALL to Blocks.STONE_BRICK_WALL,
             Blocks.INFESTED_MOSSY_STONE_BRICKS to Blocks.INFESTED_STONE_BRICKS,
-            Blocks.OXIDIZED_COPPER to Blocks.WEATHERED_COPPER,
-            Blocks.WEATHERED_COPPER to Blocks.EXPOSED_COPPER,
-            Blocks.EXPOSED_COPPER to Blocks.COPPER_BLOCK,
-            Blocks.OXIDIZED_CUT_COPPER to Blocks.WEATHERED_CUT_COPPER,
-            Blocks.WEATHERED_CUT_COPPER to Blocks.EXPOSED_CUT_COPPER,
-            Blocks.EXPOSED_CUT_COPPER to Blocks.CUT_COPPER,
-            Blocks.OXIDIZED_CUT_COPPER_SLAB to Blocks.WEATHERED_CUT_COPPER_SLAB,
-            Blocks.WEATHERED_CUT_COPPER_SLAB to Blocks.EXPOSED_CUT_COPPER_SLAB,
-            Blocks.EXPOSED_CUT_COPPER_SLAB to Blocks.CUT_COPPER_SLAB,
-            Blocks.OXIDIZED_CUT_COPPER_STAIRS to Blocks.WEATHERED_CUT_COPPER_STAIRS,
-            Blocks.WEATHERED_CUT_COPPER_STAIRS to Blocks.EXPOSED_CUT_COPPER_STAIRS,
-            Blocks.EXPOSED_CUT_COPPER_STAIRS to Blocks.CUT_COPPER_STAIRS,
-        )
+        ) + listOf(
+            Blocks.COPPER_BLOCK.weathering(),
+            Blocks.CUT_COPPER.weathering(),
+            Blocks.CUT_COPPER_SLAB.weathering(),
+            Blocks.CUT_COPPER_STAIRS.weathering(),
+        ).flatMap { copper ->
+            listOf(
+                copper.oxidized() to copper.weathered(),
+                copper.weathered() to copper.exposed(),
+                copper.exposed() to copper.unaffected(),
+            )
+        }.toMap()
     }
 
     private var cleanTime = 0

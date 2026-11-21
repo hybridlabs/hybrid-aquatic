@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Block
 import dev.hybridlabs.aquatic.platform.Services
 import net.minecraft.world.level.block.SkullBlock
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.entity.BlockEntityTypes
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 
@@ -15,7 +16,7 @@ import net.minecraft.world.level.block.state.StateDefinition
  */
 class PlushieBlock(variant: Variant, settings: Properties) : SkullBlock(variant, settings) {
     init {
-        Services.PLATFORM.addBlockEntityTypeBlocks(BlockEntityType.SKULL, this)
+        Services.PLATFORM.addBlockEntityTypeBlocks(BlockEntityTypes.SKULL, this)
     }
 
     override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
@@ -35,5 +36,9 @@ class PlushieBlock(variant: Variant, settings: Properties) : SkullBlock(variant,
         val textureLocation: Identifier by lazy { CommonClass.locate("textures/entity/block/plushie/${id}_plushie.png") }
 
         override fun getSerializedName(): String = id
+
+        init {
+            SkullBlock.Type.TYPES[id] = this
+        }
     }
 }
