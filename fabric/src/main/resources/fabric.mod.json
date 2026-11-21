@@ -53,13 +53,13 @@
 
     "depends": {
         "fabricloader": ">=0.20",
-        "minecraft": "~26.2",
+        "minecraft": "~26.3",
         "java": ">=25",
         "fabric-language-kotlin": "*",
         "fabric-api": ">=0.155",
-        "geckolib": ">=5.5.5",
-        "lithostitched": ">=1.8.0",
-        "hapi": ">=1.5.0"
+        "geckolib": ">=5.5.7",
+        "lithostitched": ">=2.0.6",
+        "hapi": ">=1.6.0"
     },
 
     "custom": {

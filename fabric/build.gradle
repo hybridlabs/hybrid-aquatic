@@ -4,15 +4,16 @@ plugins {
 }
 
 dependencies {
-    implementation("dev.hybridlabs.hapi:hapi-fabric-26.2:1.5.0")
+    implementation("dev.hybridlabs.hapi:hapi-fabric-26.3:1.6.0")
 
     implementation "com.geckolib:geckolib-fabric-$geckolib_version"
     localRuntime("com.terraformersmc:modmenu:${modmenu_version}")
 
     // Dev runs load the release jar from run/mods, since Loom skips the Apollib jar nested inside it
-    compileOnly "maven.modrinth:lithostitched:${lithostitched_version}-fabric-26.2"
+    compileOnly "maven.modrinth:lithostitched:${lithostitched_version}-fabric-26.3"
 
-    runtimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
+    // debugutils has no 26.3 build yet; re-enable once it does
+    //runtimeOnly "io.github.flemmli97:debugutils:$minecraft_version-$debug_utils_version-fabric"
     //runtimeOnly "maven.modrinth:cyanide:5.0.0-fabric"
 }
 
@@ -26,7 +27,7 @@ fabricApi {
 
 // Datagen writes our Lithostitched biome injectors, so its run needs the release jar in its mods folder too
 def lithostitchedRelease = configurations.detachedConfiguration(
-    dependencies.create("maven.modrinth:lithostitched:${lithostitched_version}-fabric-26.2"))
+    dependencies.create("maven.modrinth:lithostitched:${lithostitched_version}-fabric-26.3"))
 lithostitchedRelease.transitive = false
 
 def prepareDatagen = tasks.register('prepareDatagen', Copy) {

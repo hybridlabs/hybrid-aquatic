@@ -6,8 +6,8 @@ plugins {
 dependencies {
     implementation "com.geckolib:geckolib-neoforge-$geckolib_version"
 
-    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-26.2"
-    implementation("dev.hybridlabs.hapi:hapi-neoforge-26.2:1.5.0")
+    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-26.3"
+    implementation("dev.hybridlabs.hapi:hapi-neoforge-26.3:1.6.0")
 
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
