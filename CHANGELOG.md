@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Updated to Minecraft 1.21.11
+- Added diving armor upgrade templates to crate loot
+- Jungle lily pads now break for modded boats as well
 
 <details>
 <summary>Developer notes</summary>

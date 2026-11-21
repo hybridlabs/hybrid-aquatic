@@ -22,6 +22,21 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "hybrid_aquatic:diving_armor_upgrade_template"
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
                 "max": 9.0,
                 "min": 3.0
               },
