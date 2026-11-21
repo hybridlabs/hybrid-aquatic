@@ -1,6 +1,11 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "hybrid_aquatic:item/thresher_shark_plushie"
+    "type": "minecraft:special",
+    "base": "hybrid_aquatic:item/template_plushie",
+    "model": {
+      "type": "minecraft:head",
+      "kind": "thresher_shark",
+      "texture": "hybrid_aquatic:block/plushie/thresher_shark_plushie"
+    }
   }
 }

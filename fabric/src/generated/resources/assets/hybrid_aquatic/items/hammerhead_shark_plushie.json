@@ -1,6 +1,11 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "hybrid_aquatic:item/hammerhead_shark_plushie"
+    "type": "minecraft:special",
+    "base": "hybrid_aquatic:item/template_plushie",
+    "model": {
+      "type": "minecraft:head",
+      "kind": "hammerhead_shark",
+      "texture": "hybrid_aquatic:block/plushie/hammerhead_shark_plushie"
+    }
   }
 }

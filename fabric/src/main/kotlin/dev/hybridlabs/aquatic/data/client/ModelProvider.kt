@@ -18,6 +18,7 @@ import net.minecraft.client.data.models.blockstates.ConditionBuilder
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator
 import net.minecraft.client.data.models.model.ModelTemplate
 import net.minecraft.client.data.models.model.ItemModelUtils
+import net.minecraft.client.renderer.special.SkullSpecialRenderer
 import software.bernie.geckolib.renderer.internal.GeckolibItemSpecialRenderer
 import net.minecraft.client.renderer.item.SpecialModelWrapper
 import net.minecraft.client.data.models.model.ModelTemplates
@@ -43,7 +44,18 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .forEach { block ->
                     val id = BuiltInRegistries.BLOCK.getKey(block)
                     createAirLikeBlock(block, CommonClass.locate("block/${id.path}"))
-                    registerSimpleItemModel(block.asItem(), CommonClass.locate("item/${id.path}"))
+                    val variant = block.type as PlushieBlock.Variant
+                    itemModelOutput.accept(
+                        block.asItem(),
+                        ItemModelUtils.specialModel(
+                            TEMPLATE_PLUSHIE,
+                            SkullSpecialRenderer.Unbaked(
+                                variant,
+                                java.util.Optional.of(CommonClass.locate("block/plushie/${variant.id}_plushie")),
+                                0.0F
+                            )
+                        )
+                    )
                 }
 
             // fluids
