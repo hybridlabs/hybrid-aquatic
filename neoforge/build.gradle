@@ -6,8 +6,8 @@ plugins {
 dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
 
-    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.1"
-    implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.2.0")
+    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.11"
+    implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.11:1.3.0")
 
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
@@ -16,4 +16,19 @@ dependencies {
 publishMods.platforms.configureEach {
     requires 'kotlin-for-forge', 'geckolib', 'lithostitched', 'hybrid-api'
     optional 'curios'
+}
+
+// GeckoLib 5 marks vanilla render states as GeoRenderState via NeoForge interface injection.
+// hybrid-gradle does not wire dependency-provided injection data yet, so we do it here.
+neoForge {
+    interfaceInjectionData.from(rootProject.file('gradle/geckolib-interface-injections.json'))
+
+    // hybrid-gradle still configures its data run with the MDG 1.x `data()` type, which
+    // NeoForge no longer ships from 1.21.4 on (only clientData/serverData exist now).
+    // Keep the run/task names (`runData`, `prepareDataRun`) but use the server data generator:
+    // this module only registers GatherDataEvent.Server providers, while client assets come from
+    // the Fabric project's datagen.
+    runs.named('data') {
+        serverData()
+    }
 }
