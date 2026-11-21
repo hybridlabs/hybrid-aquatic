@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated to Minecraft 1.21.11
 - Updated to Minecraft 26.1.2
+- Updated to Minecraft 26.2
 - Added diving armor upgrade templates to crate loot
 - Jungle lily pads now break for modded boats as well
 
@@ -32,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Coral and seashell gear now use the 1.21.11 tool and armor item API
 - Custom bobber textures, painting variants and marine snow weather visuals are temporarily
   disabled while their vanilla renderers are reworked
-- Trinkets support is compile-only for this release
+- Trinkets support was compile-only in 1.21.11; there is no Trinkets release for 26.2
 - Added a compatibility mixin for Lithostitched 1.7.2 biome injectors and a guard for missing
   GeckoLib animation names
 
