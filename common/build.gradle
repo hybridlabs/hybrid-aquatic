@@ -11,11 +11,11 @@ neoForge {
 }
 
 dependencies {
-    compileOnly("dev.hybridlabs.hapi:hapi-common-26.1.2:1.4.0")
+    compileOnly("dev.hybridlabs.hapi:hapi-common-26.2:1.5.0")
 
     implementation "com.geckolib:geckolib-neoforge-${geckolib_version}"
 
-    compileOnly "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-26.1"
+    compileOnly "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-26.2"
 }
 
 // GeckoLib 5.5 moved to the com.geckolib group, which hybrid-gradle's GeckoLib repository
