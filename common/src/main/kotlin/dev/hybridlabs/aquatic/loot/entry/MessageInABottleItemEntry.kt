@@ -11,7 +11,6 @@ import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.storage.loot.LootContext
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
@@ -23,9 +22,7 @@ class MessageInABottleItemEntry(
     conditions: List<LootItemCondition>,
     functions: List<LootItemFunction>
 ) : LootPoolSingletonContainer(weight, quality, conditions, functions) {
-    override fun getType(): LootPoolEntryType {
-        return HybridAquaticLootPoolEntryTypes.MESSAGE_IN_A_BOTTLE.get()
-    }
+    override fun codec(): MapCodec<out LootPoolSingletonContainer> = CODEC
 
     public override fun createItemStack(consumer: Consumer<ItemStack>, context: LootContext) {
         val random = context.random

@@ -13,6 +13,6 @@ class HermitCrabEntityRenderer(context: Context) :
     BaseCrustaceanEntityRenderer<HermitCrabEntity, LivingEntityRenderState>(context, HermitCrabEntityModel(), true, false) {
 
     init {
-        withRenderLayer(HybridAquaticShellLayer(this, Items.NAUTILUS_SHELL))
+        withRenderLayer(HybridAquaticShellLayer(context, this, Items.NAUTILUS_SHELL))
     }
 }

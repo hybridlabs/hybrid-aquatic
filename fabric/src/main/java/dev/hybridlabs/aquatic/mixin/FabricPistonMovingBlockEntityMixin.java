@@ -15,9 +15,9 @@ public class FabricPistonMovingBlockEntityMixin {
 			method = "moveCollidedEntities",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"
+					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"
 			))
-	private static boolean addCustomSlimeBlocks(BlockState blockState, Block block, Operation<Boolean> original) {
+	private static boolean addCustomSlimeBlocks(BlockState blockState, Object block, Operation<Boolean> original) {
 		return blockState.is(HABlockTags.INSTANCE.getIS_SLIMELIKE()) || original.call(blockState, block);
 	}
 }

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
 import dev.hybridlabs.hapi.client.model.getVariant
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.crustacean.LobsterEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCrustaceanEntityModel
 import net.minecraft.resources.Identifier

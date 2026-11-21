@@ -9,8 +9,8 @@ import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.loot.HALootTables
 import com.google.gson.JsonPrimitive
 import com.mojang.serialization.JsonOps
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider
 import net.minecraft.advancements.criterion.ItemPredicate
 import net.minecraft.advancements.criterion.StatePropertiesPredicate
 import net.minecraft.core.HolderLookup
@@ -42,8 +42,8 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 import java.util.concurrent.CompletableFuture
 
-class BlockLootTableProvider(output: FabricDataOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) :
-    FabricBlockLootTableProvider(output, registryLookup) {
+class BlockLootTableProvider(output: FabricPackOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) :
+    FabricBlockLootSubProvider(output, registryLookup) {
 
     private val itemLookup = registryLookup.join().lookupOrThrow(Registries.ITEM)
 
@@ -56,169 +56,150 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
 
         //#region Anemones
         add(HABlocks.ANEMONE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.STRAWBERRY_ANEMONE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.GIANT_GREEN_ANEMONE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
         //#endregion
 
         //#region Plants
         add(HAPlatformBlocks.DUNEGRASS.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HAPlatformBlocks.TALL_DUNEGRASS.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HAPlatformBlocks.CATTAIL.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .build()
             )
         }
 
         add(HAPlatformBlocks.PAPYRUS.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .build()
             )
         }
 
         add(HABlocks.SHORT_RED_ALGAE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.RED_ALGAE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.SEA_LETTUCE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.BULL_KELP.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .build()
             )
         }
 
         add(HABlocks.SARGASSUM.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .build()
             )
         }
 
         add(HABlocks.DELESSERIA.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .build()
             )
         }
 
         add(HABlocks.FLOATING_SARGASSUM.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.FLOATING_PETALS.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.FLOATING_LEAVES.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.FLOATING_LEAF_LITTER.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.DUCKWEED.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .conditionally(hasShearsOrSilkTouch().build())
-                    .build()
+                    .`when`(hasShears().or(hasSilkTouch()))
             )
         }
 
         add(HABlocks.BONE_WORMS.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool()
                     .add(LootItem.lootTableItem(block))
-                    .build()
             )
         }
 
@@ -609,7 +590,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
 
         //#region Miscellaneous
         add(HABlocks.MESSAGE_IN_A_BOTTLE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         LootItem.lootTableItem(block).`when`(hasSilkTouch()).apply(
@@ -622,7 +603,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.MESSAGE_IN_A_BOTTLE
                             ))
                     )
-                ).build()
+                )
             )
         }
 
@@ -631,7 +612,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
 
         //#region Crates
         add(HABlocks.CRAB_POT.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -644,12 +625,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem())
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.HYBRID_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -662,12 +643,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.OAK_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -680,12 +661,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem())
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.BIRCH_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -698,12 +679,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.SPRUCE_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -716,12 +697,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.DARK_OAK_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -734,12 +715,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.ACACIA_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -752,12 +733,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.JUNGLE_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -770,12 +751,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.BAMBOO_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -788,12 +769,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.MANGROVE_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -806,12 +787,12 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
 
         add(HABlocks.CHERRY_CRATE.get()) { block ->
-            LootTable.lootTable().pool(
+            LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         NestedLootTable.lootTableReference(
@@ -824,7 +805,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
-                ).build()
+                )
             )
         }
         //#endregion

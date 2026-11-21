@@ -7,10 +7,10 @@ import net.minecraft.client.renderer.rendertype.RenderType
 import dev.hybridlabs.aquatic.client.model.entity.misc.CavitationBubbleEntityModel
 import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
-import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.base.BoneSnapshots
-import software.bernie.geckolib.renderer.base.RenderPassInfo
-import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
+import com.geckolib.renderer.GeoEntityRenderer
+import com.geckolib.renderer.base.BoneSnapshots
+import com.geckolib.renderer.base.RenderPassInfo
+import com.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
 import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
 
 class CavitationBubbleEntityRenderer(

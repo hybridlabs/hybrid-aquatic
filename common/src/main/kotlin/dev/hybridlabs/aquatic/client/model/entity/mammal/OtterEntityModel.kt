@@ -4,21 +4,21 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 import dev.hybridlabs.aquatic.client.model.HADataTickets
 
-import software.bernie.geckolib.renderer.base.BoneSnapshots
+import com.geckolib.renderer.base.BoneSnapshots
 
 import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
 import dev.hybridlabs.hapi.client.model.getVariant
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity
 import dev.hybridlabs.aquatic.entity.mammal.OtterEntity.Companion.OtterAction
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseMammalEntityModel
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.constant.DataTickets
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.constant.DataTickets
 
 class OtterEntityModel : BaseMammalEntityModel<OtterEntity>("hybrid_aquatic", "otter"), HABoneAdjustingModel {
 

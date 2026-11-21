@@ -6,7 +6,8 @@ import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
-import net.minecraft.world.entity.ai.goal.FollowBoatGoal
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat
+import net.minecraft.world.entity.ai.goal.FollowPlayerRiddenEntityGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.level.Level
 
@@ -34,7 +35,7 @@ class BullSharkEntity(type: EntityType<out BullSharkEntity>, world: Level) :
     override fun registerGoals() {
         super.registerGoals()
         goalSelector.addGoal(1, HurtByTargetGoal(this))
-        goalSelector.addGoal(8, FollowBoatGoal(this))
+        goalSelector.addGoal(8, FollowPlayerRiddenEntityGoal(this, AbstractBoat::class.java))
     }
 
     companion object {

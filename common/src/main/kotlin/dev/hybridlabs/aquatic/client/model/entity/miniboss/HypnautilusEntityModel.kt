@@ -1,17 +1,17 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
-import software.bernie.geckolib.constant.DataTickets
+import com.geckolib.constant.DataTickets
 
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 
-import software.bernie.geckolib.renderer.base.BoneSnapshots
+import com.geckolib.renderer.base.BoneSnapshots
 
 import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
 
 import dev.hybridlabs.aquatic.entity.miniboss.HypnautilusEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.state.AnimationTest
+import com.geckolib.animation.state.AnimationTest
 
 class HypnautilusEntityModel : HAMinionEntityModel<HypnautilusEntity>("hypnautilus"), HABoneAdjustingModel {
 

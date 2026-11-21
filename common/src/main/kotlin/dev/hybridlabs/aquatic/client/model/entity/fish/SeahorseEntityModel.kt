@@ -1,18 +1,18 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
-import software.bernie.geckolib.renderer.base.BoneSnapshots
+import com.geckolib.renderer.base.BoneSnapshots
 
 import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
 import dev.hybridlabs.hapi.client.model.getVariant
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.SeahorseEntity
 import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.constant.DataTickets
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.constant.DataTickets
 
 class SeahorseEntityModel : BaseFishEntityModel<SeahorseEntity>("hybrid_aquatic", "seahorse"), HABoneAdjustingModel {
 

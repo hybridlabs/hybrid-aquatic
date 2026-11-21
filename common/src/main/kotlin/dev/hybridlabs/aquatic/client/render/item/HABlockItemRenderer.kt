@@ -6,11 +6,11 @@ import net.minecraft.client.renderer.SubmitNodeCollector
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.entity.BlockEntity
-import software.bernie.geckolib.animatable.GeoAnimatable
-import software.bernie.geckolib.model.GeoModel
-import software.bernie.geckolib.renderer.GeoItemRenderer
-import software.bernie.geckolib.renderer.base.GeoRenderState
-import software.bernie.geckolib.renderer.base.RenderPassInfo
+import com.geckolib.animatable.GeoAnimatable
+import com.geckolib.model.GeoModel
+import com.geckolib.renderer.GeoItemRenderer
+import com.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.RenderPassInfo
 
 /**
  * Renders the item form of a block using that block's GeckoLib block entity model, applying the

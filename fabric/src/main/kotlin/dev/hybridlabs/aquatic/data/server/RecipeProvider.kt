@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.item.HAPIItems
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.advancements.criterion.InventoryChangeTrigger
 import net.minecraft.advancements.criterion.ItemPredicate
@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import java.util.concurrent.CompletableFuture
 
-class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     FabricRecipeProvider(output, lookupProvider) {
     override fun createRecipeProvider(
         registries: HolderLookup.Provider,
@@ -1839,54 +1839,18 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         result: Item,
         experience: Float,
     ) {
-        offerCookingRecipe(
-            "smelting",
-            RecipeSerializer.SMELTING_RECIPE,
-            ::SmeltingRecipe,
-            200,
-            input,
-            result,
-            experience
-        )
-        offerCookingRecipe(
-            "smoking",
-            RecipeSerializer.SMOKING_RECIPE,
-            ::SmokingRecipe,
-            100,
-            input,
-            result,
-            experience
-        )
-        offerCookingRecipe(
-            "campfire_cooking",
-            RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
-            ::CampfireCookingRecipe,
-            600,
-            input,
-            result,
-            experience
-        )
-    }
-
-    private fun <T : AbstractCookingRecipe> offerCookingRecipe(
-        cooker: String,
-        serializer: RecipeSerializer<T>,
-        recipeFactory: AbstractCookingRecipe.Factory<T>,
-        cookingTime: Int,
-        input: Item,
-        result: Item,
-        experience: Float,
-    ) {
-        SimpleCookingRecipeBuilder.generic(
-            Ingredient.of(input),
-            RecipeCategory.FOOD,
-            result,
-            experience,
-            cookingTime,
-            serializer,
-            recipeFactory
+        SimpleCookingRecipeBuilder.smelting(
+            Ingredient.of(input), RecipeCategory.FOOD, CookingBookCategory.FOOD, result, experience, 200
         ).unlockedBy(getHasName(input), has(input))
-            .save(output, getItemName(result) + "_from_" + cooker)
+            .save(output, getItemName(result) + "_from_smelting")
+        SimpleCookingRecipeBuilder.smoking(
+            Ingredient.of(input), RecipeCategory.FOOD, result, experience, 100
+        ).unlockedBy(getHasName(input), has(input))
+            .save(output, getItemName(result) + "_from_smoking")
+        SimpleCookingRecipeBuilder.campfireCooking(
+            Ingredient.of(input), RecipeCategory.FOOD, result, experience, 600
+        ).unlockedBy(getHasName(input), has(input))
+            .save(output, getItemName(result) + "_from_campfire_cooking")
     }
 
     //#region Kelp Cooking Recipes
@@ -1895,56 +1859,19 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         result: Item,
         experience: Float,
     ) {
-        offerKelpCookingRecipe(
-            "smelting",
-            RecipeSerializer.SMELTING_RECIPE,
-            ::SmeltingRecipe,
-            200,
-            inputTag,
-            result,
-            experience
-        )
-        offerKelpCookingRecipe(
-            "smoking",
-            RecipeSerializer.SMOKING_RECIPE,
-            ::SmokingRecipe,
-            100,
-            inputTag,
-            result,
-            experience
-        )
-        offerKelpCookingRecipe(
-            "campfire_cooking",
-            RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
-            ::CampfireCookingRecipe,
-            600,
-            inputTag,
-            result,
-            experience
-        )
-    }
-
-    private fun <T : AbstractCookingRecipe> offerKelpCookingRecipe(
-        cooker: String,
-        serializer: RecipeSerializer<T>,
-        recipeFactory: AbstractCookingRecipe.Factory<T>,
-        cookingTime: Int,
-        inputTag: TagKey<Item>,
-        result: Item,
-        experience: Float,
-    ) {
-        val builder = SimpleCookingRecipeBuilder.generic(
-            Ingredient.of(itemLookup.getOrThrow(inputTag)),
-            RecipeCategory.FOOD,
-            result,
-            experience,
-            cookingTime,
-            serializer,
-            recipeFactory
+        val ingredient = Ingredient.of(itemLookup.getOrThrow(inputTag))
+        SimpleCookingRecipeBuilder.smelting(
+            ingredient, RecipeCategory.FOOD, CookingBookCategory.FOOD, result, experience, 200
         ).unlockedBy("has_kelp", has(inputTag))
-
-        val recipeId = getItemName(result) + "_from_" + cooker
-        builder.save(output, recipeId)
+            .save(output, getItemName(result) + "_from_smelting")
+        SimpleCookingRecipeBuilder.smoking(
+            ingredient, RecipeCategory.FOOD, result, experience, 100
+        ).unlockedBy("has_kelp", has(inputTag))
+            .save(output, getItemName(result) + "_from_smoking")
+        SimpleCookingRecipeBuilder.campfireCooking(
+            ingredient, RecipeCategory.FOOD, result, experience, 600
+        ).unlockedBy("has_kelp", has(inputTag))
+            .save(output, getItemName(result) + "_from_campfire_cooking")
     }
     //#endregion
 

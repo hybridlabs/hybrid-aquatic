@@ -4,6 +4,5 @@ import dev.hybridlabs.aquatic.block.entity.GiantGreenAnemoneBlockEntity
 import dev.hybridlabs.aquatic.client.model.block.entity.GiantGreenAnemoneBlockEntityModel
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 
-@Suppress("UNUSED_PARAMETER")
 class GiantGreenAnemoneBlockEntityRenderer(context: BlockEntityRendererProvider.Context) :
-    HADirectionalBlockEntityRenderer<GiantGreenAnemoneBlockEntity>(GiantGreenAnemoneBlockEntityModel())
+    HADirectionalBlockEntityRenderer<GiantGreenAnemoneBlockEntity>(context, GiantGreenAnemoneBlockEntityModel())

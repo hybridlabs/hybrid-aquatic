@@ -6,12 +6,12 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.equipment.ArmorType
 import net.minecraft.world.item.ItemStack
-import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.animatable.client.GeoRenderProvider
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.renderer.GeoArmorRenderer
-import software.bernie.geckolib.util.GeckoLibUtil
+import com.geckolib.animatable.GeoItem
+import com.geckolib.animatable.client.GeoRenderProvider
+import com.geckolib.animatable.instance.AnimatableInstanceCache
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.renderer.GeoArmorRenderer
+import com.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
 class ReinforcedDivingArmorItem(type: ArmorType, settings: Properties) :

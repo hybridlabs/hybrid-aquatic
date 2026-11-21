@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.data.server
 
 import dev.hybridlabs.aquatic.painting.HAPaintings
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
@@ -11,7 +11,7 @@ import net.minecraft.world.entity.decoration.painting.PaintingVariant
 import java.util.Optional
 import java.util.concurrent.CompletableFuture
 
-class PaintingProvider(output: FabricDataOutput,
+class PaintingProvider(output: FabricPackOutput,
                        registriesFuture: CompletableFuture<HolderLookup.Provider>
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
 

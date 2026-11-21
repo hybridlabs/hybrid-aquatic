@@ -20,13 +20,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.animation.`object`.PlayState
-import software.bernie.geckolib.animation.`object`.EasingType
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.animation.AnimationController
+import com.geckolib.animation.AnimationController.AnimationStateHandler
+import com.geckolib.animation.RawAnimation
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.animation.`object`.PlayState
+import com.geckolib.animation.`object`.EasingType
 import java.util.function.IntFunction
 
 class ShrimpEntity(entityType: EntityType<out ShrimpEntity>, world: Level) :

@@ -4,7 +4,7 @@ package dev.hybridlabs.aquatic.data.server.worldgen
 
 import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture
 
 @Suppress("DEPRECATION")
 class PlacedFeatureProvider(
-    output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>,
+    output: FabricPackOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
 
     companion object {

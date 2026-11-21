@@ -4,11 +4,11 @@ import dev.hybridlabs.aquatic.block.entity.BuoyBlockEntity
 import dev.hybridlabs.aquatic.client.model.block.entity.BuoyBlockEntityModel
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState
-import software.bernie.geckolib.renderer.GeoBlockRenderer
-import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
+import com.geckolib.renderer.GeoBlockRenderer
+import com.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
 
 class BuoyBlockEntityRenderer(context: BlockEntityRendererProvider.Context) :
-    GeoBlockRenderer<BuoyBlockEntity, HABlockEntityRenderState>(BuoyBlockEntityModel()) {
+    GeoBlockRenderer<BuoyBlockEntity, HABlockEntityRenderState>(context, BuoyBlockEntityModel()) {
 
     override fun createRenderState(): HABlockEntityRenderState = HABlockEntityRenderState()
 

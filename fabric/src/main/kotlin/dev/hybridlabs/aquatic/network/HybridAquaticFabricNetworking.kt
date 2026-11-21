@@ -10,8 +10,8 @@ import net.minecraft.world.item.ItemStack
 object HybridAquaticFabricNetworking {
 
     init {
-        PayloadTypeRegistry.playS2C().register(FishingBobberPayload.type, FishingBobberPayload.CODEC)
-        PayloadTypeRegistry.playC2S().register(FishingBobberPayload.type, FishingBobberPayload.CODEC)
+        PayloadTypeRegistry.clientboundPlay().register(FishingBobberPayload.type, FishingBobberPayload.CODEC)
+        PayloadTypeRegistry.serverboundPlay().register(FishingBobberPayload.type, FishingBobberPayload.CODEC)
     }
 
     fun registerNetworking() {

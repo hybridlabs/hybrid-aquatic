@@ -3,12 +3,12 @@ package dev.hybridlabs.aquatic.item
 import dev.hybridlabs.aquatic.client.render.item.AnemoneBlockItemRenderer
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.Block
-import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.animatable.client.GeoRenderProvider
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.renderer.GeoItemRenderer
-import software.bernie.geckolib.util.GeckoLibUtil
+import com.geckolib.animatable.GeoItem
+import com.geckolib.animatable.client.GeoRenderProvider
+import com.geckolib.animatable.instance.AnimatableInstanceCache
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.renderer.GeoItemRenderer
+import com.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
 class AnemoneBlockItem(block: Block, properties: Properties) : BlockItem(block, properties), GeoItem {

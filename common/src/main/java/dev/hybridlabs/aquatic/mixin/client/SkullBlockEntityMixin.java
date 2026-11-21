@@ -37,7 +37,7 @@ public abstract class SkullBlockEntityMixin {
     private static void hybrid$plushieRenderType(
             SkullBlock.Type skullType, Identifier texture, CallbackInfoReturnable<RenderType> cir) {
         if (skullType instanceof PlushieBlock.Variant variant) {
-            cir.setReturnValue(RenderTypes.entityCutoutNoCullZOffset(variant.getTextureLocation()));
+            cir.setReturnValue(RenderTypes.entityCutoutZOffset(variant.getTextureLocation()));
         }
     }
 }

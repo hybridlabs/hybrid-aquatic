@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.data.builder.FabricSoundsProvider
 import dev.hybridlabs.aquatic.data.builder.SoundTypeBuilder
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import dev.hybridlabs.aquatic.sound.HASoundEvents
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.Identifier
@@ -14,7 +14,7 @@ import net.minecraft.sounds.SoundEvents
 import java.util.concurrent.CompletableFuture
 
 class SoundProvider(
-    output: FabricDataOutput,
+    output: FabricPackOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>
 ): FabricSoundsProvider(output, registriesFuture) {
 

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import java.util.UUID
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
 
 import net.minecraft.world.entity.EntitySpawnReason
@@ -43,15 +44,15 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.animation.`object`.PlayState
-import software.bernie.geckolib.animation.`object`.EasingType
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.util.ClientUtil
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.animation.AnimationController
+import com.geckolib.animation.AnimationController.AnimationStateHandler
+import com.geckolib.animation.RawAnimation
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.animation.`object`.PlayState
+import com.geckolib.animation.`object`.EasingType
+import com.geckolib.constant.DefaultAnimations
+import com.geckolib.util.ClientUtil
 import java.lang.ref.WeakReference
 import java.util.Collections.synchronizedList
 import java.util.function.Predicate
@@ -81,8 +82,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
 
     override fun createNavigation(level: Level): PathNavigation {
         setPathfindingMalus(PathType.WATER, 0.0f)
-        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, 16.0f)
+        setPathfindingMalus(PathType.FIRE, -1.0f)
 
         moveControl = SmoothStrafeSwimmingMoveControl(
             this,
@@ -103,7 +104,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     private var bossBar: ServerBossEvent =
-        ServerBossEvent(displayName, BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.NOTCHED_6)
+        ServerBossEvent(UUID.randomUUID(), displayName, BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.NOTCHED_6)
 
     override fun registerGoals() {
         goalSelector.addGoal(1, ShellBeastSummonBeaklingsGoal(this))

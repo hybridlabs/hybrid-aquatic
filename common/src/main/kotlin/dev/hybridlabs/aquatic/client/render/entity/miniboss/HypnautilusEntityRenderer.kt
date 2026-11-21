@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 
 import dev.hybridlabs.aquatic.client.model.entity.miniboss.HypnautilusEntityModel
 import dev.hybridlabs.aquatic.entity.miniboss.HypnautilusEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
-import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
+import com.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
 
 class HypnautilusEntityRenderer(context: Context) :
     HAMinionEntityRenderer<HypnautilusEntity>(context, HypnautilusEntityModel()) {

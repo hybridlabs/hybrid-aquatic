@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.world.item.ItemStack
-import software.bernie.geckolib.cache.model.GeoBone
+import com.geckolib.cache.model.GeoBone
 
 class GoldenDoradoEntityRenderer(context: Context) :
     BaseFishEntityRenderer<GoldenDoradoEntity, LivingEntityRenderState>(context, GoldenDoradoEntityModel(), true, false) {

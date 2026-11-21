@@ -9,7 +9,7 @@ import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.THRESHER_SHARK_PL
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.TIGER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.WHALE_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry.registerModelLayer
 
 object HAModelLayerRegistry {
     init {

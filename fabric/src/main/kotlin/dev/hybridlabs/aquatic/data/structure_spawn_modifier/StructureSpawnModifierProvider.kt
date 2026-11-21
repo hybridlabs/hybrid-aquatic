@@ -3,14 +3,14 @@ package dev.hybridlabs.aquatic.data.structure_spawn_modifier
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.structure.BuiltinSpawnModifiers
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceKey
 import java.util.concurrent.CompletableFuture
 
 class StructureSpawnModifierProvider(
-    output: FabricDataOutput,
+    output: FabricPackOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>
 ) :
     FabricDynamicRegistryProvider(output, registriesFuture) {

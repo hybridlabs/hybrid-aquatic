@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.CorydoraEntity
 import net.minecraft.client.renderer.rendertype.RenderType

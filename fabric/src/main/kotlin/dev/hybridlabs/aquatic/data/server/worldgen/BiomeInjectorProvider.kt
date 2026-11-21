@@ -3,13 +3,13 @@ package dev.hybridlabs.aquatic.data.server.worldgen
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors
 import dev.worldgen.lithostitched.api.registry.LithostitchedRegistries
 import java.util.concurrent.CompletableFuture
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 
 class BiomeInjectorProvider(
-    output: FabricDataOutput,
+    output: FabricPackOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     override fun configure(

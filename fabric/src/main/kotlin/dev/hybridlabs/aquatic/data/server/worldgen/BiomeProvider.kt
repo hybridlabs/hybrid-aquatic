@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.HolderGetter
 import net.minecraft.core.HolderLookup
@@ -26,7 +26,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature
 import java.util.concurrent.CompletableFuture
 
 class BiomeProvider(
-    output: FabricDataOutput,
+    output: FabricPackOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     companion object {

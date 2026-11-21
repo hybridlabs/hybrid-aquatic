@@ -121,7 +121,7 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
             val entity = context.entity
             if (
                 entity != null &&
-                entity.type.`is`(HAPIEntityTags.NET_CATCHABLE)
+                entity.type.builtInRegistryHolder().`is`(HAPIEntityTags.NET_CATCHABLE)
             ) {
                 return Shapes.block()
             }

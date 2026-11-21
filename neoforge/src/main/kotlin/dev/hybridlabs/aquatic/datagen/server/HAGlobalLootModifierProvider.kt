@@ -22,6 +22,7 @@ class HAGlobalLootModifierProvider
             "fishing_fish",
             HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
+                0,
                 BuiltInLootTables.FISHING.identifier(),
                 ItemTags.FISHES,
                 0.5f,
@@ -36,6 +37,7 @@ class HAGlobalLootModifierProvider
             "fishing_treasure",
             HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
+                0,
                 BuiltInLootTables.FISHING.identifier(),
                 HAItemTags.FISHING_TREASURE,
                 0.25f,

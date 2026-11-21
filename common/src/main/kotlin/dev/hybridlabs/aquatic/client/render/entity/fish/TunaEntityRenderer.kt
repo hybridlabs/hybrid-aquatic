@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.world.item.ItemStack
-import software.bernie.geckolib.cache.model.GeoBone
+import com.geckolib.cache.model.GeoBone
 
 class TunaEntityRenderer(context: Context) :
     BaseFishEntityRenderer<TunaEntity, LivingEntityRenderState>(context, TunaEntityModel(), true, false) {

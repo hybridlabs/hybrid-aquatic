@@ -45,8 +45,8 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.constant.DefaultAnimations
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.constant.DefaultAnimations
 import java.util.*
 
 @Suppress("DEPRECATION")
@@ -60,8 +60,8 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     init {
         setPathfindingMalus(PathType.WATER_BORDER, 0.0f)
         setPathfindingMalus(PathType.WATER, 0.0f)
-        setPathfindingMalus(PathType.DANGER_FIRE, 16.0f)
-        setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0f)
+        setPathfindingMalus(PathType.FIRE_IN_NEIGHBOR, 16.0f)
+        setPathfindingMalus(PathType.FIRE, -1.0f)
 
         moveControl = MoveControl(this)
         lookControl = LookControl(this)

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import java.util.UUID
 import net.minecraft.world.entity.EntitySpawnReason
 
 import net.minecraft.server.level.ServerLevel
@@ -41,11 +42,11 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.PathType
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.`object`.PlayState
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.constant.DefaultAnimations
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.animation.AnimationController
+import com.geckolib.animation.`object`.PlayState
+import com.geckolib.animation.RawAnimation
+import com.geckolib.constant.DefaultAnimations
 
 class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     HAMinibossEntity(type, world) {
@@ -70,7 +71,7 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     private var bossBar: ServerBossEvent =
-        ServerBossEvent(displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
+        ServerBossEvent(UUID.randomUUID(), displayName, BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_20)
 
     override fun registerGoals() {
         goalSelector.addGoal(1, KarkinosSummonGoal(this))

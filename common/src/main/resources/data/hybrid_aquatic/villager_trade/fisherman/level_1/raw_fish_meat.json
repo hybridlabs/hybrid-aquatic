@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 1.0
+  },
+  "gives": {
+    "id": "hybrid_aquatic:raw_fish_meat",
+    "count": 4
+  },
+  "max_uses": 4.0,
+  "xp": 5.0,
+  "reputation_discount": 0.05
+}

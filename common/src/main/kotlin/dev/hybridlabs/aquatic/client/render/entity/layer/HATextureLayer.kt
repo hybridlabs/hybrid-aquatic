@@ -5,11 +5,11 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.client.renderer.rendertype.RenderType
 import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.resources.Identifier
-import software.bernie.geckolib.animatable.GeoAnimatable
-import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderer
-import software.bernie.geckolib.renderer.base.RenderPassInfo
-import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer
+import com.geckolib.animatable.GeoAnimatable
+import com.geckolib.constant.DataTickets
+import com.geckolib.renderer.base.GeoRenderer
+import com.geckolib.renderer.base.RenderPassInfo
+import com.geckolib.renderer.layer.builtin.TextureLayerGeoLayer
 
 /**
  * Base class for Hybrid Aquatic's extra texture passes. GeckoLib 5 layers only see the render state,

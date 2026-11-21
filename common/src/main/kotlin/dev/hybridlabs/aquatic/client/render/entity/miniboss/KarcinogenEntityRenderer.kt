@@ -1,6 +1,6 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 
 import dev.hybridlabs.aquatic.client.model.entity.miniboss.KarcinogenEntityModel
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinogenEntity

@@ -68,8 +68,8 @@ object HABlocks {
     val CLAMS = register("clams") { ClamBlock(HABlockProperties.ofFullCopy(Blocks.CARROTS)) }
     val MUSSELS = register("mussels") { MusselBlock(HABlockProperties.ofFullCopy(Blocks.CARROTS)) }
     val WILD_MUSSELS = register("wild_mussels") { WildMusselBlock(HABlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
-    val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
-    val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND).hasPostProcess { _, _, _ -> true }) }
+    val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND).postProcess { _, _, pos -> pos }) }
+    val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND).postProcess { _, _, pos -> pos }) }
     val WHITE_SAND = register("white_sand") { ColoredFallingBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND)) }
 
     val WHITE_SANDSTONE = register("white_sandstone") {

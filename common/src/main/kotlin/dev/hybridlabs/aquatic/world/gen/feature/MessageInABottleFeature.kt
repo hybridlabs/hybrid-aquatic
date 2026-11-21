@@ -19,7 +19,7 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         val world = context.level()
         val origin = context.origin()
         val random = context.random()
-        val placedState = config.toPlace.getState(random, origin)
+        val placedState = config.toPlace.getState(world, random, origin)
         val originalState = world.getBlockState(origin.mutable())
 
         if (originalState.isSolid || placedState.block !is MessageInABottleBlock) {

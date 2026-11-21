@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.block.entity
 import net.minecraft.world.level.storage.ValueInput
 import net.minecraft.world.level.storage.ValueOutput
 
-import software.bernie.geckolib.animation.`object`.LoopType
+import com.geckolib.animation.`object`.LoopType
 
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import net.minecraft.core.BlockPos
@@ -13,17 +13,17 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
-import software.bernie.geckolib.animatable.GeoAnimatable
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.animation.`object`.PlayState
-import software.bernie.geckolib.animation.`object`.EasingType
-import software.bernie.geckolib.util.GeckoLibUtil
-import software.bernie.geckolib.util.RenderUtil
+import com.geckolib.animatable.GeoAnimatable
+import com.geckolib.animatable.instance.AnimatableInstanceCache
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.animation.AnimationController
+import com.geckolib.animation.AnimationController.AnimationStateHandler
+import com.geckolib.animation.RawAnimation
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.animation.`object`.PlayState
+import com.geckolib.animation.`object`.EasingType
+import com.geckolib.util.GeckoLibUtil
+import com.geckolib.util.RenderUtil
 
 /**
  * Represents the block entity for Message in a Bottle blocks.

@@ -11,13 +11,13 @@ import net.minecraft.core.BlockPos
 import net.minecraft.util.Mth
 import net.minecraft.util.RandomSource
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
-import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.constant.dataticket.DataTicket
-import software.bernie.geckolib.renderer.base.RenderPassInfo
-import software.bernie.geckolib.renderer.GeoBlockRenderer
+import com.geckolib.constant.DataTickets
+import com.geckolib.constant.dataticket.DataTicket
+import com.geckolib.renderer.base.RenderPassInfo
+import com.geckolib.renderer.GeoBlockRenderer
 
 class MessageInABottleBlockEntityRenderer(context: BlockEntityRendererProvider.Context) :
-    GeoBlockRenderer<MessageInABottleBlockEntity, HABlockEntityRenderState>(MessageInABottleBlockEntityModel()) {
+    GeoBlockRenderer<MessageInABottleBlockEntity, HABlockEntityRenderState>(context, MessageInABottleBlockEntityModel()) {
     private val random = RandomSource.create()
 
 

@@ -1,12 +1,12 @@
 package dev.hybridlabs.aquatic.client.model
 
 import net.minecraft.world.item.ItemStack
-import software.bernie.geckolib.constant.dataticket.DataTicket
+import com.geckolib.constant.dataticket.DataTicket
 
 /**
  * Model-local render state data that is only relevant to Hybrid Aquatic models. GeckoLib 5 models
  * only see a render state, so values an entity exposes for resource selection are captured in
- * [software.bernie.geckolib.model.GeoModel.addAdditionalStateData] and read back through these
+ * [com.geckolib.model.GeoModel.addAdditionalStateData] and read back through these
  * tickets.
  */
 object HADataTickets {

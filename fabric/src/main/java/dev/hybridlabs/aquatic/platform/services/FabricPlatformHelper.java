@@ -118,7 +118,7 @@ public class FabricPlatformHelper implements PlatformHelper {
     @Override
     public <T extends BlockEntity> void addBlockEntityTypeBlocks(BlockEntityType<T> type, Block... blocks) {
         for (Block block : blocks) {
-            ((net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType) type).addSupportedBlock(block);
+            ((net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType) type).addValidBlock(block);
         }
     }
 

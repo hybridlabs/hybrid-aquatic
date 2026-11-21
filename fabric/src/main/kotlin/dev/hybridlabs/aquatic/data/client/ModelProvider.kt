@@ -9,7 +9,7 @@ import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.client.model.HAModelTemplates
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider
 import net.minecraft.client.data.models.BlockModelGenerators
 import net.minecraft.client.data.models.ItemModelGenerators
@@ -18,12 +18,12 @@ import net.minecraft.client.data.models.blockstates.ConditionBuilder
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator
 import net.minecraft.client.data.models.model.ModelTemplate
 import net.minecraft.client.data.models.model.ItemModelUtils
-import software.bernie.geckolib.renderer.internal.GeckolibItemSpecialRenderer
+import com.geckolib.renderer.internal.GeckolibItemSpecialRenderer
 import net.minecraft.client.renderer.item.SpecialModelWrapper
 import net.minecraft.client.data.models.model.ModelTemplates
 import net.minecraft.client.data.models.model.TextureMapping
 import net.minecraft.client.data.models.model.TexturedModel
-import net.minecraft.client.renderer.block.model.Variant
+import net.minecraft.client.renderer.block.dispatch.Variant
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.Identifier
@@ -34,7 +34,7 @@ import net.minecraft.world.level.block.CropBlock
 import net.minecraft.world.level.block.LiquidBlock
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
-class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
+class ModelProvider(output: FabricPackOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(generator: BlockModelGenerators) {
         generator.run {
             //#region Plushies
@@ -42,7 +42,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .filterIsInstance<PlushieBlock>()
                 .forEach { block ->
                     val id = BuiltInRegistries.BLOCK.getKey(block)
-                    createAirLikeBlock(block, CommonClass.locate("block/${id.path}"))
+                    createAirLikeBlock(block, TextureMapping.getBlockTexture(block))
                     registerSimpleItemModel(block.asItem(), CommonClass.locate("item/${id.path}"))
                 }
 
@@ -67,7 +67,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 particleBlock?.let { b -> createAirLikeBlock(block, TextureMapping.getBlockTexture(b)) }
                 itemModelOutput.accept(
                     block.asItem(),
-                    SpecialModelWrapper.Unbaked(template, GeckolibItemSpecialRenderer.Unbaked())
+                    SpecialModelWrapper.Unbaked(template, java.util.Optional.empty(), GeckolibItemSpecialRenderer.Unbaked<dev.hybridlabs.aquatic.item.AnemoneBlockItem>())
                 )
             }
 

@@ -7,13 +7,16 @@ import net.minecraft.client.renderer.SubmitNodeCollector
 import net.minecraft.client.renderer.entity.EntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.TntMinecartRenderer
+import net.minecraft.client.renderer.entity.TntRenderer
 import net.minecraft.client.renderer.entity.state.TntRenderState
-import net.minecraft.client.renderer.state.CameraRenderState
+import net.minecraft.client.renderer.state.level.CameraRenderState
 import net.minecraft.util.Mth
 import net.minecraft.world.level.block.Blocks
 
 class SmallTNTEntityRenderer(context: EntityRendererProvider.Context) :
     EntityRenderer<SmallTNTEntity, TntRenderState>(context) {
+
+    private val blockModelResolver = context.blockModelResolver
 
     init {
         this.shadowRadius = 0.25f
@@ -24,7 +27,7 @@ class SmallTNTEntityRenderer(context: EntityRendererProvider.Context) :
     override fun extractRenderState(entity: SmallTNTEntity, state: TntRenderState, partialTick: Float) {
         super.extractRenderState(entity, state, partialTick)
         state.fuseRemainingInTicks = entity.fuse - partialTick + 1.0f
-        state.blockState = Blocks.TNT.defaultBlockState()
+
     }
 
     override fun submit(
@@ -50,16 +53,15 @@ class SmallTNTEntityRenderer(context: EntityRendererProvider.Context) :
         poseStack.mulPose(Axis.YP.rotationDegrees(90.0f))
         poseStack.scale(0.5f, 0.5f, 0.5f)
 
-        state.blockState?.let { blockState ->
-            TntMinecartRenderer.submitWhiteSolidBlock(
-                blockState,
-                poseStack,
-                nodeCollector,
-                state.lightCoords,
-                state.fuseRemainingInTicks.toInt() / 5 % 2 == 0,
-                state.outlineColor
-            )
-        }
+        blockModelResolver.update(state.blockState, Blocks.TNT.defaultBlockState(), TntRenderer.BLOCK_DISPLAY_CONTEXT)
+        TntMinecartRenderer.submitWhiteSolidBlock(
+            state.blockState,
+            poseStack,
+            nodeCollector,
+            state.lightCoords,
+            state.fuseRemainingInTicks.toInt() / 5 % 2 == 0,
+            state.outlineColor
+        )
 
         poseStack.popPose()
         super.submit(state, poseStack, nodeCollector, cameraState)

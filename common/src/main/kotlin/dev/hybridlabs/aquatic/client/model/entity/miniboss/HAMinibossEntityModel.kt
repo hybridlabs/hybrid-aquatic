@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import net.minecraft.resources.Identifier
-import software.bernie.geckolib.model.GeoModel
+import com.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
 abstract class HAMinibossEntityModel<T : HAMinibossEntity>(private val id: String) :

@@ -36,7 +36,7 @@ class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), 
         )
     }
 
-    override fun getLightBlock(state: BlockState): Int {
+    override fun getLightDampening(state: BlockState): Int {
         return 1
     }
 

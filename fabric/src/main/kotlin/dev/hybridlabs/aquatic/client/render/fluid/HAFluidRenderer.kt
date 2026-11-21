@@ -2,10 +2,9 @@ package dev.hybridlabs.aquatic.client.render.fluid
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
-import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderingRegistry
+import net.minecraft.client.renderer.block.FluidModel
+import net.minecraft.client.resources.model.sprite.Material
 import net.minecraft.world.level.material.FlowingFluid
 
 class HAFluidRenderer {
@@ -14,14 +13,15 @@ class HAFluidRenderer {
     }
 
     fun registerFluid(id: String, still: FlowingFluid, flowing: FlowingFluid) {
-        FluidRenderHandlerRegistry.INSTANCE.register(
-            still, flowing, SimpleFluidRenderHandler(
-                CommonClass.locate("block/${id}_still"),
-                CommonClass.locate("block/${id}_flowing"),
-                CommonClass.locate("block/${id}_overlay"),
-                0xFFFFFF
+        FluidRenderingRegistry.register(
+            still,
+            flowing,
+            FluidModel.Unbaked(
+                Material(CommonClass.locate("block/${id}_still")),
+                Material(CommonClass.locate("block/${id}_flowing")),
+                Material(CommonClass.locate("block/${id}_overlay")),
+                null
             )
         )
-        BlockRenderLayerMap.putFluids(ChunkSectionLayer.SOLID, still, flowing)
     }
 }

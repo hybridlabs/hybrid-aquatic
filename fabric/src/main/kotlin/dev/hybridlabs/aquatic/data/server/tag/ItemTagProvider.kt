@@ -6,8 +6,8 @@ import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquati
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.tags.TagAppender
 import net.minecraft.core.registries.BuiltInRegistries
@@ -20,8 +20,8 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
 
-class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
-    FabricTagProvider.ItemTagProvider(output, registriesFuture) {
+class ItemTagProvider(output: FabricPackOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
+    FabricTagsProvider.ItemTagsProvider(output, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         // Items that will be consumed by a fishing rod
         setOf(

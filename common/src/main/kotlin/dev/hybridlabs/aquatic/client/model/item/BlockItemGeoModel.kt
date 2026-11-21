@@ -3,9 +3,9 @@ package dev.hybridlabs.aquatic.client.model.item
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.resources.Identifier
-import software.bernie.geckolib.animatable.GeoAnimatable
-import software.bernie.geckolib.model.GeoModel
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.animatable.GeoAnimatable
+import com.geckolib.model.GeoModel
+import com.geckolib.renderer.base.GeoRenderState
 
 /**
  * Adapts a block entity's [GeoModel] to the item form of that block, so the item in a hand or in

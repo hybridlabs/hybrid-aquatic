@@ -1,8 +1,8 @@
 package dev.hybridlabs.aquatic.client.render.block.entity
 
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState
-import software.bernie.geckolib.constant.dataticket.DataTicket
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.constant.dataticket.DataTicket
+import com.geckolib.renderer.base.GeoRenderState
 
 /**
  * Block entity render state that also carries GeckoLib data.

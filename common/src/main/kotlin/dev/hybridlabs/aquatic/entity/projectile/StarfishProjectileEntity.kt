@@ -14,16 +14,17 @@ import net.minecraft.world.entity.projectile.arrow.AbstractArrow
 import net.minecraft.world.entity.projectile.ItemSupplier
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import net.minecraft.world.phys.Vec3
 import net.minecraft.world.phys.BlockHitResult
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.`object`.PlayState
-import software.bernie.geckolib.util.GeckoLibUtil
+import com.geckolib.animatable.GeoEntity
+import com.geckolib.animatable.instance.AnimatableInstanceCache
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.animation.AnimationController
+import com.geckolib.animation.AnimationController.AnimationStateHandler
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.animation.RawAnimation
+import com.geckolib.animation.`object`.PlayState
+import com.geckolib.util.GeckoLibUtil
 
 class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     private val animCache = GeckoLibUtil.createInstanceCache(this)
@@ -78,7 +79,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
         return ItemStack(HAItems.STARFISH.get())
     }
 
-    override fun interact(player: Player, hand: InteractionHand): InteractionResult {
+    override fun interact(player: Player, hand: InteractionHand, hitPosition: Vec3): InteractionResult {
         if (!this.level().isClientSide && this.onGround()) {
             val item = ItemStack(HAItems.STARFISH.get())
 

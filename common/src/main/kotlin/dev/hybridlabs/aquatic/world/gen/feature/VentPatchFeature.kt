@@ -10,7 +10,6 @@ import net.minecraft.core.Direction
 import net.minecraft.core.Vec3i
 import net.minecraft.util.RandomSource
 import net.minecraft.util.valueproviders.IntProvider
-import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.WorldGenLevel
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -134,7 +133,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
     }
 
     private fun generateSingleVent(
-        world: LevelAccessor,
+        world: WorldGenLevel,
         rootPos: BlockPos,
         random: RandomSource,
         heightMultiplier: Double,
@@ -150,7 +149,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
 
         val mutablePos = rootPos.mutable()
 
-        val state = ventProvider.getState(random, mutablePos)
+        val state = ventProvider.getState(world, random, mutablePos)
         if (!isValidPosition(world, mutablePos, state)) {
             return false
         }
@@ -166,7 +165,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         }
 
         repeat(baseThickness) {
-            val state = baseProvider.getState(random, mutablePos)
+            val state = baseProvider.getState(world, random, mutablePos)
             world.setBlock(mutablePos, state, Block.UPDATE_CLIENTS)
             mutablePos.move(Direction.UP)
         }
@@ -181,7 +180,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
     }
 
     private fun generateGiantVent(
-        world: LevelAccessor,
+        world: WorldGenLevel,
         rootPos: BlockPos,
         random: RandomSource,
         heightMultiplier: Double,
@@ -196,7 +195,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
 
         val mutablePos = rootPos.mutable()
 
-        val state = giantVentProvider.getState(random, mutablePos)
+        val state = giantVentProvider.getState(world, random, mutablePos)
         if (!isValidPosition(world, mutablePos, state)) {
             return false
         }
@@ -220,7 +219,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
     }
 
     private fun generateHydrothermalVent(
-        world: LevelAccessor,
+        world: WorldGenLevel,
         pos: BlockPos,
         cycle: Int,
         height: Int,
@@ -237,7 +236,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
     }
 
     private fun generateGiantVent(
-        world: LevelAccessor,
+        world: WorldGenLevel,
         pos: BlockPos,
         cycle: Int,
         height: Int,
@@ -285,7 +284,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
     }
 
     private fun generateTubeWormPatch(
-        world: LevelAccessor,
+        world: WorldGenLevel,
         pos: BlockPos,
         random: RandomSource,
         count: Int,
@@ -311,7 +310,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                 }
             }
 
-            val state = stateProvider.getState(random, tubeWormPos)
+            val state = stateProvider.getState(world, random, tubeWormPos)
             if (isValidPosition(world, tubeWormPos, state)) {
                 val wormCount = wormCountProvider.sample(random)
                 world.setBlock(tubeWormPos, state.setValue(TubeWormBlock.WORMS, wormCount), Block.UPDATE_CLIENTS)
@@ -319,7 +318,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         }
     }
 
-    private fun isValidPosition(world: LevelAccessor, pos: BlockPos, state: BlockState): Boolean {
+    private fun isValidPosition(world: WorldGenLevel, pos: BlockPos, state: BlockState): Boolean {
         val existingState = world.getBlockState(pos)
 
         if (!existingState.canBeReplaced()) {

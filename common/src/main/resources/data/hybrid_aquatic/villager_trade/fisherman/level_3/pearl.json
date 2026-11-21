@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "hybrid_aquatic:pearl",
+    "count": 1.0
+  },
+  "gives": {
+    "id": "minecraft:emerald",
+    "count": 2
+  },
+  "max_uses": 6.0,
+  "xp": 15.0,
+  "reputation_discount": 0.05
+}

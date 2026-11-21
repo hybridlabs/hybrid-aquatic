@@ -52,7 +52,7 @@ open class SmallTNTEntity(
                 this.explodeTnt()
             }
         } else {
-            this.updateInWaterStateAndDoFluidPushing()
+            this.updateFluidInteraction()
             if (this.level().isClientSide) {
                 this.level()
                     .addParticle(

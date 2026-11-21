@@ -10,12 +10,12 @@ import net.minecraft.world.item.equipment.ArmorType
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.component.TooltipDisplay
 import net.minecraft.world.item.TooltipFlag
-import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.animatable.client.GeoRenderProvider
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.renderer.GeoArmorRenderer
-import software.bernie.geckolib.util.GeckoLibUtil
+import com.geckolib.animatable.GeoItem
+import com.geckolib.animatable.client.GeoRenderProvider
+import com.geckolib.animatable.instance.AnimatableInstanceCache
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.renderer.GeoArmorRenderer
+import com.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
 class MoonJellyfishArmorItem(type: ArmorType, settings: Properties) :

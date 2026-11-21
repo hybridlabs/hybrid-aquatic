@@ -2,7 +2,6 @@ package dev.hybridlabs.aquatic
 
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
-import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.property.FlammableProperty
 import dev.hybridlabs.aquatic.block.property.StrippableProperty
@@ -24,7 +23,6 @@ import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import dev.hybridlabs.aquatic.tag.*
-import dev.hybridlabs.aquatic.utils.HACustomTrades.registerCustomTrades
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.hybridlabs.aquatic.world.gen.densityfunction.DensityFunctionWrappers
@@ -38,12 +36,9 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STARTING
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
-import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
-import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder
+import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
-import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.world.entity.npc.villager.VillagerTrades
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
@@ -104,13 +99,6 @@ object HybridAquatic : ModInitializer {
 
 
         registerDynamicRegistries()
-        if (configHandler.config.enableWanderingTraderTrades) {
-            registerWanderingTraderTrades()
-        }
-        if (configHandler.config.enableWanderingTraderTrades) {
-            registerCustomTrades()
-        }
-
         FlammableProperty
         StrippableProperty
 
@@ -123,20 +111,6 @@ object HybridAquatic : ModInitializer {
 
     private fun registerDynamicRegistries() {
         DynamicRegistries.register(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER, SpawnModifier.CODEC)
-    }
-
-    private fun registerWanderingTraderTrades() {
-        // plushies
-        BuiltInRegistries.ITEM
-            .filter { it is BlockItem && it.block is PlushieBlock }
-            .forEach { block ->
-                TradeOfferHelper.registerWanderingTraderOffers { builder ->
-                    builder.addOffersToPool(
-                        TradeOfferHelper.WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
-                        VillagerTrades.ItemsForEmeralds(block, 8, 1, 2, 2)
-                    )
-                }
-            }
     }
 
 
@@ -183,7 +157,7 @@ object HybridAquatic : ModInitializer {
     }
 
     private fun registerBrewingRecipes() {
-        FabricBrewingRecipeRegistryBuilder.BUILD.register { builder ->
+        FabricPotionBrewingBuilder.BUILD.register { builder ->
             for (recipe in HAPotions.recipes.get()) {
                 builder.registerPotionRecipe(
                     recipe.inputPotion,

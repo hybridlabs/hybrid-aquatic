@@ -18,11 +18,12 @@ import net.neoforged.neoforge.common.loot.LootModifier
 
 class HAGlobalLootModifier(
     conditionsIn: Array<LootItemCondition>,
+    priority: Int,
     val target: Identifier,
     val itemTag: TagKey<Item>,
     val chance: Float,
     val tables: WeightedList<Identifier>
-) : LootModifier(conditionsIn) {
+) : LootModifier(conditionsIn, priority) {
 
     override fun doApply(
         generatedLoot: ObjectArrayList<ItemStack>, context: LootContext
@@ -30,7 +31,7 @@ class HAGlobalLootModifier(
 
         if (context.queriedLootTableId == target) {
             for ((idx, stack) in generatedLoot.withIndex()) {
-                if (stack.itemHolder.`is`(itemTag)) {
+                if (stack.typeHolder().`is`(itemTag)) {
                     if (context.random.nextFloat() >= chance) {
                         generatedLoot.removeAt(idx)
                         val table = tables.getRandom(context.random)

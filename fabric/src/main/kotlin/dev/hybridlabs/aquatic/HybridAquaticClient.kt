@@ -2,10 +2,8 @@
 
 package dev.hybridlabs.aquatic
 
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer
 
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.client.data.HypnoticEntities
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
@@ -30,10 +28,14 @@ import dev.hybridlabs.aquatic.platform.ClientServices
 import dev.hybridlabs.aquatic.platform.Services
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
-import net.minecraft.client.color.block.BlockColor
+import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry.registerModelLayer
+import net.minecraft.client.color.block.BlockTintSource
 import net.minecraft.client.renderer.BiomeColors
+import net.minecraft.client.renderer.block.BlockAndTintGetter
+import net.minecraft.core.BlockPos
+import net.minecraft.world.level.FoliageColor
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.client.renderer.rendertype.RenderType
 import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
@@ -63,96 +65,6 @@ object HybridAquaticClient : ClientModInitializer {
         // TODO: hook up renderer to make this thing easier
     }
 
-    private fun registerRenderShapes() {
-        ClientServices.PLATFORM.registerBlockRenderers(
-            ChunkSectionLayer.TRANSLUCENT,
-            HABlocks.ANEMONE.get(),
-            HABlocks.GIANT_GREEN_ANEMONE.get(),
-            HABlocks.STRAWBERRY_ANEMONE.get(),
-            HABlocks.MESSAGE_IN_A_BOTTLE.get(),
-            HAPlatformBlocks.GLOWSLIME_BLOCK.get(),
-        )
-        ClientServices.PLATFORM.registerBlockRenderers(
-            ChunkSectionLayer.CUTOUT,
-            HAPlatformBlocks.DUNEGRASS.get(),
-            HAPlatformBlocks.TALL_DUNEGRASS.get(),
-
-            HAPlatformBlocks.CATTAIL.get(),
-            HAPlatformBlocks.PAPYRUS.get(),
-
-            HABlocks.RED_ALGAE.get(),
-            HABlocks.TALL_RED_ALGAE.get(),
-
-            HABlocks.BULL_KELP.get(),
-            HABlocks.BULL_KELP_PLANT.get(),
-
-            HABlocks.SARGASSUM.get(),
-            HABlocks.SARGASSUM_PLANT.get(),
-            HABlocks.FLOATING_SARGASSUM.get(),
-            HABlocks.FLOATING_PETALS.get(),
-            HABlocks.FLOATING_LEAVES.get(),
-
-            HABlocks.WATER_LETTUCE.get(),
-            HABlocks.JUNGLE_LILY_PAD.get(),
-
-            HABlocks.GLOWING_PLANKTON.get(),
-
-            HABlocks.SEA_LETTUCE.get(),
-            HABlocks.TALL_SEA_LETTUCE.get(),
-
-            HABlocks.CRAB_POT.get(),
-            HABlocks.GIANT_CLAM.get(),
-            HABlocks.TUBE_WORM.get(),
-
-            HABlocks.LOPHELIA_CORAL.get(),
-            HABlocks.LOPHELIA_CORAL_FAN.get(),
-            HABlocks.LOPHELIA_CORAL_WALL_FAN.get(),
-            HABlocks.DEAD_LOPHELIA_CORAL.get(),
-            HABlocks.DEAD_LOPHELIA_CORAL_FAN.get(),
-            HABlocks.DEAD_LOPHELIA_CORAL_WALL_FAN.get(),
-
-            HABlocks.SUN_CORAL.get(),
-            HABlocks.SUN_CORAL_FAN.get(),
-            HABlocks.SUN_CORAL_WALL_FAN.get(),
-            HABlocks.DEAD_SUN_CORAL.get(),
-            HABlocks.DEAD_SUN_CORAL_FAN.get(),
-            HABlocks.DEAD_SUN_CORAL_WALL_FAN.get(),
-
-            HABlocks.LEAF_CORAL.get(),
-            HABlocks.LEAF_CORAL_FAN.get(),
-            HABlocks.LEAF_CORAL_WALL_FAN.get(),
-            HABlocks.DEAD_LEAF_CORAL.get(),
-            HABlocks.DEAD_LEAF_CORAL_FAN.get(),
-            HABlocks.DEAD_LEAF_CORAL_WALL_FAN.get(),
-
-            HABlocks.ROSE_CORAL.get(),
-            HABlocks.ROSE_CORAL_FAN.get(),
-            HABlocks.ROSE_CORAL_WALL_FAN.get(),
-            HABlocks.DEAD_ROSE_CORAL.get(),
-            HABlocks.DEAD_ROSE_CORAL_FAN.get(),
-            HABlocks.DEAD_ROSE_CORAL_WALL_FAN.get(),
-
-            HABlocks.BUTTON_CORAL.get(),
-            HABlocks.BUTTON_CORAL_FAN.get(),
-            HABlocks.BUTTON_CORAL_WALL_FAN.get(),
-            HABlocks.DEAD_BUTTON_CORAL.get(),
-            HABlocks.DEAD_BUTTON_CORAL_FAN.get(),
-            HABlocks.DEAD_BUTTON_CORAL_WALL_FAN.get(),
-
-            HABlocks.THORN_CORAL.get(),
-            HABlocks.THORN_CORAL_FAN.get(),
-            HABlocks.THORN_CORAL_WALL_FAN.get(),
-            HABlocks.DEAD_THORN_CORAL.get(),
-            HABlocks.DEAD_THORN_CORAL_FAN.get(),
-            HABlocks.DEAD_THORN_CORAL_WALL_FAN.get(),
-
-            HAPlatformBlocks.DRIFTWOOD_DOOR.get(),
-            HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
-            HABlocks.GLOWSTICK.get(),
-            HABlocks.WALL_GLOWSTICK.get(),
-        )
-    }
-
     private fun registerBlockEntityRenderers() {
         BlockEntityRenderers.register(HABlockEntityTypes.ANEMONE.get(), ::AnemoneBlockEntityRenderer)
         BlockEntityRenderers.register(
@@ -175,17 +87,18 @@ object HybridAquaticClient : ClientModInitializer {
     }
 
     private fun registerBlockColors() {
-        ColorProviderRegistry.BLOCK.register(
-            BlockColor { state, level, pos, tintIndex ->
-                if (level != null && pos != null) {
-                    BiomeColors.getAverageFoliageColor(level, pos)
-                } else {
-                    -1
-                }
-            },
-
+        BlockColorRegistry.register(
+            listOf(FOLIAGE_TINT),
             HABlocks.FLOATING_LEAVES.get(),
         )
+    }
+
+    private val FOLIAGE_TINT = object : BlockTintSource {
+        override fun color(state: BlockState): Int = FoliageColor.FOLIAGE_DEFAULT
+
+        override fun colorInWorld(state: BlockState, level: BlockAndTintGetter, pos: BlockPos): Int {
+            return BiomeColors.getAverageFoliageColor(level, pos)
+        }
     }
 
     private fun registerModelLayers() {

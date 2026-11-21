@@ -45,7 +45,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                 }
             }
 
-            val blockState = configuration.fluidProvider.getState(randomSource, blockPos)
+            val blockState = configuration.fluidProvider.getState(worldGenLevel, randomSource, blockPos)
 
             for (s in 0..15) {
                 for (t in 0..15) {
@@ -88,7 +88,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                 }
             }
 
-            val blockState3 = configuration.barrierProvider.getState(randomSource, blockPos)
+            val blockState3 = configuration.barrierProvider.getState(worldGenLevel, randomSource, blockPos)
             if (!blockState3.isAir) {
                 for (t in 0..15) {
                     for (u in 0..15) {

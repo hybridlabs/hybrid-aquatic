@@ -6,7 +6,7 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.item.HAPIItems
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider
 import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.AdvancementHolder
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Blocks.WATER
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
-class AdvancementProvider(output: FabricDataOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) : FabricAdvancementProvider(output,registryLookup) {
+class AdvancementProvider(output: FabricPackOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) : FabricAdvancementProvider(output,registryLookup) {
     override fun generateAdvancement(registryLookup: HolderLookup.Provider, consumer: Consumer<AdvancementHolder>) {
         val itemLookup = registryLookup.lookupOrThrow(Registries.ITEM)
         val blockLookup = registryLookup.lookupOrThrow(Registries.BLOCK)

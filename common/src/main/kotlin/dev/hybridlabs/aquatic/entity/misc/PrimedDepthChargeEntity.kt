@@ -64,7 +64,7 @@ open class PrimedDepthChargeEntity(
                 this.explode()
             }
         } else {
-            this.updateInWaterStateAndDoFluidPushing()
+            this.updateFluidInteraction()
             if (this.level().isClientSide) {
                 this.level()
                     .addParticle(ParticleTypes.BUBBLE_COLUMN_UP, this.x, this.y + 0.5, this.z, 0.0, 0.0, 0.0)

@@ -13,10 +13,10 @@ import net.minecraft.client.renderer.rendertype.RenderType
 import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.base.BoneSnapshots
-import software.bernie.geckolib.renderer.base.RenderPassInfo
-import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
+import com.geckolib.renderer.GeoEntityRenderer
+import com.geckolib.renderer.base.BoneSnapshots
+import com.geckolib.renderer.base.RenderPassInfo
+import com.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
 
 class ArgonautEntityRenderer<T : ArgonautEntity>(
     context: EntityRendererProvider.Context
@@ -35,7 +35,7 @@ class ArgonautEntityRenderer<T : ArgonautEntity>(
     }
 
     override fun getRenderType(renderState: LivingEntityRenderState, texture: Identifier): RenderType {
-        return RenderTypes.entityCutoutNoCull(texture)
+        return RenderTypes.entityCutout(texture)
     }
 
     override fun addRenderData(

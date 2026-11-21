@@ -13,7 +13,7 @@ import dev.hybridlabs.aquatic.world.gen.feature.*
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.DelesseriaFeatureConfig
 import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
@@ -56,7 +56,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise
 import java.util.concurrent.CompletableFuture
 
 class ConfiguredFeatureProvider(
-    output: FabricDataOutput,
+    output: FabricPackOutput,
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     companion object {
@@ -66,8 +66,8 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.ANEMONES,
 
-                Feature.NO_BONEMEAL_FLOWER,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     4, 2, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -324,7 +324,7 @@ class ConfiguredFeatureProvider(
 
                 Feature.DISK,
                 DiskConfiguration(
-                    RuleBasedBlockStateProvider.simple(HABlocks.AERATED_SAND.get()),
+                    RuleBasedStateProvider.simple(HABlocks.AERATED_SAND.get()),
                     BlockPredicate.matchesBlocks(
                         listOf<Block>(
                             HABlocks.GRASSY_SAND.get(),
@@ -344,7 +344,7 @@ class ConfiguredFeatureProvider(
 
                 Feature.DISK,
                 DiskConfiguration(
-                    RuleBasedBlockStateProvider.simple(Blocks.SAND),
+                    RuleBasedStateProvider.simple(Blocks.SAND),
                     BlockPredicate.matchesBlocks(listOf<Block>(HABlocks.GRASSY_SAND.get())),
                     UniformInt.of(3, 8),
                     1
@@ -370,7 +370,7 @@ class ConfiguredFeatureProvider(
 
                 HAFeatures.SUSPICIOUS_SAND_DISK.get(),
                 DiskConfiguration(
-                    RuleBasedBlockStateProvider.simple(Blocks.SUSPICIOUS_SAND),
+                    RuleBasedStateProvider.simple(Blocks.SUSPICIOUS_SAND),
                     BlockPredicate.matchesBlocks(listOf<Block>(Blocks.SAND)),
                     UniformInt.of(1, 2),
                     1
@@ -432,7 +432,7 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.FLOATING_SARGASSUM,
 
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     100, 10, 10,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -467,8 +467,8 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.FLOATING_LEAVES,
-                Feature.RANDOM_PATCH,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     50,
                     5,
                     5,
@@ -504,8 +504,8 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.FLOATING_LEAF_LITTER,
-                Feature.RANDOM_PATCH,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     50,
                     5,
                     5,
@@ -541,8 +541,8 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.DUCKWEED_PATCH,
-                Feature.RANDOM_PATCH,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     50,
                     5,
                     5,
@@ -578,8 +578,8 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.FLOATING_PETALS,
-                Feature.RANDOM_PATCH,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     50,
                     5,
                     5,
@@ -602,7 +602,7 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.WATER_LETTUCE,
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     30, 5, 5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -617,7 +617,7 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.WATER_HYACINTH,
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     30, 5, 5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -632,7 +632,7 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.JUNGLE_LILY_PAD,
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     10, 5, 5,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -658,8 +658,8 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH,
 
-                Feature.FLOWER,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     16, 4, 4,
                     PlacementUtils.filtered(
                         Feature.REPLACE_SINGLE_BLOCK,
@@ -687,8 +687,8 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.TUBE_SPONGE_PATCH,
 
-                Feature.FLOWER,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     4, 2, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -706,8 +706,8 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.GLASS_SPONGE_PATCH,
 
-                Feature.FLOWER,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     4, 4, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -725,8 +725,8 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.HARP_SPONGE_PATCH,
 
-                Feature.FLOWER,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     4, 4, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -744,8 +744,8 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.PING_PONG_SPONGE_PATCH,
 
-                Feature.FLOWER,
-                RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(),
+                HARandomPatchConfiguration(
                     4, 4, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -764,7 +764,7 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.GIANT_CLAM_PATCH,
 
-                Feature.NO_BONEMEAL_FLOWER, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     2, 2, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -794,7 +794,7 @@ class ConfiguredFeatureProvider(
                 bootstrap,
                 HAConfiguredFeatures.OYSTER_BED,
 
-                Feature.NO_BONEMEAL_FLOWER, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     2, 2, 2,
                     PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
@@ -862,12 +862,12 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.CORAL_MOUND,
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     6, 7, 0, PlacementUtils.inlinePlaced(
                         Feature.DISK, DiskConfiguration(
-                            RuleBasedBlockStateProvider(
+                            RuleBasedStateProvider(
                                 SimpleStateProvider.simple(HABlocks.CORALSTONE.get()), listOf(
-                                    RuleBasedBlockStateProvider.Rule(
+                                    RuleBasedStateProvider.Rule(
                                         BlockPredicate.not(
                                             BlockPredicate.matchesBlocks(
                                                 Vec3i(0, -1, 0),
@@ -907,10 +907,10 @@ class ConfiguredFeatureProvider(
                         WeightedPlacedFeature(
                             PlacementUtils.inlinePlaced(
                                 Feature.DISK, DiskConfiguration(
-                                    RuleBasedBlockStateProvider(
+                                    RuleBasedStateProvider(
                                         SimpleStateProvider.simple(HABlocks.CORALSTONE.get()),
                                         listOf(
-                                            RuleBasedBlockStateProvider.Rule(
+                                            RuleBasedStateProvider.Rule(
                                                 BlockPredicate.allOf(
                                                     BlockPredicate.matchesTag(
                                                         Vec3i(0, 1, 0),
@@ -932,7 +932,7 @@ class ConfiguredFeatureProvider(
                                                     )
                                                 )
                                             ),
-                                            RuleBasedBlockStateProvider.Rule(
+                                            RuleBasedStateProvider.Rule(
                                                 BlockPredicate.allOf(
                                                     BlockPredicate.anyOf(
                                                         BlockPredicate.matchesBlocks(
@@ -978,10 +978,10 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.MOUND,
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     6, 7, 0, PlacementUtils.inlinePlaced(
                         Feature.DISK, DiskConfiguration(
-                            RuleBasedBlockStateProvider(
+                            RuleBasedStateProvider(
                                 WeightedStateProvider(
                                     WeightedList.builder<BlockState>()
                                         .add(Blocks.DEAD_HORN_CORAL_BLOCK.defaultBlockState(), 1)
@@ -991,7 +991,7 @@ class ConfiguredFeatureProvider(
                                         .add(Blocks.DEAD_TUBE_CORAL_BLOCK.defaultBlockState(), 1)
                                         .add(Blocks.STONE.defaultBlockState(), 2)
                                 ), listOf(
-                                    RuleBasedBlockStateProvider.Rule(
+                                    RuleBasedStateProvider.Rule(
                                         BlockPredicate.not(
                                             BlockPredicate.matchesBlocks(
                                                 Vec3i(0, -1, 0),
@@ -1032,17 +1032,17 @@ class ConfiguredFeatureProvider(
             FeatureUtils.register(
                 bootstrap,
                 HAConfiguredFeatures.WHITE_MOUND,
-                Feature.RANDOM_PATCH, RandomPatchConfiguration(
+                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
                     6, 7, 0, PlacementUtils.inlinePlaced(
                         Feature.DISK, DiskConfiguration(
-                            RuleBasedBlockStateProvider(
+                            RuleBasedStateProvider(
                                 WeightedStateProvider(
                                     WeightedList.builder<BlockState>()
                                         .add(Blocks.CALCITE.defaultBlockState(), 5)
                                         .add(Blocks.DIORITE.defaultBlockState(), 3)
                                         .add(HABlocks.WHITE_SANDSTONE.get().defaultBlockState(), 1)
                                 ), listOf(
-                                    RuleBasedBlockStateProvider.Rule(
+                                    RuleBasedStateProvider.Rule(
                                         BlockPredicate.not(
                                             BlockPredicate.matchesBlocks(
                                                 Vec3i(0, -1, 0),

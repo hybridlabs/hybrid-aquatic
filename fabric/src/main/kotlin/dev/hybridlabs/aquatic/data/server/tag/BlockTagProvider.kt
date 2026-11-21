@@ -6,15 +6,15 @@ import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import java.util.concurrent.CompletableFuture
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.Blocks
 
-class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
-    FabricTagProvider.BlockTagProvider(output, registriesFuture) {
+class BlockTagProvider(output: FabricPackOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
+    FabricTagsProvider.BlockTagsProvider(output, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         // misc
         valueLookupBuilder(HABlockTags.ANEMONES)

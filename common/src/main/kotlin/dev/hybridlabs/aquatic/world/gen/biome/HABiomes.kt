@@ -200,7 +200,7 @@ object HABiomes {
                 CommonClass.locate("surface_rule/${biome.identifier().path}")
             ),
             WorldgenModifier.builder(BiomeEnabledPredicate(biome)).addSurfaceRule(
-                LevelStem.OVERWORLD,
+                Level.OVERWORLD,
                 InjectionType.PREPEND,
                 ifTrue(abovePreliminarySurface(), ifTrue(isBiome(biome), rule))
             )

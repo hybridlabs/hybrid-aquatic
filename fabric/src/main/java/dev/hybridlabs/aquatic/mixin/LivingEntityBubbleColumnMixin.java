@@ -17,12 +17,12 @@ public class LivingEntityBubbleColumnMixin {
 			method = "baseTick",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"),
+					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"),
 			slice = @Slice(
 					from = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z"),
 					to = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;canBreatheUnderwater()Z"))
 	)
-	private boolean decorativeBubbleColumn_baseTickParity(BlockState instance, Block block, Operation<Boolean> original) {
+	private boolean decorativeBubbleColumn_baseTickParity(BlockState instance, Object block, Operation<Boolean> original) {
 		return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 }

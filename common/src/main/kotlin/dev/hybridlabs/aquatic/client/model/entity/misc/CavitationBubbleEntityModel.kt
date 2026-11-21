@@ -1,13 +1,13 @@
 package dev.hybridlabs.aquatic.client.model.entity.misc
 
-import software.bernie.geckolib.constant.DataTickets
+import com.geckolib.constant.DataTickets
 
-import software.bernie.geckolib.renderer.base.BoneSnapshots
+import com.geckolib.renderer.base.BoneSnapshots
 
 import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import net.minecraft.client.model.geom.PartNames
@@ -15,8 +15,8 @@ import net.minecraft.client.renderer.rendertype.RenderType
 import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.model.GeoModel
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.model.GeoModel
 
 class CavitationBubbleEntityModel() :
     GeoModel<CavitationBubbleEntity>(), HABoneAdjustingModel {

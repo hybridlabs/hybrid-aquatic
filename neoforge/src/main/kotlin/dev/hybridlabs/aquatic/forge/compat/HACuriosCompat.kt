@@ -14,11 +14,11 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import software.bernie.geckolib.animatable.GeoItem
-import software.bernie.geckolib.animatable.client.GeoRenderProvider
-import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.renderer.GeoArmorRenderer
-import software.bernie.geckolib.renderer.base.GeoRenderer
+import com.geckolib.animatable.GeoItem
+import com.geckolib.animatable.client.GeoRenderProvider
+import com.geckolib.constant.DataTickets
+import com.geckolib.renderer.GeoArmorRenderer
+import com.geckolib.renderer.base.GeoRenderer
 import top.theillusivec4.curios.api.SlotContext
 import top.theillusivec4.curios.api.client.ICurioRenderer
 
@@ -100,7 +100,7 @@ object HACuriosCompat {
             renderState,
             poseStack,
             submitNodeCollector,
-            Minecraft.getInstance().gameRenderer.levelRenderState.cameraRenderState
+            Minecraft.getInstance().gameRenderer.gameRenderState.levelRenderState.cameraRenderState
         )
     }
 }

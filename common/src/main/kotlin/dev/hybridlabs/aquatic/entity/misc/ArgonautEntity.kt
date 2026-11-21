@@ -53,12 +53,12 @@ import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
-import software.bernie.geckolib.animatable.GeoEntity
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animatable.manager.AnimatableManager
-import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.util.GeckoLibUtil
+import com.geckolib.animatable.GeoEntity
+import com.geckolib.animatable.instance.AnimatableInstanceCache
+import com.geckolib.animatable.manager.AnimatableManager
+import com.geckolib.animation.AnimationController
+import com.geckolib.constant.DefaultAnimations
+import com.geckolib.util.GeckoLibUtil
 import java.util.function.IntFunction
 
 open class ArgonautEntity(
@@ -296,7 +296,7 @@ open class ArgonautEntity(
 
         val itemRemainder = fuelItemStack.item.craftingRemainder
         fuelItemStack.shrink(1)
-        if (fuelItemStack.isEmpty && !itemRemainder.isEmpty) itemStacks[0] = itemRemainder
+        if (fuelItemStack.isEmpty && itemRemainder != null) itemStacks[0] = itemRemainder.create()
 
         setLit(true)
     }
@@ -600,7 +600,7 @@ open class ArgonautEntity(
         this.clampRotation(entityToUpdate)
     }
 
-    override fun interact(player: Player, hand: InteractionHand): InteractionResult {
+    override fun interact(player: Player, hand: InteractionHand, hitPosition: Vec3): InteractionResult {
         val stack = player.getItemInHand(hand)
 
         //#region Add Glow
@@ -618,8 +618,9 @@ open class ArgonautEntity(
         }
 
         //#region Sail Color
-        if (stack.item is DyeItem && player.isCrouching) {
-            val dye = (stack.item as DyeItem).dyeColor
+        val dyeColor = stack.get(DataComponents.DYE)
+        if (dyeColor != null && player.isCrouching) {
+            val dye = dyeColor
             val sailColor = SailColor.fromDye(dye)
             if (sailColor != getSailColor()) {
                 setSailColor(sailColor)
@@ -629,8 +630,8 @@ open class ArgonautEntity(
         }
 
         //#region Shell Color
-        if (stack.item is DyeItem) {
-            val dye = (stack.item as DyeItem).dyeColor
+        if (dyeColor != null) {
+            val dye = dyeColor
             val shellColor = ShellColor.fromDye(dye)
             if (shellColor != getShellColor()) {
                 setShellColor(shellColor)

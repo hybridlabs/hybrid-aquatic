@@ -16,9 +16,9 @@ public class FlowingFluidMixin {
 			method = "canHoldAnyFluid",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
+					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z")
 	)
-	private static boolean decorativeBubbleColumn_givesAirParity(BlockState instance, Block block, Operation<Boolean> original) {
+	private static boolean decorativeBubbleColumn_givesAirParity(BlockState instance, Object block, Operation<Boolean> original) {
 		return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 }

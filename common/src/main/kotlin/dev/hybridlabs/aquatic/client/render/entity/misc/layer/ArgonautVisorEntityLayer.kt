@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.client.renderer.rendertype.RenderType
 import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.resources.Identifier
-import software.bernie.geckolib.renderer.base.RenderPassInfo
-import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer
+import com.geckolib.renderer.base.RenderPassInfo
+import com.geckolib.renderer.layer.builtin.TextureLayerGeoLayer
 
 class ArgonautVisorEntityLayer<T : ArgonautEntity>(
     renderer: ArgonautEntityRenderer<T>
 ) : TextureLayerGeoLayer<T, Void, LivingEntityRenderState>(renderer, VISOR_TEXTURE) {
 
     override fun getRenderType(renderState: LivingEntityRenderState): RenderType {
-        return RenderTypes.entityCutoutNoCull(VISOR_TEXTURE)
+        return RenderTypes.entityCutout(VISOR_TEXTURE)
     }
 
     companion object {

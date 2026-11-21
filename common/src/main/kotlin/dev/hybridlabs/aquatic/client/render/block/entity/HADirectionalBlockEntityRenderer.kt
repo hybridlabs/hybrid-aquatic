@@ -4,11 +4,11 @@ import com.mojang.math.Axis
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState
 import net.minecraft.core.Direction
 import net.minecraft.world.level.block.entity.BlockEntity
-import software.bernie.geckolib.animatable.GeoAnimatable
-import software.bernie.geckolib.constant.DataTickets
-import software.bernie.geckolib.model.GeoModel
-import software.bernie.geckolib.renderer.GeoBlockRenderer
-import software.bernie.geckolib.renderer.base.RenderPassInfo
+import com.geckolib.animatable.GeoAnimatable
+import com.geckolib.model.GeoModel
+import com.geckolib.renderer.GeoBlockRenderer
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
+import com.geckolib.renderer.base.RenderPassInfo
 
 /**
  * Block entity renderer for models that attach to any face of a block. The models are authored
@@ -16,15 +16,16 @@ import software.bernie.geckolib.renderer.base.RenderPassInfo
  * transform; GeckoLib has already centred the model on the block in `preRenderPass`.
  */
 abstract class HADirectionalBlockEntityRenderer<T>(
+    context: BlockEntityRendererProvider.Context,
     model: GeoModel<T>
-) : GeoBlockRenderer<T, HABlockEntityRenderState>(model)
+) : GeoBlockRenderer<T, HABlockEntityRenderState>(context, model)
     where T : BlockEntity, T : GeoAnimatable {
 
 
     override fun createRenderState(): HABlockEntityRenderState = HABlockEntityRenderState()
 
     override fun adjustRenderPose(renderPassInfo: RenderPassInfo<HABlockEntityRenderState>) {
-        val facing = renderPassInfo.getGeckolibData(DataTickets.BLOCK_FACING) ?: return
+        val facing = renderPassInfo.getGeckolibData(GeoBlockRenderer.DIRECTION_FACING) ?: return
         applyFacingTransform(renderPassInfo.poseStack(), facing)
     }
 }

@@ -36,7 +36,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
         this.registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, true))
     }
 
-    override fun getLightBlock(state: BlockState): Int {
+    override fun getLightDampening(state: BlockState): Int {
         return 1
     }
 

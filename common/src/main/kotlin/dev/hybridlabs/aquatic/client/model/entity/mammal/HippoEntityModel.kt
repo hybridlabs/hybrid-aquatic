@@ -1,17 +1,17 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
-import software.bernie.geckolib.renderer.base.BoneSnapshots
+import com.geckolib.renderer.base.BoneSnapshots
 
 import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.mammal.HippoEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseMammalEntityModel
 import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.state.AnimationTest
-import software.bernie.geckolib.constant.DataTickets
+import com.geckolib.animation.state.AnimationTest
+import com.geckolib.constant.DataTickets
 
 class HippoEntityModel : BaseMammalEntityModel<HippoEntity>("hybrid_aquatic", "hippo") {
 

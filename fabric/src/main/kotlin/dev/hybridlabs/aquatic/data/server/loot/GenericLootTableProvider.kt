@@ -7,8 +7,8 @@ import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.loot.HALootTables
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.Registries
@@ -29,8 +29,8 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCon
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
 
-class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
-    SimpleFabricLootTableProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
+class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableSubProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         val lookup = lookupProvider.join()
 

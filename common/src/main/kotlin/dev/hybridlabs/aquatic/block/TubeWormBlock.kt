@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.RandomSource
 import net.minecraft.util.valueproviders.IntProvider
+import net.minecraft.util.valueproviders.IntProviders
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
@@ -38,7 +39,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
         val WORMS: IntegerProperty = IntegerProperty.create("worms", 1, 4)
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
-        val WORM_COUNT_CODEC: Codec<IntProvider> = IntProvider.codec(WORMS.min, WORMS.max)
+        val WORM_COUNT_CODEC: Codec<IntProvider> = IntProviders.codec(WORMS.min, WORMS.max)
 
         private val ONE_WORM_SHAPE: VoxelShape = box(6.0, 0.0, 6.0, 10.0, 8.0, 10.0)
         private val TWO_WORMS_SHAPE: VoxelShape = box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0)

@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.shark
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
 import dev.hybridlabs.hapi.client.model.getVariant
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.shark.HoundSharkEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseSharkEntityModel
 import net.minecraft.resources.Identifier

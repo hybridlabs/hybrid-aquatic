@@ -167,7 +167,7 @@ object HABlockFamilies {
 
     //#region Bone Blocks
     val BONE_BLOCK: BlockFamily by lazy {
-        BlockFamily.Builder(Blocks.BONE_BLOCK).dontGenerateModel().dontGenerateRecipe()
+        BlockFamily.Builder(Blocks.BONE_BLOCK).dontGenerateModel().dontGenerateCraftingRecipe()
             .slab(HABlocks.BONE_SLAB.get())
             .stairs(HABlocks.BONE_STAIRS.get())
             .fence(HABlocks.BONE_FENCE.get())

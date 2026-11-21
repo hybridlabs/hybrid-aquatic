@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.crustacean
 
 import dev.hybridlabs.aquatic.client.model.HADataTickets
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.crustacean.HermitCrabEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCrustaceanEntityModel

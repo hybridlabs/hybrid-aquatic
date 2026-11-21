@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.mixin.compat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import software.bernie.geckolib.animation.state.AnimationTimeline;
+import com.geckolib.animation.state.AnimationTimeline;
 
 import java.util.List;
 

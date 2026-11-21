@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.gui.screen
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.world.inventory.ArgonautMenu
-import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.gui.GuiGraphicsExtractor
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.network.chat.Component
@@ -10,28 +10,33 @@ import net.minecraft.resources.Identifier
 import net.minecraft.world.entity.player.Inventory
 
 class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Component) :
-    AbstractContainerScreen<ArgonautMenu>(menu, playerInventory, title) {
+    AbstractContainerScreen<ArgonautMenu>(
+        menu,
+        playerInventory,
+        title,
+        182,
+        HEADER_HEIGHT + menu.rowCount * 18 + PLAYER_INVENTORY_HEIGHT
+    ) {
     private val argonautRows: Int = menu.rowCount
 
     init {
         // The background is drawn as a header (fuel slot and title), one strip per cargo row, and
         // then the player inventory section, so the screen has to be exactly as tall as those add
         // up to. Getting this wrong offsets the whole window and leaves a gap at the bottom.
-        imageHeight = HEADER_HEIGHT + this.argonautRows * 18 + PLAYER_INVENTORY_HEIGHT
-        imageWidth = 182
-
         inventoryLabelY = imageHeight - 94
     }
 
-    override fun renderBg(
-        guiGraphics: GuiGraphics,
-        partialTick: Float,
+    override fun extractBackground(
+        extractor: GuiGraphicsExtractor,
         mouseX: Int,
-        mouseY: Int
+        mouseY: Int,
+        partialTick: Float
     ) {
+        super.extractBackground(extractor, mouseX, mouseY, partialTick)
+
         val leftDrawPos = (this.width - this.imageWidth) / 2
         val topDrawPos = (this.height - this.imageHeight) / 2
-        guiGraphics.blit(
+        extractor.blit(
             RenderPipelines.GUI_TEXTURED,
             ARGONAUT_BACKGROUND,
             leftDrawPos,
@@ -43,7 +48,7 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
             256,
             256
         )
-        guiGraphics.blit(
+        extractor.blit(
             RenderPipelines.GUI_TEXTURED,
             ARGONAUT_BACKGROUND,
             leftDrawPos,
@@ -58,7 +63,7 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
 
         if (this.menu.isLit()) {
             val litProgress = this.menu.getLitProgress()
-            guiGraphics.blit(
+            extractor.blit(
                 RenderPipelines.GUI_TEXTURED,
                 ARGONAUT_BACKGROUND,
                 leftDrawPos + 84,
@@ -71,12 +76,6 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
                 256
             )
         }
-    }
-
-    override fun render(guiGraphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
-        renderBackground(guiGraphics, mouseX, mouseY, partialTick)
-        super.render(guiGraphics, mouseX, mouseY, partialTick)
-        renderTooltip(guiGraphics, mouseX, mouseY)
     }
 
     companion object {

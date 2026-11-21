@@ -4,7 +4,7 @@ import dev.hybridlabs.aquatic.client.model.entity.misc.StarfishProjectileEntityM
 import dev.hybridlabs.aquatic.entity.projectile.StarfishProjectileEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
-import software.bernie.geckolib.renderer.GeoEntityRenderer
+import com.geckolib.renderer.GeoEntityRenderer
 
 class StarfishProjectileRenderer(
     context: EntityRendererProvider.Context

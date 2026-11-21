@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.client.model.entity.fish
 
 import dev.hybridlabs.aquatic.client.model.HADataTickets
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.fish.SquirrelfishEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import net.minecraft.client.model.geom.PartNames
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.rendertype.RenderType
 import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.state.AnimationTest
+import com.geckolib.animation.state.AnimationTest
 import kotlin.math.abs
 
 class SquirrelfishEntityModel : BaseFishEntityModel<SquirrelfishEntity>("hybrid_aquatic", "squirrelfish") {

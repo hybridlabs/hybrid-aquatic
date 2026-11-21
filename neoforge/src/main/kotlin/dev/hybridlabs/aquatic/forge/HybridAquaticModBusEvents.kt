@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.forge
 
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
@@ -14,7 +15,6 @@ import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.THRESHER_SHARK_PL
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.TIGER_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.WHALE_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.*
-import dev.hybridlabs.aquatic.client.render.block.HABlockRenderers
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
@@ -26,13 +26,20 @@ import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ClientPayload
 import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ServerPayloadHandler
 import dev.hybridlabs.aquatic.particle.*
 import dev.hybridlabs.aquatic.platform.Services
+import net.minecraft.client.color.block.BlockTintSource
+import net.minecraft.core.BlockPos
+import net.minecraft.client.renderer.block.BlockAndTintGetter
+import net.minecraft.client.renderer.block.FluidModel
+import net.minecraft.client.resources.model.sprite.Material
 import net.minecraft.client.renderer.BiomeColors
+import net.minecraft.world.level.FoliageColor
+import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
+import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.fluids.FluidType
@@ -52,7 +59,7 @@ object HybridAquaticModBusEvents {
                 MOD_BUS.addListener(::registerModelLayers)
                 MOD_BUS.addListener(::registerSkullModels)
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
-                MOD_BUS.addListener(::registerFluidTypes)
+                MOD_BUS.addListener(::registerFluidModels)
                 MOD_BUS.addListener(::registerBlockColors)
                 MOD_BUS.addListener(::registerClientPayloadHandlers)
                 HybridAquaticEntityRenderers
@@ -104,11 +111,16 @@ object HybridAquaticModBusEvents {
         event.registerBlockEntityRenderer(HABlockEntityTypes.BELL_BUOY.get(),
             ::BellBuoyBlockEntityRenderer)
 
-        HABlockRenderers.registerRenderShapes()
     }
 
-    private fun registerFluidTypes(event: RegisterClientExtensionsEvent) {
-        event.registerFluidType(BrineFluidType(FluidType.Properties.create()), HAPlatformFluids.BRINE_FLUIDTYPE.get())
+    private fun registerFluidModels(event: RegisterFluidModelsEvent) {
+        val model = FluidModel.Unbaked(
+            Material(CommonClass.locate("block/brine_still")),
+            Material(CommonClass.locate("block/brine_flowing")),
+            Material(CommonClass.locate("block/brine_overlay")),
+            null
+        )
+        event.register(model, HAPlatformFluids.BRINE_STILL, HAPlatformFluids.BRINE_FLOWING)
     }
 
     private fun registerSkullModels(event: EntityRenderersEvent.CreateSkullModels) {
@@ -193,16 +205,14 @@ object HybridAquaticModBusEvents {
         event.register(FishingBobberPayload.type, ClientPayloadHandler::handleDataOnMain)
     }
 
-    fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {
-        event.register(
-            { _, level, pos, _ ->
-                if (level != null && pos != null) {
-                    BiomeColors.getAverageFoliageColor(level, pos)
-                } else {
-                    -1
-                }
-            },
-            HABlocks.FLOATING_LEAVES.get()
-        )
+    fun registerBlockColors(event: RegisterColorHandlersEvent.BlockTintSources) {
+        val foliageTint = object : BlockTintSource {
+            override fun color(state: BlockState): Int = FoliageColor.FOLIAGE_DEFAULT
+
+            override fun colorInWorld(state: BlockState, level: BlockAndTintGetter, pos: BlockPos): Int {
+                return BiomeColors.getAverageFoliageColor(level, pos)
+            }
+        }
+        event.register(listOf(foliageTint), HABlocks.FLOATING_LEAVES.get())
     }
 }

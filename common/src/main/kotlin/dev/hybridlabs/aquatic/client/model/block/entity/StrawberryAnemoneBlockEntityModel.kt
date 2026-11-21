@@ -1,11 +1,11 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
 import dev.hybridlabs.hapi.client.model.HAPIDataTickets
-import software.bernie.geckolib.renderer.base.GeoRenderState
+import com.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
 import net.minecraft.resources.Identifier
-import software.bernie.geckolib.model.GeoModel
+import com.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
 class StrawberryAnemoneBlockEntityModel : GeoModel<StrawberryAnemoneBlockEntity>() {

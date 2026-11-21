@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.data.server.loot
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.loot.HALootTables
 import dev.hybridlabs.aquatic.tag.HAItemTags
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
+import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableSubProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
@@ -16,8 +16,8 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-class FishingLootTableProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
-    SimpleFabricLootTableProvider(output, lookupProvider, LootContextParamSets.FISHING) {
+class FishingLootTableProvider(output: FabricPackOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
+    SimpleFabricLootTableSubProvider(output, lookupProvider, LootContextParamSets.FISHING) {
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         exporter.accept(
             ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_SMALL_FISH),

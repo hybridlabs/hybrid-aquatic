@@ -20,7 +20,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 
 import java.nio.file.Path;
 
@@ -61,7 +62,7 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.FEATURE, MOD_ID);
     public static final RegistrationProvider<MapCodec<? extends DensityFunction>> DENSITY_FUNCTION_TYPES =
             RegistrationProvider.get(BuiltInRegistries.DENSITY_FUNCTION_TYPE, MOD_ID);
-    public static final RegistrationProvider<LootPoolEntryType> LOOT_POOL_ENTRY_TYPE =
+    public static final RegistrationProvider<MapCodec<? extends LootPoolEntryContainer>> LOOT_POOL_ENTRY_TYPE =
             RegistrationProvider.get(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, MOD_ID);
 	public static final RegistrationProvider<ParticleType<?>> PARTICLE_TYPE =
 			RegistrationProvider.get(BuiltInRegistries.PARTICLE_TYPE, MOD_ID);
