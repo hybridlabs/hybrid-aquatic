@@ -8,16 +8,13 @@
       "min_inclusive": 1
     },
     "state_provider": {
-      "fallback": {
-        "type": "minecraft:simple_state_provider",
-        "state": {
-          "Name": "minecraft:suspicious_sand",
-          "Properties": {
-            "dusted": "0"
-          }
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:suspicious_sand",
+        "Properties": {
+          "dusted": "0"
         }
-      },
-      "rules": []
+      }
     },
     "target": {
       "type": "minecraft:matching_blocks",

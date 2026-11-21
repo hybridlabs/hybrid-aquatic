@@ -3,6 +3,7 @@
   "chance": 0.25,
   "conditions": [],
   "item_tag": "hybrid_aquatic:fishing_treasure",
+  "priority": 0,
   "tables": [
     {
       "data": "hybrid_aquatic:gameplay/fishing/ha_crates",

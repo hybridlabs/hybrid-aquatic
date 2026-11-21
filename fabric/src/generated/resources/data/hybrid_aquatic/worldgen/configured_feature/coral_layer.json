@@ -18,6 +18,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -151,6 +152,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -284,6 +286,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -417,6 +420,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -550,6 +554,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -683,6 +688,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -816,6 +822,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -949,6 +956,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
@@ -1082,6 +1090,7 @@
               "half_height": 4,
               "radius": 8,
               "state_provider": {
+                "type": "minecraft:rule_based_state_provider",
                 "fallback": {
                   "type": "minecraft:simple_state_provider",
                   "state": {
