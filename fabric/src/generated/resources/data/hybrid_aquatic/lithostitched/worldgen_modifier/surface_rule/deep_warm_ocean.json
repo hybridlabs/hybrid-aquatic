@@ -17,9 +17,7 @@
       "type": "minecraft:condition",
       "if_true": {
         "type": "minecraft:biome",
-        "biome_is": [
-          "hybrid_aquatic:deep_warm_ocean"
-        ]
+        "biome_is": "hybrid_aquatic:deep_warm_ocean"
       },
       "then_run": {
         "type": "minecraft:sequence",

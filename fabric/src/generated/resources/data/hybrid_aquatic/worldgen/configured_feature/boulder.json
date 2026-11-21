@@ -45,11 +45,6 @@
       "crack_point_offset": 0,
       "generate_crack_chance": 0.0
     },
-    "distribution_points": {
-      "type": "minecraft:uniform",
-      "max_inclusive": 4,
-      "min_inclusive": 3
-    },
     "invalid_blocks_threshold": 50,
     "layers": {
       "filling": 0.5,
@@ -57,8 +52,6 @@
       "middle_layer": 1.25,
       "outer_layer": 1.75
     },
-    "max_gen_offset": 16,
-    "min_gen_offset": -16,
     "noise_multiplier": 0.07,
     "outer_wall_distance": 5,
     "placements_require_layer0_alternate": false,
@@ -67,7 +60,6 @@
       "max_inclusive": 2,
       "min_inclusive": 1
     },
-    "use_alternate_layer0_chance": 0.0,
     "use_potential_placements_chance": 0.0
   }
 }

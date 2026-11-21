@@ -17,9 +17,7 @@
       "type": "minecraft:condition",
       "if_true": {
         "type": "minecraft:biome",
-        "biome_is": [
-          "minecraft:lukewarm_ocean"
-        ]
+        "biome_is": "minecraft:lukewarm_ocean"
       },
       "then_run": {
         "type": "minecraft:sequence",

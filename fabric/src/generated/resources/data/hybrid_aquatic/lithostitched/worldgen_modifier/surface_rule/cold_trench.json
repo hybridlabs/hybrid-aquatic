@@ -17,9 +17,7 @@
       "type": "minecraft:condition",
       "if_true": {
         "type": "minecraft:biome",
-        "biome_is": [
-          "hybrid_aquatic:cold_trench"
-        ]
+        "biome_is": "hybrid_aquatic:cold_trench"
       },
       "then_run": {
         "type": "minecraft:sequence",

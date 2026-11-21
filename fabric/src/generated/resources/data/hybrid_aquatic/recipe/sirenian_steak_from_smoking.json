@@ -1,7 +1,6 @@
 {
   "type": "minecraft:smoking",
   "category": "food",
-  "cookingtime": 100,
   "experience": 0.3,
   "ingredient": "hybrid_aquatic:sirenian_beef",
   "result": {

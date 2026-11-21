@@ -2,7 +2,6 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -17,7 +16,6 @@
               "function": "minecraft:enchanted_count_increase"
             },
             {
-              "add": false,
               "count": 1.0,
               "function": "minecraft:set_count"
             }
