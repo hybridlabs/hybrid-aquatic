@@ -11,9 +11,20 @@ neoForge {
 }
 
 dependencies {
-    implementation("dev.hybridlabs.hapi:hapi-common-1.21.11:1.3.0")
+    compileOnly("dev.hybridlabs.hapi:hapi-common-26.1.2:1.4.0")
 
-    implementation "software.bernie.geckolib:geckolib-neoforge-${geckolib_version}"
+    implementation "com.geckolib:geckolib-neoforge-${geckolib_version}"
 
-    compileOnly "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.11"
+    compileOnly "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-26.1"
+}
+
+// GeckoLib 5.5 moved to the com.geckolib group, which hybrid-gradle's GeckoLib repository
+// filter does not include yet.
+repositories {
+    maven {
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup('com.geckolib')
+        }
+    }
 }

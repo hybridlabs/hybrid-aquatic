@@ -1,4 +1,4 @@
-accessWidener v2 named
+accessWidener v2 official
 
 accessible method net/minecraft/world/level/block/BaseEntityBlock createTickerHelper (Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/world/level/block/entity/BlockEntityType;Lnet/minecraft/world/level/block/entity/BlockEntityTicker;)Lnet/minecraft/world/level/block/entity/BlockEntityTicker;
 accessible class net/minecraft/client/gui/screens/MenuScreens
@@ -20,7 +20,6 @@ accessible field net/minecraft/client/data/models/BlockModelGenerators blockStat
 accessible field net/minecraft/client/data/models/BlockModelGenerators itemModelOutput Lnet/minecraft/client/data/models/ItemModelOutput;
 accessible field net/minecraft/client/data/models/BlockModelGenerators modelOutput Ljava/util/function/BiConsumer;
 accessible method net/minecraft/client/data/models/BlockModelGenerators createAirLikeBlock (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/item/Item;)V
-accessible method net/minecraft/client/data/models/BlockModelGenerators createAirLikeBlock (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/resources/Identifier;)V
 accessible method net/minecraft/client/data/models/BlockModelGenerators createNonTemplateModelBlock (Lnet/minecraft/world/level/block/Block;)V
 accessible method net/minecraft/client/data/models/BlockModelGenerators createCrossBlock (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/client/data/models/BlockModelGenerators$PlantType;)V
 accessible method net/minecraft/client/data/models/BlockModelGenerators createCrossBlockWithDefaultItem (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/client/data/models/BlockModelGenerators$PlantType;)V
@@ -39,3 +38,10 @@ accessible class net/minecraft/client/data/models/BlockModelGenerators$BlockFami
 accessible class net/minecraft/client/data/models/BlockModelGenerators$WoodProvider
 accessible method net/minecraft/client/data/models/ItemModelGenerators generateFlatItem (Lnet/minecraft/world/item/Item;Lnet/minecraft/client/data/models/model/ModelTemplate;)V
 accessible method net/minecraft/world/item/CreativeModeTabs generatePresetPaintings (Lnet/minecraft/world/item/CreativeModeTab$Output;Lnet/minecraft/core/HolderLookup$Provider;Lnet/minecraft/core/HolderLookup$RegistryLookup;Ljava/util/function/Predicate;Lnet/minecraft/world/item/CreativeModeTab$TabVisibility;)V
+# Datagen helpers that are private in 26.1
+accessible method net/minecraft/client/data/models/BlockModelGenerators createAirLikeBlock (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/client/resources/model/sprite/Material;)V
+accessible method net/minecraft/client/data/models/BlockModelGenerators registerSimpleItemModel (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/Identifier;)V
+accessible method net/minecraft/client/data/models/BlockModelGenerators createNonTemplateModelBlock (Lnet/minecraft/world/level/block/Block;)V
+# Vanilla registers particle providers in a private method in 26.1
+accessible method net/minecraft/client/particle/ParticleResources register (Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleResources$SpriteParticleRegistration;)V
+accessible class net/minecraft/client/particle/ParticleResources$SpriteParticleRegistration

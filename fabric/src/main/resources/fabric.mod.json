@@ -45,29 +45,30 @@
     },
 
     "mixins": [
-        "hybrid_aquatic.fabric.mixins.json"
+        "hybrid_aquatic.fabric.mixins.json",
+    "hybrid_aquatic.fabric.particles.mixins.json"
     ],
 
     "accessWidener": "hybrid_aquatic.accesswidener",
 
     "depends": {
-        "fabricloader": ">=0.19",
-        "minecraft": "~1.21.1",
-        "java": ">=21",
+        "fabricloader": ">=0.20",
+        "minecraft": "~26.1.2",
+        "java": ">=25",
         "fabric-language-kotlin": "*",
-        "fabric-api": ">=0.116",
-        "geckolib": ">=4.8.3",
-        "lithostitched": ">=1.7.2",
-        "hapi": ">=1.3.0"
+        "fabric-api": ">=0.155",
+        "geckolib": ">=5.5.2",
+        "lithostitched": ">=1.8.1",
+        "hapi": ">=1.4.0"
     },
 
     "suggests": {
-        "trinkets": ">=3.10.0"
+        "trinkets": ">=4.0.1"
     },
 
     "custom": {
         "loom:injected_interfaces": {
-            "net/minecraft/class_1657": [
+            "net/minecraft/world/entity/player/Player": [
                 "dev/hybridlabs/aquatic/access/CustomPlayerEntityData"
             ]
         }

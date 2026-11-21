@@ -14,7 +14,7 @@ pluginManagement {
 
 plugins {
     // The shared build setup: https://github.com/hybridlabs/hybrid-gradle
-    id 'dev.hybridlabs.multiloader' version '1.0.2'
+    id 'dev.hybridlabs.multiloader' version '1.0.4+loom1.19.4+mdg2.0.148'
 }
 
 // This should match the folder name of the project, or else IDEA may complain
