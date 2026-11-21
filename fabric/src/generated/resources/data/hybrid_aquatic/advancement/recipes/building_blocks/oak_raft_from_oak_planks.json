@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:oak_raft_from_oak_planks"
+        "recipes": "hybrid_aquatic:oak_raft_from_oak_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

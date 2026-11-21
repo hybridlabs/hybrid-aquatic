@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bleached_rose_coral_block_from_dead_rose_coral_block"
+        "recipes": "hybrid_aquatic:bleached_rose_coral_block_from_dead_rose_coral_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

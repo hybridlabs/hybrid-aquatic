@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:yellow_brinestone_bricks"
+        "recipes": "hybrid_aquatic:yellow_brinestone_bricks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

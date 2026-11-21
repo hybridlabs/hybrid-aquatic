@@ -1,0 +1,12 @@
+{
+  "type": "hybrid_aquatic:brine_lake",
+  "barrier_block": {
+    "id": "hybrid_aquatic:red_brinestone"
+  },
+  "fluid_block": {
+    "id": "hybrid_aquatic:brine",
+    "properties": {
+      "level": "0"
+    }
+  }
+}

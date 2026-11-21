@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:schist_wall"
+        "recipes": "hybrid_aquatic:schist_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

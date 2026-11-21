@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:glowslime_block"
+        "recipes": "hybrid_aquatic:glowslime_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

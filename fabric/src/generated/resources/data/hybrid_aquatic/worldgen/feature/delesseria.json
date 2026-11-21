@@ -1,0 +1,9 @@
+{
+  "type": "hybrid_aquatic:delesseria",
+  "to_place": {
+    "id": "hybrid_aquatic:delesseria",
+    "properties": {
+      "age": "0"
+    }
+  }
+}

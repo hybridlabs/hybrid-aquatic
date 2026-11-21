@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:geode",
+  "blocks": {
+    "alternate_inner_layer_provider": {
+      "id": "minecraft:stone"
+    },
+    "cannot_replace": "#minecraft:features_cannot_replace",
+    "filling_provider": {
+      "id": "minecraft:stone"
+    },
+    "inner_layer_provider": {
+      "id": "minecraft:stone"
+    },
+    "inner_placements": [
+      "minecraft:stone"
+    ],
+    "invalid_blocks": "#minecraft:geode_invalid_blocks",
+    "middle_layer_provider": {
+      "id": "minecraft:stone"
+    },
+    "outer_layer_provider": {
+      "id": "hybrid_aquatic:shorestone"
+    }
+  },
+  "crack": {
+    "base_crack_size": 0.0,
+    "crack_point_offset": 0,
+    "generate_crack_chance": 0.0
+  },
+  "invalid_blocks_threshold": 50,
+  "layers": {
+    "filling": 0.5,
+    "inner_layer": 1.0,
+    "middle_layer": 1.25,
+    "outer_layer": 1.75
+  },
+  "noise_multiplier": 0.07,
+  "outer_wall_distance": 5,
+  "placements_require_layer0_alternate": false,
+  "point_offset": {
+    "type": "minecraft:biased_to_bottom",
+    "max_inclusive": 2,
+    "min_inclusive": 1
+  },
+  "use_potential_placements_chance": 0.0
+}

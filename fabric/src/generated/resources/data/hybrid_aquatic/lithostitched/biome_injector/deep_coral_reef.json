@@ -4,7 +4,7 @@
   "parameters": {
     "hybrid_aquatic:biome/reef_selector": [
       0.2,
-      1.7976931348623157E308
+      3.4028235E38
     ]
   },
   "predicate": {

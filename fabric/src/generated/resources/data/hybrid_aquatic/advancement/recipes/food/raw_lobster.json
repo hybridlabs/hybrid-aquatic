@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:raw_lobster"
+        "recipes": "hybrid_aquatic:raw_lobster"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,5 +1,387 @@
 {
   "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {
+          "hybrid_aquatic:anglerfish": {
+            "charge": 0.1,
+            "energy_budget": 0.3
+          },
+          "hybrid_aquatic:barreleye": {
+            "charge": 0.1,
+            "energy_budget": 0.2
+          },
+          "hybrid_aquatic:coelacanth": {
+            "charge": 0.1,
+            "energy_budget": 0.2
+          },
+          "hybrid_aquatic:dragonfish": {
+            "charge": 0.15,
+            "energy_budget": 0.6
+          },
+          "hybrid_aquatic:fangtooth": {
+            "charge": 0.15,
+            "energy_budget": 0.6
+          },
+          "hybrid_aquatic:giant_squid": {
+            "charge": 0.9,
+            "energy_budget": 1.0
+          },
+          "hybrid_aquatic:goblin_shark": {
+            "charge": 0.4,
+            "energy_budget": 0.8
+          },
+          "hybrid_aquatic:hatchetfish": {
+            "charge": 0.1,
+            "energy_budget": 0.6
+          },
+          "hybrid_aquatic:john_dory": {
+            "charge": 0.1,
+            "energy_budget": 0.3
+          },
+          "hybrid_aquatic:lantern_shark": {
+            "charge": 0.1,
+            "energy_budget": 0.4
+          },
+          "hybrid_aquatic:nautilus": {
+            "charge": 0.15,
+            "energy_budget": 0.6
+          },
+          "hybrid_aquatic:oarfish": {
+            "charge": 0.5,
+            "energy_budget": 0.8
+          },
+          "hybrid_aquatic:ratfish": {
+            "charge": 0.1,
+            "energy_budget": 0.2
+          },
+          "hybrid_aquatic:sea_angel": {
+            "charge": 0.1,
+            "energy_budget": 0.25
+          },
+          "hybrid_aquatic:sixgill_shark": {
+            "charge": 0.4,
+            "energy_budget": 0.8
+          },
+          "hybrid_aquatic:slickhead": {
+            "charge": 0.1,
+            "energy_budget": 0.3
+          },
+          "hybrid_aquatic:snailfish": {
+            "charge": 0.1,
+            "energy_budget": 0.7
+          },
+          "hybrid_aquatic:tripod_fish": {
+            "charge": 0.1,
+            "energy_budget": 0.6
+          },
+          "hybrid_aquatic:umbrella_octopus": {
+            "charge": 0.15,
+            "energy_budget": 0.3
+          },
+          "hybrid_aquatic:vampire_squid": {
+            "charge": 0.1,
+            "energy_budget": 0.2
+          },
+          "hybrid_aquatic:viperfish": {
+            "charge": 0.15,
+            "energy_budget": 0.6
+          }
+        },
+        "spawns_by_category": {
+          "ambient": [
+            {
+              "type": "minecraft:bat",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 8,
+                "min_inclusive": 8
+              },
+              "weight": 10
+            }
+          ],
+          "monster": [
+            {
+              "type": "minecraft:spider",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 4,
+                "min_inclusive": 4
+              },
+              "weight": 100
+            },
+            {
+              "type": "minecraft:zombie",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 4,
+                "min_inclusive": 4
+              },
+              "weight": 95
+            },
+            {
+              "type": "minecraft:zombie_villager",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "minecraft:skeleton",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 4,
+                "min_inclusive": 4
+              },
+              "weight": 100
+            },
+            {
+              "type": "minecraft:creeper",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 4,
+                "min_inclusive": 4
+              },
+              "weight": 100
+            },
+            {
+              "type": "minecraft:slime",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 4,
+                "min_inclusive": 4
+              },
+              "weight": 100
+            },
+            {
+              "type": "minecraft:enderman",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 4,
+                "min_inclusive": 1
+              },
+              "weight": 10
+            },
+            {
+              "type": "minecraft:witch",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            }
+          ],
+          "underground_water_creature": [
+            {
+              "type": "minecraft:glow_squid",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 5,
+                "min_inclusive": 2
+              },
+              "weight": 5
+            }
+          ],
+          "water_ambient": [
+            {
+              "type": "hybrid_aquatic:giant_squid",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 1
+            },
+            {
+              "type": "hybrid_aquatic:umbrella_octopus",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 7
+            },
+            {
+              "type": "hybrid_aquatic:vampire_squid",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 7
+            },
+            {
+              "type": "hybrid_aquatic:nautilus",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 10
+            },
+            {
+              "type": "hybrid_aquatic:ratfish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 3,
+                "min_inclusive": 1
+              },
+              "weight": 10
+            },
+            {
+              "type": "hybrid_aquatic:snailfish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 3,
+                "min_inclusive": 1
+              },
+              "weight": 10
+            },
+            {
+              "type": "hybrid_aquatic:anglerfish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "hybrid_aquatic:fangtooth",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "hybrid_aquatic:john_dory",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 8
+            },
+            {
+              "type": "hybrid_aquatic:viperfish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "hybrid_aquatic:dragonfish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "hybrid_aquatic:hatchetfish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "hybrid_aquatic:tripod_fish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "hybrid_aquatic:barreleye",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            },
+            {
+              "type": "hybrid_aquatic:sea_angel",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 3,
+                "min_inclusive": 1
+              },
+              "weight": 3
+            },
+            {
+              "type": "hybrid_aquatic:coelacanth",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 1
+            },
+            {
+              "type": "hybrid_aquatic:slickhead",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 1
+            },
+            {
+              "type": "hybrid_aquatic:oarfish",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 1
+            }
+          ],
+          "water_creature": [
+            {
+              "type": "hybrid_aquatic:sixgill_shark",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 3
+            },
+            {
+              "type": "hybrid_aquatic:goblin_shark",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 1,
+                "min_inclusive": 1
+              },
+              "weight": 3
+            },
+            {
+              "type": "hybrid_aquatic:lantern_shark",
+              "count": {
+                "type": "minecraft:uniform",
+                "max_inclusive": 2,
+                "min_inclusive": 1
+              },
+              "weight": 5
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    },
     "minecraft:visual/fog_color": "#c0d8ff",
     "minecraft:visual/sky_color": "#78a7ff",
     "minecraft:visual/water_fog_color": "#020217"
@@ -72,302 +454,5 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {
-    "hybrid_aquatic:anglerfish": {
-      "charge": 0.1,
-      "energy_budget": 0.3
-    },
-    "hybrid_aquatic:barreleye": {
-      "charge": 0.1,
-      "energy_budget": 0.2
-    },
-    "hybrid_aquatic:coelacanth": {
-      "charge": 0.1,
-      "energy_budget": 0.2
-    },
-    "hybrid_aquatic:dragonfish": {
-      "charge": 0.15,
-      "energy_budget": 0.6
-    },
-    "hybrid_aquatic:fangtooth": {
-      "charge": 0.15,
-      "energy_budget": 0.6
-    },
-    "hybrid_aquatic:giant_squid": {
-      "charge": 0.9,
-      "energy_budget": 1.0
-    },
-    "hybrid_aquatic:goblin_shark": {
-      "charge": 0.4,
-      "energy_budget": 0.8
-    },
-    "hybrid_aquatic:hatchetfish": {
-      "charge": 0.1,
-      "energy_budget": 0.6
-    },
-    "hybrid_aquatic:john_dory": {
-      "charge": 0.1,
-      "energy_budget": 0.3
-    },
-    "hybrid_aquatic:lantern_shark": {
-      "charge": 0.1,
-      "energy_budget": 0.4
-    },
-    "hybrid_aquatic:nautilus": {
-      "charge": 0.15,
-      "energy_budget": 0.6
-    },
-    "hybrid_aquatic:oarfish": {
-      "charge": 0.5,
-      "energy_budget": 0.8
-    },
-    "hybrid_aquatic:ratfish": {
-      "charge": 0.1,
-      "energy_budget": 0.2
-    },
-    "hybrid_aquatic:sea_angel": {
-      "charge": 0.1,
-      "energy_budget": 0.25
-    },
-    "hybrid_aquatic:sixgill_shark": {
-      "charge": 0.4,
-      "energy_budget": 0.8
-    },
-    "hybrid_aquatic:slickhead": {
-      "charge": 0.1,
-      "energy_budget": 0.3
-    },
-    "hybrid_aquatic:snailfish": {
-      "charge": 0.1,
-      "energy_budget": 0.7
-    },
-    "hybrid_aquatic:tripod_fish": {
-      "charge": 0.1,
-      "energy_budget": 0.6
-    },
-    "hybrid_aquatic:umbrella_octopus": {
-      "charge": 0.15,
-      "energy_budget": 0.3
-    },
-    "hybrid_aquatic:vampire_squid": {
-      "charge": 0.1,
-      "energy_budget": 0.2
-    },
-    "hybrid_aquatic:viperfish": {
-      "charge": 0.15,
-      "energy_budget": 0.6
-    }
-  },
-  "spawners": {
-    "ambient": [
-      {
-        "type": "minecraft:bat",
-        "maxCount": 8,
-        "minCount": 8,
-        "weight": 10
-      }
-    ],
-    "axolotls": [],
-    "creature": [],
-    "hybrid_aquatic:cephalopod": [],
-    "hybrid_aquatic:critter": [],
-    "hybrid_aquatic:crustacean": [],
-    "hybrid_aquatic:fish": [],
-    "hybrid_aquatic:jelly": [],
-    "hybrid_aquatic:mammal": [],
-    "hybrid_aquatic:miniboss": [],
-    "hybrid_aquatic:minion": [],
-    "hybrid_aquatic:river_fish": [],
-    "hybrid_aquatic:shark": [],
-    "misc": [],
-    "monster": [
-      {
-        "type": "minecraft:spider",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:zombie",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 95
-      },
-      {
-        "type": "minecraft:zombie_villager",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "minecraft:skeleton",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:creeper",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:slime",
-        "maxCount": 4,
-        "minCount": 4,
-        "weight": 100
-      },
-      {
-        "type": "minecraft:enderman",
-        "maxCount": 4,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "minecraft:witch",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      }
-    ],
-    "underground_water_creature": [
-      {
-        "type": "minecraft:glow_squid",
-        "maxCount": 5,
-        "minCount": 2,
-        "weight": 5
-      }
-    ],
-    "water_ambient": [
-      {
-        "type": "hybrid_aquatic:giant_squid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "hybrid_aquatic:umbrella_octopus",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "hybrid_aquatic:vampire_squid",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "hybrid_aquatic:nautilus",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "hybrid_aquatic:ratfish",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "hybrid_aquatic:snailfish",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "hybrid_aquatic:anglerfish",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:fangtooth",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:john_dory",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 8
-      },
-      {
-        "type": "hybrid_aquatic:viperfish",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:dragonfish",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:hatchetfish",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:tripod_fish",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:barreleye",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 5
-      },
-      {
-        "type": "hybrid_aquatic:sea_angel",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "hybrid_aquatic:coelacanth",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "hybrid_aquatic:slickhead",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
-        "type": "hybrid_aquatic:oarfish",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
-    "water_creature": [
-      {
-        "type": "hybrid_aquatic:sixgill_shark",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "hybrid_aquatic:goblin_shark",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "hybrid_aquatic:lantern_shark",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 5
-      }
-    ]
-  },
   "temperature": 0.2
 }

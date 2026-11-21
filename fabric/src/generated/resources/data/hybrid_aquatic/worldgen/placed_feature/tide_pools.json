@@ -6,20 +6,28 @@
       "count": 24
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": 8,
-      "y_spread": 0
+      "type": "minecraft:offset",
+      "x": 8,
+      "y": 0,
+      "z": 8
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:clamped_normal",
         "deviation": 3.0,
         "max_inclusive": 10,
         "mean": 0.0,
         "min_inclusive": -10
       },
-      "y_spread": 0
+      "y": 0,
+      "z": {
+        "type": "minecraft:clamped_normal",
+        "deviation": 3.0,
+        "max_inclusive": 10,
+        "mean": 0.0,
+        "min_inclusive": -10
+      }
     },
     {
       "type": "minecraft:height_range",
@@ -38,13 +46,18 @@
       "count": 3
     },
     {
-      "type": "minecraft:random_offset",
-      "xz_spread": {
+      "type": "minecraft:offset",
+      "x": {
         "type": "minecraft:uniform",
         "max_inclusive": 12,
         "min_inclusive": -12
       },
-      "y_spread": 0
+      "y": 0,
+      "z": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 12,
+        "min_inclusive": -12
+      }
     },
     {
       "type": "minecraft:biome"

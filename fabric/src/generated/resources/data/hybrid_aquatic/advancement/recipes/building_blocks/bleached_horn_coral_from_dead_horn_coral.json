@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bleached_horn_coral_from_dead_horn_coral"
+        "recipes": "hybrid_aquatic:bleached_horn_coral_from_dead_horn_coral"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

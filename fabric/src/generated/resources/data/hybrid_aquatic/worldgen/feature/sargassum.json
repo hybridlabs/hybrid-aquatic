@@ -1,0 +1,9 @@
+{
+  "type": "hybrid_aquatic:sargassum",
+  "to_place": {
+    "id": "hybrid_aquatic:sargassum",
+    "properties": {
+      "age": "0"
+    }
+  }
+}

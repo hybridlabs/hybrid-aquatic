@@ -3,16 +3,16 @@
   "dimension": "minecraft:overworld",
   "parameters": {
     "continentalness": [
-      -1.7976931348623157E308,
+      -3.4028235E38,
       0.03
     ],
     "erosion": [
       -0.375,
-      1.7976931348623157E308
+      3.4028235E38
     ],
     "temperature": [
       0.55,
-      1.7976931348623157E308
+      3.4028235E38
     ],
     "weirdness": [
       0.05,

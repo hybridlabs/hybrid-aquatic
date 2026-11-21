@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:yellow_brinestone_wall"
+        "recipes": "hybrid_aquatic:yellow_brinestone_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

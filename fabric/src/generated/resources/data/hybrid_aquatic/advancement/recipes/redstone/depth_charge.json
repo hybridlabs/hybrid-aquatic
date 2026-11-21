@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:depth_charge"
+        "recipes": "hybrid_aquatic:depth_charge"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

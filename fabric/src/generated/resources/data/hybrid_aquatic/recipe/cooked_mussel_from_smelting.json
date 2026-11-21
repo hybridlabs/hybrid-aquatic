@@ -1,6 +1,7 @@
 {
   "type": "minecraft:smelting",
   "category": "food",
+  "cookingtime": 200,
   "experience": 0.15,
   "ingredient": "hybrid_aquatic:mussel",
   "result": {

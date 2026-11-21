@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:disk",
+  "half_height": 1,
+  "radius": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 3,
+    "min_inclusive": 1
+  },
+  "state_provider": {
+    "id": "hybrid_aquatic:aerated_sand"
+  },
+  "target": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "hybrid_aquatic:grassy_sand",
+      "hybrid_aquatic:shorestone",
+      "hybrid_aquatic:coralstone",
+      "minecraft:sand"
+    ]
+  }
+}

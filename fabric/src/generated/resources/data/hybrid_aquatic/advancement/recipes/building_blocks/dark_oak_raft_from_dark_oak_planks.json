@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:dark_oak_raft_from_dark_oak_planks"
+        "recipes": "hybrid_aquatic:dark_oak_raft_from_dark_oak_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

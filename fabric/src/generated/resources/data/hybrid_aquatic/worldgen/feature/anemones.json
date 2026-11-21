@@ -1,0 +1,51 @@
+{
+  "type": "hybrid_aquatic:random_patch",
+  "feature": {
+    "feature": {
+      "type": "minecraft:simple_block",
+      "to_place": {
+        "type": "minecraft:weighted",
+        "entries": [
+          {
+            "data": "hybrid_aquatic:anemone",
+            "weight": 1
+          },
+          {
+            "data": "hybrid_aquatic:giant_green_anemone",
+            "weight": 1
+          },
+          {
+            "data": "hybrid_aquatic:strawberry_anemone",
+            "weight": 3
+          }
+        ]
+      }
+    },
+    "placement": [
+      {
+        "type": "minecraft:block_predicate_filter",
+        "predicate": {
+          "type": "minecraft:all_of",
+          "predicates": [
+            {
+              "type": "minecraft:matching_blocks",
+              "blocks": "minecraft:water"
+            },
+            {
+              "type": "minecraft:has_sturdy_face",
+              "direction": "up",
+              "offset": [
+                0,
+                -1,
+                0
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "tries": 4,
+  "xz_spread": 2,
+  "y_spread": 2
+}

@@ -6,11 +6,11 @@
         {
           "type": "minecraft:tag",
           "expand": true,
-          "name": "hybrid_aquatic:large_fish",
+          "items": "#hybrid_aquatic:large_fish",
           "weight": 3
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "hybrid_aquatic:gameplay/fishing/ha_large_fish"

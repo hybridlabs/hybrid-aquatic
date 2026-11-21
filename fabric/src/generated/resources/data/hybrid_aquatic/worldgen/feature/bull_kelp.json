@@ -1,0 +1,9 @@
+{
+  "type": "hybrid_aquatic:bull_kelp",
+  "to_place": {
+    "id": "hybrid_aquatic:bull_kelp",
+    "properties": {
+      "age": "0"
+    }
+  }
+}

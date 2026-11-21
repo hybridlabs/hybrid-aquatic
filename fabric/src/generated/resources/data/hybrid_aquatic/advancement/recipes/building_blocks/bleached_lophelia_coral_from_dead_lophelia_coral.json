@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bleached_lophelia_coral_from_dead_lophelia_coral"
+        "recipes": "hybrid_aquatic:bleached_lophelia_coral_from_dead_lophelia_coral"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

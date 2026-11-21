@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:driftwood_pressure_plate"
+        "recipes": "hybrid_aquatic:driftwood_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -5,39 +5,35 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2,
+              "min": 0
             }
-          ],
+          },
           "name": "hybrid_aquatic:sirenian_beef"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 3,
+              "min": 0
             }
-          ],
+          },
           "name": "minecraft:leather"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

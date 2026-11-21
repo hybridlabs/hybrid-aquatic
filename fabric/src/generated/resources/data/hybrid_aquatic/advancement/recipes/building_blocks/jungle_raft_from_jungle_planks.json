@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:jungle_raft_from_jungle_planks"
+        "recipes": "hybrid_aquatic:jungle_raft_from_jungle_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

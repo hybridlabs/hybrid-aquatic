@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:smooth_white_sandstone_stairs"
+        "recipes": "hybrid_aquatic:smooth_white_sandstone_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

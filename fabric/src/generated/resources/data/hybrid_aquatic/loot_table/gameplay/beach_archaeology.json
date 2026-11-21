@@ -151,7 +151,7 @@
           "name": "hybrid_aquatic:diving_armor_upgrade_template"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "hybrid_aquatic:gameplay/beach_archaeology"

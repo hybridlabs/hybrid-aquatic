@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:driftwood_trapdoor"
+        "recipes": "hybrid_aquatic:driftwood_trapdoor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

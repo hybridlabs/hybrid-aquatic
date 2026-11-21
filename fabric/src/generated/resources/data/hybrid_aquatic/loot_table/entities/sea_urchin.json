@@ -5,53 +5,53 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
+              "type": "minecraft:enchanted_count_increase",
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
                 "min": 0.0
               },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
+              "enchantment": "minecraft:looting"
             },
             {
-              "count": 1.0,
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count",
+              "count": 1
             }
           ],
           "name": "hybrid_aquatic:sea_urchin_spine"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
+              "type": "minecraft:enchanted_count_increase",
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
                 "min": 0.0
               },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
+              "enchantment": "minecraft:looting"
             },
             {
+              "type": "minecraft:set_count",
               "count": {
                 "type": "minecraft:uniform",
-                "max": 3.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_count"
+                "max": 3,
+                "min": 0
+              }
             }
           ],
           "name": "hybrid_aquatic:uni"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

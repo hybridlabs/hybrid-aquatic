@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:pearl_block"
+        "recipes": "hybrid_aquatic:pearl_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

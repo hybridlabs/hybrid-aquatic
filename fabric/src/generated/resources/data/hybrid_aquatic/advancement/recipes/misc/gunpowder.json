@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:gunpowder"
+        "recipes": "hybrid_aquatic:gunpowder"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

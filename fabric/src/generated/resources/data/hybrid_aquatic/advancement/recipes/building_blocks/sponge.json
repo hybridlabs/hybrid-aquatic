@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:sponge"
+        "recipes": "hybrid_aquatic:sponge"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

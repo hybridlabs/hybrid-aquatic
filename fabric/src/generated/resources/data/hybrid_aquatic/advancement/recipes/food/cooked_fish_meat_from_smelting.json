@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:cooked_fish_meat_from_smelting"
+        "recipes": "hybrid_aquatic:cooked_fish_meat_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

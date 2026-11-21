@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:raw_fish_meat_small"
+        "recipes": "hybrid_aquatic:raw_fish_meat_small"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

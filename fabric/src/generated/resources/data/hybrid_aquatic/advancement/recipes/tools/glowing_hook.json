@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:glowing_hook"
+        "recipes": "hybrid_aquatic:glowing_hook"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

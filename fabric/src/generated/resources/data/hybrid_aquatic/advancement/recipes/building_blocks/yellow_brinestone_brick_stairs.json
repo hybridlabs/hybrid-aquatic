@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:yellow_brinestone_brick_stairs"
+        "recipes": "hybrid_aquatic:yellow_brinestone_brick_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

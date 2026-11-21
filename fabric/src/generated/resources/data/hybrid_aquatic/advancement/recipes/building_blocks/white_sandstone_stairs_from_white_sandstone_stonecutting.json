@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:white_sandstone_stairs_from_white_sandstone_stonecutting"
+        "recipes": "hybrid_aquatic:white_sandstone_stairs_from_white_sandstone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

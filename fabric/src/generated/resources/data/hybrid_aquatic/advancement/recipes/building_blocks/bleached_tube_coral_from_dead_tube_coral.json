@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bleached_tube_coral_from_dead_tube_coral"
+        "recipes": "hybrid_aquatic:bleached_tube_coral_from_dead_tube_coral"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bone_fence"
+        "recipes": "hybrid_aquatic:bone_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

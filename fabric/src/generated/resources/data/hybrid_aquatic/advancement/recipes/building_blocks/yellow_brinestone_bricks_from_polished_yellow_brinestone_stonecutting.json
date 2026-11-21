@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:yellow_brinestone_bricks_from_polished_yellow_brinestone_stonecutting"
+        "recipes": "hybrid_aquatic:yellow_brinestone_bricks_from_polished_yellow_brinestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

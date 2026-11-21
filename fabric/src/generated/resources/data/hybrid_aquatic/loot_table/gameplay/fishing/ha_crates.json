@@ -48,7 +48,7 @@
           "name": "hybrid_aquatic:cherry_crate"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "hybrid_aquatic:gameplay/fishing/ha_crates"

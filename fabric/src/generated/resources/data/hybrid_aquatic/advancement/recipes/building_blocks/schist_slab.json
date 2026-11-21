@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:schist_slab"
+        "recipes": "hybrid_aquatic:schist_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:glowstick"
+        "recipes": "hybrid_aquatic:glowstick"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:buoy"
+        "recipes": "hybrid_aquatic:buoy"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

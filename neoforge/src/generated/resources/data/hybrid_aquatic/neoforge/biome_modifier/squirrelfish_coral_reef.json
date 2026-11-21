@@ -1,10 +1,15 @@
 {
   "type": "neoforge:add_spawns",
   "biomes": "#hapi:coral_reef",
-  "spawners": {
-    "type": "hybrid_aquatic:squirrelfish",
-    "maxCount": 12,
-    "minCount": 4,
-    "weight": 5
-  }
+  "spawners": [
+    {
+      "type": "hybrid_aquatic:squirrelfish",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 12,
+        "min_inclusive": 4
+      },
+      "weight": 5
+    }
+  ]
 }

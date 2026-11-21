@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:seashell_spear"
+        "recipes": "hybrid_aquatic:seashell_spear"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

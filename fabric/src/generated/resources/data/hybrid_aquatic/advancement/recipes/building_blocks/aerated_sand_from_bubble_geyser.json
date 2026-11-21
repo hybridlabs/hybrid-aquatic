@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:aerated_sand_from_bubble_geyser"
+        "recipes": "hybrid_aquatic:aerated_sand_from_bubble_geyser"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

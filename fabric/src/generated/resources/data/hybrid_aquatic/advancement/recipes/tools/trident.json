@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:trident"
+        "recipes": "hybrid_aquatic:trident"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

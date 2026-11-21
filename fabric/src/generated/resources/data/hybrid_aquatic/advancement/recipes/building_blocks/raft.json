@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:raft"
+        "recipes": "hybrid_aquatic:raft"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

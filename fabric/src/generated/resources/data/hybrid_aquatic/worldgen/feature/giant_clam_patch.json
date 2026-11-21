@@ -1,0 +1,40 @@
+{
+  "type": "hybrid_aquatic:random_patch",
+  "feature": {
+    "feature": {
+      "type": "minecraft:simple_block",
+      "to_place": {
+        "type": "minecraft:weighted",
+        "entries": [
+          {
+            "data": {
+              "id": "hybrid_aquatic:giant_clam",
+              "properties": {
+                "facing": "east",
+                "state": "open",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": "hybrid_aquatic:giant_clam",
+            "weight": 1
+          }
+        ]
+      }
+    },
+    "placement": [
+      {
+        "type": "minecraft:block_predicate_filter",
+        "predicate": {
+          "type": "minecraft:matching_blocks",
+          "blocks": "minecraft:water"
+        }
+      }
+    ]
+  },
+  "tries": 2,
+  "xz_spread": 2,
+  "y_spread": 2
+}

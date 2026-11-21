@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:prismarine_rod"
+        "recipes": "hybrid_aquatic:prismarine_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

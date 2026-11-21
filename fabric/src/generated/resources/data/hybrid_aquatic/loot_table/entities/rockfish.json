@@ -5,25 +5,25 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
+              "type": "minecraft:enchanted_count_increase",
               "count": {
                 "type": "minecraft:uniform",
                 "max": 1.0,
                 "min": 0.0
               },
-              "enchantment": "minecraft:looting",
-              "function": "minecraft:enchanted_count_increase"
+              "enchantment": "minecraft:looting"
             },
             {
-              "count": 1.0,
-              "function": "minecraft:set_count"
+              "type": "minecraft:set_count",
+              "count": 1
             }
           ],
           "name": "hybrid_aquatic:rockfish"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

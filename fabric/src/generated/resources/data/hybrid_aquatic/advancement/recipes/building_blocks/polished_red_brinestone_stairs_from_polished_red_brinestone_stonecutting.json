@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:polished_red_brinestone_stairs_from_polished_red_brinestone_stonecutting"
+        "recipes": "hybrid_aquatic:polished_red_brinestone_stairs_from_polished_red_brinestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

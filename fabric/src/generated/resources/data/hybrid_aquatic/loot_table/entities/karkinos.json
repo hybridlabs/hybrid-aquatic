@@ -5,20 +5,18 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 16.0,
-                "min": 8.0
-              },
-              "function": "minecraft:set_count"
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 16,
+              "min": 8
             }
-          ],
+          },
           "name": "hybrid_aquatic:raw_crab"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "entries": [
@@ -27,7 +25,7 @@
           "name": "hybrid_aquatic:karkinos_claw"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

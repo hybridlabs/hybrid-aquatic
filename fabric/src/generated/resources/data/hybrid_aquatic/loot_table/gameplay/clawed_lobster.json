@@ -7,7 +7,7 @@
           "name": "hybrid_aquatic:lobster_claw"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     },
     {
       "entries": [
@@ -16,7 +16,7 @@
           "name": "hybrid_aquatic:raw_lobster_tail"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

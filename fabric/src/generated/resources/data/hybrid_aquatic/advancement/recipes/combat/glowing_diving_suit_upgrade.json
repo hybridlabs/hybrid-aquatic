@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:glowing_diving_suit_upgrade"
+        "recipes": "hybrid_aquatic:glowing_diving_suit_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

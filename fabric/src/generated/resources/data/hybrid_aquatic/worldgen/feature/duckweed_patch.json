@@ -1,0 +1,194 @@
+{
+  "type": "hybrid_aquatic:random_patch",
+  "feature": {
+    "feature": {
+      "type": "minecraft:simple_block",
+      "to_place": {
+        "type": "minecraft:weighted",
+        "entries": [
+          {
+            "data": "hybrid_aquatic:duckweed",
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "east",
+                "flower_amount": "1",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "south",
+                "flower_amount": "1",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "west",
+                "flower_amount": "1",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "north",
+                "flower_amount": "2",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "east",
+                "flower_amount": "2",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "south",
+                "flower_amount": "2",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "west",
+                "flower_amount": "2",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "north",
+                "flower_amount": "3",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "east",
+                "flower_amount": "3",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "south",
+                "flower_amount": "3",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "west",
+                "flower_amount": "3",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "north",
+                "flower_amount": "4",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "east",
+                "flower_amount": "4",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "south",
+                "flower_amount": "4",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          },
+          {
+            "data": {
+              "id": "hybrid_aquatic:duckweed",
+              "properties": {
+                "facing": "west",
+                "flower_amount": "4",
+                "waterlogged": "true"
+              }
+            },
+            "weight": 1
+          }
+        ]
+      }
+    },
+    "placement": [
+      {
+        "type": "minecraft:block_predicate_filter",
+        "predicate": {
+          "type": "minecraft:matching_blocks",
+          "blocks": "minecraft:water"
+        }
+      }
+    ]
+  },
+  "tries": 50,
+  "xz_spread": 5,
+  "y_spread": 5
+}

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:red_brinestone_wall_from_red_brinestone_stonecutting"
+        "recipes": "hybrid_aquatic:red_brinestone_wall_from_red_brinestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

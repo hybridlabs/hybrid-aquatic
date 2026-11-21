@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:polished_chimneystone"
+        "recipes": "hybrid_aquatic:polished_chimneystone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

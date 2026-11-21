@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:red_brinestone_brick_wall"
+        "recipes": "hybrid_aquatic:red_brinestone_brick_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

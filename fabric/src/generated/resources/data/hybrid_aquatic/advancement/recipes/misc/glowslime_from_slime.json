@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:glowslime_from_slime"
+        "recipes": "hybrid_aquatic:glowslime_from_slime"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

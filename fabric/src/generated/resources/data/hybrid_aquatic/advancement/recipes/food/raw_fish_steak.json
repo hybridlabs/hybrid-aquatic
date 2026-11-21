@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:raw_fish_steak"
+        "recipes": "hybrid_aquatic:raw_fish_steak"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

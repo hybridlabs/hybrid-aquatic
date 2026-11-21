@@ -1,10 +1,15 @@
 {
   "type": "neoforge:add_spawns",
   "biomes": "#hapi:coral_reef",
-  "spawners": {
-    "type": "hybrid_aquatic:triggerfish",
-    "maxCount": 1,
-    "minCount": 1,
-    "weight": 3
-  }
+  "spawners": [
+    {
+      "type": "hybrid_aquatic:triggerfish",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 1
+      },
+      "weight": 3
+    }
+  ]
 }

@@ -1,7 +1,6 @@
 {
   "type": "hybrid_aquatic:ha_loot_modifier",
   "chance": 0.5,
-  "conditions": [],
   "item_tag": "minecraft:fishes",
   "priority": 0,
   "tables": [

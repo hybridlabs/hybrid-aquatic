@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:polished_yellow_brinestone"
+        "recipes": "hybrid_aquatic:polished_yellow_brinestone"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

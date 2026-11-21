@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:dried_kelp_from_smoking"
+        "recipes": "hybrid_aquatic:dried_kelp_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

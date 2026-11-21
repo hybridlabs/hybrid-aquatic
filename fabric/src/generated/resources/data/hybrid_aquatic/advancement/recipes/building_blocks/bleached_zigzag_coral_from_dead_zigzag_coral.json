@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bleached_zigzag_coral_from_dead_zigzag_coral"
+        "recipes": "hybrid_aquatic:bleached_zigzag_coral_from_dead_zigzag_coral"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

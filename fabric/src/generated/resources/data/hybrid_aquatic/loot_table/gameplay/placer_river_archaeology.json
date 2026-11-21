@@ -56,7 +56,7 @@
           "name": "minecraft:sheaf_pottery_sherd"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "hybrid_aquatic:gameplay/placer_river_archaeology"

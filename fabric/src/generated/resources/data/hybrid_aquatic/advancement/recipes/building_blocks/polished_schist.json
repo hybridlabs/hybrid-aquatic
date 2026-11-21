@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:polished_schist"
+        "recipes": "hybrid_aquatic:polished_schist"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

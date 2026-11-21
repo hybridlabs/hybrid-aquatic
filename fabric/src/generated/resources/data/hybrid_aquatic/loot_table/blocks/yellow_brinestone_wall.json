@@ -2,18 +2,16 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
       "entries": [
         {
           "type": "minecraft:item",
           "name": "hybrid_aquatic:yellow_brinestone_wall"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:chiseled_red_brinestone_from_polished_red_brinestone_stonecutting"
+        "recipes": "hybrid_aquatic:chiseled_red_brinestone_from_polished_red_brinestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

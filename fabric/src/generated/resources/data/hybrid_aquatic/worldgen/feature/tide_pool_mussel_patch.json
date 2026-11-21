@@ -1,0 +1,46 @@
+{
+  "type": "hybrid_aquatic:random_patch",
+  "feature": {
+    "feature": {
+      "type": "minecraft:replace_single_block",
+      "targets": [
+        {
+          "state": "hybrid_aquatic:wild_mussels",
+          "target": {
+            "block_state": "minecraft:water",
+            "predicate_type": "minecraft:blockstate_match"
+          }
+        },
+        {
+          "state": {
+            "id": "hybrid_aquatic:wild_mussels",
+            "properties": {
+              "waterlogged": "false"
+            }
+          },
+          "target": {
+            "block_state": "minecraft:air",
+            "predicate_type": "minecraft:blockstate_match"
+          }
+        }
+      ]
+    },
+    "placement": [
+      {
+        "type": "minecraft:block_predicate_filter",
+        "predicate": {
+          "type": "minecraft:has_sturdy_face",
+          "direction": "up",
+          "offset": [
+            0,
+            -1,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "tries": 16,
+  "xz_spread": 4,
+  "y_spread": 4
+}

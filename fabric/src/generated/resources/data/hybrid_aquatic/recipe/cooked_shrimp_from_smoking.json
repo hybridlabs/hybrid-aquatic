@@ -1,6 +1,7 @@
 {
   "type": "minecraft:smoking",
   "category": "food",
+  "cookingtime": 100,
   "experience": 0.15,
   "ingredient": "hybrid_aquatic:raw_shrimp",
   "result": {

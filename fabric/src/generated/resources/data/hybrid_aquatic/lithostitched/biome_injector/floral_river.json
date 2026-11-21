@@ -3,7 +3,7 @@
   "dimension": "minecraft:overworld",
   "parameters": {
     "humidity": [
-      -1.7976931348623157E308,
+      -3.4028235E38,
       -0.35
     ],
     "temperature": [
@@ -11,7 +11,7 @@
       0.2
     ],
     "weirdness": [
-      -1.7976931348623157E308,
+      -3.4028235E38,
       -0.01
     ]
   },

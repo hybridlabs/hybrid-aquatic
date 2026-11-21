@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:coral_blade"
+        "recipes": "hybrid_aquatic:coral_blade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

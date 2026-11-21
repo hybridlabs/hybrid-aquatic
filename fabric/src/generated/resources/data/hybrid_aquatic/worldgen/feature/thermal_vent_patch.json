@@ -1,0 +1,44 @@
+{
+  "type": "hybrid_aquatic:vent_patch",
+  "base_block": {
+    "id": "hybrid_aquatic:chimneystone"
+  },
+  "count": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 5,
+    "min_inclusive": 3
+  },
+  "floor_search_range": 5,
+  "giant_vent_block": {
+    "id": "hybrid_aquatic:giant_thermal_vent",
+    "properties": {
+      "thickness": "tip"
+    }
+  },
+  "spread_radius": 2,
+  "vent_block": {
+    "id": "hybrid_aquatic:hydrothermal_vent_shaft",
+    "properties": {
+      "thickness": "tip",
+      "waterlogged": "true"
+    }
+  },
+  "worm_block": {
+    "id": "hybrid_aquatic:tube_worm",
+    "properties": {
+      "waterlogged": "true",
+      "worms": "1"
+    }
+  },
+  "worm_count": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 3,
+    "min_inclusive": 1
+  },
+  "worm_count_per_block": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 4,
+    "min_inclusive": 1
+  },
+  "worm_spread_radius": 4
+}

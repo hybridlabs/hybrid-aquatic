@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:orange_brinestone_brick_slab"
+        "recipes": "hybrid_aquatic:orange_brinestone_brick_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

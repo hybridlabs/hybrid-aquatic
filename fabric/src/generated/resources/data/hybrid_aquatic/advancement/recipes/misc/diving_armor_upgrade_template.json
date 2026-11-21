@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:diving_armor_upgrade_template"
+        "recipes": "hybrid_aquatic:diving_armor_upgrade_template"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:sulfur"
+        "recipes": "hybrid_aquatic:sulfur"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

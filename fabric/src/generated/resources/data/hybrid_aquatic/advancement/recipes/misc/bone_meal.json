@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bone_meal"
+        "recipes": "hybrid_aquatic:bone_meal"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

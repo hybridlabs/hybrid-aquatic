@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:driftwood_wood"
+        "recipes": "hybrid_aquatic:driftwood_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

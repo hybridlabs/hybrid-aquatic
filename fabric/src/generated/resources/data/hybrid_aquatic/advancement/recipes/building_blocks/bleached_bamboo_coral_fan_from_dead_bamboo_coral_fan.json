@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bleached_bamboo_coral_fan_from_dead_bamboo_coral_fan"
+        "recipes": "hybrid_aquatic:bleached_bamboo_coral_fan_from_dead_bamboo_coral_fan"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

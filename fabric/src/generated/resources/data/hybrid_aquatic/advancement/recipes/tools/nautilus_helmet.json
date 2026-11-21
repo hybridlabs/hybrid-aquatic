@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:nautilus_helmet"
+        "recipes": "hybrid_aquatic:nautilus_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

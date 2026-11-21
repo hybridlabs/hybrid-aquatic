@@ -1,0 +1,19 @@
+{
+  "type": "hybrid_aquatic:suspicious_sand_disk",
+  "half_height": 1,
+  "radius": {
+    "type": "minecraft:uniform",
+    "max_inclusive": 2,
+    "min_inclusive": 1
+  },
+  "state_provider": {
+    "id": "minecraft:suspicious_sand",
+    "properties": {
+      "dusted": "0"
+    }
+  },
+  "target": {
+    "type": "minecraft:matching_blocks",
+    "blocks": "minecraft:sand"
+  }
+}

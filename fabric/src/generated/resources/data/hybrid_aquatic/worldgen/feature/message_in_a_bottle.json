@@ -1,0 +1,9 @@
+{
+  "type": "hybrid_aquatic:message_in_a_bottle",
+  "to_place": {
+    "id": "hybrid_aquatic:message_in_a_bottle",
+    "properties": {
+      "waterlogged": "false"
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:fish_food"
+        "recipes": "hybrid_aquatic:fish_food"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

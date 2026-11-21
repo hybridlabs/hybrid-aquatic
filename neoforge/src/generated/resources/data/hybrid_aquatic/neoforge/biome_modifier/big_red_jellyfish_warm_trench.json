@@ -1,10 +1,15 @@
 {
   "type": "neoforge:add_spawns",
   "biomes": "#hapi:warm_trench",
-  "spawners": {
-    "type": "hybrid_aquatic:big_red_jellyfish",
-    "maxCount": 1,
-    "minCount": 1,
-    "weight": 1
-  }
+  "spawners": [
+    {
+      "type": "hybrid_aquatic:big_red_jellyfish",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 1
+      },
+      "weight": 1
+    }
+  ]
 }

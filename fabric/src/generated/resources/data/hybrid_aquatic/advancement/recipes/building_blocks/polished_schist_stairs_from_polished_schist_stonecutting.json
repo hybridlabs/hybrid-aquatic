@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:polished_schist_stairs_from_polished_schist_stonecutting"
+        "recipes": "hybrid_aquatic:polished_schist_stairs_from_polished_schist_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

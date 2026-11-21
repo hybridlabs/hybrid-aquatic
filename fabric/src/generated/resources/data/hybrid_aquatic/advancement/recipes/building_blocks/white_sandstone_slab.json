@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:white_sandstone_slab"
+        "recipes": "hybrid_aquatic:white_sandstone_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

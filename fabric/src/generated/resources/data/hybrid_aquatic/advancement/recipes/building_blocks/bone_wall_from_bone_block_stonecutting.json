@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:bone_wall_from_bone_block_stonecutting"
+        "recipes": "hybrid_aquatic:bone_wall_from_bone_block_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

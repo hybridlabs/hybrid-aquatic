@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:polished_orange_brinestone"
+        "recipes": "hybrid_aquatic:polished_orange_brinestone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

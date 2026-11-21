@@ -5,8 +5,11 @@
     "crustacean": [
       {
         "type": "hybrid_aquatic:coconut_crab",
-        "maxCount": 4,
-        "minCount": 1
+        "count": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 4,
+          "min_inclusive": 1
+        }
       }
     ]
   },

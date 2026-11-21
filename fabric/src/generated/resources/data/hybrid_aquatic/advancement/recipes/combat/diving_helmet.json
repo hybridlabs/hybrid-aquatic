@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:diving_helmet"
+        "recipes": "hybrid_aquatic:diving_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

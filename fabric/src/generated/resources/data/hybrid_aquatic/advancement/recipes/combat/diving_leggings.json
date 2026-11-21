@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:diving_leggings"
+        "recipes": "hybrid_aquatic:diving_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

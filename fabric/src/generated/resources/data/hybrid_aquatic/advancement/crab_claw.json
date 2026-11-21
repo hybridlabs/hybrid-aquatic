@@ -13,7 +13,6 @@
     }
   },
   "display": {
-    "background": "hybrid_aquatic:textures/block/coralstone.png",
     "description": {
       "translate": "advancements.hybrid_aquatic.crab_claw.description"
     },

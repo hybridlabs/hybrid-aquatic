@@ -3,21 +3,18 @@
   "criteria": {
     "kill_karkinos": {
       "conditions": {
-        "entity": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:entity_type": "hybrid_aquatic:karkinos"
-            }
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "hybrid_aquatic:karkinos"
           }
-        ]
+        }
       },
       "trigger": "minecraft:player_killed_entity"
     }
   },
   "display": {
-    "background": "hybrid_aquatic:textures/block/coralstone.png",
     "description": {
       "translate": "advancements.hybrid_aquatic.kill_karkinos.description"
     },

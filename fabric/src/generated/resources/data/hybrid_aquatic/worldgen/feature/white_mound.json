@@ -1,0 +1,88 @@
+{
+  "type": "hybrid_aquatic:random_patch",
+  "feature": {
+    "feature": {
+      "type": "minecraft:disk",
+      "half_height": 1,
+      "radius": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 5,
+        "min_inclusive": 3
+      },
+      "state_provider": {
+        "type": "minecraft:rule_based",
+        "fallback": {
+          "type": "minecraft:weighted",
+          "entries": [
+            {
+              "data": "minecraft:calcite",
+              "weight": 5
+            },
+            {
+              "data": "minecraft:diorite",
+              "weight": 3
+            },
+            {
+              "data": "hybrid_aquatic:white_sandstone",
+              "weight": 1
+            }
+          ]
+        },
+        "rules": [
+          {
+            "if_true": {
+              "type": "minecraft:not",
+              "predicate": {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:calcite",
+                  "minecraft:diorite",
+                  "hybrid_aquatic:white_sand",
+                  "hybrid_aquatic:white_sandstone"
+                ],
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            },
+            "then": {
+              "id": "minecraft:water",
+              "properties": {
+                "level": "0"
+              }
+            }
+          }
+        ]
+      },
+      "target": {
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "minecraft:calcite",
+          "minecraft:diorite",
+          "hybrid_aquatic:white_sand",
+          "hybrid_aquatic:white_sandstone"
+        ],
+        "offset": [
+          0,
+          -1,
+          0
+        ]
+      }
+    },
+    "placement": [
+      {
+        "type": "minecraft:count",
+        "count": 1
+      },
+      {
+        "type": "minecraft:heightmap",
+        "heightmap": "OCEAN_FLOOR"
+      }
+    ]
+  },
+  "tries": 6,
+  "xz_spread": 7,
+  "y_spread": 0
+}

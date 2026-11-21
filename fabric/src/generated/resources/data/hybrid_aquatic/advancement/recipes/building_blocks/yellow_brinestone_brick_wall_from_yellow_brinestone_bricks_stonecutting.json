@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:yellow_brinestone_brick_wall_from_yellow_brinestone_bricks_stonecutting"
+        "recipes": "hybrid_aquatic:yellow_brinestone_brick_wall_from_yellow_brinestone_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

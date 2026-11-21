@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:spruce_raft_from_spruce_planks"
+        "recipes": "hybrid_aquatic:spruce_raft_from_spruce_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

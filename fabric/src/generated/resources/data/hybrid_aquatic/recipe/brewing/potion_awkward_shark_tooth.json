@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:potion",
+    "potion_contents": {
+      "potions": "minecraft:awkward"
+    }
+  },
+  "output": {
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "hybrid_aquatic:bleeding"
+      }
+    },
+    "id": "minecraft:potion"
+  },
+  "reagent": {
+    "item": "hybrid_aquatic:shark_tooth"
+  }
+}

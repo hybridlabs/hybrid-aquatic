@@ -1,10 +1,15 @@
 {
   "type": "neoforge:add_spawns",
   "biomes": "#hapi:seagrass_bed",
-  "spawners": {
-    "type": "hybrid_aquatic:trevally",
-    "maxCount": 1,
-    "minCount": 1,
-    "weight": 3
-  }
+  "spawners": [
+    {
+      "type": "hybrid_aquatic:trevally",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 1
+      },
+      "weight": 3
+    }
+  ]
 }

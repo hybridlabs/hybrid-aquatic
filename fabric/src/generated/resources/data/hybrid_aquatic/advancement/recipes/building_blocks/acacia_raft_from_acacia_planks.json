@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hybrid_aquatic:acacia_raft_from_acacia_planks"
+        "recipes": "hybrid_aquatic:acacia_raft_from_acacia_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
