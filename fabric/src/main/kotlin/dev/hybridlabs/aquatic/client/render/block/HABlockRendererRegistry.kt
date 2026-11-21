@@ -1,17 +1,20 @@
 package dev.hybridlabs.aquatic.client.render.block
 
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer
+
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.platform.ClientServices
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.rendertype.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 
 object HABlockRendererRegistry {
     init {
         ClientServices.PLATFORM.registerBlockRenderers(
-            RenderType.translucent(),
+            ChunkSectionLayer.TRANSLUCENT,
             HABlocks.ANEMONE.get(),
             HABlocks.GIANT_GREEN_ANEMONE.get(),
             HABlocks.STRAWBERRY_ANEMONE.get(),
@@ -20,7 +23,7 @@ object HABlockRendererRegistry {
             HAPlatformBlocks.HAGSLIME_BLOCK.get(),
         )
         ClientServices.PLATFORM.registerBlockRenderers(
-            RenderType.cutout(),
+            ChunkSectionLayer.CUTOUT,
             HAPlatformBlocks.DUNEGRASS.get(),
             HAPlatformBlocks.TALL_DUNEGRASS.get(),
 

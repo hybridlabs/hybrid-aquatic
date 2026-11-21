@@ -17,12 +17,12 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     FabricTagProvider.BlockTagProvider(output, registriesFuture) {
     override fun addTags(arg: HolderLookup.Provider) {
         // misc
-        getOrCreateTagBuilder(HABlockTags.ANEMONES)
+        valueLookupBuilder(HABlockTags.ANEMONES)
             .add(HABlocks.ANEMONE.get())
             .add(HABlocks.GIANT_GREEN_ANEMONE.get())
             .add(HABlocks.STRAWBERRY_ANEMONE.get())
 
-        getOrCreateTagBuilder(HABlockTags.DETRITIVORE_EDIBLE)
+        valueLookupBuilder(HABlockTags.DETRITIVORE_EDIBLE)
             .add(HABlocks.MARINE_SNOW.get())
             .add(HABlocks.BONE_STAIRS.get())
             .add(HABlocks.BONE_SLAB.get())
@@ -30,11 +30,11 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BONE_WALL.get())
             .add(Blocks.BONE_BLOCK)
 
-        getOrCreateTagBuilder(HABlockTags.CORALLIVORE_EDIBLE)
+        valueLookupBuilder(HABlockTags.CORALLIVORE_EDIBLE)
             .forceAddTag(BlockTags.CORAL_BLOCKS)
             .forceAddTag(HABlockTags.DEEP_CORAL_BLOCKS)
 
-        getOrCreateTagBuilder(HABlockTags.ALGIVORE_EDIBLE)
+        valueLookupBuilder(HABlockTags.ALGIVORE_EDIBLE)
             .add(HABlocks.GRASSY_SAND.get())
             .add(HABlocks.SEA_LETTUCE.get())
             .add(HABlocks.TALL_SEA_LETTUCE.get())
@@ -52,7 +52,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.MOSSY_STONE_BRICK_WALL)
             .add(Blocks.MOSS_CARPET)
 
-        getOrCreateTagBuilder(HABlockTags.HERBIVORE_EDIBLE)
+        valueLookupBuilder(HABlockTags.HERBIVORE_EDIBLE)
             .add(HABlocks.GRASSY_SAND.get())
             .add(HABlocks.SEA_LETTUCE.get())
             .add(HABlocks.TALL_SEA_LETTUCE.get())
@@ -60,26 +60,26 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.TALL_SEAGRASS)
 
         //#region Deep Corals
-        getOrCreateTagBuilder(HABlockTags.DEEP_CORAL_BLOCKS)
+        valueLookupBuilder(HABlockTags.DEEP_CORAL_BLOCKS)
             .add(HABlocks.LOPHELIA_CORAL_BLOCK.get())
             .add(HABlocks.THORN_CORAL_BLOCK.get())
             .add(HABlocks.ZIGZAG_CORAL_BLOCK.get())
             .add(HABlocks.BAMBOO_CORAL_BLOCK.get())
 
-        getOrCreateTagBuilder(HABlockTags.DEEP_CORAL_PLANTS)
+        valueLookupBuilder(HABlockTags.DEEP_CORAL_PLANTS)
             .add(HABlocks.LOPHELIA_CORAL.get())
             .add(HABlocks.THORN_CORAL.get())
             .add(HABlocks.ZIGZAG_CORAL.get())
             .add(HABlocks.BAMBOO_CORAL.get())
 
-        getOrCreateTagBuilder(HABlockTags.DEEP_CORALS)
+        valueLookupBuilder(HABlockTags.DEEP_CORALS)
             .forceAddTag(HABlockTags.DEEP_CORAL_PLANTS)
             .add(HABlocks.LOPHELIA_CORAL_FAN.get())
             .add(HABlocks.THORN_CORAL_FAN.get())
             .add(HABlocks.ZIGZAG_CORAL_FAN.get())
             .add(HABlocks.BAMBOO_CORAL_FAN.get())
 
-        getOrCreateTagBuilder(HABlockTags.DEEP_WALL_CORALS)
+        valueLookupBuilder(HABlockTags.DEEP_WALL_CORALS)
             .add(HABlocks.LOPHELIA_CORAL_WALL_FAN.get())
             .add(HABlocks.THORN_CORAL_WALL_FAN.get())
             .add(HABlocks.ZIGZAG_CORAL_WALL_FAN.get())
@@ -87,7 +87,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
         //#endregion
 
         //#region Bleached Corals
-        getOrCreateTagBuilder(HABlockTags.BLEACHED_CORAL_BLOCKS)
+        valueLookupBuilder(HABlockTags.BLEACHED_CORAL_BLOCKS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL_BLOCK.get())
             .add(HABlocks.BLEACHED_BAMBOO_CORAL_BLOCK.get())
             .add(HABlocks.BLEACHED_ZIGZAG_CORAL_BLOCK.get())
@@ -102,7 +102,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BLEACHED_BUBBLE_CORAL_BLOCK.get())
             .add(HABlocks.BLEACHED_BRAIN_CORAL_BLOCK.get())
 
-        getOrCreateTagBuilder(HABlockTags.BLEACHED_CORAL_PLANTS)
+        valueLookupBuilder(HABlockTags.BLEACHED_CORAL_PLANTS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL.get())
             .add(HABlocks.BLEACHED_BAMBOO_CORAL.get())
             .add(HABlocks.BLEACHED_ZIGZAG_CORAL.get())
@@ -117,7 +117,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BLEACHED_BUBBLE_CORAL.get())
             .add(HABlocks.BLEACHED_BRAIN_CORAL.get())
 
-        getOrCreateTagBuilder(HABlockTags.BLEACHED_CORALS)
+        valueLookupBuilder(HABlockTags.BLEACHED_CORALS)
             .forceAddTag(HABlockTags.BLEACHED_CORAL_PLANTS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL_FAN.get())
             .add(HABlocks.BLEACHED_BAMBOO_CORAL_FAN.get())
@@ -133,7 +133,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BLEACHED_BUBBLE_CORAL_FAN.get())
             .add(HABlocks.BLEACHED_BRAIN_CORAL_FAN.get())
 
-        getOrCreateTagBuilder(HABlockTags.BLEACHED_WALL_CORALS)
+        valueLookupBuilder(HABlockTags.BLEACHED_WALL_CORALS)
             .add(HABlocks.BLEACHED_LOPHELIA_CORAL_WALL_FAN.get())
             .add(HABlocks.BLEACHED_BAMBOO_CORAL_WALL_FAN.get())
             .add(HABlocks.BLEACHED_ZIGZAG_CORAL_WALL_FAN.get())
@@ -149,7 +149,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.BLEACHED_BRAIN_CORAL_WALL_FAN.get())
 //#endregion
 
-        getOrCreateTagBuilder(HABlockTags.KELP)
+        valueLookupBuilder(HABlockTags.KELP)
             .add(HABlocks.BULL_KELP.get())
             .add(HABlocks.BULL_KELP_PLANT.get())
             .add(HABlocks.DELESSERIA.get())
@@ -159,17 +159,17 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.KELP)
             .add(Blocks.KELP_PLANT)
 
-        getOrCreateTagBuilder(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+        valueLookupBuilder(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
             .add(HABlocks.SCHIST.get())
             .add(HABlocks.CHIMNEYSTONE.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
+        valueLookupBuilder(BlockTags.WOODEN_FENCES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE.get())
 
-        getOrCreateTagBuilder(BlockTags.FENCES)
+        valueLookupBuilder(BlockTags.FENCES)
             .add(HABlocks.BONE_FENCE.get())
 
-        getOrCreateTagBuilder(BlockTags.WALLS)
+        valueLookupBuilder(BlockTags.WALLS)
             .add(HABlocks.BONE_WALL.get())
             .add(HABlocks.WHITE_SANDSTONE_WALL.get())
             .add(HABlocks.RED_BRINESTONE_WALL.get())
@@ -181,7 +181,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.SCHIST_WALL.get())
             .add(HABlocks.CHIMNEYSTONE_WALL.get())
 
-        getOrCreateTagBuilder(BlockTags.SLABS)
+        valueLookupBuilder(BlockTags.SLABS)
             .add(HABlocks.BONE_SLAB.get())
             .add(HABlocks.WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get())
@@ -207,7 +207,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get())
             .add(HABlocks.CHIMNEYSTONE_BRICK_SLAB.get())
 
-        getOrCreateTagBuilder(BlockTags.STAIRS)
+        valueLookupBuilder(BlockTags.STAIRS)
             .add(HABlocks.BONE_STAIRS.get())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get())
@@ -232,48 +232,48 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get())
             .add(HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get())
 
-        getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+        valueLookupBuilder(BlockTags.FENCE_GATES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
 
-        getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+        valueLookupBuilder(BlockTags.LOGS_THAT_BURN)
             .add(HAPlatformBlocks.DRIFTWOOD_LOG.get())
             .add(HAPlatformBlocks.DRIFTWOOD_WOOD.get())
             .add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
             .add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get())
 
-        getOrCreateTagBuilder(BlockTags.UNDERWATER_BONEMEALS)
+        valueLookupBuilder(BlockTags.UNDERWATER_BONEMEALS)
             .add(HABlocks.SHORT_RED_ALGAE.get())
             .add(HABlocks.RED_ALGAE.get())
             .add(HABlocks.SEA_LETTUCE.get())
 
-        getOrCreateTagBuilder(BlockTags.CORAL_BLOCKS)
+        valueLookupBuilder(BlockTags.CORAL_BLOCKS)
             .add(HABlocks.BUTTON_CORAL_BLOCK.get())
             .add(HABlocks.ROSE_CORAL_BLOCK.get())
             .add(HABlocks.LEAF_CORAL_BLOCK.get())
             .add(HABlocks.SUN_CORAL_BLOCK.get())
 
-        getOrCreateTagBuilder(BlockTags.CORALS)
+        valueLookupBuilder(BlockTags.CORALS)
             .add(HABlocks.ROSE_CORAL.get())
             .add(HABlocks.LEAF_CORAL.get())
             .add(HABlocks.BUTTON_CORAL.get())
             .add(HABlocks.SUN_CORAL.get())
 
-        getOrCreateTagBuilder(BlockTags.CORAL_PLANTS)
+        valueLookupBuilder(BlockTags.CORAL_PLANTS)
             .add(HABlocks.ROSE_CORAL.get())
             .add(HABlocks.LEAF_CORAL.get())
             .add(HABlocks.BUTTON_CORAL.get())
             .add(HABlocks.SUN_CORAL.get())
 
-        getOrCreateTagBuilder(BlockTags.WALL_CORALS)
+        valueLookupBuilder(BlockTags.WALL_CORALS)
             .add(HABlocks.ROSE_CORAL_WALL_FAN.get())
             .add(HABlocks.LEAF_CORAL_WALL_FAN.get())
             .add(HABlocks.BUTTON_CORAL_WALL_FAN.get())
             .add(HABlocks.SUN_CORAL_WALL_FAN.get())
 
-        getOrCreateTagBuilder(BlockTags.SAND)
+        valueLookupBuilder(BlockTags.SAND)
             .add(HABlocks.WHITE_SAND.get())
 
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
             .add(HABlocks.BUTTON_CORAL_BLOCK.get())
             .add(HABlocks.DEAD_BUTTON_CORAL_BLOCK.get())
             .add(HABlocks.BLEACHED_BUTTON_CORAL_BLOCK.get())
@@ -489,7 +489,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get())
 
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
             .add(HABlocks.RAFT.get())
             .add(HABlocks.OAK_RAFT.get())
             .add(HABlocks.SPRUCE_RAFT.get())
@@ -514,51 +514,51 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.CHERRY_CRATE.get())
             .add(HABlocks.BAMBOO_CRATE.get())
 
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
+        valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
             .add(HABlocks.GRASSY_SAND.get())
             .add(HABlocks.BUBBLE_GEYSER.get())
             .add(HABlocks.AERATED_SAND.get())
             .add(HABlocks.WHITE_SAND.get())
             .add(HABlocks.MARINE_SNOW.get())
 
-        getOrCreateTagBuilder(BlockTags.LOGS)
+        valueLookupBuilder(BlockTags.LOGS)
             .add(HAPlatformBlocks.DRIFTWOOD_LOG.get())
             .add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_SLABS)
+        valueLookupBuilder(BlockTags.WOODEN_SLABS)
             .add(HAPlatformBlocks.DRIFTWOOD_SLAB.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_STAIRS)
+        valueLookupBuilder(BlockTags.WOODEN_STAIRS)
             .add(HAPlatformBlocks.DRIFTWOOD_STAIRS.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_DOORS)
+        valueLookupBuilder(BlockTags.WOODEN_DOORS)
             .add(HAPlatformBlocks.DRIFTWOOD_DOOR.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_FENCES)
+        valueLookupBuilder(BlockTags.WOODEN_FENCES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_TRAPDOORS)
+        valueLookupBuilder(BlockTags.WOODEN_TRAPDOORS)
             .add(HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_BUTTONS)
+        valueLookupBuilder(BlockTags.WOODEN_BUTTONS)
             .add(HAPlatformBlocks.DRIFTWOOD_BUTTON.get())
 
-        getOrCreateTagBuilder(BlockTags.WOODEN_PRESSURE_PLATES)
+        valueLookupBuilder(BlockTags.WOODEN_PRESSURE_PLATES)
             .add(HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get())
 
-        getOrCreateTagBuilder(BlockTags.FENCE_GATES)
+        valueLookupBuilder(BlockTags.FENCE_GATES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get())
 
-        getOrCreateTagBuilder(BlockTags.PLANKS)
+        valueLookupBuilder(BlockTags.PLANKS)
             .add(HAPlatformBlocks.DRIFTWOOD_PLANKS.get())
 
-        getOrCreateTagBuilder(BlockTags.FROGS_SPAWNABLE_ON)
+        valueLookupBuilder(BlockTags.FROGS_SPAWNABLE_ON)
             .add(HABlocks.JUNGLE_LILY_PAD.get())
 
-        getOrCreateTagBuilder(BlockTags.FROG_PREFER_JUMP_TO)
+        valueLookupBuilder(BlockTags.FROG_PREFER_JUMP_TO)
             .add(HABlocks.JUNGLE_LILY_PAD.get())
 
-        getOrCreateTagBuilder(HABlockTags.TIDE_POOL_REPLACEABLE)
+        valueLookupBuilder(HABlockTags.TIDE_POOL_REPLACEABLE)
             .add(Blocks.CLAY)
             .add(Blocks.GRAVEL)
             .add(Blocks.DIRT)
@@ -568,15 +568,15 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(Blocks.MOSSY_COBBLESTONE)
             .add(Blocks.TUFF)
 
-        getOrCreateTagBuilder(HABlockTags.CORAL_MOUND_BLOCKS)
+        valueLookupBuilder(HABlockTags.CORAL_MOUND_BLOCKS)
             .add(HABlocks.CORALSTONE.get())
 
-        getOrCreateTagBuilder(HABlockTags.CORAL_MOUND_BASE_BLOCKS)
+        valueLookupBuilder(HABlockTags.CORAL_MOUND_BASE_BLOCKS)
             .addTag(HABlockTags.CORAL_MOUND_BLOCKS)
             .add(HABlocks.SHORESTONE.get())
             .add(Blocks.SAND)
 
-        getOrCreateTagBuilder(HABlockTags.MOUND_BLOCKS)
+        valueLookupBuilder(HABlockTags.MOUND_BLOCKS)
             .add(Blocks.STONE)
             .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK)
             .add(Blocks.DEAD_FIRE_CORAL_BLOCK)
@@ -592,9 +592,9 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .add(HABlocks.DEAD_BAMBOO_CORAL_BLOCK.get())
             .add(HABlocks.DEAD_ZIGZAG_CORAL_BLOCK.get())
 
-        getOrCreateTagBuilder(HABlockTags.IS_HONEYLIKE)
+        valueLookupBuilder(HABlockTags.IS_HONEYLIKE)
             .add(HAPlatformBlocks.HAGSLIME_BLOCK.get())
-        getOrCreateTagBuilder(HABlockTags.IS_SLIMELIKE)
+        valueLookupBuilder(HABlockTags.IS_SLIMELIKE)
             .add(HAPlatformBlocks.GLOWSLIME_BLOCK.get())
 
         // plushies
@@ -603,7 +603,7 @@ class BlockTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
             .forEach { block ->
                 // plushies
                 if (block is PlushieBlock) {
-                    getOrCreateTagBuilder(HABlockTags.PLUSHIES).add(block)
+                    valueLookupBuilder(HABlockTags.PLUSHIES).add(block)
                 }
             }
     }

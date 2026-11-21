@@ -49,7 +49,7 @@ class PapyrusFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
                 val upper = HAPlatformBlocks.PAPYRUS.get().defaultBlockState()
                     .setValue(PapyrusBlock.HALF, DoubleBlockHalf.UPPER)
 
-                if (pos.y < world.maxBuildHeight - 1 &&
+                if (pos.y < world.maxY &&
                     world.isEmptyBlock(pos.above()) &&
                     lower.canSurvive(world, pos)
                 ) {

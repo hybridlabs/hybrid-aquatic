@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.effect
 
+import net.minecraft.server.level.ServerLevel
+
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
 import net.minecraft.world.entity.LivingEntity
@@ -10,7 +12,7 @@ class BleedingMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0xee4049) {
         return duration % 40 == 0
     }
 
-    override fun applyEffectTick(entity: LivingEntity, amplifier: Int): Boolean {
+    override fun applyEffectTick(level: ServerLevel, entity: LivingEntity, amplifier: Int): Boolean {
         if (entity.health > entity.maxHealth / (1.3 + 0.3 * amplifier)) {
             entity.health = entity.maxHealth / (1.3 + 0.3 * amplifier).toFloat()
             return true

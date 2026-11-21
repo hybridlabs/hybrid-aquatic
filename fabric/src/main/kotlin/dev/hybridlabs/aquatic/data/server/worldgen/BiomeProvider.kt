@@ -15,6 +15,7 @@ import net.minecraft.data.worldgen.placement.AquaticPlacements
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
+import net.minecraft.world.attribute.EnvironmentAttributes
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.BiomeGenerationSettings
 import net.minecraft.world.level.biome.BiomeSpecialEffects
@@ -137,7 +138,7 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.CREATURE,
-                            MobSpawnSettings.SpawnerData(EntityType.FROG, 1, 1, 2)
+                            SpawnerData(EntityType.FROG, 1, 1, 2)
                         )
                     )
                 ) {
@@ -165,7 +166,7 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.SALMON, 1, 2, 4)
+                            SpawnerData(EntityType.SALMON, 1, 2, 4)
                         )
                     )
                 ) {
@@ -338,7 +339,7 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.TROPICAL_FISH, 3, 3, 6)
+                            SpawnerData(EntityType.TROPICAL_FISH, 3, 3, 6)
                         )
                     )
                 ) {
@@ -382,15 +383,15 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(EntityType.DOLPHIN, 1, 1, 2)
+                            SpawnerData(EntityType.DOLPHIN, 1, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.PUFFERFISH, 1, 1, 3)
+                            SpawnerData(EntityType.PUFFERFISH, 1, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(EntityType.TROPICAL_FISH, 8, 2, 4)
+                            SpawnerData(EntityType.TROPICAL_FISH, 8, 2, 4)
                         )
                     )
                 )
@@ -502,89 +503,89 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                            SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
 
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
+                            SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
+                            SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 2)
+                            SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
+                            SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                         ),
 
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                         ),
                     ),
                     extraSpawnCosts = listOf(
@@ -627,90 +628,90 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                            SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
+                            SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
                         ),
 
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
+                            SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
+                            SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                         ),
 
 
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                         ),
                     ),
                     extraSpawnCosts = listOf(
@@ -753,90 +754,90 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.VAMPIRE_SQUID.get(), 7, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                            SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
+                            SpawnerData(HAEntityTypes.FIREFLY_SQUID.get(), 10, 1, 2)
                         ),
 
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
+                            SpawnerData(HAEntityTypes.JOHN_DORY.get(), 8, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.DRAGONFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.BARRELEYE.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.COELACANTH.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
+                            SpawnerData(HAEntityTypes.OARFISH.get(), 1, 1, 2)
                         ),
 
 
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.SIXGILL_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.FRILLED_SHARK.get(), 3, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.LANTERN_SHARK.get(), 5, 1, 2)
                         ),
                     ),
                     extraSpawnCosts = listOf(
@@ -879,62 +880,62 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.GIANT_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
+                            SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
                         ),
 
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
+                            SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 2)
-                        ),
-
-                        Pair(
-                            MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.SLICKHEAD.get(), 1, 1, 2)
                         ),
 
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
+                        ),
+
+                        Pair(
+                            MobCategory.WATER_CREATURE,
+                            SpawnerData(HAEntityTypes.GOBLIN_SHARK.get(), 3, 1, 1)
                         ),
                     ),
                     extraSpawnCosts = listOf(
@@ -969,49 +970,49 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
+                            SpawnerData(HAEntityTypes.COLOSSAL_SQUID.get(), 1, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
+                            SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 2)
                         ),
 
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.RATFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
+                            SpawnerData(HAEntityTypes.SNAILFISH.get(), 10, 1, 3)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.ANGLERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.FANGTOOTH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
+                            SpawnerData(HAEntityTypes.VIPERFISH.get(), 5, 1, 1)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.HATCHETFISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
+                            SpawnerData(HAEntityTypes.TRIPOD_FISH.get(), 5, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
+                            SpawnerData(HAEntityTypes.SEA_ANGEL.get(), 3, 1, 3)
                         ),
 
                         Pair(
                             MobCategory.WATER_CREATURE,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
+                            SpawnerData(HAEntityTypes.SLEEPER_SHARK.get(), 3, 1, 1)
                         ),
                     ),
                     extraSpawnCosts = listOf(
@@ -1043,11 +1044,11 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                            SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                     ),
                     extraSpawnCosts = listOf(
@@ -1075,11 +1076,11 @@ class BiomeProvider(
                     listOf(
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
+                            SpawnerData(HAEntityTypes.NAUTILUS.get(), 10, 1, 2)
                         ),
                         Pair(
                             MobCategory.WATER_AMBIENT,
-                            MobSpawnSettings.SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
+                            SpawnerData(HAEntityTypes.UMBRELLA_OCTOPUS.get(), 7, 1, 1)
                         ),
                     ),
                     extraSpawnCosts = listOf(
@@ -1106,7 +1107,7 @@ class BiomeProvider(
             waterColor: Int,
             waterFogColor: Int,
             grassColor: Int,
-            extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>> = ArrayList(),
+            extraSpawns: List<Pair<MobCategory, SpawnerData>> = ArrayList(),
             extraSpawnCosts: List<Triple<EntityType<*>, Double, Double>> = emptyList(),
             extraFeatures: (BiomeGenerationSettings.Builder.() -> Unit)? = null,
         ): Biome {
@@ -1130,9 +1131,11 @@ class BiomeProvider(
                 .specialEffects(
                     createStandardBiomeEffects()
                         .waterColor(waterColor)
-                        .waterFogColor(waterFogColor)
                         .build()
                 )
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, waterFogColor)
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xC0D8FF)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0x78A7FF)
                 .build()
         }
 
@@ -1148,13 +1151,17 @@ class BiomeProvider(
         }
 
         fun makeSpawnSettings(
-            extraSpawns: List<Pair<MobCategory, MobSpawnSettings.SpawnerData>>,
+            extraSpawns: List<Pair<MobCategory, SpawnerData>>,
             extraSpawnCosts: List<Triple<EntityType<*>, Double, Double>>
         ): MobSpawnSettings {
             val builder = makeDefaultSpawnSettings()
 
             for ((category, spawner) in extraSpawns) {
-                builder.addSpawn(category, spawner)
+                builder.addSpawn(
+                    category,
+                    spawner.weight,
+                    MobSpawnSettings.SpawnerData(spawner.type, spawner.minCount, spawner.maxCount)
+                )
             }
 
             for ((entity, charge, budget) in extraSpawnCosts) {
@@ -1181,30 +1188,35 @@ class BiomeProvider(
         }
 
         fun addDefaultAmbientSpawns(builder: MobSpawnSettings.Builder) {
-            builder.addSpawn(MobCategory.AMBIENT, MobSpawnSettings.SpawnerData(EntityType.BAT, 10, 8, 8))
+            builder.addSpawn(MobCategory.AMBIENT, 10, MobSpawnSettings.SpawnerData(EntityType.BAT, 8, 8))
             builder.addSpawn(
                 MobCategory.UNDERGROUND_WATER_CREATURE,
-                MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 5, 2, 5)
+                5,
+                MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 2, 5)
             )
         }
 
         fun addDefaultMonsterSpawns(builder: MobSpawnSettings.Builder) {
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SPIDER, 100, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE, 95, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE_VILLAGER, 5, 1, 1))
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SKELETON, 100, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.CREEPER, 100, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.SLIME, 100, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 10, 1, 4))
-            builder.addSpawn(MobCategory.MONSTER, MobSpawnSettings.SpawnerData(EntityType.WITCH, 5, 1, 1))
+            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityType.SPIDER, 4, 4))
+            builder.addSpawn(MobCategory.MONSTER, 95, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE, 4, 4))
+            builder.addSpawn(MobCategory.MONSTER, 5, MobSpawnSettings.SpawnerData(EntityType.ZOMBIE_VILLAGER, 1, 1))
+            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityType.SKELETON, 4, 4))
+            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityType.CREEPER, 4, 4))
+            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityType.SLIME, 4, 4))
+            builder.addSpawn(MobCategory.MONSTER, 10, MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 1, 4))
+            builder.addSpawn(MobCategory.MONSTER, 5, MobSpawnSettings.SpawnerData(EntityType.WITCH, 1, 1))
         }
+
+        data class SpawnerData(
+            val type: EntityType<*>,
+            val weight: Int,
+            val minCount: Int,
+            val maxCount: Int,
+        )
 
         fun createStandardBiomeEffects(): BiomeSpecialEffects.Builder {
             return BiomeSpecialEffects.Builder()
                 .waterColor(0x3f76e4)
-                .waterFogColor(0x50533)
-                .fogColor(0xC0D8FF)
-                .skyColor(0x78A7FF)
         }
     }
 

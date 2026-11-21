@@ -1,53 +1,32 @@
 package dev.hybridlabs.aquatic.client.render.entity.mammal.layer
 
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.VertexConsumer
+import dev.hybridlabs.aquatic.client.model.HADataTickets
 import dev.hybridlabs.aquatic.client.model.entity.mammal.OrcaEntityModel
+import dev.hybridlabs.aquatic.client.render.entity.layer.HATextureLayer
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.texture.OverlayTexture
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseDolphinEntityRenderer
-import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer
-import software.bernie.geckolib.util.Color
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+import net.minecraft.resources.Identifier
 
 class OrcaSaddleEntityLayer(
-    renderer: BaseDolphinEntityRenderer<OrcaEntity>
-) : GeoRenderLayer<OrcaEntity>(renderer) {
+    renderer: BaseDolphinEntityRenderer<OrcaEntity, LivingEntityRenderState>
+) : HATextureLayer<OrcaEntity>(renderer) {
 
-    private fun getSaddleTexture(animatable: OrcaEntity, layer: String): ResourceLocation {
-        return (geoModel as OrcaEntityModel).getSaddleTextureResource(animatable, layer)
+    override fun addRenderData(
+        animatable: OrcaEntity,
+        relatedObject: Void?,
+        renderState: LivingEntityRenderState,
+        partialTick: Float
+    ) {
+        super.addRenderData(animatable, relatedObject, renderState, partialTick)
+        renderState.addGeckolibData(HADataTickets.SADDLE_NAME, animatable.getSaddleTextureName())
     }
 
-    override fun render(
-        poseStack: PoseStack,
-        animatable: OrcaEntity,
-        bakedModel: BakedGeoModel,
-        renderType: RenderType?,
-        bufferSource: MultiBufferSource,
-        buffer: VertexConsumer?,
-        partialTick: Float,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        if (animatable.getSaddleTextureName().isEmpty()) return
+    override fun layerTexture(renderState: LivingEntityRenderState): Identifier? {
+        val saddleName = renderState.getGeckolibData(HADataTickets.SADDLE_NAME) ?: return null
 
-        val saddleTexture = getSaddleTexture(animatable, animatable.getSaddleTextureName())
-        val saddleRenderType = RenderType.entityTranslucent(saddleTexture)
+        if (saddleName.isEmpty()) return null
 
-        getRenderer().reRender(
-            getDefaultBakedModel(animatable),
-            poseStack,
-            bufferSource,
-            animatable,
-            saddleRenderType,
-            bufferSource.getBuffer(saddleRenderType),
-            partialTick,
-            packedLight,
-            OverlayTexture.NO_OVERLAY,
-            Color.WHITE.argbInt
-        )
+        return (getGeoModel() as OrcaEntityModel).getSaddleTextureResource(renderState, saddleName)
     }
 }

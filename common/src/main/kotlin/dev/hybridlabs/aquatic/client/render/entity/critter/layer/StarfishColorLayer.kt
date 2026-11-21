@@ -1,61 +1,37 @@
 package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.VertexConsumer
+import dev.hybridlabs.hapi.client.model.getVariant
+
+import dev.hybridlabs.aquatic.client.model.HADataTickets
 import dev.hybridlabs.aquatic.client.model.entity.critter.StarfishEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.critter.StarfishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.layer.HATextureLayer
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.entity.LivingEntityRenderer
-import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer
-import software.bernie.geckolib.util.Color
-
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+import net.minecraft.resources.Identifier
 
 class StarfishColorLayer(
     renderer: StarfishEntityRenderer,
-) : GeoRenderLayer<StarfishEntity>(renderer) {
+) : HATextureLayer<StarfishEntity>(renderer, tinted = true) {
 
-
-    private fun getLayerTextureResource(animatable: StarfishEntity): ResourceLocation {
-        return (geoModel as StarfishEntityModel).getTextureResource(animatable)
-    }
-
-    override fun render(
-        poseStack: PoseStack,
+    override fun addRenderData(
         animatable: StarfishEntity,
-        bakedModel: BakedGeoModel,
-        renderType: RenderType?,
-        bufferSource: MultiBufferSource,
-        buffer: VertexConsumer?,
-        partialTick: Float,
-        packedLight: Int,
-        packedOverlay: Int
+        relatedObject: Void?,
+        renderState: LivingEntityRenderState,
+        partialTick: Float
     ) {
-        if (animatable.variant != StarfishEntity.Companion.Type.SMALL &&
-            animatable.variant != StarfishEntity.Companion.Type.MEDIUM) {
-            return
-        }
-
-        val layerTexture: ResourceLocation = getLayerTextureResource(animatable)
-        val tintRenderType = RenderType.entityTranslucent(layerTexture)
-
-        val color = Color.ofOpaque(animatable.starfishColor)
-
-        getRenderer().reRender(
-            getDefaultBakedModel(animatable),
-            poseStack,
-            bufferSource,
-            animatable,
-            tintRenderType,
-            bufferSource.getBuffer(tintRenderType),
-            partialTick,
-            packedLight,
-            LivingEntityRenderer.getOverlayCoords(animatable, 0.0f),
-            color.argbInt
-        )
+        super.addRenderData(animatable, relatedObject, renderState, partialTick)
+        renderState.addGeckolibData(HADataTickets.STARFISH_COLOR, animatable.starfishColor)
     }
 
+    override fun layerTexture(renderState: LivingEntityRenderState): Identifier? {
+        val variant = renderState.getVariant(StarfishEntity.Companion.Type.entries)
+
+        if (variant != StarfishEntity.Companion.Type.SMALL && variant != StarfishEntity.Companion.Type.MEDIUM) return null
+
+        return (getGeoModel() as StarfishEntityModel).getTextureResource(renderState)
+    }
+
+    override fun layerTint(renderState: LivingEntityRenderState): Int =
+        renderState.getGeckolibData(HADataTickets.STARFISH_COLOR) ?: WHITE
 }

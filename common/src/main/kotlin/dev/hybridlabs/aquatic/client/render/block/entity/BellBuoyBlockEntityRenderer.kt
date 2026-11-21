@@ -6,4 +6,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider
 import software.bernie.geckolib.renderer.GeoBlockRenderer
 
 class BellBuoyBlockEntityRenderer(context: BlockEntityRendererProvider.Context) :
-    GeoBlockRenderer<BellBuoyBlockEntity>(BellBuoyBlockEntityModel())
+    GeoBlockRenderer<BellBuoyBlockEntity, HABlockEntityRenderState>(BellBuoyBlockEntityModel()) {
+    override fun createRenderState(): HABlockEntityRenderState = HABlockEntityRenderState()
+}

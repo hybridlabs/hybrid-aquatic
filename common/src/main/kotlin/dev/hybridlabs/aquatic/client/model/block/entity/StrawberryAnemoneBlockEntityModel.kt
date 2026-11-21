@@ -1,27 +1,29 @@
 package dev.hybridlabs.aquatic.client.model.block.entity
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.entity.StrawberryAnemoneBlockEntity
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
 class StrawberryAnemoneBlockEntityModel : GeoModel<StrawberryAnemoneBlockEntity>() {
-    override fun getAnimationResource(entity: StrawberryAnemoneBlockEntity): ResourceLocation {
+    override fun getAnimationResource(entity: StrawberryAnemoneBlockEntity): Identifier {
         return ANIMATION_LOCATION
     }
 
-    override fun getModelResource(animatable: StrawberryAnemoneBlockEntity): ResourceLocation {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
         return MODEL_LOCATION
     }
 
-    override fun getTextureResource(entity: StrawberryAnemoneBlockEntity): ResourceLocation {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
         return TEXTURE_LOCATION
     }
 
     companion object {
-        val ANIMATION_LOCATION: ResourceLocation = CommonClass.locate("animations/anemone.animation.json")
-        val MODEL_LOCATION: ResourceLocation = CommonClass.locate("geo/strawberry_anemone.geo.json")
-        val TEXTURE_LOCATION: ResourceLocation = CommonClass.locate("textures/block/strawberry_anemone.png")
+        val ANIMATION_LOCATION: Identifier = CommonClass.locate("anemone")
+        val MODEL_LOCATION: Identifier = CommonClass.locate("strawberry_anemone")
+        val TEXTURE_LOCATION: Identifier = CommonClass.locate("textures/block/strawberry_anemone.png")
     }
 }

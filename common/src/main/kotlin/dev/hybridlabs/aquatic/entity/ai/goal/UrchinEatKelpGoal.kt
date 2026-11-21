@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
+import dev.hybridlabs.aquatic.util.HAMath
+
+import net.minecraft.world.entity.EntitySpawnReason
+
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
@@ -112,9 +116,9 @@ class UrchinEatKelpGoal(
             level.destroyBlock(posAbove, false)
 
             if (spawnUrchinOnNextBreak) {
-                val newUrchin = waterAnimal.type.create(level)
+                val newUrchin = waterAnimal.type.create(level, EntitySpawnReason.MOB_SUMMONED)
 
-                newUrchin?.moveTo(
+                newUrchin?.snapTo(
                     posAbove.x + 0.5,
                     posAbove.y.toDouble(),
                     posAbove.z + 0.5,
@@ -166,9 +170,9 @@ class UrchinEatKelpGoal(
             val motionZ = waterAnimal.random.nextGaussian() * 0.07
             val angle = ((0.0174532925 * waterAnimal.yBodyRot) + i1).toFloat()
 
-            val extraX = (radius * Mth.sin(Mth.PI + angle)).toDouble()
+            val extraX = (radius * HAMath.sin(Mth.PI + angle)).toDouble()
             val extraY = 0.8
-            val extraZ = (radius * Mth.cos(angle)).toDouble()
+            val extraZ = (radius * HAMath.cos(angle)).toDouble()
 
             val state = waterAnimal.level().getBlockState(target)
 

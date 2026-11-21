@@ -1,13 +1,16 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.fish.OceanSunfishEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 
 class OceanSunfishEntityModel : BaseFishEntityModel<OceanSunfishEntity>("hybrid_aquatic","ocean_sunfish") {
 
-    override fun getTextureResource(animatable: OceanSunfishEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(OceanSunfishEntity.Companion.Type.entries)!!) {
             OceanSunfishEntity.Companion.Type.OCEAN -> OCEAN_TEXTURE
             OceanSunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_TEXTURE
             OceanSunfishEntity.Companion.Type.SHARPTAIL -> SHARPTAIL_TEXTURE
@@ -15,8 +18,8 @@ class OceanSunfishEntityModel : BaseFishEntityModel<OceanSunfishEntity>("hybrid_
         }
     }
 
-    override fun getModelResource(animatable: OceanSunfishEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(OceanSunfishEntity.Companion.Type.entries)!!) {
             OceanSunfishEntity.Companion.Type.OCEAN -> SUNFISH_MODEL
             OceanSunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_MODEL
             OceanSunfishEntity.Companion.Type.HOODWINKER -> HOODWINKER_MODEL
@@ -24,7 +27,7 @@ class OceanSunfishEntityModel : BaseFishEntityModel<OceanSunfishEntity>("hybrid_
         }
     }
 
-    override fun getAnimationResource(animatable: OceanSunfishEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: OceanSunfishEntity): Identifier {
         return when (animatable.variant) {
             OceanSunfishEntity.Companion.Type.OCEAN -> SUNFISH_ANIMATION
             OceanSunfishEntity.Companion.Type.SHARPTAIL -> SUNFISH_ANIMATION
@@ -35,26 +38,26 @@ class OceanSunfishEntityModel : BaseFishEntityModel<OceanSunfishEntity>("hybrid_
 
     companion object {
         private val OCEAN_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/ocean_sunfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/ocean_sunfish.png")
         private val HOODWINKER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/hoodwinker_sunfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/hoodwinker_sunfish.png")
         private val SHARPTAIL_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/sharptail_sunfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/sharptail_sunfish.png")
         private val GIANT_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/giant_sunfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/ocean_sunfish/giant_sunfish.png")
 
         private val SUNFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/ocean_sunfish/ocean_sunfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/ocean_sunfish/ocean_sunfish")
         private val HOODWINKER_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/ocean_sunfish/hoodwinker_sunfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/ocean_sunfish/hoodwinker_sunfish")
         private val GIANT_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/ocean_sunfish/giant_sunfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/ocean_sunfish/giant_sunfish")
 
         private val SUNFISH_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/ocean_sunfish/ocean_sunfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/ocean_sunfish/ocean_sunfish")
         private val HOODWINKER_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/ocean_sunfish/hoodwinker_sunfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/ocean_sunfish/hoodwinker_sunfish")
         private val GIANT_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/ocean_sunfish/giant_sunfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/ocean_sunfish/giant_sunfish")
     }
 }

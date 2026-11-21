@@ -1,5 +1,11 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.world.entity.EntitySpawnReason
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
+import dev.hybridlabs.hapi.entity.base.VariantHolder
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.goal.CarpBreedGoal
@@ -14,7 +20,6 @@ import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseWaterAnimal
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -65,13 +70,13 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
             partner.variant == Type.KOI
         ) {
             return if (level.random.nextBoolean()) {
-                HAEntityTypes.GOLDFISH.get().create(level)
+                HAEntityTypes.GOLDFISH.get().create(level, EntitySpawnReason.MOB_SUMMONED)
             } else {
-                HAEntityTypes.CARP.get().create(level)
+                HAEntityTypes.CARP.get().create(level, EntitySpawnReason.MOB_SUMMONED)
             }
         }
 
-        return HAEntityTypes.CARP.get().create(level)
+        return HAEntityTypes.CARP.get().create(level, EntitySpawnReason.MOB_SUMMONED)
     }
 
     override fun getMaxSpawnClusterSize(): Int {
@@ -89,7 +94,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
@@ -115,7 +120,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
         val baby = this.getBreedOffspring(level, mate) ?: return
 
         baby.isBaby = true
-        baby.moveTo(this.x, this.y, this.z, 0.0f, 0.0f)
+        baby.snapTo(this.x, this.y, this.z, 0.0f, 0.0f)
 
         this.finalizeSpawnChildFromBreeding(level, mate)
 
@@ -158,6 +163,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
@@ -168,7 +174,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
         fun canSpawn(
             type: EntityType<out CarpEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            reason: EntitySpawnReason,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
@@ -195,7 +201,7 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
                     ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
-                fun byName(name: String?): Type {
+                fun byName(name: String): Type {
                     return CODEC.byName(name, COMMON) as Type
                 }
 
@@ -290,24 +296,22 @@ class CarpEntity(type: EntityType<out CarpEntity>, world: Level) : BaseFishEntit
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putString("Type", this.variant.serializedName)
-        compound.putInt("pattern_texture", this.patternTexture.id)
-        super.addAdditionalSaveData(compound)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.putString("Type", this.variant.serializedName)
+        output.putInt("pattern_texture", this.patternTexture.id)
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.variant = Type.byName(compound.getString("Type"))
-        if (compound.contains("pattern_texture")) this.patternTexture =
-            PatternTextures.byId(compound.getInt("pattern_texture"))
-        super.readAdditionalSaveData(compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        this.variant = Type.byName(input.getStringOr("Type", this.variant.serializedName))
+        if (input.getInt("pattern_texture").isPresent) this.patternTexture =
+            PatternTextures.byId(input.getIntOr("pattern_texture", this.patternTexture.id))
+        super.readAdditionalSaveData(input)
     }
 
-    override fun getVariant(): Type {
-        return Type.fromId((entityData.get(TYPE) as Int))
-    }
-
-    override fun setVariant(type: Type) {
-        entityData.set(TYPE, type.id)
-    }
+    override var variant: Type
+        get() = Type.fromId((entityData.get(TYPE) as Int))
+        set(value) {
+            entityData.set(TYPE, value.id)
+        }
 }

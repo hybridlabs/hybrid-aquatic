@@ -6,7 +6,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-
 class LionsManeJellyfishEntity(entityType: EntityType<out LionsManeJellyfishEntity>, world: Level) :
     BaseJellyfishEntity(entityType, world, true, 0) {
 
@@ -17,6 +16,7 @@ class LionsManeJellyfishEntity(entityType: EntityType<out LionsManeJellyfishEnti
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 8.0)
                 .add(Attributes.MOVEMENT_SPEED, 1.2)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)

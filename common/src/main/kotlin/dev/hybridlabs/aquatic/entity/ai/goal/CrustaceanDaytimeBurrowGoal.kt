@@ -24,7 +24,7 @@ class CrustaceanDaytimeBurrowGoal(
             !crustacean.onGround() ||
             crustacean.fromCreatureNet ||
             crustacean.hasCustomName() ||
-            crustacean.level().isNight ||
+            crustacean.level().isDarkOutside() ||
             crustacean.level().getNearestPlayer(crustacean, 32.0) == null) {
             return false
         }

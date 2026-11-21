@@ -1,65 +1,56 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
+import software.bernie.geckolib.renderer.base.BoneSnapshots
+
+import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
+
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.mammal.HippoEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseMammalEntityModel
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.state.AnimationTest
 import software.bernie.geckolib.constant.DataTickets
 
 class HippoEntityModel : BaseMammalEntityModel<HippoEntity>("hybrid_aquatic", "hippo") {
 
     companion object {
         private val HIPPO_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/hippo/hippo.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/hippo/hippo.png")
         private val BABY_HIPPO_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/hippo/baby_hippo.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/hippo/baby_hippo.png")
 
         private val HIPPO_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/hippo/hippo.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "mammal/hippo/hippo")
         private val BABY_HIPPO_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/hippo/baby_hippo.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "mammal/hippo/baby_hippo")
 
         private val HIPPO_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath(
+            Identifier.fromNamespaceAndPath(
                 "hybrid_aquatic",
-                "animations/entity/mammal/hippo/hippo.animation.json"
+                "entity/mammal/hippo/hippo"
             )
     }
 
-    override fun getTextureResource(animatable: HippoEntity): ResourceLocation {
-        return if (animatable.isBaby) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             BABY_HIPPO_TEXTURE
         } else {
             HIPPO_TEXTURE
         }
     }
 
-
-    override fun getModelResource(animatable: HippoEntity): ResourceLocation {
-        return if (animatable.isBaby) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             BABY_HIPPO_MODEL
         } else {
             HIPPO_MODEL
         }
     }
 
-    override fun getAnimationResource(animatable: HippoEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: HippoEntity): Identifier {
         return HIPPO_ANIMATION
     }
 
-    override fun setCustomAnimations(
-        animatable: HippoEntity,
-        instanceId: Long,
-        animationState: AnimationState<HippoEntity>,
-    ) {
-        val head = animationProcessor.getBone("head")
-
-        if (head != null) {
-            val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
-
-            head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
-            head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
-        }
-    }
 }

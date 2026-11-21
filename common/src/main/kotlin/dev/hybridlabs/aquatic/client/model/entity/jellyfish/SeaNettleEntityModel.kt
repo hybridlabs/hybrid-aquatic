@@ -1,46 +1,47 @@
 package dev.hybridlabs.aquatic.client.model.entity.jellyfish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.jellyfish.SeaNettleEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseJellyfishEntityModel
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.client.renderer.rendertype.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
+import net.minecraft.resources.Identifier
 
 class SeaNettleEntityModel : BaseJellyfishEntityModel<SeaNettleEntity>("hybrid_aquatic", "sea_nettle") {
-    override fun getRenderType(animatable: SeaNettleEntity, texture: ResourceLocation): RenderType {
-        return RenderType.entityTranslucent(texture)
-    }
 
     companion object {
         private val PACIFIC_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/pacific_sea_nettle.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/pacific_sea_nettle.png")
         private val COMPASS_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/compass_jellyfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/jellyfish/sea_nettle/compass_jellyfish.png")
 
         private val PACIFIC_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/jellyfish/sea_nettle/sea_nettle.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "jellyfish/sea_nettle/sea_nettle")
         private val COMPASS_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/jellyfish/sea_nettle/compass_jellyfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "jellyfish/sea_nettle/compass_jellyfish")
 
         private val PACIFIC_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/sea_nettle.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/jellyfish/sea_nettle/sea_nettle")
         private val COMPASS_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/jellyfish/sea_nettle/compass_jellyfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/jellyfish/sea_nettle/compass_jellyfish")
     }
-    override fun getTextureResource(animatable: SeaNettleEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(SeaNettleEntity.Companion.Type.entries)!!) {
             SeaNettleEntity.Companion.Type.PACIFIC -> PACIFIC_TEXTURE
             SeaNettleEntity.Companion.Type.COMPASS -> COMPASS_TEXTURE
         }
     }
 
-    override fun getModelResource(animatable: SeaNettleEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(SeaNettleEntity.Companion.Type.entries)!!) {
             SeaNettleEntity.Companion.Type.PACIFIC -> PACIFIC_MODEL
             SeaNettleEntity.Companion.Type.COMPASS -> COMPASS_MODEL
         }
     }
 
-    override fun getAnimationResource(animatable: SeaNettleEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: SeaNettleEntity): Identifier {
         return when (animatable.variant) {
             SeaNettleEntity.Companion.Type.PACIFIC -> PACIFIC_ANIMATION
             SeaNettleEntity.Companion.Type.COMPASS -> COMPASS_ANIMATION

@@ -9,6 +9,7 @@ import dev.hybridlabs.aquatic.network.FishingBobberPayload;
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import dev.hybridlabs.aquatic.utils.HASpawnGroup;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.entity.*;
@@ -17,9 +18,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 import org.jetbrains.annotations.NotNull;
@@ -52,8 +57,9 @@ public class FabricPlatformHelper implements PlatformHelper {
     public <T extends Mob> Supplier<SpawnEggItem> registerSpawnEggItem(@NotNull String name,
                                                                        Supplier<EntityType<T>> entityType,
                                                                        int backgroundColor, int highlightColor) {
-        return CommonClass.ITEMS.register(name, () -> new SpawnEggItem(entityType.get(), backgroundColor,
-                highlightColor, new Item.Properties()));
+        return CommonClass.ITEMS.register(name, () -> new SpawnEggItem(new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, CommonClass.locate(name)))
+                .spawnEgg(entityType.get())));
     }
 
     @Override
@@ -101,6 +107,19 @@ public class FabricPlatformHelper implements PlatformHelper {
             return new GiantGreenAnemoneBlockItem(block, properties);
         }
         return new BlockItem(block, properties);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(
+            BlockEntityType.BlockEntitySupplier<? extends T> factory, Block... blocks) {
+        return FabricBlockEntityTypeBuilder.<T>create(factory::create, blocks).build();
+    }
+
+    @Override
+    public <T extends BlockEntity> void addBlockEntityTypeBlocks(BlockEntityType<T> type, Block... blocks) {
+        for (Block block : blocks) {
+            ((net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType) type).addSupportedBlock(block);
+        }
     }
 
     @Override

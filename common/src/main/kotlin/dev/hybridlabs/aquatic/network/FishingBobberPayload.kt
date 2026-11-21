@@ -5,12 +5,12 @@ import net.minecraft.network.RegistryFriendlyByteBuf
 import net.minecraft.network.codec.ByteBufCodecs
 import net.minecraft.network.codec.StreamCodec
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.item.ItemStack
 
 data class FishingBobberPayload(val id: Int, val lure: ItemStack) : CustomPacketPayload {
     companion object {
-        val FISHING_BOBBER_PAYLOAD_TYPE: ResourceLocation = CommonClass.locate("fishing_bobber")
+        val FISHING_BOBBER_PAYLOAD_TYPE: Identifier = CommonClass.locate("fishing_bobber")
         val type: CustomPacketPayload.Type<FishingBobberPayload> = CustomPacketPayload.Type(FISHING_BOBBER_PAYLOAD_TYPE)
         val CODEC: StreamCodec<RegistryFriendlyByteBuf, FishingBobberPayload> =
             StreamCodec.composite(

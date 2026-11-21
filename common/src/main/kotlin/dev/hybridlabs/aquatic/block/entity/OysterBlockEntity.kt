@@ -1,5 +1,8 @@
 package dev.hybridlabs.aquatic.block.entity
 
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.block.OysterBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -70,14 +73,14 @@ class OysterBlockEntity(
         }
     }
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
-        tag.putInt("pearl_timer", pearlTimer)
+    override fun saveAdditional(output: ValueOutput) {
+        super.saveAdditional(output)
+        output.putInt("pearl_timer", pearlTimer)
     }
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
-        pearlTimer = tag.getInt("pearl_timer")
+    override fun loadAdditional(input: ValueInput) {
+        super.loadAdditional(input)
+        pearlTimer = input.getIntOr("pearl_timer", pearlTimer)
     }
 
     companion object {

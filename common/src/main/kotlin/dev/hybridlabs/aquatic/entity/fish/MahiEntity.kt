@@ -1,5 +1,8 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
@@ -8,7 +11,6 @@ import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -16,9 +18,9 @@ import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.SpawnGroupData
-import net.minecraft.world.entity.VariantHolder
+import dev.hybridlabs.hapi.entity.base.VariantHolder
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
@@ -46,7 +48,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData)
@@ -54,14 +56,14 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
         val variant = Type.entries.random(Random).id
         this.variant = Type.fromId(variant)
 
-        if (spawnReason == MobSpawnType.CHUNK_GENERATION || spawnReason == MobSpawnType.NATURAL) {
+        if (spawnReason == EntitySpawnReason.CHUNK_GENERATION || spawnReason == EntitySpawnReason.NATURAL) {
             val fishCount = (this.maxSpawnClusterSize * this.random.nextFloat()).toInt()
             if (fishCount > 0 && !level().isClientSide()) {
                 for (i in 0 until  fishCount) {
                     val distance = 1.5f
                     val entity = MahiEntity(HAEntityTypes.MAHI.get(), this.level())
                     entity.variant = this.variant
-                    entity.moveTo(
+                    entity.snapTo(
                         this.x + this.random.nextFloat() * distance,
                         this.y + this.random.nextFloat() * distance,
                         this.z + this.random.nextFloat() * distance
@@ -93,6 +95,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.65)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
@@ -119,7 +122,7 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
                     ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
-                fun byName(name: String?): Type {
+                fun byName(name: String): Type {
                     return CODEC.byName(name, MAHI) as Type
                 }
 
@@ -135,21 +138,19 @@ class MahiEntity(type: EntityType<out MahiEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(compound)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.variant = Type.byName(compound.getString("Type"))
-        super.readAdditionalSaveData(compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        this.variant = Type.byName(input.getStringOr("Type", this.variant.serializedName))
+        super.readAdditionalSaveData(input)
     }
 
-    override fun getVariant(): Type {
-        return Type.fromId((entityData.get(TYPE) as Int))
-    }
-
-    override fun setVariant(type: Type) {
-        entityData.set(TYPE, type.id)
-    }
+    override var variant: Type
+        get() = Type.fromId((entityData.get(TYPE) as Int))
+        set(value) {
+            entityData.set(TYPE, value.id)
+        }
 }

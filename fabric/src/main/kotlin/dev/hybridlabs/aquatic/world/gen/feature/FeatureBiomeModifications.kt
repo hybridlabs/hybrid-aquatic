@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.tags.BiomeTags
 import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.levelgen.GenerationStep
@@ -19,7 +19,7 @@ object FeatureBiomeModifications {
     // Vanilla vegetation that Hybrid Aquatic's own ocean features replace.
     // NeoForge removes the same features with the biome modifiers in data/hybrid_aquatic/neoforge/biome_modifier.
     private val DEEP_OCEAN_REMOVALS = placedFeatures(
-        "seagrass_deep_cold", "seagrass_deep_warm", "seagrass_deep", "seagrass_simple", "kelp_cold", "kelp_warm"
+        "seagrass_deep_cold", "seagrass_deep_warm", "seagrass_deep", "seagrass_normal", "kelp_cold", "kelp_warm"
     )
     private val WARM_OCEAN_REMOVALS = placedFeatures("warm_ocean_vegetation")
 
@@ -43,5 +43,5 @@ object FeatureBiomeModifications {
     }
 
     private fun placedFeatures(vararg paths: String): List<ResourceKey<PlacedFeature>> =
-        paths.map { ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.withDefaultNamespace(it)) }
+        paths.map { ResourceKey.create(Registries.PLACED_FEATURE, Identifier.withDefaultNamespace(it)) }
 }

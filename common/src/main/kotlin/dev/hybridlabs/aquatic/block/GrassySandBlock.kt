@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.BlockGetter
+
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.registries.Registries
@@ -18,8 +20,12 @@ import net.minecraft.world.level.block.state.BlockState
 class GrassySandBlock(properties: Properties) :
     FallingBlock(properties), BonemealableBlock {
 
-    override fun codec(): MapCodec<out FallingBlock> {
-        return CODEC
+    override fun codec(): MapCodec<FallingBlock> {
+        return CODEC as MapCodec<FallingBlock>
+    }
+
+    override fun getDustColor(state: BlockState, level: BlockGetter, pos: BlockPos): Int {
+        return 0xC7B47A
     }
 
     override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState): Boolean {
@@ -42,8 +48,8 @@ class GrassySandBlock(properties: Properties) :
         val startPos = pos.above()
 
         val optional = level.registryAccess()
-            .registryOrThrow(Registries.PLACED_FEATURE)
-            .getHolder(AquaticPlacements.SEAGRASS_WARM)
+            .lookupOrThrow(Registries.PLACED_FEATURE)
+            .get(AquaticPlacements.SEAGRASS_WARM)
 
         if (!optional.isPresent) return
 

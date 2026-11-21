@@ -1,22 +1,24 @@
 package dev.hybridlabs.aquatic.client.model.entity.misc
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.projectile.StarfishProjectileEntity
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import software.bernie.geckolib.model.GeoModel
 
 class StarfishProjectileEntityModel :
     GeoModel<StarfishProjectileEntity>() {
 
-    override fun getModelResource(entity: StarfishProjectileEntity): ResourceLocation {
-        return CommonClass.locate("geo/misc/starfish_projectile.geo.json")
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return CommonClass.locate("misc/starfish_projectile")
     }
 
-    override fun getTextureResource(entity: StarfishProjectileEntity): ResourceLocation {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
         return CommonClass.locate("textures/entity/misc/starfish_projectile/starfish_projectile.png")
     }
 
-    override fun getAnimationResource(entity: StarfishProjectileEntity): ResourceLocation {
-        return CommonClass.locate("animations/entity/misc/starfish_projectile.animation.json")
+    override fun getAnimationResource(entity: StarfishProjectileEntity): Identifier {
+        return CommonClass.locate("entity/misc/starfish_projectile")
     }
 }

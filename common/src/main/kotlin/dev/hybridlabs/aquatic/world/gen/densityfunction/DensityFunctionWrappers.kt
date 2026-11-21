@@ -13,7 +13,7 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.resources.FileToIdConverter
 import net.minecraft.resources.RegistryOps
 import net.minecraft.resources.ResourceKey
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.KeyDispatchDataCodec
 import net.minecraft.world.level.levelgen.DensityFunction
@@ -32,11 +32,11 @@ object DensityFunctionWrappers {
     private val DENSITY_FUNCTION_TYPES = CommonClass.DENSITY_FUNCTION_TYPES
     val WRAPPED_MARKER = DENSITY_FUNCTION_TYPES.register("wrapped_marker") { WrappedMarker.CODEC.codec() }
 
-    private data class Wrapper(val targetFunction: ResourceLocation, val wrapperFunction: Holder<DensityFunction>) {
+    private data class Wrapper(val targetFunction: Identifier, val wrapperFunction: Holder<DensityFunction>) {
         companion object {
             val CODEC: Codec<Wrapper> = RecordCodecBuilder.create { instance ->
                 instance.group(
-                    ResourceLocation.CODEC.fieldOf("target_function").forGetter(Wrapper::targetFunction),
+                    Identifier.CODEC.fieldOf("target_function").forGetter(Wrapper::targetFunction),
                     DensityFunction.CODEC.fieldOf("wrapper_function").forGetter(Wrapper::wrapperFunction),
                 ).apply(instance, ::Wrapper)
             }
@@ -46,7 +46,7 @@ object DensityFunctionWrappers {
     @JvmStatic
     fun apply(server: MinecraftServer) {
         val ops = RegistryOps.create(JsonOps.INSTANCE, server.registryAccess())
-        val densityFunctions = server.registryAccess().registryOrThrow(Registries.DENSITY_FUNCTION)
+        val densityFunctions = server.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION)
 
         WRAPPER_FILES.listMatchingResources(server.resourceManager).toSortedMap().forEach { (file, resource) ->
             val id = WRAPPER_FILES.fileToId(file)
@@ -54,7 +54,7 @@ object DensityFunctionWrappers {
             val wrapper = Wrapper.CODEC.parse(ops, json)
                 .getOrThrow { error -> IllegalStateException("Invalid density function wrapper $id: $error") }
 
-            val target = densityFunctions.getHolder(ResourceKey.create(Registries.DENSITY_FUNCTION, wrapper.targetFunction))
+            val target = densityFunctions.get(ResourceKey.create(Registries.DENSITY_FUNCTION, wrapper.targetFunction))
                 .orElseThrow { IllegalStateException("Density function wrapper $id targets unknown density function ${wrapper.targetFunction}") }
 
             val wrapped = target.value()

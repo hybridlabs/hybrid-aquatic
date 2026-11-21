@@ -15,27 +15,39 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 import java.util.Locale;
 
 public class ForgePlatformHelper implements PlatformHelper {
+
+    private static final Map<BlockEntityType<?>, List<Block>> PENDING_VALID_BLOCKS = new HashMap<>();
+    private static boolean validBlocksListenerRegistered;
 
     public static IEventBus getEventBus() {
         final ModContainer cont =
@@ -58,7 +70,7 @@ public class ForgePlatformHelper implements PlatformHelper {
     @Override
     public boolean isDevelopmentEnvironment() {
 
-        return !FMLLoader.isProduction();
+        return !FMLEnvironment.isProduction();
     }
 
     @Override
@@ -69,12 +81,9 @@ public class ForgePlatformHelper implements PlatformHelper {
             int highlightColor) {
         return CommonClass.ITEMS.register(
                 name,
-                () ->
-                        new DeferredSpawnEggItem(
-                                entityType,
-                                backgroundColor,
-                                highlightColor,
-                                new Item.Properties()));
+                () -> new SpawnEggItem(new Item.Properties()
+                        .setId(ResourceKey.create(Registries.ITEM, CommonClass.locate(name)))
+                        .spawnEgg(entityType.get())));
     }
 
     @Override
@@ -124,6 +133,31 @@ public class ForgePlatformHelper implements PlatformHelper {
             return new GiantGreenAnemoneBlockItem(block, properties);
         }
         return new BlockItem(block, properties);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(
+            BlockEntityType.BlockEntitySupplier<? extends T> factory, Block... blocks) {
+        return new BlockEntityType<>(factory, java.util.Set.of(blocks));
+    }
+
+    @Override
+    public <T extends BlockEntity> void addBlockEntityTypeBlocks(BlockEntityType<T> type, Block... blocks) {
+        registerValidBlocksListener();
+        PENDING_VALID_BLOCKS.computeIfAbsent(type, blockEntityType -> new ArrayList<>())
+                .addAll(Arrays.asList(blocks));
+    }
+
+    private static void registerValidBlocksListener() {
+        if (validBlocksListenerRegistered) {
+            return;
+        }
+        validBlocksListenerRegistered = true;
+        getEventBus().addListener((BlockEntityTypeAddBlocksEvent event) -> {
+            PENDING_VALID_BLOCKS.forEach(
+                    (type, blocks) -> event.modify(type, blocks.toArray(new Block[0])));
+            PENDING_VALID_BLOCKS.clear();
+        });
     }
 
     @Override

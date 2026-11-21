@@ -5,12 +5,13 @@ import net.minecraft.client.Minecraft
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.projectile.FishingHook
 import net.minecraft.world.item.ItemStack
+import net.neoforged.neoforge.client.network.ClientPacketDistributor
 import net.neoforged.neoforge.network.PacketDistributor
 import net.neoforged.neoforge.network.handling.IPayloadContext
 
 object HybridAquaticNetworkingForge {
     fun sendHookPacket(entityId: Int, entityData: ItemStack) {
-        PacketDistributor.sendToServer(FishingBobberPayload(entityId, entityData))
+        ClientPacketDistributor.sendToServer(FishingBobberPayload(entityId, entityData))
     }
 
     fun sendClientHookPacket(player: ServerPlayer, entityId: Int, entityData: ItemStack) {

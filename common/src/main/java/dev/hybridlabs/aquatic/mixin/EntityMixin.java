@@ -22,6 +22,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -55,16 +61,6 @@ public class EntityMixin {
                     target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
     )
     private boolean decorativeBubbleColumn_getBlockSpeedFactorParity(BlockState instance, Block block, Operation<Boolean> original) {
-        return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
-    }
-
-    @WrapOperation(
-            method = "isInBubbleColumn",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
-    )
-    private boolean decorativeBubbleColumn_isInBubbleColumnParity(BlockState instance, Block block, Operation<Boolean> original) {
         return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
     }
 
@@ -127,5 +123,30 @@ public class EntityMixin {
                 && chest.is(HAItems.INSTANCE.getREINFORCED_DIVING_SUIT().get())
                 && legs.is(HAItems.INSTANCE.getREINFORCED_DIVING_LEGGINGS().get())
                 && boots.is(HAItems.INSTANCE.getREINFORCED_DIVING_BOOTS().get());
+    }
+
+    /**
+     * Marks the player as recently hurt when a shark is close by, so the custom hurt overlay plays.
+     */
+    @Inject(method = "hurt", at = @At("HEAD"))
+    private void hybrid$markHurtNearShark(DamageSource source, float amount, CallbackInfo ci) {
+        if (!((Object) this instanceof Player player)) return;
+
+        if (player.isInWater() && player.level() instanceof ServerLevel serverLevel) {
+            LivingEntity shark = serverLevel.getNearestEntity(
+                    BaseSharkEntity.class,
+                    TargetingConditions.forNonCombat()
+                            .range(32)
+                            .selector((target, level) -> target.isUnderWater()),
+                    player,
+                    player.getX(),
+                    player.getEyeY(),
+                    player.getZ(),
+                    player.getBoundingBox().inflate(16));
+
+            if (shark != null) {
+                ((CustomPlayerEntityData) player).setHybridHurtTime(200);
+            }
+        }
     }
 }

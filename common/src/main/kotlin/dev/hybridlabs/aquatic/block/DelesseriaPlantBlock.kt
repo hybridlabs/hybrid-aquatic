@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.LivingEntity
+
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -32,7 +34,7 @@ class DelesseriaPlantBlock(settings: Properties) :
     }
 
     override fun canPlaceLiquid(
-        p0: Player?,
+        p0: LivingEntity?,
         world: BlockGetter,
         pos: BlockPos,
         state: BlockState,
@@ -50,8 +52,8 @@ class DelesseriaPlantBlock(settings: Properties) :
         return false
     }
 
-    override fun codec(): MapCodec<out GrowingPlantBodyBlock> {
-        return CODEC
+    override fun codec(): MapCodec<GrowingPlantBodyBlock> {
+        return CODEC as MapCodec<GrowingPlantBodyBlock>
     }
 
     companion object {

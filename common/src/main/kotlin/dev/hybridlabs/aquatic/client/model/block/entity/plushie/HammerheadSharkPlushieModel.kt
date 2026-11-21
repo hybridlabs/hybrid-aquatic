@@ -16,7 +16,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * The model for the Hammerhead Shark Blahaj Plushie.
  * @see PlushieBlock.Variant.HAMMERHEAD_SHARK
  */
-class HammerheadSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+class HammerheadSharkPlushieModel(root: ModelPart) : PlushieModel(root) {
     override val jaw: ModelPart = root.getChild(JAW)
 
     companion object {

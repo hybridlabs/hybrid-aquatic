@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.LivingEntity
+
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -16,6 +18,7 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BucketPickup
@@ -66,18 +69,20 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
 
     override fun updateShape(
         state: BlockState,
-        facing: Direction,
-        facingState: BlockState,
-        level: LevelAccessor,
+        level: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         currentPos: BlockPos,
-        facingPos: BlockPos
+        facing: Direction,
+        facingPos: BlockPos,
+        facingState: BlockState,
+        random: RandomSource
     ): BlockState {
-        level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
+        scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
         if (!state.canSurvive(level, currentPos) || facing == Direction.DOWN || facing == Direction.UP && !facingState.`is`(HABlocks.BUBBLE_NET.get()) && canExistIn(facingState)) {
-            level.scheduleTick(currentPos, this, CHECK_PERIOD)
+            scheduledTickAccess.scheduleTick(currentPos, this, CHECK_PERIOD)
         }
 
-        return super.updateShape(state, facing, facingState, level, currentPos, facingPos)
+        return super.updateShape(state, level, scheduledTickAccess, currentPos, facing, facingPos, facingState, random)
     }
 
     override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
@@ -93,12 +98,12 @@ class BubbleNetBlock(settings: Properties): Block(settings), BucketPickup {
         return RenderShape.INVISIBLE
     }
 
-    override fun pickupBlock(p0: Player?, level: LevelAccessor, pos: BlockPos, state: BlockState): ItemStack {
+    override fun pickupBlock(p0: LivingEntity?, level: LevelAccessor, pos: BlockPos, state: BlockState): ItemStack {
         level.setBlock(pos, Blocks.AIR.defaultBlockState(), 11)
         return ItemStack(Items.WATER_BUCKET)
     }
 
-    override fun getPickupSound(): Optional<SoundEvent?> {
+    override fun getPickupSound(): Optional<SoundEvent> {
         return Fluids.WATER.pickupSound
     }
 

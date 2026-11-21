@@ -11,7 +11,7 @@ import dev.hybridlabs.aquatic.client.model.block.entity.plushie.HammerheadSharkP
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.ThresherSharkPlushieModel
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.TigerSharkPlushieModel
 import dev.hybridlabs.aquatic.client.model.block.entity.plushie.WhaleSharkPlushieModel
-import net.minecraft.client.model.SkullModelBase
+import net.minecraft.client.model.`object`.skull.SkullModelBase
 import net.minecraft.client.model.geom.EntityModelSet
 import net.minecraft.client.model.geom.ModelLayerLocation
 import net.minecraft.world.level.block.SkullBlock
@@ -34,46 +34,21 @@ object HAEntityModelLayers {
     }
 
     /**
-     * Injects Plushie models into the given [builder].
-     * @see dev.hybridlabs.aquatic.mixin.client.SkullBlockEntityModelMixin
+     * Creates the skull model for a plushie variant, used by the skull renderer.
      */
-    fun injectModels(
-        modelLoader: EntityModelSet, builder: ImmutableMap.Builder<SkullBlock.Type, SkullModelBase>
-    ) {
-        builder.put(
-            PlushieBlock.Variant.BASKING_SHARK, BaskingSharkPlushieModel(modelLoader.bakeLayer(
-                BASKING_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.BULL_SHARK, BullSharkPlushieModel(modelLoader.bakeLayer(
-                BULL_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.FRILLED_SHARK, FrilledSharkPlushieModel(modelLoader.bakeLayer(
-                FRILLED_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.GREAT_WHITE_SHARK,
-            GreatWhiteSharkPlushieModel(modelLoader.bakeLayer(
-                GREAT_WHITE_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.HAMMERHEAD_SHARK,
-            HammerheadSharkPlushieModel(modelLoader.bakeLayer(
-                HAMMERHEAD_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.THRESHER_SHARK,
-            ThresherSharkPlushieModel(modelLoader.bakeLayer(
-                THRESHER_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.TIGER_SHARK, TigerSharkPlushieModel(modelLoader.bakeLayer(
-                TIGER_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.WHALE_SHARK, WhaleSharkPlushieModel(modelLoader.bakeLayer(
-                WHALE_SHARK_PLUSHIE))
-        )
+    fun createSkullModel(modelLoader: EntityModelSet, type: SkullBlock.Type): SkullModelBase? {
+        if (type !is PlushieBlock.Variant) return null
+
+        return when (type) {
+            PlushieBlock.Variant.BASKING_SHARK -> BaskingSharkPlushieModel(modelLoader.bakeLayer(BASKING_SHARK_PLUSHIE))
+            PlushieBlock.Variant.BULL_SHARK -> BullSharkPlushieModel(modelLoader.bakeLayer(BULL_SHARK_PLUSHIE))
+            PlushieBlock.Variant.FRILLED_SHARK -> FrilledSharkPlushieModel(modelLoader.bakeLayer(FRILLED_SHARK_PLUSHIE))
+            PlushieBlock.Variant.GREAT_WHITE_SHARK -> GreatWhiteSharkPlushieModel(modelLoader.bakeLayer(GREAT_WHITE_SHARK_PLUSHIE))
+            PlushieBlock.Variant.HAMMERHEAD_SHARK -> HammerheadSharkPlushieModel(modelLoader.bakeLayer(HAMMERHEAD_SHARK_PLUSHIE))
+            PlushieBlock.Variant.THRESHER_SHARK -> ThresherSharkPlushieModel(modelLoader.bakeLayer(THRESHER_SHARK_PLUSHIE))
+            PlushieBlock.Variant.TIGER_SHARK -> TigerSharkPlushieModel(modelLoader.bakeLayer(TIGER_SHARK_PLUSHIE))
+            PlushieBlock.Variant.WHALE_SHARK -> WhaleSharkPlushieModel(modelLoader.bakeLayer(WHALE_SHARK_PLUSHIE))
+            else -> null
+        }
     }
 }

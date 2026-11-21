@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
@@ -66,7 +68,7 @@ open class SharkAttackGoal(
             false
         } else if (!this.followingTargetEvenIfNotSeen) {
             !shark.navigation.isDone
-        } else if (!shark.isWithinRestriction(livingEntity.blockPosition())) {
+        } else if (!shark.isWithinHome(livingEntity.blockPosition())) {
             false
         } else {
             livingEntity !is Player || !livingEntity.isSpectator && !livingEntity.isCreative
@@ -85,7 +87,7 @@ open class SharkAttackGoal(
 
     override fun stop() {
         val livingEntity = shark.target
-        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
+        if (livingEntity != null && !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
             shark.target = null
         }
 
@@ -141,7 +143,7 @@ open class SharkAttackGoal(
         if (this.canPerformAttack(enemy)) {
             this.resetAttackCooldown()
             shark.swing(InteractionHand.MAIN_HAND)
-            shark.doHurtTarget(enemy)
+            (shark.level() as? ServerLevel)?.let { shark.doHurtTarget(it, enemy) }
             if (!enemy.isBlocking) {
                 enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), 200, 0), shark)
             }
@@ -150,7 +152,7 @@ open class SharkAttackGoal(
 
             val hasShield = enemy.mainHandItem.`is`(Items.SHIELD) || enemy.offhandItem.`is`(Items.SHIELD)
             if (hasShield && enemy.isBlocking) {
-                shark.spawnAtLocation(HAItems.SHARK_TOOTH.get())
+                (shark.level() as? ServerLevel)?.let { shark.spawnAtLocation(it, HAItems.SHARK_TOOTH.get()) }
             }
         }
     }

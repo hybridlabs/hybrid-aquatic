@@ -18,7 +18,7 @@ class BrineFluidBlock(fluid: FlowingFluid, properties: Properties) : LiquidBlock
 
     override fun animateTick(state: BlockState, level: Level, pos: BlockPos, random: RandomSource) {
         val blockpos = pos.above()
-        if (level.getBlockState(blockpos).fluidState.`is`(FluidTags.WATER) && !level.getBlockState(blockpos).isSolidRender(level, blockpos)) {
+        if (level.getBlockState(blockpos).fluidState.`is`(FluidTags.WATER) && !level.getBlockState(blockpos).isSolidRender()) {
             if (random.nextInt(100) == 0) {
                 val d0 = pos.x.toDouble() + random.nextDouble()
                 val d1 = pos.y.toDouble() + 1.0

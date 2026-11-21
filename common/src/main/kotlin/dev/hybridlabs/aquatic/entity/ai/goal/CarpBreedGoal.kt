@@ -17,7 +17,7 @@ open class CarpBreedGoal @JvmOverloads constructor(
     private var loveTime = 0
 
     init {
-        this.flags = EnumSet.of<Flag?>(Flag.MOVE, Flag.LOOK)
+        this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
     }
 
     override fun canUse(): Boolean {
@@ -52,7 +52,7 @@ open class CarpBreedGoal @JvmOverloads constructor(
 
     private val freePartner: CarpEntity?
         get() {
-            val list: MutableList<out CarpEntity> = this.level.getNearbyEntities(
+            val list: MutableList<out CarpEntity> = (this.level as ServerLevel).getNearbyEntities(
                 this.partnerClass,
                 PARTNER_TARGETING,
                 this.carp,
@@ -77,7 +77,6 @@ open class CarpBreedGoal @JvmOverloads constructor(
         val mate = this.partner ?: return
         this.carp.spawnChildFromBreeding(this.level as ServerLevel, mate)
     }
-
 
     companion object {
         private val PARTNER_TARGETING: TargetingConditions =

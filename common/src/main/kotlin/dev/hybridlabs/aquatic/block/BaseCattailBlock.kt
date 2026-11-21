@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.LivingEntity
+
 import net.minecraft.core.BlockPos
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.FluidTags
@@ -102,7 +104,7 @@ open class BaseCattailBlock(settings: Properties) : DoublePlantBlock(settings), 
     }
 
     override fun canPlaceLiquid(
-        p0: Player?,
+        p0: LivingEntity?,
         world: BlockGetter,
         pos: BlockPos,
         state: BlockState,

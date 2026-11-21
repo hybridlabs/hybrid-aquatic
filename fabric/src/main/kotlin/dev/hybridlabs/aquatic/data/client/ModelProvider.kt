@@ -10,20 +10,24 @@ import dev.hybridlabs.aquatic.client.model.HAModelTemplates
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider
+import net.minecraft.client.data.models.BlockModelGenerators
+import net.minecraft.client.data.models.ItemModelGenerators
+import net.minecraft.client.data.models.MultiVariant
+import net.minecraft.client.data.models.blockstates.ConditionBuilder
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator
+import net.minecraft.client.data.models.model.ModelTemplate
+import net.minecraft.client.data.models.model.ItemModelUtils
+import software.bernie.geckolib.renderer.internal.GeckolibItemSpecialRenderer
+import net.minecraft.client.renderer.item.SpecialModelWrapper
+import net.minecraft.client.data.models.model.ModelTemplates
+import net.minecraft.client.data.models.model.TextureMapping
+import net.minecraft.client.data.models.model.TexturedModel
+import net.minecraft.client.renderer.block.model.Variant
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.data.models.BlockModelGenerators
-import net.minecraft.data.models.ItemModelGenerators
-import net.minecraft.data.models.blockstates.Condition
-import net.minecraft.data.models.blockstates.MultiPartGenerator
-import net.minecraft.data.models.blockstates.Variant
-import net.minecraft.data.models.blockstates.VariantProperties
-import net.minecraft.data.models.model.ModelTemplate
-import net.minecraft.data.models.model.ModelTemplates
-import net.minecraft.data.models.model.TextureMapping
-import net.minecraft.data.models.model.TexturedModel
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
+import net.minecraft.util.random.WeightedList
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.CropBlock
@@ -37,9 +41,9 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
             BuiltInRegistries.BLOCK
                 .filterIsInstance<PlushieBlock>()
                 .forEach { block ->
-                    skipAutoItemBlock(block)
-                    createAirLikeBlock(block, block.asItem())
-                    delegateItemModel(block, TEMPLATE_PLUSHIE)
+                    val id = BuiltInRegistries.BLOCK.getKey(block)
+                    createAirLikeBlock(block, CommonClass.locate("block/${id.path}"))
+                    registerSimpleItemModel(block.asItem(), CommonClass.locate("item/${id.path}"))
                 }
 
             // fluids
@@ -53,17 +57,18 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 }
 
             // builtin
-            mapOf<Block, Pair<Block?, ResourceLocation>>(
+            mapOf<Block, Pair<Block?, Identifier>>(
                 HABlocks.ANEMONE.get() to (null to TEMPLATE_ANEMONE),
                 HABlocks.STRAWBERRY_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
                 HABlocks.GIANT_GREEN_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
             ).forEach { (block, info) ->
                 val (particleBlock, template) = info
 
-                skipAutoItemBlock(block)
-
                 particleBlock?.let { b -> createAirLikeBlock(block, TextureMapping.getBlockTexture(b)) }
-                delegateItemModel(block, template)
+                itemModelOutput.accept(
+                    block.asItem(),
+                    SpecialModelWrapper.Unbaked(template, GeckolibItemSpecialRenderer.Unbaked())
+                )
             }
 
             createAirLikeBlock(
@@ -204,7 +209,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.BLEACHED_BUBBLE_CORAL.get(),
                 HABlocks.BLEACHED_BRAIN_CORAL.get(),
             ).forEach { block ->
-                generator.createCrossBlockWithDefaultItem(block, BlockModelGenerators.TintState.NOT_TINTED)
+                generator.createCrossBlockWithDefaultItem(block, BlockModelGenerators.PlantType.NOT_TINTED)
             }
 
             generator.createCoralFans(
@@ -280,7 +285,7 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 template3: ModelTemplate,
                 template4: ModelTemplate
             ) {
-                createSimpleFlatItemModel(block.asItem())
+                registerSimpleFlatItemModel(block.asItem())
 
                 val model1 = template1.createWithSuffix(
                     block, "_1", TextureMapping.cube(block), modelOutput
@@ -295,129 +300,41 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                     block, "_4", TextureMapping.cube(block), modelOutput
                 )
 
-                blockStateOutput.accept(
-                    MultiPartGenerator.multiPart(block)
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
-                            Variant.variant().with(VariantProperties.MODEL, model1)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model1)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model1)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model1)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
-                            Variant.variant().with(VariantProperties.MODEL, model2)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model2)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model2)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model2)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
-                            Variant.variant().with(VariantProperties.MODEL, model3)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model3)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model3)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model3)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH),
-                            Variant.variant().with(VariantProperties.MODEL, model4)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model4)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model4)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180)
-                        )
-                        .with(
-                            Condition.condition()
-                                .term(BlockStateProperties.FLOWER_AMOUNT, 4)
-                                .term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST),
-                            Variant.variant()
-                                .with(VariantProperties.MODEL, model4)
-                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)
-                        )
+                val variant1 = MultiVariant(WeightedList.of(Variant(model1)))
+                val variant2 = MultiVariant(WeightedList.of(Variant(model2)))
+                val variant3 = MultiVariant(WeightedList.of(Variant(model3)))
+                val variant4 = MultiVariant(WeightedList.of(Variant(model4)))
+
+                val modelVariants = listOf(variant1, variant2, variant3, variant4)
+                val directions = listOf(
+                    Direction.NORTH,
+                    Direction.EAST,
+                    Direction.SOUTH,
+                    Direction.WEST,
                 )
+                val yRotations = listOf(
+                    BlockModelGenerators.NOP,
+                    BlockModelGenerators.Y_ROT_90,
+                    BlockModelGenerators.Y_ROT_180,
+                    BlockModelGenerators.Y_ROT_270,
+                )
+
+                val multiPart = MultiPartGenerator.multiPart(block)
+                for (modelIndex in modelVariants.indices) {
+                    for (directionIndex in directions.indices) {
+                        val condition = when (modelIndex) {
+                            // The first layer is always present; conditioning it on all four
+                            // values only makes vanilla warn that the condition is always true.
+                            0 -> ConditionBuilder()
+                            1 -> ConditionBuilder().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4)
+                            2 -> ConditionBuilder().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4)
+                            else -> ConditionBuilder().term(BlockStateProperties.FLOWER_AMOUNT, 4)
+                        }.term(BlockStateProperties.HORIZONTAL_FACING, directions[directionIndex])
+
+                        multiPart.with(condition, modelVariants[modelIndex].with(yRotations[directionIndex]))
+                    }
+                }
+                blockStateOutput.accept(multiPart)
             }
 
             createIncrementalBlock(
@@ -574,62 +491,62 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
 
             createCrossBlockWithDefaultItem(
                 HABlocks.HARP_SPONGE.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlockWithDefaultItem(
                 HABlocks.PING_PONG_SPONGE.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.SARGASSUM_PLANT.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.SARGASSUM.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.BULL_KELP_PLANT.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.BULL_KELP.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.DELESSERIA_PLANT.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.DELESSERIA.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.SEA_LETTUCE.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createCrossBlock(
                 HABlocks.WILD_MUSSELS.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createDoublePlant(
                 HAPlatformBlocks.PAPYRUS.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createDoublePlant(
                 HAPlatformBlocks.CATTAIL.get(),
-                BlockModelGenerators.TintState.NOT_TINTED,
+                BlockModelGenerators.PlantType.NOT_TINTED,
             )
 
             createNonTemplateModelBlock(
@@ -641,6 +558,67 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 HABlocks.BUBBLE_NET.get(),
                 Blocks.WATER
             )
+
+            //#region Static item models
+            // Items whose models are hand-authored in common/src/main/resources (rafts, the static
+            // block families, vents, clams, ...). Since 1.21.4 an item also needs an explicit item
+            // model definition; without one it renders as the missing model even though
+            // models/item/<id>.json exists.
+            setOf(
+                HAItems.RAFT.get(),
+                HAItems.OAK_RAFT.get(),
+                HAItems.SPRUCE_RAFT.get(),
+                HAItems.BIRCH_RAFT.get(),
+                HAItems.JUNGLE_RAFT.get(),
+                HAItems.ACACIA_RAFT.get(),
+                HAItems.DARK_OAK_RAFT.get(),
+                HAItems.MANGROVE_RAFT.get(),
+                HAItems.CHERRY_RAFT.get(),
+                HAItems.DRIFTWOOD_RAFT.get(),
+                HAItems.FLOATING_SARGASSUM.get(),
+                HAItems.JUNGLE_LILY_PAD.get(),
+                HAItems.GIANT_CLAM.get(),
+                HAItems.OYSTER_BLOCK.get(),
+                HAItems.GLASS_SPONGE.get(),
+                HAItems.BONE_WORMS.get(),
+                HAItems.TUBE_WORM.get(),
+                HAItems.CRAB_POT.get(),
+                HAItems.GIANT_THERMAL_VENT.get(),
+                HAItems.HYDROTHERMAL_VENT.get(),
+                HAItems.WATER_HYACINTH.get(),
+                HAItems.WATER_LETTUCE.get(),
+                HAItems.KARKINOS_CLAW.get(),
+                HAItems.OMINOUS_CONCH.get(),
+                HAPlatformItems.GLOWSLIME_BLOCK.get(),
+                HAPlatformItems.HAGSLIME_BLOCK.get(),
+                HAItems.WHITE_SANDSTONE_STAIRS.get(),
+                HAItems.WHITE_SANDSTONE_SLAB.get(),
+                HAItems.WHITE_SANDSTONE_WALL.get(),
+                HAItems.CUT_WHITE_SANDSTONE_SLAB.get(),
+                HAItems.BONE_STAIRS.get(),
+                HAItems.BONE_SLAB.get(),
+                HAItems.BONE_WALL.get(),
+                HAItems.BONE_FENCE.get(),
+                HAItems.SCHIST_STAIRS.get(),
+                HAItems.SCHIST_SLAB.get(),
+                HAItems.SCHIST_WALL.get(),
+                HAItems.CHIMNEYSTONE_STAIRS.get(),
+                HAItems.CHIMNEYSTONE_SLAB.get(),
+                HAItems.CHIMNEYSTONE_WALL.get(),
+                HAItems.RED_BRINESTONE_STAIRS.get(),
+                HAItems.RED_BRINESTONE_SLAB.get(),
+                HAItems.RED_BRINESTONE_WALL.get(),
+                HAItems.ORANGE_BRINESTONE_STAIRS.get(),
+                HAItems.ORANGE_BRINESTONE_SLAB.get(),
+                HAItems.ORANGE_BRINESTONE_WALL.get(),
+                HAItems.YELLOW_BRINESTONE_STAIRS.get(),
+                HAItems.YELLOW_BRINESTONE_SLAB.get(),
+                HAItems.YELLOW_BRINESTONE_WALL.get(),
+            ).forEach { item ->
+                val id = BuiltInRegistries.ITEM.getKey(item)
+                itemModelOutput.accept(item, ItemModelUtils.plainModel(CommonClass.locate("item/${id.path}")))
+            }
+            //#endregion
         }
     }
 

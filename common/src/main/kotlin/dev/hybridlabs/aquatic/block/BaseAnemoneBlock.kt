@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.LevelReader
+
+import net.minecraft.util.RandomSource
+
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -7,6 +11,7 @@ import net.minecraft.tags.FluidTags
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
@@ -49,7 +54,7 @@ open class BaseAnemoneBlock(settings: Properties) : DirectionalBlock(settings),
     }
 
     override fun getRenderShape(state: BlockState): RenderShape {
-        return RenderShape.ENTITYBLOCK_ANIMATED
+        return RenderShape.MODEL
     }
 
     override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
@@ -58,17 +63,19 @@ open class BaseAnemoneBlock(settings: Properties) : DirectionalBlock(settings),
 
     override fun updateShape(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        level: LevelAccessor,
+        level: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         pos: BlockPos,
-        neighborPos: BlockPos
+        direction: Direction,
+        neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: RandomSource
     ): BlockState {
-        if (state.getValue(WATERLOGGED)) level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
+        if (state.getValue(WATERLOGGED)) scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
 
         return if (!canSurvive(state, level, pos)) {
             Blocks.AIR.defaultBlockState()
-        } else super.updateShape(state, direction, neighborState, level, pos, neighborPos)
+        } else super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random)
     }
 
     override fun getCollisionShape(

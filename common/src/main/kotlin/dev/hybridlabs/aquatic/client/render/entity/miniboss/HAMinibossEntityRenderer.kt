@@ -1,12 +1,19 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
+import software.bernie.geckolib.renderer.base.BoneSnapshots
+
+import software.bernie.geckolib.renderer.base.RenderPassInfo
+
+import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
+
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraft.client.renderer.entity.EntityRendererProvider
 import software.bernie.geckolib.model.GeoModel
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import software.bernie.geckolib.renderer.GeoEntityRenderer
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
+import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
 
 @Suppress("LeakingThis")
 open class HAMinibossEntityRenderer<T : HAMinibossEntity>(
@@ -14,20 +21,17 @@ open class HAMinibossEntityRenderer<T : HAMinibossEntity>(
     model: GeoModel<T>,
     private var variableSize: Boolean = false,
     canGlow: Boolean = false
-) : GeoEntityRenderer<T>(context, model) {
+) : GeoEntityRenderer<T, LivingEntityRenderState>(context, model) {
 
     init {
-        if(canGlow) addRenderLayer(AutoGlowingGeoLayer(this))
+        if(canGlow) withRenderLayer(AutoGlowingGeoLayer(this))
     }
 
-    override fun render(
-        entity: T,
-        entityYaw: Float,
-        partialTick: Float,
-        poseStack: PoseStack,
-        bufferSource: MultiBufferSource,
-        packedLight: Int
+    override fun adjustModelBonesForRender(
+        renderPassInfo: RenderPassInfo<LivingEntityRenderState>,
+        snapshots: BoneSnapshots
     ) {
-        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight)
+        (getGeoModel() as? HABoneAdjustingModel)?.adjustModelBones(renderPassInfo.renderState(), snapshots)
     }
+
 }

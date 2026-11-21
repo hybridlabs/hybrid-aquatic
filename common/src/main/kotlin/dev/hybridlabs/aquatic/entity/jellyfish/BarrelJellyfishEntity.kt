@@ -6,7 +6,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 
-
 class BarrelJellyfishEntity(entityType: EntityType<out BarrelJellyfishEntity>, world: Level) :
     BaseJellyfishEntity(entityType, world, false, 0) {
 
@@ -17,6 +16,7 @@ class BarrelJellyfishEntity(entityType: EntityType<out BarrelJellyfishEntity>, w
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.4)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)

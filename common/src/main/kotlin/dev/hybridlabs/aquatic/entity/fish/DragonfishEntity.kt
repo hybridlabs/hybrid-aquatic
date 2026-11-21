@@ -6,7 +6,7 @@ import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -40,6 +40,7 @@ class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
@@ -50,7 +51,7 @@ class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
         fun canSpawn(
             type: EntityType<out DragonfishEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            reason: EntitySpawnReason,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
@@ -58,7 +59,7 @@ class DragonfishEntity(type: EntityType<out DragonfishEntity>, world: Level) :
             val nightSpawn = (seaLevel - 16)..<seaLevel
             val daySpawn = (seaLevel - 256)..(seaLevel - 48)
 
-            val spawnY = if (!world.level.isDay) nightSpawn else daySpawn
+            val spawnY = if (!world.level.isBrightOutside()) nightSpawn else daySpawn
 
             return pos.y in spawnY && world.isWaterAt(pos)
         }

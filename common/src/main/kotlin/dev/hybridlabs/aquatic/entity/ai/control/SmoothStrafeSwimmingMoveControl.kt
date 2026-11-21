@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.control
 
+import dev.hybridlabs.aquatic.util.HAMath
+
 import net.minecraft.core.BlockPos
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.Mob
@@ -37,8 +39,8 @@ open class SmoothStrafeSwimmingMoveControl(
             forward *= magnitude
             right *= magnitude
 
-            val sin = Mth.sin(mob.yRot * (Math.PI.toFloat() / 180f))
-            val cos = Mth.cos(mob.yRot * (Math.PI.toFloat() / 180f))
+            val sin = HAMath.sin((mob.yRot * (Math.PI / 180.0)))
+            val cos = HAMath.cos((mob.yRot * (Math.PI / 180.0)))
 
             val relX = forward * cos - right * sin
             val relZ = right * cos + forward * sin
@@ -93,8 +95,8 @@ open class SmoothStrafeSwimmingMoveControl(
                     mob.xRot = rotlerp(mob.xRot, pitch, 5f)
                 }
 
-                val cosPitch = Mth.cos(mob.xRot * (Math.PI.toFloat() / 180f))
-                val sinPitch = Mth.sin(mob.xRot * (Math.PI.toFloat() / 180f))
+                val cosPitch = HAMath.cos(mob.xRot * (Math.PI / 180.0))
+                val sinPitch = HAMath.sin(mob.xRot * (Math.PI / 180.0))
 
                 mob.zza = cosPitch * baseSpeed
                 mob.yya = -sinPitch * baseSpeed

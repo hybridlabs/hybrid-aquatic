@@ -6,15 +6,15 @@ import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.constant.DefaultAnimations
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.state.AnimationTest
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
@@ -34,8 +34,8 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Flop/Idle/Swim/Feed", 5
-            ) { state: AnimationState<OarfishEntity> ->
+            AnimationController<OarfishEntity>("Flop/Idle/Swim/Feed", 5
+            ) { state: AnimationTest<OarfishEntity> ->
                 when {
                     state.isMoving && isUnderWater -> state.setAndContinue(DefaultAnimations.SWIM)
                     !this.isUnderWater && !this.isSwimming && this.moistness < 595 -> state.setAndContinue(FLOP_ANIMATION)
@@ -49,6 +49,7 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 12.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
@@ -59,7 +60,7 @@ class OarfishEntity(type: EntityType<out OarfishEntity>, world: Level) :
         fun canSpawn(
             type: EntityType<out OarfishEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            reason: EntitySpawnReason,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {

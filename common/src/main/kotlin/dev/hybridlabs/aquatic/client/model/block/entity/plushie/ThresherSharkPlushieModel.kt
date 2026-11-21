@@ -14,7 +14,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * The model for the Thresher Shark Plushie.
  * @see PlushieBlock.Variant.THRESHER_SHARK
  */
-class ThresherSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+class ThresherSharkPlushieModel(root: ModelPart) : PlushieModel(root) {
     companion object {
         fun createModelData(): LayerDefinition {
             val modelData = MeshDefinition()
@@ -46,7 +46,6 @@ class ThresherSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
                 CubeListBuilder.create(),
                 PartPose.ZERO
             )
-
 
             return LayerDefinition.create(modelData, 32, 32)
         }

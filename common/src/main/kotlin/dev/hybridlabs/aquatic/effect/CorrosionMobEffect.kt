@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.effect
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectCategory
@@ -8,7 +10,7 @@ import net.minecraft.world.entity.LivingEntity
 
 class CorrosionMobEffect : MobEffect(MobEffectCategory.HARMFUL, 0x9d9136) {
 
-    override fun applyEffectTick(entity: LivingEntity, amplifier: Int): Boolean {
+    override fun applyEffectTick(level: ServerLevel, entity: LivingEntity, amplifier: Int): Boolean {
         if (entity.level().isClientSide) return true
 
         val damage = amplifier + 1

@@ -4,7 +4,9 @@ import dev.hybridlabs.aquatic.client.model.entity.fish.CatfishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.CatfishEntity
 import dev.hybridlabs.aquatic.entity.fish.TroutEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class CatfishEntityRenderer(context: Context) :
-    BaseFishEntityRenderer<CatfishEntity>(context, CatfishEntityModel(), true, false)
+    BaseFishEntityRenderer<CatfishEntity, LivingEntityRenderState>(context, CatfishEntityModel(), true, false)

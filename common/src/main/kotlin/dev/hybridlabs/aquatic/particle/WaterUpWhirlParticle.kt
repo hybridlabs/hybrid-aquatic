@@ -1,13 +1,19 @@
 package dev.hybridlabs.aquatic.particle
 
+import dev.hybridlabs.aquatic.util.HAMath
+
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.*
+import net.minecraft.util.RandomSource
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.SimpleParticleType
 import net.minecraft.tags.FluidTags
 import net.minecraft.util.Mth
 
-class WaterUpWhirlParticle(world: ClientLevel, x: Double, y: Double, z: Double): TextureSheetParticle(world, x, y, z) {
+class WaterUpWhirlParticle(
+    level: ClientLevel, x: Double, y: Double, z: Double,
+    sprites: SpriteSet,
+) : SingleQuadParticle(level, x, y, z, sprites.get(0, 90)) {
     private var angle: Float = 0f
 
     init {
@@ -21,10 +27,6 @@ class WaterUpWhirlParticle(world: ClientLevel, x: Double, y: Double, z: Double):
         this.gravity = 0.002f
     }
 
-    override fun getRenderType(): ParticleRenderType {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE
-    }
-
     override fun tick() {
         this.xo = this.x
         this.yo = this.y
@@ -33,8 +35,8 @@ class WaterUpWhirlParticle(world: ClientLevel, x: Double, y: Double, z: Double):
             this.remove()
         } else {
             val f = 0.6f
-            this.xd += (f * Mth.cos(this.angle)).toDouble()
-            this.zd += (f * Mth.sin(this.angle)).toDouble()
+            this.xd += (f * HAMath.cos(this.angle)).toDouble()
+            this.zd += (f * HAMath.sin(this.angle)).toDouble()
             this.xd *= 0.07
             this.zd *= 0.07
             this.move(this.xd, this.yd, this.zd)
@@ -51,14 +53,20 @@ class WaterUpWhirlParticle(world: ClientLevel, x: Double, y: Double, z: Double):
     companion object {
         class Provider(private val sprite: SpriteSet) : ParticleProvider<SimpleParticleType> {
             override fun createParticle(
-                type: SimpleParticleType, level: ClientLevel,
-                x: Double, y: Double, z: Double,
-                xSpeed: Double, ySpeed: Double, zSpeed: Double
+                type: SimpleParticleType,
+                level: ClientLevel,
+                x: Double,
+                y: Double,
+                z: Double,
+                xSpeed: Double,
+                ySpeed: Double,
+                zSpeed: Double,
+                random: RandomSource,
             ): Particle {
-                val waterUpWhirlParticle = WaterUpWhirlParticle(level, x, y, z)
-                waterUpWhirlParticle.pickSprite(this.sprite)
-                return waterUpWhirlParticle
+                return WaterUpWhirlParticle(level, x, y, z, this.sprite)
             }
         }
     }
+
+    override fun getLayer(): SingleQuadParticle.Layer = SingleQuadParticle.Layer.OPAQUE
 }

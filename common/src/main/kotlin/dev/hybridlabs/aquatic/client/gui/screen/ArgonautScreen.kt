@@ -4,8 +4,9 @@ import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.world.inventory.ArgonautMenu
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+import net.minecraft.client.renderer.RenderPipelines
 import net.minecraft.network.chat.Component
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.entity.player.Inventory
 
 class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Component) :
@@ -30,22 +31,45 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
     ) {
         val leftDrawPos = (this.width - this.imageWidth) / 2
         val topDrawPos = (this.height - this.imageHeight) / 2
-        guiGraphics.blit(ARGONAUT_BACKGROUND, leftDrawPos,
-            topDrawPos, 16, 0, this.imageWidth, HEADER_HEIGHT + argonautRows * 18)
-        guiGraphics.blit(ARGONAUT_BACKGROUND,
-            leftDrawPos, topDrawPos + HEADER_HEIGHT + this.argonautRows * 18,
-            16, 126, this.imageWidth, PLAYER_INVENTORY_HEIGHT)
+        guiGraphics.blit(
+            RenderPipelines.GUI_TEXTURED,
+            ARGONAUT_BACKGROUND,
+            leftDrawPos,
+            topDrawPos,
+            16.0f,
+            0.0f,
+            this.imageWidth,
+            HEADER_HEIGHT + argonautRows * 18,
+            256,
+            256
+        )
+        guiGraphics.blit(
+            RenderPipelines.GUI_TEXTURED,
+            ARGONAUT_BACKGROUND,
+            leftDrawPos,
+            topDrawPos + HEADER_HEIGHT + this.argonautRows * 18,
+            16.0f,
+            126.0f,
+            this.imageWidth,
+            PLAYER_INVENTORY_HEIGHT,
+            256,
+            256
+        )
 
         if (this.menu.isLit()) {
             val litProgress = this.menu.getLitProgress()
             guiGraphics.blit(
+                RenderPipelines.GUI_TEXTURED,
                 ARGONAUT_BACKGROUND,
                 leftDrawPos + 84,
                 topDrawPos + 38 + 12 - litProgress,
-                198,
-                12 - litProgress,
+                198.0f,
+                (12 - litProgress).toFloat(),
                 14,
-                litProgress + 1)
+                litProgress + 1,
+                256,
+                256
+            )
         }
     }
 
@@ -62,6 +86,6 @@ class ArgonautScreen(menu: ArgonautMenu, playerInventory: Inventory, title: Comp
         /** Inventory label, the three inventory rows and the hotbar, below the cargo rows. */
         private const val PLAYER_INVENTORY_HEIGHT = 96
 
-        val ARGONAUT_BACKGROUND: ResourceLocation = CommonClass.locate("textures/gui/container/argonaut_3row.png")
+        val ARGONAUT_BACKGROUND: Identifier = CommonClass.locate("textures/gui/container/argonaut_3row.png")
     }
 }

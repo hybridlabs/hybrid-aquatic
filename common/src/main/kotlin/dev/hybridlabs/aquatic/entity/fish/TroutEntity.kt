@@ -1,9 +1,12 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
+import dev.hybridlabs.hapi.entity.base.VariantHolder
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -50,7 +53,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val spawnData = super.finalizeSpawn(world, difficulty, spawnReason, entityData)
@@ -74,6 +77,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 8.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
@@ -100,7 +104,7 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
                     ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
-                fun byName(name: String?): Type {
+                fun byName(name: String): Type {
                     return CODEC.byName(name, REDBAND_TROUT) as Type
                 }
 
@@ -116,21 +120,19 @@ class TroutEntity(type: EntityType<out TroutEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putString("Type", this.variant.serializedName)
-        super.addAdditionalSaveData(compound)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.putString("Type", this.variant.serializedName)
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.variant = Type.byName(compound.getString("Type"))
-        super.readAdditionalSaveData(compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        this.variant = Type.byName(input.getStringOr("Type", this.variant.serializedName))
+        super.readAdditionalSaveData(input)
     }
 
-    override fun getVariant(): Type {
-        return Type.fromId((entityData.get(TYPE) as Int))
-    }
-
-    override fun setVariant(type: Type) {
-        entityData.set(TYPE, type.id)
-    }
+    override var variant: Type
+        get() = Type.fromId((entityData.get(TYPE) as Int))
+        set(value) {
+            entityData.set(TYPE, value.id)
+        }
 }

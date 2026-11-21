@@ -8,6 +8,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,6 +73,11 @@ public interface PlatformHelper {
     MobCategory getHybridMobCategoryByName(String name);
 
     Item createBlockItem(Block block, Item.Properties properties);
+
+    <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(
+            BlockEntityType.BlockEntitySupplier<? extends T> factory, Block... blocks);
+
+    <T extends BlockEntity> void addBlockEntityTypeBlocks(BlockEntityType<T> type, Block... blocks);
 
     void sendHookToServer(int entityId, ItemStack entityData);
 }

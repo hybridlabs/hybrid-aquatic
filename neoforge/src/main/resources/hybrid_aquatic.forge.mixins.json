@@ -6,6 +6,8 @@
     "minVersion": "0.8.5",
     "refmap": "hybrid_aquatic.refmap.json",
     "mixins": [
+        "compat.GeckoLibAnimationTimelineMixin",
+        "compat.LithostitchedParameterMapMixin",
         "HolderReferenceInvoker",
         "MinecraftServerMixin",
         "BreathAirGoalMixin",
@@ -18,23 +20,18 @@
         "ResourceLocationMixin",
         "SeagrassBlockMixin",
         "TallSeagrassBlockMixin",
-        "PaintingMixin",
         "HangingEntityItemMixin"
     ],
     "client": [
+        "client.EntityRenderStateMixin",
         "client.CameraMixin",
         "client.FishingBobberEntityClientMixin",
-        "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
-        "client.SkullBlockEntityTextureMixin",
+        "client.SkullBlockEntityMixin",
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
         "client.MouseHandlerMixin",
-        "client.PlayerEntityRendererMixin",
-        "client.SkullBlockEntityTextureMixin",
-        "client.WeatherDisplayMixin",
-        "client.PaintingRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

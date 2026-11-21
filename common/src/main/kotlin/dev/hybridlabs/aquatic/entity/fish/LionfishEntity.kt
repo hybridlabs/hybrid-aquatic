@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
@@ -35,6 +37,7 @@ class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
@@ -43,13 +46,13 @@ class LionfishEntity(type: EntityType<out LionfishEntity>, world: Level) :
         }
     }
 
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (super.hurt(source, amount)) {
+    override fun hurtServer(level: ServerLevel, source: DamageSource, amount: Float): Boolean {
+        if (super.hurtServer(level, source, amount)) {
 
             val attacker = source.directEntity
             if (attacker is LivingEntity && attacker.mainHandItem.isEmpty) {
                 attacker.addEffect(MobEffectInstance(MobEffects.POISON, 200, 0))
-                attacker.addEffect(MobEffectInstance(MobEffects.CONFUSION, 200, 0))
+                attacker.addEffect(MobEffectInstance(MobEffects.NAUSEA, 200, 0))
             }
 
             return true

@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.effect
 
+import net.minecraft.server.level.ServerLevel
+
 import net.minecraft.tags.DamageTypeTags
 import net.minecraft.util.RandomSource
 import net.minecraft.world.damagesource.DamageTypes
@@ -13,16 +15,16 @@ class ThornsMobEffect : MobEffect(MobEffectCategory.BENEFICIAL, 0x695672) {
         return true
     }
 
-    override fun applyEffectTick(entity: LivingEntity, amplifier: Int): Boolean {
-        val level = amplifier + 1
+    override fun applyEffectTick(level: ServerLevel, entity: LivingEntity, amplifier: Int): Boolean {
+        val strength = amplifier + 1
         val damageSource = entity.lastDamageSource ?: return true
         val attacker = damageSource.directEntity as? LivingEntity ?: return true
 
         if (attacker.isDeadOrDying) return true
         if (damageSource.`is`(DamageTypeTags.AVOIDS_GUARDIAN_THORNS) || damageSource.`is`(DamageTypes.THORNS)) return true
 
-        if (shouldHit(level, entity.random)) {
-            attacker.hurt(entity.damageSources().thorns(entity), getDamage(level))
+        if (shouldHit(strength, entity.random)) {
+            attacker.hurtServer(level, entity.damageSources().thorns(entity), getDamage(strength))
         }
         return true
     }

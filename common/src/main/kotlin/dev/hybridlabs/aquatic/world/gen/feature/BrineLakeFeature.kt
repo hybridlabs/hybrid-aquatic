@@ -15,7 +15,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
         val worldGenLevel = context.level()
         val randomSource = context.random()
         val configuration = context.config()
-        if (blockPos.y <= worldGenLevel.minBuildHeight + 4) {
+        if (blockPos.y <= worldGenLevel.minY + 4) {
             return false
         } else {
             blockPos = blockPos.below(4)

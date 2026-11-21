@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.world.level.gamerules.GameRules
+
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
@@ -13,12 +17,11 @@ import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
-import net.minecraft.world.level.GameRules
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 
@@ -48,17 +51,17 @@ class HagfishEntity(type: EntityType<out HagfishEntity>, world: Level) :
         return stack.`is`(Items.ROTTEN_FLESH)
     }
 
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (super.hurt(source, amount)) {
+    override fun hurtServer(level: ServerLevel, source: DamageSource, amount: Float): Boolean {
+        if (super.hurtServer(level, source, amount)) {
 
             val attacker = source.directEntity
             if (attacker is LivingEntity) {
-                attacker.addEffect(MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0))
-                attacker.addEffect(MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 1))
+                attacker.addEffect(MobEffectInstance(MobEffects.SLOWNESS, 100, 0))
+                attacker.addEffect(MobEffectInstance(MobEffects.MINING_FATIGUE, 100, 1))
             }
 
-            if (level().gameRules.getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                spawnAtLocation(HAItems.HAGSLIME.get())
+            if (level.getGameRules().get(GameRules.ENTITY_DROPS)) {
+                spawnAtLocation(level, HAItems.HAGSLIME.get())
             }
 
             return true
@@ -70,6 +73,7 @@ class HagfishEntity(type: EntityType<out HagfishEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 4.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
@@ -80,7 +84,7 @@ class HagfishEntity(type: EntityType<out HagfishEntity>, world: Level) :
         fun canSpawn(
             type: EntityType<out HagfishEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            reason: EntitySpawnReason,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {

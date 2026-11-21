@@ -1,45 +1,36 @@
 package dev.hybridlabs.aquatic.client.render.entity.critter.layer
 
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.VertexConsumer
+import dev.hybridlabs.aquatic.client.model.HADataTickets
+import dev.hybridlabs.aquatic.client.render.entity.layer.HATextureLayer
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseCritterEntityModel
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseCritterEntityRenderer
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseCritterEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+import net.minecraft.resources.Identifier
 
-class HACritterEntityLayer<T: BaseCritterEntity>(
-    renderer: BaseCritterEntityRenderer<T>
-) : GeoRenderLayer<T>(renderer) {
+class HACritterEntityLayer<T : BaseCritterEntity>(
+    renderer: BaseCritterEntityRenderer<T, LivingEntityRenderState>
+) : HATextureLayer<T>(renderer) {
 
-    private fun getLayerTextureResource(layer: String): ResourceLocation {
-        return (geoModel as BaseCritterEntityModel).getLayerTextureResource(layer.lowercase())
+    override fun addRenderData(
+        animatable: T,
+        relatedObject: Void?,
+        renderState: LivingEntityRenderState,
+        partialTick: Float
+    ) {
+        super.addRenderData(animatable, relatedObject, renderState, partialTick)
+        renderState.addGeckolibData(
+            HADataTickets.OVERLAY_NAME,
+            (animatable as? OverlayTextureFeature)?.getOverlayTextureName() ?: ""
+        )
     }
 
-    override fun render(
-        poseStack: PoseStack,
-        animatable: T,
-        bakedModel: BakedGeoModel,
-        renderType: RenderType?,
-        bufferSource: MultiBufferSource,
-        buffer: VertexConsumer?,
-        partialTick: Float,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        if (animatable !is OverlayTextureFeature) return
-        if (animatable.getOverlayTextureName().isEmpty()) return
+    override fun layerTexture(renderState: LivingEntityRenderState): Identifier? {
+        val overlayName = renderState.getGeckolibData(HADataTickets.OVERLAY_NAME) ?: return null
 
-        val layerTexture: ResourceLocation = getLayerTextureResource(animatable.getOverlayTextureName())
-        val layerRenderType = RenderType.entityTranslucent(layerTexture)
+        if (overlayName.isEmpty()) return null
 
-        getRenderer().reRender(getDefaultBakedModel(animatable), poseStack, bufferSource, animatable, layerRenderType,
-            bufferSource.getBuffer(layerRenderType), partialTick, packedLight, OverlayTexture.NO_OVERLAY,
-            1)
+        return (getGeoModel() as BaseCritterEntityModel).getLayerTextureResource(overlayName.lowercase())
     }
 }

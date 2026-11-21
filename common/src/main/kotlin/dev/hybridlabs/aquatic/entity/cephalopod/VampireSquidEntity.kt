@@ -8,11 +8,11 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
 
 class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level) : BaseCephalopodEntity(type, world) {
     override fun getTargetConfig() = MobTargetConfiguration.ofPrey(HAPIEntityTags.ALL_SHARKS)
@@ -25,9 +25,8 @@ class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level)
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         super.registerControllers(controllers)
         controllers.add(
-            AnimationController(
-                this, "Feeding",
-                AnimationStateHandler { state: AnimationState<BaseCephalopodEntity> ->
+            AnimationController<BaseCephalopodEntity>("Feeding",
+                AnimationStateHandler { state: AnimationTest<BaseCephalopodEntity> ->
                     if (this.isFeeding())
                         return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
                     PlayState.STOP
@@ -39,6 +38,7 @@ class VampireSquidEntity(type: EntityType<out VampireSquidEntity>, world: Level)
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)

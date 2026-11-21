@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalSitGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
@@ -41,6 +43,7 @@ class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
@@ -49,8 +52,8 @@ class StonefishEntity(type: EntityType<out StonefishEntity>, world: Level) :
         }
     }
 
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
-        if (super.hurt(source, amount)) {
+    override fun hurtServer(level: ServerLevel, source: DamageSource, amount: Float): Boolean {
+        if (super.hurtServer(level, source, amount)) {
 
             val attacker = source.directEntity
             if (attacker is LivingEntity && attacker.mainHandItem.isEmpty) {

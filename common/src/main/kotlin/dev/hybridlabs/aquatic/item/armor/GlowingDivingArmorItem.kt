@@ -2,21 +2,20 @@ package dev.hybridlabs.aquatic.item.armor
 
 import dev.hybridlabs.aquatic.client.render.armor.GlowingDivingArmorRenderer
 import dev.hybridlabs.hapi.item.HAPIArmorMaterials
-import net.minecraft.client.model.HumanoidModel
 import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.item.ArmorItem
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.equipment.ArmorType
 import net.minecraft.world.item.ItemStack
 import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.animatable.client.GeoRenderProvider
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.renderer.GeoArmorRenderer
 import software.bernie.geckolib.util.GeckoLibUtil
 import java.util.function.Consumer
 
-class GlowingDivingArmorItem(type: Type, settings: Properties) :
-    ArmorItem(HAPIArmorMaterials.GLOWING_DIVING, type, settings),
+class GlowingDivingArmorItem(type: ArmorType, settings: Properties) :
+    Item(settings.humanoidArmor(HAPIArmorMaterials.GLOWING_DIVING, type)),
     GeoItem {
     private val cache: AnimatableInstanceCache = GeckoLibUtil.createInstanceCache(this)
 
@@ -27,16 +26,11 @@ class GlowingDivingArmorItem(type: Type, settings: Properties) :
         return cache
     }
 
-    override fun createGeoRenderer(consumer: Consumer<GeoRenderProvider?>) {
+    override fun createGeoRenderer(consumer: Consumer<GeoRenderProvider>) {
         consumer.accept(object : GeoRenderProvider {
-            private var renderer: GeoArmorRenderer<*>? = null
+            private var renderer: GeoArmorRenderer<*, *>? = null
 
-            override fun <T : LivingEntity?> getGeoArmorRenderer(
-                livingEntity: T?,
-                itemStack: ItemStack,
-                equipmentSlot: EquipmentSlot?,
-                original: HumanoidModel<T>?
-            ): HumanoidModel<*>? {
+            override fun getGeoArmorRenderer(itemStack: ItemStack, equipmentSlot: EquipmentSlot): GeoArmorRenderer<*, *>? {
                 if (this.renderer == null)
                     this.renderer = GlowingDivingArmorRenderer()
                 return this.renderer

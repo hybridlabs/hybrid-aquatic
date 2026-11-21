@@ -3,8 +3,8 @@ package dev.hybridlabs.aquatic.loot
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.config.ConfigHelper
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
-import net.minecraft.advancements.critereon.EntityPredicate
-import net.minecraft.advancements.critereon.FishingHookPredicate
+import net.minecraft.advancements.criterion.EntityPredicate
+import net.minecraft.advancements.criterion.FishingHookPredicate
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.storage.loot.BuiltInLootTables

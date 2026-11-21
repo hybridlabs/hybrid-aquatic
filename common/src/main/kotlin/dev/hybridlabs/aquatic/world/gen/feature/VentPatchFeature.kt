@@ -302,7 +302,6 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
 
             val tubeWormPos = pos.offset(offset).mutable()
 
-
             repeat(3) {
                 val testState = world.getBlockState(tubeWormPos)
                 if (testState.block != Blocks.WATER) {

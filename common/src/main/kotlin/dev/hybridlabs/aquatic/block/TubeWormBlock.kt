@@ -13,6 +13,7 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
@@ -72,19 +73,21 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
 
     override fun updateShape(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: LevelAccessor,
+        world: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         pos: BlockPos,
-        neighborPos: BlockPos
+        direction: Direction,
+        neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: RandomSource
     ): BlockState {
         return if (!state.canSurvive(world, pos)) {
             Blocks.AIR.defaultBlockState()
         } else {
             if (state.getValue(WATERLOGGED)) {
-                world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
+                scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
             }
-            super.updateShape(state, direction, neighborState, world, pos, neighborPos)
+            super.updateShape(state, world, scheduledTickAccess, pos, direction, neighborPos, neighborState, random)
         }
     }
 
@@ -137,7 +140,7 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
                 floor.isFaceSturdy(world, pos, Direction.UP)
     }
 
-    override fun codec(): MapCodec<out BushBlock> {
-        return CODEC
+    override fun codec(): MapCodec<BushBlock> {
+        return CODEC as MapCodec<BushBlock>
     }
 }

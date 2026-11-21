@@ -18,7 +18,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * The model for the Frilled Shark Blahaj Plushie.
  * @see PlushieBlock.Variant.FRILLED_SHARK
  */
-class FrilledSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+class FrilledSharkPlushieModel(root: ModelPart) : PlushieModel(root) {
 
     companion object {
         fun createModelData(): LayerDefinition {

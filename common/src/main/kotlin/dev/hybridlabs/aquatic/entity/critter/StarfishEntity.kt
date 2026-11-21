@@ -1,11 +1,16 @@
 package dev.hybridlabs.aquatic.entity.critter
 
+import net.minecraft.server.level.ServerLevel
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
+import dev.hybridlabs.hapi.entity.base.VariantHolder
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseCritterEntity
 import net.minecraft.core.Holder
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -41,6 +46,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 1.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
@@ -104,7 +110,7 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
                     ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
-                fun byName(name: String?): Type {
+                fun byName(name: String): Type {
                     return CODEC.byName(name, SMALL) as Type
                 }
 
@@ -141,20 +147,20 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         }
     }
 
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
+    override fun hurtServer(level: ServerLevel, source: DamageSource, amount: Float): Boolean {
         val attacker = source.directEntity
 
         if (this.variant == Type.CROWN_OF_THORNS && attacker is LivingEntity) {
             attacker.addEffect(MobEffectInstance(MobEffects.POISON, 100, 1))
         }
 
-        return super.hurt(source, amount)
+        return super.hurtServer(level, source, amount)
     }
 
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
@@ -230,37 +236,35 @@ class StarfishEntity(entityType: EntityType<out StarfishEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putString("Type", this.variant.serializedName)
-        compound.putInt("Overlay", this.overlayTexture.id)
-        compound.putInt("Starfish_Color", starfishColor)
-        compound.putInt("Overlay_Color", overlayColor)
-        super.addAdditionalSaveData(compound)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.putString("Type", this.variant.serializedName)
+        output.putInt("Overlay", this.overlayTexture.id)
+        output.putInt("Starfish_Color", starfishColor)
+        output.putInt("Overlay_Color", overlayColor)
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.variant = Type.byName(compound.getString("Type"))
+    override fun readAdditionalSaveData(input: ValueInput) {
+        this.variant = Type.byName(input.getStringOr("Type", this.variant.serializedName))
 
-        if (compound.contains("Overlay")) {
-            this.overlayTexture = OverlayTextures.byId(compound.getInt("Overlay"))
+        if (input.getInt("Overlay").isPresent) {
+            this.overlayTexture = OverlayTextures.byId(input.getIntOr("Overlay", this.overlayTexture.id))
         }
 
-        if (compound.contains("Overlay_Color")) {
-            this.overlayColor = compound.getInt("Overlay_Color")
+        if (input.getInt("Overlay_Color").isPresent) {
+            this.overlayColor = input.getIntOr("Overlay_Color", overlayColor)
         }
 
-        if (compound.contains("Starfish_Color")) {
-            this.starfishColor = compound.getInt("Starfish_Color")
+        if (input.getInt("Starfish_Color").isPresent) {
+            this.starfishColor = input.getIntOr("Starfish_Color", starfishColor)
         }
 
-        super.readAdditionalSaveData(compound)
+        super.readAdditionalSaveData(input)
     }
 
-    override fun getVariant(): Type {
-        return Type.fromId((entityData.get(TYPE) as Int))
-    }
-
-    override fun setVariant(type: Type) {
-        entityData.set(TYPE, type.id)
-    }
+    override var variant: Type
+        get() = Type.fromId((entityData.get(TYPE) as Int))
+        set(value) {
+            entityData.set(TYPE, value.id)
+        }
 }

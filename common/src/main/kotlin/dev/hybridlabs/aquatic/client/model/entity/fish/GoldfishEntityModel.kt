@@ -1,17 +1,20 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.GoldfishEntity
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 
 class GoldfishEntityModel : BaseFishEntityModel<GoldfishEntity>("hybrid_aquatic", "goldfish") {
 
-    override fun getTextureResource(animatable: GoldfishEntity): ResourceLocation {
-        if (animatable.isBaby) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             return BABY_GOLDFISH_TEXTURE
         }
 
-        return when (animatable.variant) {
+        return when (renderState.getVariant(GoldfishEntity.Companion.Type.entries)!!) {
             GoldfishEntity.Companion.Type.COMMON_GOLDFISH -> COMMON_GOLDFISH_TEXTURE
             GoldfishEntity.Companion.Type.TELESCOPE -> TELESCOPE_GOLDFISH_TEXTURE
             GoldfishEntity.Companion.Type.BUBBLE_EYE -> BUBBLE_EYE_GOLDFISH_TEXTURE
@@ -21,12 +24,12 @@ class GoldfishEntityModel : BaseFishEntityModel<GoldfishEntity>("hybrid_aquatic"
         }
     }
 
-    override fun getModelResource(animatable: GoldfishEntity): ResourceLocation {
-        if (animatable.isBaby) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             return BABY_CARP_MODEL
         }
 
-        return when (animatable.variant) {
+        return when (renderState.getVariant(GoldfishEntity.Companion.Type.entries)!!) {
             GoldfishEntity.Companion.Type.COMMON_GOLDFISH -> COMMON_GOLDFISH_MODEL
             GoldfishEntity.Companion.Type.TELESCOPE -> TELESCOPE_GOLDFISH_MODEL
             GoldfishEntity.Companion.Type.BUBBLE_EYE -> BUBBLE_EYE_GOLDFISH_MODEL
@@ -36,7 +39,7 @@ class GoldfishEntityModel : BaseFishEntityModel<GoldfishEntity>("hybrid_aquatic"
         }
     }
 
-    override fun getAnimationResource(animatable: GoldfishEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: GoldfishEntity): Identifier {
         return when (animatable.variant) {
             GoldfishEntity.Companion.Type.COMMON_GOLDFISH -> COMMON_GOLDFISH_ANIMATION
             else -> GOLDFISH_ANIMATION
@@ -45,38 +48,38 @@ class GoldfishEntityModel : BaseFishEntityModel<GoldfishEntity>("hybrid_aquatic"
 
     companion object {
         private val BABY_GOLDFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/baby_goldfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/baby_goldfish.png")
         private val COMMON_GOLDFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/common_goldfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/common_goldfish.png")
         private val TELESCOPE_GOLDFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/telescope_goldfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/telescope_goldfish.png")
         private val BUBBLE_EYE_GOLDFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/bubble_eye_goldfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/bubble_eye_goldfish.png")
         private val RYUKIN_GOLDFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/ryukin_goldfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/ryukin_goldfish.png")
         private val FANTAIL_GOLDFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/fantail_goldfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/fantail_goldfish.png")
         private val SHUBUNKIN_GOLDFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/shubunkin_goldfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/goldfish/shubunkin_goldfish.png")
 
         private val BABY_CARP_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/baby_goldfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/goldfish/baby_goldfish")
         private val COMMON_GOLDFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/common_goldfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/goldfish/common_goldfish")
         private val TELESCOPE_GOLDFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/telescope_goldfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/goldfish/telescope_goldfish")
         private val BUBBLE_EYE_GOLDFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/bubble_eye_goldfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/goldfish/bubble_eye_goldfish")
         private val RYUKIN_GOLDFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/ryukin_goldfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/goldfish/ryukin_goldfish")
         private val FANTAIL_GOLDFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/fantail_goldfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/goldfish/fantail_goldfish")
         private val SHUBUNKIN_GOLDFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/goldfish/shubunkin_goldfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/goldfish/shubunkin_goldfish")
 
         private val COMMON_GOLDFISH_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/goldfish/common_goldfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/goldfish/common_goldfish")
         private val GOLDFISH_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/goldfish/goldfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/goldfish/goldfish")
     }
 }

@@ -1,5 +1,11 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.server.level.ServerLevel
+
+import net.minecraft.world.level.redstone.Orientation
+
+import net.minecraft.world.InteractionResult
+
 import dev.hybridlabs.aquatic.entity.misc.PrimedDepthChargeEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -7,7 +13,6 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionHand
-import net.minecraft.world.ItemInteractionResult
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.entity.projectile.Projectile
@@ -70,8 +75,8 @@ class DepthChargeBlock(properties: Properties) : Block(properties), SimpleWaterl
         level: Level,
         pos: BlockPos,
         block: Block,
-        fromPos: BlockPos,
-        isMoving: Boolean,
+        orientation: Orientation?,
+        isMoving: Boolean
     ) {
         if (level.hasNeighborSignal(pos)) {
             explode(level, pos)
@@ -87,7 +92,13 @@ class DepthChargeBlock(properties: Properties) : Block(properties), SimpleWaterl
         return super.playerWillDestroy(level, pos, state, player)
     }
 
-    override fun wasExploded(level: Level, pos: BlockPos, explosion: Explosion) {
+    override fun onExplosionHit(
+        state: BlockState,
+        level: ServerLevel,
+        pos: BlockPos,
+        explosion: Explosion,
+        dropConsumer: java.util.function.BiConsumer<ItemStack, BlockPos>
+    ) {
         if (!level.isClientSide) {
             val primedDepthCharge = PrimedDepthChargeEntity(
                 level,
@@ -110,7 +121,7 @@ class DepthChargeBlock(properties: Properties) : Block(properties), SimpleWaterl
         player: Player,
         hand: InteractionHand,
         hit: BlockHitResult,
-    ): ItemInteractionResult {
+    ): InteractionResult {
         val itemstack = player.getItemInHand(hand)
         if (!itemstack.`is`(Items.FLINT_AND_STEEL) && !itemstack.`is`(Items.FIRE_CHARGE)) {
             return super.useItemOn(stack, state, level, pos, player, hand, hit)
@@ -120,14 +131,14 @@ class DepthChargeBlock(properties: Properties) : Block(properties), SimpleWaterl
             val item = itemstack.item
             if (!player.isCreative) {
                 if (stack.`is`(Items.FLINT_AND_STEEL)) {
-                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand))
+                    stack.hurtAndBreak(1, player, hand)
                 } else {
                     stack.consume(1, player)
                 }
             }
 
             player.awardStat(Stats.ITEM_USED.get(item))
-            return ItemInteractionResult.sidedSuccess(level.isClientSide)
+            return if (level.isClientSide) InteractionResult.SUCCESS else InteractionResult.SUCCESS_SERVER
         }
     }
 
@@ -135,7 +146,7 @@ class DepthChargeBlock(properties: Properties) : Block(properties), SimpleWaterl
         if (!level.isClientSide) {
             val blockpos = hit.blockPos
             val entity = projectile.owner
-            if (projectile.isOnFire && projectile.mayInteract(level, blockpos)) {
+            if (projectile.isOnFire && projectile.mayInteract(level as ServerLevel, blockpos)) {
                 explode(level, blockpos, entity as? LivingEntity)
                 level.removeBlock(blockpos, false)
             }

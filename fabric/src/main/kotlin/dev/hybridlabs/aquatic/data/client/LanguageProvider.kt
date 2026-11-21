@@ -13,7 +13,7 @@ import dev.hybridlabs.aquatic.sound.HASoundEvents
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
-import net.minecraft.Util
+import net.minecraft.util.Util
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.entity.EntityType
@@ -811,14 +811,14 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
 
             HAItems.MOON_JELLYFISH_HAT.get().descriptionId to "Made by Jakotens",
 
-            HAItems.GREAT_WHITE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
-            HAItems.BULL_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
-            HAItems.TIGER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
-            HAItems.THRESHER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
-            HAItems.BASKING_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
-            HAItems.WHALE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
-            HAItems.HAMMERHEAD_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
-            HAItems.FRILLED_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.GREAT_WHITE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.BULL_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.TIGER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.THRESHER_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.BASKING_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.WHALE_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.HAMMERHEAD_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
+            HABlocks.FRILLED_SHARK_PLUSHIE.get().descriptionId to "Can be worn as a hat!",
         ).forEach { (itemTranslationKey, translation) ->
             builder.add(itemTranslationKey.plus(".description"), translation)
         }
@@ -881,7 +881,7 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HABiomes.EXOTIC_BADLANDS_ESTUARY to "Exotic Badlands Estuary",
             HABiomes.BLACKWATER_ESTUARY to "Blackwater Estuary",
         ).forEach { (biome, name) ->
-            builder.add("biome.hybrid_aquatic.${biome.location().path}", name)
+            builder.add("biome.hybrid_aquatic.${biome.identifier().path}", name)
         }
 
         // Workaround for Jade/WAILA not being able to find the mod display name on Forge
@@ -956,8 +956,8 @@ class LanguageProvider( output: FabricDataOutput, lookupProvider: CompletableFut
             HAPaintings.NONBINARY_PRIDE_FLAG to listOf("Nonbinary Pride", "Flag"),
             HAPaintings.PANSEXUAL_PRIDE_FLAG to listOf("Pansexual Pride", "Flag"),
         ).forEach { (painting, name) ->
-            builder.add("painting.hybrid_aquatic.${painting.location().path}.title", name[0])
-            builder.add("painting.hybrid_aquatic.${painting.location().path}.author", name[1])
+            builder.add("painting.hybrid_aquatic.${painting.identifier().path}.title", name[0])
+            builder.add("painting.hybrid_aquatic.${painting.identifier().path}.author", name[1])
         }
     }
 

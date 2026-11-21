@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.item
 
+import net.minecraft.world.entity.EntitySpawnReason
+
+import net.minecraft.world.InteractionResult
+
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import net.minecraft.ChatFormatting
@@ -7,22 +11,19 @@ import net.minecraft.core.component.DataComponents
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerLevel
-import net.minecraft.tags.TagEntry.tag
-import net.minecraft.tags.TagKey
 import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.item.Instrument
-import net.minecraft.world.item.InstrumentItem
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.TooltipDisplay
+import java.util.function.Consumer
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.component.CustomData
 import net.minecraft.world.level.Level
 
 class OminousConchItem(
-    properties: Properties,
-    instruments: TagKey<Instrument>
-) : InstrumentItem(properties, instruments) {
+    properties: Properties
+) : Item(properties) {
 
     companion object {
         private const val TAG_HAS_SUMMONED = "hasSummoned"
@@ -31,33 +32,32 @@ class OminousConchItem(
 
     override fun appendHoverText(
         stack: ItemStack,
-        context: TooltipContext,
-        lines: MutableList<Component>,
+        context: Item.TooltipContext,
+        tooltipDisplay: TooltipDisplay,
+        lines: Consumer<Component>,
         tooltipFlag: TooltipFlag
     ) {
-        lines.add(
+        lines.accept(
             Component.translatable("item.hybrid_aquatic.ominous_conch.function")
                 .withStyle(ChatFormatting.GRAY)
         )
 
-        val hasSummoned = stack.get(DataComponents.CUSTOM_DATA)
-            ?.contains(TAG_HAS_SUMMONED)
-            ?: false
+        val hasSummoned = stack.get(DataComponents.CUSTOM_DATA)?.copyTag()?.getBooleanOr(TAG_HAS_SUMMONED, false) ?: false
 
         if (!hasSummoned) {
-            lines.add(
+            lines.accept(
                 Component.translatable("tooltip.hybrid_aquatic.ominous_conch.unused")
                     .withStyle(ChatFormatting.DARK_PURPLE)
             )
         } else {
-            lines.add(
+            lines.accept(
                 Component.translatable("tooltip.hybrid_aquatic.ominous_conch.used")
                     .withStyle(ChatFormatting.GRAY)
             )
         }
     }
 
-    override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
+    override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResult {
         val result = super.use(level, player, hand)
         val stack = player.getItemInHand(hand)
 
@@ -65,11 +65,11 @@ class OminousConchItem(
 
         val tag = stack.get(DataComponents.CUSTOM_DATA)?.copyTag()
 
-        if (tag != null && tag.getBoolean(TAG_HAS_SUMMONED)) return result
+        if (tag != null && tag.getBooleanOr(TAG_HAS_SUMMONED, false)) return InteractionResult.PASS
 
         val biome = level.getBiome(player.blockPosition())
-        if (!biome.`is`(HAPIBiomeTags.CAN_SUMMON_SHELL_BEAST)) return result
-        if (!player.isUnderWater) return result
+        if (!biome.`is`(HAPIBiomeTags.CAN_SUMMON_SHELL_BEAST)) return InteractionResult.PASS
+        if (!player.isUnderWater) return InteractionResult.PASS
 
         stack.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY) { data ->
             data.update { tag ->
@@ -86,7 +86,7 @@ class OminousConchItem(
             spawnAfterCooldown(serverLevel, pos, startTick)
         }
 
-        return result
+        return InteractionResult.SUCCESS_SERVER
     }
 
     private fun spawnAfterCooldown(
@@ -98,11 +98,11 @@ class OminousConchItem(
 
         if (server.tickCount >= startTick + SUMMON_DELAY_TICKS) {
 
-            val shellBeast = HAEntityTypes.SHELL_BEAST.get().create(level)
+            val shellBeast = HAEntityTypes.SHELL_BEAST.get().create(level, EntitySpawnReason.MOB_SUMMONED)
 
             if (shellBeast != null) {
 
-                shellBeast.moveTo(
+                shellBeast.snapTo(
                     pos.x + 0.5,
                     pos.y.toDouble(),
                     pos.z + 0.5,
@@ -119,11 +119,11 @@ class OminousConchItem(
                     val offsetX = (random.nextDouble() - 0.5) * 8.0
                     val offsetZ = (random.nextDouble() - 0.5) * 8.0
 
-                    val beakling = HAEntityTypes.BEAKLING.get().create(level)
+                    val beakling = HAEntityTypes.BEAKLING.get().create(level, EntitySpawnReason.MOB_SUMMONED)
 
                     if (beakling != null) {
 
-                        beakling.moveTo(
+                        beakling.snapTo(
                             shellBeast.x + offsetX,
                             shellBeast.y,
                             shellBeast.z + offsetZ,

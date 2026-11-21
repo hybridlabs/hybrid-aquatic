@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.entity.miniboss.KarkinosEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.LivingEntity
@@ -45,7 +47,6 @@ open class KarkinosMeleeAttackGoal(
         return super.stop()
     }
 
-
     override fun requiresUpdateEveryTick(): Boolean {
         return true
     }
@@ -59,13 +60,13 @@ open class KarkinosMeleeAttackGoal(
         if (attackDelayTicks > 0) {
             attackDelayTicks--
             if (attackDelayTicks == 0 && pendingTarget != null && !karkinos.level().isClientSide) {
-                karkinos.doHurtTarget(pendingTarget!!)
+                (karkinos.level() as? ServerLevel)?.let { karkinos.doHurtTarget(it, pendingTarget!!) }
 
                 val target = pendingTarget
                 if (target is Player) {
                     val itemInUse = target.useItem
                     if (itemInUse.`is`(Items.SHIELD)) {
-                        target.disableShield()
+                        target.stopUsingItem()
                         target.level().broadcastEntityEvent(target, 30.toByte())
                     }
                 }

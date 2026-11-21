@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.LevelReader
+
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -7,6 +9,7 @@ import net.minecraft.util.ColorRGBA
 import net.minecraft.util.RandomSource
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.ColoredFallingBlock
 import net.minecraft.world.level.block.state.BlockState
@@ -19,17 +22,19 @@ class AeratedSandBlock(dustColor: ColorRGBA, settings: Properties) : ColoredFall
 
     override fun updateShape(
         state: BlockState,
-        facing: Direction,
-        facingState: BlockState,
-        level: LevelAccessor,
+        level: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         currentPos: BlockPos,
+        facing: Direction,
         facingPos: BlockPos,
+        facingState: BlockState,
+        random: RandomSource
     ): BlockState {
         if (facing == Direction.UP && facingState.`is`(Blocks.WATER)) {
-            level.scheduleTick(currentPos, this, DECORATIVE_BUBBLE_COLUMN_CHECK_DELAY)
+            scheduledTickAccess.scheduleTick(currentPos, this, DECORATIVE_BUBBLE_COLUMN_CHECK_DELAY)
         }
 
-        return super.updateShape(state, facing, facingState, level, currentPos, facingPos)
+        return super.updateShape(state, level, scheduledTickAccess, currentPos, facing, facingPos, facingState, random)
     }
 
     override fun onPlace(state: BlockState, level: Level, pos: BlockPos, oldState: BlockState, isMoving: Boolean) {

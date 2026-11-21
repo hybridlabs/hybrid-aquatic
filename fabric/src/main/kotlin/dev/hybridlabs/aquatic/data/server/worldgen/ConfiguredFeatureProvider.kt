@@ -24,7 +24,7 @@ import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.tags.BlockTags
-import net.minecraft.util.random.SimpleWeightedRandomList
+import net.minecraft.util.random.WeightedList
 import net.minecraft.util.valueproviders.BiasedToBottomInt
 import net.minecraft.util.valueproviders.ConstantInt
 import net.minecraft.util.valueproviders.UniformInt
@@ -73,7 +73,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>()
+                                WeightedList.builder<BlockState>()
                                     .add(
                                         HABlocks.ANEMONE.get().defaultBlockState()
                                             .setValue(WATERLOGGED, true), 1
@@ -166,7 +166,7 @@ class ConfiguredFeatureProvider(
                 WATERLOGGED_VEGETATION_PATCH, VegetationPatchConfiguration(
                     HABlockTags.TIDE_POOL_REPLACEABLE,
                     WeightedStateProvider(
-                        SimpleWeightedRandomList.builder<BlockState>()
+                        WeightedList.builder<BlockState>()
                             .add(HABlocks.SHORESTONE.get().defaultBlockState(), 3)
                             .add(HABlocks.BARNACLE_SHORESTONE.get().defaultBlockState(), 1)
                             .build()
@@ -174,7 +174,7 @@ class ConfiguredFeatureProvider(
                     PlacementUtils.inlinePlaced(
                         HAFeatures.ANEMONES.get(),
                         FeatureConfiguration.NONE,
-                        *arrayOfNulls<PlacementModifier>(0)
+                        *arrayOf<PlacementModifier>()
                     ),
                     CaveSurface.FLOOR,
                     BiasedToBottomInt.of(1, 7),
@@ -226,22 +226,22 @@ class ConfiguredFeatureProvider(
                         PlacementUtils.inlinePlaced(
                             HAFeatures.DEEP_CORAL_TREE.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.DEEP_CORAL_CLAW.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.DEEP_CORAL_MUSHROOM.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.DEEP_CORAL_TABLE.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         )
                     )
                 )
@@ -257,22 +257,22 @@ class ConfiguredFeatureProvider(
                         PlacementUtils.inlinePlaced(
                             HAFeatures.BLEACHED_CORAL_TREE.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.BLEACHED_CORAL_CLAW.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.BLEACHED_CORAL_MUSHROOM.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.BLEACHED_CORAL_TABLE.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         )
                     )
                 )
@@ -288,22 +288,22 @@ class ConfiguredFeatureProvider(
                         PlacementUtils.inlinePlaced(
                             HAFeatures.REEF_CORAL_TREE.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.REEF_CORAL_CLAW.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.REEF_CORAL_MUSHROOM.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         ),
                         PlacementUtils.inlinePlaced(
                             HAFeatures.REEF_CORAL_TABLE.get(),
                             FeatureConfiguration.NONE,
-                            *arrayOfNulls<PlacementModifier>(0)
+                            *arrayOf<PlacementModifier>()
                         )
                     )
                 )
@@ -476,7 +476,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>().apply {
+                                WeightedList.builder<BlockState>().apply {
                                     floatingLeavesStates.forEach { state ->
                                         add(state, 1)
                                     }
@@ -513,7 +513,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>().apply {
+                                WeightedList.builder<BlockState>().apply {
                                     floatingLeafLitterStates.forEach { state ->
                                         add(state, 1)
                                     }
@@ -550,7 +550,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>().apply {
+                                WeightedList.builder<BlockState>().apply {
                                     duckweedStates.forEach { state ->
                                         add(state, 1)
                                     }
@@ -587,7 +587,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>().apply {
+                                WeightedList.builder<BlockState>().apply {
                                     floatingPetalsStates.forEach { state ->
                                         add(state, 1)
                                     }
@@ -770,7 +770,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>()
+                                WeightedList.builder<BlockState>()
                                     .add(
                                         HABlocks.GIANT_CLAM.get().defaultBlockState()
                                             .setValue(WATERLOGGED, true)
@@ -800,7 +800,7 @@ class ConfiguredFeatureProvider(
                         Feature.SIMPLE_BLOCK,
                         SimpleBlockConfiguration(
                             WeightedStateProvider(
-                                SimpleWeightedRandomList.builder<BlockState>()
+                                WeightedList.builder<BlockState>()
                                     .add(
                                         HABlocks.OYSTER.get().defaultBlockState()
                                             .setValue(WATERLOGGED, true)
@@ -922,7 +922,7 @@ class ConfiguredFeatureProvider(
                                                     ),
                                                 ),
                                                 WeightedStateProvider(
-                                                    SimpleWeightedRandomList.builder<BlockState>().add(
+                                                    WeightedList.builder<BlockState>().add(
                                                         HABlocks.CORALSTONE.get().defaultBlockState(),
                                                         2
                                                     ).add(
@@ -983,7 +983,7 @@ class ConfiguredFeatureProvider(
                         Feature.DISK, DiskConfiguration(
                             RuleBasedBlockStateProvider(
                                 WeightedStateProvider(
-                                    SimpleWeightedRandomList.builder<BlockState>()
+                                    WeightedList.builder<BlockState>()
                                         .add(Blocks.DEAD_HORN_CORAL_BLOCK.defaultBlockState(), 1)
                                         .add(Blocks.DEAD_FIRE_CORAL_BLOCK.defaultBlockState(), 1)
                                         .add(Blocks.DEAD_BUBBLE_CORAL_BLOCK.defaultBlockState(), 1)
@@ -1037,7 +1037,7 @@ class ConfiguredFeatureProvider(
                         Feature.DISK, DiskConfiguration(
                             RuleBasedBlockStateProvider(
                                 WeightedStateProvider(
-                                    SimpleWeightedRandomList.builder<BlockState>()
+                                    WeightedList.builder<BlockState>()
                                         .add(Blocks.CALCITE.defaultBlockState(), 5)
                                         .add(Blocks.DIORITE.defaultBlockState(), 3)
                                         .add(HABlocks.WHITE_SANDSTONE.get().defaultBlockState(), 1)

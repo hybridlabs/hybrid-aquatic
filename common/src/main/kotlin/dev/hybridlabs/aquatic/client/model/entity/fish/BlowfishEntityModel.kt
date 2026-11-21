@@ -1,18 +1,19 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.aquatic.client.model.HADataTickets
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.BlowfishEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.client.renderer.rendertype.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
+import net.minecraft.resources.Identifier
 
 class BlowfishEntityModel : BaseFishEntityModel<BlowfishEntity>("hybrid_aquatic", "blowfish") {
-    override fun getRenderType(animatable: BlowfishEntity, texture: ResourceLocation): RenderType {
-        return RenderType.entityTranslucent(texture)
-    }
 
-    override fun getTextureResource(animatable: BlowfishEntity): ResourceLocation {
-        val puffState = animatable.getPuffState()
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        val puffState = (renderState.getGeckolibData(HADataTickets.PUFF_STATE) ?: 0)
 
         val texturePath = when (puffState) {
             0 -> "textures/entity/fish/blowfish/blowfish_small.png"
@@ -23,13 +24,21 @@ class BlowfishEntityModel : BaseFishEntityModel<BlowfishEntity>("hybrid_aquatic"
         return CommonClass.locate(texturePath)
     }
 
-    override fun getModelResource(animatable: BlowfishEntity): ResourceLocation {
-        val puffState = animatable.getPuffState()
+    override fun addAdditionalStateData(
+        animatable: BlowfishEntity,
+        relatedObject: Any?,
+        renderState: GeoRenderState
+    ) {
+        renderState.addGeckolibData(HADataTickets.PUFF_STATE, animatable.getPuffState())
+    }
+
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        val puffState = (renderState.getGeckolibData(HADataTickets.PUFF_STATE) ?: 0)
 
         val texturePath = when (puffState) {
-            0 -> "geo/fish/blowfish/blowfish_small.geo.json"
-            1 -> "geo/fish/blowfish/blowfish_medium.geo.json"
-            else -> "geo/fish/blowfish/blowfish_large.geo.json"
+            0 -> "fish/blowfish/blowfish_small"
+            1 -> "fish/blowfish/blowfish_medium"
+            else -> "fish/blowfish/blowfish_large"
         }
 
         return CommonClass.locate(texturePath)

@@ -111,17 +111,17 @@ object BiomeSurvey : ModInitializer {
 
         val expected = source.possibleBiomes()
             .mapNotNull { it.unwrapKey().orElse(null) }
-            .filter { it.location().namespace == Constants.MOD_ID }
-            .sortedBy { it.location().path }
+            .filter { it.identifier().namespace == Constants.MOD_ID }
+            .sortedBy { it.identifier().path }
         val missing = expected.filter { (counts[it] ?: 0) == 0 }
         val floors = floorColumns.mapValues { (biome, columns) -> floorMatches(level, biome, columns) }
         val lukewarmShare = if (tidePools == 0) 0.0 else tidePoolsByLukewarm.toDouble() / tidePools
 
         val failures = buildList {
             if (expected.isEmpty()) add("biome source lists no ${Constants.MOD_ID} biomes")
-            missing.forEach { add("never sampled: ${it.location()}") }
+            missing.forEach { add("never sampled: ${it.identifier()}") }
             floors.forEach { (biome, matches) ->
-                if (matches == 0) add("no ${FLOORS.getValue(biome)().builtInRegistryHolder().key().location()} floor in ${biome.location()}")
+                if (matches == 0) add("no ${FLOORS.getValue(biome)().builtInRegistryHolder().key().identifier()} floor in ${biome.identifier()}")
             }
             if (lukewarmShare < MIN_TIDE_POOLS_BY_LUKEWARM) {
                 add("only ${percent(lukewarmShare)} of tide pools border a lukewarm ocean")
@@ -138,13 +138,13 @@ object BiomeSurvey : ModInitializer {
             appendLine("Worldgen mods: ${mods.ifEmpty { "none" }}")
             appendLine("Biome source: ${source.javaClass.name}")
             appendLine()
-            expected.forEach { appendLine("${it.location()}: ${counts[it] ?: 0}") }
+            expected.forEach { appendLine("${it.identifier()}: ${counts[it] ?: 0}") }
             appendLine()
             listOf(Biomes.WARM_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.BEACH).forEach {
-                appendLine("${it.location()}: ${counts[it] ?: 0}")
+                appendLine("${it.identifier()}: ${counts[it] ?: 0}")
             }
-            floors.toSortedMap(compareBy { it.location().path }).forEach { (biome, matches) ->
-                appendLine("${biome.location()} floor: $matches / ${floorColumns.getValue(biome).size} columns")
+            floors.toSortedMap(compareBy { it.identifier().path }).forEach { (biome, matches) ->
+                appendLine("${biome.identifier()} floor: $matches / ${floorColumns.getValue(biome).size} columns")
             }
             appendLine("tide pools bordering lukewarm ocean: $tidePoolsByLukewarm / $tidePools (${percent(lukewarmShare)})")
             appendLine()

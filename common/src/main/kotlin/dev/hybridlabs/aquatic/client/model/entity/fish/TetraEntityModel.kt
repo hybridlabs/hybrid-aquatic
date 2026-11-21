@@ -1,12 +1,15 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.fish.TetraEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 
 class TetraEntityModel : BaseFishEntityModel<TetraEntity>("hybrid_aquatic", "tetra") {
-    override fun getTextureResource(animatable: TetraEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(TetraEntity.Companion.Type.entries)!!) {
             TetraEntity.Companion.Type.NEON_TETRA -> NEON_TETRA_TEXTURE
             TetraEntity.Companion.Type.GREEN_NEON_TETRA -> GREEN_NEON_TETRA_TEXTURE
             TetraEntity.Companion.Type.BLACK_NEON_TETRA -> BLACK_NEON_TETRA_TEXTURE
@@ -20,20 +23,20 @@ class TetraEntityModel : BaseFishEntityModel<TetraEntity>("hybrid_aquatic", "tet
 
     companion object {
         private val NEON_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/neon_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/neon_tetra.png")
         private val GREEN_NEON_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/green_neon_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/green_neon_tetra.png")
         private val BLACK_NEON_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/black_neon_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/black_neon_tetra.png")
         private val EMBER_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/ember_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/ember_tetra.png")
         private val GLOWLIGHT_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/glowlight_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/glowlight_tetra.png")
         private val RUMMYNOSE_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/rummynose_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/rummynose_tetra.png")
         private val CARDINAL_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/cardinal_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/cardinal_tetra.png")
         private val BLIND_CAVE_TETRA_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/blind_cave_tetra.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tetra/blind_cave_tetra.png")
     }
 }

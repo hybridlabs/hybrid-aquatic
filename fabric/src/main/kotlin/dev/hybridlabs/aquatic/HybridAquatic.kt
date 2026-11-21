@@ -15,7 +15,6 @@ import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
-import dev.hybridlabs.aquatic.item.instrument.HAInstruments
 import dev.hybridlabs.aquatic.loot.LootTableModifications
 import dev.hybridlabs.aquatic.loot.entry.HybridAquaticLootPoolEntryTypes
 import dev.hybridlabs.aquatic.network.HybridAquaticFabricNetworking
@@ -44,7 +43,7 @@ import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.world.entity.npc.VillagerTrades
+import net.minecraft.world.entity.npc.villager.VillagerTrades
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
@@ -66,7 +65,6 @@ object HybridAquatic : ModInitializer {
         HAPlatformFluids
         HAPlatformBlocks
         HASoundEvents
-        HAInstruments
         HAEntityTypes
         HABlockEntityTypes
         HAPaintings
@@ -132,8 +130,11 @@ object HybridAquatic : ModInitializer {
         BuiltInRegistries.ITEM
             .filter { it is BlockItem && it.block is PlushieBlock }
             .forEach { block ->
-                TradeOfferHelper.registerWanderingTraderOffers(2) { list ->
-                    list.add(VillagerTrades.ItemsForEmeralds(block, 8, 1, 2, 2))
+                TradeOfferHelper.registerWanderingTraderOffers { builder ->
+                    builder.addOffersToPool(
+                        TradeOfferHelper.WanderingTraderOffersBuilder.SELL_COMMON_ITEMS_POOL,
+                        VillagerTrades.ItemsForEmeralds(block, 8, 1, 2, 2)
+                    )
                 }
             }
     }

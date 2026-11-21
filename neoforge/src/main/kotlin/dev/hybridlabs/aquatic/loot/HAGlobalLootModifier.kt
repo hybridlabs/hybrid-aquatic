@@ -6,24 +6,22 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.tags.TagKey
-import net.minecraft.util.random.WeightedEntry
-import net.minecraft.util.random.WeightedRandomList
+import net.minecraft.util.random.WeightedList
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.storage.loot.LootContext
-import net.minecraft.world.level.storage.loot.LootParams
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier
 import net.neoforged.neoforge.common.loot.LootModifier
 
 class HAGlobalLootModifier(
     conditionsIn: Array<LootItemCondition>,
-    val target: ResourceLocation,
+    val target: Identifier,
     val itemTag: TagKey<Item>,
     val chance: Float,
-    val tables: WeightedRandomList<WeightedEntry.Wrapper<ResourceLocation>>
+    val tables: WeightedList<Identifier>
 ) : LootModifier(conditionsIn) {
 
     override fun doApply(
@@ -37,17 +35,11 @@ class HAGlobalLootModifier(
                         generatedLoot.removeAt(idx)
                         val table = tables.getRandom(context.random)
                         if (table.isPresent) {
-                            val bob = ResourceKey.create(Registries.LOOT_TABLE, table.get().data)
+                            val bob = ResourceKey.create(Registries.LOOT_TABLE, table.get())
                             val lootTable = context.level.server.reloadableRegistries().getLootTable(
                                 bob
                             )
-                            generatedLoot.addAll(
-                                lootTable.getRandomItems(
-                                    LootParams(
-                                        context.level, emptyMap(), emptyMap(), context.luck
-                                    )
-                                )
-                            )
+                            lootTable.getRandomItems(context) { loot -> generatedLoot.add(loot) }
                         }
                     }
                 }
@@ -64,12 +56,12 @@ class HAGlobalLootModifier(
         val CODEC: MapCodec<HAGlobalLootModifier> = RecordCodecBuilder.mapCodec<HAGlobalLootModifier> { inst ->
             @Suppress("DEPRECATION") codecStart<HAGlobalLootModifier>(inst).and(
                 inst.group(
-                    ResourceLocation.CODEC.fieldOf("target").forGetter(HAGlobalLootModifier::target),
+                    Identifier.CODEC.fieldOf("target").forGetter(HAGlobalLootModifier::target),
                     TagKey<Item>.codec(Registries.ITEM).fieldOf("item_tag").forGetter(
                         HAGlobalLootModifier::itemTag
                     ),
                     Codec.FLOAT.fieldOf("chance").forGetter(HAGlobalLootModifier::chance),
-                    WeightedRandomList.codec(WeightedEntry.Wrapper<ResourceLocation>.codec(ResourceLocation.CODEC))
+                    WeightedList.codec(Identifier.CODEC)
                         .fieldOf("tables").forGetter(HAGlobalLootModifier::tables)
                 )
             ).apply(inst, ::HAGlobalLootModifier)

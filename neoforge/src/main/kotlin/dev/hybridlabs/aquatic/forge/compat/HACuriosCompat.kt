@@ -2,21 +2,24 @@ package dev.hybridlabs.aquatic.forge.compat
 
 import com.mojang.blaze3d.vertex.PoseStack
 import dev.hybridlabs.aquatic.item.HAItems
+import net.minecraft.client.Minecraft
 import net.minecraft.client.model.EntityModel
 import net.minecraft.client.model.HumanoidModel
 import net.minecraft.client.player.AbstractClientPlayer
-import net.minecraft.client.renderer.MultiBufferSource
+import net.minecraft.client.renderer.SubmitNodeCollector
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.RenderLayerParent
-import net.minecraft.client.renderer.texture.OverlayTexture
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.world.entity.EquipmentSlot
-import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import software.bernie.geckolib.animatable.GeoItem
 import software.bernie.geckolib.animatable.client.GeoRenderProvider
+import software.bernie.geckolib.constant.DataTickets
 import software.bernie.geckolib.renderer.GeoArmorRenderer
-import software.bernie.geckolib.util.Color
+import software.bernie.geckolib.renderer.base.GeoRenderer
 import top.theillusivec4.curios.api.SlotContext
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry
 import top.theillusivec4.curios.api.client.ICurioRenderer
 
 /**
@@ -38,40 +41,66 @@ object HACuriosCompat {
     }
 
     private fun registerCurioRenderer(item: Item, equipmentSlot: EquipmentSlot) {
-        CuriosRendererRegistry.register(item) { HACurioRenderer(equipmentSlot) }
+        ICurioRenderer.register(item) { HACurioRenderer(equipmentSlot) }
     }
 
-    private class HACurioRenderer(val equipmentSlot: EquipmentSlot) : ICurioRenderer {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : LivingEntity?, M : EntityModel<T?>?> render(
+    private class HACurioRenderer(private val equipmentSlot: EquipmentSlot) : ICurioRenderer {
+        override fun <S : LivingEntityRenderState, M : EntityModel<in S>> render(
             itemStack: ItemStack,
             slotContext: SlotContext,
             poseStack: PoseStack,
-            renderLayerParent: RenderLayerParent<T?, M?>,
-            bufferSource: MultiBufferSource,
-            light: Int,
-            limbSwing: Float,
-            limbSwingAmount: Float,
-            partialTicks: Float,
-            ageInTicks: Float,
-            netHeadYaw: Float,
-            headPitch: Float
+            submitNodeCollector: SubmitNodeCollector,
+            packedLight: Int,
+            renderState: S,
+            renderLayerParent: RenderLayerParent<S, M>,
+            context: EntityRendererProvider.Context,
+            yRotation: Float,
+            xRotation: Float
         ) {
-            if (slotContext.entity is AbstractClientPlayer) {
-                val renderer = GeoRenderProvider.of(itemStack)
-                val originalModel = renderLayerParent.model as HumanoidModel<LivingEntity>
+            val player = slotContext.entity as? AbstractClientPlayer ?: return
+            val humanoidState = renderState as? HumanoidRenderState ?: return
+            val baseModel = renderLayerParent.model as? HumanoidModel<*> ?: return
+            val armorRenderer = GeoRenderProvider.of(itemStack).getGeoArmorRenderer(itemStack, equipmentSlot)
+                ?: return
 
-                val armorModel = renderer.getGeoArmorRenderer(
-                    slotContext.entity, itemStack, equipmentSlot,
-                    originalModel
-                ) as HumanoidModel<AbstractClientPlayer>?
-                if (armorModel == null) return
-
-                if (armorModel is GeoArmorRenderer<*>) armorModel.prepForRender(slotContext.entity, itemStack, equipmentSlot, originalModel, bufferSource, partialTicks, limbSwing, limbSwingAmount, netHeadYaw, headPitch)
-                (originalModel as HumanoidModel<AbstractClientPlayer>).copyPropertiesTo(armorModel)
-
-                armorModel.renderToBuffer(poseStack, null, light, OverlayTexture.NO_OVERLAY, Color.WHITE.argbInt)
-            }
+            submitGeoArmor(
+                armorRenderer,
+                itemStack,
+                player,
+                equipmentSlot,
+                baseModel,
+                humanoidState,
+                poseStack,
+                submitNodeCollector,
+                packedLight
+            )
         }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun submitGeoArmor(
+        armorRenderer: GeoArmorRenderer<*, *>,
+        itemStack: ItemStack,
+        entity: AbstractClientPlayer,
+        equipmentSlot: EquipmentSlot,
+        baseModel: HumanoidModel<*>,
+        renderState: HumanoidRenderState,
+        poseStack: PoseStack,
+        submitNodeCollector: SubmitNodeCollector,
+        packedLight: Int
+    ) {
+        val renderer =
+            armorRenderer as GeoRenderer<GeoItem, GeoArmorRenderer.RenderData, HumanoidRenderState>
+        val renderData = GeoArmorRenderer.RenderData(itemStack, equipmentSlot, entity, baseModel)
+        val partialTick = Minecraft.getInstance().deltaTracker.getGameTimeDeltaPartialTick(false)
+
+        renderState.addGeckolibData(DataTickets.PACKED_LIGHT, packedLight)
+        renderer.fillRenderState(itemStack.item as GeoItem, renderData, renderState, partialTick)
+        renderer.performRenderPass(
+            renderState,
+            poseStack,
+            submitNodeCollector,
+            Minecraft.getInstance().gameRenderer.levelRenderState.cameraRenderState
+        )
     }
 }

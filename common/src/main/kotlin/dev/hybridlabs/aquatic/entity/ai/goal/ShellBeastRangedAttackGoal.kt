@@ -70,7 +70,6 @@ class ShellBeastRangedAttackGoal(private val shellBeast: ShellBeastEntity) : Goa
             strafingTime = 0
         }
 
-
         if (strafingTime > -1) {
             strafingBackwards = distance < 256 // 16**2
             shellBeast.moveControl.strafe(

@@ -1,41 +1,44 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.fish.CarpEntity
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import kotlin.random.Random
 
 class CarpEntityModel : BaseFishEntityModel<CarpEntity>("hybrid_aquatic", "carp") {
 
-    override fun getTextureResource(animatable: CarpEntity): ResourceLocation {
-        if (animatable.isBaby) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             return BABY_CARP_TEXTURE
         }
 
-        val seed = animatable.uuid.leastSignificantBits
+        val seed = (renderState.getGeckolibData(HAPIDataTickets.ENTITY_UUID)!!).leastSignificantBits
         val random = Random(seed)
 
-        return when (animatable.variant) {
+        return when (renderState.getVariant(CarpEntity.Companion.Type.entries)!!) {
             CarpEntity.Companion.Type.COMMON -> COMMON_TEXTURE
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_TEXTURE
             CarpEntity.Companion.Type.KOI -> koiTextures[random.nextInt(koiTextures.size)]
         }
     }
 
-    override fun getModelResource(animatable: CarpEntity): ResourceLocation {
-        if (animatable.isBaby) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             return BABY_CARP_MODEL
         }
 
-        return when (animatable.variant) {
+        return when (renderState.getVariant(CarpEntity.Companion.Type.entries)!!) {
             CarpEntity.Companion.Type.PRUSSIAN -> PRUSSIAN_CARP_MODEL
             CarpEntity.Companion.Type.KOI -> COMMON_CARP_MODEL
             CarpEntity.Companion.Type.COMMON -> COMMON_CARP_MODEL
         }
     }
 
-    override fun getAnimationResource(animatable: CarpEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: CarpEntity): Identifier {
         return when (animatable.variant) {
             CarpEntity.Companion.Type.PRUSSIAN -> CARP_ANIMATION
             CarpEntity.Companion.Type.KOI -> CARP_ANIMATION
@@ -43,39 +46,36 @@ class CarpEntityModel : BaseFishEntityModel<CarpEntity>("hybrid_aquatic", "carp"
         }
     }
 
-    fun getPatternTextureResource(animatable: CarpEntity, layer: String): ResourceLocation {
-        return when (animatable.variant) {
-            CarpEntity.Companion.Type.KOI -> CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
-            else -> CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
-        }
+    fun getPatternTextureResource(layer: String): Identifier {
+        return CommonClass.locate("textures/entity/fish/carp/layer/$layer.png")
     }
 
     companion object {
         private val BABY_CARP_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/baby_carp.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/baby_carp.png")
         private val COMMON_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/carp.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/carp.png")
         private val PRUSSIAN_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/prussian_carp.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/prussian_carp.png")
 
         private val BABY_CARP_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/carp/baby_carp.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/carp/baby_carp")
         private val COMMON_CARP_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/carp/carp.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/carp/carp")
         private val PRUSSIAN_CARP_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/carp/prussian_carp.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/carp/prussian_carp")
 
         private val CARP_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/carp/carp.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/carp/carp")
 
         private val koiTextures = listOf(
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_silver.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_gold.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_orange.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_red.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_yellow.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_black.png"),
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_white.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_silver.png"),
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_gold.png"),
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_orange.png"),
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_red.png"),
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_yellow.png"),
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_black.png"),
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/carp/koi_white.png")
         )
     }
 }

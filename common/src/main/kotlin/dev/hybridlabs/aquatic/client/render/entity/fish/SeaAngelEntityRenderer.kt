@@ -1,9 +1,22 @@
 package dev.hybridlabs.aquatic.client.render.entity.fish
 
+import net.minecraft.resources.Identifier
+import net.minecraft.client.renderer.rendertype.RenderTypes
+import net.minecraft.client.renderer.rendertype.RenderType
 import dev.hybridlabs.aquatic.client.model.entity.fish.SeaAngelEntityModel
 import dev.hybridlabs.aquatic.entity.fish.SeaAngelEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class SeaAngelEntityRenderer(context: Context) :
-    BaseFishEntityRenderer<SeaAngelEntity>(context, SeaAngelEntityModel(), true, true)
+    BaseFishEntityRenderer<SeaAngelEntity, LivingEntityRenderState>(context, SeaAngelEntityModel(), true, true) {
+
+    override fun getRenderType(
+        renderState: LivingEntityRenderState,
+        texture: Identifier
+    ): RenderType {
+        return RenderTypes.entityTranslucent(texture)
+    }
+}

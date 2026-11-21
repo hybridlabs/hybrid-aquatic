@@ -7,6 +7,7 @@ import net.minecraft.core.HolderSet
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
+import net.minecraft.util.random.Weighted
 import net.minecraft.world.level.biome.MobSpawnSettings
 import net.neoforged.neoforge.common.world.BiomeModifier
 import net.neoforged.neoforge.common.world.BiomeModifiers
@@ -34,15 +35,15 @@ class BiomeModifierProvider(context: BootstrapContext<BiomeModifier>) {
             )
 
             context.register(
-                key, BiomeModifiers.AddSpawnsBiomeModifier(
+                key, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
                     biomeRegistry.get(spawnConfig.biomes).get(),
-                    listOf(
+                    Weighted(
                         MobSpawnSettings.SpawnerData(
                             spawnConfig.type,
-                            spawnConfig.weight,
                             spawnConfig.minGroupSize,
                             spawnConfig.maxGroupSize
-                        )
+                        ),
+                        spawnConfig.weight
                     )
                 )
             )
@@ -60,7 +61,7 @@ class BiomeModifierProvider(context: BootstrapContext<BiomeModifier>) {
         val featureRegistry = context.lookup(Registries.PLACED_FEATURE)
         for (addition in BiomeFeatureAddition.builtIn) {
 
-            val location = "${addition.placedFeature.location().path}_${addition.biomeTag.location.path}"
+            val location = "${addition.placedFeature.identifier().path}_${addition.biomeTag.location.path}"
             val key = ResourceKey.create(
                 BIOME_MODIFIERS,
                 CommonClass.locate(location)

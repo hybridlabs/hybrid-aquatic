@@ -4,8 +4,8 @@ import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.SimpleFabricLootTableProvider
-import net.minecraft.advancements.critereon.EntityFlagsPredicate
-import net.minecraft.advancements.critereon.EntityPredicate
+import net.minecraft.advancements.criterion.EntityFlagsPredicate
+import net.minecraft.advancements.criterion.EntityPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Items
@@ -32,7 +32,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         val lookup = lookupProvider.join()
         // nautilus
         // sharks
-        export(exporter, HAEntityTypes.SLEEPER_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SLEEPER_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -42,7 +42,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SIXGILL_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SIXGILL_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -52,7 +52,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.GOBLIN_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.GOBLIN_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -62,7 +62,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.HAMMERHEAD_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.HAMMERHEAD_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -72,7 +72,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BULL_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BULL_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -82,7 +82,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.GREAT_WHITE_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.GREAT_WHITE_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -92,7 +92,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.THRESHER_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.THRESHER_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -102,7 +102,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.WHALE_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.WHALE_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -112,7 +112,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BASKING_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BASKING_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -122,7 +122,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.HOUND_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.HOUND_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -132,7 +132,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SAND_TIGER_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SAND_TIGER_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -142,7 +142,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.FRILLED_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.FRILLED_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -152,7 +152,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.LANTERN_SHARK.get().defaultLootTable){
+        export(exporter, HAEntityTypes.LANTERN_SHARK.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -162,7 +162,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
         
-        export(exporter, HAEntityTypes.NAUTILUS.get().defaultLootTable){
+        export(exporter, HAEntityTypes.NAUTILUS.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -186,7 +186,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.MANATEE.get().defaultLootTable){
+        export(exporter, HAEntityTypes.MANATEE.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -203,7 +203,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.STARFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.STARFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -212,7 +212,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.DUGONG.get().defaultLootTable){
+        export(exporter, HAEntityTypes.DUGONG.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -230,7 +230,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         }
 
         //#region Minibosses
-        export(exporter, HAEntityTypes.KARKINOS.get().defaultLootTable){
+        export(exporter, HAEntityTypes.KARKINOS.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -245,7 +245,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SHELL_BEAST.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SHELL_BEAST.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -262,7 +262,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         //#endregion
 
         //#region Crustaceans
-        export(exporter, HAEntityTypes.DECORATOR_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.DECORATOR_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -281,7 +281,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.HORSESHOE_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.HORSESHOE_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -300,7 +300,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.DUNGENESS_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.DUNGENESS_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -319,7 +319,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.FIDDLER_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.FIDDLER_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -338,7 +338,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SPIDER_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SPIDER_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -357,7 +357,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.GHOST_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.GHOST_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -376,7 +376,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.VAMPIRE_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.VAMPIRE_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -395,7 +395,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.FLOWER_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.FLOWER_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -414,7 +414,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.COCONUT_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.COCONUT_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -433,7 +433,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.YETI_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.YETI_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -452,7 +452,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.LIGHTFOOT_CRAB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.LIGHTFOOT_CRAB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -471,7 +471,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.LOBSTER.get().defaultLootTable){
+        export(exporter, HAEntityTypes.LOBSTER.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -505,7 +505,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.CRAYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.CRAYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -524,7 +524,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SHRIMP.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SHRIMP.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -544,7 +544,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         }
 
         // cephalopods
-        export(exporter, HAEntityTypes.VAMPIRE_SQUID.get().defaultLootTable){
+        export(exporter, HAEntityTypes.VAMPIRE_SQUID.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -562,7 +562,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
                     ).build()
             )
         }
-        export(exporter, HAEntityTypes.CUTTLEFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.CUTTLEFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -592,7 +592,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.ARROW_SQUID.get().defaultLootTable){
+        export(exporter, HAEntityTypes.ARROW_SQUID.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -617,34 +617,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.GIANT_SQUID.get().defaultLootTable){
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(Items.INK_SAC)
-                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
-                    ).build()
-            )
-            pool(
-                LootPool.lootPool()
-                    .add(
-                        LootItem.lootTableItem(HAItems.RAW_TENTACLE.get())
-                            .apply(
-                                SmeltItemFunction.smelted().`when`(
-                                    LootItemEntityPropertyCondition.hasProperties(
-                                        LootContext.EntityTarget.THIS,
-                                        NEEDS_ENTITY_ON_FIRE
-                                    )
-                                )
-                            )
-                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
-                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
-                    ).build()
-            )
-        }
-
-        export(exporter, HAEntityTypes.COLOSSAL_SQUID.get().defaultLootTable){
+        export(exporter, HAEntityTypes.GIANT_SQUID.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -671,7 +644,34 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.FIREFLY_SQUID.get().defaultLootTable){
+        export(exporter, HAEntityTypes.COLOSSAL_SQUID.get().defaultLootTable.orElseThrow()){
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(Items.INK_SAC)
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                    ).build()
+            )
+            pool(
+                LootPool.lootPool()
+                    .add(
+                        LootItem.lootTableItem(HAItems.RAW_TENTACLE.get())
+                            .apply(
+                                SmeltItemFunction.smelted().`when`(
+                                    LootItemEntityPropertyCondition.hasProperties(
+                                        LootContext.EntityTarget.THIS,
+                                        NEEDS_ENTITY_ON_FIRE
+                                    )
+                                )
+                            )
+                            .apply(EnchantedCountIncreaseFunction.lootingMultiplier(lookup,UniformGenerator.between(0.0F, 1.0F)))
+                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
+                    ).build()
+            )
+        }
+
+        export(exporter, HAEntityTypes.FIREFLY_SQUID.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -696,7 +696,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_CUCUMBER.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SEA_CUCUMBER.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -707,7 +707,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SCALYFOOT_SNAIL.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SCALYFOOT_SNAIL.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -718,7 +718,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_SLUG.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SEA_SLUG.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -729,7 +729,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_URCHIN.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SEA_URCHIN.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -750,7 +750,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
 
         // end region
 
-        export(exporter, HAEntityTypes.OCTOPUS.get().defaultLootTable){
+        export(exporter, HAEntityTypes.OCTOPUS.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -770,7 +770,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         }
 
         // jellyfish
-        export(exporter, HAEntityTypes.MOON_JELLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.MOON_JELLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -781,7 +781,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_NETTLE.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SEA_NETTLE.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -792,7 +792,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.NOMURA_JELLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.NOMURA_JELLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -803,7 +803,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.LIONS_MANE_JELLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.LIONS_MANE_JELLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -814,7 +814,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BLUE_JELLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BLUE_JELLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -826,7 +826,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         }
 
 
-        export(exporter, HAEntityTypes.BARREL_JELLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BARREL_JELLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -837,7 +837,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.MAUVE_STINGER.get().defaultLootTable){
+        export(exporter, HAEntityTypes.MAUVE_STINGER.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -848,7 +848,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.CEPHEIDAE_JELLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.CEPHEIDAE_JELLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -859,7 +859,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.CROWN_JELLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.CROWN_JELLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -870,7 +870,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.ANGLERFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.ANGLERFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -881,7 +881,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.DRAGONFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.DRAGONFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -892,7 +892,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BLOBFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BLOBFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -903,7 +903,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.HAGFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.HAGFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -914,7 +914,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.ROCKFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.ROCKFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -925,7 +925,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SEA_BASS.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SEA_BASS.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -936,7 +936,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.CLOWNFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.CLOWNFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -947,7 +947,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.DAMSELFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.DAMSELFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -958,7 +958,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.JOHN_DORY.get().defaultLootTable){
+        export(exporter, HAEntityTypes.JOHN_DORY.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -969,7 +969,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SURGEONFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SURGEONFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -980,7 +980,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BOXFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BOXFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -991,7 +991,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.LIONFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.LIONFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1002,7 +1002,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BARRELEYE.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BARRELEYE.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1021,7 +1021,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.STINGRAY.get().defaultLootTable){
+        export(exporter, HAEntityTypes.STINGRAY.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1032,7 +1032,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.GOURAMI.get().defaultLootTable){
+        export(exporter, HAEntityTypes.GOURAMI.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1043,7 +1043,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BETTA.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BETTA.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1054,7 +1054,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.PEARLFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.PEARLFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1065,7 +1065,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SNAILFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SNAILFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1076,7 +1076,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.DANIO.get().defaultLootTable){
+        export(exporter, HAEntityTypes.DANIO.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1087,7 +1087,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.TETRA.get().defaultLootTable){
+        export(exporter, HAEntityTypes.TETRA.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1098,7 +1098,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.AFRICAN_BUTTERFLYFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.AFRICAN_BUTTERFLYFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1109,7 +1109,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.DISCUS.get().defaultLootTable){
+        export(exporter, HAEntityTypes.DISCUS.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1120,7 +1120,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.BLOWFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.BLOWFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1131,7 +1131,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.STONEFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.STONEFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1142,7 +1142,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.CARP.get().defaultLootTable){
+        export(exporter, HAEntityTypes.CARP.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1153,7 +1153,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.GOLDFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.GOLDFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1164,7 +1164,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.PLECO.get().defaultLootTable){
+        export(exporter, HAEntityTypes.PLECO.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1175,7 +1175,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SHINER.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SHINER.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1186,7 +1186,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.FANGTOOTH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.FANGTOOTH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1197,7 +1197,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.HATCHETFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.HATCHETFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1208,7 +1208,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.VIPERFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.VIPERFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1219,7 +1219,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SUNFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SUNFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1230,7 +1230,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.TROUT.get().defaultLootTable){
+        export(exporter, HAEntityTypes.TROUT.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1241,7 +1241,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.PARROTFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.PARROTFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1252,7 +1252,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.WRASSE.get().defaultLootTable){
+        export(exporter, HAEntityTypes.WRASSE.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1263,7 +1263,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.FLASHLIGHT_FISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.FLASHLIGHT_FISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1274,7 +1274,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.RATFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.RATFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1285,7 +1285,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.PIRANHA.get().defaultLootTable){
+        export(exporter, HAEntityTypes.PIRANHA.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1296,7 +1296,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.MAHI.get().defaultLootTable){
+        export(exporter, HAEntityTypes.MAHI.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1307,7 +1307,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.OPAH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.OPAH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1318,7 +1318,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.NEEDLEFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.NEEDLEFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1329,7 +1329,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.MACKEREL.get().defaultLootTable){
+        export(exporter, HAEntityTypes.MACKEREL.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1340,7 +1340,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.HERRING.get().defaultLootTable){
+        export(exporter, HAEntityTypes.HERRING.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1351,7 +1351,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.TUNA.get().defaultLootTable){
+        export(exporter, HAEntityTypes.TUNA.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1362,7 +1362,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.FLYING_FISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.FLYING_FISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1373,7 +1373,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.TRIGGERFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.TRIGGERFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1385,7 +1385,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
         }
 
 
-        export(exporter, HAEntityTypes.TREVALLY.get().defaultLootTable){
+        export(exporter, HAEntityTypes.TREVALLY.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1396,7 +1396,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SEAHORSE.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SEAHORSE.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1407,7 +1407,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.OCEAN_SUNFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.OCEAN_SUNFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1418,7 +1418,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.COELACANTH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.COELACANTH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1429,7 +1429,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.GOLDEN_DORADO.get().defaultLootTable){
+        export(exporter, HAEntityTypes.GOLDEN_DORADO.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1440,7 +1440,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.OARFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.OARFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1451,7 +1451,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.CICHLID.get().defaultLootTable){
+        export(exporter, HAEntityTypes.CICHLID.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1462,7 +1462,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.TIGER_BARB.get().defaultLootTable){
+        export(exporter, HAEntityTypes.TIGER_BARB.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1473,7 +1473,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.MORAY_EEL.get().defaultLootTable){
+        export(exporter, HAEntityTypes.MORAY_EEL.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(
@@ -1484,7 +1484,7 @@ class EntityTypeLootTableProvider(exporter: FabricDataOutput, val lookupProvider
             )
         }
 
-        export(exporter, HAEntityTypes.SQUIRRELFISH.get().defaultLootTable){
+        export(exporter, HAEntityTypes.SQUIRRELFISH.get().defaultLootTable.orElseThrow()){
             pool(
                 LootPool.lootPool()
                     .add(

@@ -2,10 +2,10 @@ package dev.hybridlabs.aquatic.client.render.fluid
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer
 import net.minecraft.world.level.material.FlowingFluid
 
 class HAFluidRenderer {
@@ -22,6 +22,6 @@ class HAFluidRenderer {
                 0xFFFFFF
             )
         )
-        BlockRenderLayerMap.INSTANCE.putFluids(RenderType.solid(), still, flowing)
+        BlockRenderLayerMap.putFluids(ChunkSectionLayer.SOLID, still, flowing)
     }
 }

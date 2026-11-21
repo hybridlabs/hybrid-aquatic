@@ -1,5 +1,10 @@
 package dev.hybridlabs.aquatic.block.entity
 
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
+import software.bernie.geckolib.animation.`object`.LoopType
+
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import net.minecraft.core.BlockPos
 import net.minecraft.core.HolderLookup
@@ -10,7 +15,13 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import software.bernie.geckolib.animatable.GeoAnimatable
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animatable.manager.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
+import software.bernie.geckolib.animation.`object`.EasingType
 import software.bernie.geckolib.util.GeckoLibUtil
 import software.bernie.geckolib.util.RenderUtil
 
@@ -28,18 +39,18 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
      */
     var variant: MessageInABottleBlock.Variant = MessageInABottleBlock.Variant.BOTTLE
 
-    override fun saveAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.saveAdditional(tag, registries)
-        tag.putString(VARIANT_KEY, variant.id)
+    override fun saveAdditional(output: ValueOutput) {
+        super.saveAdditional(output)
+        output.putString(VARIANT_KEY, variant.id)
     }
 
-    override fun loadAdditional(tag: CompoundTag, registries: HolderLookup.Provider) {
-        super.loadAdditional(tag, registries)
-        variant = MessageInABottleBlock.Variant.byId(tag.getString(VARIANT_KEY))
+    override fun loadAdditional(input: ValueInput) {
+        super.loadAdditional(input)
+        variant = MessageInABottleBlock.Variant.byId(input.getStringOr(VARIANT_KEY, variant.id))
     }
 
     private fun <E> predicate(
-        event: AnimationState<E>
+        event: AnimationTest<E>
     ): PlayState where E : BlockEntity?, E : GeoAnimatable {
         return if (blockState.hasProperty(WATERLOGGED)) {
             event.controller.setAnimation(WATER_BOB_ANIMATION)
@@ -50,19 +61,16 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
     }
 
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
-        controllerRegistrar.add(AnimationController(this, "controller", 0, ::predicate))
+        controllerRegistrar.add(AnimationController<MessageInABottleBlockEntity>("controller", 0, ::predicate))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return instanceCache
     }
 
-    override fun getTick(animatable: Any): Double {
-        return RenderUtil.getCurrentTick()
-    }
 
     override fun getUpdateTag(registries: HolderLookup.Provider): CompoundTag {
-        return saveWithId(registries)
+        return saveWithoutMetadata(registries)
     }
 
     override fun getUpdatePacket(): ClientboundBlockEntityDataPacket {
@@ -75,6 +83,6 @@ class MessageInABottleBlockEntity(pos: BlockPos, state: BlockState) :
          */
         const val VARIANT_KEY = "variant"
 
-        val WATER_BOB_ANIMATION: RawAnimation = RawAnimation.begin().then("water_bob", Animation.LoopType.LOOP)
+        val WATER_BOB_ANIMATION: RawAnimation = RawAnimation.begin().then("water_bob", LoopType.LOOP)
     }
 }

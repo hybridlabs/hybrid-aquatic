@@ -1,7 +1,11 @@
 package dev.hybridlabs.aquatic.entity.base
 
+import net.minecraft.server.level.ServerLevel
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -10,7 +14,7 @@ import net.minecraft.world.Difficulty
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal
@@ -19,17 +23,16 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.goal.target.TargetGoal
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
-import net.minecraft.world.entity.animal.IronGolem
+import net.minecraft.world.entity.animal.golem.IronGolem
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
-
 
 @Suppress("LeakingThis", "UNUSED_PARAMETER")
 abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
@@ -44,7 +47,7 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
         super.tick()
         if (this.hasLimitedLife && --this.limitedLifeTicks <= 0) {
             this.limitedLifeTicks = 20
-            this.hurt(damageSources().starve(), 1.0f)
+            (this.level() as? ServerLevel)?.let { this.hurtServer(it, damageSources().starve(), 1.0f) }
         }
     }
 
@@ -54,21 +57,21 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
         builder.define(ATTEMPT_ATTACK, false)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        super.addAdditionalSaveData(nbt)
-        nbt.putInt("AttackTick", this.attackTick)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putInt("AttackTick", this.attackTick)
 
         if (this.hasLimitedLife) {
-            nbt.putInt("LifeTicks", this.limitedLifeTicks)
+            output.putInt("LifeTicks", this.limitedLifeTicks)
         }
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        this.attackTick = nbt.getInt("AttackTick")
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        this.attackTick = input.getIntOr("AttackTick", 0)
 
-        if (nbt.contains("LifeTicks")) {
-            this.setLimitedLife(nbt.getInt("LifeTicks"))
+        if (input.getInt("LifeTicks").isPresent) {
+            this.setLimitedLife(input.getIntOr("LifeTicks", 0))
         }
     }
     //#endregion
@@ -105,8 +108,8 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
 
     //#region Animations
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(DefaultAnimations.genericWalkRunIdleController(this))
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
+        controllers.add(DefaultAnimations.genericWalkRunIdleController<HAMinionEntity>())
+        controllers.add(DefaultAnimations.genericAttackAnimation<HAMinionEntity>(DefaultAnimations.ATTACK_SWING))
     }
 
     override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
@@ -117,7 +120,7 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
     override fun finalizeSpawn(
         level: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        reason: MobSpawnType,
+        reason: EntitySpawnReason,
         spawnData: SpawnGroupData?
     ): SpawnGroupData? {
         val randomsource = level.random
@@ -136,14 +139,14 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
     }
 
     override fun checkDespawn() {
-        if (level().difficulty == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+        if (level().difficulty == Difficulty.PEACEFUL) {
             discard()
         } else {
             noActionTime = 0
         }
     }
 
-    override fun isPreventingPlayerRest(player: Player): Boolean {
+    override fun isPreventingPlayerRest(level: ServerLevel, player: Player): Boolean {
         return true
     }
 
@@ -154,7 +157,7 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
         fun canSpawn(
             type: EntityType<out Monster>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            reason: EntitySpawnReason,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {

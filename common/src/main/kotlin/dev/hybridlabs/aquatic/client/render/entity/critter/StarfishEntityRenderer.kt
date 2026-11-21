@@ -5,12 +5,14 @@ import dev.hybridlabs.aquatic.client.render.entity.critter.layer.StarfishColorLa
 import dev.hybridlabs.aquatic.client.render.entity.critter.layer.StarfishOverlayLayer
 import dev.hybridlabs.aquatic.entity.critter.StarfishEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseCritterEntityRenderer
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class StarfishEntityRenderer(context: Context) :
-    BaseCritterEntityRenderer<StarfishEntity>(context, StarfishEntityModel(), true) {
+    BaseCritterEntityRenderer<StarfishEntity, LivingEntityRenderState>(context, StarfishEntityModel(), true) {
     init {
-        addRenderLayer(StarfishColorLayer(this))
-        addRenderLayer(StarfishOverlayLayer(this))
+        withRenderLayer(StarfishColorLayer(this))
+        withRenderLayer(StarfishOverlayLayer(this))
     }
 }

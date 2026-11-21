@@ -15,9 +15,10 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.NbtOps
 import net.minecraft.resources.ResourceKey
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.component.CustomData
+import net.minecraft.world.entity.EntityType
+import net.minecraft.world.item.component.TypedEntityData
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.LootItem
@@ -605,18 +606,17 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
         val paintingRegistry = lookup.lookup(Registries.PAINTING_VARIANT).get()
         paintingRegistry.listElements()
             .toList()
-            .sortedBy { it.key().location().toString() }
+            .sortedBy { it.key().identifier().toString() }
             .forEach { painting ->
-                if (painting.key().location().namespace != Constants.MOD_ID) return@forEach
+                if (painting.key().identifier().namespace != Constants.MOD_ID) return@forEach
 
-                val customData = CustomData.EMPTY
-                    .update(NbtOps.INSTANCE, PAINTINGVARIANTMAPCODEC, painting.key().location())
-                    .getOrThrow()
-                    .update { compoundTag: CompoundTag -> compoundTag.putString("id", "minecraft:painting") }
+                val tag = CompoundTag()
+                tag.putString("variant", painting.key().identifier().toString())
+                val entityData: TypedEntityData<EntityType<*>> = TypedEntityData.of(EntityType.PAINTING, tag)
 
                 messageInABottleLootPoolBuilder.add(
                     LootItem.lootTableItem(Items.PAINTING).apply(
-                        SetComponentsFunction.setComponent(DataComponents.ENTITY_DATA, customData)
+                        SetComponentsFunction.setComponent(DataComponents.ENTITY_DATA, entityData)
                     )
                 )
             }
@@ -630,6 +630,6 @@ class GenericLootTableProvider(output: FabricDataOutput, val lookupProvider: Com
     }
 
     companion object {
-        val PAINTINGVARIANTMAPCODEC: MapCodec<ResourceLocation> = ResourceLocation.CODEC.fieldOf("variant")
+        val PAINTINGVARIANTMAPCODEC: MapCodec<Identifier> = Identifier.CODEC.fieldOf("variant")
     }
 }

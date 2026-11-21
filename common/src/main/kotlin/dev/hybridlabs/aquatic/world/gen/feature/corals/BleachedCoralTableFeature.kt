@@ -7,7 +7,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class BleachedCoralTableFeature(codec: Codec<NoneFeatureConfiguration?>) : BleachedCoralFeature(codec) {
+class BleachedCoralTableFeature(codec: Codec<NoneFeatureConfiguration>) : BleachedCoralFeature(codec) {
 
     override fun placeFeature(
         level: LevelAccessor,

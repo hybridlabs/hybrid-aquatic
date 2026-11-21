@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.LivingEntity
+
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -12,6 +14,7 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
@@ -22,7 +25,7 @@ import net.minecraft.world.phys.shapes.CollisionContext
 import net.minecraft.world.phys.shapes.VoxelShape
 
 @Suppress("OVERRIDE_DEPRECATION")
-class RedAlgaeBlock(settings: Properties?) :
+class RedAlgaeBlock(settings: Properties) :
     BushBlock(settings), BonemealableBlock, LiquidBlockContainer {
     override fun getShape(
         state: BlockState,
@@ -44,15 +47,17 @@ class RedAlgaeBlock(settings: Properties?) :
 
     override fun updateShape(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: LevelAccessor,
+        world: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         pos: BlockPos,
-        neighborPos: BlockPos
+        direction: Direction,
+        neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: RandomSource
     ): BlockState {
-        val blockState = super.updateShape(state, direction, neighborState, world, pos, neighborPos)
+        val blockState = super.updateShape(state, world, scheduledTickAccess, pos, direction, neighborPos, neighborState, random)
         if (!blockState.isAir) {
-            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
+            scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
 
         return blockState
@@ -81,7 +86,7 @@ class RedAlgaeBlock(settings: Properties?) :
     }
 
     override fun canPlaceLiquid(
-        p0: Player?,
+        p0: LivingEntity?,
         world: BlockGetter,
         pos: BlockPos,
         state: BlockState,
@@ -99,8 +104,8 @@ class RedAlgaeBlock(settings: Properties?) :
         return false
     }
 
-    override fun codec(): MapCodec<out BushBlock> {
-        return CODEC
+    override fun codec(): MapCodec<BushBlock> {
+        return CODEC as MapCodec<BushBlock>
     }
 
     companion object {

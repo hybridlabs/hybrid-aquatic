@@ -1,11 +1,19 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import net.minecraft.world.entity.LivingEntity
+
+import net.minecraft.world.entity.EntityReference
+
+import net.minecraft.world.entity.EntitySpawnReason
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalAttackGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalBreedGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalFollowParentGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseMammalEntity
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -37,7 +45,7 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
 import net.minecraft.world.level.pathfinder.PathType
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.constant.DefaultAnimations
 import java.util.*
 
@@ -46,8 +54,8 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     BaseMammalEntity(entityType, world),
     NeutralMob {
 
-    private var angerTime = 0
-    private var angryAt: UUID? = null
+    private var angerEndTime: Long = -1L
+    private var angryAt: EntityReference<LivingEntity>? = null
 
     init {
         setPathfindingMalus(PathType.WATER_BORDER, 0.0f)
@@ -66,8 +74,8 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     override fun registerGoals() {
         targetSelector.addGoal(1, HurtByTargetGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { target: LivingEntity -> this.okTarget(target) })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { target, level -> this.isAngryAt(target, level) })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { target, _ -> this.okTarget(target) })
         goalSelector.addGoal(1, WaterAnimalBreedGoal(this, 1.1))
         goalSelector.addGoal(1, WaterAnimalAttackGoal(this, 1.0, false))
         goalSelector.addGoal(3, RandomStrollGoal(this, 0.7, 20))
@@ -79,7 +87,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         super.registerControllers(controllers)
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_BITE))
+        controllers.add(DefaultAnimations.genericAttackAnimation<HippoEntity>(DefaultAnimations.ATTACK_BITE))
     }
 
     override fun tick() {
@@ -97,9 +105,9 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
      *
      * We want hippos to seek air for the behavior, but it's too sad when they drown.
      */
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
+    override fun hurtServer(level: ServerLevel, source: DamageSource, amount: Float): Boolean {
         if (source == damageSources().drown()) return false
-        return super.hurt(source, amount)
+        return super.hurtServer(level, source, amount)
     }
 
     /* A little boost to help short fellas get up slopes. */
@@ -129,7 +137,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?,
     ): SpawnGroupData? {
 
@@ -163,7 +171,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
     //#endregion
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): HippoEntity? {
-        return HAEntityTypes.HIPPO.get().create(p0)
+        return HAEntityTypes.HIPPO.get().create(p0, EntitySpawnReason.MOB_SUMMONED)
     }
 
     override fun getMaxHeadYRot(): Int {
@@ -178,6 +186,7 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 50.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.4)
                 .add(Attributes.ATTACK_DAMAGE, 8.0)
@@ -204,36 +213,32 @@ class HippoEntity(entityType: EntityType<out HippoEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putInt(HUNGER_KEY, hunger)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.putInt(HUNGER_KEY, hunger)
 
-        super.addAdditionalSaveData(compound)
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        hunger = compound.getInt(HUNGER_KEY)
-        super.readAdditionalSaveData(compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        hunger = input.getIntOr(HUNGER_KEY, hunger)
+        super.readAdditionalSaveData(input)
     }
 
     //#region Angerable Implementation Details
-    override fun getRemainingPersistentAngerTime(): Int {
-        return angerTime
+    override fun getPersistentAngerEndTime(): Long = this.angerEndTime
+
+    override fun setPersistentAngerEndTime(time: Long) {
+        this.angerEndTime = time
     }
 
-    override fun setRemainingPersistentAngerTime(angerTime: Int) {
-        this.angerTime = angerTime
-    }
+    override fun getPersistentAngerTarget(): EntityReference<LivingEntity>? = this.angryAt
 
-    override fun getPersistentAngerTarget(): UUID? {
-        return angryAt
-    }
-
-    override fun setPersistentAngerTarget(angryAt: UUID?) {
-        this.angryAt = angryAt
+    override fun setPersistentAngerTarget(target: EntityReference<LivingEntity>?) {
+        this.angryAt = target
     }
 
     override fun startPersistentAngerTimer() {
-        this.remainingPersistentAngerTime = ANGER_TIME_RANGE.sample(this.random)
+        this.setTimeToRemainAngry(ANGER_TIME_RANGE.sample(this.random).toLong())
     }
-    //#endregion
+
 }

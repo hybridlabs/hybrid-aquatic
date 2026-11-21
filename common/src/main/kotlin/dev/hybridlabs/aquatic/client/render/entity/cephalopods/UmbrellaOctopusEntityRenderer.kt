@@ -4,11 +4,11 @@ import dev.hybridlabs.aquatic.client.model.entity.cephalopod.UmbrellaOctopusEnti
 import dev.hybridlabs.aquatic.entity.cephalopod.UmbrellaOctopusEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseOctopusEntityRenderer
 import net.minecraft.client.renderer.entity.EntityRendererProvider
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class UmbrellaOctopusEntityRenderer(context: EntityRendererProvider.Context) :
-    BaseOctopusEntityRenderer<UmbrellaOctopusEntity>(
+    BaseOctopusEntityRenderer<UmbrellaOctopusEntity, LivingEntityRenderState>(
         context,
         UmbrellaOctopusEntityModel(),
-        true,
-        false
+        true
     )

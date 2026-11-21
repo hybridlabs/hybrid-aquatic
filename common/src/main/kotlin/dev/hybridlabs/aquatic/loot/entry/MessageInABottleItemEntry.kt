@@ -27,7 +27,7 @@ class MessageInABottleItemEntry(
         return HybridAquaticLootPoolEntryTypes.MESSAGE_IN_A_BOTTLE.get()
     }
 
-    public override fun createItemStack(consumer: Consumer<ItemStack?>, context: LootContext) {
+    public override fun createItemStack(consumer: Consumer<ItemStack>, context: LootContext) {
         val random = context.random
         val stack = ItemStack(HAItems.MESSAGE_IN_A_BOTTLE.get())
         val stuff = CompoundTag().apply {

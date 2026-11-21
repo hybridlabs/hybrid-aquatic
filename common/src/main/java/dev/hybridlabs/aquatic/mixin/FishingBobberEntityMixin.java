@@ -9,13 +9,15 @@ import dev.hybridlabs.aquatic.item.HAItems;
 import dev.hybridlabs.aquatic.tag.HAItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -53,19 +55,15 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
-        setLureItem(
-                ItemStack.parseOptional(
-                        this.level().registryAccess(), nbt.getCompound("lureItem")));
+    private void readCustomDataFromNbt(ValueInput input, CallbackInfo ci) {
+        setLureItem(input.read("lureItem", ItemStack.CODEC).orElse(Items.AIR.getDefaultInstance()));
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
+    private void writeCustomDataToNbt(ValueOutput output, CallbackInfo ci) {
         if (!lureItemStack.is(HAItemTags.INSTANCE.getLURE_ITEMS())) return;
 
-        CompoundTag itemStack = new CompoundTag();
-        getLureItem().save(this.level().registryAccess(), itemStack);
-        nbt.put("lureItem", itemStack);
+        output.store("lureItem", ItemStack.CODEC, getLureItem());
     }
 
     public ItemStack getLureItem() {
@@ -82,9 +80,9 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
             At.Shift.AFTER))
     private void reduceCooldownTime(BlockPos pos, CallbackInfo ci) {
         Item lureItem = this.lureItemStack.getItem();
-        if (lureItem.equals(HAItems.INSTANCE.getBARBED_HOOK().get()) && this.level().isDay()) {
+        if (lureItem.equals(HAItems.INSTANCE.getBARBED_HOOK().get()) && !this.level().isDarkOutside()) {
             timeUntilLured -= 75;
-        } else if (lureItem.equals(HAItems.INSTANCE.getGLOWING_HOOK().get()) && this.level().isNight()) {
+        } else if (lureItem.equals(HAItems.INSTANCE.getGLOWING_HOOK().get()) && this.level().isDarkOutside()) {
             timeUntilLured -= 75;
         }
     }
@@ -128,7 +126,7 @@ public abstract class FishingBobberEntityMixin extends Entity implements CustomF
     @Unique
     private void createAndLaunchEntityAtPlayer(EntityType<?> entityType) {
         if (this.level() instanceof ServerLevel serverWorld) {
-            Entity entity = entityType.spawn(serverWorld, this.blockPosition(), MobSpawnType.MOB_SUMMONED);
+            Entity entity = entityType.spawn(serverWorld, this.blockPosition(), EntitySpawnReason.MOB_SUMMONED);
             if (entity == null)
                 return;
 

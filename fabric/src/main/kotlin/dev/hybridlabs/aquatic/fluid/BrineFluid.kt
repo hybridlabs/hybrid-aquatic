@@ -28,7 +28,7 @@ abstract class BrineFluid : CommonBrineFluid() {
     }
 
     class Flowing : BrineFluid() {
-        override fun createFluidStateDefinition(builder: StateDefinition.Builder<Fluid?, FluidState?>) {
+        override fun createFluidStateDefinition(builder: StateDefinition.Builder<Fluid, FluidState>) {
             super.createFluidStateDefinition(builder)
             builder.add(LEVEL)
         }

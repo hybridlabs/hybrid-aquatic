@@ -1,51 +1,26 @@
 package dev.hybridlabs.aquatic.client.render.entity.misc.layer
 
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.VertexConsumer
+import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.client.model.entity.misc.ArgonautEntityModel
 import dev.hybridlabs.aquatic.client.render.entity.misc.ArgonautEntityRenderer
 import dev.hybridlabs.aquatic.entity.misc.ArgonautEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer
-import software.bernie.geckolib.util.Color
+import net.minecraft.client.renderer.SubmitNodeCollector
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+import net.minecraft.client.renderer.rendertype.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
+import net.minecraft.resources.Identifier
+import software.bernie.geckolib.renderer.base.RenderPassInfo
+import software.bernie.geckolib.renderer.layer.builtin.TextureLayerGeoLayer
 
-class ArgonautVisorEntityLayer<T: ArgonautEntity>(
+class ArgonautVisorEntityLayer<T : ArgonautEntity>(
     renderer: ArgonautEntityRenderer<T>
-): GeoRenderLayer<T>(renderer) {
+) : TextureLayerGeoLayer<T, Void, LivingEntityRenderState>(renderer, VISOR_TEXTURE) {
 
-    private fun getVisorTexture(): ResourceLocation {
-        return (geoModel as ArgonautEntityModel).getVisorTextureResource()
+    override fun getRenderType(renderState: LivingEntityRenderState): RenderType {
+        return RenderTypes.entityCutoutNoCull(VISOR_TEXTURE)
     }
 
-    override fun render(
-        poseStack: PoseStack,
-        animatable: T,
-        bakedModel: BakedGeoModel,
-        renderType: RenderType?,
-        bufferSource: MultiBufferSource,
-        buffer: VertexConsumer?,
-        partialTick: Float,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        val visorTexture = getVisorTexture()
-        val visorRenderType = RenderType.entityTranslucentCull(visorTexture)
-
-        getRenderer().reRender(
-            getDefaultBakedModel(animatable),
-            poseStack,
-            bufferSource,
-            animatable,
-            visorRenderType,
-            bufferSource.getBuffer(visorRenderType),
-            partialTick,
-            packedLight,
-            OverlayTexture.NO_OVERLAY,
-            Color.WHITE.argbInt
-        )
+    companion object {
+        private val VISOR_TEXTURE = CommonClass.locate("textures/entity/misc/argonaut/argonaut_visor.png")
     }
 }

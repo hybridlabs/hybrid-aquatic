@@ -1,80 +1,78 @@
 package dev.hybridlabs.aquatic.client.render.entity.cephalopods.layer
 
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.VertexConsumer
+import dev.hybridlabs.hapi.client.model.getVariant
+
+import dev.hybridlabs.aquatic.client.model.HADataTickets
+import dev.hybridlabs.aquatic.client.render.entity.layer.HATextureLayer
 import dev.hybridlabs.aquatic.entity.cephalopod.OctopusEntity
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseOctopusEntityModel
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseOctopusEntityRenderer
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseOctopusEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.entity.LivingEntityRenderer
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer
-import software.bernie.geckolib.util.Color
 
+class HAOctopusEntityLayer<T : BaseOctopusEntity>(
+    renderer: BaseOctopusEntityRenderer<T, LivingEntityRenderState>,
+) : HATextureLayer<T>(renderer, tinted = true) {
 
-class HAOctopusEntityLayer<T: BaseOctopusEntity>(
-    renderer: BaseOctopusEntityRenderer<T>,
-) : GeoRenderLayer<T>(renderer) {
-
-    private fun getLayerTextureResource(): ResourceLocation {
-        return (geoModel as BaseOctopusEntityModel).getLayerTextureResource()
-    }
-
-    override fun render(
-        poseStack: PoseStack,
+    override fun addRenderData(
         animatable: T,
-        bakedModel: BakedGeoModel,
-        renderType: RenderType?,
-        bufferSource: MultiBufferSource,
-        buffer: VertexConsumer?,
-        partialTick: Float,
-        packedLight: Int,
-        packedOverlay: Int
+        relatedObject: Void?,
+        renderState: LivingEntityRenderState,
+        partialTick: Float
     ) {
-        if (animatable !is OverlayTextureFeature) return
+        super.addRenderData(animatable, relatedObject, renderState, partialTick)
 
-        if (animatable is OctopusEntity &&
-            animatable.variant != OctopusEntity.Companion.Type.OCTOPUS) {
-            return
-        }
+        val overlayName = (animatable as? OverlayTextureFeature)?.getOverlayTextureName() ?: ""
 
-        if (!animatable.isSitting()) return
+        renderState.addGeckolibData(
+            HADataTickets.OVERLAY_NAME,
+            if (animatable.isSitting()) overlayName else ""
+        )
 
-        val overlayName = animatable.getOverlayTextureName()
-        if (overlayName.isEmpty()) return
-
-        val layerTexture = getLayerTextureResource()
-        val tintRenderType = RenderType.entityTranslucent(layerTexture)
-
-        var current = Color.ofOpaque(animatable.getCurrentColor())
-        val target = Color.ofOpaque(animatable.getTargetColor())
+        var current = animatable.getCurrentColor()
+        val target = animatable.getTargetColor()
 
         if (current != target) {
             val blendSpeed = 0.025f
-            current = Color.ofRGB(
-                Mth.lerp(blendSpeed, current.redFloat, target.redFloat),
-                Mth.lerp(blendSpeed, current.greenFloat, target.greenFloat),
-                Mth.lerp(blendSpeed, current.blueFloat, target.blueFloat)
-            )
-            animatable.setCurrentColor(current.color)
+            current = (0xFF shl 24) or
+                (Mth.lerp(blendSpeed, red(current), red(target)) * 255f).toInt().shl(16) or
+                (Mth.lerp(blendSpeed, green(current), green(target)) * 255f).toInt().shl(8) or
+                (Mth.lerp(blendSpeed, blue(current), blue(target)) * 255f).toInt()
+            animatable.setCurrentColor(current)
         }
 
-        getRenderer().reRender(
-            getDefaultBakedModel(animatable),
-            poseStack,
-            bufferSource,
-            animatable,
-            tintRenderType,
-            bufferSource.getBuffer(tintRenderType),
-            partialTick,
-            packedLight,
-            LivingEntityRenderer.getOverlayCoords(animatable, 0.0f),
-            current.brighter(1.2).argbInt
-        )
+        renderState.addGeckolibData(HADataTickets.CURRENT_COLOR, brighten(current))
+    }
+
+    override fun layerTexture(renderState: LivingEntityRenderState): Identifier? {
+        val overlayName = renderState.getGeckolibData(HADataTickets.OVERLAY_NAME) ?: return null
+
+        if (overlayName.isEmpty()) return null
+
+        if (renderState.getVariant(OctopusEntity.Companion.Type.entries) != OctopusEntity.Companion.Type.OCTOPUS) {
+            return null
+        }
+
+        return (getGeoModel() as BaseOctopusEntityModel).getLayerTextureResource()
+    }
+
+    override fun layerTint(renderState: LivingEntityRenderState): Int =
+        renderState.getGeckolibData(HADataTickets.CURRENT_COLOR) ?: WHITE
+
+    private fun red(color: Int) = ((color shr 16) and 0xFF) / 255f
+
+    private fun green(color: Int) = ((color shr 8) and 0xFF) / 255f
+
+    private fun blue(color: Int) = (color and 0xFF) / 255f
+
+    private fun brighten(color: Int): Int {
+        val r = (((color shr 16) and 0xFF) * 1.2f).toInt().coerceAtMost(255)
+        val g = (((color shr 8) and 0xFF) * 1.2f).toInt().coerceAtMost(255)
+        val b = ((color and 0xFF) * 1.2f).toInt().coerceAtMost(255)
+
+        return (0xFF shl 24) or (r shl 16) or (g shl 8) or b
     }
 }

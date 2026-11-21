@@ -10,7 +10,7 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.RegistryOps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -23,12 +23,12 @@ public abstract class FabricSoundsProvider implements DataProvider {
 	private static final Codec<Map<String, SoundTypeBuilderImpl.SoundType>> CODEC = Codec.unboundedMap(Codec.STRING, SoundTypeBuilderImpl.SoundType.CODEC);
 	private final CompletableFuture<HolderLookup.Provider> registriesFuture;
 	private final PackOutput output;
-	
+
 	public FabricSoundsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		this.registriesFuture = registriesFuture;
 		this.output = output;
 	}
-	
+
 	@Override
 	public CompletableFuture<?> run(CachedOutput output) {
 		return registriesFuture.thenCompose(provider -> {
@@ -38,32 +38,32 @@ public abstract class FabricSoundsProvider implements DataProvider {
 					throw new IllegalStateException("Duplicate sound for event " + id);
 				}
 			});
-			
+
 			return CompletableFuture.allOf(data.entrySet().stream().map(file -> {
 				Path outputPath = this.output.getOutputFolder(PackOutput.Target.RESOURCE_PACK).resolve(file.getKey() + "/sounds.json");
-				
+
 				return saveStable(output, provider, CODEC, file.getValue(), outputPath);
 			}).toArray(CompletableFuture[]::new));
 		});
 	}
-	
+
 	protected abstract void configure(SoundExporter exporter);
-	
+
 	@ApiStatus.NonExtendable
 	@FunctionalInterface
 	public interface SoundExporter {
-		
+
 		default void add(SoundEvent event, SoundTypeBuilder builder) {
-			add(event.getLocation(), builder);
+			add(event.location(), builder);
 		}
-		
+
 		default void add(Holder<SoundEvent> event, SoundTypeBuilder builder) {
-			add(event.unwrapKey().orElseThrow(() -> new IllegalArgumentException("Direct (non-registered) sound event cannot be added")).location(), builder);
+			add(event.unwrapKey().orElseThrow(() -> new IllegalArgumentException("Direct (non-registered) sound event cannot be added")).identifier(), builder);
 		}
-		
-		void add(ResourceLocation id, SoundTypeBuilder builder);
+
+		void add(Identifier id, SoundTypeBuilder builder);
 	}
-	
+
 	static <T> CompletableFuture<?> saveStable(
 			final CachedOutput cache,
 			final HolderLookup.Provider registries,
@@ -73,7 +73,7 @@ public abstract class FabricSoundsProvider implements DataProvider {
 		RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, registries);
 		return saveStable(cache, ops, codec, value, path);
 	}
-	
+
 	static <T> CompletableFuture<?> saveStable(
 			final CachedOutput cache,
 			final Codec<T> codec,
@@ -82,7 +82,7 @@ public abstract class FabricSoundsProvider implements DataProvider {
 	) {
 		return saveStable(cache, JsonOps.INSTANCE, codec, value, path);
 	}
-	
+
 	private static <T> CompletableFuture<?> saveStable(
 			final CachedOutput cache,
 			final DynamicOps<JsonElement> ops,

@@ -49,7 +49,7 @@ class CattailFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
                 val upper = HAPlatformBlocks.CATTAIL.get().defaultBlockState()
                     .setValue(CattailBlock.HALF, DoubleBlockHalf.UPPER)
 
-                if (pos.y < world.maxBuildHeight - 1 &&
+                if (pos.y < world.maxY &&
                     world.isEmptyBlock(pos.above()) &&
                     lower.canSurvive(world, pos)
                 ) {

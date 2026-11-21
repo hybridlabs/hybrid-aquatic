@@ -10,6 +10,7 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.BonemealableBlock
 import net.minecraft.world.level.block.BushBlock
@@ -53,20 +54,15 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
 
     override fun updateShape(
         state: BlockState,
-        facing: Direction,
-        facingState: BlockState,
-        level: LevelAccessor,
+        level: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         currentPos: BlockPos,
+        facing: Direction,
         facingPos: BlockPos,
+        facingState: BlockState,
+        random: RandomSource
     ): BlockState {
-        return if (!state.canSurvive(level, currentPos)) Blocks.AIR.defaultBlockState() else super.updateShape(
-            state,
-            facing,
-            facingState,
-            level,
-            currentPos,
-            facingPos
-        )
+        return if (!state.canSurvive(level, currentPos)) Blocks.AIR.defaultBlockState() else super.updateShape(state, level, scheduledTickAccess, currentPos, facing, facingPos, facingState, random)
     }
 
     override fun canSurvive(state: BlockState, level: LevelReader, pos: BlockPos): Boolean {
@@ -74,8 +70,8 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
         return this.mayPlaceOn(level.getBlockState(blockPos), level, blockPos)
     }
 
-    override fun codec(): MapCodec<out BushBlock> {
-        return CODEC
+    override fun codec(): MapCodec<BushBlock> {
+        return CODEC as MapCodec<BushBlock>
     }
 
     companion object {

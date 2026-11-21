@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.particle
 
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.*
+import net.minecraft.util.RandomSource
 import net.minecraft.core.particles.SimpleParticleType
 
 class BrineBubblePopParticle(
@@ -13,7 +14,7 @@ class BrineBubblePopParticle(
     ySpeed: Double,
     zSpeed: Double,
     private val sprites: SpriteSet,
-) : TextureSheetParticle(level, x, y, z) {
+) : SingleQuadParticle(level, x, y, z, sprites.get(0, 4)) {
     init {
         this.lifetime = 4
         this.gravity = 0.008f
@@ -36,10 +37,6 @@ class BrineBubblePopParticle(
         }
     }
 
-    override fun getRenderType(): ParticleRenderType {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE
-    }
-
     companion object {
         class Provider(private val sprites: SpriteSet) : ParticleProvider<SimpleParticleType> {
             override fun createParticle(
@@ -51,9 +48,12 @@ class BrineBubblePopParticle(
                 xSpeed: Double,
                 ySpeed: Double,
                 zSpeed: Double,
+                random: RandomSource,
             ): Particle {
                 return BrineBubblePopParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, this.sprites)
             }
         }
     }
+
+    override fun getLayer(): SingleQuadParticle.Layer = SingleQuadParticle.Layer.OPAQUE
 }

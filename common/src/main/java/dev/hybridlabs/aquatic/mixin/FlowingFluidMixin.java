@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(FlowingFluid.class)
 public class FlowingFluidMixin {
 	@WrapOperation(
-			method = "canHoldFluid",
+			method = "canHoldAnyFluid",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z")
 	)
-	private boolean decorativeBubbleColumn_givesAirParity(BlockState instance, Block block, Operation<Boolean> original) {
+	private static boolean decorativeBubbleColumn_givesAirParity(BlockState instance, Block block, Operation<Boolean> original) {
 		return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
 	}
 }

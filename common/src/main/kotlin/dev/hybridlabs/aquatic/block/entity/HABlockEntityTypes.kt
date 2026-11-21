@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.block.entity
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
+import dev.hybridlabs.aquatic.platform.Services
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -28,15 +29,14 @@ object HABlockEntityTypes {
     val GIANT_THERMAL_VENT =
         register("giant_thermal_vent", ::GiantThermalVentBlockEntity, HABlocks.GIANT_THERMAL_VENT)
 
-    fun <T : BlockEntity?> register(
+    fun <T : BlockEntity> register(
         id: String,
         factory: BlockEntityType.BlockEntitySupplier<T>, vararg validBlocks: RegistryObject<Block>?,
-    ): RegistryObject<BlockEntityType<T?>> {
+    ): RegistryObject<BlockEntityType<T>> {
 
         return CommonClass.BLOCK_ENTITY_TYPES.register(id) {
-            val blocks = validBlocks.map { block -> block?.get() }.toTypedArray()
-            val builder = BlockEntityType.Builder.of(factory, *blocks)
-            builder.build(null)
+            val blocks = validBlocks.mapNotNull { block -> block?.get() }.toTypedArray()
+            Services.PLATFORM.createBlockEntityType(factory, *blocks)
         }
     }
 }

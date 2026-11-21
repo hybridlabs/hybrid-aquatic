@@ -9,9 +9,14 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
+import net.minecraft.data.tags.TagAppender
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.Identifier
+import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.ItemTags
+import net.minecraft.tags.TagKey
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import java.util.concurrent.CompletableFuture
 
@@ -26,7 +31,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.CREEPERMAGNET_HOOK.get(),
             HAItems.OMINOUS_HOOK.get()
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.LURE_ITEMS).add(item)
+            valueLookupBuilder(HAItemTags.LURE_ITEMS).add(item)
         }
 
         setOf(
@@ -37,62 +42,62 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             Items.NAUTILUS_SHELL,
             Items.SADDLE
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.FISHING_TREASURE).add(item)
+            valueLookupBuilder(HAItemTags.FISHING_TREASURE).add(item)
         }
 
         //#region Diving Armor
-        getOrCreateTagBuilder(HAItemTags.DIVING_ARMOR)
+        valueLookupBuilder(HAItemTags.DIVING_ARMOR)
             .addTag(HAItemTags.DIVING_HELMET)
             .addTag(HAItemTags.DIVING_SUIT)
             .addTag(HAItemTags.DIVING_LEGGINGS)
             .addTag(HAItemTags.DIVING_BOOTS)
 
-        getOrCreateTagBuilder(HAItemTags.DIVING_HELMET)
-            .add(
+        builder(HAItemTags.DIVING_HELMET)
+            .addItems(
                 HAItems.DIVING_HELMET.get(),
                 HAItems.REINFORCED_DIVING_HELMET.get(),
                 HAItems.GLOWING_DIVING_HELMET.get(),
             )
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "copper_diving_helmet"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "netherite_diving_helmet"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("aquamirae", "three_bolt_helmet"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("alexscaves", "diving_helmet"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "copper_diving_helmet"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "netherite_diving_helmet"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("aquamirae", "three_bolt_helmet"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("alexscaves", "diving_helmet"))
 
-        getOrCreateTagBuilder(HAItemTags.DIVING_SUIT)
-            .add(
+        builder(HAItemTags.DIVING_SUIT)
+            .addItems(
                 HAItems.DIVING_SUIT.get(),
                 HAItems.REINFORCED_DIVING_SUIT.get(),
                 HAItems.GLOWING_DIVING_SUIT.get(),
             )
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "copper_backtank"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "netherite_backtank"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("aquamirae", "three_bolt_chestplate"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("alexscaves", "diving_chestplate"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "copper_backtank"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "netherite_backtank"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("aquamirae", "three_bolt_chestplate"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("alexscaves", "diving_chestplate"))
 
-        getOrCreateTagBuilder(HAItemTags.DIVING_LEGGINGS)
-            .add(
+        builder(HAItemTags.DIVING_LEGGINGS)
+            .addItems(
                 HAItems.DIVING_LEGGINGS.get(),
                 HAItems.REINFORCED_DIVING_LEGGINGS.get(),
                 HAItems.GLOWING_DIVING_LEGGINGS.get(),
             )
-            .addOptional(ResourceLocation.fromNamespaceAndPath("aquamirae", "three_bolt_leggings"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("alexscaves", "diving_leggings"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("aquamirae", "three_bolt_leggings"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("alexscaves", "diving_leggings"))
 
-        getOrCreateTagBuilder(HAItemTags.DIVING_BOOTS)
-            .add(
+        builder(HAItemTags.DIVING_BOOTS)
+            .addItems(
                 HAItems.DIVING_BOOTS.get(),
                 HAItems.REINFORCED_DIVING_BOOTS.get(),
                 HAItems.GLOWING_DIVING_BOOTS.get(),
             )
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "copper_diving_boots"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "netherite_diving_boots"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("aquamirae", "three_bolt_boots"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("alexscaves", "diving_boots"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "copper_diving_boots"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "netherite_diving_boots"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("aquamirae", "three_bolt_boots"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("alexscaves", "diving_boots"))
         //#endregion
 
         //#region Effect Tags
-        getOrCreateTagBuilder(HAItemTags.RESISTS_CORROSION)
-            .add(
+        builder(HAItemTags.RESISTS_CORROSION)
+            .addItems(
                 Items.DIAMOND_AXE,
                 Items.DIAMOND_PICKAXE,
                 Items.DIAMOND_SWORD,
@@ -128,58 +133,58 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 HAItems.REINFORCED_DIVING_LEGGINGS.get(),
                 HAItems.REINFORCED_DIVING_BOOTS.get(),
             )
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "netherite_diving_helmet"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "netherite_backtank"))
-            .addOptional(ResourceLocation.fromNamespaceAndPath("create", "netherite_diving_boots"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "netherite_diving_helmet"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "netherite_backtank"))
+            .addOptionalItem(Identifier.fromNamespaceAndPath("create", "netherite_diving_boots"))
         //#endregion
 
         //#region Wood Tags
-        getOrCreateTagBuilder(ItemTags.PLANKS)
+        valueLookupBuilder(ItemTags.PLANKS)
             .add(HAPlatformBlocks.DRIFTWOOD_PLANKS.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN)
+        valueLookupBuilder(ItemTags.LOGS_THAT_BURN)
             .add(HAPlatformBlocks.DRIFTWOOD_LOG.get().asItem())
             .add(HAPlatformBlocks.DRIFTWOOD_WOOD.get().asItem())
             .add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get().asItem())
             .add(HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get().asItem())
 
-        getOrCreateTagBuilder(HAItemTags.DRIFTWOOD_LOG_WOOD)
+        valueLookupBuilder(HAItemTags.DRIFTWOOD_LOG_WOOD)
             .add(HAPlatformItems.DRIFTWOOD_LOG.get())
             .add(HAPlatformItems.STRIPPED_DRIFTWOOD_LOG.get())
             .add(HAPlatformItems.DRIFTWOOD_WOOD.get())
             .add(HAPlatformItems.STRIPPED_DRIFTWOOD_WOOD.get())
 
-        getOrCreateTagBuilder(HAItemTags.STRIPPED_LOGS)
+        valueLookupBuilder(HAItemTags.STRIPPED_LOGS)
             .add(HAPlatformItems.STRIPPED_DRIFTWOOD_LOG.get())
 
-        getOrCreateTagBuilder(HAItemTags.STRIPPED_WOODS)
+        valueLookupBuilder(HAItemTags.STRIPPED_WOODS)
             .add(HAPlatformItems.STRIPPED_DRIFTWOOD_WOOD.get())
 
-        getOrCreateTagBuilder(ItemTags.WOODEN_FENCES)
+        valueLookupBuilder(ItemTags.WOODEN_FENCES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.FENCE_GATES)
+        valueLookupBuilder(ItemTags.FENCE_GATES)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.WOODEN_DOORS)
+        valueLookupBuilder(ItemTags.WOODEN_DOORS)
             .add(HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.WOODEN_BUTTONS)
+        valueLookupBuilder(ItemTags.WOODEN_BUTTONS)
             .add(HAPlatformBlocks.DRIFTWOOD_BUTTON.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.WOODEN_PRESSURE_PLATES)
+        valueLookupBuilder(ItemTags.WOODEN_PRESSURE_PLATES)
             .add(HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.WOODEN_SLABS)
+        valueLookupBuilder(ItemTags.WOODEN_SLABS)
             .add(HAPlatformBlocks.DRIFTWOOD_SLAB.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS)
+        valueLookupBuilder(ItemTags.WOODEN_STAIRS)
             .add(HAPlatformBlocks.DRIFTWOOD_STAIRS.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS)
+        valueLookupBuilder(ItemTags.WOODEN_TRAPDOORS)
             .add(HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.SLABS)
+        valueLookupBuilder(ItemTags.SLABS)
             .add(HABlocks.BONE_SLAB.get().asItem())
 
             .add(HABlocks.WHITE_SANDSTONE_SLAB.get().asItem())
@@ -206,7 +211,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get().asItem())
             .add(HABlocks.CHIMNEYSTONE_BRICK_SLAB.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.STAIRS)
+        valueLookupBuilder(ItemTags.STAIRS)
             .add(HABlocks.BONE_STAIRS.get().asItem())
             .add(HABlocks.WHITE_SANDSTONE_STAIRS.get().asItem())
             .add(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get().asItem())
@@ -231,7 +236,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HABlocks.POLISHED_CHIMNEYSTONE_STAIRS.get().asItem())
             .add(HABlocks.CHIMNEYSTONE_BRICK_STAIRS.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.WALLS)
+        valueLookupBuilder(ItemTags.WALLS)
             .add(HABlocks.BONE_WALL.get().asItem())
             .add(HABlocks.WHITE_SANDSTONE_WALL.get().asItem())
             .add(HABlocks.RED_BRINESTONE_WALL.get().asItem())
@@ -245,28 +250,28 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HABlocks.CHIMNEYSTONE_WALL.get().asItem())
             .add(HABlocks.CHIMNEYSTONE_BRICK_WALL.get().asItem())
 
-        getOrCreateTagBuilder(ItemTags.SAND)
+        valueLookupBuilder(ItemTags.SAND)
             .add(HABlocks.WHITE_SAND.get().asItem())
         //#endregion
 
-        getOrCreateTagBuilder(HAItemTags.STONES)
+        valueLookupBuilder(HAItemTags.STONES)
             .add(HAItems.SHORESTONE.get())
             .add(HAItems.BARNACLE_SHORESTONE.get())
             .add(HAItems.CORALSTONE.get())
 
-        getOrCreateTagBuilder(HAItemTags.SANDS)
+        valueLookupBuilder(HAItemTags.SANDS)
             .add(HAItems.WHITE_SAND.get())
             .add(HAItems.GRASSY_SAND.get())
 
         //#region Tool Tags
-        getOrCreateTagBuilder(HAItemTags.CORAL_SET)
+        valueLookupBuilder(HAItemTags.CORAL_SET)
             .add(HAItems.CORAL_BLADE.get())
             .add(HAItems.CORAL_PICKAXE.get())
             .add(HAItems.CORAL_AXE.get())
             .add(HAItems.CORAL_SHOVEL.get())
             .add(HAItems.CORAL_HOE.get())
 
-        getOrCreateTagBuilder(HAItemTags.SEASHELL_SET)
+        valueLookupBuilder(HAItemTags.SEASHELL_SET)
             .add(HAItems.SEASHELL_SPEAR.get())
             .add(HAItems.SEASHELL_PICKAXE.get())
             .add(HAItems.SEASHELL_AXE.get())
@@ -275,27 +280,27 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             .add(HAItems.NAUTILUS_HELMET.get())
             .add(HAItems.NAUTILUS_PAULDRONS.get())
 
-        getOrCreateTagBuilder(HAItemTags.TURTLE_SET)
+        valueLookupBuilder(HAItemTags.TURTLE_SET)
             .add(HAItems.TURTLE_CHESTPLATE.get())
             .add(Items.TURTLE_HELMET)
 
-        getOrCreateTagBuilder(ItemTags.SWORDS)
+        valueLookupBuilder(ItemTags.SWORDS)
             .add(HAItems.SEASHELL_SPEAR.get())
             .add(HAItems.CORAL_BLADE.get())
 
-        getOrCreateTagBuilder(ItemTags.SHOVELS)
+        valueLookupBuilder(ItemTags.SHOVELS)
             .add(HAItems.SEASHELL_SHOVEL.get())
             .add(HAItems.CORAL_SHOVEL.get())
 
-        getOrCreateTagBuilder(ItemTags.AXES)
+        valueLookupBuilder(ItemTags.AXES)
             .add(HAItems.SEASHELL_AXE.get())
             .add(HAItems.CORAL_AXE.get())
 
-        getOrCreateTagBuilder(ItemTags.PICKAXES)
+        valueLookupBuilder(ItemTags.PICKAXES)
             .add(HAItems.SEASHELL_PICKAXE.get())
             .add(HAItems.CORAL_PICKAXE.get())
 
-        getOrCreateTagBuilder(ItemTags.HOES)
+        valueLookupBuilder(ItemTags.HOES)
             .add(HAItems.SEASHELL_HOE.get())
             .add(HAItems.CORAL_HOE.get())
         //#endregion
@@ -306,7 +311,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.RAW_LOBSTER_TAIL.get(),
             HAItems.COOKED_LOBSTER_TAIL.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.LOBSTER_MEAT).add(item)
+            valueLookupBuilder(HAItemTags.LOBSTER_MEAT).add(item)
         }
 
         listOf(
@@ -321,7 +326,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.RAW_CRAYFISH.get(),
             HAItems.COOKED_CRAYFISH.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.CRUSTACEAN_MEAT).add(item)
+            valueLookupBuilder(HAItemTags.CRUSTACEAN_MEAT).add(item)
         }
 
         listOf(
@@ -362,7 +367,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             Items.SALMON,
             Items.TROPICAL_FISH,
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.SMALL_FISH).add(item)
+            valueLookupBuilder(HAItemTags.SMALL_FISH).add(item)
         }
 
         listOf(
@@ -379,7 +384,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.SEA_BASS.get(),
             HAItems.NEEDLEFISH.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.MEDIUM_FISH).add(item)
+            valueLookupBuilder(HAItemTags.MEDIUM_FISH).add(item)
         }
 
         listOf(
@@ -391,7 +396,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.GOLDEN_DORADO.get(),
             HAItems.COELACANTH.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.LARGE_FISH).add(item)
+            valueLookupBuilder(HAItemTags.LARGE_FISH).add(item)
         }
 
         listOf(
@@ -405,7 +410,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.VAMPIRE_CRAB_CLAW.get(),
             HAItems.YETI_CRAB_CLAW.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.CRAB_CLAW).add(item)
+            valueLookupBuilder(HAItemTags.CRAB_CLAW).add(item)
         }
 
         listOf(
@@ -467,8 +472,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.RAW_CRAYFISH.get(),
             HAItems.RAW_LOBSTER_TAIL.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.RAW_FISH).add(item)
-            getOrCreateTagBuilder(HAItemTags.RAW_FISHES).add(item)
+            valueLookupBuilder(HAItemTags.RAW_FISH).add(item)
+            valueLookupBuilder(HAItemTags.RAW_FISHES).add(item)
         }
 
         listOf(
@@ -481,8 +486,8 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.COOKED_CRAYFISH.get(),
             HAItems.COOKED_LOBSTER_TAIL.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.COOKED_FISH).add(item)
-            getOrCreateTagBuilder(HAItemTags.COOKED_FISHES).add(item)
+            valueLookupBuilder(HAItemTags.COOKED_FISH).add(item)
+            valueLookupBuilder(HAItemTags.COOKED_FISHES).add(item)
         }
 
         listOf(
@@ -490,7 +495,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.BULL_KELP.get(),
             HAItems.DELESSERIA.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.KELPS).add(item)
+            valueLookupBuilder(HAItemTags.KELPS).add(item)
         }
 
         listOf(
@@ -501,7 +506,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.HAGFISH.get(),
             HAItems.STINGRAY.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.FOOD_POISONING).add(item)
+            valueLookupBuilder(HAItemTags.FOOD_POISONING).add(item)
         }
 
         listOf(
@@ -553,7 +558,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.SQUIRRELFISH.get(),
             HAItems.GOLDEN_DORADO.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(ItemTags.FISHES).add(item)
+            valueLookupBuilder(ItemTags.FISHES).add(item)
         }
 
         // plushies
@@ -564,7 +569,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 id.path.endsWith("plushie")
             }
             .forEach { item ->
-                getOrCreateTagBuilder(HAItemTags.PLUSHIES).add(item)
+                valueLookupBuilder(HAItemTags.PLUSHIES).add(item)
             }
 
         setOf(
@@ -576,20 +581,20 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.BROWN_HATXOLOTL.get(),
             HAItems.GOLD_HATXOLOTL.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.HAT).add(item)
+            valueLookupBuilder(HAItemTags.HAT).add(item)
         }
 
         setOf(
             HAItems.EEL_SCARF.get(),
             HAItems.STRIPED_EEL_SCARF.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.SCARF).add(item)
+            valueLookupBuilder(HAItemTags.SCARF).add(item)
         }
 
         setOf(
             HAItems.MANGLERFISH_FIN.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.BACK_FIN).add(item)
+            valueLookupBuilder(HAItemTags.BACK_FIN).add(item)
         }
 
         setOf(
@@ -607,18 +612,18 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             HAItems.DIVING_LEGGINGS.get(),
             HAItems.DIVING_BOOTS.get(),
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.ARMORS).add(item)
+            valueLookupBuilder(HAItemTags.ARMORS).add(item)
         }
 
-        getOrCreateTagBuilder(HAItemTags.CRAB_WEARABLES)
-            .addOptionalTag(ItemTags.WOOL.location())
-            .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "skulls"))
-            .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "bookshelves"))
-            .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "barrels"))
-            .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "chests"))
-            .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "pumpkins"))
-            .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "shulker_boxes"))
-            .add(
+        builder(HAItemTags.CRAB_WEARABLES)
+            .addOptionalTag(ItemTags.WOOL)
+            .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "skulls"))
+            .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "bookshelves"))
+            .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "barrels"))
+            .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "chests"))
+            .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "pumpkins"))
+            .addOptionalItemTag(Identifier.fromNamespaceAndPath("c", "shulker_boxes"))
+            .addItems(
                 Items.NAUTILUS_SHELL,
                 Items.SKELETON_SKULL,
                 Items.WITHER_SKELETON_SKULL,
@@ -670,7 +675,7 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
                 Items.YELLOW_SHULKER_BOX,
             )
 
-        getOrCreateTagBuilder(HAItemTags.CRAB_TRADEABLES)
+        valueLookupBuilder(HAItemTags.CRAB_TRADEABLES)
             .add(
                 Items.NAUTILUS_SHELL,
             )
@@ -680,7 +685,17 @@ class ItemTagProvider(output: FabricDataOutput, registriesFuture: CompletableFut
             Items.REDSTONE_LAMP,
             Items.TNT
         ).forEach { item ->
-            getOrCreateTagBuilder(HAItemTags.REDSTONE_COMPONENTS).add(item)
+            valueLookupBuilder(HAItemTags.REDSTONE_COMPONENTS).add(item)
         }
     }
+
+    private fun TagAppender<ResourceKey<Item>, Item>.addItems(vararg items: Item) = apply {
+        items.forEach { add(it.builtInRegistryHolder().key()) }
+    }
+
+    private fun TagAppender<ResourceKey<Item>, Item>.addOptionalItem(id: Identifier) =
+        addOptional(ResourceKey.create(Registries.ITEM, id))
+
+    private fun TagAppender<ResourceKey<Item>, Item>.addOptionalItemTag(id: Identifier) =
+        addOptionalTag(TagKey.create(Registries.ITEM, id))
 }

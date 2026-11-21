@@ -1,5 +1,10 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import net.minecraft.world.Container
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.entity.misc.SmallTNTEntity
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
@@ -7,7 +12,6 @@ import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalFleeFromEntityGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseCrustaceanEntity
 import net.minecraft.core.Vec3i
 import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
@@ -16,7 +20,7 @@ import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
@@ -33,10 +37,10 @@ import net.minecraft.world.level.block.NoteBlock
 import net.minecraft.world.level.block.TntBlock
 import net.minecraft.world.level.gameevent.GameEvent
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
 import kotlin.jvm.optionals.getOrDefault
 
 @Suppress("DEPRECATION")
@@ -51,24 +55,21 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
         goalSelector.addGoal(1, WaterAnimalFleeFromEntityGoal(this, SmallTNTEntity::class.java, 15.0, 0.3, 0.75))
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putBoolean("HasShell", hasShell)
-        if (!shellItem.isEmpty) compound.put("ShellItem", shellItem.save(this.registryAccess()))
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putBoolean("HasShell", hasShell)
+        if (!shellItem.isEmpty) output.store("ShellItem", ItemStack.CODEC, shellItem)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
 
-        hasShell = compound.getBoolean("HasShell")
+        hasShell = input.getBooleanOr("HasShell", hasShell)
 
-        if (hasShell && compound.contains("ShellItem")) {
-            shellItem = ItemStack.parse(
-                registryAccess(),
-                compound.getCompound("ShellItem")
-            ).getOrDefault(Items.NAUTILUS_SHELL.defaultInstance)
+        shellItem = if (hasShell) {
+            input.read("ShellItem", ItemStack.CODEC).orElse(Items.NAUTILUS_SHELL.defaultInstance)
         } else {
-            shellItem = ItemStack.EMPTY
+            ItemStack.EMPTY
         }
     }
 
@@ -76,7 +77,7 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?,
     ): SpawnGroupData? {
         this.setCanPickUpLoot(true)
@@ -93,7 +94,7 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
         return super.finalizeSpawn(world, difficulty, spawnReason, entityData)
     }
 
-    override fun canTakeItem(itemstack: ItemStack): Boolean {
+    private fun isWearableShell(itemstack: ItemStack): Boolean {
         return itemstack.`is`(HAItemTags.CRAB_WEARABLES)
     }
 
@@ -101,15 +102,15 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
         return ITEM_PICKUP_REACH
     }
 
-    override fun wantsToPickUp(stack: ItemStack): Boolean {
-        return canTakeItem(stack)
+    override fun wantsToPickUp(level: ServerLevel, stack: ItemStack): Boolean {
+        return isWearableShell(stack)
     }
 
-    override fun pickUpItem(itemEntity: ItemEntity) {
+    override fun pickUpItem(level: ServerLevel, itemEntity: ItemEntity) {
         if (!shellItem.isEmpty) return
 
         val itemStack = itemEntity.item
-        if (!canTakeItem(itemStack)) return
+        if (!isWearableShell(itemStack)) return
 
         shellItem = itemStack.copyWithCount(1)
         itemStack.shrink(1)
@@ -125,7 +126,7 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
             return InteractionResult.PASS
         }
 
-        if (canTakeItem(playerStack) || playerStack.isEmpty) {
+        if (isWearableShell(playerStack) || playerStack.isEmpty) {
             val oldStack = shellItem.copy()
             shellItem = playerStack.copyWithCount(1)
 
@@ -145,7 +146,7 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
                 }
             }
 
-            return InteractionResult.sidedSuccess(level().isClientSide)
+            return if (level().isClientSide) InteractionResult.SUCCESS else InteractionResult.SUCCESS_SERVER
         }
 
         return super.mobInteract(player, hand)
@@ -159,7 +160,7 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
                 return
             }
 
-            spawnAtLocation(shellItem)
+            spawnAtLocation(level, shellItem)
             shellItem = ItemStack.EMPTY
         }
     }
@@ -244,12 +245,12 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
         attributes.getInstance(Attributes.ARMOR)?.baseValue = 5.0
     }
 
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
+    override fun hurtServer(level: ServerLevel, source: DamageSource, amount: Float): Boolean {
         if (!isHiding && !shellItem.isEmpty) startHiding()
 
         lastDamageTime = level().gameTime
 
-        return super.hurt(source, amount)
+        return super.hurtServer(level, source, amount)
     }
     //#endregion
 
@@ -264,9 +265,8 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
     override fun registerControllers(controllerRegistrar: AnimatableManager.ControllerRegistrar) {
         super.registerControllers(controllerRegistrar)
         controllerRegistrar.add(
-            AnimationController(
-                this, "Hide", 4,
-                AnimationController.AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
+            AnimationController<BaseCrustaceanEntity>("Hide", 4,
+                AnimationController.AnimationStateHandler { state: AnimationTest<BaseCrustaceanEntity> ->
                     if (this.isHiding) {
                         return@AnimationStateHandler state.setAndContinue(HIDE_ANIMATION)
                     } else {
@@ -281,6 +281,7 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)

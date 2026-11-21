@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.data.builder;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.StringRepresentable;
@@ -22,9 +22,9 @@ public interface SoundTypeBuilder {
 	 */
 	static SoundTypeBuilder of(SoundEvent event) {
 		Objects.requireNonNull(event, "Sound event cannot be null.");
-		return of().subtitle(Util.makeDescriptionId("subtitles", event.getLocation()));
+		return of().subtitle(Util.makeDescriptionId("subtitles", event.location()));
 	}
-	
+
 	/**
 	 * Creates a new empty builder.
 	 *
@@ -33,7 +33,7 @@ public interface SoundTypeBuilder {
 	static SoundTypeBuilder of() {
 		return new SoundTypeBuilderImpl();
 	}
-	
+
 	/**
 	 * @deprecated Source is not a field interpreted by vanilla in the sounds file,
 	 * calling this method will have no effect.
@@ -42,14 +42,14 @@ public interface SoundTypeBuilder {
 	default SoundTypeBuilder source(SoundSource source) {
 		return this;
 	}
-	
+
 	/**
 	 * Sets an optional replace boolean, which on true allows this sound type to override others.
 	 *
 	 * <p>The default is false.
 	 */
 	SoundTypeBuilder replace(boolean replace);
-	
+
 	/**
 	 * Sets an optional translation key string to use for the sound's subtitle.
 	 *
@@ -58,14 +58,14 @@ public interface SoundTypeBuilder {
 	 * <p>Note: To generate a translation value, use {@link net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider.TranslationBuilder #add(SoundEvent, String)}.  //TODO
 	 */
 	SoundTypeBuilder subtitle(@Nullable String subtitle);
-	
+
 	/**
 	 * Adds one sound to the event.
 	 *
 	 * @param sound base sound to add
 	 */
 	SoundTypeBuilder sound(RegistrationBuilder sound);
-	
+
 	/**
 	 * Adds one or more sounds to the event.
 	 *
@@ -84,7 +84,7 @@ public interface SoundTypeBuilder {
 	 * @param count number of instances of that sound to register
 	 */
 	SoundTypeBuilder sound(RegistrationBuilder sound, int count);
-	
+
 	/**
 	 * Represents the type of weighted sound event registration.
 	 *
@@ -99,21 +99,21 @@ public interface SoundTypeBuilder {
 		 * References to another sound event.
 		 */
 		SOUND_EVENT("event");
-		
+
 		public static final Codec<RegistrationType> CODEC = StringRepresentable.fromEnum(RegistrationType::values);
-		
+
 		private final String name;
-		
+
 		RegistrationType(String name) {
 			this.name = name;
 		}
-		
+
 		@Override
 		public String getSerializedName() {
 			return name;
 		}
 	}
-	
+
 	/**
 	 * Builder for creating a weighted sound event registration that can be played for a particular sound type.
 	 *
@@ -125,40 +125,40 @@ public interface SoundTypeBuilder {
 		 * The default sound volume.
 		 */
 		float DEFAULT_VOLUME = 1F;
-		
+
 		/**
 		 * The default sound pitch.
 		 */
 		float DEFAULT_PITCH = 1F;
-		
+
 		/**
 		 * The default weight applied to individual sounds.
 		 */
 		int DEFAULT_WEIGHT = 1;
-		
+
 		/**
 		 * The default attenuation distance for a sound (16 blocks).
 		 */
 		int DEFAULT_ATTENUATION_DISTANCE = 16;
-		
+
 		/**
 		 * Creates a builder for constructing a new sound event registration.
 		 *
 		 * @param id sound file or event
 		 */
-		static RegistrationBuilder create(RegistrationType type, ResourceLocation id) {
+		static RegistrationBuilder create(RegistrationType type, Identifier id) {
 			return SoundTypeBuilderImpl.RegistrationBuilderImpl.create(type, id);
 		}
-		
+
 		/**
 		 * Creates a builder for constructing a new sound event registration.
 		 *
 		 * @param soundFile sound file excluding the {@code .ogg} extension
 		 */
-		static RegistrationBuilder ofFile(ResourceLocation soundFile) {
+		static RegistrationBuilder ofFile(Identifier soundFile) {
 			return SoundTypeBuilderImpl.RegistrationBuilderImpl.ofFile(soundFile);
 		}
-		
+
 		/**
 		 * Creates a builder for constructing a new sound event registration.
 		 *
@@ -167,7 +167,7 @@ public interface SoundTypeBuilder {
 		static RegistrationBuilder ofEvent(SoundEvent event) {
 			return SoundTypeBuilderImpl.RegistrationBuilderImpl.ofEvent(event);
 		}
-		
+
 		/**
 		 * Creates a builder for constructing a new sound event registration.
 		 *
@@ -176,7 +176,7 @@ public interface SoundTypeBuilder {
 		static RegistrationBuilder ofEvent(Holder<SoundEvent> event) {
 			return SoundTypeBuilderImpl.RegistrationBuilderImpl.ofEvent(event);
 		}
-		
+
 		/**
 		 * Sets the volume of the sound.
 		 *
@@ -188,7 +188,7 @@ public interface SoundTypeBuilder {
 		 * @see net.minecraft.client.sounds.SoundEngine #VOLUME_MAX //TODO
 		 */
 		RegistrationBuilder volume(float volume);
-		
+
 		/**
 		 * Sets the pitch of the sound.
 		 *
@@ -200,7 +200,7 @@ public interface SoundTypeBuilder {
 		 * @see net.minecraft.client.sounds.SoundEngine #PITCH_MAX //TODO
 		 */
 		RegistrationBuilder pitch(float pitch);
-		
+
 		/**
 		 * Sets the attenuation block distance of the sound.
 		 *
@@ -208,7 +208,7 @@ public interface SoundTypeBuilder {
 		 * higher will cause the sound to be heard from greater distances.
 		 */
 		RegistrationBuilder attenuationDistance(int attenuationDistance);
-		
+
 		/**
 		 * Sets the weight or "chance" that this sound has of playing when
 		 * its parent sound event is called upon.
@@ -216,7 +216,7 @@ public interface SoundTypeBuilder {
 		 * <p>The default weight is {@value RegistrationBuilder#DEFAULT_WEIGHT}.
 		 */
 		RegistrationBuilder weight(int weight);
-		
+
 		/**
 		 * Configures the sound to be streamed.
 		 * This is usually set for longer sounds like music discs
@@ -225,7 +225,7 @@ public interface SoundTypeBuilder {
 		 * <p>The default value is {@code false}.
 		 */
 		RegistrationBuilder stream(boolean stream);
-		
+
 		/**
 		 * Configures whether the sound must be preloaded by the game.
 		 * By default, sounds are only loaded upon playing.

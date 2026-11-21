@@ -1,30 +1,31 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.fish.BoxfishEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.client.renderer.rendertype.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
+import net.minecraft.resources.Identifier
 
 class BoxfishEntityModel : BaseFishEntityModel<BoxfishEntity>("hybrid_aquatic", "boxfish") {
-    override fun getRenderType(animatable: BoxfishEntity, texture: ResourceLocation): RenderType {
-        return RenderType.entityTranslucent(texture)
-    }
 
-    override fun getTextureResource(animatable: BoxfishEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(BoxfishEntity.Companion.Type.entries)!!) {
             BoxfishEntity.Companion.Type.LONGHORN_COWFISH -> LONGHORN_COWFISH_TEXTURE
             BoxfishEntity.Companion.Type.WHITESPOTTED -> WHITESPOTTED_BOXFISH_TEXTURE
         }
     }
 
-    override fun getModelResource(animatable: BoxfishEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(BoxfishEntity.Companion.Type.entries)!!) {
             BoxfishEntity.Companion.Type.LONGHORN_COWFISH -> COWFISH_MODEL
             BoxfishEntity.Companion.Type.WHITESPOTTED -> BOXFISH_MODEL
         }
     }
 
-    override fun getAnimationResource(animatable: BoxfishEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: BoxfishEntity): Identifier {
         return when (animatable.variant) {
             BoxfishEntity.Companion.Type.LONGHORN_COWFISH -> COWFISH_ANIMATION
             BoxfishEntity.Companion.Type.WHITESPOTTED -> BOXFISH_ANIMATION
@@ -33,18 +34,18 @@ class BoxfishEntityModel : BaseFishEntityModel<BoxfishEntity>("hybrid_aquatic", 
 
     companion object {
         private val LONGHORN_COWFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/boxfish/longhorn_cowfish.png")
         private val WHITESPOTTED_BOXFISH_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/boxfish/whitespotted_boxfish.png")
 
         private val COWFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/boxfish/cowfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/boxfish/cowfish")
         private val BOXFISH_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/boxfish/boxfish.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/boxfish/boxfish")
 
         private val COWFISH_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/boxfish/cowfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/boxfish/cowfish")
         private val BOXFISH_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/boxfish/boxfish.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/boxfish/boxfish")
     }
 }

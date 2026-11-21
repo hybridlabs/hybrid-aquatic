@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import net.minecraft.core.BlockPos
 import net.minecraft.world.effect.MobEffectInstance
@@ -40,8 +42,14 @@ class CrystallineSulfurBlock(settings: Properties): Block(settings) {
         level.addFreshEntity(cloud)
     }
 
-    override fun wasExploded(level: Level, pos: BlockPos, explosion: Explosion) {
-        super.wasExploded(level, pos, explosion)
+    override fun onExplosionHit(
+        state: BlockState,
+        level: ServerLevel,
+        pos: BlockPos,
+        explosion: Explosion,
+        dropConsumer: java.util.function.BiConsumer<ItemStack, BlockPos>
+    ) {
+        super.onExplosionHit(state, level, pos, explosion, dropConsumer)
 
         if (level.isClientSide) return
 

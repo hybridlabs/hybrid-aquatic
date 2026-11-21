@@ -8,7 +8,7 @@ import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class DeepCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration?>) : DeepCoralFeature(codec) {
+class DeepCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration>) : DeepCoralFeature(codec) {
     override fun placeFeature(
         level: LevelAccessor,
         random: RandomSource,

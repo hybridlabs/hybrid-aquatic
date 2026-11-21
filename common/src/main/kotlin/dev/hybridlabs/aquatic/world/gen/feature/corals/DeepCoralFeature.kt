@@ -21,16 +21,16 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import java.util.function.Consumer
 import java.util.function.Function
 
-abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : Feature<NoneFeatureConfiguration?>(codec) {
-    override fun place(context: FeaturePlaceContext<NoneFeatureConfiguration?>): Boolean {
+abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration>) : Feature<NoneFeatureConfiguration>(codec) {
+    override fun place(context: FeaturePlaceContext<NoneFeatureConfiguration>): Boolean {
         val randomSource = context.random()
         val worldGenLevel = context.level()
         val blockPos = context.origin()
-        val optional = BuiltInRegistries.BLOCK.getTag(HABlockTags.DEEP_CORAL_BLOCKS)
-            .flatMap(Function { named: HolderSet.Named<Block?>? ->
+        val optional = BuiltInRegistries.BLOCK.get(HABlockTags.DEEP_CORAL_BLOCKS)
+            .flatMap(Function { named: HolderSet.Named<Block>? ->
                 named!!.getRandomElement(randomSource)
             }).map<Block>(
-                Function { obj: Holder<Block?>? -> obj!!.value() })
+                Function { obj: Holder<Block>? -> obj!!.value() })
         return if (optional.isEmpty) false else this.placeFeature(
             worldGenLevel, randomSource, blockPos, optional.get()
                 .defaultBlockState()
@@ -58,11 +58,11 @@ abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : Featu
         ) {
             level.setBlock(pos, state, 3)
             if (random.nextFloat() < 0.25f) {
-                BuiltInRegistries.BLOCK.getTag(HABlockTags.DEEP_CORALS)
-                    .flatMap(Function { named: HolderSet.Named<Block?>? ->
+                BuiltInRegistries.BLOCK.get(HABlockTags.DEEP_CORALS)
+                    .flatMap(Function { named: HolderSet.Named<Block>? ->
                         named!!.getRandomElement(random)
-                    }).map<Block?>(
-                        Function { obj: Holder<Block?>? -> obj!!.value() })
+                    }).map<Block>(
+                        Function { obj: Holder<Block>? -> obj!!.value() })
                     .ifPresent(Consumer { block: Block? -> level.setBlock(blockPos, block!!.defaultBlockState(), 2) })
             } else if (random.nextFloat() < 0.05f) {
                 level.setBlock(
@@ -77,11 +77,11 @@ abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration?>) : Featu
                 if (random.nextFloat() < 0.2f) {
                     val blockPos2 = pos.relative(direction)
                     if (level.getBlockState(blockPos2).`is`(Blocks.WATER)) {
-                        BuiltInRegistries.BLOCK.getTag(HABlockTags.DEEP_WALL_CORALS)
-                            .flatMap(Function { named: HolderSet.Named<Block?>? ->
+                        BuiltInRegistries.BLOCK.get(HABlockTags.DEEP_WALL_CORALS)
+                            .flatMap(Function { named: HolderSet.Named<Block>? ->
                                 named!!.getRandomElement(random)
-                            }).map<Block?>(
-                                Function { obj: Holder<Block?>? -> obj!!.value() })
+                            }).map<Block>(
+                                Function { obj: Holder<Block>? -> obj!!.value() })
                             .ifPresent(Consumer { block: Block? ->
                                 var blockState = block!!.defaultBlockState()
                                 if (blockState.hasProperty(BaseCoralWallFanBlock.FACING)) {

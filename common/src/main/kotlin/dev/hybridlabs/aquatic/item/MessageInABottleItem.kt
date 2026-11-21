@@ -8,8 +8,9 @@ import net.minecraft.ChatFormatting
 import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.TooltipDisplay
+import java.util.function.Consumer
 import net.minecraft.world.item.TooltipFlag
-
 
 /**
  * Represents the Message in a Bottle block item.
@@ -20,14 +21,19 @@ class MessageInABottleItem(settings: Properties) : PlaceableInWaterItem(HABlocks
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,
-        tooltipComponents: List<Component?>,
+        tooltipDisplay: TooltipDisplay,
+        tooltipComponents: Consumer<Component>,
         tooltipFlag: TooltipFlag
     ) {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag)
+        super.appendHoverText(stack, context, tooltipDisplay, tooltipComponents, tooltipFlag)
+
         // custom variant translation keys
-        val id = stack.components[DataComponents.BLOCK_ENTITY_DATA]?.copyTag()?.getString(MessageInABottleBlockEntity.VARIANT_KEY) ?: ""
+        val id = stack.components[DataComponents.BLOCK_ENTITY_DATA]?.copyTagWithoutId()?.getStringOr(MessageInABottleBlockEntity.VARIANT_KEY, "") ?: ""
         val variant = Variant.byId(id)
-        tooltipComponents + Component.translatable("$descriptionId.variant.${variant.id}").withStyle(ChatFormatting.GRAY)
-        tooltipComponents + Component.translatable("$descriptionId.change_hint")
+
+        tooltipComponents.accept(
+            Component.translatable("$descriptionId.variant.${variant.id}").withStyle(ChatFormatting.GRAY)
+        )
+        tooltipComponents.accept(Component.translatable("$descriptionId.change_hint"))
     }
 }

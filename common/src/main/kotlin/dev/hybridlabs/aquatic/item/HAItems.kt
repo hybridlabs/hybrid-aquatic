@@ -2,6 +2,12 @@
 
 package dev.hybridlabs.aquatic.item
 
+import net.minecraft.core.component.DataComponents
+
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect
+
+import net.minecraft.world.item.component.Consumable
+
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
@@ -19,6 +25,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.*
+import net.minecraft.world.item.equipment.ArmorType
 import net.minecraft.world.level.block.Block
 import java.util.function.Supplier
 
@@ -29,8 +36,8 @@ object HAItems {
         "diving_helmet"
     ) {
         DivingArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -38,8 +45,8 @@ object HAItems {
         "diving_suit"
     ) {
         DivingArmorItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 15)
         )
     }
 
@@ -47,8 +54,8 @@ object HAItems {
         "diving_leggings"
     ) {
         DivingArmorItem(
-            ArmorItem.Type.LEGGINGS,
-            armorProperties(ArmorItem.Type.LEGGINGS, 15)
+            ArmorType.LEGGINGS,
+            armorProperties(ArmorType.LEGGINGS, 15)
         )
     }
 
@@ -56,8 +63,8 @@ object HAItems {
         "diving_boots"
     ) {
         DivingArmorItem(
-            ArmorItem.Type.BOOTS,
-            armorProperties(ArmorItem.Type.BOOTS, 15)
+            ArmorType.BOOTS,
+            armorProperties(ArmorType.BOOTS, 15)
         )
     }
     //#endregion
@@ -67,8 +74,8 @@ object HAItems {
         "reinforced_diving_helmet"
     ) {
         ReinforcedDivingArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 25)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 25)
         )
     }
 
@@ -76,8 +83,8 @@ object HAItems {
         "reinforced_diving_suit"
     ) {
         ReinforcedDivingArmorItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 25)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 25)
         )
     }
 
@@ -85,8 +92,8 @@ object HAItems {
         "reinforced_diving_leggings"
     ) {
         ReinforcedDivingArmorItem(
-            ArmorItem.Type.LEGGINGS,
-            armorProperties(ArmorItem.Type.LEGGINGS, 25)
+            ArmorType.LEGGINGS,
+            armorProperties(ArmorType.LEGGINGS, 25)
         )
     }
 
@@ -94,8 +101,8 @@ object HAItems {
         "reinforced_diving_boots"
     ) {
         ReinforcedDivingArmorItem(
-            ArmorItem.Type.BOOTS,
-            armorProperties(ArmorItem.Type.BOOTS, 25)
+            ArmorType.BOOTS,
+            armorProperties(ArmorType.BOOTS, 25)
         )
     }
     //#endregion
@@ -105,8 +112,8 @@ object HAItems {
         "glowing_diving_helmet"
     ) {
         GlowingDivingArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -114,8 +121,8 @@ object HAItems {
         "glowing_diving_suit"
     ) {
         GlowingDivingArmorItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 15)
         )
     }
 
@@ -123,8 +130,8 @@ object HAItems {
         "glowing_diving_leggings"
     ) {
         GlowingDivingArmorItem(
-            ArmorItem.Type.LEGGINGS,
-            armorProperties(ArmorItem.Type.LEGGINGS, 15)
+            ArmorType.LEGGINGS,
+            armorProperties(ArmorType.LEGGINGS, 15)
         )
     }
 
@@ -132,8 +139,8 @@ object HAItems {
         "glowing_diving_boots"
     ) {
         GlowingDivingArmorItem(
-            ArmorItem.Type.BOOTS,
-            armorProperties(ArmorItem.Type.BOOTS, 15)
+            ArmorType.BOOTS,
+            armorProperties(ArmorType.BOOTS, 15)
         )
     }
     //#endregion
@@ -143,8 +150,8 @@ object HAItems {
         "nautilus_helmet"
     ) {
         SeashellArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -152,8 +159,8 @@ object HAItems {
         "nautilus_pauldrons"
     ) {
         SeashellArmorItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 15)
         )
     }
     //#endregion
@@ -163,8 +170,8 @@ object HAItems {
         "turtle_chestplate"
     ) {
         TurtleArmorItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 25)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 25)
         )
     }
     //#endregion
@@ -174,8 +181,8 @@ object HAItems {
         "manglerfish_lure"
     ) {
         ManglerfishArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -183,8 +190,8 @@ object HAItems {
         "manglerfish_fin"
     ) {
         ManglerfishArmorItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 15)
         )
     }
 
@@ -192,8 +199,8 @@ object HAItems {
         "eel_scarf"
     ) {
         EelArmorItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 15)
         )
     }
 
@@ -201,8 +208,8 @@ object HAItems {
         "striped_eel_scarf"
     ) {
         StripedEelScarfItem(
-            ArmorItem.Type.CHESTPLATE,
-            armorProperties(ArmorItem.Type.CHESTPLATE, 15)
+            ArmorType.CHESTPLATE,
+            armorProperties(ArmorType.CHESTPLATE, 15)
         )
     }
 
@@ -210,8 +217,8 @@ object HAItems {
         "pink_hatxolotl"
     ) {
         PinkHatxolotlArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -219,8 +226,8 @@ object HAItems {
         "brown_hatxolotl"
     ) {
         BrownHatxolotlArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -228,8 +235,8 @@ object HAItems {
         "gold_hatxolotl"
     ) {
         GoldHatxolotlArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -237,8 +244,8 @@ object HAItems {
         "blue_hatxolotl"
     ) {
         BlueHatxolotlArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -246,8 +253,8 @@ object HAItems {
         "cyan_hatxolotl"
     ) {
         CyanHatxolotlArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
 
@@ -255,33 +262,33 @@ object HAItems {
         "moon_jellyfish_hat"
     ) {
         MoonJellyfishArmorItem(
-            ArmorItem.Type.HELMET,
-            armorProperties(ArmorItem.Type.HELMET, 15)
+            ArmorType.HELMET,
+            armorProperties(ArmorType.HELMET, 15)
         )
     }
     //#endregion
     //#endregion
 
     //#region Tools - Weapons - Hooks
-    val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(Item.Properties()) }
-    val KARKINOS_CLAW = register("karkinos_claw") { KarkinosClawItem(Item.Properties().stacksTo(1)) }
-    val OMINOUS_CONCH = register("ominous_conch") { OminousConchItem(Item.Properties().stacksTo(1), HAInstrumentTags.OMINOUS_CONCH) }
-    val ARGONAUT = register("argonaut") { ArgonautItem(Item.Properties().stacksTo(1)) }
+    val DIVING_WEIGHT = register("diving_weight") { DivingWeightItem(HAItemProperties.props()) }
+    val KARKINOS_CLAW = register("karkinos_claw") {
+        KarkinosClawItem(HAItemProperties.props().stacksTo(1).attributes(KarkinosClawItem.ATTRIBUTES))
+    }
+    val OMINOUS_CONCH = register("ominous_conch") { OminousConchItem(HAItemProperties.props().stacksTo(1)) }
+    val ARGONAUT = register("argonaut") { ArgonautItem(HAItemProperties.props().stacksTo(1)) }
 
-    val BARBED_HOOK = register("barbed_hook") { HookItem(Item.Properties().durability(16)) }
-    val GLOWING_HOOK = register("glowing_hook") { HookItem(Item.Properties().durability(16)) }
-    val MAGNETIC_HOOK = register("magnetic_hook") { HookItem(Item.Properties().durability(8)) }
-    val CREEPERMAGNET_HOOK = register("creepermagnet_hook") { HookItem(Item.Properties().durability(1)) }
-    val OMINOUS_HOOK = register("ominous_hook") { HookItem(Item.Properties().durability(1)) }
+    val BARBED_HOOK = register("barbed_hook") { HookItem(HAItemProperties.props().durability(16)) }
+    val GLOWING_HOOK = register("glowing_hook") { HookItem(HAItemProperties.props().durability(16)) }
+    val MAGNETIC_HOOK = register("magnetic_hook") { HookItem(HAItemProperties.props().durability(8)) }
+    val CREEPERMAGNET_HOOK = register("creepermagnet_hook") { HookItem(HAItemProperties.props().durability(1)) }
+    val OMINOUS_HOOK = register("ominous_hook") { HookItem(HAItemProperties.props().durability(1)) }
 
     //#region Seashell Set
     val SEASHELL_SPEAR = register(
         "seashell_spear"
     ) {
         SeashellSpearItem(
-            Item.Properties().attributes(
-                SwordItem.createAttributes(HAPIToolMaterials.SEASHELL, 2, -2.4f)
-            )
+            HAItemProperties.props().sword(HAPIToolMaterials.SEASHELL, 2f, -2.4f)
         )
     }
 
@@ -289,9 +296,7 @@ object HAItems {
         "seashell_pickaxe"
     ) {
         SeashellPickaxeItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 1.0f, -2.8f)
-            )
+            HAItemProperties.props().pickaxe(HAPIToolMaterials.SEASHELL, 1.0f, -2.8f)
         )
     }
 
@@ -299,9 +304,7 @@ object HAItems {
         "seashell_axe"
     ) {
         SeashellAxeItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 7.0f, -3.2f)
-            )
+            HAItemProperties.props().axe(HAPIToolMaterials.SEASHELL, 7.0f, -3.2f)
         )
     }
 
@@ -309,9 +312,7 @@ object HAItems {
         "seashell_shovel"
     ) {
         SeashellShovelItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 1.5f, -3.0f)
-            )
+            HAItemProperties.props().shovel(HAPIToolMaterials.SEASHELL, 1.5f, -3.0f)
         )
     }
 
@@ -319,9 +320,7 @@ object HAItems {
         "seashell_hoe"
     ) {
         SeashellHoeItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.SEASHELL, 1.0f, -2.0f)
-            )
+            HAItemProperties.props().hoe(HAPIToolMaterials.SEASHELL, 1.0f, -2.0f)
         )
     }
     //#endregion
@@ -331,9 +330,7 @@ object HAItems {
         "coral_blade"
     ) {
         CoralBladeItem(
-            Item.Properties().attributes(
-                SwordItem.createAttributes(HAPIToolMaterials.CORAL, 3, -2.4f)
-            )
+            HAItemProperties.props().sword(HAPIToolMaterials.CORAL, 3f, -2.4f)
         )
     }
 
@@ -341,9 +338,7 @@ object HAItems {
         "coral_pickaxe"
     ) {
         CoralPickaxeItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.0f, -2.8f)
-            )
+            HAItemProperties.props().pickaxe(HAPIToolMaterials.CORAL, 1.0f, -2.8f)
         )
     }
 
@@ -351,9 +346,7 @@ object HAItems {
         "coral_axe"
     ) {
         CoralAxeItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.0f, -3.2f)
-            )
+            HAItemProperties.props().axe(HAPIToolMaterials.CORAL, 1.0f, -3.2f)
         )
     }
 
@@ -361,9 +354,7 @@ object HAItems {
         "coral_shovel"
     ) {
         CoralShovelItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.5f, -3.0f)
-            )
+            HAItemProperties.props().shovel(HAPIToolMaterials.CORAL, 1.5f, -3.0f)
         )
     }
 
@@ -371,9 +362,7 @@ object HAItems {
         "coral_hoe"
     ) {
         CoralHoeItem(
-            Item.Properties().attributes(
-                DiggerItem.createAttributes(HAPIToolMaterials.CORAL, 1.0f, -2.0f)
-            )
+            HAItemProperties.props().hoe(HAPIToolMaterials.CORAL, 1.0f, -2.0f)
         )
     }
     //#endregion
@@ -384,14 +373,14 @@ object HAItems {
     //#region Nature Blocks
 
     val ANEMONE = register("anemone") {
-        PLATFORM.createBlockItem(HABlocks.ANEMONE.get(), Item.Properties())
+        PLATFORM.createBlockItem(HABlocks.ANEMONE.get(), HAItemProperties.blockProps())
     }
 
     val STRAWBERRY_ANEMONE = register("strawberry_anemone") {
-        PLATFORM.createBlockItem(HABlocks.STRAWBERRY_ANEMONE.get(), Item.Properties())
+        PLATFORM.createBlockItem(HABlocks.STRAWBERRY_ANEMONE.get(), HAItemProperties.blockProps())
     }
     val GIANT_GREEN_ANEMONE = register("giant_green_anemone") {
-        PLATFORM.createBlockItem(HABlocks.GIANT_GREEN_ANEMONE.get(), Item.Properties())
+        PLATFORM.createBlockItem(HABlocks.GIANT_GREEN_ANEMONE.get(), HAItemProperties.blockProps())
     }
 
     val GIANT_CLAM = registerBlockItem("giant_clam") { HABlocks.GIANT_CLAM.get() }
@@ -695,7 +684,7 @@ object HAItems {
     val CHERRY_RAFT = registerPlaceableInWaterBlockItem("cherry_raft") { HABlocks.CHERRY_RAFT.get() }
     val DRIFTWOOD_RAFT = registerPlaceableInWaterBlockItem("driftwood_raft") { HABlocks.DRIFTWOOD_RAFT.get() }
     val GLOWSTICK = registerVerticallyAttachable("glowstick", HABlocks.GLOWSTICK, HABlocks.WALL_GLOWSTICK)
-    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { MessageInABottleItem(Item.Properties()) }
+    val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") { MessageInABottleItem(HAItemProperties.blockProps(HABlocks.MESSAGE_IN_A_BOTTLE.get())) }
     //#endregion
 
     //#region Nature Blocks
@@ -706,19 +695,19 @@ object HAItems {
     val WHITE_SAND = registerBlockItem("white_sand") { HABlocks.WHITE_SAND.get() }
     val CHISELED_WHITE_SANDSTONE = registerBlockItem("chiseled_white_sandstone") { HABlocks.CHISELED_WHITE_SANDSTONE.get() }
     val WHITE_SANDSTONE = registerBlockItem("white_sandstone") { HABlocks.WHITE_SANDSTONE.get() }
-    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") { BlockItem(HABlocks.WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
-    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") { BlockItem(HABlocks.WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
-    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") { BlockItem(HABlocks.WHITE_SANDSTONE_WALL.get(), Item.Properties()) }
+    val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") { BlockItem(HABlocks.WHITE_SANDSTONE_STAIRS.get(), HAItemProperties.blockProps()) }
+    val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") { BlockItem(HABlocks.WHITE_SANDSTONE_SLAB.get(), HAItemProperties.blockProps()) }
+    val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") { BlockItem(HABlocks.WHITE_SANDSTONE_WALL.get(), HAItemProperties.blockProps()) }
     val SMOOTH_WHITE_SANDSTONE = registerBlockItem("smooth_white_sandstone") { HABlocks.SMOOTH_WHITE_SANDSTONE.get() }
-    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(), Item.Properties()) }
-    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_STAIRS.get(), HAItemProperties.blockProps()) }
+    val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") { BlockItem(HABlocks.SMOOTH_WHITE_SANDSTONE_SLAB.get(), HAItemProperties.blockProps()) }
     val CUT_WHITE_SANDSTONE = registerBlockItem("cut_white_sandstone") { HABlocks.CUT_WHITE_SANDSTONE.get() }
-    val CUT_WHITE_SANDSTONE_SLAB = register("cut_white_sandstone_slab") { BlockItem(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get(), Item.Properties()) }
+    val CUT_WHITE_SANDSTONE_SLAB = register("cut_white_sandstone_slab") { BlockItem(HABlocks.CUT_WHITE_SANDSTONE_SLAB.get(), HAItemProperties.blockProps()) }
 
-    val BONE_STAIRS = register("bone_stairs") { BlockItem(HABlocks.BONE_STAIRS.get(), Item.Properties()) }
-    val BONE_SLAB = register("bone_slab") { BlockItem(HABlocks.BONE_SLAB.get(), Item.Properties()) }
-    val BONE_WALL = register("bone_wall") { BlockItem(HABlocks.BONE_WALL.get(), Item.Properties()) }
-    val BONE_FENCE = register("bone_fence") { BlockItem(HABlocks.BONE_FENCE.get(), Item.Properties()) }
+    val BONE_STAIRS = register("bone_stairs") { BlockItem(HABlocks.BONE_STAIRS.get(), HAItemProperties.blockProps()) }
+    val BONE_SLAB = register("bone_slab") { BlockItem(HABlocks.BONE_SLAB.get(), HAItemProperties.blockProps()) }
+    val BONE_WALL = register("bone_wall") { BlockItem(HABlocks.BONE_WALL.get(), HAItemProperties.blockProps()) }
+    val BONE_FENCE = register("bone_fence") { BlockItem(HABlocks.BONE_FENCE.get(), HAItemProperties.blockProps()) }
 
     val SUSPICIOUS_RED_SAND = registerBlockItem("suspicious_red_sand") { HABlocks.SUSPICIOUS_RED_SAND.get() }
     val CORALSTONE = registerBlockItem("coralstone") { HABlocks.CORALSTONE.get() }
@@ -804,26 +793,26 @@ object HAItems {
 
     //#region Plushies
     val BASKING_SHARK_PLUSHIE =
-        registerBlockItem("basking_shark_plushie") { HABlocks.BASKING_SHARK_PLUSHIE.get() }
+        register("basking_shark_plushie") { HABlockItem(HABlocks.BASKING_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     val BULL_SHARK_PLUSHIE =
-        registerBlockItem("bull_shark_plushie") { HABlocks.BULL_SHARK_PLUSHIE.get() }
+        register("bull_shark_plushie") { HABlockItem(HABlocks.BULL_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     val FRILLED_SHARK_PLUSHIE =
-        registerBlockItem("frilled_shark_plushie") { HABlocks.FRILLED_SHARK_PLUSHIE.get() }
+        register("frilled_shark_plushie") { HABlockItem(HABlocks.FRILLED_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     val GREAT_WHITE_SHARK_PLUSHIE =
-        registerBlockItem("great_white_shark_plushie") { HABlocks.GREAT_WHITE_SHARK_PLUSHIE.get() }
+        register("great_white_shark_plushie") { HABlockItem(HABlocks.GREAT_WHITE_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     val HAMMERHEAD_SHARK_PLUSHIE =
-        registerBlockItem("hammerhead_shark_plushie") { HABlocks.HAMMERHEAD_SHARK_PLUSHIE.get() }
+        register("hammerhead_shark_plushie") { HABlockItem(HABlocks.HAMMERHEAD_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     val THRESHER_SHARK_PLUSHIE =
-        registerBlockItem("thresher_shark_plushie") { HABlocks.THRESHER_SHARK_PLUSHIE.get() }
+        register("thresher_shark_plushie") { HABlockItem(HABlocks.THRESHER_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     val TIGER_SHARK_PLUSHIE =
-        registerBlockItem("tiger_shark_plushie") { HABlocks.TIGER_SHARK_PLUSHIE.get() }
+        register("tiger_shark_plushie") { HABlockItem(HABlocks.TIGER_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     val WHALE_SHARK_PLUSHIE =
-        registerBlockItem("whale_shark_plushie") { HABlocks.WHALE_SHARK_PLUSHIE.get() }
+        register("whale_shark_plushie") { HABlockItem(HABlocks.WHALE_SHARK_PLUSHIE.get(), HAItemProperties.blockProps(), true) }
     //#endregion
 
     //#region Crates
-    val CRAB_POT = registerBlockItem("crab_pot") { HABlocks.CRAB_POT.get() }
-    val HYBRID_CRATE = registerBlockItem("hybrid_crate") { HABlocks.HYBRID_CRATE.get() }
+    val CRAB_POT = register("crab_pot") { HABlockItem(HABlocks.CRAB_POT.get(), HAItemProperties.blockProps(), true) }
+    val HYBRID_CRATE = register("hybrid_crate") { HABlockItem(HABlocks.HYBRID_CRATE.get(), HAItemProperties.blockProps(), true) }
     val OAK_CRATE = registerBlockItem("oak_crate") { HABlocks.OAK_CRATE.get() }
     val SPRUCE_CRATE = registerBlockItem("spruce_crate") { HABlocks.SPRUCE_CRATE.get() }
     val BIRCH_CRATE = registerBlockItem("birch_crate") { HABlocks.BIRCH_CRATE.get() }
@@ -838,32 +827,32 @@ object HAItems {
     //#endregion
 
     //#region Crafting Ingredients
-    val GLOWSLIME = register("glowslime") { Item(Item.Properties()) }
-    val HAGSLIME = register("hagslime") { Item(Item.Properties()) }
-    val SEA_URCHIN_SPINE = register("sea_urchin_spine") { Item(Item.Properties()) }
-    val SHARK_TOOTH = register("shark_tooth") { Item(Item.Properties()) }
-    val SULFUR = register("sulfur") { Item(Item.Properties()) }
-    val CORAL_CHUNK = register("coral_chunk") { Item(Item.Properties()) }
-    val PRISMARINE_ROD = register("prismarine_rod") { Item(Item.Properties()) }
-    val DIVING_ARMOR_UPGRADE_TEMPLATE = register("diving_armor_upgrade_template") { Item(Item.Properties()) }
-    val STARFISH = register("starfish") { StarfishItem(Item.Properties().stacksTo(16)) }
-    val PEARL = register("pearl") { Item(Item.Properties()) }
-    val BLACK_PEARL = register("black_pearl") { Item(Item.Properties()) }
-    val COMICALLY_LARGE_NAUTILUS_SHELL = register("comically_large_nautilus_shell") { Item(Item.Properties()) }
-    val CUTTLEBONE = register("cuttlebone") { Item(Item.Properties()) }
-    val FISH_FOOD = register("fish_food") { Item(Item.Properties()) }
+    val GLOWSLIME = register("glowslime") { Item(HAItemProperties.props()) }
+    val HAGSLIME = register("hagslime") { Item(HAItemProperties.props()) }
+    val SEA_URCHIN_SPINE = register("sea_urchin_spine") { Item(HAItemProperties.props()) }
+    val SHARK_TOOTH = register("shark_tooth") { Item(HAItemProperties.props()) }
+    val SULFUR = register("sulfur") { Item(HAItemProperties.props()) }
+    val CORAL_CHUNK = register("coral_chunk") { Item(HAItemProperties.props()) }
+    val PRISMARINE_ROD = register("prismarine_rod") { Item(HAItemProperties.props()) }
+    val DIVING_ARMOR_UPGRADE_TEMPLATE = register("diving_armor_upgrade_template") { Item(HAItemProperties.props()) }
+    val STARFISH = register("starfish") { StarfishItem(HAItemProperties.props().stacksTo(16)) }
+    val PEARL = register("pearl") { Item(HAItemProperties.props()) }
+    val BLACK_PEARL = register("black_pearl") { Item(HAItemProperties.props()) }
+    val COMICALLY_LARGE_NAUTILUS_SHELL = register("comically_large_nautilus_shell") { Item(HAItemProperties.props()) }
+    val CUTTLEBONE = register("cuttlebone") { Item(HAItemProperties.props()) }
+    val FISH_FOOD = register("fish_food") { Item(HAItemProperties.props()) }
 
     //#region Claws
-    val LOBSTER_CLAW = register("lobster_claw") { Item(Item.Properties()) }
-    val DUNGENESS_CRAB_CLAW = register("dungeness_crab_claw") { Item(Item.Properties()) }
-    val FIDDLER_CRAB_CLAW = register("fiddler_crab_claw") { Item(Item.Properties()) }
-    val VAMPIRE_CRAB_CLAW = register("vampire_crab_claw") { Item(Item.Properties()) }
-    val FLOWER_CRAB_CLAW = register("flower_crab_claw") { Item(Item.Properties()) }
-    val GHOST_CRAB_CLAW = register("ghost_crab_claw") { Item(Item.Properties()) }
-    val SPIDER_CRAB_CLAW = register("spider_crab_claw") { Item(Item.Properties()) }
-    val COCONUT_CRAB_CLAW = register("coconut_crab_claw") { Item(Item.Properties()) }
-    val YETI_CRAB_CLAW = register("yeti_crab_claw") { Item(Item.Properties()) }
-    val LIGHTFOOT_CRAB_CLAW = register("lightfoot_crab_claw") { Item(Item.Properties()) }
+    val LOBSTER_CLAW = register("lobster_claw") { Item(HAItemProperties.props()) }
+    val DUNGENESS_CRAB_CLAW = register("dungeness_crab_claw") { Item(HAItemProperties.props()) }
+    val FIDDLER_CRAB_CLAW = register("fiddler_crab_claw") { Item(HAItemProperties.props()) }
+    val VAMPIRE_CRAB_CLAW = register("vampire_crab_claw") { Item(HAItemProperties.props()) }
+    val FLOWER_CRAB_CLAW = register("flower_crab_claw") { Item(HAItemProperties.props()) }
+    val GHOST_CRAB_CLAW = register("ghost_crab_claw") { Item(HAItemProperties.props()) }
+    val SPIDER_CRAB_CLAW = register("spider_crab_claw") { Item(HAItemProperties.props()) }
+    val COCONUT_CRAB_CLAW = register("coconut_crab_claw") { Item(HAItemProperties.props()) }
+    val YETI_CRAB_CLAW = register("yeti_crab_claw") { Item(HAItemProperties.props()) }
+    val LIGHTFOOT_CRAB_CLAW = register("lightfoot_crab_claw") { Item(HAItemProperties.props()) }
     //#endregion
 
     //#endregion
@@ -871,7 +860,7 @@ object HAItems {
     //#region Food
     val UNI = register("uni") {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -885,7 +874,7 @@ object HAItems {
         "raw_shrimp"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -899,7 +888,7 @@ object HAItems {
         "cooked_shrimp"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -913,7 +902,7 @@ object HAItems {
         "cooked_clam"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -928,7 +917,7 @@ object HAItems {
     ) {
         BlockItem(
             HABlocks.CLAMS.get(),
-            Item.Properties()
+            HAItemProperties.blockProps(HABlocks.CLAMS.get())
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -942,7 +931,7 @@ object HAItems {
         "cooked_mussel"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -957,7 +946,7 @@ object HAItems {
     ) {
         BlockItem(
             HABlocks.MUSSELS.get(),
-            Item.Properties()
+            HAItemProperties.blockProps(HABlocks.MUSSELS.get())
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -971,7 +960,7 @@ object HAItems {
         "raw_crayfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -985,7 +974,7 @@ object HAItems {
         "cooked_crayfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -999,7 +988,7 @@ object HAItems {
         "raw_crab"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1013,7 +1002,7 @@ object HAItems {
         "cooked_crab"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -1027,7 +1016,7 @@ object HAItems {
         "raw_lobster"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1041,7 +1030,7 @@ object HAItems {
         "cooked_lobster"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(5)
@@ -1055,7 +1044,7 @@ object HAItems {
         "raw_lobster_tail"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1069,7 +1058,7 @@ object HAItems {
         "cooked_lobster_tail"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(5)
@@ -1083,7 +1072,7 @@ object HAItems {
         "cooked_fish_steak"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(8)
@@ -1097,7 +1086,7 @@ object HAItems {
         "raw_fish_steak"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
@@ -1111,7 +1100,7 @@ object HAItems {
         "cooked_fish_meat"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -1125,7 +1114,7 @@ object HAItems {
         "raw_fish_meat"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1139,7 +1128,7 @@ object HAItems {
         "raw_tentacle"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1153,7 +1142,7 @@ object HAItems {
         "cooked_tentacle"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(4)
@@ -1167,7 +1156,7 @@ object HAItems {
         "sirenian_steak"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(8)
@@ -1181,7 +1170,7 @@ object HAItems {
         "sirenian_beef"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
@@ -1195,7 +1184,7 @@ object HAItems {
         "mackerel"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1209,7 +1198,7 @@ object HAItems {
         "herring"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1223,7 +1212,7 @@ object HAItems {
         "flying_fish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1237,7 +1226,7 @@ object HAItems {
         "piranha"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1251,7 +1240,7 @@ object HAItems {
         "anglerfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1265,7 +1254,7 @@ object HAItems {
         "barreleye"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1279,7 +1268,7 @@ object HAItems {
         "dragonfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1293,7 +1282,7 @@ object HAItems {
         "blobfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1307,12 +1296,17 @@ object HAItems {
         "hagfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
                         .saturationModifier(0.2F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
+                        .build()
+                )
+                .component(
+                    DataComponents.CONSUMABLE,
+                    Consumable.builder()
+                        .onConsume(ApplyStatusEffectsConsumeEffect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f))
                         .build()
                 )
         )
@@ -1322,7 +1316,7 @@ object HAItems {
         "surgeonfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1336,7 +1330,7 @@ object HAItems {
         "clownfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1350,7 +1344,7 @@ object HAItems {
         "john_dory"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1364,7 +1358,7 @@ object HAItems {
         "damselfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1378,7 +1372,7 @@ object HAItems {
         "flashlight_fish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1392,7 +1386,7 @@ object HAItems {
         "squirrelfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1406,7 +1400,7 @@ object HAItems {
         "gourami"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1420,7 +1414,7 @@ object HAItems {
         "betta"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1434,7 +1428,7 @@ object HAItems {
         "pearlfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1448,7 +1442,7 @@ object HAItems {
         "snailfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1462,7 +1456,7 @@ object HAItems {
         "discus"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1476,7 +1470,7 @@ object HAItems {
         "danio"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1490,7 +1484,7 @@ object HAItems {
         "tetra"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1504,7 +1498,7 @@ object HAItems {
         "african_butterflyfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1518,7 +1512,7 @@ object HAItems {
         "tiger_barb"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1532,7 +1526,7 @@ object HAItems {
         "cichlid"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1546,12 +1540,17 @@ object HAItems {
         "boxfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
                         .saturationModifier(0.2F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
+                        .build()
+                )
+                .component(
+                    DataComponents.CONSUMABLE,
+                    Consumable.builder()
+                        .onConsume(ApplyStatusEffectsConsumeEffect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f))
                         .build()
                 )
         )
@@ -1561,7 +1560,7 @@ object HAItems {
         "carp"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1575,7 +1574,7 @@ object HAItems {
         "goldfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1589,7 +1588,7 @@ object HAItems {
         "sunfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1603,7 +1602,7 @@ object HAItems {
         "trout"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1617,7 +1616,7 @@ object HAItems {
         "pleco"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1631,7 +1630,7 @@ object HAItems {
         "seahorse"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
@@ -1645,12 +1644,17 @@ object HAItems {
         "blowfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
                         .saturationModifier(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
+                        .build()
+                )
+                .component(
+                    DataComponents.CONSUMABLE,
+                    Consumable.builder()
+                        .onConsume(ApplyStatusEffectsConsumeEffect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f))
                         .build()
                 )
         )
@@ -1660,12 +1664,17 @@ object HAItems {
         "stonefish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(1)
                         .saturationModifier(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f)
+                        .build()
+                )
+                .component(
+                    DataComponents.CONSUMABLE,
+                    Consumable.builder()
+                        .onConsume(ApplyStatusEffectsConsumeEffect(MobEffectInstance(MobEffects.POISON, 600, 1), 1.0f))
                         .build()
                 )
         )
@@ -1675,12 +1684,17 @@ object HAItems {
         "lionfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
                         .saturationModifier(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f)
+                        .build()
+                )
+                .component(
+                    DataComponents.CONSUMABLE,
+                    Consumable.builder()
+                        .onConsume(ApplyStatusEffectsConsumeEffect(MobEffectInstance(MobEffects.POISON, 1200, 0), 1.0f))
                         .build()
                 )
         )
@@ -1690,7 +1704,7 @@ object HAItems {
         "rockfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1704,7 +1718,7 @@ object HAItems {
         "sea_bass"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1718,12 +1732,17 @@ object HAItems {
         "stingray"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
                         .saturationModifier(0.4F)
-                        .effect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f)
+                        .build()
+                )
+                .component(
+                    DataComponents.CONSUMABLE,
+                    Consumable.builder()
+                        .onConsume(ApplyStatusEffectsConsumeEffect(MobEffectInstance(MobEffects.POISON, 600, 0), 1.0f))
                         .build()
                 )
         )
@@ -1733,7 +1752,7 @@ object HAItems {
         "moray_eel"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1747,7 +1766,7 @@ object HAItems {
         "needlefish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1761,7 +1780,7 @@ object HAItems {
         "ratfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1775,7 +1794,7 @@ object HAItems {
         "triggerfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1789,7 +1808,7 @@ object HAItems {
         "trevally"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1803,7 +1822,7 @@ object HAItems {
         "parrotfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1817,7 +1836,7 @@ object HAItems {
         "sheepshead_wrasse"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1831,7 +1850,7 @@ object HAItems {
         "coelacanth"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1845,7 +1864,7 @@ object HAItems {
         "golden_dorado"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(2)
@@ -1859,7 +1878,7 @@ object HAItems {
         "mahi"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
@@ -1873,7 +1892,7 @@ object HAItems {
         "tuna"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
@@ -1887,7 +1906,7 @@ object HAItems {
         "opah"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
@@ -1901,7 +1920,7 @@ object HAItems {
         "oarfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
@@ -1915,7 +1934,7 @@ object HAItems {
         "ocean_sunfish"
     ) {
         Item(
-            Item.Properties()
+            HAItemProperties.props()
                 .food(
                     FoodProperties.Builder()
                         .nutrition(3)
@@ -2230,7 +2249,7 @@ object HAItems {
     //#endregion
 
     fun register(id: String, item: Supplier<Item>): Supplier<Item> {
-        return CommonClass.ITEMS.register(id, item)
+        return CommonClass.ITEMS.register(id) { HAItemProperties.withId(id) { item.get() } }
     }
 
     private fun <T : Mob> registerSpawnEgg(
@@ -2244,23 +2263,35 @@ object HAItems {
     }
 
     fun registerBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
-        return register(id) { BlockItem(block.get(), Item.Properties()) }
+        return register(id) { BlockItem(block.get(), HAItemProperties.blockProps(block.get())) }
     }
 
     /**
      * Armor durability is no longer carried by the armor material, so each piece has to declare it
      * here. [durabilityFactor] is the per-material multiplier the armor set used before the port.
      */
-    private fun armorProperties(type: ArmorItem.Type, durabilityFactor: Int): Item.Properties {
-        return Item.Properties().stacksTo(1).durability(type.getDurability(durabilityFactor))
+    private fun armorProperties(type: ArmorType, durabilityFactor: Int): Item.Properties {
+        return HAItemProperties.props().stacksTo(1).durability(type.getDurability(durabilityFactor))
     }
 
     private fun registerPlaceableInWaterBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
-        return register(id) { PlaceableInWaterItem(block.get(), Item.Properties()) }
+        return register(id) { PlaceableInWaterItem(block.get(), HAItemProperties.blockProps(block.get())) }
     }
 
+    /** Whether [stack] is one of the seashell tools, which keep their speed while underwater. */
+    fun isSeashellTool(stack: ItemStack): Boolean =
+        stack.`is`(SEASHELL_SPEAR.get()) || stack.`is`(SEASHELL_PICKAXE.get()) ||
+            stack.`is`(SEASHELL_AXE.get()) || stack.`is`(SEASHELL_SHOVEL.get()) ||
+            stack.`is`(SEASHELL_HOE.get())
+
+    /** Whether [stack] is one of the coral tools, which slowly repair while underwater. */
+    fun isCoralTool(stack: ItemStack): Boolean =
+        stack.`is`(CORAL_BLADE.get()) || stack.`is`(CORAL_PICKAXE.get()) ||
+            stack.`is`(CORAL_AXE.get()) || stack.`is`(CORAL_SHOVEL.get()) ||
+            stack.`is`(CORAL_HOE.get())
+
     private fun registerPlaceableInWaterOrLandBlockItem(id: String, block: Supplier<Block>): Supplier<Item> {
-        return register(id) { PlaceableInWaterOrLandItem(block.get(), Item.Properties()) }
+        return register(id) { PlaceableInWaterOrLandItem(block.get(), HAItemProperties.blockProps(block.get())) }
     }
 
     private fun registerVerticallyAttachable(
@@ -2273,8 +2304,8 @@ object HAItems {
             StandingAndWallBlockItem(
                 standingBlock.get(),
                 wallBlock.get(),
-                Item.Properties(),
-                direction
+                direction,
+                HAItemProperties.blockProps(standingBlock.get())
             )
         }
     }

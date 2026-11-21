@@ -1,47 +1,43 @@
 package dev.hybridlabs.aquatic.client.model.entity.misc
 
+import software.bernie.geckolib.constant.DataTickets
+
+import software.bernie.geckolib.renderer.base.BoneSnapshots
+
+import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
+
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import net.minecraft.client.model.geom.PartNames
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.client.renderer.rendertype.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
+import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.state.AnimationTest
 import software.bernie.geckolib.model.GeoModel
 
 class CavitationBubbleEntityModel() :
-    GeoModel<CavitationBubbleEntity>() {
-    override fun getModelResource(animatable: CavitationBubbleEntity): ResourceLocation {
-        return CommonClass.locate("geo/misc/cavitation_bubble.geo.json")
+    GeoModel<CavitationBubbleEntity>(), HABoneAdjustingModel {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return CommonClass.locate("misc/cavitation_bubble")
     }
 
-    override fun getTextureResource(animatable: CavitationBubbleEntity): ResourceLocation {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
         return CommonClass.locate("textures/entity/misc/cavitation_bubble/cavitation_bubble.png")
     }
 
-    override fun getAnimationResource(p0: CavitationBubbleEntity?): ResourceLocation? {
-        return CommonClass.locate("animations/entity/misc/cavitation_bubble.animation.json")
+    override fun getAnimationResource(p0: CavitationBubbleEntity): Identifier {
+        return CommonClass.locate("entity/misc/cavitation_bubble")
     }
 
-    override fun getRenderType(animatable: CavitationBubbleEntity, texture: ResourceLocation): RenderType {
-        return RenderType.entityTranslucent(texture)
+    override fun adjustModelBones(renderState: GeoRenderState, snapshots: BoneSnapshots) {
+        val pitch = Mth.clamp(renderState.getOrDefaultGeckolibData(DataTickets.ENTITY_PITCH, 0f) ?: 0f, -45f, 45f)
+
+        snapshots.get(PartNames.BODY).ifPresent { bone ->
+            bone.setRotX(pitch * -Mth.DEG_TO_RAD)
+        }
     }
 
-    override fun setCustomAnimations(
-        animatable: CavitationBubbleEntity,
-        instanceId: Long,
-        animationState: AnimationState<CavitationBubbleEntity>
-    ) {
-        super.setCustomAnimations(animatable, instanceId, animationState)
-
-        val deltaTime = animationState.partialTick
-        val body = animationProcessor.getBone(PartNames.BODY)
-
-        val tilt = Mth.clamp(
-            Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot),
-            -45f, 45f
-        )
-
-        body?.rotX = tilt * -Mth.DEG_TO_RAD
-    }
 }

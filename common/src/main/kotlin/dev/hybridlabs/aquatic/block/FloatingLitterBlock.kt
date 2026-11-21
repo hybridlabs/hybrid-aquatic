@@ -1,16 +1,21 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.InsideBlockEffectApplier
+
+import net.minecraft.util.RandomSource
+
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.vehicle.Boat
+import net.minecraft.world.entity.vehicle.boat.Boat
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.SimpleWaterloggedBlock
@@ -31,7 +36,7 @@ class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), 
         )
     }
 
-    override fun getLightBlock(state: BlockState, level: BlockGetter, pos: BlockPos): Int {
+    override fun getLightBlock(state: BlockState): Int {
         return 1
     }
 
@@ -50,8 +55,15 @@ class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), 
         return fluidState.`is`(Fluids.WATER) || canSupportCenter(world, pos.below(), Direction.UP)
     }
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
-        super.entityInside(state, level, pos, entity)
+    override fun entityInside(
+        state: BlockState,
+        level: Level,
+        pos: BlockPos,
+        entity: Entity,
+        applier: InsideBlockEffectApplier,
+        intersects: Boolean
+    ) {
+        super.entityInside(state, level, pos, entity, applier, intersects)
         if (level is ServerLevel && entity is Boat) {
             level.destroyBlock(BlockPos(pos), true, entity)
         }
@@ -70,21 +82,23 @@ class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), 
 
     override fun updateShape(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: LevelAccessor,
+        world: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         pos: BlockPos,
+        direction: Direction,
         neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: RandomSource
     ): BlockState {
         if (state.getValue(WATERLOGGED)) {
-            world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
+            scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world))
         }
 
         if (!canSurvive(state, world, pos)) {
             return Blocks.AIR.defaultBlockState()
         }
 
-        return super.updateShape(state, direction, neighborState, world, pos, neighborPos)
+        return super.updateShape(state, world, scheduledTickAccess, pos, direction, neighborPos, neighborState, random)
     }
 
     override fun getShape(
@@ -100,7 +114,7 @@ class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), 
         return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         super.createBlockStateDefinition(builder)
         builder.add(WATERLOGGED)
     }

@@ -27,18 +27,16 @@ import dev.hybridlabs.aquatic.network.HybridAquaticNetworkingForge.ServerPayload
 import dev.hybridlabs.aquatic.particle.*
 import dev.hybridlabs.aquatic.platform.Services
 import net.minecraft.client.renderer.BiomeColors
-import net.minecraft.client.renderer.ItemBlockRenderTypes
-import net.minecraft.client.renderer.RenderType
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent
+import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent
 import net.neoforged.neoforge.fluids.FluidType
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent
-import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler
 import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.neoforge.forge.runForDist
 
@@ -56,6 +54,7 @@ object HybridAquaticModBusEvents {
                 MOD_BUS.addListener(::registerBlockEntityRenderers)
                 MOD_BUS.addListener(::registerFluidTypes)
                 MOD_BUS.addListener(::registerBlockColors)
+                MOD_BUS.addListener(::registerClientPayloadHandlers)
                 HybridAquaticEntityRenderers
             },
             serverTarget = {
@@ -113,39 +112,45 @@ object HybridAquaticModBusEvents {
     }
 
     private fun registerSkullModels(event: EntityRenderersEvent.CreateSkullModels) {
-        val modelLoader = event.entityModelSet
-
         event.registerSkullModel(
             PlushieBlock.Variant.BASKING_SHARK,
-            BaskingSharkPlushieModel(modelLoader.bakeLayer(BASKING_SHARK_PLUSHIE))
+            { modelSet -> BaskingSharkPlushieModel(modelSet.bakeLayer(BASKING_SHARK_PLUSHIE)) },
+            null
         )
         event.registerSkullModel(
             PlushieBlock.Variant.BULL_SHARK,
-            BullSharkPlushieModel(modelLoader.bakeLayer(BULL_SHARK_PLUSHIE))
+            { modelSet -> BullSharkPlushieModel(modelSet.bakeLayer(BULL_SHARK_PLUSHIE)) },
+            null
         )
         event.registerSkullModel(
             PlushieBlock.Variant.FRILLED_SHARK,
-            BullSharkPlushieModel(modelLoader.bakeLayer(FRILLED_SHARK_PLUSHIE))
+            { modelSet -> BullSharkPlushieModel(modelSet.bakeLayer(FRILLED_SHARK_PLUSHIE)) },
+            null
         )
         event.registerSkullModel(
             PlushieBlock.Variant.GREAT_WHITE_SHARK,
-            BullSharkPlushieModel(modelLoader.bakeLayer(GREAT_WHITE_SHARK_PLUSHIE))
+            { modelSet -> BullSharkPlushieModel(modelSet.bakeLayer(GREAT_WHITE_SHARK_PLUSHIE)) },
+            null
         )
         event.registerSkullModel(
             PlushieBlock.Variant.HAMMERHEAD_SHARK,
-            BullSharkPlushieModel(modelLoader.bakeLayer(HAMMERHEAD_SHARK_PLUSHIE))
+            { modelSet -> BullSharkPlushieModel(modelSet.bakeLayer(HAMMERHEAD_SHARK_PLUSHIE)) },
+            null
         )
         event.registerSkullModel(
             PlushieBlock.Variant.THRESHER_SHARK,
-            BullSharkPlushieModel(modelLoader.bakeLayer(THRESHER_SHARK_PLUSHIE))
+            { modelSet -> BullSharkPlushieModel(modelSet.bakeLayer(THRESHER_SHARK_PLUSHIE)) },
+            null
         )
         event.registerSkullModel(
             PlushieBlock.Variant.TIGER_SHARK,
-            BullSharkPlushieModel(modelLoader.bakeLayer(TIGER_SHARK_PLUSHIE))
+            { modelSet -> BullSharkPlushieModel(modelSet.bakeLayer(TIGER_SHARK_PLUSHIE)) },
+            null
         )
         event.registerSkullModel(
             PlushieBlock.Variant.WHALE_SHARK,
-            BullSharkPlushieModel(modelLoader.bakeLayer(WHALE_SHARK_PLUSHIE))
+            { modelSet -> BullSharkPlushieModel(modelSet.bakeLayer(WHALE_SHARK_PLUSHIE)) },
+            null
         )
     }
 
@@ -168,13 +173,6 @@ object HybridAquaticModBusEvents {
         Constants.LOGGER.info("Initializing client...")
         if (Services.PLATFORM.isModLoaded("curios")) HACuriosCompat.registerRenderers()
 
-        listOf(
-            HAPlatformFluids.BRINE_STILL,
-            HAPlatformFluids.BRINE_FLOWING
-        ).forEach { fluid ->
-            ItemBlockRenderTypes.setRenderLayer(fluid.get(), RenderType.solid())
-        }
-
         HAMenuScreens
     }
 
@@ -187,11 +185,12 @@ object HybridAquaticModBusEvents {
         registrar.playBidirectional(
             FishingBobberPayload.type,
             FishingBobberPayload.CODEC,
-            DirectionalPayloadHandler(
-                ClientPayloadHandler::handleDataOnMain,
-                ServerPayloadHandler::handleDataOnMain,
-            )
+            ServerPayloadHandler::handleDataOnMain
         )
+    }
+
+    private fun registerClientPayloadHandlers(event: RegisterClientPayloadHandlersEvent) {
+        event.register(FishingBobberPayload.type, ClientPayloadHandler::handleDataOnMain)
     }
 
     fun registerBlockColors(event: RegisterColorHandlersEvent.Block) {

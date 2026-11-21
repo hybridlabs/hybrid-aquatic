@@ -1,54 +1,35 @@
 package dev.hybridlabs.aquatic.client.render.entity.fish.layer
 
-import com.mojang.blaze3d.vertex.PoseStack
-import com.mojang.blaze3d.vertex.VertexConsumer
+import dev.hybridlabs.aquatic.client.model.HADataTickets
 import dev.hybridlabs.aquatic.client.model.entity.fish.CarpEntityModel
-import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
+import dev.hybridlabs.aquatic.client.render.entity.layer.HATextureLayer
 import dev.hybridlabs.aquatic.entity.fish.CarpEntity
-import net.minecraft.client.renderer.MultiBufferSource
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraft.resources.ResourceLocation
-import software.bernie.geckolib.cache.`object`.BakedGeoModel
-import software.bernie.geckolib.renderer.layer.GeoRenderLayer
-import software.bernie.geckolib.util.Color
+import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+import net.minecraft.resources.Identifier
 
 class CarpPatternEntityLayer(
-    renderer: BaseFishEntityRenderer<CarpEntity>
-) : GeoRenderLayer<CarpEntity>(renderer) {
+    renderer: BaseFishEntityRenderer<CarpEntity, LivingEntityRenderState>
+) : HATextureLayer<CarpEntity>(renderer) {
 
-    private fun getPatternTexture(animatable: CarpEntity, layer: String): ResourceLocation {
-        return (geoModel as CarpEntityModel).getPatternTextureResource(animatable, layer)
+    override fun addRenderData(
+        animatable: CarpEntity,
+        relatedObject: Void?,
+        renderState: LivingEntityRenderState,
+        partialTick: Float
+    ) {
+        super.addRenderData(animatable, relatedObject, renderState, partialTick)
+        renderState.addGeckolibData(
+            HADataTickets.PATTERN_NAME,
+            if (animatable.isBaby) "" else animatable.getPatternTextureName()
+        )
     }
 
-    override fun render(
-        poseStack: PoseStack,
-        animatable: CarpEntity,
-        bakedModel: BakedGeoModel,
-        renderType: RenderType?,
-        bufferSource: MultiBufferSource,
-        buffer: VertexConsumer?,
-        partialTick: Float,
-        packedLight: Int,
-        packedOverlay: Int
-    ) {
-        if (animatable.getPatternTextureName().isEmpty()) return
-        if (animatable.isBaby) return
+    override fun layerTexture(renderState: LivingEntityRenderState): Identifier? {
+        val patternName = renderState.getGeckolibData(HADataTickets.PATTERN_NAME) ?: return null
 
-        val patternTexture = getPatternTexture(animatable, animatable.getPatternTextureName())
-        val patternRenderType = RenderType.entityTranslucent(patternTexture)
+        if (patternName.isEmpty()) return null
 
-        getRenderer().reRender(
-            getDefaultBakedModel(animatable),
-            poseStack,
-            bufferSource,
-            animatable,
-            patternRenderType,
-            bufferSource.getBuffer(patternRenderType),
-            partialTick,
-            packedLight,
-            OverlayTexture.NO_OVERLAY,
-            Color.WHITE.argbInt
-        )
+        return (getGeoModel() as CarpEntityModel).getPatternTextureResource(patternName)
     }
 }

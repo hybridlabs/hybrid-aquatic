@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.InsideBlockEffectApplier
+
 import dev.hybridlabs.aquatic.block.impl.StickyBlock
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.core.BlockPos
@@ -10,8 +12,8 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.item.PrimedTnt
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.entity.vehicle.AbstractMinecart
-import net.minecraft.world.entity.vehicle.Boat
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart
+import net.minecraft.world.entity.vehicle.boat.Boat
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
@@ -31,11 +33,7 @@ open class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings),
         this.registerDefaultState(stateDefinition.any())
     }
 
-    override fun getOcclusionShape(
-        state: BlockState,
-        level: BlockGetter,
-        pos: BlockPos,
-    ): VoxelShape {
+    override fun getOcclusionShape(state: BlockState): VoxelShape {
         return Shapes.empty()
     }
 
@@ -75,7 +73,7 @@ open class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings),
         return true
     }
 
-    override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Float) {
+    override fun fallOn(level: Level, state: BlockState, pos: BlockPos, entity: Entity, fallDistance: Double) {
         if (entity is Player && entity.isCrouching) {
             super.fallOn(level, state, pos, entity, fallDistance)
         } else {
@@ -94,7 +92,14 @@ open class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings),
         }
     }
 
-    override fun entityInside(state: BlockState, level: Level, pos: BlockPos, entity: Entity) {
+    override fun entityInside(
+        state: BlockState,
+        level: Level,
+        pos: BlockPos,
+        entity: Entity,
+        applier: InsideBlockEffectApplier,
+        intersects: Boolean
+    ) {
         if (entity is Player && entity.isCrouching) {
             return
         }
@@ -105,7 +110,7 @@ open class HagslimeBlock(settings: Properties) : HalfTransparentBlock(settings),
             this.maybeDoSlideEffects(level, entity)
         }
 
-        super.entityInside(state, level, pos, entity)
+        super.entityInside(state, level, pos, entity, applier, intersects)
     }
 
     private fun maybeDoSlideAchievement(entity: Entity?, pos: BlockPos) {

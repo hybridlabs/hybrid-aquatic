@@ -2,13 +2,17 @@ package dev.hybridlabs.aquatic.particle
 
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.*
+import net.minecraft.util.RandomSource
 import net.minecraft.core.particles.SimpleParticleType
 import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sin
 
-class SargassumParticle(world: ClientLevel, x: Double, y: Double, z: Double): TextureSheetParticle(world, x, y, z) {
+class SargassumParticle(
+    level: ClientLevel, x: Double, y: Double, z: Double,
+    sprites: SpriteSet,
+) : SingleQuadParticle(level, x, y, z, sprites.get(0, 300)) {
     private var rotSpeed: Float = Math.toRadians(if (this.random.nextBoolean()) -30.0 else 30.0).toFloat()
     private val particleRandom: Float = this.random.nextFloat()
     private val spinAcceleration: Float = Math.toRadians(if (this.random.nextBoolean()) -5.0 else 5.0).toFloat()
@@ -20,10 +24,6 @@ class SargassumParticle(world: ClientLevel, x: Double, y: Double, z: Double): Te
         this.quadSize = f
         this.setSize(f, f)
         this.friction = 1.0f
-    }
-
-    override fun getRenderType(): ParticleRenderType {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE
     }
 
     override fun tick() {
@@ -61,14 +61,20 @@ class SargassumParticle(world: ClientLevel, x: Double, y: Double, z: Double): Te
     companion object {
         class Provider(private val sprite: SpriteSet) : ParticleProvider<SimpleParticleType> {
             override fun createParticle(
-                type: SimpleParticleType, level: ClientLevel,
-                x: Double, y: Double, z: Double,
-                xSpeed: Double, ySpeed: Double, zSpeed: Double
+                type: SimpleParticleType,
+                level: ClientLevel,
+                x: Double,
+                y: Double,
+                z: Double,
+                xSpeed: Double,
+                ySpeed: Double,
+                zSpeed: Double,
+                random: RandomSource,
             ): Particle {
-                val sargassumParticle = SargassumParticle(level, x, y, z)
-                sargassumParticle.pickSprite(this.sprite)
-                return sargassumParticle
+                return SargassumParticle(level, x, y, z, this.sprite)
             }
         }
     }
+
+    override fun getLayer(): SingleQuadParticle.Layer = SingleQuadParticle.Layer.OPAQUE
 }

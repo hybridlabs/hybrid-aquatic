@@ -12,7 +12,9 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 
 class DunegrassBlock(settings: Properties): BaseDunegrassBlock(settings){
-    override fun getCloneItemStack(world: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getCloneItemStack(
+        world: LevelReader, pos: BlockPos, state: BlockState, includeData: Boolean
+    ): ItemStack {
         return ItemStack(HAPlatformBlocks.DUNEGRASS.get())
     }
     override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
@@ -25,16 +27,16 @@ class DunegrassBlock(settings: Properties): BaseDunegrassBlock(settings){
             level.setBlock(blockPosAbove, blockStateUpper, 2)
         }
     }
-    override fun isFlammable(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Boolean {
+    override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
         return true
     }
 
-    override fun getFlammability(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Int {
+    override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
         return 60
     }
 
     override fun getFireSpreadSpeed(
-        state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+        state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
     ): Int {
         return 100
     }

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty
 import net.minecraft.world.phys.shapes.VoxelShape
 
 class TallDunegrassBlock(settings: Properties) : BaseTallDunegrassBlock(settings) {
-    override fun getCloneItemStack(world: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getCloneItemStack(world: LevelReader, pos: BlockPos, state: BlockState, includeData: Boolean): ItemStack {
         return ItemStack(HAPlatformBlocks.TALL_DUNEGRASS.get())
     }
 

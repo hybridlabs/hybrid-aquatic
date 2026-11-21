@@ -5,12 +5,13 @@ import dev.hybridlabs.aquatic.access.CustomPlayerEntityData;
 import dev.hybridlabs.aquatic.effect.HAMobEffects;
 
 import dev.hybridlabs.aquatic.item.HAItems;
-import dev.hybridlabs.hapi.item.HAPIToolMaterials;
-import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,10 +19,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -64,49 +63,19 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void readCustomDataFromNbt(CompoundTag nbt, CallbackInfo ci) {
-        setHybridHurtTime(nbt.getInt("haHurtTime"));
+    private void readCustomDataFromNbt(ValueInput input, CallbackInfo ci) {
+        setHybridHurtTime(input.getIntOr("haHurtTime", 0));
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void writeCustomDataToNbt(CompoundTag nbt, CallbackInfo ci) {
-        nbt.putInt("haHurtTime", getHybridHurtTime());
+    private void writeCustomDataToNbt(ValueOutput output, CallbackInfo ci) {
+        output.putInt("haHurtTime", getHybridHurtTime());
     }
 
     @Inject(method = "isAffectedByFluids", at = @At("HEAD"), cancellable = true)
     private void overrideShouldSwimInFluids(CallbackInfoReturnable<Boolean> ci) {
         if ((isHoldingDivingWeight) && !isSwimming() && isUnderWater()) {
             ci.setReturnValue(false);
-        }
-    }
-
-    @Inject(
-            method = "hurt",
-            at =
-                    @At(
-                            value = "INVOKE",
-                            target =
-                                    "Lnet/minecraft/world/entity/player/Player;level()Lnet/minecraft/world/level/Level;",
-                            ordinal = 0,
-                            shift = At.Shift.BEFORE))
-    private void setCustomHurtTimeOnDamage(
-            DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        Player object = (Player) (Object) this;
-
-        if (object.isInWater()) {
-            LivingEntity foundEntity =
-                    object.level()
-                            .getNearestEntity(
-                                    BaseSharkEntity.class,
-                                    TargetingConditions.forNonCombat()
-                                            .range(32)
-                                            .selector(Entity::isUnderWater),
-                                    object,
-                                    object.getX(),
-                                    object.getEyeY(),
-                                    object.getZ(),
-                                    object.getBoundingBox().inflate(16));
-            if (foundEntity != null) setHybridHurtTime(200);
         }
     }
 
@@ -131,9 +100,7 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         Player player = (Player)(Object)this;
 
         ItemStack stack = player.getMainHandItem();
-        if (!(stack.getItem() instanceof TieredItem tieredItem)) return;
-
-        if (tieredItem.getTier() != HAPIToolMaterials.SEASHELL) return;
+        if (!HAItems.INSTANCE.isSeashellTool(stack)) return;
 
         if (player.isEyeInFluid(FluidTags.WATER)) {
             var aquaAffinity = player.level()
@@ -227,10 +194,10 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         if (itemStack.is(HAItems.INSTANCE.getTURTLE_CHESTPLATE().get())) {
             player.addEffect(
                     new MobEffectInstance(
-                            MobEffects.DAMAGE_RESISTANCE, 200, 0, false, false, true));
+                            MobEffects.RESISTANCE, 200, 0, false, false, true));
             player.addEffect(
                     new MobEffectInstance(
-                            MobEffects.MOVEMENT_SLOWDOWN, 200, 0, false, false, true));
+                            MobEffects.SLOWNESS, 200, 0, false, false, true));
         }
     }
 
@@ -245,13 +212,11 @@ public abstract class PlayerEntityMixin extends Entity implements CustomPlayerEn
         if (player.isEyeInFluid(FluidTags.WATER)) {
             if (coralRepairTick > 5) {
                 List<NonNullList<ItemStack>> combinedInventory =
-                        ImmutableList.of(inventory.items, inventory.offhand);
+                        ImmutableList.of(inventory.getNonEquipmentItems(), inventory.getNonEquipmentItems());
                 List<ItemStack> coralItems = new ArrayList<>();
                 for (List<ItemStack> list : combinedInventory) {
                     for (ItemStack itemStack : list) {
-                        if (itemStack.getItem() instanceof TieredItem tool
-                                && tool.getTier() == HAPIToolMaterials.CORAL
-                                && itemStack.isDamaged()) {
+                        if (HAItems.INSTANCE.isCoralTool(itemStack) && itemStack.isDamaged()) {
                             coralItems.add(itemStack);
                         }
                     }

@@ -9,8 +9,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animatable.manager.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
+import software.bernie.geckolib.animation.`object`.EasingType
 
 class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level) :
     BaseSharkEntity(type, world) {
@@ -29,9 +34,8 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         super.registerControllers(controllers)
         controllers.add(
-            AnimationController(
-                this, "Feeding",
-                AnimationStateHandler { state: AnimationState<BaseSharkEntity> ->
+            AnimationController<BaseSharkEntity>("Feeding",
+                AnimationStateHandler { state: AnimationTest<BaseSharkEntity> ->
                     if (this.isFeeding())
                         return@AnimationStateHandler state.setAndContinue(FEED_ANIMATION)
                     PlayState.STOP
@@ -43,6 +47,7 @@ class BaskingSharkEntity(type: EntityType<out BaskingSharkEntity>, world: Level)
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 40.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.75)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)

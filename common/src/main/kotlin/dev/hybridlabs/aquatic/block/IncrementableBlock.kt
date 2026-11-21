@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import com.mojang.serialization.MapCodec
-import net.minecraft.Util
+import net.minecraft.util.Util
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraft.world.level.block.state.properties.DirectionProperty
+import net.minecraft.world.level.block.state.properties.EnumProperty
 import net.minecraft.world.level.block.state.properties.IntegerProperty
 import net.minecraft.world.level.block.state.properties.Property
 import net.minecraft.world.phys.shapes.CollisionContext
@@ -25,8 +25,8 @@ import java.util.function.BiFunction
 import kotlin.math.min
 
 open class IncrementableBlock protected constructor(properties: Properties) : BushBlock(properties), BonemealableBlock {
-    public override fun codec(): MapCodec<IncrementableBlock?> {
-        return CODEC
+    public override fun codec(): MapCodec<BushBlock> {
+        return CODEC as MapCodec<BushBlock>
     }
 
     public override fun rotate(blockState: BlockState, rotation: Rotation): BlockState {
@@ -74,8 +74,8 @@ open class IncrementableBlock protected constructor(properties: Properties) : Bu
         ) as BlockState
     }
 
-    override fun createBlockStateDefinition(stateDefinitionBuilder: StateDefinition.Builder<Block?, BlockState?>) {
-        stateDefinitionBuilder.add(*arrayOf<Property<*>?>(FACING, AMOUNT))
+    override fun createBlockStateDefinition(stateDefinitionBuilder: StateDefinition.Builder<Block, BlockState>) {
+        stateDefinitionBuilder.add(*arrayOf<Property<*>>(FACING, AMOUNT))
     }
 
     override fun isValidBonemealTarget(levelReader: LevelReader, blockPos: BlockPos, blockState: BlockState): Boolean {
@@ -111,22 +111,21 @@ open class IncrementableBlock protected constructor(properties: Properties) : Bu
 
     init {
         this.registerDefaultState(
-            ((this.stateDefinition.any() as BlockState).setValue<Direction?, Direction?>(
-                FACING,
-                Direction.NORTH
-            ) as BlockState).setValue(AMOUNT, 1) as BlockState
+            (this.stateDefinition.any() as BlockState)
+                .setValue(FACING, Direction.NORTH)
+                .setValue(AMOUNT, 1)
         )
     }
 
     companion object {
-        val CODEC: MapCodec<IncrementableBlock?> =
-            simpleCodec<IncrementableBlock?> { properties: Properties? -> IncrementableBlock(properties!!) }
+        val CODEC: MapCodec<IncrementableBlock> =
+            simpleCodec { properties: Properties -> IncrementableBlock(properties) }
         const val MIN_COUNT: Int = 1
         const val MAX_COUNT: Int = 4
-        val FACING: DirectionProperty = BlockStateProperties.HORIZONTAL_FACING
+        val FACING: EnumProperty<Direction> = BlockStateProperties.HORIZONTAL_FACING
         val AMOUNT: IntegerProperty = BlockStateProperties.FLOWER_AMOUNT
-        private val SHAPE_BY_PROPERTIES: BiFunction<Direction?, Int?, VoxelShape?> =
-            Util.memoize<Direction?, Int?, VoxelShape> { direction: Direction?, count: Int? ->
+        private val SHAPE_BY_PROPERTIES: BiFunction<Direction, Int, VoxelShape> =
+            Util.memoize<Direction, Int, VoxelShape> { direction: Direction, count: Int ->
                 val avoxelshape: Array<VoxelShape> = arrayOf(
                     box(8.0, 0.0, 8.0, 16.0, 3.0, 16.0),
                     box(8.0, 0.0, 0.0, 16.0, 3.0, 8.0),

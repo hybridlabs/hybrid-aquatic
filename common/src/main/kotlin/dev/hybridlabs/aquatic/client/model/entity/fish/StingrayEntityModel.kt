@@ -1,26 +1,29 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.StingrayEntity
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 
 class StingrayEntityModel : BaseFishEntityModel<StingrayEntity>("hybrid_aquatic", "stingray") {
 
-    override fun getTextureResource(animatable: StingrayEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(StingrayEntity.Companion.Type.entries)!!) {
             StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_TEXTURE
             StingrayEntity.Companion.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_TEXTURE
         }
     }
 
-    override fun getModelResource(animatable: StingrayEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(StingrayEntity.Companion.Type.entries)!!) {
             StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_MODEL
             StingrayEntity.Companion.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_MODEL
         }
     }
 
-    override fun getAnimationResource(animatable: StingrayEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: StingrayEntity): Identifier {
         return when (animatable.variant) {
             StingrayEntity.Companion.Type.BLUE_SPOTTED -> BLUE_SPOTTED_ANIMATION
             StingrayEntity.Companion.Type.SPOTTED_EAGLE -> SPOTTED_EAGLE_ANIMATION
@@ -29,18 +32,18 @@ class StingrayEntityModel : BaseFishEntityModel<StingrayEntity>("hybrid_aquatic"
 
     companion object {
         private val BLUE_SPOTTED_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/stingray/stingray_blue_spotted.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/stingray/stingray_blue_spotted.png")
         private val SPOTTED_EAGLE_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/stingray/stingray_spotted_eagle.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/stingray/stingray_spotted_eagle.png")
 
         private val BLUE_SPOTTED_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/stingray/stingray_blue_spotted.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/stingray/stingray_blue_spotted")
         private val SPOTTED_EAGLE_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/stingray/stingray_spotted_eagle.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/stingray/stingray_spotted_eagle")
 
         private val BLUE_SPOTTED_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/stingray/stingray_blue_spotted.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/stingray/stingray_blue_spotted")
         private val SPOTTED_EAGLE_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "animations/entity/fish/stingray/stingray_spotted_eagle.animation.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "entity/fish/stingray/stingray_spotted_eagle")
     }
 }

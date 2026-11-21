@@ -1,10 +1,12 @@
 package dev.hybridlabs.aquatic.entity.crustacean
 
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.entity.ai.goal.ShrimpCleanGoal
 import dev.hybridlabs.aquatic.entity.feature.OverlayTextureFeature
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseCrustaceanEntity
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -12,14 +14,19 @@ import net.minecraft.util.ByIdMap
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.DifficultyInstance
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.SpawnGroupData
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.ServerLevelAccessor
-import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animatable.manager.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
+import software.bernie.geckolib.animation.`object`.EasingType
 import java.util.function.IntFunction
 
 class ShrimpEntity(entityType: EntityType<out ShrimpEntity>, world: Level) :
@@ -52,9 +59,8 @@ class ShrimpEntity(entityType: EntityType<out ShrimpEntity>, world: Level) :
         super.registerControllers(controllerRegistrar)
 
         controllerRegistrar.add(
-            AnimationController(
-                this, "Cleaning",
-                AnimationStateHandler { state: AnimationState<ShrimpEntity> ->
+            AnimationController<ShrimpEntity>("Cleaning",
+                AnimationStateHandler { state: AnimationTest<ShrimpEntity> ->
                     if (this.isCleaning())
                         return@AnimationStateHandler state.setAndContinue(CLEAN_ANIMATION)
                     PlayState.STOP
@@ -66,6 +72,7 @@ class ShrimpEntity(entityType: EntityType<out ShrimpEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 1.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
@@ -113,7 +120,7 @@ class ShrimpEntity(entityType: EntityType<out ShrimpEntity>, world: Level) :
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?
     ): SpawnGroupData? {
         val overlayID = world.random.nextIntBetweenInclusive(0, OverlayTextures.entries.size - 1)
@@ -146,15 +153,15 @@ class ShrimpEntity(entityType: EntityType<out ShrimpEntity>, world: Level) :
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putInt("texture_overlay", this.overlayTexture.id)
-        this.setCleaning(compound.getBoolean("Cleaning"))
-        super.addAdditionalSaveData(compound)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.putInt("texture_overlay", this.overlayTexture.id)
+        output.putBoolean("Cleaning", isCleaning())
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        if(compound.contains("texture_overlay")) this.overlayTexture = OverlayTextures.byId(compound.getInt("texture_overlay"))
-        this.setCleaning(compound.getBoolean("Cleaning"))
-        super.readAdditionalSaveData(compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        if(input.getInt("texture_overlay").isPresent) this.overlayTexture = OverlayTextures.byId(input.getIntOr("texture_overlay", this.overlayTexture.id))
+        this.setCleaning(input.getBooleanOr("Cleaning", false))
+        super.readAdditionalSaveData(input)
     }
 }

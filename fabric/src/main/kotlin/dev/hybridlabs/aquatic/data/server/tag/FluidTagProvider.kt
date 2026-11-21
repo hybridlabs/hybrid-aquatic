@@ -12,12 +12,12 @@ class FluidTagProvider(output: FabricDataOutput, registriesFuture: CompletableFu
     FabricTagProvider.FluidTagProvider(output, registriesFuture) {
 
     override fun addTags(p0: HolderLookup.Provider) {
-        getOrCreateTagBuilder(HAFluidTags.BRINE)
+        valueLookupBuilder(HAFluidTags.BRINE)
             .add(HAPlatformFluids.BRINE_STILL.get())
             .add(HAPlatformFluids.BRINE_FLOWING.get())
 
 
-        getOrCreateTagBuilder(FluidTags.WATER)
+        valueLookupBuilder(FluidTags.WATER)
             .add(HAPlatformFluids.BRINE_STILL.get())
             .add(HAPlatformFluids.BRINE_FLOWING.get())
     }

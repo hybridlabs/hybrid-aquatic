@@ -4,7 +4,7 @@ package dev.hybridlabs.aquatic.utils;
 import dev.hybridlabs.aquatic.block.PlushieBlock;
 import dev.hybridlabs.aquatic.item.HAItems;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

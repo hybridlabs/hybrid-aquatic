@@ -1,9 +1,11 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
+import software.bernie.geckolib.renderer.base.GeoRenderState
+
 import dev.hybridlabs.aquatic.client.model.entity.miniboss.ShellBeastEntityModel
 import dev.hybridlabs.aquatic.entity.miniboss.ShellBeastEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
-import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer
+import software.bernie.geckolib.renderer.layer.builtin.AutoGlowingGeoLayer
 
 class ShellBeastEntityRenderer(context: Context) :
     HAMinibossEntityRenderer<ShellBeastEntity>(context, ShellBeastEntityModel()) {
@@ -11,12 +13,12 @@ class ShellBeastEntityRenderer(context: Context) :
         return 0.0025f
     }
 
-    override fun getDeathMaxRotation(animatable: ShellBeastEntity): Float {
+    override fun getDeathMaxRotation(renderState: GeoRenderState): Float {
         return 0f
     }
 
     init {
-        this.addRenderLayer(AutoGlowingGeoLayer(this))
+        this.withRenderLayer(AutoGlowingGeoLayer(this))
         this.shadowRadius = 1.5f
     }
 }

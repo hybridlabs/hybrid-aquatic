@@ -13,7 +13,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * The model for the Whale Shark Blahaj Plushie.
  * @see PlushieBlock.Variant.WHALE_SHARK
  */
-class WhaleSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+class WhaleSharkPlushieModel(root: ModelPart) : PlushieModel(root) {
     companion object {
         fun createModelData(): LayerDefinition {
             val modelData = MeshDefinition()

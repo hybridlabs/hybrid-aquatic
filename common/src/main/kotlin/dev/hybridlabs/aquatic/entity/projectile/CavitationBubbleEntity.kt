@@ -1,13 +1,17 @@
 package dev.hybridlabs.aquatic.entity.projectile
 
+import net.minecraft.server.level.ServerLevel
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import net.minecraft.core.particles.ParticleOptions
 import net.minecraft.core.particles.ParticleTypes
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile
+import net.minecraft.world.entity.projectile.hurtingprojectile.AbstractHurtingProjectile
 import net.minecraft.world.entity.projectile.ProjectileUtil
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
@@ -15,9 +19,9 @@ import net.minecraft.world.phys.HitResult
 import net.minecraft.world.phys.Vec3
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.`object`.PlayState
 import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.GeckoLibUtil
@@ -30,7 +34,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
     private var fuseDuration = -1
     private val trapBubble = this.deltaMovement.lengthSqr() < 0.0025
 
-    constructor(entityType: EntityType<out CavitationBubbleEntity?>, level: Level) : super(entityType, level)
+    constructor(entityType: EntityType<out CavitationBubbleEntity>, level: Level) : super(entityType, level)
 
     constructor(
         level: Level,
@@ -58,7 +62,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
     }
 
     override fun tick() {
-        val entity = this.owner
+        val entity = this.getOwner()
         if (this.level().isClientSide || (entity == null || !entity.isRemoved) && this.level()
                 .hasChunkAt(this.blockPosition())
         ) {
@@ -73,7 +77,6 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
                 this.onHit(hitresult)
             }
 
-            this.checkInsideBlocks()
             val vec3 = this.deltaMovement
             val d0 = this.x + vec3.x
             val d1 = this.y + vec3.y
@@ -98,7 +101,7 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         }
 
         if (!this.level().isClientSide) {
-            if (!firstTick && !isInWaterOrBubble) {
+            if (!firstTick && !isInWater) {
                 this.discard()
                 return
             }
@@ -153,34 +156,31 @@ class CavitationBubbleEntity : AbstractHurtingProjectile,
         super.onHitEntity(result)
         if (!this.level().isClientSide) {
             val entity = result.entity
-            val entity1 = this.owner
-            entity.hurt(this.damageSources()
-                .explosion(this, entity1), 8.0f)
+            val entity1 = this.getOwner()
+            entity.hurtServer(this.level() as ServerLevel, this.damageSources().explosion(this, entity1), 8.0f)
         }
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putByte("ExplosionPower", this.explosionPower.toByte())
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putByte("ExplosionPower", this.explosionPower.toByte())
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        if (compound.contains("ExplosionPower", 99)) {
-            this.explosionPower = compound.getByte("ExplosionPower").toInt()
-        }
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        this.explosionPower = input.getByteOr("ExplosionPower", this.explosionPower.toByte()).toInt()
     }
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
-        controllers.add(DefaultAnimations.genericSwimIdleController(this))
+        controllers.add(DefaultAnimations.genericSwimIdleController<CavitationBubbleEntity>())
 
         controllers.add(
-            AnimationController(this, "explode_controller") { PlayState.STOP }
+            AnimationController<CavitationBubbleEntity>("explode_controller") { PlayState.STOP }
                 .triggerableAnim("explode", EXPLODE_ANIMATION)
         )
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache? {
+    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return animCache
     }
 

@@ -1,13 +1,17 @@
 package dev.hybridlabs.aquatic.entity.base
 
+import net.minecraft.server.level.ServerLevel
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.monster.Monster
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
@@ -28,14 +32,14 @@ abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
         builder.define(ATTEMPT_ATTACK, false)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putInt("AttackTick", this.attackTick)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putInt("AttackTick", this.attackTick)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        this.attackTick = compound.getInt("AttackTick")
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        this.attackTick = input.getIntOr("AttackTick", 0)
     }
     //#endregion
 
@@ -52,7 +56,7 @@ abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
         return false
     }
 
-    override fun isPreventingPlayerRest(player: Player): Boolean {
+    override fun isPreventingPlayerRest(level: ServerLevel, player: Player): Boolean {
         return true
     }
 
@@ -68,7 +72,7 @@ abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
         fun canSpawn(
             type: EntityType<out Monster>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            reason: EntitySpawnReason,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {

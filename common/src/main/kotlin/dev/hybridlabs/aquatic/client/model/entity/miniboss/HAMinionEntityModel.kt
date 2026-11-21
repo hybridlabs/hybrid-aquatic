@@ -1,22 +1,24 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import software.bernie.geckolib.model.GeoModel
 
 @Suppress("OVERRIDE_DEPRECATION")
 abstract class HAMinionEntityModel<T : HAMinionEntity>(private val id: String) :
     GeoModel<T>() {
-    override fun getModelResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("geo/miniboss/${id}/$id.geo.json")
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return CommonClass.locate("miniboss/${id}/$id")
     }
 
-    override fun getTextureResource(animatable: T): ResourceLocation {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
         return CommonClass.locate("textures/entity/miniboss/${id}/$id.png")
     }
 
-    override fun getAnimationResource(animatable: T): ResourceLocation {
-        return CommonClass.locate("animations/entity/miniboss/${id}/$id.animation.json")
+    override fun getAnimationResource(animatable: T): Identifier {
+        return CommonClass.locate("entity/miniboss/${id}/$id")
     }
 }

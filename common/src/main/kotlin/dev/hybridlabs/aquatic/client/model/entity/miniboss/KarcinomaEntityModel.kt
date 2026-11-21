@@ -1,23 +1,26 @@
 package dev.hybridlabs.aquatic.client.model.entity.miniboss
 
+import software.bernie.geckolib.constant.DataTickets
+
+import software.bernie.geckolib.renderer.base.GeoRenderState
+
+import software.bernie.geckolib.renderer.base.BoneSnapshots
+
+import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
+
 import dev.hybridlabs.aquatic.entity.miniboss.KarcinomaEntity
 import net.minecraft.client.model.geom.PartNames
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.state.AnimationTest
 
-class KarcinomaEntityModel : HAMinionEntityModel<KarcinomaEntity>("karcinoma") {
+class KarcinomaEntityModel : HAMinionEntityModel<KarcinomaEntity>("karcinoma"), HABoneAdjustingModel {
 
-    override fun setCustomAnimations(
-        animatable: KarcinomaEntity,
-        instanceId: Long,
-        animationState: AnimationState<KarcinomaEntity>
-    ) {
-        super.setCustomAnimations(animatable, instanceId, animationState)
-        val deltaTime: Float = animationState.partialTick
+    override fun adjustModelBones(renderState: GeoRenderState, snapshots: BoneSnapshots) {
+        val pitch = Mth.clamp(renderState.getOrDefaultGeckolibData(DataTickets.ENTITY_PITCH, 0f) ?: 0f, -45f, 45f)
 
-        val body = animationProcessor.getBone(PartNames.BODY)
-
-        val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
-        body.rotX = xRot * -Mth.DEG_TO_RAD
+        snapshots.get(PartNames.BODY).ifPresent { bone ->
+            bone.setRotX(pitch * -Mth.DEG_TO_RAD)
+        }
     }
+
 }

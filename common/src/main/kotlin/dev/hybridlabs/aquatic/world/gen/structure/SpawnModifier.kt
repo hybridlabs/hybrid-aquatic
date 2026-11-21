@@ -16,7 +16,7 @@ data class SpawnModifier(
 ) {
     companion object {
         val MAP_CODEC: Codec<Map<String, List<SpawnerData>>> =
-            Codec.unboundedMap(Codec.STRING, SpawnerData.CODEC.listOf())
+            Codec.unboundedMap(Codec.STRING, SpawnerData.CODEC.codec().listOf())
         val CODEC: Codec<SpawnModifier> = RecordCodecBuilder.create { instance ->
             instance.group(
                 Codec.STRING.fieldOf("id").forGetter { modifier -> modifier.id },

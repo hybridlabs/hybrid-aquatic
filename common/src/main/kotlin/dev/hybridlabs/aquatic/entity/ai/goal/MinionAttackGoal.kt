@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.entity.EntitySelector
@@ -65,7 +67,7 @@ open class MinionAttackGoal(
             false
         } else if (!this.followingTargetEvenIfNotSeen) {
             !minion.navigation.isDone
-        } else if (!minion.isWithinRestriction(livingEntity.blockPosition())) {
+        } else if (!minion.isWithinHome(livingEntity.blockPosition())) {
             false
         } else {
             livingEntity !is Player || !livingEntity.isSpectator && !livingEntity.isCreative
@@ -84,7 +86,7 @@ open class MinionAttackGoal(
 
     override fun stop() {
         val livingEntity = minion.target
-        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
+        if (livingEntity != null && !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingEntity)) {
             minion.target = null
         }
 
@@ -142,7 +144,7 @@ open class MinionAttackGoal(
         if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
             this.resetAttackCooldown()
             minion.swing(InteractionHand.MAIN_HAND)
-            minion.doHurtTarget(enemy)
+            (minion.level() as? ServerLevel)?.let { minion.doHurtTarget(it, enemy) }
         }
     }
 

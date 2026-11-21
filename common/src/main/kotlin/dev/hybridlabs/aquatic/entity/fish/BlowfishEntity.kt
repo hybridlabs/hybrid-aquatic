@@ -1,9 +1,13 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.server.level.ServerLevel
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseFishEntity
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -21,7 +25,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.Goal
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
-import net.minecraft.world.entity.animal.WaterAnimal
+import net.minecraft.world.entity.animal.fish.WaterAnimal
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import java.util.function.Predicate
@@ -68,14 +72,14 @@ class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) :
         refreshDimensions()
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putInt("PuffState", getPuffState())
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putInt("PuffState", getPuffState())
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        setPuffState(compound.getInt("PuffState").coerceAtMost(FULLY_PUFFED))
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        setPuffState(input.getIntOr("PuffState", getPuffState()).coerceAtMost(FULLY_PUFFED))
     }
 
     override fun tick() {
@@ -114,15 +118,16 @@ class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) :
         super.aiStep()
         if (isAlive && getPuffState() > 0) {
             val nearbyEntities = level().getEntitiesOfClass(Mob::class.java, boundingBox.inflate(0.3)) {
-                BLOW_UP_TARGET_PREDICATE.test(this, it)
+                BLOW_UP_TARGET_PREDICATE.test(level() as ServerLevel, this, it)
             }
             nearbyEntities.forEach { touch(it) }
         }
     }
 
     private fun touch(mob: Mob) {
+        val level = this.level() as? ServerLevel ?: return
         val i = this.getPuffState()
-        if (mob.hurt(damageSources().mobAttack(this), (1 + i).toFloat())) {
+        if (mob.hurtServer(level, damageSources().mobAttack(this), (1 + i).toFloat())) {
             mob.addEffect(
                 MobEffectInstance(MobEffects.POISON, 60 * i, 0),
                 this
@@ -133,7 +138,7 @@ class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) :
 
     override fun playerTouch(entity: Player) {
         val i = this.getPuffState()
-        if (entity is ServerPlayer && i > 0 && entity.hurt(damageSources().mobAttack(this), (1 + i).toFloat())) {
+        if (entity is ServerPlayer && i > 0 && entity.hurtServer(entity.level(), damageSources().mobAttack(this), (1 + i).toFloat())) {
             if (!this.isSilent) {
                 entity.connection.send(ClientboundGameEventPacket(ClientboundGameEventPacket.PUFFER_FISH_STING, 0.0f))
             }
@@ -148,7 +153,7 @@ class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) :
     private inner class InflateGoal : Goal() {
         override fun canUse(): Boolean {
             val nearbyEntities = level().getEntitiesOfClass(LivingEntity::class.java, boundingBox.inflate(2.0)) {
-                BLOW_UP_TARGET_PREDICATE.test(this@BlowfishEntity, it)
+                BLOW_UP_TARGET_PREDICATE.test(level() as ServerLevel, this@BlowfishEntity, it)
             }
             return nearbyEntities.isNotEmpty()
         }
@@ -176,6 +181,7 @@ class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
@@ -185,8 +191,8 @@ class BlowfishEntity(type: EntityType<out BlowfishEntity>, world: Level) :
 
         private val PUFF_STATE: EntityDataAccessor<Int> =
             SynchedEntityData.defineId(BlowfishEntity::class.java, EntityDataSerializers.INT)
-        private val BLOW_UP_FILTER: Predicate<LivingEntity> =
-            Predicate { entity -> !(entity is Player && entity.isCreative) or (entity !is WaterAnimal) }
+        private val BLOW_UP_FILTER: TargetingConditions.Selector =
+            TargetingConditions.Selector { entity, _ -> !(entity is Player && entity.isCreative) || entity !is WaterAnimal }
 
         private val BLOW_UP_TARGET_PREDICATE: TargetingConditions =
             TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight()

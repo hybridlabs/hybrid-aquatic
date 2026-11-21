@@ -13,7 +13,6 @@
     ],
     "client": [
         "client.FishingBobberEntityClientMixin",
-        "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
         "client.SkullBlockEntityTextureMixin"

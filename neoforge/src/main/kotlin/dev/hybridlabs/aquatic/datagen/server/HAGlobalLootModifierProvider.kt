@@ -7,41 +7,40 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.PackOutput
 import net.minecraft.tags.ItemTags
-import net.minecraft.util.random.WeightedEntry
-import net.minecraft.util.random.WeightedRandomList
+import net.minecraft.util.random.Weighted
+import net.minecraft.util.random.WeightedList
 import net.minecraft.world.level.storage.loot.BuiltInLootTables
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider
-import net.neoforged.neoforge.common.loot.IGlobalLootModifier
 import java.util.concurrent.CompletableFuture
 
 class HAGlobalLootModifierProvider
     (output: PackOutput, registries: CompletableFuture<HolderLookup.Provider>) :
     GlobalLootModifierProvider(output, registries, Constants.MOD_ID) {
     override fun start() {
-        this.add<IGlobalLootModifier?>(
+        this.add(
             "fishing_fish",
             HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
-                BuiltInLootTables.FISHING.location(),
+                BuiltInLootTables.FISHING.identifier(),
                 ItemTags.FISHES,
                 0.5f,
-                WeightedRandomList.create(
-                    WeightedEntry.wrap(CommonClass.locate("gameplay/fishing/ha_large_fish"), 1),
-                    WeightedEntry.wrap(CommonClass.locate("gameplay/fishing/ha_medium_fish"), 2),
-                    WeightedEntry.wrap(CommonClass.locate("gameplay/fishing/ha_small_fish"), 4),
+                WeightedList.of(
+                    Weighted(CommonClass.locate("gameplay/fishing/ha_large_fish"), 1),
+                    Weighted(CommonClass.locate("gameplay/fishing/ha_medium_fish"), 2),
+                    Weighted(CommonClass.locate("gameplay/fishing/ha_small_fish"), 4),
                 )
             )
         )
-        this.add<IGlobalLootModifier?>(
+        this.add(
             "fishing_treasure",
             HAGlobalLootModifier(
                 emptyArray<LootItemCondition>(),
-                BuiltInLootTables.FISHING.location(),
+                BuiltInLootTables.FISHING.identifier(),
                 HAItemTags.FISHING_TREASURE,
                 0.25f,
-                WeightedRandomList.create(
-                    WeightedEntry.wrap(CommonClass.locate("gameplay/fishing/ha_crates"), 1),
+                WeightedList.of(
+                    Weighted(CommonClass.locate("gameplay/fishing/ha_crates"), 1),
                 )
             )
         )

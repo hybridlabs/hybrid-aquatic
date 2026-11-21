@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.entity.ai.goal
 
+import dev.hybridlabs.aquatic.util.HAMath
+
 import dev.hybridlabs.aquatic.entity.crustacean.ShrimpEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.BlockParticleOption
@@ -170,9 +172,9 @@ class ShrimpCleanGoal(
             val motionY = shrimp.getRandom().nextGaussian() * 0.07
             val motionZ = shrimp.getRandom().nextGaussian() * 0.07
             val angle = ((0.0174532925 * shrimp.yBodyRot) + i1).toFloat()
-            val extraX = (radius * Mth.sin(Mth.PI + angle)).toDouble()
+            val extraX = (radius * HAMath.sin(Mth.PI + angle.toDouble())).toDouble()
             val extraY = 0.8
-            val extraZ = (radius * Mth.cos(angle)).toDouble()
+            val extraZ = (radius * HAMath.cos(angle)).toDouble()
             val state = shrimp.level().getBlockState(target)
             (shrimp.level() as ServerLevel).sendParticles(
                 BlockParticleOption(

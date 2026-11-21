@@ -6,11 +6,11 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.AnimationState
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
 import software.bernie.geckolib.constant.DefaultAnimations
 
 class VampireCrabEntity(entityType: EntityType<out VampireCrabEntity>, world: Level) :
@@ -26,9 +26,8 @@ class VampireCrabEntity(entityType: EntityType<out VampireCrabEntity>, world: Le
         super.registerControllers(controllerRegistrar)
 
         controllerRegistrar.add(
-            AnimationController(
-                this, "Spawning",
-                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
+            AnimationController<BaseCrustaceanEntity>("Spawning",
+                AnimationStateHandler { state: AnimationTest<BaseCrustaceanEntity> ->
                     if (this.tickCount < 20)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
@@ -38,9 +37,8 @@ class VampireCrabEntity(entityType: EntityType<out VampireCrabEntity>, world: Le
         )
 
         controllerRegistrar.add(
-            AnimationController(
-                this, "Digging",
-                AnimationStateHandler { state: AnimationState<BaseCrustaceanEntity> ->
+            AnimationController<BaseCrustaceanEntity>("Digging",
+                AnimationStateHandler { state: AnimationTest<BaseCrustaceanEntity> ->
                     if (this.isDigging())
                         return@AnimationStateHandler state.setAndContinue(DIG_ANIMATION)
                     PlayState.STOP
@@ -52,6 +50,7 @@ class VampireCrabEntity(entityType: EntityType<out VampireCrabEntity>, world: Le
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 3.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)

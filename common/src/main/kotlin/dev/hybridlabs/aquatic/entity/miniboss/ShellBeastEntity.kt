@@ -1,5 +1,12 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import net.minecraft.world.entity.ai.targeting.TargetingConditions
+
+import net.minecraft.world.entity.EntitySpawnReason
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.ai.control.SmoothStrafeSwimmingMoveControl
 import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastRangedAttackGoal
@@ -7,7 +14,6 @@ import dev.hybridlabs.aquatic.entity.ai.goal.ShellBeastSummonBeaklingsGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.StayInWaterGoal
 import dev.hybridlabs.aquatic.entity.base.HAMinibossEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
@@ -31,14 +37,19 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
 import net.minecraft.world.entity.ai.navigation.PathNavigation
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
-import net.minecraft.world.entity.animal.IronGolem
+import net.minecraft.world.entity.animal.golem.IronGolem
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animatable.manager.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
+import software.bernie.geckolib.animation.`object`.EasingType
 import software.bernie.geckolib.constant.DefaultAnimations
 import software.bernie.geckolib.util.ClientUtil
 import java.lang.ref.WeakReference
@@ -107,13 +118,13 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
                 this,
                 Player::class.java,
                 true
-            ) { target -> target is Player && !(target.isCreative || target.isSpectator) }
+            ) { target, _ -> target is Player && !(target.isCreative || target.isSpectator) }
         )
 
         targetSelector.addGoal(
             1, ShellBeastNearestTargetGoal(
                 this, IronGolem::class.java, true
-            ) { true }
+            ) { _, _ -> true }
         )
     }
 
@@ -156,7 +167,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     }
 
     override fun checkDespawn() {
-        if (level().difficulty == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+        if (level().difficulty == Difficulty.PEACEFUL) {
             discard()
         } else {
             noActionTime = 0
@@ -170,25 +181,25 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         builder.define(SUMMONING, false)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        compound.putBoolean("Summoning", isSummoning())
-        compound.putInt("SummonTimer", summonTimer)
-        compound.putInt("BeaklingCooldown", beaklingCooldown)
-        compound.putInt("HypnautilusCooldown", hypnautilusCooldown)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        output.putBoolean("Summoning", isSummoning())
+        output.putInt("SummonTimer", summonTimer)
+        output.putInt("BeaklingCooldown", beaklingCooldown)
+        output.putInt("HypnautilusCooldown", hypnautilusCooldown)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
+    override fun readAdditionalSaveData(input: ValueInput) {
         if (hasCustomName()) {
             bossBar.name = this.displayName
         }
 
-        this.setSummoning(compound.getBoolean("Summoning"))
-        this.summonTimer = compound.getInt("SummonTimer")
-        this.beaklingCooldown = compound.getInt("BeaklingCooldown")
-        this.hypnautilusCooldown = compound.getInt("HypnautilusCooldown")
+        this.setSummoning(input.getBooleanOr("Summoning", isSummoning()))
+        this.summonTimer = input.getIntOr("SummonTimer", summonTimer)
+        this.beaklingCooldown = input.getIntOr("BeaklingCooldown", beaklingCooldown)
+        this.hypnautilusCooldown = input.getIntOr("HypnautilusCooldown", hypnautilusCooldown)
 
-        super.readAdditionalSaveData(compound)
+        super.readAdditionalSaveData(input)
     }
     //#endregion
 
@@ -239,12 +250,12 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
 
         controllers.add(
-            DefaultAnimations.genericSwimIdleController(this)
-                .transitionLength(8)
+            DefaultAnimations.genericSwimIdleController<ShellBeastEntity>()
+                .setTransitionTicks(8)
         )
 
         controllers.add(
-            AnimationController(this, "shoot_controller") { PlayState.STOP }
+            AnimationController<ShellBeastEntity>("shoot_controller") { PlayState.STOP }
                 .triggerableAnim("shoot", DefaultAnimations.ATTACK_SHOOT)
                 .setSoundKeyframeHandler { event ->
                     val player = ClientUtil.getClientPlayer()
@@ -254,7 +265,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         )
 
         controllers.add(
-            AnimationController(this, "summon_controller") { PlayState.STOP }
+            AnimationController<ShellBeastEntity>("summon_controller") { PlayState.STOP }
                 .triggerableAnim("summon", SUMMON_ANIMATION)
                 .setSoundKeyframeHandler { event ->
                     val player = ClientUtil.getClientPlayer()
@@ -264,9 +275,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         )
 
         controllers.add(
-            AnimationController(
-                this, "spawn_controller",
-                AnimationStateHandler { state: AnimationState<ShellBeastEntity> ->
+            AnimationController<ShellBeastEntity>("spawn_controller",
+                AnimationStateHandler { state: AnimationTest<ShellBeastEntity> ->
                     if (this.tickCount < 120)
                         return@AnimationStateHandler state.setAndContinue(DefaultAnimations.SPAWN)
                     PlayState.STOP
@@ -284,6 +294,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 500.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.7)
                 .add(Attributes.ATTACK_DAMAGE, 8.0)
@@ -311,7 +322,7 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         shellBeast: Mob,
         target: Class<T>,
         mustSee: Boolean,
-        predicate: Predicate<LivingEntity>,
+        predicate: TargetingConditions.Selector,
     ) :
         NearestAttackableTargetGoal<T>(shellBeast, target, mustSee, predicate) {
         override fun getTargetSearchArea(targetDistance: Double): AABB {
@@ -375,11 +386,11 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
     //    val count = 6
 
     //     for (i in 0 until count) {
-    //      val hypnautilus = HAEntityTypes.HYPNAUTILUS.get().create(level())
+    //      val hypnautilus = HAEntityTypes.HYPNAUTILUS.get().create(level(), EntitySpawnReason.MOB_SUMMONED)
     //       if (hypnautilus != null) {
     //          addMinion(hypnautilus)
     //         val spawnPos = hypnautilus.calcBeastRelativePos()
-    //         hypnautilus.moveTo(
+    //         hypnautilus.snapTo(
     //           spawnPos.x,
     //            spawnPos.y,
     //           spawnPos.z,
@@ -400,9 +411,9 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
             val offsetZ = (random.nextDouble() - 0.5) * 1.0
             val spawnPos = blockPosition().offset(offsetX.toInt(), 0, offsetZ.toInt())
 
-            val beakling = HAEntityTypes.BEAKLING.get().create(level())
+            val beakling = HAEntityTypes.BEAKLING.get().create(level(), EntitySpawnReason.MOB_SUMMONED)
             if (beakling != null) {
-                beakling.moveTo(
+                beakling.snapTo(
                     spawnPos.x.toDouble(),
                     spawnPos.y.toDouble(),
                     spawnPos.z.toDouble(),

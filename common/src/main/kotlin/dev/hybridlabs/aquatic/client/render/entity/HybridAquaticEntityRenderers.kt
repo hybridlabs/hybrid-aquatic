@@ -188,7 +188,6 @@ object HybridAquaticEntityRenderers {
             HAEntityTypes.OPAH, ::OpahEntityRenderer
         )
 
-
     val OCEAN_SUNFISH =
         ClientServices.PLATFORM.registerEntityRenderer(
             HAEntityTypes.OCEAN_SUNFISH, ::OceanSunfishEntityRenderer

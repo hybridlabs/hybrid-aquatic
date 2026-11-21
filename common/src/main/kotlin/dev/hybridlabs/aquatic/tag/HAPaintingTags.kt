@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.tag
 import dev.hybridlabs.aquatic.CommonClass
 import net.minecraft.core.registries.Registries
 import net.minecraft.tags.TagKey
-import net.minecraft.world.entity.decoration.PaintingVariant
+import net.minecraft.world.entity.decoration.painting.PaintingVariant
 
 object HAPaintingTags {
     val KEEPS_PAINTING_VARIANT = create("keeps_painting_variant")

@@ -1,42 +1,31 @@
 package dev.hybridlabs.aquatic.mixin.client;
 
-import com.llamalad7.mixinextras.sugar.Local;
-import dev.hybridlabs.aquatic.effect.HAMobEffects;
 import dev.hybridlabs.aquatic.fog.ClarityFogModifier;
 import dev.hybridlabs.aquatic.fog.ThalassophobiaFogModifier;
-import net.minecraft.client.Camera;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.FogType;
+import net.minecraft.client.renderer.fog.FogRenderer;
+import net.minecraft.client.renderer.fog.environment.FogEnvironment;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
+
+/**
+ * Adds Hybrid Aquatic's mob effect fogs to vanilla's fixed list of fog environments.
+ */
 @Mixin(FogRenderer.class)
 public class FogRendererMixin {
 
-    @Inject(method = "setupFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;" +
-                                                                         "setShaderFogStart(F)V"))
-    private static void hybrid$renderFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance,
-                                         boolean thickFog, float tickDelta, CallbackInfo ci,
-                                         @Local FogType cameraSubmersionType, @Local Entity entity, @Local FogRenderer.FogData fogData) {
+    @Shadow
+    @Final
+    private static List<FogEnvironment> FOG_ENVIRONMENTS;
 
-        if (entity instanceof LocalPlayer clientPlayerEntity && cameraSubmersionType == FogType.WATER) {
-            Level world = clientPlayerEntity.level();
-            MobEffectInstance clarityEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getCLARITY().asHolder());
-            MobEffectInstance thalassophobiaEffect = clientPlayerEntity.getEffect(HAMobEffects.INSTANCE.getTHALASSOPHOBIA().asHolder());
-
-            if (clarityEffect != null) {
-                new ClarityFogModifier().setupFog(fogData, clientPlayerEntity, clarityEffect, viewDistance, tickDelta);
-            } else if (thalassophobiaEffect != null) {
-                new ThalassophobiaFogModifier().setupFog(fogData, clientPlayerEntity, thalassophobiaEffect,
-                        viewDistance, tickDelta);
-            }
-        }
+    @Inject(method = "<clinit>", at = @At("TAIL"))
+    private static void hybrid$registerFogEnvironments(CallbackInfo ci) {
+        FOG_ENVIRONMENTS.add(new ClarityFogModifier());
+        FOG_ENVIRONMENTS.add(new ThalassophobiaFogModifier());
     }
 }

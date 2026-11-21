@@ -7,15 +7,18 @@ import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity.Companion
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.loot.HALootTables
+import com.google.gson.JsonPrimitive
+import com.mojang.serialization.JsonOps
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
-import net.minecraft.advancements.critereon.ItemPredicate
-import net.minecraft.advancements.critereon.StatePropertiesPredicate
+import net.minecraft.advancements.criterion.ItemPredicate
+import net.minecraft.advancements.criterion.StatePropertiesPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.enchantment.Enchantment
 import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.block.BaseCoralWallFanBlock
@@ -42,8 +45,14 @@ import java.util.concurrent.CompletableFuture
 class BlockLootTableProvider(output: FabricDataOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) :
     FabricBlockLootTableProvider(output, registryLookup) {
 
+    private val itemLookup = registryLookup.join().lookupOrThrow(Registries.ITEM)
+
+    private val blockEntityNbt = ContextNbtProvider.INLINE_CODEC
+        .parse(JsonOps.INSTANCE, JsonPrimitive("block_entity"))
+        .getOrThrow()
+
     override fun generate() {
-        val registrylookup = this.registries.lookupOrThrow<Enchantment?>(Registries.ENCHANTMENT)
+        val registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT)
 
         //#region Anemones
         add(HABlocks.ANEMONE.get()) { block ->
@@ -604,7 +613,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         LootItem.lootTableItem(block).`when`(hasSilkTouch()).apply(
-                            CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                            CopyCustomDataFunction.copyData(blockEntityNbt)
                                 .copy(VARIANT_KEY, VARIANT_KEY)
                         ),
                         NestedLootTable.lootTableReference(
@@ -631,7 +640,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.CRAB_POT_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
                     )
@@ -649,7 +658,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.HYBRID_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -667,7 +676,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.OAK_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
                     )
@@ -685,7 +694,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.BIRCH_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -703,7 +712,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.SPRUCE_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -721,7 +730,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.DARK_OAK_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -739,7 +748,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.ACACIA_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -757,7 +766,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.JUNGLE_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -775,7 +784,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.BAMBOO_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -793,7 +802,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.MANGROVE_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -811,7 +820,7 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
                                 HALootTables.CHERRY_CRATE_TREASURE_ID
                             )
                         ).`when`(
-                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.AXES))
+                            MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
                     )
@@ -820,27 +829,19 @@ class BlockLootTableProvider(output: FabricDataOutput, registryLookup: Completab
         }
         //#endregion
 
-        add(HABlocks.DECORATIVE_BUBBLE_COLUMN.get()) { block ->
-            LootTable.lootTable()
-        }
-
-        add(HABlocks.BUBBLE_NET.get()) { block ->
-            LootTable.lootTable()
-        }
-
         // generate remaining drops
         BuiltInRegistries.BLOCK
             .filter(filterHybridAquatic(BuiltInRegistries.BLOCK))
             .filter { block ->
                 block !is WallTorchBlock && block !is BaseCoralWallFanBlock
-                        && block.lootTable !in map
+                        && block.getLootTable().isPresent
             }
             .forEach { block ->
                 val id = BuiltInRegistries.BLOCK.getKey(block)
-                if (id.path.endsWith("slab")) {
-                    add(block, createSlabItemTable(block))
-                } else {
-                    dropSelf(block)
+                when {
+                    block.asItem() == Items.AIR -> add(block) { LootTable.lootTable() }
+                    id.path.endsWith("slab") -> add(block, createSlabItemTable(block))
+                    else -> dropSelf(block)
                 }
             }
     }

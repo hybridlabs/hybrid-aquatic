@@ -27,7 +27,6 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.block.state.properties.BooleanProperty
-import net.minecraft.world.level.block.state.properties.DirectionProperty
 import net.minecraft.world.level.block.state.properties.EnumProperty
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
@@ -139,7 +138,7 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
         super.stepOn(world, pos, state, entity)
     }
 
-    override fun <T : BlockEntity?> getTicker(
+    override fun <T : BlockEntity> getTicker(
         level: Level,
         state: BlockState,
         blockEntityType: BlockEntityType<T>,
@@ -168,7 +167,7 @@ class GiantClamBlock(private val emitsParticles: Boolean, settings: Properties) 
     }
 
     companion object {
-        val FACING: DirectionProperty = HorizontalDirectionalBlock.FACING
+        val FACING: EnumProperty<Direction> = HorizontalDirectionalBlock.FACING
         val STATE: EnumProperty<GiantClamState> = EnumProperty.create(
             "state",
             GiantClamState::class.java,

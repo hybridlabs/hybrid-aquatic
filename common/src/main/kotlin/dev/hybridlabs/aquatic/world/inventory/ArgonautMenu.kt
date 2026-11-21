@@ -6,12 +6,12 @@ import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.*
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity
 
 class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Inventory, container: Container, rows: Int, val containerData: ContainerData) :
     AbstractContainerMenu(type, containerId) {
     val container: Container
     val rowCount: Int
+    private val player: Player = playerInventory.player
 
     init {
         checkContainerSize(container, rows * SLOTS_PER_ROW + 1)
@@ -95,7 +95,7 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
     }
 
     fun isFuel(stack: ItemStack): Boolean {
-        return AbstractFurnaceBlockEntity.isFuel(stack)
+        return this.player.level().fuelValues().isFuel(stack)
     }
 
     fun getLitProgress(): Int {

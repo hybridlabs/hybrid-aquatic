@@ -12,20 +12,22 @@ import net.minecraft.world.level.block.state.properties.EnumProperty
 import net.minecraft.world.phys.shapes.VoxelShape
 
 class TallDunegrassBlock(settings: Properties) : BaseTallDunegrassBlock(settings) {
-    override fun getCloneItemStack(world: LevelReader, pos: BlockPos, state: BlockState): ItemStack {
+    override fun getCloneItemStack(
+        world: LevelReader, pos: BlockPos, state: BlockState, includeData: Boolean
+    ): ItemStack {
         return ItemStack(HAPlatformBlocks.TALL_DUNEGRASS.get())
     }
 
-    override fun isFlammable(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Boolean {
+    override fun isFlammable(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Boolean {
         return true
     }
 
-    override fun getFlammability(state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?): Int {
+    override fun getFlammability(state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction): Int {
         return 60
     }
 
     override fun getFireSpreadSpeed(
-        state: BlockState?, level: BlockGetter?, pos: BlockPos?, direction: Direction?
+        state: BlockState, level: BlockGetter, pos: BlockPos, direction: Direction
     ): Int {
         return 100
     }

@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.entity.cephalopod
 
+import net.minecraft.world.level.MoonPhase
+
+import net.minecraft.world.attribute.EnvironmentAttributes
+
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseCephalopodEntity
@@ -7,7 +11,7 @@ import dev.hybridlabs.hapi.entity.base.aquatic.InkConfiguration
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.entity.EntityType
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.level.Level
@@ -36,6 +40,7 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)
@@ -46,7 +51,7 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
         fun canSpawn(
             type: EntityType<out FireflySquidEntity>,
             world: ServerLevelAccessor,
-            reason: MobSpawnType,
+            reason: EntitySpawnReason,
             pos: BlockPos,
             random: RandomSource,
         ): Boolean {
@@ -54,9 +59,9 @@ class FireflySquidEntity(type: EntityType<out FireflySquidEntity>, world: Level)
             val nightSpawn = (seaLevel - 16)..<seaLevel
             val daySpawn = (seaLevel - 256)..(seaLevel - 48)
 
-            val newMoon = world.moonPhase == 4
+            val newMoon = world.environmentAttributes().getValue(EnvironmentAttributes.MOON_PHASE, pos) == MoonPhase.NEW_MOON
 
-            val spawnY = if ((newMoon) && !world.level.isDay) nightSpawn else daySpawn
+            val spawnY = if ((newMoon) && !world.level.isBrightOutside()) nightSpawn else daySpawn
 
             return pos.y in spawnY && world.isWaterAt(pos)
         }

@@ -10,7 +10,7 @@ import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.RegistryOps
 import net.minecraft.resources.ResourceKey
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.server.MinecraftServer
 import net.minecraft.util.KeyDispatchDataCodec
 import net.minecraft.world.level.dimension.LevelStem
@@ -36,14 +36,14 @@ object TrenchCarver {
     private val CARVER = ResourceKey.create(Registries.DENSITY_FUNCTION, CommonClass.locate("trench/carver"))
     private val BIOME_DEPTH = ResourceKey.create(Registries.DENSITY_FUNCTION, CommonClass.locate("trench/biome_depth"))
     private val CLEANUP_CARVER = ResourceKey.create(Registries.DENSITY_FUNCTION, CommonClass.locate("trench/cleanup_carver"))
-    private val VANILLA_OFFSET = ResourceLocation.withDefaultNamespace("overworld/offset")
+    private val VANILLA_OFFSET = Identifier.withDefaultNamespace("overworld/offset")
 
     private val DENSITY_FUNCTION_TYPES = CommonClass.DENSITY_FUNCTION_TYPES
     val CONTINENTS_MARKER = DENSITY_FUNCTION_TYPES.register("continents_marker") { ContinentsMarker.CODEC.codec() }
 
     @JvmStatic
     fun apply(server: MinecraftServer) {
-        val overworld = server.registryAccess().registryOrThrow(Registries.LEVEL_STEM).get(LevelStem.OVERWORLD) ?: return
+        val overworld = server.registryAccess().lookupOrThrow(Registries.LEVEL_STEM).getOrThrow(LevelStem.OVERWORLD).value()
         val generator = overworld.generator() as? NoiseBasedChunkGenerator ?: return
 
         // Inline settings have no registry holder to rebind, which only happens with hand-written world presets
@@ -53,8 +53,8 @@ object TrenchCarver {
         }
 
         val router = settings.value().noiseRouter()
-        val densityFunctions = server.registryAccess().registryOrThrow(Registries.DENSITY_FUNCTION)
-        fun load(key: ResourceKey<DensityFunction>) = densityFunctions.getHolderOrThrow(key).value()
+        val densityFunctions = server.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION)
+        fun load(key: ResourceKey<DensityFunction>) = densityFunctions.getOrThrow(key).value()
             .mapAll { function -> if (function is ContinentsMarker) router.continents() else function }
 
         val offsetShapesTrench = reads(router.finalDensity(), VANILLA_OFFSET, server)
@@ -74,7 +74,7 @@ object TrenchCarver {
             depth,
             router.ridges(),
             // Initial density sets the preliminary surface, which aquifers use to flood the trench with sea water
-            DensityFunctions.min(router.initialDensityWithoutJaggedness(), carver),
+            DensityFunctions.min(router.preliminarySurfaceLevel(), carver),
             DensityFunctions.min(router.finalDensity(), carver),
             router.veinToggle(),
             router.veinRidged(),
@@ -104,18 +104,18 @@ object TrenchCarver {
     /**
      * Whether [function] references the registered density function [target], following references through the registry.
      */
-    private fun reads(function: DensityFunction, target: ResourceLocation, server: MinecraftServer): Boolean {
+    private fun reads(function: DensityFunction, target: Identifier, server: MinecraftServer): Boolean {
         val ops = RegistryOps.create(JsonOps.INSTANCE, server.registryAccess())
-        val densityFunctions = server.registryAccess().registryOrThrow(Registries.DENSITY_FUNCTION)
-        val visited = mutableSetOf<ResourceLocation>()
+        val densityFunctions = server.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION)
+        val visited = mutableSetOf<Identifier>()
         val pending = ArrayDeque(listOf(function))
 
         while (pending.isNotEmpty()) {
             // References to registered functions encode as their ID, so every string in the encoding is a candidate
             val json = DensityFunction.HOLDER_HELPER_CODEC.encodeStart(ops, pending.removeFirst()).result().orElse(null) ?: continue
-            for (id in strings(json).mapNotNull(ResourceLocation::tryParse)) {
+            for (id in strings(json).mapNotNull(Identifier::tryParse)) {
                 if (id == target) return true
-                if (visited.add(id)) densityFunctions.get(id)?.let(pending::add)
+                if (visited.add(id)) densityFunctions.get(id).ifPresent { holder -> pending.add(holder.value()) }
             }
         }
 

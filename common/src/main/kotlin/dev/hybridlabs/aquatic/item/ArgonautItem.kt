@@ -9,11 +9,12 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.stats.Stats
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
-import net.minecraft.world.InteractionResultHolder
-import net.minecraft.world.entity.MobSpawnType
+import net.minecraft.world.entity.EntitySpawnReason
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.component.TooltipDisplay
+import java.util.function.Consumer
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.ClipContext
@@ -27,23 +28,24 @@ class ArgonautItem(properties: Properties) : Item(properties) {
     override fun appendHoverText(
         stack: ItemStack,
         context: TooltipContext,
-        lines: MutableList<Component>,
+        tooltipDisplay: TooltipDisplay,
+        lines: Consumer<Component>,
         tooltipFlag: TooltipFlag
     ) {
         val tag = stack.get(DataComponents.CUSTOM_DATA)?.copyTag() ?: return
 
         if (tag.contains("ShellColor")) {
-            val color = ArgonautEntity.ShellColor.byId(tag.getInt("ShellColor"))
-            lines.add(Component.translatable("tooltip.hybrid_aquatic.argonaut.shell", color.name.uppercase()))
+            val color = ArgonautEntity.ShellColor.byId(tag.getIntOr("ShellColor", 0))
+            lines.accept(Component.translatable("tooltip.hybrid_aquatic.argonaut.shell", color.name.uppercase()))
         }
 
         if (tag.contains("SailColor")) {
-            val color = ArgonautEntity.SailColor.byId(tag.getInt("SailColor"))
-            lines.add(Component.translatable("tooltip.hybrid_aquatic.argonaut.sail", color.name.uppercase()))
+            val color = ArgonautEntity.SailColor.byId(tag.getIntOr("SailColor", 0))
+            lines.accept(Component.translatable("tooltip.hybrid_aquatic.argonaut.sail", color.name.uppercase()))
         }
 
-        if (tag.contains("Glowing") && tag.getBoolean("Glowing")) {
-            lines.add(Component.translatable("tooltip.hybrid_aquatic.argonaut.glowing"))
+        if (tag.contains("Glowing") && tag.getBooleanOr("Glowing", false)) {
+            lines.accept(Component.translatable("tooltip.hybrid_aquatic.argonaut.glowing"))
         }
     }
 
@@ -70,7 +72,7 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             stack,
             context.player,
             spawnPos,
-            MobSpawnType.SPAWN_EGG,
+            EntitySpawnReason.SPAWN_ITEM_USE,
             true,
             face == Direction.UP
         )
@@ -88,37 +90,37 @@ class ArgonautItem(properties: Properties) : Item(properties) {
         val tag = stack.get(DataComponents.CUSTOM_DATA)?.copyTag() ?: return
 
         if (tag.contains("ShellColor")) {
-            val shellColorId = tag.getInt("ShellColor")
+            val shellColorId = tag.getIntOr("ShellColor", 0)
             entity.setShellColor(ArgonautEntity.ShellColor.byId(shellColorId))
         }
 
         if (tag.contains("SailColor")) {
-            val sailColorId = tag.getInt("SailColor")
+            val sailColorId = tag.getIntOr("SailColor", 0)
             entity.setSailColor(ArgonautEntity.SailColor.byId(sailColorId))
         }
 
         if (tag.contains("Glowing")) {
-            entity.setGlowing(tag.getBoolean("Glowing"))
+            entity.setGlowing(tag.getBooleanOr("Glowing", false))
         }
     }
 
-    override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
+    override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResult {
         val stack = player.getItemInHand(hand)
         val customData = stack.get(DataComponents.CUSTOM_DATA)
         val hit = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY)
 
         if (hit.type != HitResult.Type.BLOCK) {
-            return InteractionResultHolder.pass(stack)
+            return InteractionResult.PASS
         }
 
         if (level !is ServerLevel) {
-            return InteractionResultHolder.success(stack)
+            return InteractionResult.SUCCESS
         }
 
         val pos = hit.blockPos
 
         if (level.getBlockState(pos).block !is LiquidBlock) {
-            return InteractionResultHolder.pass(stack)
+            return InteractionResult.PASS
         }
 
         val entity: ArgonautEntity? = HAEntityTypes.ARGONAUT.get().spawn(
@@ -126,24 +128,24 @@ class ArgonautItem(properties: Properties) : Item(properties) {
             stack,
             player,
             pos,
-            MobSpawnType.SPAWN_EGG,
+            EntitySpawnReason.SPAWN_ITEM_USE,
             false,
             false
         )
 
         if (entity == null) {
-            return InteractionResultHolder.pass(stack)
+            return InteractionResult.PASS
         }
 
         customData?.copyTag()?.let { tag ->
             if (tag.contains("ShellColor")) {
-                entity.setShellColor(ArgonautEntity.ShellColor.byId(tag.getInt("ShellColor")))
+                entity.setShellColor(ArgonautEntity.ShellColor.byId(tag.getIntOr("ShellColor", 0)))
             }
             if (tag.contains("SailColor")) {
-                entity.setSailColor(ArgonautEntity.SailColor.byId(tag.getInt("SailColor")))
+                entity.setSailColor(ArgonautEntity.SailColor.byId(tag.getIntOr("SailColor", 0)))
             }
             if (tag.contains("Glowing")) {
-                entity.setGlowing(tag.getBoolean("Glowing"))
+                entity.setGlowing(tag.getBooleanOr("Glowing", false))
             }
         }
 
@@ -154,6 +156,6 @@ class ArgonautItem(properties: Properties) : Item(properties) {
         player.awardStat(Stats.ITEM_USED.get(this))
         level.gameEvent(player, GameEvent.ENTITY_PLACE, entity.position())
 
-        return InteractionResultHolder.consume(stack)
+        return InteractionResult.CONSUME
     }
 }

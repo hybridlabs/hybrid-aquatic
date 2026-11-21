@@ -8,11 +8,14 @@ import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.item.HAPIItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
-import net.minecraft.advancements.critereon.InventoryChangeTrigger
-import net.minecraft.advancements.critereon.ItemPredicate
+import net.minecraft.advancements.criterion.InventoryChangeTrigger
+import net.minecraft.advancements.criterion.ItemPredicate
 import net.minecraft.core.HolderLookup
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import net.minecraft.data.recipes.*
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.data.recipes.RecipeProvider as VanillaRecipeProvider
+import net.minecraft.resources.Identifier
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.Item
@@ -25,51 +28,57 @@ import java.util.concurrent.CompletableFuture
 
 class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     FabricRecipeProvider(output, lookupProvider) {
-    override fun buildRecipes(exporter: RecipeOutput) {
+    override fun createRecipeProvider(
+        registries: HolderLookup.Provider,
+        output: RecipeOutput
+    ): VanillaRecipeProvider = GeneratedRecipes(registries, output)
+
+    override fun getName(): String = "Recipes"
+
+    private class GeneratedRecipes(
+        registries: HolderLookup.Provider,
+        output: RecipeOutput
+    ) : VanillaRecipeProvider(registries, output) {
+        private val itemLookup = registries.lookupOrThrow(Registries.ITEM)
+
+        override fun buildRecipes() {
 
         //#region Sandstone Block Recipes
         stair(
-            exporter,
             HAItems.WHITE_SANDSTONE_STAIRS.get(),
             HAItems.WHITE_SANDSTONE.get()
         )
 
         stair(
-            exporter,
             HAItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
             HAItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.WHITE_SANDSTONE_SLAB.get(),
             HAItems.WHITE_SANDSTONE.get()
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CUT_WHITE_SANDSTONE_SLAB.get(),
             HAItems.CUT_WHITE_SANDSTONE.get()
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
             HAItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         chiseled(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHISELED_WHITE_SANDSTONE.get(),
             HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.WHITE_SANDSTONE_SLAB.get(),
             HAItems.WHITE_SANDSTONE.get(),
@@ -77,7 +86,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CUT_WHITE_SANDSTONE_SLAB.get(),
             HAItems.CUT_WHITE_SANDSTONE.get(),
@@ -85,7 +93,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SMOOTH_WHITE_SANDSTONE_SLAB.get(),
             HAItems.SMOOTH_WHITE_SANDSTONE.get(),
@@ -93,42 +100,36 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.WHITE_SANDSTONE_STAIRS.get(),
             HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SMOOTH_WHITE_SANDSTONE_STAIRS.get(),
             HAItems.SMOOTH_WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.WHITE_SANDSTONE_WALL.get(),
             HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHISELED_WHITE_SANDSTONE.get(),
             HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SMOOTH_WHITE_SANDSTONE.get(),
             HAItems.WHITE_SANDSTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CUT_WHITE_SANDSTONE.get(),
             HAItems.WHITE_SANDSTONE.get()
@@ -137,14 +138,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         //red brinestone
         //#region polished red brinestone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_RED_BRINESTONE.get(),
             HAItems.RED_BRINESTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_RED_BRINESTONE.get(),
             HAItems.RED_BRINESTONE.get()
@@ -153,7 +152,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chiseled red brinestone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHISELED_RED_BRINESTONE.get(),
             HAItems.POLISHED_RED_BRINESTONE.get()
@@ -168,27 +166,23 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region red brinestone stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_STAIRS.get(),
             HAItems.RED_BRINESTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_RED_BRINESTONE_STAIRS.get(),
             HAItems.POLISHED_RED_BRINESTONE.get()
         )
 
         stair(
-            exporter,
             HAItems.RED_BRINESTONE_STAIRS.get(),
             HABlocks.RED_BRINESTONE.get()
         )
 
         stair(
-            exporter,
             HAItems.POLISHED_RED_BRINESTONE_STAIRS.get(),
             HABlocks.POLISHED_RED_BRINESTONE.get()
         )
@@ -196,7 +190,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region red brinestone slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_SLAB.get(),
             HAItems.RED_BRINESTONE.get(),
@@ -204,7 +197,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_RED_BRINESTONE_SLAB.get(),
             HAItems.POLISHED_RED_BRINESTONE.get(),
@@ -212,14 +204,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.RED_BRINESTONE_SLAB.get(),
             HABlocks.RED_BRINESTONE.get(),
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.POLISHED_RED_BRINESTONE_SLAB.get(),
             HABlocks.POLISHED_RED_BRINESTONE.get(),
@@ -228,14 +218,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region red brinestone walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_WALL.get(),
             HAItems.RED_BRINESTONE.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.RED_BRINESTONE_WALL.get(),
             HABlocks.RED_BRINESTONE.get(),
@@ -244,14 +232,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         
         //#region red brinestone bricks
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_BRICKS.get(),
             HAItems.POLISHED_RED_BRINESTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_BRICKS.get(),
             HAItems.POLISHED_RED_BRINESTONE.get()
@@ -260,14 +246,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region red brinestone brick stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_BRICK_STAIRS.get(),
             HAItems.RED_BRINESTONE_BRICKS.get()
         )
 
         stair(
-            exporter,
             HAItems.RED_BRINESTONE_BRICK_STAIRS.get(),
             HABlocks.RED_BRINESTONE_BRICKS.get()
         )
@@ -275,7 +259,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region red brinestone brick slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_BRICK_SLAB.get(),
             HAItems.RED_BRINESTONE_BRICKS.get(),
@@ -283,7 +266,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.RED_BRINESTONE_BRICK_SLAB.get(),
             HABlocks.RED_BRINESTONE_BRICKS.get(),
@@ -292,14 +274,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region red brinestone brick walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.RED_BRINESTONE_BRICK_WALL.get(),
             HAItems.RED_BRINESTONE_BRICKS.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.RED_BRINESTONE_BRICK_WALL.get(),
             HABlocks.RED_BRINESTONE_BRICKS.get()
@@ -309,14 +289,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         //orange
         //#region polished orange brinestone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_ORANGE_BRINESTONE.get(),
             HAItems.ORANGE_BRINESTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_ORANGE_BRINESTONE.get(),
             HAItems.ORANGE_BRINESTONE.get()
@@ -325,7 +303,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chiseled orange brinestone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHISELED_ORANGE_BRINESTONE.get(),
             HAItems.POLISHED_ORANGE_BRINESTONE.get()
@@ -340,27 +317,23 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region orange brinestone stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_STAIRS.get(),
             HAItems.ORANGE_BRINESTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_ORANGE_BRINESTONE_STAIRS.get(),
             HAItems.POLISHED_ORANGE_BRINESTONE.get()
         )
 
         stair(
-            exporter,
             HAItems.ORANGE_BRINESTONE_STAIRS.get(),
             HABlocks.ORANGE_BRINESTONE.get()
         )
 
         stair(
-            exporter,
             HAItems.POLISHED_ORANGE_BRINESTONE_STAIRS.get(),
             HABlocks.POLISHED_ORANGE_BRINESTONE.get()
         )
@@ -368,7 +341,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region orange brinestone slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_SLAB.get(),
             HAItems.ORANGE_BRINESTONE.get(),
@@ -376,7 +348,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_ORANGE_BRINESTONE_SLAB.get(),
             HAItems.POLISHED_ORANGE_BRINESTONE.get(),
@@ -384,14 +355,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.ORANGE_BRINESTONE_SLAB.get(),
             HABlocks.ORANGE_BRINESTONE.get(),
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.POLISHED_ORANGE_BRINESTONE_SLAB.get(),
             HABlocks.POLISHED_ORANGE_BRINESTONE.get(),
@@ -400,14 +369,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region orange brinestone walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_WALL.get(),
             HAItems.ORANGE_BRINESTONE.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.ORANGE_BRINESTONE_WALL.get(),
             HABlocks.ORANGE_BRINESTONE.get()
@@ -416,14 +383,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region orange brinestone bricks
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_BRICKS.get(),
             HAItems.POLISHED_ORANGE_BRINESTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_BRICKS.get(),
             HAItems.POLISHED_ORANGE_BRINESTONE.get()
@@ -432,14 +397,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region orange brinestone brick stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_BRICK_STAIRS.get(),
             HAItems.ORANGE_BRINESTONE_BRICKS.get()
         )
 
         stair(
-            exporter,
             HAItems.ORANGE_BRINESTONE_BRICK_STAIRS.get(),
             HABlocks.ORANGE_BRINESTONE_BRICKS.get()
         )
@@ -447,7 +410,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region orange brinestone brick slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_BRICK_SLAB.get(),
             HAItems.ORANGE_BRINESTONE_BRICKS.get(),
@@ -455,7 +417,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.ORANGE_BRINESTONE_BRICK_SLAB.get(),
             HABlocks.ORANGE_BRINESTONE_BRICKS.get(),
@@ -464,14 +425,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region orange brinestone brick walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.ORANGE_BRINESTONE_BRICK_WALL.get(),
             HAItems.ORANGE_BRINESTONE_BRICKS.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.ORANGE_BRINESTONE_BRICK_WALL.get(),
             HABlocks.ORANGE_BRINESTONE_BRICKS.get()
@@ -481,14 +440,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         //yellow
         //#region polished yellow brinestone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_YELLOW_BRINESTONE.get(),
             HAItems.YELLOW_BRINESTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_YELLOW_BRINESTONE.get(),
             HAItems.YELLOW_BRINESTONE.get()
@@ -497,7 +454,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         
         //#region chiseled yellow brinestone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHISELED_YELLOW_BRINESTONE.get(),
             HAItems.POLISHED_YELLOW_BRINESTONE.get()
@@ -512,26 +468,22 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region yellow brinestone stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_STAIRS.get(),
             HAItems.YELLOW_BRINESTONE.get()
         )
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_YELLOW_BRINESTONE_STAIRS.get(),
             HAItems.POLISHED_YELLOW_BRINESTONE.get()
         )
         
         stair(
-            exporter,
             HAItems.YELLOW_BRINESTONE_STAIRS.get(),
             HABlocks.YELLOW_BRINESTONE.get()
         )
         
         stair(
-            exporter,
             HAItems.POLISHED_YELLOW_BRINESTONE_STAIRS.get(),
             HABlocks.POLISHED_YELLOW_BRINESTONE.get()
         )
@@ -539,7 +491,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region yellow brinestone slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_SLAB.get(),
             HAItems.YELLOW_BRINESTONE.get(),
@@ -547,7 +498,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_YELLOW_BRINESTONE_SLAB.get(),
             HAItems.POLISHED_YELLOW_BRINESTONE.get(),
@@ -555,14 +505,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
         
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.YELLOW_BRINESTONE_SLAB.get(),
             HABlocks.YELLOW_BRINESTONE.get(),
         )
         
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.POLISHED_YELLOW_BRINESTONE_SLAB.get(),
             HABlocks.POLISHED_YELLOW_BRINESTONE.get(),
@@ -571,14 +519,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region yellow brinestone walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_WALL.get(),
             HAItems.YELLOW_BRINESTONE.get()
         )
         
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.YELLOW_BRINESTONE_WALL.get(),
             HABlocks.YELLOW_BRINESTONE.get()
@@ -587,14 +533,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region yellow brinestone bricks
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_BRICKS.get(),
             HAItems.POLISHED_YELLOW_BRINESTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_BRICKS.get(),
             HAItems.POLISHED_YELLOW_BRINESTONE.get()
@@ -603,14 +547,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region yellow brinestone brick stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_BRICK_STAIRS.get(),
             HAItems.YELLOW_BRINESTONE_BRICKS.get()
         )
 
         stair(
-            exporter,
             HAItems.YELLOW_BRINESTONE_BRICK_STAIRS.get(),
             HABlocks.YELLOW_BRINESTONE_BRICKS.get()
         )
@@ -618,7 +560,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region yellow brinestone brick slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_BRICK_SLAB.get(),
             HAItems.YELLOW_BRINESTONE_BRICKS.get(),
@@ -626,7 +567,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.YELLOW_BRINESTONE_BRICK_SLAB.get(),
             HABlocks.YELLOW_BRINESTONE_BRICKS.get(),
@@ -635,14 +575,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region yellow brinestone brick walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.YELLOW_BRINESTONE_BRICK_WALL.get(),
             HAItems.YELLOW_BRINESTONE_BRICKS.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.YELLOW_BRINESTONE_BRICK_WALL.get(),
             HABlocks.YELLOW_BRINESTONE_BRICKS.get()
@@ -653,14 +591,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         //schist
         //#region polished schist
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_SCHIST.get(),
             HAItems.SCHIST.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_SCHIST.get(),
             HAItems.SCHIST.get()
@@ -669,7 +605,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chiseled schist
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHISELED_SCHIST.get(),
             HAItems.POLISHED_SCHIST.get()
@@ -684,27 +619,23 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region schist stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_STAIRS.get(),
             HAItems.SCHIST.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_SCHIST_STAIRS.get(),
             HAItems.POLISHED_SCHIST.get()
         )
 
         stair(
-            exporter,
             HAItems.SCHIST_STAIRS.get(),
             HABlocks.SCHIST.get()
         )
 
         stair(
-            exporter,
             HAItems.POLISHED_SCHIST_STAIRS.get(),
             HABlocks.POLISHED_SCHIST.get()
         )
@@ -712,7 +643,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region schist slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_SLAB.get(),
             HAItems.SCHIST.get(),
@@ -720,7 +650,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_SCHIST_SLAB.get(),
             HAItems.POLISHED_SCHIST.get(),
@@ -728,14 +657,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.SCHIST_SLAB.get(),
             HABlocks.SCHIST.get(),
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.POLISHED_SCHIST_SLAB.get(),
             HABlocks.POLISHED_SCHIST.get(),
@@ -744,14 +671,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region schist walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_WALL.get(),
             HAItems.SCHIST.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.SCHIST_WALL.get(),
             HABlocks.SCHIST.get()
@@ -760,14 +685,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region schist bricks
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_BRICKS.get(),
             HAItems.POLISHED_SCHIST.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_BRICKS.get(),
             HAItems.POLISHED_SCHIST.get()
@@ -776,14 +699,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region schist brick stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_BRICK_STAIRS.get(),
             HAItems.SCHIST_BRICKS.get()
         )
 
         stair(
-            exporter,
             HAItems.SCHIST_BRICK_STAIRS.get(),
             HABlocks.SCHIST_BRICKS.get()
         )
@@ -791,7 +712,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region schist brick slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_BRICK_SLAB.get(),
             HAItems.SCHIST_BRICKS.get(),
@@ -799,7 +719,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.SCHIST_BRICK_SLAB.get(),
             HABlocks.SCHIST_BRICKS.get(),
@@ -808,14 +727,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region schist brick walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SCHIST_BRICK_WALL.get(),
             HAItems.SCHIST_BRICKS.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.SCHIST_BRICK_WALL.get(),
             HABlocks.SCHIST_BRICKS.get()
@@ -825,14 +742,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         //chimneystone
         //#region polished chimneystone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_CHIMNEYSTONE.get(),
             HAItems.CHIMNEYSTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_CHIMNEYSTONE.get(),
             HAItems.CHIMNEYSTONE.get()
@@ -841,7 +756,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chiseled chimneystone
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHISELED_CHIMNEYSTONE.get(),
             HAItems.POLISHED_CHIMNEYSTONE.get()
@@ -856,27 +770,23 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chimneystone stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_STAIRS.get(),
             HAItems.CHIMNEYSTONE.get()
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_CHIMNEYSTONE_STAIRS.get(),
             HAItems.POLISHED_CHIMNEYSTONE.get()
         )
 
         stair(
-            exporter,
             HAItems.CHIMNEYSTONE_STAIRS.get(),
             HABlocks.CHIMNEYSTONE.get()
         )
 
         stair(
-            exporter,
             HAItems.POLISHED_CHIMNEYSTONE_STAIRS.get(),
             HABlocks.POLISHED_CHIMNEYSTONE.get()
         )
@@ -884,7 +794,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chimneystone slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_SLAB.get(),
             HAItems.CHIMNEYSTONE.get(),
@@ -892,7 +801,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.POLISHED_CHIMNEYSTONE_SLAB.get(),
             HAItems.POLISHED_CHIMNEYSTONE.get(),
@@ -900,14 +808,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.CHIMNEYSTONE_SLAB.get(),
             HABlocks.CHIMNEYSTONE.get(),
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.POLISHED_CHIMNEYSTONE_SLAB.get(),
             HABlocks.POLISHED_CHIMNEYSTONE.get(),
@@ -916,14 +822,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chimneystone walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_WALL.get(),
             HAItems.CHIMNEYSTONE.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.CHIMNEYSTONE_WALL.get(),
             HABlocks.CHIMNEYSTONE.get()
@@ -932,14 +836,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chimneystone bricks
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_BRICKS.get(),
             HAItems.POLISHED_CHIMNEYSTONE.get()
         )
 
         polished(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_BRICKS.get(),
             HAItems.POLISHED_CHIMNEYSTONE.get()
@@ -948,14 +850,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chimneystone brick stairs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_BRICK_STAIRS.get(),
             HAItems.CHIMNEYSTONE_BRICKS.get()
         )
 
         stair(
-            exporter,
             HAItems.CHIMNEYSTONE_BRICK_STAIRS.get(),
             HABlocks.CHIMNEYSTONE_BRICKS.get()
         )
@@ -963,7 +863,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chimneystone brick slabs
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_BRICK_SLAB.get(),
             HAItems.CHIMNEYSTONE_BRICKS.get(),
@@ -971,7 +870,6 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.CHIMNEYSTONE_BRICK_SLAB.get(),
             HABlocks.CHIMNEYSTONE_BRICKS.get(),
@@ -980,14 +878,12 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
 
         //#region chimneystone brick walls
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.CHIMNEYSTONE_BRICK_WALL.get(),
             HAItems.CHIMNEYSTONE_BRICKS.get()
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.CHIMNEYSTONE_BRICK_WALL.get(),
             HABlocks.CHIMNEYSTONE_BRICKS.get()
@@ -995,7 +891,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         //#endregion
 
         // misc recipes
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.CHIMNEYSTONE.get(), 8)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.CHIMNEYSTONE.get(), 8)
             .pattern("BBB")
             .pattern("BSB")
             .pattern("BBB")
@@ -1005,9 +901,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_sulfur",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RED_BRINESTONE.get(), 8)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RED_BRINESTONE.get(), 8)
             .pattern("TTT")
             .pattern("TBT")
             .pattern("TTT")
@@ -1017,9 +913,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_brine_bucket",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.ORANGE_BRINESTONE.get(), 8)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.ORANGE_BRINESTONE.get(), 8)
             .pattern("TTT")
             .pattern("TBT")
             .pattern("TTT")
@@ -1029,9 +925,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_brine_bucket",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.YELLOW_BRINESTONE.get(), 8)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.YELLOW_BRINESTONE.get(), 8)
             .pattern("TTT")
             .pattern("TBT")
             .pattern("TTT")
@@ -1041,9 +937,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_brine_bucket",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.BRINE_BUCKET.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, HAItems.ARGONAUT.get())
+        shaped(RecipeCategory.TRANSPORTATION, HAItems.ARGONAUT.get())
             .pattern("IBF")
             .pattern("GSC")
             .pattern("IBW")
@@ -1058,9 +954,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_giant_nautilus_shell",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.COMICALLY_LARGE_NAUTILUS_SHELL.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.DIVING_WEIGHT.get())
+        shaped(RecipeCategory.TOOLS, HAItems.DIVING_WEIGHT.get())
             .pattern("III")
             .pattern("I I")
             .pattern("IBI")
@@ -1070,9 +966,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_iron_ingot",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT)
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HAItems.PRISMARINE_ROD.get())
+        shaped(RecipeCategory.MISC, HAItems.PRISMARINE_ROD.get())
             .pattern("P  ")
             .pattern("P  ")
             .pattern("   ")
@@ -1081,9 +977,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_prismarine",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.PRISMARINE_SHARD)
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(), 2)
+        shaped(RecipeCategory.MISC, HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get(), 2)
             .pattern("PPP")
             .pattern("PUP")
             .pattern("PCP")
@@ -1094,9 +990,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_diving_template",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, HAItems.DEPTH_CHARGE.get())
+        shaped(RecipeCategory.REDSTONE, HAItems.DEPTH_CHARGE.get())
             .pattern("SIS")
             .pattern("ISI")
             .pattern("SIS")
@@ -1106,9 +1002,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_sulfur",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.AERATED_SAND.get())
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.AERATED_SAND.get())
             .pattern("SSS")
             .pattern("SPS")
             .pattern("SSS")
@@ -1118,9 +1014,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "aerated_sand_from_pearl"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "aerated_sand_from_pearl")))
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.AERATED_SAND.get(),
             1
@@ -1130,9 +1026,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "aerated_sand_from_bubble_geyser"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "aerated_sand_from_bubble_geyser")))
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.BUBBLE_GEYSER.get(),
             1
@@ -1142,9 +1038,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "bubble_geyser_from_aerated_sand"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "bubble_geyser_from_aerated_sand")))
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
+        shaped(RecipeCategory.BUILDING_BLOCKS, Blocks.SPONGE)
             .pattern("SS ")
             .pattern("SS ")
             .pattern("   ")
@@ -1153,9 +1049,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_tube_sponge",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.TUBE_SPONGE.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.PEARL_BLOCK.get())
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.PEARL_BLOCK.get())
             .pattern("PPP")
             .pattern("PPP")
             .pattern("PPP")
@@ -1164,9 +1060,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.MISC,
             HAItems.PEARL.get(),
             9
@@ -1176,9 +1072,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_pearl_block",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PEARL_BLOCK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BLACK_PEARL_BLOCK.get())
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BLACK_PEARL_BLOCK.get())
             .pattern("PPP")
             .pattern("PPP")
             .pattern("PPP")
@@ -1187,9 +1083,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_black_pearl",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BLACK_PEARL.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.MISC,
             HAItems.BLACK_PEARL.get(),
             9
@@ -1199,9 +1095,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_black_pearl_block",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.BLACK_PEARL_BLOCK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.CRYSTALLINE_SULFUR.get())
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.CRYSTALLINE_SULFUR.get())
             .pattern("SSS")
             .pattern("SSS")
             .pattern("SSS")
@@ -1210,9 +1106,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_sulfur",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.SULFUR.get(),
             9
@@ -1222,9 +1118,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_sulfur",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAPlatformItems.GLOWSLIME_BLOCK.get())
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAPlatformItems.GLOWSLIME_BLOCK.get())
             .pattern("SSS")
             .pattern("SSS")
             .pattern("SSS")
@@ -1233,9 +1129,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_glowslime",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.MISC,
             HAItems.GLOWSLIME.get(),
             9
@@ -1245,9 +1141,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_glowslime_block",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.GLOWSLIME_BLOCK.get())
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowslime_from_block"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "glowslime_from_block")))
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAPlatformItems.HAGSLIME_BLOCK.get())
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAPlatformItems.HAGSLIME_BLOCK.get())
             .pattern("HHH")
             .pattern("HHH")
             .pattern("HHH")
@@ -1256,9 +1152,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_hagslime",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.HAGSLIME.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.MISC,
             HAItems.HAGSLIME.get(),
             9
@@ -1268,9 +1164,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_hagslime_block",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformItems.HAGSLIME_BLOCK.get())
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "hagslime_from_block"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "hagslime_from_block")))
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_BLADE.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.CORAL_BLADE.get(), 1)
             .pattern(" C ")
             .pattern(" C ")
             .pattern(" S ")
@@ -1280,9 +1176,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_coral_chunk",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, Items.TRIDENT, 1)
+        shaped(RecipeCategory.TOOLS, Items.TRIDENT, 1)
             .pattern("SSS")
             .pattern(" R ")
             .pattern(" R ")
@@ -1296,9 +1192,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_prismarine_rod",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.PRISMARINE_ROD.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_PICKAXE.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.CORAL_PICKAXE.get(), 1)
             .pattern("CCC")
             .pattern(" S ")
             .pattern(" S ")
@@ -1308,9 +1204,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_coral_chunk",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_AXE.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.CORAL_AXE.get(), 1)
             .pattern(" CC")
             .pattern(" SC")
             .pattern(" S ")
@@ -1320,9 +1216,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_coral_chunk",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_SHOVEL.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.CORAL_SHOVEL.get(), 1)
             .pattern(" C ")
             .pattern(" S ")
             .pattern(" S ")
@@ -1332,9 +1228,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_coral_chunk",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.CORAL_HOE.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.CORAL_HOE.get(), 1)
             .pattern(" CC")
             .pattern(" S ")
             .pattern(" S ")
@@ -1344,99 +1240,94 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_coral_chunk",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CORAL_CHUNK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_SPEAR.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_SPEAR.get(), 1)
             .pattern(" N ")
             .pattern(" N ")
             .pattern(" S ")
             .define('S', Items.STICK)
             .define('N', Items.NAUTILUS_SHELL)
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_PICKAXE.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_PICKAXE.get(), 1)
             .pattern("NNN")
             .pattern(" S ")
             .pattern(" S ")
             .define('S', Items.STICK)
             .define('N', Items.NAUTILUS_SHELL)
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_AXE.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_AXE.get(), 1)
             .pattern(" NN")
             .pattern(" SN")
             .pattern(" S ")
             .define('S', Items.STICK)
             .define('N', Items.NAUTILUS_SHELL)
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_SHOVEL.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_SHOVEL.get(), 1)
             .pattern(" N ")
             .pattern(" S ")
             .pattern(" S ")
             .define('S', Items.STICK)
             .define('N', Items.NAUTILUS_SHELL)
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_HOE.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.SEASHELL_HOE.get(), 1)
             .pattern(" NN")
             .pattern(" S ")
             .pattern(" S ")
             .define('S', Items.STICK)
             .define('N', Items.NAUTILUS_SHELL)
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.NAUTILUS_HELMET.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.NAUTILUS_HELMET.get(), 1)
             .pattern("NNN")
             .pattern("N N")
             .pattern("   ")
             .define('N', Items.NAUTILUS_SHELL)
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.NAUTILUS_PAULDRONS.get(), 1)
+        shaped(RecipeCategory.TOOLS, HAItems.NAUTILUS_PAULDRONS.get(), 1)
             .pattern("N N")
             .pattern("N N")
             .pattern("   ")
             .define('N', Items.NAUTILUS_SHELL)
             .unlockedBy("has_shell", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NAUTILUS_SHELL))
-            .save(exporter)
+            .save(output)
 
         //#regione Bone Set Recipes
         stair(
-            exporter,
             HAItems.BONE_STAIRS.get(),
             Blocks.BONE_BLOCK
         )
 
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.BONE_SLAB.get(),
             Blocks.BONE_BLOCK
         )
 
         wall(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HABlocks.BONE_WALL.get(),
             Blocks.BONE_BLOCK
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.BONE_STAIRS.get(),
             Blocks.BONE_BLOCK,
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.BONE_SLAB.get(),
             Blocks.BONE_BLOCK,
@@ -1444,34 +1335,33 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
         )
 
         stonecutterResultFromBase(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAItems.BONE_WALL.get(),
             Blocks.BONE_BLOCK
         )
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BONE_FENCE.get(), 3)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BONE_FENCE.get(), 3)
             .pattern("BIB")
             .pattern("BIB")
             .pattern("   ")
             .define('I', Items.BONE)
             .define('B', Items.BONE_BLOCK)
             .unlockedBy("has_bone", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BONE))
-            .save(exporter)
+            .save(output)
         //#endregion
 
         //#region Wood Recipes
-        offerRaftRecipes(exporter, raftTypeMap)
+        offerRaftRecipes(raftTypeMap)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RAFT.get(), 2)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.RAFT.get(), 2)
             .pattern("SS ")
             .pattern("SS ")
             .pattern("   ")
             .define('S', Items.STICK)
             .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BUOY.get(), 2)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BUOY.get(), 2)
             .pattern(" L ")
             .pattern(" S ")
             .pattern(" W ")
@@ -1479,9 +1369,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .define('L', Items.LANTERN)
             .define('W', ItemTags.PLANKS)
             .unlockedBy("has_lantern", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LANTERN))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BELL_BUOY.get(), 2)
+        shaped(RecipeCategory.BUILDING_BLOCKS, HAItems.BELL_BUOY.get(), 2)
             .pattern(" G ")
             .pattern(" S ")
             .pattern(" W ")
@@ -1489,65 +1379,56 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .define('G', Items.GOLD_INGOT)
             .define('W', ItemTags.PLANKS)
             .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
-            .save(exporter)
+            .save(output)
 
         trapdoor(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_TRAPDOOR.get(),
             HAPlatformItems.DRIFTWOOD_PLANKS.get(),
         )
 
         door(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_DOOR.get(),
             HAPlatformItems.DRIFTWOOD_PLANKS.get(),
         )
 
         stair(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_STAIRS.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
         
         slab(
-            exporter,
             RecipeCategory.BUILDING_BLOCKS,
             HAPlatformBlocks.DRIFTWOOD_SLAB.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         fence(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_FENCE.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         fenceGate(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_FENCE_GATE.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
         woodFromLogs(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_WOOD.get(),
             HAPlatformBlocks.DRIFTWOOD_LOG.get()
         )
 
         planksFromLog(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get(),
             HAItemTags.DRIFTWOOD_LOG_WOOD,
             4
         )
 
         pressurePlate(
-            exporter,
             HAPlatformBlocks.DRIFTWOOD_PRESSURE_PLATE.get(),
             HAPlatformBlocks.DRIFTWOOD_PLANKS.get()
         )
 
-        ShapelessRecipeBuilder.shapeless(
+        shapeless(
             RecipeCategory.BUILDING_BLOCKS,
             HAPlatformBlocks.DRIFTWOOD_BUTTON.get(),
             1
@@ -1557,19 +1438,19 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_driftwood_planks",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAPlatformBlocks.DRIFTWOOD_PLANKS.get())
             )
-            .save(exporter)
+            .save(output)
         //#endregion
 
         //#region Armor
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.TURTLE_CHESTPLATE.get())
+        shaped(RecipeCategory.COMBAT, HAItems.TURTLE_CHESTPLATE.get())
             .pattern("S S")
             .pattern("SSS")
             .pattern("SSS")
             .define('S', Items.TURTLE_SCUTE)
             .unlockedBy("has_scute", InventoryChangeTrigger.TriggerInstance.hasItems(Items.TURTLE_SCUTE))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_HELMET.get())
+        shaped(RecipeCategory.COMBAT, HAItems.DIVING_HELMET.get())
             .pattern("CCC")
             .pattern("CGC")
             .pattern("CCC")
@@ -1578,9 +1459,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .unlockedBy("has_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
             .unlockedBy("has_glass_pane", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_PANE))
             .unlockedBy("has_glass", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_SUIT.get())
+        shaped(RecipeCategory.COMBAT, HAItems.DIVING_SUIT.get())
             .pattern("C C")
             .pattern("LCL")
             .pattern("LLL")
@@ -1588,9 +1469,9 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .define('C', Items.COPPER_INGOT)
             .unlockedBy("has_leather", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LEATHER))
             .unlockedBy("has_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_LEGGINGS.get())
+        shaped(RecipeCategory.COMBAT, HAItems.DIVING_LEGGINGS.get())
             .pattern("CCC")
             .pattern("L L")
             .pattern("L L")
@@ -1598,16 +1479,16 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .define('C', Items.COPPER_INGOT)
             .unlockedBy("has_leather", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LEATHER))
             .unlockedBy("has_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, HAItems.DIVING_BOOTS.get())
+        shaped(RecipeCategory.COMBAT, HAItems.DIVING_BOOTS.get())
             .pattern("C C")
             .pattern("C C")
             .pattern("   ")
             .define('C', Items.COPPER_INGOT)
             .unlockedBy("has_leather", InventoryChangeTrigger.TriggerInstance.hasItems(Items.LEATHER))
             .unlockedBy("has_copper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.COPPER_INGOT))
-            .save(exporter)
+            .save(output)
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1622,7 +1503,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_HELMET.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_helmet_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_helmet_upgrade")))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1637,7 +1518,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_SUIT.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_suit_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_suit_upgrade")))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1652,7 +1533,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_LEGGINGS.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_leggings_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_leggings_upgrade")))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1667,7 +1548,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_BOOTS.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_boots_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "reinforced_diving_boots_upgrade")))
 
 
         SmithingTransformRecipeBuilder.smithing(
@@ -1683,7 +1564,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_HELMET.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_helmet_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_helmet_upgrade")))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1698,7 +1579,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_SUIT.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_suit_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_suit_upgrade")))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1713,7 +1594,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_LEGGINGS.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_leggings_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_leggings_upgrade")))
 
         SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get()),
@@ -1728,20 +1609,20 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     HAItems.DIVING_BOOTS.get()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_boots_upgrade"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "glowing_diving_boots_upgrade")))
 
         //#endregion
 
         //#region Fishing Lures
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.BARBED_HOOK.get())
+        shaped(RecipeCategory.TOOLS, HAItems.BARBED_HOOK.get())
             .pattern("N  ")
             .pattern("N N")
             .pattern("NNN")
             .define('N', Items.IRON_NUGGET)
             .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HAItems.GLOWING_HOOK.get())
+        shapeless(RecipeCategory.TOOLS, HAItems.GLOWING_HOOK.get())
             .requires(HAItems.BARBED_HOOK.get())
             .requires(HAItems.GLOWSLIME.get())
             .unlockedBy(
@@ -1752,27 +1633,27 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_glowslime",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, HAItems.MAGNETIC_HOOK.get())
+        shaped(RecipeCategory.TOOLS, HAItems.MAGNETIC_HOOK.get())
             .pattern("NIN")
             .pattern("N N")
             .pattern("I I")
             .define('N', Items.IRON_NUGGET)
             .define('I', Items.IRON_INGOT)
             .unlockedBy("has_iron_nugget", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_NUGGET))
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.CREEPERMAGNET_HOOK.get())
+        shapeless(RecipeCategory.MISC, HAItems.CREEPERMAGNET_HOOK.get())
             .requires(HAItems.MAGNETIC_HOOK.get())
             .requires(Items.GUNPOWDER)
             .unlockedBy(
                 "has_magnetic_hook",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.MAGNETIC_HOOK.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, HAItems.OMINOUS_HOOK.get())
+        shapeless(RecipeCategory.TOOLS, HAItems.OMINOUS_HOOK.get())
             .requires(HAItems.COCONUT_CRAB_CLAW.get())
             .requires(HAItems.YETI_CRAB_CLAW.get())
             .requires(HAItems.GHOST_CRAB_CLAW.get())
@@ -1784,20 +1665,20 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
             .requires(HAItems.LIGHTFOOT_CRAB_CLAW.get())
             .unlockedBy(
                 "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HAItemTags.CRAB_CLAW).build()
+                    ItemPredicate.Builder.item().of(itemLookup, HAItemTags.CRAB_CLAW).build()
                 )
             )
-            .save(exporter)
+            .save(output)
         //#endregion
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.GLOWSLIME.get())
+        shapeless(RecipeCategory.MISC, HAItems.GLOWSLIME.get())
             .requires(Items.SLIME_BALL)
             .requires(Items.GLOW_INK_SAC)
             .unlockedBy("has_slime_ball", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SLIME_BALL))
             .unlockedBy("has_glow_ink_sac", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLOW_INK_SAC))
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "glowslime_from_slime"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "glowslime_from_slime")))
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, HAItems.GLOWSTICK.get(), 4)
+        shapeless(RecipeCategory.BUILDING_BLOCKS, HAItems.GLOWSTICK.get(), 4)
             .requires(Items.STICK)
             .requires(HAItems.GLOWSLIME.get())
             .unlockedBy("has_stick", InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
@@ -1805,264 +1686,265 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                 "has_glowslime",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.GLOWSLIME.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BONE_MEAL)
+        shapeless(RecipeCategory.MISC, Items.BONE_MEAL)
             .requires(HAItems.CUTTLEBONE.get())
             .unlockedBy(
                 "has_cuttlebone",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.CUTTLEBONE.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HAItems.FISH_FOOD.get())
+        shapeless(RecipeCategory.MISC, HAItems.FISH_FOOD.get())
             .requires(ItemTags.FISHES)
             .requires(Items.WHEAT)
             .unlockedBy(
                 "has_wheat",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT)
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER, 2)
+        shapeless(RecipeCategory.MISC, Items.GUNPOWDER, 2)
             .requires(HAItems.SULFUR.get())
             .requires(Items.COAL)
             .requires(Items.BONE_MEAL)
             .requires(Items.BONE_MEAL)
             .unlockedBy("has_sulfur", InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.SULFUR.get()))
-            .save(exporter)
+            .save(output)
 
         //#region Foodstuffs
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_CRAB.get(), 1)
+        shapeless(RecipeCategory.FOOD, HAItems.RAW_CRAB.get(), 1)
             .requires(HAItemTags.CRAB_CLAW)
             .unlockedBy(
                 "has_crab_claw", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HAItemTags.CRAB_CLAW).build()
+                    ItemPredicate.Builder.item().of(itemLookup, HAItemTags.CRAB_CLAW).build()
                 )
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_LOBSTER.get(), 1)
+        shapeless(RecipeCategory.FOOD, HAItems.RAW_LOBSTER.get(), 1)
             .requires(HAItems.LOBSTER_CLAW.get())
             .unlockedBy(
                 "has_lobster_claw",
                 InventoryChangeTrigger.TriggerInstance.hasItems(HAItems.LOBSTER_CLAW.get())
             )
-            .save(exporter)
+            .save(output)
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_MEAT.get(), 1)
+        shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_MEAT.get(), 1)
             .requires(HAItemTags.SMALL_FISH)
             .unlockedBy(
                 "has_small_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HAItemTags.SMALL_FISH).build()
+                    ItemPredicate.Builder.item().of(itemLookup, HAItemTags.SMALL_FISH).build()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "raw_fish_meat_small"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "raw_fish_meat_small")))
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_MEAT.get(), 2)
+        shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_MEAT.get(), 2)
             .requires(HAItemTags.MEDIUM_FISH)
             .unlockedBy(
                 "has_medium_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HAItemTags.MEDIUM_FISH).build()
+                    ItemPredicate.Builder.item().of(itemLookup, HAItemTags.MEDIUM_FISH).build()
                 )
             )
-            .save(exporter, ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "raw_fish_meat_medium"))
+            .save(output, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath("hybrid_aquatic", "raw_fish_meat_medium")))
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_STEAK.get(), 2)
+        shapeless(RecipeCategory.FOOD, HAItems.RAW_FISH_STEAK.get(), 2)
             .requires(HAItemTags.LARGE_FISH)
             .unlockedBy(
                 "has_large_fish", InventoryChangeTrigger.TriggerInstance.hasItems(
-                    ItemPredicate.Builder.item().of(HAItemTags.LARGE_FISH).build()
+                    ItemPredicate.Builder.item().of(itemLookup, HAItemTags.LARGE_FISH).build()
                 )
             )
-            .save(exporter)
+            .save(output)
         //#endregion
 
         //#region Cooking Recipes
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_CRAB.get(),
             HAItems.COOKED_CRAB.get(),
             0.15f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_SHRIMP.get(),
             HAItems.COOKED_SHRIMP.get(),
             0.15f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_CRAYFISH.get(),
             HAItems.COOKED_CRAYFISH.get(),
             0.15f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_LOBSTER.get(),
             HAItems.COOKED_LOBSTER.get(),
             0.3f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_LOBSTER_TAIL.get(),
             HAItems.COOKED_LOBSTER_TAIL.get(),
             0.3f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_FISH_STEAK.get(),
             HAItems.COOKED_FISH_STEAK.get(),
             0.3f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.SIRENIAN_BEEF.get(),
             HAItems.SIRENIAN_STEAK.get(),
             0.3f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_FISH_MEAT.get(),
             HAItems.COOKED_FISH_MEAT.get(),
             0.15f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.RAW_TENTACLE.get(),
             HAItems.COOKED_TENTACLE.get(),
             0.15f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.CLAM.get(),
             HAItems.COOKED_CLAM.get(),
             0.15f
         )
 
         offerCookingRecipes(
-            exporter,
             HAItems.MUSSEL.get(),
             HAItems.COOKED_MUSSEL.get(),
             0.15f
         )
 
-        offerKelpCookingRecipes(exporter, HAItemTags.KELPS, Items.DRIED_KELP, 0.15f)
+        offerKelpCookingRecipes(HAItemTags.KELPS, Items.DRIED_KELP, 0.15f)
         //#endregion
 
-        offerBleachingRecipes(exporter, bleachedCoralBlockMap)
-        offerBleachingRecipes(exporter, bleachedCoralMap)
-        offerBleachingRecipes(exporter, bleachedCoralFanMap)
+        offerBleachingRecipes(bleachedCoralBlockMap)
+        offerBleachingRecipes(bleachedCoralMap)
+        offerBleachingRecipes(bleachedCoralFanMap)
     }
 
     private fun offerCookingRecipes(
-        exporter: RecipeOutput,
         input: Item,
-        output: Item,
+        result: Item,
         experience: Float,
     ) {
-        simpleCookingRecipe(
-            exporter,
+        offerCookingRecipe(
             "smelting",
             RecipeSerializer.SMELTING_RECIPE,
             ::SmeltingRecipe,
             200,
             input,
-            output,
+            result,
             experience
         )
-        simpleCookingRecipe(
-            exporter,
+        offerCookingRecipe(
             "smoking",
             RecipeSerializer.SMOKING_RECIPE,
             ::SmokingRecipe,
             100,
             input,
-            output,
+            result,
             experience
         )
-        simpleCookingRecipe(
-            exporter,
+        offerCookingRecipe(
             "campfire_cooking",
             RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
             ::CampfireCookingRecipe,
             600,
             input,
-            output,
+            result,
             experience
         )
+    }
+
+    private fun <T : AbstractCookingRecipe> offerCookingRecipe(
+        cooker: String,
+        serializer: RecipeSerializer<T>,
+        recipeFactory: AbstractCookingRecipe.Factory<T>,
+        cookingTime: Int,
+        input: Item,
+        result: Item,
+        experience: Float,
+    ) {
+        SimpleCookingRecipeBuilder.generic(
+            Ingredient.of(input),
+            RecipeCategory.FOOD,
+            result,
+            experience,
+            cookingTime,
+            serializer,
+            recipeFactory
+        ).unlockedBy(getHasName(input), has(input))
+            .save(output, getItemName(result) + "_from_" + cooker)
     }
 
     //#region Kelp Cooking Recipes
     private fun offerKelpCookingRecipes(
-        exporter: RecipeOutput,
         inputTag: TagKey<Item>,
-        output: Item,
+        result: Item,
         experience: Float,
     ) {
         offerKelpCookingRecipe(
-            exporter,
             "smelting",
             RecipeSerializer.SMELTING_RECIPE,
             ::SmeltingRecipe,
             200,
             inputTag,
-            output,
+            result,
             experience
         )
         offerKelpCookingRecipe(
-            exporter,
             "smoking",
             RecipeSerializer.SMOKING_RECIPE,
             ::SmokingRecipe,
             100,
             inputTag,
-            output,
+            result,
             experience
         )
         offerKelpCookingRecipe(
-            exporter,
             "campfire_cooking",
             RecipeSerializer.CAMPFIRE_COOKING_RECIPE,
             ::CampfireCookingRecipe,
             600,
             inputTag,
-            output,
+            result,
             experience
         )
     }
 
     private fun <T : AbstractCookingRecipe> offerKelpCookingRecipe(
-        exporter: RecipeOutput,
         cooker: String,
         serializer: RecipeSerializer<T>,
         recipeFactory: AbstractCookingRecipe.Factory<T>,
         cookingTime: Int,
         inputTag: TagKey<Item>,
-        output: Item,
+        result: Item,
         experience: Float,
     ) {
         val builder = SimpleCookingRecipeBuilder.generic(
-            Ingredient.of(inputTag),
+            Ingredient.of(itemLookup.getOrThrow(inputTag)),
             RecipeCategory.FOOD,
-            output,
+            result,
             experience,
             cookingTime,
             serializer,
             recipeFactory
         ).unlockedBy("has_kelp", has(inputTag))
 
-        val recipeId = getItemName(output) + "_from_" + cooker
-        builder.save(exporter, recipeId)
+        val recipeId = getItemName(result) + "_from_" + cooker
+        builder.save(output, recipeId)
     }
     //#endregion
 
@@ -2080,11 +1962,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
     )
 
     private fun offerRaftRecipes(
-        exporter: RecipeOutput,
         map: Map<Block, Block>,
     ) {
         for ((woodType, raftType) in map) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, raftType, 2)
+            shaped(RecipeCategory.BUILDING_BLOCKS, raftType, 2)
                 .pattern("SS ")
                 .pattern("SW ")
                 .pattern("   ")
@@ -2095,7 +1976,7 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     has(woodType.asItem())
                 )
                 .save(
-                    exporter,
+                    output,
                     "${getItemName(raftType.asItem())}_from_${getItemName(woodType.asItem())}"
                 )
         }
@@ -2155,11 +2036,10 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
     )
 
     private fun offerBleachingRecipes(
-        exporter: RecipeOutput,
         map: Map<Block, Block>,
     ) {
         for ((deadCoral, bleachedCoral) in map) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, bleachedCoral, 8)
+            shaped(RecipeCategory.BUILDING_BLOCKS, bleachedCoral, 8)
                 .pattern("CCC")
                 .pattern("CWC")
                 .pattern("CCC")
@@ -2170,35 +2050,48 @@ class RecipeProvider(output: FabricDataOutput, lookupProvider: CompletableFuture
                     has(deadCoral.asItem())
                 )
                 .save(
-                    exporter,
+                    output,
                     "${getItemName(bleachedCoral.asItem())}_from_${getItemName(deadCoral.asItem())}"
                 )
         }
     }
     //#endregion
 
-    private fun door(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+    private fun door(result: ItemLike, material: ItemLike) {
         doorBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
-            .save(recipeOutput)
+            .save(output)
     }
 
-    private fun trapdoor(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+    private fun trapdoor(result: ItemLike, material: ItemLike) {
         trapdoorBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
-            .save(recipeOutput)
+            .save(output)
     }
 
-    private fun stair(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
+    private fun stair(result: ItemLike, material: ItemLike) {
         stairBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
-            .save(recipeOutput)
+            .save(output)
     }
 
-    private fun fence(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
-        fenceBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
-            .save(recipeOutput)
+    private fun fence(result: ItemLike, material: ItemLike) {
+        val count = if (result == Blocks.NETHER_BRICK_FENCE) 6 else 3
+        val stick = if (result == Blocks.NETHER_BRICK_FENCE) Items.NETHER_BRICK else Items.STICK
+        shaped(RecipeCategory.DECORATIONS, result, count)
+            .define('W', material)
+            .define('#', stick)
+            .pattern("W#W")
+            .pattern("W#W")
+            .unlockedBy(getHasName(material), has(material))
+            .save(output)
     }
 
-    private fun fenceGate(recipeOutput: RecipeOutput, result: ItemLike, material: ItemLike) {
-        fenceGateBuilder(result, Ingredient.of(material)).unlockedBy(getHasName(material), has(material))
-            .save(recipeOutput)
+    private fun fenceGate(result: ItemLike, material: ItemLike) {
+        shaped(RecipeCategory.REDSTONE, result)
+            .define('#', Items.STICK)
+            .define('W', material)
+            .pattern("#W#")
+            .pattern("#W#")
+            .unlockedBy(getHasName(material), has(material))
+            .save(output)
     }
+}
 }

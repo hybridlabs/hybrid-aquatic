@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.mixin;
 
 import dev.hybridlabs.aquatic.Constants;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
-@Mixin(ResourceLocation.class)
+@Mixin(Identifier.class)
 public class ResourceLocationMixin {
     @Mutable
     @Shadow
@@ -29,7 +29,7 @@ public class ResourceLocationMixin {
     private String path;
 
     @Unique
-    private static final Logger LOGGER = LoggerFactory.getLogger("ResourceLocation-DFU-Hybrid");
+    private static final Logger LOGGER = LoggerFactory.getLogger("Identifier-DFU-Hybrid");
 
     @Inject(method = "<init>(Ljava/lang/String;Ljava/lang/String;)V", at = @At("TAIL"))
     private void onInit(String namespace, String path, CallbackInfo ci) {
@@ -40,7 +40,7 @@ public class ResourceLocationMixin {
 
         // DATAFIX hybrid aquatic
         if (Objects.equals(this.namespace, Constants.MOD_ID)) {
-            ResourceLocation newLoc = processPath(path);
+            Identifier newLoc = processPath(path);
             if (newLoc != null) {
                 LOGGER.info("Datafixing {}:{} to {}", namespace, path, newLoc);
 
@@ -51,9 +51,9 @@ public class ResourceLocationMixin {
     }
 
     @Unique
-    private ResourceLocation processPath(@NotNull String path) {
+    private Identifier processPath(@NotNull String path) {
         // FISHING NET -> CREATURE NET
-        if (path.equals("fishing_net")) return ResourceLocation.tryBuild(dev.hybridlabs.hapi.Constants.MOD_ID, "creature_net");
+        if (path.equals("fishing_net")) return Identifier.tryBuild(dev.hybridlabs.hapi.Constants.MOD_ID, "creature_net");
 
         return null;
     }

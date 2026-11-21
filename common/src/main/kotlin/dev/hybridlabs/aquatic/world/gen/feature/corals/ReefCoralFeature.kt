@@ -25,7 +25,7 @@ abstract class ReefCoralFeature(codec: Codec<NoneFeatureConfiguration>) : Featur
         val randomSource = context.random()
         val worldGenLevel = context.level()
         val blockPos = context.origin()
-        val optional = BuiltInRegistries.BLOCK.getTag(BlockTags.CORAL_BLOCKS)
+        val optional = BuiltInRegistries.BLOCK.get(BlockTags.CORAL_BLOCKS)
             .flatMap(Function { named: HolderSet.Named<Block> ->
                 named.getRandomElement(randomSource)
             }).map(
@@ -57,7 +57,7 @@ abstract class ReefCoralFeature(codec: Codec<NoneFeatureConfiguration>) : Featur
         ) {
             level.setBlock(pos, state, 3)
             if (random.nextFloat() < 0.25f) {
-                BuiltInRegistries.BLOCK.getTag(BlockTags.CORALS)
+                BuiltInRegistries.BLOCK.get(BlockTags.CORALS)
                     .flatMap(Function { named: HolderSet.Named<Block> ->
                         named.getRandomElement(random)
                     }).map(
@@ -76,7 +76,7 @@ abstract class ReefCoralFeature(codec: Codec<NoneFeatureConfiguration>) : Featur
                 if (random.nextFloat() < 0.2f) {
                     val blockPos2 = pos.relative(direction)
                     if (level.getBlockState(blockPos2).`is`(Blocks.WATER)) {
-                        BuiltInRegistries.BLOCK.getTag(BlockTags.WALL_CORALS)
+                        BuiltInRegistries.BLOCK.get(BlockTags.WALL_CORALS)
                             .flatMap(Function { named: HolderSet.Named<Block> ->
                                 named.getRandomElement(random)
                             }).map(

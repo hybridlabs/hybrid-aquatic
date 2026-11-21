@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import net.minecraft.core.UUIDUtil
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.client.data.HypnoticEntities
 import dev.hybridlabs.aquatic.entity.ai.goal.HypnotizeTargetGoal
 import dev.hybridlabs.aquatic.entity.ai.goal.MinionLookAtOwnerTargetGoal
@@ -7,7 +11,6 @@ import dev.hybridlabs.aquatic.entity.base.HAMinionEntity
 import dev.hybridlabs.aquatic.entity.projectile.CavitationBubbleEntity
 import dev.hybridlabs.aquatic.sound.HASoundEvents
 import net.minecraft.core.BlockPos
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -30,9 +33,9 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.`object`.PlayState
 import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
 import java.util.*
@@ -63,7 +66,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Swim/Run/Idle", 4) { state ->
+            AnimationController<HypnautilusEntity>("Swim/Run/Idle", 4) { state ->
                 when {
                     isInWater -> {
                         state.setAndContinue(DefaultAnimations.IDLE)
@@ -77,7 +80,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         )
 
         controllers.add(
-            AnimationController(this, "hypnosis_controller", 0) { state ->
+            AnimationController<HypnautilusEntity>("hypnosis_controller", 0) { state ->
                 if (isHypnotizing()) {
                     state.setAndContinue(HYPNOSIS_ANIMATION)
                 } else {
@@ -115,20 +118,18 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
         builder.define(HYPNOTIZING, false)
     }
 
-    override fun addAdditionalSaveData(nbt: CompoundTag) {
-        if (this.getOwner() != null) {
-            nbt.putUUID("Owner", this.getOwner()!!.uuid)
-        }
-        this.setHypnotizing(nbt.getBoolean("Hypnotizing"))
-        super.addAdditionalSaveData(nbt)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.storeNullable("Owner", UUIDUtil.CODEC, this.getOwner()?.uuid)
+        output.putBoolean("Hypnotizing", isHypnotizing())
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(nbt: CompoundTag) {
-        super.readAdditionalSaveData(nbt)
-        if (nbt.contains("Owner")) {
-            prevOwner = nbt.getUUID("Owner")
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        if (input.getInt("Owner").isPresent) {
+            prevOwner = input.read("Owner", UUIDUtil.CODEC).orElse(null)
         }
-        this.setHypnotizing(nbt.getBoolean("Hypnotizing"))
+        this.setHypnotizing(input.getBooleanOr("Hypnotizing", false))
     }
 
     override fun nextStep(): Float {
@@ -163,7 +164,6 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
         val angle = Mth.PI / 3.0F * beastPosition + Mth.PI / 6F +
                 getAngleWobble()
-
 
         return owner.position().add(
             upVector
@@ -216,7 +216,8 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     companion object {
         fun createMobAttributes(): AttributeSupplier.Builder {
-            return createLivingAttributes().add(Attributes.MAX_HEALTH, 6.0).add(Attributes.MOVEMENT_SPEED, 1.0)
+            return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0).add(Attributes.MAX_HEALTH, 6.0).add(Attributes.MOVEMENT_SPEED, 1.0)
                 .add(Attributes.ATTACK_DAMAGE, 4.0).add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
         }
@@ -250,7 +251,7 @@ class HypnautilusEntity(type: EntityType<out HAMinionEntity>, world: Level) :
             override fun tick() {
                 val target = hypnautilus.calcBeastRelativePos()
                 if (hypnautilus.level().getBlockState(BlockPos.containing(target)).`is`(Blocks.WATER))
-                    hypnautilus.moveTo(hypnautilus.calcBeastRelativePos())
+                    hypnautilus.snapTo(hypnautilus.calcBeastRelativePos())
             }
         }
     }

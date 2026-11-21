@@ -1,76 +1,93 @@
 package dev.hybridlabs.aquatic.client.model.entity.mammal
 
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
+
+import dev.hybridlabs.aquatic.client.model.HADataTickets
+
+import software.bernie.geckolib.renderer.base.BoneSnapshots
+
+import dev.hybridlabs.hapi.client.model.HABoneAdjustingModel
+
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.mammal.BeaverEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseMammalEntityModel
 import net.minecraft.client.model.geom.PartNames
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.util.Mth
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.state.AnimationTest
 import software.bernie.geckolib.constant.DataTickets
 
-class BeaverEntityModel : BaseMammalEntityModel<BeaverEntity>("hybrid_aquatic", "beaver") {
+class BeaverEntityModel : BaseMammalEntityModel<BeaverEntity>("hybrid_aquatic", "beaver"), HABoneAdjustingModel {
 
     companion object {
         private val BEAVER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/beaver/beaver.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/beaver/beaver.png")
         private val BABY_BEAVER_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/beaver/baby_beaver.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/mammal/beaver/baby_beaver.png")
 
         private val BEAVER_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/beaver/beaver.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "mammal/beaver/beaver")
         private val BABY_BEAVER_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/mammal/beaver/baby_beaver.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "mammal/beaver/baby_beaver")
 
         private val BEAVER_ANIMATION =
-            ResourceLocation.fromNamespaceAndPath(
+            Identifier.fromNamespaceAndPath(
                 "hybrid_aquatic",
-                "animations/entity/mammal/beaver/beaver.animation.json"
+                "entity/mammal/beaver/beaver"
             )
     }
 
-    override fun getTextureResource(animatable: BeaverEntity): ResourceLocation {
-        return if (animatable.isBaby) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             BABY_BEAVER_TEXTURE
         } else {
             BEAVER_TEXTURE
         }
     }
 
-
-    override fun getModelResource(animatable: BeaverEntity): ResourceLocation {
-        return if (animatable.isBaby) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return if ((renderState.getGeckolibData(HAPIDataTickets.IS_BABY) == true)) {
             BABY_BEAVER_MODEL
         } else {
             BEAVER_MODEL
         }
     }
 
-    override fun getAnimationResource(animatable: BeaverEntity): ResourceLocation {
+    override fun getAnimationResource(animatable: BeaverEntity): Identifier {
         return BEAVER_ANIMATION
     }
 
-    override fun setCustomAnimations(
+    override fun addAdditionalStateData(
         animatable: BeaverEntity,
-        instanceId: Long,
-        animationState: AnimationState<BeaverEntity>,
+        relatedObject: Any?,
+        renderState: GeoRenderState
     ) {
-        val deltaTime: Float = animationState.partialTick
-        val body = animationProcessor.getBone(PartNames.BODY)
+        renderState.addGeckolibData(HADataTickets.ON_GROUND, animatable.onGround())
+        renderState.addGeckolibData(HADataTickets.FLOATING, animatable.getAction() == BeaverEntity.Companion.OtterAction.FLOATING)
+    }
 
-        if (!animationState.isMoving && animatable.isInWater && !animatable.onGround() && animatable.getAction() == BeaverEntity.Companion.OtterAction.FLOATING) {
-            body?.rotX = Mth.lerp(0.1f, body.rotX, 0f)
-        } else {
-            val head = animationProcessor.getBone("head")
+    override fun adjustModelBones(renderState: GeoRenderState, snapshots: BoneSnapshots) {
+        val floating = renderState.getGeckolibData(HADataTickets.FLOATING) == true
+        val isMoving = renderState.getOrDefaultGeckolibData(DataTickets.IS_MOVING, false) ?: false
+        val inWater = (renderState as? LivingEntityRenderState)?.isInWater == true
+        val onGround = renderState.getGeckolibData(HADataTickets.ON_GROUND) == true
 
-            if (head != null) {
-                val entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA)
-
-                head.rotX = entityData!!.headPitch() * Mth.DEG_TO_RAD
-                head.rotY = entityData.netHeadYaw() * Mth.DEG_TO_RAD
+        if (!isMoving && inWater && !onGround && floating) {
+            snapshots.get(PartNames.BODY).ifPresent { bone ->
+                bone.setRotX(Mth.lerp(0.1f, bone.getRotX(), 0f))
             }
+        } else {
+            val pitch = Mth.clamp(
+                renderState.getOrDefaultGeckolibData(DataTickets.ENTITY_PITCH, 0f) ?: 0f,
+                -45f,
+                45f
+            )
 
-            val xRot = Mth.clamp(Mth.lerp(deltaTime, animatable.xRotO, animatable.xRot), -45f, 45f)
-            body?.rotX = xRot * -Mth.DEG_TO_RAD
+            snapshots.get(PartNames.BODY).ifPresent { bone ->
+                bone.setRotX(pitch * -Mth.DEG_TO_RAD)
+            }
         }
     }
+
 }

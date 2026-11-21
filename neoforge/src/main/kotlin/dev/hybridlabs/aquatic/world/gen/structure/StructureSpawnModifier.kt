@@ -23,7 +23,7 @@ class StructureSpawnModifier(val spawnModifier: SpawnModifier) : StructureModifi
     }
 
     override fun modify(
-        structure: Holder<Structure?>,
+        structure: Holder<Structure>,
         phase: StructureModifier.Phase,
         builder: ModifiableStructureInfo.StructureInfo.Builder
     ) {
@@ -33,7 +33,7 @@ class StructureSpawnModifier(val spawnModifier: SpawnModifier) : StructureModifi
                 for ((categoryName, spawns) in spawnModifier.spawns.entries) {
                     val category = MobCategory.valueOf(categoryName)
                     for (spawn in spawns) {
-                        builder.structureSettings.getOrAddSpawnOverrides(category).addSpawn(spawn)
+                        builder.structureSettings.getOrAddSpawnOverrides(category).addSpawn(spawn, 1)
                     }
                 }
             }

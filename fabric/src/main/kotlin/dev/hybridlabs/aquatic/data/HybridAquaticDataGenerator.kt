@@ -14,7 +14,6 @@ import dev.hybridlabs.aquatic.data.server.loot.GenericLootTableProvider
 import dev.hybridlabs.aquatic.data.server.tag.BlockTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.EntityTypeTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.FluidTagProvider
-import dev.hybridlabs.aquatic.data.server.tag.InstrumentTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.ItemTagProvider
 import dev.hybridlabs.aquatic.data.server.tag.PaintingVariantTagProvider
 import dev.hybridlabs.aquatic.data.server.worldgen.BiomeInjectorProvider
@@ -26,14 +25,26 @@ import dev.hybridlabs.aquatic.registry.HARegistryKeys
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomes
 import dev.worldgen.lithostitched.api.registry.LithostitchedRegistries
+import net.fabricmc.api.EnvType
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.core.Registry
 import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 
 object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(generator: FabricDataGenerator) {
+        // Item models and language files are client-only providers. Running datagen as a server
+        // (the default for a plain `runDatagen` Loom config, and for IDE run configs generated
+        // before `client = true`) crashes deep inside the loader when FabricModelProvider is
+        // resolved, so fail with an actionable message instead.
+        check(FabricLoader.getInstance().environmentType == EnvType.CLIENT) {
+            "Hybrid Aquatic data generation must run in a client environment: set " +
+                "`fabricApi.configureDataGeneration { client = true }` (already set) and run " +
+                "`:fabric:runDatagen`, not a server run configuration."
+        }
+
         val pack = generator.createPack()
         pack.addProvider(::LanguageProvider)
         pack.addProvider(::ModelProvider)
@@ -46,7 +57,6 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider(::EntityTypeTagProvider)
         pack.addProvider(::PaintingVariantTagProvider)
         pack.addProvider(::ItemTagProvider)
-        pack.addProvider(::InstrumentTagProvider)
         pack.addProvider(::ConfiguredFeatureProvider)
         pack.addProvider(::PlacedFeatureProvider)
         pack.addProvider(::RecipeProvider)
@@ -70,7 +80,7 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
         registryBuilder.add(Registries.PAINTING_VARIANT, PaintingProvider::bootstrapVariants)
     }
 
-    fun <T> filterHybridAquatic(registry: Registry<T>): (T & Any) -> Boolean {
+    fun <T : Any> filterHybridAquatic(registry: Registry<T>): (T) -> Boolean {
         return { o ->
             val id = registry.getKey(o)
             id!!.namespace == Constants.MOD_ID

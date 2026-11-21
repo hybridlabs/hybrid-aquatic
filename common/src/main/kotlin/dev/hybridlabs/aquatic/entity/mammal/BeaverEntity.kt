@@ -1,5 +1,13 @@
 package dev.hybridlabs.aquatic.entity.mammal
 
+import dev.hybridlabs.aquatic.util.HAMath
+
+import net.minecraft.world.entity.EntitySpawnReason
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
+import dev.hybridlabs.hapi.entity.base.VariantHolder
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.sound.HASoundEvents
@@ -13,7 +21,6 @@ import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalFollowParentGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseMammalEntity
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Holder
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.syncher.EntityDataAccessor
 import net.minecraft.network.syncher.EntityDataSerializers
 import net.minecraft.network.syncher.SynchedEntityData
@@ -47,7 +54,7 @@ import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec2
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.RawAnimation
 import software.bernie.geckolib.constant.DefaultAnimations
@@ -110,9 +117,9 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
      *
      * We want otters to seek air for the behavior, but it's too sad when they drown.
      */
-    override fun hurt(source: DamageSource, amount: Float): Boolean {
+    override fun hurtServer(level: ServerLevel, source: DamageSource, amount: Float): Boolean {
         if (source == damageSources().drown()) return false
-        return super.hurt(source, amount)
+        return super.hurtServer(level, source, amount)
     }
 
     /* A little boost to help short fellas get up slopes. */
@@ -163,7 +170,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
     override fun finalizeSpawn(
         world: ServerLevelAccessor,
         difficulty: DifficultyInstance,
-        spawnReason: MobSpawnType,
+        spawnReason: EntitySpawnReason,
         entityData: SpawnGroupData?,
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
@@ -200,7 +207,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
     //#endregion
 
     override fun getBreedOffspring(p0: ServerLevel, p1: AgeableMob): BeaverEntity? {
-        return HAEntityTypes.BEAVER.get().create(p0)
+        return HAEntityTypes.BEAVER.get().create(p0, EntitySpawnReason.MOB_SUMMONED)
     }
 
     override fun getWaterline(): Float {
@@ -211,7 +218,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
     /* Animation controller triggers based on the OtterAction enum in otter.action, which is set by various goals */
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "otter_controller", 8) { state ->
+            AnimationController<BeaverEntity>("otter_controller", 8) { state ->
                 when {
                     state.isMoving && getAction() == OtterAction.WALKING ->
                         state.setAndContinue(DefaultAnimations.WALK)
@@ -247,6 +254,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.35)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
@@ -288,7 +296,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
                     ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
-                fun byName(name: String?): OtterAction {
+                fun byName(name: String): OtterAction {
                     return OtterAction.CODEC.byName(name, IDLE) as OtterAction
                 }
 
@@ -314,7 +322,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
                     ByIdMap.OutOfBoundsStrategy.ZERO
                 )
 
-                fun byName(name: String?): Type {
+                fun byName(name: String): Type {
                     return CODEC.byName(name, RIVER) as Type
                 }
 
@@ -356,28 +364,26 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
         super.defineSynchedData(builder)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        compound.putString("Type", this.variant.serializedName)
-        compound.putInt(HUNGER_KEY, hunger)
-        compound.putString("Action", this.getAction().serializedName)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        output.putString("Type", this.variant.serializedName)
+        output.putInt(HUNGER_KEY, hunger)
+        output.putString("Action", this.getAction().serializedName)
 
-        super.addAdditionalSaveData(compound)
+        super.addAdditionalSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        this.variant = Type.byName(compound.getString("Type"))
-        hunger = compound.getInt(HUNGER_KEY)
-        this.setAction(OtterAction.byName(compound.getString("Action")))
-        super.readAdditionalSaveData(compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        this.variant = Type.byName(input.getStringOr("Type", this.variant.serializedName))
+        hunger = input.getIntOr(HUNGER_KEY, hunger)
+        this.setAction(OtterAction.byName(input.getStringOr("Action", this.getAction().serializedName)))
+        super.readAdditionalSaveData(input)
     }
 
-    override fun getVariant(): Type {
-        return Type.fromId((entityData.get(TYPE) as Int))
-    }
-
-    override fun setVariant(type: Type) {
-        entityData.set(TYPE, type.id)
-    }
+    override var variant: Type
+        get() = Type.fromId((entityData.get(TYPE) as Int))
+        set(value) {
+            entityData.set(TYPE, value.id)
+        }
 
     fun setAction(action: OtterAction) {
         entityData.set(ACTION, action.id)
@@ -411,7 +417,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
             {
                 this.resetAttackCooldown()
                 otter.swing(InteractionHand.MAIN_HAND)
-                otter.doHurtTarget(enemy)
+                (otter.level() as? ServerLevel)?.let { otter.doHurtTarget(it, enemy) }
 
                 if (enemy.health <= 0) otter.hunger = MAX_HUNGER
                 otter.health = otter.maxHealth
@@ -507,7 +513,6 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
             this.flags = EnumSet.of(Flag.MOVE, Flag.LOOK)
         }
 
-
         override fun canUse(): Boolean {
             return otter.isInWater && !otter.isUnderWater && otter.level().gameTime >= nextDiveTime
         }
@@ -529,7 +534,7 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
              */
             val pos = otter.blockPosition().mutable()
             val angle = otter.random.nextFloat() * Mth.TWO_PI
-            val vec = Vec2(Mth.cos(angle), Mth.sin(angle))
+            val vec = Vec2(HAMath.cos(angle), HAMath.sin(angle))
             vec.scale((otter.random.nextFloat() * 6) + 2)
             pos.move(vec.x.toInt(), 0, vec.y.toInt())
             pos.y = otter.level().getHeight(Heightmap.Types.OCEAN_FLOOR, pos.x, pos.z) + 1
@@ -548,7 +553,6 @@ class BeaverEntity(entityType: EntityType<out BeaverEntity>, world: Level) : Bas
             otter.swimControl.applyGravity = true
         }
     }
-
 
     /* Makes the otter float on its back. Adorable! */
     internal class OtterFloatGoal(private val otter: BeaverEntity) : Goal() {

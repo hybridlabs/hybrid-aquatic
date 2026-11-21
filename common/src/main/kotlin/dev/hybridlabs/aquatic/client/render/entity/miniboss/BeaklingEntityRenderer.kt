@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.client.render.entity.miniboss
 
+import software.bernie.geckolib.renderer.base.GeoRenderState
+
 import dev.hybridlabs.aquatic.client.model.entity.miniboss.BeaklingEntityModel
 import dev.hybridlabs.aquatic.entity.miniboss.BeaklingEntity
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
@@ -10,7 +12,7 @@ class BeaklingEntityRenderer(context: Context) :
         return 0.0025f
     }
 
-    override fun getDeathMaxRotation(animatable: BeaklingEntity): Float {
+    override fun getDeathMaxRotation(renderState: GeoRenderState): Float {
         return 0f
     }
 

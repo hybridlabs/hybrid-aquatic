@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.LivingEntity
+
 import dev.hybridlabs.aquatic.item.HAItems
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
@@ -38,7 +40,7 @@ class ClamBlock(properties: Properties) :
     }
 
     override fun canPlaceLiquid(
-        p0: Player?,
+        p0: LivingEntity?,
         world: BlockGetter,
         pos: BlockPos,
         state: BlockState,

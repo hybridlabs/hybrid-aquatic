@@ -5,13 +5,15 @@ import dev.hybridlabs.aquatic.client.render.entity.mammal.layer.OrcaEyeSpotEntit
 import dev.hybridlabs.aquatic.client.render.entity.mammal.layer.OrcaSaddleEntityLayer
 import dev.hybridlabs.aquatic.entity.mammal.OrcaEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseDolphinEntityRenderer
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class OrcaEntityRenderer(context: Context) :
-    BaseDolphinEntityRenderer<OrcaEntity>(context, OrcaEntityModel(), true) {
+    BaseDolphinEntityRenderer<OrcaEntity, LivingEntityRenderState>(context, OrcaEntityModel(), true) {
 
     init {
-        addRenderLayer(OrcaEyeSpotEntityLayer(this))
-        addRenderLayer(OrcaSaddleEntityLayer(this))
+        withRenderLayer(OrcaEyeSpotEntityLayer(this))
+        withRenderLayer(OrcaSaddleEntityLayer(this))
     }
 }

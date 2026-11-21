@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.entity.LivingEntity
+
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -15,7 +17,6 @@ import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.shapes.VoxelShape
-
 
 @Suppress("OVERRIDE_DEPRECATION")
 class SargassumBlock(settings: Properties) :
@@ -34,7 +35,7 @@ class SargassumBlock(settings: Properties) :
     }
 
     override fun canPlaceLiquid(
-        p0: Player?,
+        p0: LivingEntity?,
         world: BlockGetter,
         pos: BlockPos,
         state: BlockState,
@@ -65,8 +66,8 @@ class SargassumBlock(settings: Properties) :
         return Fluids.WATER.getSource(false)
     }
 
-    override fun codec(): MapCodec<out GrowingPlantHeadBlock> {
-        return CODEC
+    override fun codec(): MapCodec<GrowingPlantHeadBlock> {
+        return CODEC as MapCodec<GrowingPlantHeadBlock>
     }
 
     companion object {

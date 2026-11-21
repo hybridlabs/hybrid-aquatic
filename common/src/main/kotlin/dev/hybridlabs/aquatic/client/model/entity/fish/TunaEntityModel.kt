@@ -1,20 +1,23 @@
 package dev.hybridlabs.aquatic.client.model.entity.fish
 
+import dev.hybridlabs.hapi.client.model.HAPIDataTickets
+import dev.hybridlabs.hapi.client.model.getVariant
+import software.bernie.geckolib.renderer.base.GeoRenderState
 import dev.hybridlabs.aquatic.entity.fish.TunaEntity
 import dev.hybridlabs.hapi.client.model.entity.aquatic.BaseFishEntityModel
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 
 class TunaEntityModel : BaseFishEntityModel<TunaEntity>("hybrid_aquatic", "tuna") {
 
-    override fun getTextureResource(animatable: TunaEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getTextureResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(TunaEntity.Companion.Type.entries)!!) {
             TunaEntity.Companion.Type.YELLOWFIN -> YELLOWFIN_TEXTURE
             TunaEntity.Companion.Type.BLUEFIN -> BLUEFIN_TEXTURE
         }
     }
 
-    override fun getModelResource(animatable: TunaEntity): ResourceLocation {
-        return when (animatable.variant) {
+    override fun getModelResource(renderState: GeoRenderState): Identifier {
+        return when (renderState.getVariant(TunaEntity.Companion.Type.entries)!!) {
             TunaEntity.Companion.Type.YELLOWFIN -> YELLOWFIN_MODEL
             TunaEntity.Companion.Type.BLUEFIN -> BLUEFIN_MODEL
         }
@@ -22,13 +25,13 @@ class TunaEntityModel : BaseFishEntityModel<TunaEntity>("hybrid_aquatic", "tuna"
 
     companion object {
         private val YELLOWFIN_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tuna/tuna_yellowfin.png")
         private val BLUEFIN_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "textures/entity/fish/tuna/tuna_bluefin.png")
 
         private val YELLOWFIN_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/tuna/tuna_yellowfin.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/tuna/tuna_yellowfin")
         private val BLUEFIN_MODEL =
-            ResourceLocation.fromNamespaceAndPath("hybrid_aquatic", "geo/fish/tuna/tuna_bluefin.geo.json")
+            Identifier.fromNamespaceAndPath("hybrid_aquatic", "fish/tuna/tuna_bluefin")
     }
 }

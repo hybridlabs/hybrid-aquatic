@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.world.entity.EntityReference
+
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
@@ -28,8 +32,8 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     BaseFishEntity(type, world),
     NeutralMob {
 
-    private var angerTime = 0
-    private var angryAt: UUID? = null
+    private var angerEndTime: Long = -1L
+    private var angryAt: EntityReference<LivingEntity>? = null
 
     override fun getTargetConfig() = TARGET_CONFIG
 
@@ -56,6 +60,7 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
         val ANGER_TIME_RANGE: IntProvider = TimeUtil.rangeOfSeconds(10, 30)
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 20.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.6)
                 .add(Attributes.ATTACK_DAMAGE, 5.0)
@@ -69,12 +74,12 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
         targetSelector.addGoal(1, HurtByTargetGoal(this).setAlertOthers())
         goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, false))
-        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.asHolder()) && it !is BarracudaEntity })
+        targetSelector.addGoal(1, NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) { target, level -> this.isAngryAt(target, level) })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { target, _ -> target.hasEffect(HAMobEffects.BLEEDING.asHolder()) && target !is BarracudaEntity })
     }
 
-    override fun doHurtTarget(target: Entity): Boolean {
-        if (super.doHurtTarget(target)) {
+    override fun doHurtTarget(level: ServerLevel, target: Entity): Boolean {
+        if (super.doHurtTarget(level, target)) {
             if (target is LivingEntity) {
                 var i = 0
                 if (level().difficulty == Difficulty.NORMAL) {
@@ -103,24 +108,20 @@ class BarracudaEntity(type: EntityType<out BarracudaEntity>, world: Level) :
     }
 
     //#region Angerable Implementation Details
-    override fun getRemainingPersistentAngerTime(): Int {
-        return angerTime
+    override fun getPersistentAngerEndTime(): Long = this.angerEndTime
+
+    override fun setPersistentAngerEndTime(time: Long) {
+        this.angerEndTime = time
     }
 
-    override fun setRemainingPersistentAngerTime(angerTime: Int) {
-        this.angerTime = angerTime
-    }
+    override fun getPersistentAngerTarget(): EntityReference<LivingEntity>? = this.angryAt
 
-    override fun getPersistentAngerTarget(): UUID? {
-        return angryAt
-    }
-
-    override fun setPersistentAngerTarget(angryAt: UUID?) {
-        this.angryAt = angryAt
+    override fun setPersistentAngerTarget(target: EntityReference<LivingEntity>?) {
+        this.angryAt = target
     }
 
     override fun startPersistentAngerTimer() {
-        this.remainingPersistentAngerTime = ANGER_TIME_RANGE.sample(this.random)
+        this.setTimeToRemainAngry(ANGER_TIME_RANGE.sample(this.random).toLong())
     }
-    //#endregion
+
 }

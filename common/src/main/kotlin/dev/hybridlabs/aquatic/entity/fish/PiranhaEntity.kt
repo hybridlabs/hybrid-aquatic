@@ -1,5 +1,12 @@
 package dev.hybridlabs.aquatic.entity.fish
 
+import net.minecraft.world.entity.LivingEntity
+
+import net.minecraft.world.entity.EntityReference
+
+import net.minecraft.world.level.storage.ValueInput
+import net.minecraft.world.level.storage.ValueOutput
+
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.aquatic.tag.HAItemTags
@@ -8,7 +15,6 @@ import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalEatItemGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.BoidGoal
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.StayInWaterGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSchoolingFishEntity
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.util.TimeUtil
 import net.minecraft.util.valueproviders.IntProvider
@@ -32,8 +38,8 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
 
     override fun getTargetConfig() = TARGET_CONFIG
 
-    private var angerTime = 0
-    private var persistentAngerTarget: UUID? = null
+    private var angerEndTime: Long = -1L
+    private var persistentAngerTarget: EntityReference<LivingEntity>? = null
     private var ticksUntilNextAlert = 0
 
     override fun registerGoals() {
@@ -41,9 +47,9 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         goalSelector.addGoal(5, BoidGoal(this, 0.25f, 0.5f, 8 / 20f, 1 / 20f))
         goalSelector.addGoal(3, StayInWaterGoal(this))
         goalSelector.addGoal(2, WaterAnimalEatItemGoal(this))
-        targetSelector.addGoal(1, (HurtByTargetGoal(this, *arrayOfNulls<Class<*>>(0))).setAlertOthers(*arrayOfNulls<Class<*>>(0)))
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { this.isAngryAt(it) })
-        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { it.hasEffect(HAMobEffects.BLEEDING.asHolder()) && it !is PiranhaEntity })
+        targetSelector.addGoal(1, (HurtByTargetGoal(this, *arrayOf<Class<*>>())).setAlertOthers(*arrayOf<Class<*>>()))
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, Player::class.java, 10, true, false) { target, level -> this.isAngryAt(target, level) })
+        targetSelector.addGoal(2, NearestAttackableTargetGoal(this, LivingEntity::class.java, 10, true, true) { target, _ -> target.hasEffect(HAMobEffects.BLEEDING.asHolder()) && target !is PiranhaEntity })
         targetSelector.addGoal(3, ResetUniversalAngerTargetGoal(this, true))
     }
 
@@ -55,27 +61,23 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         return stack.`is`(HAItemTags.SMALL_FISH)
     }
 
-    override fun addAdditionalSaveData(compound: CompoundTag) {
-        super.addAdditionalSaveData(compound)
-        this.addPersistentAngerSaveData(compound)
+    override fun addAdditionalSaveData(output: ValueOutput) {
+        super.addAdditionalSaveData(output)
+        this.addPersistentAngerSaveData(output)
     }
 
-    override fun readAdditionalSaveData(compound: CompoundTag) {
-        super.readAdditionalSaveData(compound)
-        this.readPersistentAngerSaveData(this.level(), compound)
+    override fun readAdditionalSaveData(input: ValueInput) {
+        super.readAdditionalSaveData(input)
+        this.readPersistentAngerSaveData(this.level(), input)
     }
 
-    override fun customServerAiStep() {
+    override fun customServerAiStep(level: ServerLevel) {
         this.updatePersistentAnger(this.level() as ServerLevel, true)
         if (this.target != null) {
             this.maybeAlertOthers()
         }
 
-        if (this.isAngry) {
-            this.lastHurtByPlayerTime = this.tickCount
-        }
-
-        super.customServerAiStep()
+        super.customServerAiStep(level)
     }
 
     override fun canCollideWith(entity: Entity): Boolean {
@@ -92,8 +94,8 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         super.doPush(entity)
     }
 
-    override fun doHurtTarget(target: Entity): Boolean {
-        if (super.doHurtTarget(target)) {
+    override fun doHurtTarget(level: ServerLevel, target: Entity): Boolean {
+        if (super.doHurtTarget(level, target)) {
             if (target is LivingEntity) {
                 var i = 0
                 if (level().difficulty == Difficulty.NORMAL) {
@@ -114,24 +116,20 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
     }
 
     //#region Angerable Implementation Details
-    override fun setRemainingPersistentAngerTime(time: Int) {
-        this.angerTime = time
+    override fun getPersistentAngerEndTime(): Long = this.angerEndTime
+
+    override fun setPersistentAngerEndTime(time: Long) {
+        this.angerEndTime = time
     }
 
-    override fun getRemainingPersistentAngerTime(): Int {
-        return this.angerTime
-    }
+    override fun getPersistentAngerTarget(): EntityReference<LivingEntity>? = this.persistentAngerTarget
 
-    override fun getPersistentAngerTarget(): UUID? {
-        return this.persistentAngerTarget
-    }
-
-    override fun setPersistentAngerTarget(target: UUID?) {
+    override fun setPersistentAngerTarget(target: EntityReference<LivingEntity>?) {
         this.persistentAngerTarget = target
     }
 
     override fun startPersistentAngerTimer() {
-        this.remainingPersistentAngerTime = PERSISTENT_ANGER_TIME.sample(this.random)
+        this.setTimeToRemainAngry(PERSISTENT_ANGER_TIME.sample(this.random).toLong())
     }
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -139,7 +137,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         if (this.ticksUntilNextAlert > 0) {
             --this.ticksUntilNextAlert
         } else {
-            if (this.sensing.hasLineOfSight(this.target)) {
+            if (this.sensing.hasLineOfSight(this.target as Entity)) {
                 this.alertOthers()
             }
 
@@ -165,12 +163,12 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
         }
 
         if (livingEntity is Player) {
-            this.setLastHurtByPlayer(livingEntity)
+            this.setLastHurtByPlayer(livingEntity, 100)
         }
 
         super.setTarget(livingEntity)
     }
-    //#endregion
+
 
     companion object {
         private val TARGET_CONFIG = MobTargetConfiguration.create(
@@ -189,6 +187,7 @@ class PiranhaEntity(type: EntityType<out PiranhaEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 4.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 2.0)

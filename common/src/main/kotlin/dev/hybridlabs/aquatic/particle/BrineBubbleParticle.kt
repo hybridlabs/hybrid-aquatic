@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.particle
 
 import net.minecraft.client.multiplayer.ClientLevel
 import net.minecraft.client.particle.*
+import net.minecraft.util.RandomSource
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.SimpleParticleType
 import net.minecraft.tags.FluidTags
@@ -14,7 +15,8 @@ class BrineBubbleParticle(
     xSpeed: Double,
     ySpeed: Double,
     zSpeed: Double,
-) : TextureSheetParticle(level, x, y, z) {
+    sprites: SpriteSet,
+) : SingleQuadParticle(level, x, y, z, sprites.get(0, 100)) {
     init {
         this.setSize(0.02f, 0.02f)
         this.quadSize *= this.random.nextFloat() * 0.6f + 0.2f
@@ -42,10 +44,6 @@ class BrineBubbleParticle(
         }
     }
 
-    override fun getRenderType(): ParticleRenderType {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE
-    }
-
     companion object {
         class Provider(private val sprite: SpriteSet) : ParticleProvider<SimpleParticleType> {
             override fun createParticle(
@@ -57,11 +55,12 @@ class BrineBubbleParticle(
                 xSpeed: Double,
                 ySpeed: Double,
                 zSpeed: Double,
+                random: RandomSource,
             ): Particle {
-                val bubbleParticle = BrineBubbleParticle(level, x, y, z, xSpeed, ySpeed, zSpeed)
-                bubbleParticle.pickSprite(this.sprite)
-                return bubbleParticle
+                return BrineBubbleParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, this.sprite)
             }
         }
     }
+
+    override fun getLayer(): SingleQuadParticle.Layer = SingleQuadParticle.Layer.OPAQUE
 }

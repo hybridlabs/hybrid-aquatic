@@ -3,7 +3,9 @@ package dev.hybridlabs.aquatic.client.render.entity.crustacean
 import dev.hybridlabs.aquatic.client.model.entity.crustacean.DecoratorCrabEntityModel
 import dev.hybridlabs.aquatic.entity.crustacean.DecoratorCrabEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseCrustaceanEntityRenderer
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class DecoratorCrabEntityRenderer(context: Context) :
-    BaseCrustaceanEntityRenderer<DecoratorCrabEntity>(context, DecoratorCrabEntityModel(), true, false)
+    BaseCrustaceanEntityRenderer<DecoratorCrabEntity, LivingEntityRenderState>(context, DecoratorCrabEntityModel(), true, false)

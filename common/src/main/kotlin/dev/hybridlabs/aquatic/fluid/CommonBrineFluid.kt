@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.fluid
 
+import net.minecraft.server.level.ServerLevel
+
 import dev.hybridlabs.aquatic.particle.HAParticleTypes
 import dev.hybridlabs.aquatic.tag.HAFluidTags
 import net.minecraft.core.BlockPos
@@ -39,7 +41,7 @@ abstract class CommonBrineFluid : FlowingFluid() {
 
     public override fun animateTick(level: Level, pos: BlockPos, state: FluidState, random: RandomSource) {
         val blockpos = pos.above()
-        if (level.getBlockState(blockpos).fluidState.`is`(FluidTags.WATER) && !level.getBlockState(blockpos).isSolidRender(level, blockpos)) {
+        if (level.getBlockState(blockpos).fluidState.`is`(FluidTags.WATER) && !level.getBlockState(blockpos).isSolidRender()) {
             if (random.nextInt(100) == 0) {
                 val d0 = pos.x.toDouble() + random.nextDouble()
                 val d1 = pos.y.toDouble() + 1.0
@@ -88,7 +90,7 @@ abstract class CommonBrineFluid : FlowingFluid() {
         return ParticleTypes.DRIPPING_WATER
     }
 
-    override fun canConvertToSource(level: Level): Boolean {
+    override fun canConvertToSource(level: ServerLevel): Boolean {
         return true
     }
 

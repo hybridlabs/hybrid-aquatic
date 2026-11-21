@@ -1,5 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.biome
 
+import net.minecraft.world.level.dimension.LevelStem
+
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
@@ -195,10 +197,10 @@ object HABiomes {
         register(
             ResourceKey.create(
                 LithostitchedRegistries.WORLDGEN_MODIFIER,
-                CommonClass.locate("surface_rule/${biome.location().path}")
+                CommonClass.locate("surface_rule/${biome.identifier().path}")
             ),
             WorldgenModifier.builder(BiomeEnabledPredicate(biome)).addSurfaceRule(
-                Level.OVERWORLD,
+                LevelStem.OVERWORLD,
                 InjectionType.PREPEND,
                 ifTrue(abovePreliminarySurface(), ifTrue(isBiome(biome), rule))
             )

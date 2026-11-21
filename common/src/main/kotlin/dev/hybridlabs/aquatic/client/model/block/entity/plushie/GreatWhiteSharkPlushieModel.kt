@@ -16,7 +16,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * The model for the Great White Shark Blahaj Plushie.
  * @see PlushieBlock.Variant.GREAT_WHITE_SHARK
  */
-class GreatWhiteSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+class GreatWhiteSharkPlushieModel(root: ModelPart) : PlushieModel(root) {
     override val jaw: ModelPart = root.getChild(JAW)
 
     companion object {

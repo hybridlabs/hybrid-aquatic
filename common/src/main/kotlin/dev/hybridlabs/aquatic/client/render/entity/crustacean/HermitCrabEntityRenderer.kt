@@ -4,13 +4,15 @@ import dev.hybridlabs.aquatic.client.model.entity.crustacean.HermitCrabEntityMod
 import dev.hybridlabs.aquatic.client.render.entity.crustacean.layer.HybridAquaticShellLayer
 import dev.hybridlabs.aquatic.entity.crustacean.HermitCrabEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseCrustaceanEntityRenderer
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 import net.minecraft.world.item.Items
 
 class HermitCrabEntityRenderer(context: Context) :
-    BaseCrustaceanEntityRenderer<HermitCrabEntity>(context, HermitCrabEntityModel(), true, false) {
+    BaseCrustaceanEntityRenderer<HermitCrabEntity, LivingEntityRenderState>(context, HermitCrabEntityModel(), true, false) {
 
     init {
-        addRenderLayer(HybridAquaticShellLayer(this, Items.NAUTILUS_SHELL))
+        withRenderLayer(HybridAquaticShellLayer(this, Items.NAUTILUS_SHELL))
     }
 }

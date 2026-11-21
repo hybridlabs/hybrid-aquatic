@@ -15,7 +15,7 @@ import net.minecraft.core.Holder
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.network.chat.Component
-import net.minecraft.world.entity.decoration.PaintingVariant
+import net.minecraft.world.entity.decoration.painting.PaintingVariant
 import net.minecraft.world.item.*
 import net.minecraft.world.level.block.Blocks
 import kotlin.jvm.optionals.getOrNull
@@ -308,7 +308,7 @@ object HAItemGroups {
                         entries,
                         itemDisplayParameters.holders(),
                         registryLookup,
-                        { holder: Holder<PaintingVariant> -> holder.unwrapKey().getOrNull()?.location()?.namespace == Constants.MOD_ID },
+                        { holder: Holder<PaintingVariant> -> holder.unwrapKey().getOrNull()?.identifier()?.namespace == Constants.MOD_ID },
                         CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
                     )
                 }

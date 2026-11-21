@@ -5,7 +5,7 @@ import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -56,7 +56,7 @@ public class ForgeRegistrationFactory implements RegistrationProvider.Factory {
                         }
 
                         @Override
-                        public ResourceLocation getId() {
+                        public Identifier getId() {
                             return obj.getId();
                         }
 

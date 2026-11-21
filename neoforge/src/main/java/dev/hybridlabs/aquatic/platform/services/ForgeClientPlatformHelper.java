@@ -2,7 +2,7 @@ package dev.hybridlabs.aquatic.platform.services;
 
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -23,9 +23,9 @@ public class ForgeClientPlatformHelper implements ClientPlatformHelper {
     }
 
     @Override
-    public void registerBlockRenderers(RenderType renderType, Block... blocks) {
+    public void registerBlockRenderers(ChunkSectionLayer layer, Block... blocks) {
         for (Block block : blocks) {
-            ItemBlockRenderTypes.setRenderLayer(block, renderType);
+            ItemBlockRenderTypes.setRenderLayer(block, layer);
         }
     }
 

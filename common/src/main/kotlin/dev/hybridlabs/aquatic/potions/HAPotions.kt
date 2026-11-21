@@ -20,43 +20,43 @@ object HAPotions {
     val GLOWING_POTION = register(
         "glowing"
     ) {
-        Potion(MobEffectInstance(MobEffects.GLOWING, 3600, 0))
+        Potion("glowing", MobEffectInstance(MobEffects.GLOWING, 3600, 0))
     }
 
     val CLARITY_POTION = register(
         "clarity"
     ) {
-        Potion(MobEffectInstance(HAMobEffects.CLARITY.asHolder(), 1200, 0))
+        Potion("clarity", MobEffectInstance(HAMobEffects.CLARITY.asHolder(), 1200, 0))
     }
 
     val THALASSOPHOBIA_POTION = register(
         "thalassophobia"
     ) {
-        Potion(MobEffectInstance(HAMobEffects.THALASSOPHOBIA.asHolder(), 1200, 0))
+        Potion("thalassophobia", MobEffectInstance(HAMobEffects.THALASSOPHOBIA.asHolder(), 1200, 0))
     }
 
     val MINOR_LUCK_POTION = register(
         "minor_luck"
     ) {
-        Potion(MobEffectInstance(MobEffects.LUCK, 1200, 0))
+        Potion("minor_luck", MobEffectInstance(MobEffects.LUCK, 1200, 0))
     }
 
     val MAJOR_LUCK_POTION = register(
         "major_luck"
     ) {
-        Potion(MobEffectInstance(MobEffects.LUCK, 600, 1))
+        Potion("major_luck", MobEffectInstance(MobEffects.LUCK, 600, 1))
     }
 
     val BLEEDING_POTION = register(
         "bleeding"
     ) {
-        Potion(MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), 200, 0))
+        Potion("bleeding", MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), 200, 0))
     }
 
     val SWIMMING_POTION = register(
         "swimming"
     ) {
-        Potion(
+        Potion("swimming", 
             MobEffectInstance(MobEffects.DOLPHINS_GRACE, 1200, 0),
             MobEffectInstance(MobEffects.HUNGER, 600, 0)
         )
@@ -65,25 +65,25 @@ object HAPotions {
     val BUOYANCY_POTION = register(
         "buoyancy"
     ) {
-        Potion(MobEffectInstance(HAMobEffects.BUOYANCY.asHolder(), 200, 0))
+        Potion("buoyancy", MobEffectInstance(HAMobEffects.BUOYANCY.asHolder(), 200, 0))
     }
 
     val THORNS_POTION = register(
         "thorns"
     ) {
-        Potion(MobEffectInstance(HAMobEffects.THORNS.asHolder(), 300, 0))
+        Potion("thorns", MobEffectInstance(HAMobEffects.THORNS.asHolder(), 300, 0))
     }
 
     val CORROSION_POTION = register(
         "corrosion"
     ) {
-        Potion(MobEffectInstance(HAMobEffects.CORROSION.asHolder(), 300, 0))
+        Potion("corrosion", MobEffectInstance(HAMobEffects.CORROSION.asHolder(), 300, 0))
     }
 
     val BLINDNESS_POTION = register(
         "blindness"
     ) {
-        Potion(MobEffectInstance(MobEffects.BLINDNESS, 300, 0))
+        Potion("blindness", MobEffectInstance(MobEffects.BLINDNESS, 300, 0))
     }
 
     private fun register(id: String, potion: Supplier<Potion>): RegistryObject<Potion> {

@@ -1,5 +1,9 @@
 package dev.hybridlabs.aquatic.entity
 
+import net.minecraft.core.registries.Registries
+
+import net.minecraft.resources.ResourceKey
+
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.entity.cephalopod.*
 import dev.hybridlabs.aquatic.entity.critter.*
@@ -1358,7 +1362,7 @@ object HAEntityTypes {
                 .sized(dimensions.width, dimensions.height)
                 .clientTrackingRange(10)
                 .updateInterval(10)
-                .build(id)
+                .build(ResourceKey.create(Registries.ENTITY_TYPE, CommonClass.locate(id)))
         }
     }
     //#endregion
@@ -1420,7 +1424,7 @@ object HAEntityTypes {
         attributeContainer: Callable<AttributeSupplier.Builder>,
     ): RegistryObject<EntityType<T>> {
         return CommonClass.ENTITY_TYPES.register(id) {
-            val entityType = entity.build(id)
+            val entityType = entity.build(ResourceKey.create(Registries.ENTITY_TYPE, CommonClass.locate(id)))
             Services.PLATFORM.registerAttributes(id, entityType, attributeContainer)
             entityType
         }

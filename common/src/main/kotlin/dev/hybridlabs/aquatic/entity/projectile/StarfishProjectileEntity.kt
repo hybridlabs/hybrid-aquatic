@@ -10,19 +10,19 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.entity.projectile.AbstractArrow
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow
 import net.minecraft.world.entity.projectile.ItemSupplier
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.BlockHitResult
 import software.bernie.geckolib.animatable.GeoEntity
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache
-import software.bernie.geckolib.animation.AnimatableManager
+import software.bernie.geckolib.animatable.manager.AnimatableManager
 import software.bernie.geckolib.animation.AnimationController
 import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
-import software.bernie.geckolib.animation.AnimationState
+import software.bernie.geckolib.animation.state.AnimationTest
 import software.bernie.geckolib.animation.RawAnimation
-import software.bernie.geckolib.animation.PlayState
+import software.bernie.geckolib.animation.`object`.PlayState
 import software.bernie.geckolib.util.GeckoLibUtil
 
 class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
@@ -40,10 +40,9 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(
-                this, "thrown_controller",
-                AnimationStateHandler { state: AnimationState<StarfishProjectileEntity> ->
-                    if (!inGround) return@AnimationStateHandler state.setAndContinue(THROWN_ANIMATION)
+            AnimationController<StarfishProjectileEntity>("thrown_controller",
+                AnimationStateHandler { state: AnimationTest<StarfishProjectileEntity> ->
+                    if (!onGround()) return@AnimationStateHandler state.setAndContinue(THROWN_ANIMATION)
                     else {
                         state.setControllerSpeed(0.0f)
                         PlayState.CONTINUE
@@ -53,12 +52,12 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
         )
     }
 
-    override fun getAnimatableInstanceCache(): AnimatableInstanceCache? {
+    override fun getAnimatableInstanceCache(): AnimatableInstanceCache {
         return animCache
     }
 
-    override fun canBeCollidedWith(): Boolean {
-        return inGround
+    override fun canBeCollidedWith(entity: Entity?): Boolean {
+        return onGround()
     }
 
     override fun canCollideWith(entity: Entity): Boolean {
@@ -80,7 +79,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     }
 
     override fun interact(player: Player, hand: InteractionHand): InteractionResult {
-        if (!this.level().isClientSide && this.inGround) {
+        if (!this.level().isClientSide && this.onGround()) {
             val item = ItemStack(HAItems.STARFISH.get())
 
             if (!player.addItem(item)) {
@@ -115,7 +114,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
     override fun tick() {
         super.tick()
 
-        if (isInWater && !inGround) {
+        if (isInWater && !onGround()) {
             deltaMovement = deltaMovement.add(0.0, 0.05, 0.0)
         }
     }

@@ -4,6 +4,8 @@
     "compatibilityLevel": "JAVA_17",
     "plugin": "dev.hybridlabs.aquatic.mixin.FabricMixinPlugin",
     "mixins": [
+        "compat.GeckoLibAnimationTimelineMixin",
+        "compat.LithostitchedParameterMapMixin",
         "HolderReferenceInvoker",
         "MinecraftServerMixin",
         "BreathAirGoalMixin",
@@ -22,22 +24,18 @@
         "ServerGamePacketListenerImplMixin",
         "SpawnGroupMixin",
         "TallSeagrassBlockMixin",
-        "PaintingMixin",
         "TallSeagrassBlockMixin"
     ],
     "client": [
+        "client.EntityRenderStateMixin",
         "client.CameraMixin",
         "client.FishingBobberEntityClientMixin",
-        "client.FishingBobberEntityRendererMixin",
         "client.FogRendererMixin",
         "client.HeadFeatureRendererMixin",
         "client.LivingEntityRendererMixin",
         "client.LocalPlayerMixin",
         "client.MouseHandlerMixin",
-        "client.PlayerEntityRendererMixin",
-        "client.SkullBlockEntityModelMixin",
-        "client.WeatherDisplayMixin",
-        "client.PaintingRendererMixin"
+        "client.SkullBlockEntityMixin"
     ],
     "injectors": {
         "defaultRequire": 1

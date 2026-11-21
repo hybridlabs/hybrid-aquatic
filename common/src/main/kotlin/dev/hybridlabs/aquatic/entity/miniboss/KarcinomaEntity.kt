@@ -17,7 +17,13 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.pathfinder.PathType
 import net.minecraft.world.phys.Vec3
-import software.bernie.geckolib.animation.*
+import software.bernie.geckolib.animatable.manager.AnimatableManager
+import software.bernie.geckolib.animation.AnimationController
+import software.bernie.geckolib.animation.AnimationController.AnimationStateHandler
+import software.bernie.geckolib.animation.RawAnimation
+import software.bernie.geckolib.animation.state.AnimationTest
+import software.bernie.geckolib.animation.`object`.PlayState
+import software.bernie.geckolib.animation.`object`.EasingType
 import software.bernie.geckolib.constant.DefaultAnimations
 
 class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
@@ -38,17 +44,17 @@ class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
     override fun registerControllers(controllers: AnimatableManager.ControllerRegistrar) {
         controllers.add(
-            AnimationController(this, "Run/Swim/Idle", 4) {
-                    state: AnimationState<KarcinomaEntity> ->
-                if (this.isInWaterOrBubble && state.isMoving) state.setAndContinue(
+            AnimationController<KarcinomaEntity>("Run/Swim/Idle", 4) {
+                    state: AnimationTest<KarcinomaEntity> ->
+                if (this.isInWater && state.isMoving) state.setAndContinue(
                     if (this.isSprinting) DefaultAnimations.RUN else DefaultAnimations.SWIM)
                 else state.setAndContinue(DefaultAnimations.SWIM)
             }
         )
 
         controllers.add(
-            AnimationController(this, "Flop", 4) { state ->
-                if (!this.isInWaterOrBubble) {
+            AnimationController<KarcinomaEntity>("Flop", 4) { state ->
+                if (!this.isInWater) {
                     return@AnimationController state.setAndContinue(FLOP_ANIMATION)
                 }
 
@@ -56,7 +62,7 @@ class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
             }
         )
 
-        controllers.add(DefaultAnimations.genericAttackAnimation(this, DefaultAnimations.ATTACK_SWING))
+        controllers.add(DefaultAnimations.genericAttackAnimation<KarcinomaEntity>(DefaultAnimations.ATTACK_SWING))
     }
 
     override fun travel(travelVector: Vec3) {
@@ -100,6 +106,7 @@ class KarcinomaEntity(type: EntityType<out HAMinionEntity>, world: Level) :
 
         fun createMobAttributes(): AttributeSupplier.Builder {
             return createLivingAttributes()
+                .add(Attributes.TEMPT_RANGE, 10.0)
                 .add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 1.0)
                 .add(Attributes.ATTACK_DAMAGE, 4.0)

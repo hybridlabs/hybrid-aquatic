@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * The model for the Basking Shark Blahaj Plushie.
  * @see PlushieBlock.Variant.BASKING_SHARK
  */
-class BaskingSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+class BaskingSharkPlushieModel(root: ModelPart) : PlushieModel(root) {
 
     companion object {
         fun createModelData(): LayerDefinition {

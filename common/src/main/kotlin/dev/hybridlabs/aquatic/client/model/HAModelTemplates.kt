@@ -1,9 +1,9 @@
 package dev.hybridlabs.aquatic.client.model
 
 import dev.hybridlabs.aquatic.Constants
-import net.minecraft.data.models.model.ModelTemplate
-import net.minecraft.data.models.model.TextureSlot
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.client.data.models.model.ModelTemplate
+import net.minecraft.client.data.models.model.TextureSlot
+import net.minecraft.resources.Identifier
 import java.util.Optional
 
 object HAModelTemplates {
@@ -15,7 +15,7 @@ object HAModelTemplates {
     private fun create(id: String, vararg slots: TextureSlot): ModelTemplate {
         return ModelTemplate(
             Optional.of(
-                ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id)
+                Identifier.fromNamespaceAndPath(Constants.MOD_ID, id)
             ),
             Optional.empty(), *slots
         )

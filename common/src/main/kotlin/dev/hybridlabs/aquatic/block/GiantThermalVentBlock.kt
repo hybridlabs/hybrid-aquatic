@@ -17,6 +17,7 @@ import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
+import net.minecraft.world.level.ScheduledTickAccess
 import net.minecraft.world.level.block.BaseEntityBlock.createTickerHelper
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -120,11 +121,13 @@ class GiantThermalVentBlock(
 
     override fun updateShape(
         state: BlockState,
-        direction: Direction,
-        neighborState: BlockState,
-        world: LevelAccessor,
+        world: LevelReader,
+        scheduledTickAccess: ScheduledTickAccess,
         pos: BlockPos,
+        direction: Direction,
         neighborPos: BlockPos,
+        neighborState: BlockState,
+        random: RandomSource
     ): BlockState {
 
         if (!canSurvive(state, world, pos)) {
@@ -157,8 +160,8 @@ class GiantThermalVentBlock(
         if (world.isClientSide) return
 
         if (state.getValue(THICKNESS) == GiantThermalVentPosition.TIP) {
-            if (entity is Player && !entity.isInvulnerableTo(world.damageSources().hotFloor())) {
-                entity.hurt(world.damageSources().hotFloor(), fireDamage.toFloat())
+            if (entity is Player) {
+                entity.hurtServer(world as ServerLevel, world.damageSources().hotFloor(), fireDamage.toFloat())
                 entity.addEffect(MobEffectInstance(HAMobEffects.CORROSION.asHolder(), 200, 0))
             }
         }
@@ -184,7 +187,7 @@ class GiantThermalVentBlock(
         return SHAPE
     }
 
-    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block?, BlockState?>) {
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
         builder.add(THICKNESS)
     }
 
@@ -209,6 +212,7 @@ class GiantThermalVentBlock(
 
             level.addParticle(
                 particle,
+                false,
                 false,
                 pos.x + 0.5 + random.nextDouble() / 3.0 * (if (random.nextBoolean()) 1 else -1),
                 pos.y + random.nextDouble() + random.nextDouble(),

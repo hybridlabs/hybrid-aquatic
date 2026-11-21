@@ -3,7 +3,9 @@ package dev.hybridlabs.aquatic.client.render.entity.fish
 import dev.hybridlabs.aquatic.client.model.entity.fish.FlyingFishEntityModel
 import dev.hybridlabs.aquatic.entity.fish.FlyingFishEntity
 import dev.hybridlabs.hapi.client.render.entity.aquatic.BaseFishEntityRenderer
+import net.minecraft.client.renderer.entity.EntityRendererProvider
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState
 
 class FlyingFishEntityRenderer(context: Context) :
-    BaseFishEntityRenderer<FlyingFishEntity>(context, FlyingFishEntityModel(), false, false)
+    BaseFishEntityRenderer<FlyingFishEntity, LivingEntityRenderState>(context, FlyingFishEntityModel(), false, false)

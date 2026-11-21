@@ -14,7 +14,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition
  * The model for the Tiger Shark Blahaj Plushie.
  * @see PlushieBlock.Variant.TIGER_SHARK
  */
-class TigerSharkPlushieModel(override val root: ModelPart) : PlushieModel() {
+class TigerSharkPlushieModel(root: ModelPart) : PlushieModel(root) {
     override val jaw: ModelPart = root.getChild(JAW)
 
     companion object {

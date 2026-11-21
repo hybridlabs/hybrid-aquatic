@@ -57,8 +57,8 @@ class AnemoneFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfiguratio
 
     private fun getRandomAnemoneState(level: LevelAccessor, random: RandomSource): BlockState? {
         val possibleBlocks = level.registryAccess()
-            .registryOrThrow(net.minecraft.core.registries.Registries.BLOCK)
-            .getTag(HABlockTags.ANEMONES).orElse(null)
+            .lookupOrThrow(net.minecraft.core.registries.Registries.BLOCK)
+            .get(HABlockTags.ANEMONES).orElse(null)
             ?.toList()
             ?: return null
 

@@ -2,12 +2,13 @@
 
 package dev.hybridlabs.aquatic
 
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer
+
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.client.data.HypnoticEntities
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
-import dev.hybridlabs.aquatic.client.item.HAItemProperties
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BULL_SHARK_PLUSHIE
@@ -24,7 +25,6 @@ import dev.hybridlabs.aquatic.client.render.block.HAModelLayerRegistry
 import dev.hybridlabs.aquatic.client.render.block.entity.*
 import dev.hybridlabs.aquatic.client.render.entity.HybridAquaticEntityRenderers
 import dev.hybridlabs.aquatic.client.render.fluid.HAFluidRenderer
-import dev.hybridlabs.aquatic.client.render.item.HATrinketRendererRegistry
 import dev.hybridlabs.aquatic.client.render.particle.HAParticleRendererRegistry
 import dev.hybridlabs.aquatic.platform.ClientServices
 import dev.hybridlabs.aquatic.platform.Services
@@ -34,7 +34,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry.registerModelLayer
 import net.minecraft.client.color.block.BlockColor
 import net.minecraft.client.renderer.BiomeColors
-import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.rendertype.RenderType
+import net.minecraft.client.renderer.rendertype.RenderTypes
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers
 
 @Suppress("UnusedExpression", "DEPRECATION")
@@ -48,9 +49,7 @@ object HybridAquaticClient : ClientModInitializer {
         HybridAquaticEntityRenderers
         registerWeatherRenderers()
         registerBlockColors()
-        if (Services.PLATFORM.isModLoaded("trinkets")) HATrinketRendererRegistry
         HAModelLayerRegistry
-        HAItemProperties
         HAFluidRenderer()
 
         HAMenuScreens
@@ -66,7 +65,7 @@ object HybridAquaticClient : ClientModInitializer {
 
     private fun registerRenderShapes() {
         ClientServices.PLATFORM.registerBlockRenderers(
-            RenderType.translucent(),
+            ChunkSectionLayer.TRANSLUCENT,
             HABlocks.ANEMONE.get(),
             HABlocks.GIANT_GREEN_ANEMONE.get(),
             HABlocks.STRAWBERRY_ANEMONE.get(),
@@ -74,7 +73,7 @@ object HybridAquaticClient : ClientModInitializer {
             HAPlatformBlocks.GLOWSLIME_BLOCK.get(),
         )
         ClientServices.PLATFORM.registerBlockRenderers(
-            RenderType.cutout(),
+            ChunkSectionLayer.CUTOUT,
             HAPlatformBlocks.DUNEGRASS.get(),
             HAPlatformBlocks.TALL_DUNEGRASS.get(),
 

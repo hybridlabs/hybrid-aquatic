@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.sound
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.sounds.SoundEvent
 
 object HASoundEvents {
@@ -55,7 +55,7 @@ object HASoundEvents {
     val OMINOUS_CONCH_BLOWS = register("item.ominous_conch.blows")
 
     private fun register(id: String, range: Float = -1.0f): RegistryObject<SoundEvent> {
-        val identifier = ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, id)
+        val identifier = Identifier.fromNamespaceAndPath(Constants.MOD_ID, id)
         return if (range < 0)
             CommonClass.SOUND_EVENTS.register(id) { SoundEvent.createVariableRangeEvent(identifier) }
         else

@@ -6,14 +6,14 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
-import net.minecraft.world.entity.decoration.PaintingVariant
+import net.minecraft.world.entity.decoration.painting.PaintingVariant
 import java.util.concurrent.CompletableFuture
 
 class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: CompletableFuture<HolderLookup.Provider>) :
     FabricTagProvider<PaintingVariant>(output, Registries.PAINTING_VARIANT, registriesFuture) {
 
     override fun addTags(arg: HolderLookup.Provider) {
-        getOrCreateTagBuilder(HAPaintingTags.KEEPS_PAINTING_VARIANT)
+        builder(HAPaintingTags.KEEPS_PAINTING_VARIANT)
             .add(HAPaintings.MELON)
             .add(HAPaintings.CONCH_STREET)
             .add(HAPaintings.BOLD_AND_BRASH)
@@ -64,7 +64,7 @@ class PaintingVariantTagProvider (output: FabricDataOutput, registriesFuture: Co
             .add(HAPaintings.THE_FAST_REGIMENT)
             .add(HAPaintings.GONE_FISHING)
 
-        getOrCreateTagBuilder(HAPaintingTags.TRANSPARENT_PAINTING)
+        builder(HAPaintingTags.TRANSPARENT_PAINTING)
             .add(HAPaintings.ASEXUAL_PRIDE_FLAG)
             .add(HAPaintings.BISEXUAL_PRIDE_FLAG)
             .add(HAPaintings.GAY_PRIDE_FLAG)
