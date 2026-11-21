@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated to Minecraft 1.21.11
 - Updated to Minecraft 26.1.2
 - Updated to Minecraft 26.2
+- Updated to Minecraft 26.3
 - Added diving armor upgrade templates to crate loot
 - Jungle lily pads now break for modded boats as well
 
@@ -36,6 +37,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Trinkets support was compile-only in 1.21.11; there is no Trinkets release for 26.2
 - Added a compatibility mixin for Lithostitched 1.7.2 biome injectors and a guard for missing
   GeckoLib animation names
+- Features now carry their configuration directly; `ConfiguredFeature`, `FeatureConfiguration` and
+  the separate configured feature registry were removed
+- Biome surfaces use the new `MaterialRules` registry, and biome water fog moved from
+  `BiomeSpecialEffects` to the environment attribute system
+- Density function JSON uses `left`/`right`, `gradient` with an axis, and explicit interpolation
+  cell sizes. Wrapper markers are now matched as direct density functions as well as registry
+  holders
+- Stripping and brewing recipes are data-driven: Fabric uses `BlockTransformerHelper`, NeoForge
+  generates the `transformables` data map, and brewing recipes are emitted by datagen
+- Swing state lives in `LivingEntity`; goals call `swingForAttack`, and custom swing durations use
+  a `SwingAnimation`
+- `PoseStack.mulPose` only accepts matrices and transformations
+- Removed the Lithostitched 1.7.2 `ParameterMap` mixin; 2.0 fixed the issue upstream
+- `debugutils` has no 26.3 build, so it is not loaded in Fabric dev runs
 
 </details>
 
