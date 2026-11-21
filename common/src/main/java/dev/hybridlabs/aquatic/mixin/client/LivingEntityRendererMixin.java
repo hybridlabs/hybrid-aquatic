@@ -48,7 +48,7 @@ public class LivingEntityRendererMixin {
 
         if (!Float.isNaN(pitch)) {
             poseStack.scale(-1.0F, -1.0F, 1.0F);
-            poseStack.mulPose(Axis.XP.rotationDegrees(-pitch));
+            poseStack.mulPose(new org.joml.Matrix4f().rotation(Axis.XP.rotationDegrees(-pitch)));
             poseStack.scale(-1.0F, -1.0F, 1.0F);
         }
     }

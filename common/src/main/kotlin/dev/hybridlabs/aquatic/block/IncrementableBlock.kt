@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import com.mojang.serialization.MapCodec
 import net.minecraft.util.Util
 import net.minecraft.core.BlockPos
@@ -25,9 +26,6 @@ import java.util.function.BiFunction
 import kotlin.math.min
 
 open class IncrementableBlock protected constructor(properties: Properties) : BushBlock(properties), BonemealableBlock {
-    public override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     public override fun rotate(blockState: BlockState, rotation: Rotation): BlockState {
         return blockState.setValue(
@@ -78,7 +76,7 @@ open class IncrementableBlock protected constructor(properties: Properties) : Bu
         stateDefinitionBuilder.add(*arrayOf<Property<*>>(FACING, AMOUNT))
     }
 
-    override fun isValidBonemealTarget(levelReader: LevelReader, blockPos: BlockPos, blockState: BlockState): Boolean {
+    override fun isValidBonemealTarget(levelReader: LevelReader, blockPos: BlockPos, blockState: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
@@ -86,8 +84,7 @@ open class IncrementableBlock protected constructor(properties: Properties) : Bu
         level: Level,
         randomSource: RandomSource,
         blockPos: BlockPos,
-        blockState: BlockState,
-    ): Boolean {
+        blockState: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
@@ -95,8 +92,7 @@ open class IncrementableBlock protected constructor(properties: Properties) : Bu
         serverLevel: ServerLevel,
         randomSource: RandomSource,
         blockPos: BlockPos,
-        blockState: BlockState,
-    ) {
+        blockState: BlockState, source: BonemealSource) {
         val i = blockState.getValue(AMOUNT) as Int
         if (i < 4) {
             serverLevel.setBlock(
@@ -118,8 +114,6 @@ open class IncrementableBlock protected constructor(properties: Properties) : Bu
     }
 
     companion object {
-        val CODEC: MapCodec<IncrementableBlock> =
-            simpleCodec { properties: Properties -> IncrementableBlock(properties) }
         const val MIN_COUNT: Int = 1
         const val MAX_COUNT: Int = 4
         val FACING: EnumProperty<Direction> = BlockStateProperties.HORIZONTAL_FACING

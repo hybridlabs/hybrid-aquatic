@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import net.minecraft.world.entity.LivingEntity
 
 import com.mojang.serialization.MapCodec
@@ -63,11 +64,11 @@ class RedAlgaeBlock(settings: Properties) :
         return blockState
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
-    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
+    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
@@ -75,7 +76,7 @@ class RedAlgaeBlock(settings: Properties) :
         return Fluids.WATER.getSource(false)
     }
 
-    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource) {
         val blockState = HABlocks.TALL_RED_ALGAE.get().defaultBlockState()
         val blockState2 = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
         val blockPos = pos.above()
@@ -104,12 +105,8 @@ class RedAlgaeBlock(settings: Properties) :
         return false
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<RedAlgaeBlock> = simpleCodec(::RedAlgaeBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

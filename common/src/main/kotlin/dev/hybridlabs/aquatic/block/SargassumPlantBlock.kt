@@ -53,11 +53,7 @@ class SargassumPlantBlock(settings: Properties) :
         return false
     }
 
-    override fun codec(): MapCodec<GrowingPlantBodyBlock> {
-        return CODEC as MapCodec<GrowingPlantBodyBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<SargassumPlantBlock> = simpleCodec(::SargassumPlantBlock)
     }
 }

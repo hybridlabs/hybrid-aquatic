@@ -110,16 +110,12 @@ class JungleLilyPadBlock(settings: Properties) : BushBlock(settings) {
         super.entityInside(state, world, pos, entity, applier, intersects)
         if (world is ServerLevel && entity.type.builtInRegistryHolder().`is`(HAPIEntityTags.BOATS)) {
             entity.makeStuckInBlock(state, Vec3(0.66, 0.66, 0.66))
-            world.destroyBlock(BlockPos(pos), false, entity)
+            world.destroyBlock(pos, false, entity)
         }
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<JungleLilyPadBlock> = simpleCodec(::JungleLilyPadBlock)
         private val SHAPE: VoxelShape = box(1.0, 15.0, 1.0, 15.0, 16.0, 15.0)
     }
 }

@@ -1,20 +1,32 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.WildMusselBlock
+import net.minecraft.core.BlockPos
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.util.RandomSource
+import net.minecraft.world.level.WorldGenLevel
+import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
-class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLakeFeatureConfig>(codec) {
-    override fun place(context: FeaturePlaceContext<BrineLakeFeatureConfig>): Boolean {
-        var blockPos = context.origin()
-        val worldGenLevel = context.level()
-        val randomSource = context.random()
-        val configuration = context.config()
+data class BrineLakeFeature(
+    val barrierProvider: BlockStateProvider,
+    val fluidProvider: BlockStateProvider,
+) : Feature {
+    override fun codec(): MapCodec<BrineLakeFeature> = CODEC
+
+    override fun place(
+        worldGenLevel: WorldGenLevel,
+        chunkGenerator: ChunkGenerator,
+        randomSource: RandomSource,
+        origin: BlockPos,
+    ): Boolean {
+        var blockPos = origin
         if (blockPos.y <= worldGenLevel.minY + 4) {
             return false
         } else {
@@ -45,7 +57,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                 }
             }
 
-            val blockState = configuration.fluidProvider.getState(worldGenLevel, randomSource, blockPos)
+            val blockState = fluidProvider.getState(worldGenLevel, randomSource, blockPos)
 
             for (s in 0..15) {
                 for (t in 0..15) {
@@ -88,7 +100,7 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
                 }
             }
 
-            val blockState3 = configuration.barrierProvider.getState(worldGenLevel, randomSource, blockPos)
+            val blockState3 = barrierProvider.getState(worldGenLevel, randomSource, blockPos)
             if (!blockState3.isAir) {
                 for (t in 0..15) {
                     for (u in 0..15) {
@@ -133,5 +145,12 @@ class BrineLakeFeature(codec: Codec<BrineLakeFeatureConfig>) : Feature<BrineLake
 
     companion object {
         private val WATER: BlockState = Blocks.WATER.defaultBlockState()
+
+        val CODEC: MapCodec<BrineLakeFeature> = RecordCodecBuilder.mapCodec { instance ->
+            instance.group(
+                BlockStateProvider.DIRECT_CODEC.fieldOf("barrier_block").forGetter(BrineLakeFeature::barrierProvider),
+                BlockStateProvider.DIRECT_CODEC.fieldOf("fluid_block").forGetter(BrineLakeFeature::fluidProvider),
+            ).apply(instance, ::BrineLakeFeature)
+        }
     }
 }

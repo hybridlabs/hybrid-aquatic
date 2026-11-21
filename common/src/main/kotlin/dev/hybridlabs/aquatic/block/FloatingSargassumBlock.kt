@@ -65,7 +65,7 @@ import net.minecraft.world.phys.shapes.VoxelShape
     ) {
         super.entityInside(state, level, pos, entity, applier, intersects)
         if (level is ServerLevel && entity.type.builtInRegistryHolder().`is`(HAPIEntityTags.BOATS)) {
-            level.destroyBlock(BlockPos(pos), true, entity)
+            level.destroyBlock(pos, true, entity)
         }
     }
 
@@ -129,12 +129,8 @@ import net.minecraft.world.phys.shapes.VoxelShape
         }
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<FloatingSargassumBlock> = simpleCodec(::FloatingSargassumBlock)
         private val SHAPE: VoxelShape = box(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }

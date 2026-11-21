@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "#minecraft:is_savanna",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#2c8b9c"
+  }
+}

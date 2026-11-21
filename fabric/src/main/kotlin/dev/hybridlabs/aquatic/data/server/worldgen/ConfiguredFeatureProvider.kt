@@ -10,18 +10,18 @@ import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import dev.hybridlabs.aquatic.world.gen.feature.*
-import dev.hybridlabs.aquatic.world.gen.feature.kelp.BullKelpFeatureConfig
-import dev.hybridlabs.aquatic.world.gen.feature.kelp.DelesseriaFeatureConfig
-import dev.hybridlabs.aquatic.world.gen.feature.kelp.SargassumFeatureConfig
+import dev.hybridlabs.aquatic.world.gen.feature.algae.*
+import dev.hybridlabs.aquatic.world.gen.feature.corals.*
+import dev.hybridlabs.aquatic.world.gen.feature.kelp.*
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.Direction
+import net.minecraft.core.Holder
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.HolderSet
 import net.minecraft.core.Vec3i
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
-import net.minecraft.data.worldgen.features.FeatureUtils
 import net.minecraft.data.worldgen.placement.PlacementUtils
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.random.WeightedList
@@ -39,13 +39,20 @@ import net.minecraft.world.level.levelgen.GeodeCrackSettings
 import net.minecraft.world.level.levelgen.GeodeLayerSettings
 import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
+import net.minecraft.world.level.levelgen.feature.BlockReplacement
+import net.minecraft.world.level.levelgen.feature.DiskFeature
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.Feature.GEODE
-import net.minecraft.world.level.levelgen.feature.Feature.WATERLOGGED_VEGETATION_PATCH
+import net.minecraft.world.level.levelgen.feature.GeodeFeature
+import net.minecraft.world.level.levelgen.feature.NoOpFeature
+import net.minecraft.world.level.levelgen.feature.OreFeature
+import net.minecraft.world.level.levelgen.feature.RandomSelectorFeature
+import net.minecraft.world.level.levelgen.feature.ReplaceBlockFeature
+import net.minecraft.world.level.levelgen.feature.SimpleBlockFeature
+import net.minecraft.world.level.levelgen.feature.SimpleRandomSelectorFeature
+import net.minecraft.world.level.levelgen.feature.WaterloggedVegetationPatchFeature
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature
-import net.minecraft.world.level.levelgen.feature.configurations.*
 import net.minecraft.world.level.levelgen.feature.stateproviders.*
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter
 import net.minecraft.world.level.levelgen.placement.CaveSurface
 import net.minecraft.world.level.levelgen.placement.CountPlacement
 import net.minecraft.world.level.levelgen.placement.HeightmapPlacement
@@ -60,18 +67,11 @@ class ConfiguredFeatureProvider(
     registriesFuture: CompletableFuture<HolderLookup.Provider>,
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     companion object {
-        fun bootstrapConfiguredFeatures(bootstrap: BootstrapContext<ConfiguredFeature<*, *>>) {
+        fun bootstrapConfiguredFeatures(bootstrap: BootstrapContext<Feature>) {
 
-            val ANEMONES = FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.ANEMONES,
-
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            val ANEMONES = bootstrap.register(HAConfiguredFeatures.ANEMONES, HARandomPatchFeature(
                     4, 2, 2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             WeightedStateProvider(
                                 WeightedList.builder<BlockState>()
                                     .add(
@@ -89,93 +89,64 @@ class ConfiguredFeatureProvider(
                                     )
                                     .build()
                             )
-                        ),
-                        BlockPredicate.allOf(
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
                             BlockPredicate.matchesBlocks(Blocks.WATER),
-                            BlockPredicate.hasSturdyFace(Vec3i(0, -1, 0), Direction.UP)
-                        )
-                    )
-                )
-            )
+                            BlockPredicate.hasSturdyFace(Direction.DOWN, Direction.UP)
+                        )))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.RED_BRINE_POOL,
-                HAFeatures.BRINE_LAKE.get(),
-                BrineLakeFeatureConfig(
-                    BlockStateProvider.simple(
+            bootstrap.register(HAConfiguredFeatures.RED_BRINE_POOL, BrineLakeFeature(
+                    BlockStateProvider.of(
                         HABlocks.RED_BRINESTONE.get()
                     ),
-                    BlockStateProvider.simple(
+                    BlockStateProvider.of(
                         HAPlatformFluids.BRINE_STILL.get()
                             .defaultFluidState()
                             .createLegacyBlock()
                     )
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.ORANGE_BRINE_POOL,
-                HAFeatures.BRINE_LAKE.get(),
-                BrineLakeFeatureConfig(
-                    BlockStateProvider.simple(
+            bootstrap.register(HAConfiguredFeatures.ORANGE_BRINE_POOL, BrineLakeFeature(
+                    BlockStateProvider.of(
                         HABlocks.ORANGE_BRINESTONE.get()
                     ),
-                    BlockStateProvider.simple(
+                    BlockStateProvider.of(
                         HAPlatformFluids.BRINE_STILL.get()
                             .defaultFluidState()
                             .createLegacyBlock()
                     )
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.YELLOW_BRINE_POOL,
-                HAFeatures.BRINE_LAKE.get(),
-                BrineLakeFeatureConfig(
-                    BlockStateProvider.simple(
+            bootstrap.register(HAConfiguredFeatures.YELLOW_BRINE_POOL, BrineLakeFeature(
+                    BlockStateProvider.of(
                         HABlocks.YELLOW_BRINESTONE.get()
                     ),
-                    BlockStateProvider.simple(
+                    BlockStateProvider.of(
                         HAPlatformFluids.BRINE_STILL.get()
                             .defaultFluidState()
                             .createLegacyBlock()
                     )
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.BRINE_POOL,
-                Feature.SIMPLE_RANDOM_SELECTOR,
-                CompositeFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.BRINE_POOL, SimpleRandomSelectorFeature(
                     HolderSet.direct(
                         bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.RED_BRINE_POOL).get(),
                         bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.YELLOW_BRINE_POOL).get(),
                         bootstrap.lookup(Registries.PLACED_FEATURE).get(HAPlacedFeatures.ORANGE_BRINE_POOL).get()
                     )
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.TIDE_POOLS,
-
-                WATERLOGGED_VEGETATION_PATCH, VegetationPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.TIDE_POOLS, WaterloggedVegetationPatchFeature(
                     bootstrap.lookup(Registries.BLOCK).getOrThrow(HABlockTags.TIDE_POOL_REPLACEABLE),
-                    WeightedStateProvider(
-                        WeightedList.builder<BlockState>()
-                            .add(HABlocks.SHORESTONE.get().defaultBlockState(), 3)
-                            .add(HABlocks.BARNACLE_SHORESTONE.get().defaultBlockState(), 1)
-                            .build()
+                    Holder.direct(
+                        WeightedStateProvider(
+                            WeightedList.builder<BlockState>()
+                                .add(HABlocks.SHORESTONE.get().defaultBlockState(), 3)
+                                .add(HABlocks.BARNACLE_SHORESTONE.get().defaultBlockState(), 1)
+                                .build()
+                        )
                     ),
-                    PlacementUtils.inlinePlaced(
-                        HAFeatures.ANEMONES.get(),
-                        FeatureConfiguration.NONE,
-                        *arrayOf<PlacementModifier>()
-                    ),
+                    PlacementUtils.inlinePlaced(AnemoneFeature(), *arrayOf<PlacementModifier>()),
                     CaveSurface.FLOOR,
                     BiasedToBottomInt.of(1, 7),
                     0.0f,
@@ -183,20 +154,15 @@ class ConfiguredFeatureProvider(
                     0.2f,
                     BiasedToBottomInt.of(3, 4),
                     0.5f
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.BOULDER,
-
-                GEODE, GeodeConfiguration(
+            bootstrap.register(HAConfiguredFeatures.BOULDER, GeodeFeature(
                     GeodeBlockSettings(
-                        BlockStateProvider.simple(Blocks.STONE),
-                        BlockStateProvider.simple(Blocks.STONE),
-                        BlockStateProvider.simple(Blocks.STONE),
-                        BlockStateProvider.simple(Blocks.STONE),
-                        BlockStateProvider.simple(HABlocks.SHORESTONE.get()),
+                        Holder.direct(BlockStateProvider.of(Blocks.STONE)),
+                        Holder.direct(BlockStateProvider.of(Blocks.STONE)),
+                        Holder.direct(BlockStateProvider.of(Blocks.STONE)),
+                        Holder.direct(BlockStateProvider.of(Blocks.STONE)),
+                        Holder.direct(BlockStateProvider.of(HABlocks.SHORESTONE.get())),
                         mutableListOf(Blocks.STONE.defaultBlockState()),
                         bootstrap.lookup(Registries.BLOCK).getOrThrow(BlockTags.FEATURES_CANNOT_REPLACE),
                         bootstrap.lookup(Registries.BLOCK).getOrThrow(BlockTags.GEODE_INVALID_BLOCKS)
@@ -213,243 +179,95 @@ class ConfiguredFeatureProvider(
                     16,
                     0.07,
                     50
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.DEEP_OCEAN_VEGETATION,
-
-                Feature.SIMPLE_RANDOM_SELECTOR,
-                CompositeFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.DEEP_OCEAN_VEGETATION, SimpleRandomSelectorFeature(
                     HolderSet.direct(
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.DEEP_CORAL_TREE.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.DEEP_CORAL_CLAW.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.DEEP_CORAL_MUSHROOM.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.DEEP_CORAL_TABLE.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        )
+                        PlacementUtils.inlinePlaced(DeepCoralTreeFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(DeepCoralClawFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(DeepCoralMushroomFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(DeepCoralTableFeature(), *arrayOf<PlacementModifier>())
                     )
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.BLEACHED_REEF_VEGETATION,
-
-                Feature.SIMPLE_RANDOM_SELECTOR,
-                CompositeFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.BLEACHED_REEF_VEGETATION, SimpleRandomSelectorFeature(
                     HolderSet.direct(
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.BLEACHED_CORAL_TREE.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.BLEACHED_CORAL_CLAW.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.BLEACHED_CORAL_MUSHROOM.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.BLEACHED_CORAL_TABLE.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        )
+                        PlacementUtils.inlinePlaced(BleachedCoralTreeFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(BleachedCoralClawFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(BleachedCoralMushroomFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(BleachedCoralTableFeature(), *arrayOf<PlacementModifier>())
                     )
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.CORAL_REEF_VEGETATION,
-
-                Feature.SIMPLE_RANDOM_SELECTOR,
-                CompositeFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.CORAL_REEF_VEGETATION, SimpleRandomSelectorFeature(
                     HolderSet.direct(
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.REEF_CORAL_TREE.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.REEF_CORAL_CLAW.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.REEF_CORAL_MUSHROOM.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        ),
-                        PlacementUtils.inlinePlaced(
-                            HAFeatures.REEF_CORAL_TABLE.get(),
-                            FeatureConfiguration.NONE,
-                            *arrayOf<PlacementModifier>()
-                        )
+                        PlacementUtils.inlinePlaced(ReefCoralTreeFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(ReefCoralClawFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(ReefCoralMushroomFeature(), *arrayOf<PlacementModifier>()),
+                        PlacementUtils.inlinePlaced(ReefCoralTableFeature(), *arrayOf<PlacementModifier>())
                     )
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.RED_ALGAE_PATCH,
-
-                HAFeatures.RED_ALGAE_PATCH.get(), ProbabilityFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.RED_ALGAE_PATCH, RedAlgaePatchFeature(
                     0.66f
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.AERATED_SAND_CIRCLE,
-
-                Feature.DISK,
-                DiskConfiguration(
-                    RuleBasedStateProvider.simple(HABlocks.AERATED_SAND.get()),
-                    BlockPredicate.matchesBlocks(
-                        listOf<Block>(
+            bootstrap.register(HAConfiguredFeatures.AERATED_SAND_CIRCLE, DiskFeature(Holder.direct(BlockStateProvider.of(HABlocks.AERATED_SAND.get())), BlockPredicate.matchesBlocks(Vec3i.ZERO, listOf<Block>(
                             HABlocks.GRASSY_SAND.get(),
                             HABlocks.SHORESTONE.get(),
                             HABlocks.CORALSTONE.get(),
                             Blocks.SAND
-                        )
-                    ),
-                    UniformInt.of(1, 3),
-                    1
-                )
-            )
+                        )), UniformInt.of(1, 3), 1))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.SAND_CIRCLE,
+            bootstrap.register(HAConfiguredFeatures.SAND_CIRCLE, DiskFeature(Holder.direct(BlockStateProvider.of(Blocks.SAND)), BlockPredicate.matchesBlocks(Vec3i.ZERO, listOf<Block>(HABlocks.GRASSY_SAND.get())), UniformInt.of(3, 8), 1))
 
-                Feature.DISK,
-                DiskConfiguration(
-                    RuleBasedStateProvider.simple(Blocks.SAND),
-                    BlockPredicate.matchesBlocks(listOf<Block>(HABlocks.GRASSY_SAND.get())),
-                    UniformInt.of(3, 8),
-                    1
-                )
-            )
+            bootstrap.register(HAConfiguredFeatures.SULFUR_DEPOSIT, OreFeature(listOf(BlockReplacement(TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES), HABlocks.CRYSTALLINE_SULFUR.get().defaultBlockState())), 20, 0.0f))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.SULFUR_DEPOSIT,
-
-                Feature.ORE,
-                OreConfiguration(
-                    TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES),
-                    HABlocks.CRYSTALLINE_SULFUR.get().defaultBlockState(),
-                    20,
-                    0.0f
-                )
-            )
-
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.SUSPICIOUS_SAND_DISK,
-
-                HAFeatures.SUSPICIOUS_SAND_DISK.get(),
-                DiskConfiguration(
-                    RuleBasedStateProvider.simple(Blocks.SUSPICIOUS_SAND),
-                    BlockPredicate.matchesBlocks(listOf<Block>(Blocks.SAND)),
+            bootstrap.register(HAConfiguredFeatures.SUSPICIOUS_SAND_DISK, SuspiciousSandDiskFeature(
+                    BlockStateProvider.of(Blocks.SUSPICIOUS_SAND),
+                    BlockPredicate.matchesBlocks(Vec3i.ZERO, listOf<Block>(Blocks.SAND)),
                     UniformInt.of(1, 2),
                     1
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.DUNEGRASS_PATCH,
-                HybridAquatic.DUNEGRASS_PATCH.get(), ProbabilityFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.DUNEGRASS_PATCH, DunegrassFeature(
                     0.5f
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.PAPYRUS_PATCH,
-                HybridAquatic.PAPYRUS_PATCH.get(), ProbabilityFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.PAPYRUS_PATCH, PapyrusFeature(
                     0.5f
-                )
-            )
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.CATTAIL_PATCH,
-                HybridAquatic.CATTAIL_PATCH.get(), ProbabilityFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.CATTAIL_PATCH, CattailFeature(
                     0.5f
-                )
-            )
+                ))
 
             //#region Sargassum
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.SARGASSUM,
-                HAFeatures.SARGASSUM.get(), SargassumFeatureConfig(
-                    SimpleStateProvider.simple(HABlocks.SARGASSUM.get())
-                )
-            )
+            bootstrap.register(HAConfiguredFeatures.SARGASSUM, SargassumFeature(
+                    BlockStateProvider.of(HABlocks.SARGASSUM.get())
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.BULL_KELP,
+            bootstrap.register(HAConfiguredFeatures.BULL_KELP, BullKelpFeature(
+                    BlockStateProvider.of(HABlocks.BULL_KELP.get())
+                ))
 
-                HAFeatures.BULL_KELP.get(), BullKelpFeatureConfig(
-                    SimpleStateProvider.simple(HABlocks.BULL_KELP.get())
-                )
-            )
+            bootstrap.register(HAConfiguredFeatures.DELESSERIA, DelesseriaFeature(
+                    BlockStateProvider.of(HABlocks.DELESSERIA.get())
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.DELESSERIA,
-
-                HAFeatures.DELESSERIA.get(), DelesseriaFeatureConfig(
-                    SimpleStateProvider.simple(HABlocks.DELESSERIA.get())
-                )
-            )
-
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.FLOATING_SARGASSUM,
-
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.FLOATING_SARGASSUM, HARandomPatchFeature(
                     100, 10, 10,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             NoiseProvider(
                                 237L,
-                                NormalNoise.NoiseParameters(-5, 5.0, *DoubleArray(0)),
+                                NormalNoise.createParity(-5, 5.0),
                                 1.0f,
                                 listOf<BlockState>(
                                     HABlocks.FLOATING_SARGASSUM.get().defaultBlockState()
                                 )
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
             val floatingLeavesStates = buildList {
                 for (amount in 1..4) {
@@ -464,17 +282,11 @@ class ConfiguredFeatureProvider(
                 }
             }
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.FLOATING_LEAVES,
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.FLOATING_LEAVES, HARandomPatchFeature(
                     50,
                     5,
                     5,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             WeightedStateProvider(
                                 WeightedList.builder<BlockState>().apply {
                                     floatingLeavesStates.forEach { state ->
@@ -482,11 +294,8 @@ class ConfiguredFeatureProvider(
                                     }
                                 }.build()
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
             val floatingLeafLitterStates = buildList {
                 for (amount in 1..4) {
@@ -501,17 +310,11 @@ class ConfiguredFeatureProvider(
                 }
             }
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.FLOATING_LEAF_LITTER,
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.FLOATING_LEAF_LITTER, HARandomPatchFeature(
                     50,
                     5,
                     5,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             WeightedStateProvider(
                                 WeightedList.builder<BlockState>().apply {
                                     floatingLeafLitterStates.forEach { state ->
@@ -519,11 +322,8 @@ class ConfiguredFeatureProvider(
                                     }
                                 }.build()
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
             val duckweedStates = buildList {
                 for (amount in 1..4) {
@@ -538,17 +338,11 @@ class ConfiguredFeatureProvider(
                 }
             }
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.DUCKWEED_PATCH,
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.DUCKWEED_PATCH, HARandomPatchFeature(
                     50,
                     5,
                     5,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             WeightedStateProvider(
                                 WeightedList.builder<BlockState>().apply {
                                     duckweedStates.forEach { state ->
@@ -556,11 +350,8 @@ class ConfiguredFeatureProvider(
                                     }
                                 }.build()
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
             val floatingPetalsStates = buildList {
                 for (amount in 1..4) {
@@ -575,17 +366,11 @@ class ConfiguredFeatureProvider(
                 }
             }
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.FLOATING_PETALS,
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.FLOATING_PETALS, HARandomPatchFeature(
                     50,
                     5,
                     5,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             WeightedStateProvider(
                                 WeightedList.builder<BlockState>().apply {
                                     floatingPetalsStates.forEach { state ->
@@ -593,182 +378,94 @@ class ConfiguredFeatureProvider(
                                     }
                                 }.build()
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.WATER_LETTUCE,
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.WATER_LETTUCE, HARandomPatchFeature(
                     30, 5, 5,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            SimpleStateProvider.simple(HABlocks.WATER_LETTUCE.get())
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
+                            BlockStateProvider.of(HABlocks.WATER_LETTUCE.get())
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.WATER_HYACINTH,
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.WATER_HYACINTH, HARandomPatchFeature(
                     30, 5, 5,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            SimpleStateProvider.simple(HABlocks.WATER_HYACINTH.get())
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
+                            BlockStateProvider.of(HABlocks.WATER_HYACINTH.get())
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.JUNGLE_LILY_PAD,
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.JUNGLE_LILY_PAD, HARandomPatchFeature(
                     10, 5, 5,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            SimpleStateProvider.simple(HABlocks.JUNGLE_LILY_PAD.get())
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
+                            BlockStateProvider.of(HABlocks.JUNGLE_LILY_PAD.get())
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.SEA_LETTUCE_PATCH,
-
-                HAFeatures.SEA_LETTUCE_PATCH.get(), ProbabilityFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.SEA_LETTUCE_PATCH, SeaLettuceFeature(
                     0.33f
-                )
-            )
+                ))
 
             // mussel patch
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH,
-
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.TIDE_POOL_MUSSEL_PATCH, HARandomPatchFeature(
                     16, 4, 4,
-                    PlacementUtils.filtered(
-                        Feature.REPLACE_SINGLE_BLOCK,
-                        ReplaceBlockConfiguration(
+                    PlacementUtils.inlinePlaced(ReplaceBlockFeature(
                             listOf(
-                                OreConfiguration.target(
+                                BlockReplacement(
                                     BlockStateMatchTest(Blocks.WATER.defaultBlockState()),
                                     HABlocks.WILD_MUSSELS.get().defaultBlockState()
                                         .setValue(WATERLOGGED, true)
                                 ),
-                                OreConfiguration.target(
+                                BlockReplacement(
                                     BlockStateMatchTest(Blocks.AIR.defaultBlockState()),
                                     HABlocks.WILD_MUSSELS.get().defaultBlockState()
                                         .setValue(WATERLOGGED, false)
                                 )
                             )
-                        ),
-                        BlockPredicate.hasSturdyFace(Vec3i(0, -1, 0), Direction.UP)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.hasSturdyFace(Direction.DOWN, Direction.UP)))
+                ))
 
             // tube sponge patch
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.TUBE_SPONGE_PATCH,
-
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.TUBE_SPONGE_PATCH, HARandomPatchFeature(
                     4, 2, 2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            BlockStateProvider.simple(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
+                            BlockStateProvider.of(
                                 HABlocks.TUBE_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.GLASS_SPONGE_PATCH,
-
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.GLASS_SPONGE_PATCH, HARandomPatchFeature(
                     4, 4, 2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            BlockStateProvider.simple(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
+                            BlockStateProvider.of(
                                 HABlocks.GLASS_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.HARP_SPONGE_PATCH,
-
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.HARP_SPONGE_PATCH, HARandomPatchFeature(
                     4, 4, 2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            BlockStateProvider.simple(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
+                            BlockStateProvider.of(
                                 HABlocks.HARP_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.PING_PONG_SPONGE_PATCH,
-
-                HAFeatures.RANDOM_PATCH.get(),
-                HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.PING_PONG_SPONGE_PATCH, HARandomPatchFeature(
                     4, 4, 2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
-                            BlockStateProvider.simple(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
+                            BlockStateProvider.of(
                                 HABlocks.PING_PONG_SPONGE.get().defaultBlockState().setValue(WATERLOGGED, true)
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
             // giant clam patch
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.GIANT_CLAM_PATCH,
-
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.GIANT_CLAM_PATCH, HARandomPatchFeature(
                     2, 2, 2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             WeightedStateProvider(
                                 WeightedList.builder<BlockState>()
                                     .add(
@@ -783,22 +480,13 @@ class ConfiguredFeatureProvider(
                                     )
                                     .build()
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
             // giant clam patch
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.OYSTER_BED,
-
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
+            bootstrap.register(HAConfiguredFeatures.OYSTER_BED, HARandomPatchFeature(
                     2, 2, 2,
-                    PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
-                        SimpleBlockConfiguration(
+                    PlacementUtils.inlinePlaced(SimpleBlockFeature(
                             WeightedStateProvider(
                                 WeightedList.builder<BlockState>()
                                     .add(
@@ -823,76 +511,44 @@ class ConfiguredFeatureProvider(
                                     )
                                     .build()
                             )
-                        ),
-                        BlockPredicate.matchesBlocks(Blocks.WATER)
-                    )
-                )
-            )
+                        ), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ))
 
             // message in a bottle
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.MESSAGE_IN_A_BOTTLE,
-
-                HAFeatures.MESSAGE_IN_A_BOTTLE.get(), MessageInABottleFeatureConfig(
-                    SimpleStateProvider.simple(HABlocks.MESSAGE_IN_A_BOTTLE.get())
-                )
-            )
+            bootstrap.register(HAConfiguredFeatures.MESSAGE_IN_A_BOTTLE, MessageInABottleFeature(
+                    BlockStateProvider.of(HABlocks.MESSAGE_IN_A_BOTTLE.get())
+                ))
 
             // thermal vents
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.THERMAL_VENT_PATCH,
-
-                HAFeatures.VENT_PATCH.get(), VentPatchFeatureConfig(
+            bootstrap.register(HAConfiguredFeatures.THERMAL_VENT_PATCH, VentPatchFeature(
                     5,
-                    SimpleStateProvider.simple(HABlocks.CHIMNEYSTONE.get()),
-                    SimpleStateProvider.simple(HABlocks.THERMAL_VENT.get()),
-                    SimpleStateProvider.simple(HABlocks.GIANT_THERMAL_VENT.get()),
-                    SimpleStateProvider.simple(HABlocks.TUBE_WORM.get()),
+                    BlockStateProvider.of(HABlocks.CHIMNEYSTONE.get()),
+                    BlockStateProvider.of(HABlocks.THERMAL_VENT.get()),
+                    BlockStateProvider.of(HABlocks.GIANT_THERMAL_VENT.get()),
+                    BlockStateProvider.of(HABlocks.TUBE_WORM.get()),
                     UniformInt.of(3, 5),
                     ConstantInt.of(2),
                     UniformInt.of(1, 3),
                     ConstantInt.of(4),
                     UniformInt.of(TubeWormBlock.WORMS.min, TubeWormBlock.WORMS.max),
-                )
-            )
+                ))
 
             // coral mound base
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.CORAL_MOUND,
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
-                    6, 7, 0, PlacementUtils.inlinePlaced(
-                        Feature.DISK, DiskConfiguration(
-                            RuleBasedStateProvider(
-                                SimpleStateProvider.simple(HABlocks.CORALSTONE.get()), listOf(
-                                    RuleBasedStateProvider.Rule(
-                                        BlockPredicate.not(
+            bootstrap.register(HAConfiguredFeatures.CORAL_MOUND, HARandomPatchFeature(
+                    6, 7, 0, PlacementUtils.inlinePlaced(DiskFeature(Holder.direct(RuleBasedStateProvider(Holder.direct(BlockStateProvider.of(HABlocks.CORALSTONE.get())), listOf(
+                                    RuleBasedStateProvider.Rule(BlockPredicate.not(
                                             BlockPredicate.matchesBlocks(
                                                 Vec3i(0, -1, 0),
                                                 listOf(Blocks.SAND, HABlocks.CORALSTONE.get())
                                             )
-                                        ),
-                                        SimpleStateProvider.simple(Blocks.WATER),
-                                    )
-                                )
-                            ), BlockPredicate.matchesBlocks(
+                                        ), Holder.direct(BlockStateProvider.of(Blocks.WATER)), )
+                                ))), BlockPredicate.matchesBlocks(
                                 Vec3i(0, -1, 0), listOf(Blocks.SAND, HABlocks.CORALSTONE.get())
-                            ), UniformInt.of(3, 5), 1
-                        ),
-                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
-                    )
-                )
-            )
+                            ), UniformInt.of(3, 5), 1), CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR))
+                ))
 
             // coral mound coral layers
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.CORAL_LAYER,
-
-                Feature.RANDOM_SELECTOR,
-                RandomFeatureConfiguration(
+            bootstrap.register(HAConfiguredFeatures.CORAL_LAYER, RandomSelectorFeature(
                     listOf(
                         Blocks.BRAIN_CORAL_BLOCK,
                         Blocks.HORN_CORAL_BLOCK,
@@ -905,13 +561,8 @@ class ConfiguredFeatureProvider(
                         HABlocks.BUTTON_CORAL_BLOCK.get()
                     ).map { block ->
                         WeightedPlacedFeature(
-                            PlacementUtils.inlinePlaced(
-                                Feature.DISK, DiskConfiguration(
-                                    RuleBasedStateProvider(
-                                        SimpleStateProvider.simple(HABlocks.CORALSTONE.get()),
-                                        listOf(
-                                            RuleBasedStateProvider.Rule(
-                                                BlockPredicate.allOf(
+                            PlacementUtils.inlinePlaced(DiskFeature(Holder.direct(RuleBasedStateProvider(Holder.direct(BlockStateProvider.of(HABlocks.CORALSTONE.get())), listOf(
+                                            RuleBasedStateProvider.Rule(BlockPredicate.allOf(
                                                     BlockPredicate.matchesTag(
                                                         Vec3i(0, 1, 0),
                                                         HABlockTags.CORAL_MOUND_BASE_BLOCKS,
@@ -920,8 +571,7 @@ class ConfiguredFeatureProvider(
                                                         Vec3i(0, -1, 0),
                                                         HABlockTags.CORAL_MOUND_BASE_BLOCKS,
                                                     ),
-                                                ),
-                                                WeightedStateProvider(
+                                                ), Holder.direct(WeightedStateProvider(
                                                     WeightedList.builder<BlockState>().add(
                                                         HABlocks.CORALSTONE.get().defaultBlockState(),
                                                         2
@@ -930,18 +580,16 @@ class ConfiguredFeatureProvider(
                                                         1
 
                                                     )
-                                                )
-                                            ),
-                                            RuleBasedStateProvider.Rule(
-                                                BlockPredicate.allOf(
+                                                ))),
+                                            RuleBasedStateProvider.Rule(BlockPredicate.allOf(
                                                     BlockPredicate.anyOf(
                                                         BlockPredicate.matchesBlocks(
                                                             Vec3i(0, 1, 0),
-                                                            Blocks.WATER
+                                                            listOf(Blocks.WATER)
                                                         ),
                                                         BlockPredicate.matchesBlocks(
                                                             Vec3i(0, 2, 0),
-                                                            Blocks.WATER
+                                                            listOf(Blocks.WATER)
                                                         ),
                                                     ),
                                                     BlockPredicate.allOf(
@@ -954,35 +602,20 @@ class ConfiguredFeatureProvider(
                                                             HABlockTags.CORAL_MOUND_BASE_BLOCKS,
                                                         ),
                                                     ),
-                                                ),
-                                                SimpleStateProvider.simple(block),
-                                            )
-                                        )
-                                    ),
-                                    BlockPredicate.matchesTag(
+                                                ), Holder.direct(BlockStateProvider.of(block)), )
+                                        ))), BlockPredicate.matchesTag(
                                         Vec3i(0, -1, 0),
                                         HABlockTags.CORAL_MOUND_BLOCKS,
-                                    ),
-                                    ConstantInt.of(8),
-                                    4
-                                )
-                            ),
+                                    ), ConstantInt.of(8), 4)),
                             0.2f
                         )
                     },
-                    PlacementUtils.inlinePlaced(Feature.NO_OP, NoneFeatureConfiguration())
-                )
-            )
+                    PlacementUtils.inlinePlaced(NoOpFeature())
+                ))
 
             // mound base
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.MOUND,
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
-                    6, 7, 0, PlacementUtils.inlinePlaced(
-                        Feature.DISK, DiskConfiguration(
-                            RuleBasedStateProvider(
-                                WeightedStateProvider(
+            bootstrap.register(HAConfiguredFeatures.MOUND, HARandomPatchFeature(
+                    6, 7, 0, PlacementUtils.inlinePlaced(DiskFeature(Holder.direct(RuleBasedStateProvider(Holder.direct(WeightedStateProvider(
                                     WeightedList.builder<BlockState>()
                                         .add(Blocks.DEAD_HORN_CORAL_BLOCK.defaultBlockState(), 1)
                                         .add(Blocks.DEAD_FIRE_CORAL_BLOCK.defaultBlockState(), 1)
@@ -990,9 +623,8 @@ class ConfiguredFeatureProvider(
                                         .add(Blocks.DEAD_BRAIN_CORAL_BLOCK.defaultBlockState(), 1)
                                         .add(Blocks.DEAD_TUBE_CORAL_BLOCK.defaultBlockState(), 1)
                                         .add(Blocks.STONE.defaultBlockState(), 2)
-                                ), listOf(
-                                    RuleBasedStateProvider.Rule(
-                                        BlockPredicate.not(
+                                )), listOf(
+                                    RuleBasedStateProvider.Rule(BlockPredicate.not(
                                             BlockPredicate.matchesBlocks(
                                                 Vec3i(0, -1, 0),
                                                 listOf(
@@ -1006,11 +638,8 @@ class ConfiguredFeatureProvider(
                                                     HABlocks.GRASSY_SAND.get(),
                                                 )
                                             )
-                                        ),
-                                        SimpleStateProvider.simple(Blocks.WATER),
-                                    )
-                                )
-                            ), BlockPredicate.matchesBlocks(
+                                        ), Holder.direct(BlockStateProvider.of(Blocks.WATER)), )
+                                ))), BlockPredicate.matchesBlocks(
                                 Vec3i(0, -1, 0), listOf(
                                     Blocks.GRAVEL,
                                     Blocks.SAND,
@@ -1021,29 +650,18 @@ class ConfiguredFeatureProvider(
                                     Blocks.DEAD_TUBE_CORAL_BLOCK,
                                     HABlocks.GRASSY_SAND.get()
                                 )
-                            ), UniformInt.of(3, 5), 1
-                        ),
-                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
-                    )
-                )
-            )
+                            ), UniformInt.of(3, 5), 1), CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR))
+                ))
 
             // white mound
-            FeatureUtils.register(
-                bootstrap,
-                HAConfiguredFeatures.WHITE_MOUND,
-                HAFeatures.RANDOM_PATCH.get(), HARandomPatchConfiguration(
-                    6, 7, 0, PlacementUtils.inlinePlaced(
-                        Feature.DISK, DiskConfiguration(
-                            RuleBasedStateProvider(
-                                WeightedStateProvider(
+            bootstrap.register(HAConfiguredFeatures.WHITE_MOUND, HARandomPatchFeature(
+                    6, 7, 0, PlacementUtils.inlinePlaced(DiskFeature(Holder.direct(RuleBasedStateProvider(Holder.direct(WeightedStateProvider(
                                     WeightedList.builder<BlockState>()
                                         .add(Blocks.CALCITE.defaultBlockState(), 5)
                                         .add(Blocks.DIORITE.defaultBlockState(), 3)
                                         .add(HABlocks.WHITE_SANDSTONE.get().defaultBlockState(), 1)
-                                ), listOf(
-                                    RuleBasedStateProvider.Rule(
-                                        BlockPredicate.not(
+                                )), listOf(
+                                    RuleBasedStateProvider.Rule(BlockPredicate.not(
                                             BlockPredicate.matchesBlocks(
                                                 Vec3i(0, -1, 0),
                                                 listOf(
@@ -1053,28 +671,26 @@ class ConfiguredFeatureProvider(
                                                     HABlocks.WHITE_SANDSTONE.get(),
                                                 )
                                             )
-                                        ),
-                                        SimpleStateProvider.simple(Blocks.WATER),
-                                    )
-                                )
-                            ), BlockPredicate.matchesBlocks(
+                                        ), Holder.direct(BlockStateProvider.of(Blocks.WATER)), )
+                                ))), BlockPredicate.matchesBlocks(
                                 Vec3i(0, -1, 0), listOf(
                                     Blocks.CALCITE,
                                     Blocks.DIORITE,
                                     HABlocks.WHITE_SAND.get(),
                                     HABlocks.WHITE_SANDSTONE.get()
                                 )
-                            ), UniformInt.of(3, 5), 1
-                        ),
-                        CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR)
-                    )
-                )
-            )
+                            ), UniformInt.of(3, 5), 1), CountPlacement.of(1), HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR))
+                ))
         }
     }
 
     override fun configure(registries: HolderLookup.Provider, entries: Entries) {
-        val reg = registries.lookup(Registries.CONFIGURED_FEATURE).get()
+        val reg = registries.lookup(Registries.FEATURE).get()
+
+        val materialRules = registries.lookupOrThrow(Registries.MATERIAL_RULE)
+        for (key in dev.hybridlabs.aquatic.world.gen.biome.HABiomes.surfaceRuleKeys()) {
+            entries.add(materialRules.getOrThrow(key))
+        }
 
         entries.add(reg.getOrThrow(HAConfiguredFeatures.ANEMONES))
         entries.add(reg.getOrThrow(HAConfiguredFeatures.DEEP_OCEAN_VEGETATION))

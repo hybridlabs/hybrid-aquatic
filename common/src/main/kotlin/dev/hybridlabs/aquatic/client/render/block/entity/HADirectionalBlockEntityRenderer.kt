@@ -44,24 +44,24 @@ fun applyFacingTransform(poseStack: com.mojang.blaze3d.vertex.PoseStack, facing:
         // Ceiling placement; hang the model from the top of the block.
         Direction.DOWN -> {
             poseStack.translate(0.0, 1.0, 0.0)
-            poseStack.mulPose(Axis.XP.rotationDegrees(180f))
+            poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.XP.rotationDegrees(180f)))
         }
         // Wall placements; the model extends along FACING and attaches to the opposite face.
         Direction.NORTH -> {
             poseStack.translate(0.0, 0.5, 0.5)
-            poseStack.mulPose(Axis.XN.rotationDegrees(90f))
+            poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.XN.rotationDegrees(90f)))
         }
         Direction.SOUTH -> {
             poseStack.translate(0.0, 0.5, -0.5)
-            poseStack.mulPose(Axis.XP.rotationDegrees(90f))
+            poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.XP.rotationDegrees(90f)))
         }
         Direction.WEST -> {
             poseStack.translate(0.5, 0.5, 0.0)
-            poseStack.mulPose(Axis.ZP.rotationDegrees(90f))
+            poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.ZP.rotationDegrees(90f)))
         }
         Direction.EAST -> {
             poseStack.translate(-0.5, 0.5, 0.0)
-            poseStack.mulPose(Axis.ZN.rotationDegrees(90f))
+            poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.ZN.rotationDegrees(90f)))
         }
     }
 }

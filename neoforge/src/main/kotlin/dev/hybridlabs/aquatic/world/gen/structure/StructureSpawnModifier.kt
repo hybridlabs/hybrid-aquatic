@@ -23,6 +23,7 @@ class StructureSpawnModifier(val spawnModifier: SpawnModifier) : StructureModifi
     }
 
     override fun modify(
+        registries: net.minecraft.core.RegistryAccess,
         structure: Holder<Structure>,
         phase: StructureModifier.Phase,
         builder: ModifiableStructureInfo.StructureInfo.Builder

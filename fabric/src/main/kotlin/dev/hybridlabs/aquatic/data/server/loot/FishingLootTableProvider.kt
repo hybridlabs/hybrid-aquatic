@@ -18,18 +18,18 @@ import java.util.function.BiConsumer
 
 class FishingLootTableProvider(output: FabricPackOutput, lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     SimpleFabricLootTableSubProvider(output, lookupProvider, LootContextParamSets.FISHING) {
+    private val itemLookup = lookupProvider.join().lookupOrThrow(Registries.ITEM)
     override fun generate(exporter: BiConsumer<ResourceKey<LootTable>, LootTable.Builder>) {
         exporter.accept(
             ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_SMALL_FISH),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_SMALL_FISH)
-                .pool(
+                .withPool(
                     LootPool.lootPool()
                         .add(
-                            TagEntry.expandTag(HAItemTags.SMALL_FISH)
+                            TagEntry.expandTag(itemLookup.getOrThrow(HAItemTags.SMALL_FISH))
                                 .setWeight(3)
                         )
-                        .build()
                 )
         )
 
@@ -37,13 +37,12 @@ class FishingLootTableProvider(output: FabricPackOutput, lookupProvider: Complet
             ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_MEDIUM_FISH),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_MEDIUM_FISH)
-                .pool(
+                .withPool(
                     LootPool.lootPool()
                         .add(
-                            TagEntry.expandTag(HAItemTags.MEDIUM_FISH)
+                            TagEntry.expandTag(itemLookup.getOrThrow(HAItemTags.MEDIUM_FISH))
                                 .setWeight(3)
                         )
-                        .build()
                 )
         )
 
@@ -51,13 +50,12 @@ class FishingLootTableProvider(output: FabricPackOutput, lookupProvider: Complet
             ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_LARGE_FISH),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_LARGE_FISH)
-                .pool(
+                .withPool(
                     LootPool.lootPool()
                         .add(
-                            TagEntry.expandTag(HAItemTags.LARGE_FISH)
+                            TagEntry.expandTag(itemLookup.getOrThrow(HAItemTags.LARGE_FISH))
                                 .setWeight(3)
                         )
-                        .build()
                 )
         )
 
@@ -66,7 +64,7 @@ class FishingLootTableProvider(output: FabricPackOutput, lookupProvider: Complet
             ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_CRATES),
             LootTable.lootTable()
                 .setRandomSequence(HALootTables.HA_CRATES)
-                .pool(
+                .withPool(
                     LootPool.lootPool()
                         .add(LootItem.lootTableItem(HAItems.CRAB_POT.get()))
                         .add(LootItem.lootTableItem(HAItems.HYBRID_CRATE.get()))
@@ -78,7 +76,7 @@ class FishingLootTableProvider(output: FabricPackOutput, lookupProvider: Complet
                         .add(LootItem.lootTableItem(HAItems.JUNGLE_CRATE.get()))
                         .add(LootItem.lootTableItem(HAItems.BAMBOO_CRATE.get()))
                         .add(LootItem.lootTableItem(HAItems.MANGROVE_CRATE.get()))
-                        .add(LootItem.lootTableItem(HAItems.CHERRY_CRATE.get())).build()
+                        .add(LootItem.lootTableItem(HAItems.CHERRY_CRATE.get()))
                     //.add(MessageInABottleLootItem.lootTableItem())
                 )
         )

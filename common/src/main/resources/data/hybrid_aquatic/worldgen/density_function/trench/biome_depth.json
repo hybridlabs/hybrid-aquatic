@@ -1,13 +1,14 @@
 {
   "type": "minecraft:add",
-  "argument1": {
-    "type": "minecraft:y_clamped_gradient",
-    "from_y": -64,
-    "to_y": 320,
+  "left": {
+    "type": "minecraft:gradient",
+    "axis": "y",
+    "from_coordinate": -64,
+    "to_coordinate": 320,
     "from_value": 0.203125,
     "to_value": -2.796875
   },
-  "argument2": {
+  "right": {
     "type": "minecraft:spline",
     "spline": {
       "coordinate": {

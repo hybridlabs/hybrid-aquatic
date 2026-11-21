@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "minecraft:flower_forest",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#20a3cc"
+  }
+}

@@ -1,6 +1,8 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.block.GiantThermalVentBlock
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.ThermalVentBlock
@@ -16,8 +18,8 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
 import net.minecraft.world.level.levelgen.Column
+import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 import java.util.*
 import java.util.function.Predicate
@@ -25,45 +27,79 @@ import kotlin.math.max
 import kotlin.math.sqrt
 
 @Suppress("NAME_SHADOWING", "SameParameterValue")
-class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatchFeatureConfig>(codec) {
+data class VentPatchFeature(
+    val floorSearchRange: Int = 0,
+    val baseProvider: BlockStateProvider,
+    val ventProvider: BlockStateProvider,
+    val giantVentProvider: BlockStateProvider,
+    val wormProvider: BlockStateProvider,
+    val count: IntProvider,
+    val spreadRadius: IntProvider,
+    val wormCount: IntProvider,
+    val wormSpreadRadius: IntProvider,
+    val wormCountPerBlock: IntProvider,
+) : Feature {
+    override fun codec(): MapCodec<VentPatchFeature> = CODEC
+
     companion object {
         const val MAX_VENT_HEIGHT = 5
         const val MIN_VENT_HEIGHT = 2
         const val MIN_VENT_CLEARANCE = 2
+
+        val CODEC: MapCodec<VentPatchFeature> = RecordCodecBuilder.mapCodec { instance ->
+            instance.group(
+                Codec.intRange(0, 512).fieldOf("floor_search_range")
+                    .forGetter(VentPatchFeature::floorSearchRange),
+                BlockStateProvider.DIRECT_CODEC.fieldOf("base_block").forGetter(VentPatchFeature::baseProvider),
+                BlockStateProvider.DIRECT_CODEC.fieldOf("vent_block").forGetter(VentPatchFeature::ventProvider),
+                BlockStateProvider.DIRECT_CODEC.fieldOf("giant_vent_block")
+                    .forGetter(VentPatchFeature::giantVentProvider),
+                BlockStateProvider.DIRECT_CODEC.fieldOf("worm_block").forGetter(VentPatchFeature::wormProvider),
+                net.minecraft.util.valueproviders.IntProviders.POSITIVE_CODEC.fieldOf("count")
+                    .forGetter(VentPatchFeature::count),
+                net.minecraft.util.valueproviders.IntProviders.POSITIVE_CODEC.fieldOf("spread_radius")
+                    .forGetter(VentPatchFeature::spreadRadius),
+                net.minecraft.util.valueproviders.IntProviders.POSITIVE_CODEC.fieldOf("worm_count")
+                    .forGetter(VentPatchFeature::wormCount),
+                net.minecraft.util.valueproviders.IntProviders.POSITIVE_CODEC.fieldOf("worm_spread_radius")
+                    .forGetter(VentPatchFeature::wormSpreadRadius),
+                TubeWormBlock.WORM_COUNT_CODEC.fieldOf("worm_count_per_block")
+                    .forGetter(VentPatchFeature::wormCountPerBlock),
+            ).apply(instance, ::VentPatchFeature)
+        }
     }
 
     private fun getFloorY(
         level: WorldGenLevel,
         pos: BlockPos,
-        config: VentPatchFeatureConfig
     ): OptionalInt {
         val water = Predicate<BlockState> { it.`is`(Blocks.WATER) }
         val nonWater = Predicate<BlockState> { !it.`is`(Blocks.WATER) }
 
-        return Column.scan(level, pos, config.floorSearchRange, water, nonWater)
+        return Column.scan(level, pos, this.floorSearchRange, water, nonWater)
             .map(Column::getFloor)
             .orElseGet { OptionalInt.empty() }
     }
 
-    override fun place(context: FeaturePlaceContext<VentPatchFeatureConfig>): Boolean {
+    override fun place(
+        world: WorldGenLevel,
+        chunkGenerator: ChunkGenerator,
+        random: RandomSource,
+        origin: BlockPos,
+    ): Boolean {
         var generated = false
 
-        val world = context.level()
-        val origin = context.origin()
-        val random = context.random()
-        val config = context.config()
-
-        val ventCount = config.count.sample(random)
+        val ventCount = count.sample(random)
 
         repeat(ventCount) {
-            val radius = config.spreadRadius.sample(random)
+            val radius = spreadRadius.sample(random)
 
             val offsetX = random.nextInt(radius * 2 + 1) - radius
             val offsetZ = random.nextInt(radius * 2 + 1) - radius
 
             val candidatePos = origin.offset(offsetX, 0, offsetZ)
 
-            val floorY = getFloorY(world, candidatePos, config)
+            val floorY = getFloorY(world, candidatePos)
             if (floorY.isEmpty) return@repeat
 
             val floorPos = candidatePos.atY(floorY.asInt)
@@ -77,21 +113,21 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                     floorPos.above(),
                     random,
                     heightMultiplier,
-                    config.baseProvider,
-                    config.ventProvider
+                    baseProvider,
+                    ventProvider
                 )
             ) {
-                val wormCount = config.wormCount.sample(random)
-                val wormRadius = config.wormSpreadRadius.sample(random)
+                val wormCount = wormCount.sample(random)
+                val wormRadius = wormSpreadRadius.sample(random)
 
                 generateTubeWormPatch(
                     world,
                     floorPos,
                     random,
                     wormCount,
-                    config.wormCountPerBlock,
+                    wormCountPerBlock,
                     wormRadius,
-                    config.wormProvider
+                    wormProvider
                 )
 
                 generated = true
@@ -101,14 +137,14 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
         val giantVentCount = random.nextInt(2)
 
         repeat(giantVentCount) {
-            val radius = config.spreadRadius.sample(random)
+            val radius = spreadRadius.sample(random)
 
             val offsetX = random.nextInt(radius * 2 + 1) - radius
             val offsetZ = random.nextInt(radius * 2 + 1) - radius
 
             val candidatePos = origin.offset(offsetX, 0, offsetZ)
 
-            val floorY = getFloorY(world, candidatePos, config)
+            val floorY = getFloorY(world, candidatePos)
             if (floorY.isEmpty) return@repeat
 
             val floorPos = candidatePos.atY(floorY.asInt)
@@ -122,7 +158,7 @@ class VentPatchFeature(codec: Codec<VentPatchFeatureConfig>) : Feature<VentPatch
                     floorPos.above(),
                     random,
                     heightMultiplier,
-                    config.giantVentProvider
+                    giantVentProvider
                 )
             ) {
                 generated = true

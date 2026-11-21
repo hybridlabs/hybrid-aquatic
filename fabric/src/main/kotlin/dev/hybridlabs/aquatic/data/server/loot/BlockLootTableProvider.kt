@@ -24,7 +24,7 @@ import net.minecraft.world.item.enchantment.Enchantments
 import net.minecraft.world.level.block.BaseCoralWallFanBlock
 import net.minecraft.world.level.block.PotatoBlock
 import net.minecraft.world.level.block.WallTorchBlock
-import net.minecraft.world.level.storage.loot.IntRange
+import net.minecraft.world.level.storage.loot.IntLimit
 import net.minecraft.world.level.storage.loot.LootPool
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry
@@ -34,25 +34,43 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
 import net.minecraft.world.level.storage.loot.functions.CopyCustomDataFunction
 import net.minecraft.world.level.storage.loot.functions.LimitCount
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition
+import net.minecraft.core.Holder
+import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition
+import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemCondition
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock
 import net.minecraft.world.level.storage.loot.predicates.MatchTool
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders
 import java.util.concurrent.CompletableFuture
+
+private fun Holder<LootItemCondition>.or(other: Holder<LootItemCondition>): Holder<LootItemCondition> =
+    Holder.direct(AnyOfCondition.Builder().or(this).or(other).build())
+
+private fun Holder<LootItemCondition>.invert(): Holder<LootItemCondition> =
+    Holder.direct(InvertedLootItemCondition.invert(this).build())
 
 class BlockLootTableProvider(output: FabricPackOutput, registryLookup: CompletableFuture<HolderLookup.Provider>) :
     FabricBlockLootSubProvider(output, registryLookup) {
 
-    private val itemLookup = registryLookup.join().lookupOrThrow(Registries.ITEM)
+    private object LootTableOwner : net.minecraft.core.HolderOwner<LootTable>
+
+    private fun lootTable(id: net.minecraft.resources.Identifier): Holder<LootTable> =
+        Holder.Reference.createStandAlone(
+            LootTableOwner,
+            ResourceKey.create(Registries.LOOT_TABLE, id)
+        )
+
+    private val registryProvider = registryLookup.join()
+    private val itemLookup = registryProvider.lookupOrThrow(Registries.ITEM)
 
     private val blockEntityNbt = ContextNbtProvider.INLINE_CODEC
         .parse(JsonOps.INSTANCE, JsonPrimitive("block_entity"))
         .getOrThrow()
 
     override fun generate() {
-        val registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT)
+        val registrylookup = registryProvider.lookupOrThrow(Registries.ENCHANTMENT)
 
         //#region Anemones
         add(HABlocks.ANEMONE.get()) { block ->
@@ -205,8 +223,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
 
         add(HABlocks.CLAMS.get()) { block ->
             val ageCondition: LootItemCondition.Builder =
-                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7))
+                MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7))
 
             applyExplosionDecay(
                 block,
@@ -226,8 +243,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
 
         add(HABlocks.MUSSELS.get()) { block ->
             val ageCondition: LootItemCondition.Builder =
-                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                    .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7))
+                MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7))
 
             applyExplosionDecay(
                 block,
@@ -513,12 +529,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         LootItem.lootTableItem(block).`when`(hasSilkTouch()),
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.VENT_LOOT_ID
-                            )
-                        )
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.VENT_LOOT_ID))
                     )
                 )
             )
@@ -529,12 +540,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
                         LootItem.lootTableItem(block).`when`(hasSilkTouch()),
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.VENT_LOOT_ID
-                            )
-                        )
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.VENT_LOOT_ID))
                     )
                 )
             )
@@ -548,7 +554,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
                     LootItem.lootTableItem(HAItems.SULFUR.get())
                         .apply(
                             SetItemCountFunction.setCount(
-                                UniformGenerator.between(2f, 5f)
+                                ContextIntProviders.between(2, 5)
                             )
                         )
                         .apply(
@@ -559,7 +565,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
                         )
                         .apply(
                             LimitCount.limitCount(
-                                IntRange.range(1, 9)
+                                IntLimit.range(1, 9)
                             )
                         )
                 )
@@ -569,17 +575,14 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
         add(HABlocks.TUBE_WORM.get()) { block ->
             LootTable.lootTable().withPool(
                 LootPool.lootPool()
-                    .setRolls(ConstantValue.exactly(1f))
+                    .setRolls(ContextIntProviders.exactly(1))
                     .add(
                         (2..4).fold(LootItem.lootTableItem(block)) { item, worms ->
                             item.apply(
-                                SetItemCountFunction.setCount(ConstantValue.exactly(worms.toFloat()))
+                                SetItemCountFunction.setCount(ContextIntProviders.exactly(worms))
                                     .`when`(
-                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                                            .setProperties(
-                                                StatePropertiesPredicate.Builder.properties()
-                                                    .hasProperty(TubeWormBlock.WORMS, worms)
-                                            )
+                                        MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                                                    .hasProperty(TubeWormBlock.WORMS, worms))
                                     )
                             )
                         }
@@ -597,11 +600,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
                             CopyCustomDataFunction.copyData(blockEntityNbt)
                                 .copy(VARIANT_KEY, VARIANT_KEY)
                         ),
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.MESSAGE_IN_A_BOTTLE
-                            ))
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.MESSAGE_IN_A_BOTTLE))
                     )
                 )
             )
@@ -615,12 +614,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.CRAB_POT_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.CRAB_POT_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
@@ -633,12 +627,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.HYBRID_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.HYBRID_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -651,12 +640,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.OAK_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.OAK_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem())
@@ -669,12 +653,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.BIRCH_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.BIRCH_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -687,12 +666,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.SPRUCE_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.SPRUCE_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -705,12 +679,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.DARK_OAK_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.DARK_OAK_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -723,12 +692,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.ACACIA_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.ACACIA_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -741,12 +705,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.JUNGLE_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.JUNGLE_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -759,12 +718,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.BAMBOO_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.BAMBOO_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -777,12 +731,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.MANGROVE_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.MANGROVE_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),
@@ -795,12 +744,7 @@ class BlockLootTableProvider(output: FabricPackOutput, registryLookup: Completab
             LootTable.lootTable().withPool(
                 LootPool.lootPool().add(
                     AlternativesEntry.alternatives(
-                        NestedLootTable.lootTableReference(
-                            ResourceKey.create(
-                                Registries.LOOT_TABLE,
-                                HALootTables.CHERRY_CRATE_TREASURE_ID
-                            )
-                        ).`when`(
+                        NestedLootTable.lootTableReference(lootTable(HALootTables.CHERRY_CRATE_TREASURE_ID)).`when`(
                             MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, ItemTags.AXES))
                         ),
                         LootItem.lootTableItem(block.asItem()),

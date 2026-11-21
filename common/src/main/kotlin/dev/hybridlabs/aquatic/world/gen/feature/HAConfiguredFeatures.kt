@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.world.gen.feature
 import dev.hybridlabs.aquatic.CommonClass
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature
+import net.minecraft.world.level.levelgen.feature.Feature
 
 /**
  * A registry of configured features for Hybrid Aquatic.
@@ -62,7 +62,7 @@ object HAConfiguredFeatures {
     val MOUND = register("mound")
     val WHITE_MOUND = register("white_mound")
 
-    fun register(id: String): ResourceKey<ConfiguredFeature<*, *>> {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, CommonClass.locate(id))
+    fun register(id: String): ResourceKey<Feature> {
+        return ResourceKey.create(Registries.FEATURE, CommonClass.locate(id))
     }
 }

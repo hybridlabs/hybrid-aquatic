@@ -3,17 +3,21 @@ package dev.hybridlabs.aquatic.data.server
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.item.HAItems
+import dev.hybridlabs.aquatic.potions.HAPotions
 import dev.hybridlabs.aquatic.item.HAPlatformItems
 import dev.hybridlabs.aquatic.tag.HAItemTags
 import dev.hybridlabs.hapi.item.HAPIItems
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBrewingProvider
 import net.minecraft.advancements.triggers.InventoryChangeTrigger
+import net.minecraft.advancements.Advancement
 import net.minecraft.advancements.predicates.ItemPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceKey
 import net.minecraft.data.recipes.*
+import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.data.recipes.RecipeProvider as VanillaRecipeProvider
 import net.minecraft.resources.Identifier
 import net.minecraft.tags.ItemTags
@@ -31,15 +35,17 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
     FabricRecipeProvider(output, lookupProvider) {
     override fun createRecipeProvider(
         registries: HolderLookup.Provider,
-        output: RecipeOutput
-    ): VanillaRecipeProvider = GeneratedRecipes(registries, output)
+        recipes: BootstrapContext<Recipe<*>>,
+        advancements: BootstrapContext<Advancement>
+    ): VanillaRecipeProvider = GeneratedRecipes(registries, recipes, advancements)
 
     override fun getName(): String = "Recipes"
 
     private class GeneratedRecipes(
         registries: HolderLookup.Provider,
-        output: RecipeOutput
-    ) : VanillaRecipeProvider(registries, output) {
+        recipes: BootstrapContext<Recipe<*>>,
+        advancements: BootstrapContext<Advancement>
+    ) : VanillaRecipeProvider(recipes, advancements) {
         private val itemLookup = registries.lookupOrThrow(Registries.ITEM)
 
         override fun buildRecipes() {
@@ -1908,6 +1914,7 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
                     "${getItemName(raftType.asItem())}_from_${getItemName(woodType.asItem())}"
                 )
         }
+        GeneratedBrewing(this.output).buildRecipes()
     }
     //#endregion
 
@@ -2022,4 +2029,12 @@ class RecipeProvider(output: FabricPackOutput, lookupProvider: CompletableFuture
             .save(output)
     }
 }
+
+    private class GeneratedBrewing(output: RecipeOutput) : FabricBrewingProvider(output) {
+        override fun buildMixes() {
+            for (recipe in HAPotions.recipes.get()) {
+                buildMix(recipe.inputPotion, recipe.addition, recipe.outputPotion)
+            }
+        }
+    }
 }

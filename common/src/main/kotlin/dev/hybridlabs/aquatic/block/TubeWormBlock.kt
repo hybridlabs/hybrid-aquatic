@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import com.mojang.serialization.Codec
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
@@ -35,7 +36,6 @@ import org.jetbrains.annotations.Nullable
 @Suppress("DEPRECATION", "SameParameterValue", "OVERRIDE_DEPRECATION")
 class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlock, SimpleWaterloggedBlock {
     companion object {
-        val CODEC: MapCodec<TubeWormBlock> = simpleCodec(::TubeWormBlock)
         val WORMS: IntegerProperty = IntegerProperty.create("worms", 1, 4)
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
 
@@ -121,15 +121,15 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
         builder.add(WORMS, WATERLOGGED)
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return false
     }
 
-    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
+    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return false
     }
 
-    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource) {
     }
 
     override fun isPathfindable(state: BlockState, type: PathComputationType): Boolean {
@@ -141,7 +141,4 @@ class TubeWormBlock(settings: Properties) : BushBlock(settings), BonemealableBlo
                 floor.isFaceSturdy(world, pos, Direction.UP)
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 }

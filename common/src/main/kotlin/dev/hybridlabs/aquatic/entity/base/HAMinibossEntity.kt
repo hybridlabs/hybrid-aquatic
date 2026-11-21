@@ -43,10 +43,6 @@ abstract class HAMinibossEntity(type: EntityType<out Monster>, world: Level) :
     }
     //#endregion
 
-    override fun aiStep() {
-        this.updateSwingTime()
-        super.aiStep()
-    }
 
     override fun isPushedByFluid(): Boolean {
         return false

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import net.minecraft.world.entity.InsideBlockEffectApplier
 
 import net.minecraft.util.RandomSource
@@ -65,7 +66,7 @@ class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), 
     ) {
         super.entityInside(state, level, pos, entity, applier, intersects)
         if (level is ServerLevel && entity is Boat) {
-            level.destroyBlock(BlockPos(pos), true, entity)
+            level.destroyBlock(pos, true, entity)
         }
     }
 
@@ -119,12 +120,11 @@ class FloatingLitterBlock(settings: Properties) : IncrementableBlock(settings), 
         builder.add(WATERLOGGED)
     }
 
-    override fun isValidBonemealTarget(levelReader: LevelReader, blockPos: BlockPos, blockState: BlockState): Boolean {
+    override fun isValidBonemealTarget(levelReader: LevelReader, blockPos: BlockPos, blockState: BlockState, source: BonemealSource): Boolean {
         return false
     }
 
     companion object {
-        val CODEC: MapCodec<FloatingLitterBlock> = simpleCodec(::FloatingLitterBlock)
         private val SHAPE: VoxelShape = box(0.0, 14.0, 0.0, 16.0, 15.0, 16.0)
     }
 }

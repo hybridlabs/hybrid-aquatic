@@ -17,7 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.densityfunction.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Fluid;
 import com.mojang.serialization.MapCodec;
@@ -58,8 +58,8 @@ public class CommonClass {
             RegistrationProvider.get(BuiltInRegistries.BLOCK_ENTITY_TYPE, MOD_ID);
     public static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS =
             RegistrationProvider.get(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
-    public static final RegistrationProvider<Feature<?>> FEATURE =
-            RegistrationProvider.get(BuiltInRegistries.FEATURE, MOD_ID);
+    public static final RegistrationProvider<MapCodec<? extends Feature>> FEATURE_TYPE =
+            RegistrationProvider.get(BuiltInRegistries.FEATURE_TYPE, MOD_ID);
     public static final RegistrationProvider<MapCodec<? extends DensityFunction>> DENSITY_FUNCTION_TYPES =
             RegistrationProvider.get(BuiltInRegistries.DENSITY_FUNCTION_TYPE, MOD_ID);
     public static final RegistrationProvider<MapCodec<? extends LootPoolEntryContainer>> LOOT_POOL_ENTRY_TYPE =

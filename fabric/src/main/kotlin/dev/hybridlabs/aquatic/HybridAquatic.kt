@@ -36,17 +36,15 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STARTING
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries
-import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.crafting.Ingredient
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
 object HybridAquatic : ModInitializer {
-    val DUNEGRASS_PATCH = HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
-    val CATTAIL_PATCH = HAFeatures.register("cattail_patch", CattailFeature(ProbabilityFeatureConfiguration.CODEC))
-    val PAPYRUS_PATCH = HAFeatures.register("papyrus_patch", PapyrusFeature(ProbabilityFeatureConfiguration.CODEC))
+    val DUNEGRASS_PATCH = HAFeatures.register("dunegrass_patch", DunegrassFeature.CODEC)
+    val CATTAIL_PATCH = HAFeatures.register("cattail_patch", CattailFeature.CODEC)
+    val PAPYRUS_PATCH = HAFeatures.register("papyrus_patch", PapyrusFeature.CODEC)
 
     private val logger = Constants.LOGGER
 
@@ -73,7 +71,6 @@ object HybridAquatic : ModInitializer {
 
         HAMobEffects
         HAPotions
-        registerBrewingRecipes()
 
         HAItems
         HAPlatformItems
@@ -133,11 +130,11 @@ object HybridAquatic : ModInitializer {
     }
 
     private fun registerStrippables() {
-        StrippableBlockRegistry.register(
+        BlockTransformerHelper.registerStripping(
             HAPlatformBlocks.DRIFTWOOD_LOG.get(),
             HAPlatformBlocks.STRIPPED_DRIFTWOOD_LOG.get()
         )
-        StrippableBlockRegistry.register(
+        BlockTransformerHelper.registerStripping(
             HAPlatformBlocks.DRIFTWOOD_WOOD.get(),
             HAPlatformBlocks.STRIPPED_DRIFTWOOD_WOOD.get()
         )
@@ -153,18 +150,6 @@ object HybridAquatic : ModInitializer {
                 config.minGroupSize,
                 config.maxGroupSize
             )
-        }
-    }
-
-    private fun registerBrewingRecipes() {
-        FabricPotionBrewingBuilder.BUILD.register { builder ->
-            for (recipe in HAPotions.recipes.get()) {
-                builder.registerPotionRecipe(
-                    recipe.inputPotion,
-                    Ingredient.of(recipe.addition),
-                    recipe.outputPotion
-                )
-            }
         }
     }
 }

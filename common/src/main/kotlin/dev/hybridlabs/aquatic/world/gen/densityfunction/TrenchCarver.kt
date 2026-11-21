@@ -12,13 +12,15 @@ import net.minecraft.resources.RegistryOps
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.Identifier
 import net.minecraft.server.MinecraftServer
-import net.minecraft.util.KeyDispatchDataCodec
+import net.minecraft.util.Interval
 import net.minecraft.world.level.dimension.LevelStem
-import net.minecraft.world.level.levelgen.DensityFunction
-import net.minecraft.world.level.levelgen.DensityFunctions
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings
 import net.minecraft.world.level.levelgen.NoiseRouter
+import net.minecraft.world.level.levelgen.densityfunction.DensityFunction
+import net.minecraft.world.level.levelgen.densityfunction.DensityFunctions
+import net.minecraft.world.level.levelgen.densityfunction.DensitySampler
+import net.minecraft.world.level.levelgen.densityfunction.DfRewriteRule
 
 /**
  * Carves trenches into the overworld's noise router before the server loads its levels.
@@ -39,7 +41,7 @@ object TrenchCarver {
     private val VANILLA_OFFSET = Identifier.withDefaultNamespace("overworld/offset")
 
     private val DENSITY_FUNCTION_TYPES = CommonClass.DENSITY_FUNCTION_TYPES
-    val CONTINENTS_MARKER = DENSITY_FUNCTION_TYPES.register("continents_marker") { ContinentsMarker.CODEC.codec() }
+    val CONTINENTS_MARKER = DENSITY_FUNCTION_TYPES.register("continents_marker") { ContinentsMarker.CODEC }
 
     @JvmStatic
     fun apply(server: MinecraftServer) {
@@ -54,8 +56,7 @@ object TrenchCarver {
 
         val router = settings.value().noiseRouter()
         val densityFunctions = server.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION)
-        fun load(key: ResourceKey<DensityFunction>) = densityFunctions.getOrThrow(key).value()
-            .mapAll { function -> if (function is ContinentsMarker) router.continents() else function }
+        fun load(key: ResourceKey<DensityFunction>) = replaceContinents(densityFunctions.getOrThrow(key).value(), router)
 
         val offsetShapesTrench = reads(router.finalDensity(), VANILLA_OFFSET, server)
         Constants.LOGGER.info(if (offsetShapesTrench) "Trenches follow the overworld offset" else "Overworld terrain skips the offset, so trenches are carved directly")
@@ -63,42 +64,49 @@ object TrenchCarver {
         val depth = if (offsetShapesTrench) router.depth() else DensityFunctions.min(router.depth(), load(BIOME_DEPTH))
 
         val carvedRouter = NoiseRouter(
-            router.barrierNoise(),
-            router.fluidLevelFloodednessNoise(),
-            router.fluidLevelSpreadNoise(),
-            router.lavaNoise(),
             router.temperature(),
             router.vegetation(),
             router.continents(),
             router.erosion(),
             depth,
             router.ridges(),
-            // Initial density sets the preliminary surface, which aquifers use to flood the trench with sea water
-            DensityFunctions.min(router.preliminarySurfaceLevel(), carver),
+            // The chunk surface level drives the preliminary surface, which aquifers use to flood the trench with sea water
+            DensityFunctions.min(router.chunkSurfaceLevel(), carver),
             DensityFunctions.min(router.finalDensity(), carver),
-            router.veinToggle(),
-            router.veinRidged(),
-            router.veinGap(),
         )
 
         val current = settings.value()
-        @Suppress("DEPRECATION")
         val carved = NoiseGeneratorSettings(
             current.noiseSettings(),
             current.defaultBlock(),
             current.defaultFluid(),
             carvedRouter,
-            current.surfaceRule(),
+            current.materialRule(),
             current.spawnTarget(),
             current.seaLevel(),
             current.disableMobGeneration(),
-            current.isAquifersEnabled(),
-            current.oreVeinsEnabled(),
+            current.aquifers(),
             current.useLegacyRandomSource(),
+            current.debugFunctions(),
         )
 
         @Suppress("UNCHECKED_CAST")
         (settings as HolderReferenceInvoker<NoiseGeneratorSettings>).`hybridAquatic$bindValue`(carved)
+    }
+
+    /**
+     * Replaces every [ContinentsMarker] in [function] with the router's continentalness, walking the whole tree.
+     */
+    private fun replaceContinents(function: DensityFunction, router: NoiseRouter): DensityFunction {
+        if (function is ContinentsMarker) {
+            return router.continents()
+        }
+
+        val rule = object : DfRewriteRule {
+            override fun rewrite(function: DensityFunction): DensityFunction = replaceContinents(function, router)
+        }
+
+        return function.rewriteChildren(rule)
     }
 
     /**
@@ -132,12 +140,18 @@ object TrenchCarver {
     /**
      * Placeholder for the router's continentalness. [apply] replaces every marker, so it never reaches world generation.
      */
-    object ContinentsMarker : DensityFunction.SimpleFunction {
-        val CODEC: KeyDispatchDataCodec<ContinentsMarker> = KeyDispatchDataCodec.of(MapCodec.unit(ContinentsMarker))
+    object ContinentsMarker : DensityFunction {
+        val CODEC: MapCodec<ContinentsMarker> = MapCodec.unit(ContinentsMarker)
 
-        override fun compute(context: DensityFunction.FunctionContext): Double = 0.0
-        override fun minValue(): Double = 0.0
-        override fun maxValue(): Double = 0.0
-        override fun codec(): KeyDispatchDataCodec<out DensityFunction> = CODEC
+        override fun compileSampler(context: DensityFunction.CompileContext): DensitySampler =
+            DensityFunctions.constant(0.0f).compileSampler(context)
+
+        override fun rewriteChildren(rule: DfRewriteRule): DensityFunction = this
+
+        override fun range(): Interval = Interval.ofExact(0.0f)
+
+        override fun domainAxes(): Int = 0
+
+        override fun codec(): MapCodec<ContinentsMarker> = CODEC
     }
 }

@@ -4,27 +4,27 @@
     "type": "minecraft:clamp",
     "input": {
       "type": "minecraft:add",
-      "argument1": -0.5,
-      "argument2": {
+      "left": -0.5,
+      "right": {
         "type": "minecraft:mul",
-        "argument1": {
+        "left": {
           "type": "minecraft:add",
-          "argument1": 0.5,
-          "argument2": {
+          "left": 0.5,
+          "right": {
             "type": "hybrid_aquatic:wrapped_marker"
           }
         },
-        "argument2": {
+        "right": {
           "type": "minecraft:add",
-          "argument1": 1,
-          "argument2": {
+          "left": 1,
+          "right": {
             "type": "minecraft:mul",
-            "argument1": {
+            "left": {
               "type": "minecraft:add",
-              "argument1": -1,
-              "argument2": 2
+              "left": -1,
+              "right": 2
             },
-            "argument2": {
+            "right": {
               "type": "minecraft:spline",
               "spline": {
                 "coordinate": "minecraft:overworld/continents",

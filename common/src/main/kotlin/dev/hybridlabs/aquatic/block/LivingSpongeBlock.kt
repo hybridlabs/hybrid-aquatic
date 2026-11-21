@@ -103,12 +103,8 @@ class LivingSpongeBlock(
         bubbleTimer++
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<LivingSpongeBlock> = simpleCodec(::LivingSpongeBlock)
         private val SHAPE = box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0)
     }
 }

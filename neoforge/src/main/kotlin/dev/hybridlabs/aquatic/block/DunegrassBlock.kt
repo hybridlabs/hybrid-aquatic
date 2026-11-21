@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.server.level.ServerLevel
@@ -17,7 +18,7 @@ class DunegrassBlock(settings: Properties): BaseDunegrassBlock(settings){
     ): ItemStack {
         return ItemStack(HAPlatformBlocks.DUNEGRASS.get())
     }
-    override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+    override fun performBonemeal(level: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource) {
         val blockState = HAPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
         val blockStateUpper = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER)
         val blockPosAbove = pos.above()

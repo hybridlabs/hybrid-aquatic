@@ -1,8 +1,7 @@
 {
-  "type": "lithostitched:replace_effects",
+  "type": "lithostitched:set_biome_effects",
   "biomes": "#minecraft:is_badlands",
   "effects": {
-    "water_color": 5144449,
-    "water_fog_color": 5144449
+    "water_color": 5144449
   }
 }

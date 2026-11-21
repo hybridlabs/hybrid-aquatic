@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "minecraft:mangrove_swamp",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#4d7a60"
+  }
+}

@@ -2,28 +2,23 @@ package dev.hybridlabs.aquatic.datagen
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.config.ConfigHelper.initializeConfig
+import dev.hybridlabs.aquatic.datagen.server.HABiomeModifierProvider
+import dev.hybridlabs.aquatic.datagen.server.HADataMapProvider
 import dev.hybridlabs.aquatic.datagen.server.HAGlobalLootModifierProvider
-import dev.hybridlabs.aquatic.utils.NaughtyRegistrySetBuilder
-import dev.hybridlabs.aquatic.world.gen.feature.BiomeFeatureAddition
-import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.structure.BuiltinSpawnModifiers
 import net.minecraft.core.HolderSet
+import net.minecraft.core.RegistrySetBuilder
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
 import net.minecraft.util.random.Weighted
 import net.minecraft.util.random.WeightedList
-import net.minecraft.world.level.biome.MobSpawnSettings
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider
-import net.neoforged.neoforge.common.world.BiomeModifier
-import net.neoforged.neoforge.common.world.BiomeModifiers
 import net.neoforged.neoforge.common.world.StructureModifier
 import net.neoforged.neoforge.common.world.StructureModifiers
 import net.neoforged.neoforge.data.event.GatherDataEvent
-import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.BIOME_MODIFIERS
 import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys.STRUCTURE_MODIFIERS
 
 /**
@@ -37,28 +32,18 @@ object DataGenerators {
 
     @SubscribeEvent
     fun gatherData(event: GatherDataEvent.Server) {
-        HAPlacedFeatures
+        val packOutput = event.generator.packOutput
+        val lookupProvider = event.worldLookupProvider
 
-        val generator = event.generator
-        val packOutput = generator.packOutput
-
-        val builder = NaughtyRegistrySetBuilder()
-        val lookupProvider = event.lookupProvider
-
-        builder.add(BIOME_MODIFIERS)
-        { context ->
-            registerBiomeSpawns(context)
-            registerFeatures(context)
-        }
-
-        builder.add(STRUCTURE_MODIFIERS)
-        { context ->
+        val builder = RegistrySetBuilder()
+        builder.add(STRUCTURE_MODIFIERS) { context ->
             registerStructureSpawnModifiers(context)
         }
 
         event.addProvider(
-            DatapackBuiltinEntriesProvider(
+            DatapackBuiltinEntriesProvider.forWorldLayer(
                 packOutput,
+                Constants.MOD_ID,
                 lookupProvider,
                 builder,
                 setOf(Constants.MOD_ID)
@@ -70,6 +55,17 @@ object DataGenerators {
                 packOutput,
                 lookupProvider
             )
+        )
+
+        event.addProvider(
+            HADataMapProvider(
+                packOutput,
+                lookupProvider
+            )
+        )
+
+        event.addProvider(
+            HABiomeModifierProvider(packOutput)
         )
     }
 
@@ -93,62 +89,6 @@ object DataGenerators {
                     )
                 )
             }
-        }
-    }
-
-    /**
-     * Create Forge biome modifiers to add placed features.
-     */
-    private fun registerFeatures(
-        context: BootstrapContext<BiomeModifier>,
-    ) {
-        val biomeRegistry = context.lookup(Registries.BIOME)
-        val featureRegistry = context.lookup(Registries.PLACED_FEATURE)
-        for (addition in BiomeFeatureAddition.builtIn) {
-
-            val location = "${addition.placedFeature.identifier().path}_${addition.biomeTag.location.path}"
-            val key = ResourceKey.create(
-                BIOME_MODIFIERS,
-                CommonClass.locate(location)
-            )
-            context.register(
-                key, BiomeModifiers.AddFeaturesBiomeModifier(
-                    biomeRegistry.getOrThrow(addition.biomeTag),
-                    HolderSet.direct(featureRegistry.getOrThrow(addition.placedFeature)),
-                    addition.step
-                )
-            )
-        }
-    }
-
-    /**
-     * Create Forge biome modifiers to add mob spawns based on the config.
-     */
-    private fun registerBiomeSpawns(
-        context: BootstrapContext<BiomeModifier>,
-    ) {
-        val configHandler = initializeConfig(CommonClass.CONFIG_FILE)
-        val biomeRegistry = context.lookup(Registries.BIOME)
-        for (spawnConfig in configHandler.defaultConfig.entitySpawnConfig) {
-
-            val location = "${spawnConfig.type.toShortString()}_${spawnConfig.biomes.location.path}"
-            val key = ResourceKey.create(
-                BIOME_MODIFIERS, CommonClass.locate(location)
-            )
-
-            context.register(
-                key, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
-                    biomeRegistry.get(spawnConfig.biomes).get(),
-                    Weighted(
-                        MobSpawnSettings.SpawnerData(
-                            spawnConfig.type,
-                            spawnConfig.minGroupSize,
-                            spawnConfig.maxGroupSize
-                        ),
-                        spawnConfig.weight
-                    )
-                )
-            )
         }
     }
 }

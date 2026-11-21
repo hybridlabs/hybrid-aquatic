@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import net.minecraft.world.entity.LivingEntity
 
 import com.mojang.serialization.MapCodec
@@ -65,11 +66,11 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         return blockState
     }
 
-    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState): Boolean {
+    override fun isValidBonemealTarget(world: LevelReader, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
-    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
+    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
@@ -77,7 +78,7 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         return Fluids.WATER.getSource(false)
     }
 
-    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState) {
+    override fun performBonemeal(world: ServerLevel, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource) {
         val blockState = HABlocks.TALL_SEA_LETTUCE.get().defaultBlockState()
         val blockState2 = blockState.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER) as BlockState
         val blockPos = pos.above()
@@ -106,12 +107,8 @@ class SeaLettuceBlock(settings: Properties) : BushBlock(settings), BonemealableB
         return false
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<SeaLettuceBlock> = simpleCodec(::SeaLettuceBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

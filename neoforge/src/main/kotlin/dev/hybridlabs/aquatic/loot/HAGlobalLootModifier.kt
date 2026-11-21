@@ -17,13 +17,13 @@ import net.neoforged.neoforge.common.loot.IGlobalLootModifier
 import net.neoforged.neoforge.common.loot.LootModifier
 
 class HAGlobalLootModifier(
-    conditionsIn: Array<LootItemCondition>,
+    condition: java.util.Optional<net.minecraft.core.Holder<LootItemCondition>>,
     priority: Int,
     val target: Identifier,
     val itemTag: TagKey<Item>,
     val chance: Float,
     val tables: WeightedList<Identifier>
-) : LootModifier(conditionsIn, priority) {
+) : LootModifier(condition, priority) {
 
     override fun doApply(
         generatedLoot: ObjectArrayList<ItemStack>, context: LootContext

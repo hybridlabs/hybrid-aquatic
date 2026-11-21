@@ -66,12 +66,8 @@ class SargassumBlock(settings: Properties) :
         return Fluids.WATER.getSource(false)
     }
 
-    override fun codec(): MapCodec<GrowingPlantHeadBlock> {
-        return CODEC as MapCodec<GrowingPlantHeadBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<SargassumBlock> = simpleCodec(::SargassumBlock)
         val SHAPE: VoxelShape = box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0)
     }
 }

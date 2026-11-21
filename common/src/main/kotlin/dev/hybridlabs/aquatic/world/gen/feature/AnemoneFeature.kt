@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
+import com.mojang.serialization.MapCodec
 import dev.hybridlabs.aquatic.tag.HABlockTags
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -9,16 +10,18 @@ import net.minecraft.world.level.WorldGenLevel
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.DirectionalBlock
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class AnemoneFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-    override fun place(context: FeaturePlaceContext<NoneFeatureConfiguration>): Boolean {
-        val level = context.level()
-        val random = context.random()
-        val origin = context.origin()
+class AnemoneFeature : Feature {
+    override fun codec(): MapCodec<out Feature> = CODEC
 
+    override fun place(
+        level: WorldGenLevel,
+        chunkGenerator: ChunkGenerator,
+        random: RandomSource,
+        origin: BlockPos,
+    ): Boolean {
         var placed = 0
         repeat(16) {
             val pos = origin.offset(
@@ -66,5 +69,9 @@ class AnemoneFeature : Feature<NoneFeatureConfiguration>(NoneFeatureConfiguratio
 
         val randomEntry = possibleBlocks[random.nextInt(possibleBlocks.size)].value()
         return randomEntry.defaultBlockState()
+    }
+
+    companion object {
+        val CODEC: MapCodec<AnemoneFeature> = MapCodec.unit(AnemoneFeature())
     }
 }

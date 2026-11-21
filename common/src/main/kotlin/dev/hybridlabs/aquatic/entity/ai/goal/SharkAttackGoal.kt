@@ -79,8 +79,6 @@ open class SharkAttackGoal(
         shark.navigation.moveTo(this.path, this.speedModifier)
         shark.isAggressive = true
         shark.isSprinting = true
-        shark.swinging = false
-        shark.swingTime = 0
         this.ticksUntilNextPathRecalculation = 0
         this.ticksUntilNextAttack = 0
     }
@@ -142,7 +140,7 @@ open class SharkAttackGoal(
     protected open fun checkAndPerformAttack(enemy: LivingEntity) {
         if (this.canPerformAttack(enemy)) {
             this.resetAttackCooldown()
-            shark.swing(InteractionHand.MAIN_HAND)
+            shark.swingForAttack(InteractionHand.MAIN_HAND)
             (shark.level() as? ServerLevel)?.let { shark.doHurtTarget(it, enemy) }
             if (!enemy.isBlocking) {
                 enemy.addEffect(MobEffectInstance(HAMobEffects.BLEEDING.asHolder(), 200, 0), shark)

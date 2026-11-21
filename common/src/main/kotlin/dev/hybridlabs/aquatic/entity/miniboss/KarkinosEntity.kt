@@ -1,5 +1,8 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.item.SwingAnimationType
+import net.minecraft.world.item.component.SwingAnimation
 import java.util.UUID
 import net.minecraft.world.entity.EntitySpawnReason
 
@@ -84,32 +87,8 @@ class KarkinosEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         targetSelector.addGoal(2, NearestAttackableTargetGoal(this, IronGolem::class.java, 10, true, true, null))
     }
 
-    private fun getHandSwingDuration(): Int {
-        return 40
-    }
-
-    override fun updateSwingTime() {
-        val i = this.getHandSwingDuration()
-        if (this.swinging) {
-            ++this.swingTime
-            if (this.swingTime >= i) {
-                this.swingTime = 0
-                this.swinging = false
-            }
-        } else {
-            this.swingTime = 0
-        }
-
-        this.attackAnim = swingTime.toFloat() / i.toFloat()
-    }
-
-    override fun getAttackAnim(tickDelta: Float): Float {
-        var f = this.attackAnim - this.oAttackAnim
-        if (f < 0.0f) {
-            ++f
-        }
-
-        return this.oAttackAnim + f * tickDelta
+    override fun swingForAttack(hand: InteractionHand) {
+        this.swing(hand, SwingAnimation(SwingAnimationType.WHACK, 40), false)
     }
 
     override fun startSeenByPlayer(player: ServerPlayer) {

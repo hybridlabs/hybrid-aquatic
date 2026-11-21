@@ -1,7 +1,7 @@
 package dev.hybridlabs.aquatic.block.property
 
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper
 import net.minecraft.world.level.block.Block
 
 object StrippableProperty {
@@ -11,6 +11,6 @@ object StrippableProperty {
     }
 
     fun register(input: Block, output: Block) {
-        StrippableBlockRegistry.register(input, output)
+        BlockTransformerHelper.registerStripping(input, output)
     }
 }

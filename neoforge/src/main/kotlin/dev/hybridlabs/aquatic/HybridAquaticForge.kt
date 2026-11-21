@@ -31,7 +31,6 @@ import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.PapyrusFeature
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import dev.hybridlabs.aquatic.world.inventory.HAMenuTypes
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 import net.neoforged.fml.common.Mod
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier
 import net.neoforged.neoforge.registries.DeferredRegister
@@ -68,9 +67,9 @@ object HybridAquaticForge {
         DensityFunctionWrappers
         TrenchCarver
         HABiomeInjectors
-        HAFeatures.register("dunegrass_patch", DunegrassFeature(ProbabilityFeatureConfiguration.CODEC))
-        HAFeatures.register("papyrus_patch", PapyrusFeature(ProbabilityFeatureConfiguration.CODEC))
-        HAFeatures.register("cattail_patch", CattailFeature(ProbabilityFeatureConfiguration.CODEC))
+        HAFeatures.register("dunegrass_patch", DunegrassFeature.CODEC)
+        HAFeatures.register("papyrus_patch", PapyrusFeature.CODEC)
+        HAFeatures.register("cattail_patch", CattailFeature.CODEC)
         HAPlacedFeatures
         HAConfiguredFeatures
 

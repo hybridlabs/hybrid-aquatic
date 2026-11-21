@@ -78,8 +78,6 @@ open class MinionAttackGoal(
         minion.navigation.moveTo(this.path, this.speedModifier)
         minion.isAggressive = true
         minion.isSprinting = true
-        minion.swinging = false
-        minion.swingTime = 0
         this.ticksUntilNextPathRecalculation = 0
         this.ticksUntilNextAttack = 0
     }
@@ -143,7 +141,7 @@ open class MinionAttackGoal(
         val d0 = this.getAttackReachSqr(enemy)
         if (distToEnemySqr <= d0 && this.ticksUntilNextAttack <= 0) {
             this.resetAttackCooldown()
-            minion.swing(InteractionHand.MAIN_HAND)
+            minion.swingForAttack(InteractionHand.MAIN_HAND)
             (minion.level() as? ServerLevel)?.let { minion.doHurtTarget(it, enemy) }
         }
     }

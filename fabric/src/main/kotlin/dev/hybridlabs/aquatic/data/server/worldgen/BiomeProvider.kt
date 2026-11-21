@@ -17,12 +17,13 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.EntityTypes
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.attribute.EnvironmentAttributes
+import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.BiomeGenerationSettings
 import net.minecraft.world.level.biome.BiomeSpecialEffects
 import net.minecraft.world.level.biome.MobSpawnSettings
 import net.minecraft.world.level.levelgen.GenerationStep
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver
+import net.minecraft.world.level.levelgen.carver.WorldCarver
 import net.minecraft.world.level.levelgen.placement.PlacedFeature
 import java.util.concurrent.CompletableFuture
 
@@ -32,7 +33,7 @@ class BiomeProvider(
 ) : FabricDynamicRegistryProvider(output, registriesFuture) {
     companion object {
         fun bootstrapBiomes(bootstrap: BootstrapContext<Biome>) {
-            val carversGetter = bootstrap.lookup(Registries.CONFIGURED_CARVER)
+            val carversGetter = bootstrap.lookup(Registries.CARVER)
             val featuresGetter = bootstrap.lookup(Registries.PLACED_FEATURE)
 
             bootstrap.register(
@@ -1102,7 +1103,7 @@ class BiomeProvider(
 
         fun create(
             features: HolderGetter<PlacedFeature>,
-            carvers: HolderGetter<ConfiguredWorldCarver<*>>,
+            carvers: HolderGetter<WorldCarver>,
             temperature: Float,
             downfall: Float,
             waterColor: Int,
@@ -1134,15 +1135,15 @@ class BiomeProvider(
                         .waterColor(waterColor)
                         .build()
                 )
-                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, waterFogColor)
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, 0xC0D8FF)
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, 0x78A7FF)
+                .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, net.minecraft.util.ARGB.vector3fFromRGB24(waterFogColor))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, net.minecraft.util.ARGB.vector3fFromRGB24(0xC0D8FF))
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, net.minecraft.util.ARGB.vector3fFromRGB24(0x78A7FF))
                 .build()
         }
 
         fun makeGenerationSettings(
             features: HolderGetter<PlacedFeature>,
-            carvers: HolderGetter<ConfiguredWorldCarver<*>>
+            carvers: HolderGetter<WorldCarver>
         ): BiomeGenerationSettings {
             val builder = BiomeGenerationSettings.Builder(features, carvers)
             addStandardFeatures(builder)
@@ -1159,14 +1160,14 @@ class BiomeProvider(
 
             for ((category, spawner) in extraSpawns) {
                 builder.addSpawn(
-                    category,
+                    spawner.type,
                     spawner.weight,
-                    MobSpawnSettings.SpawnerData(spawner.type, spawner.minCount, spawner.maxCount)
+                    net.minecraft.util.valueproviders.UniformInt.of(spawner.minCount, spawner.maxCount)
                 )
             }
 
             for ((entity, charge, budget) in extraSpawnCosts) {
-                builder.addMobCharge(entity, charge, budget)
+                builder.addMobSpawnCost(entity, charge, budget)
             }
 
             return builder.build()
@@ -1189,23 +1190,19 @@ class BiomeProvider(
         }
 
         fun addDefaultAmbientSpawns(builder: MobSpawnSettings.Builder) {
-            builder.addSpawn(MobCategory.AMBIENT, 10, MobSpawnSettings.SpawnerData(EntityTypes.BAT, 8, 8))
-            builder.addSpawn(
-                MobCategory.UNDERGROUND_WATER_CREATURE,
-                5,
-                MobSpawnSettings.SpawnerData(EntityTypes.GLOW_SQUID, 2, 5)
-            )
+            builder.addSpawn(EntityTypes.BAT, 10, UniformInt.of(8, 8))
+            builder.addSpawn(EntityTypes.GLOW_SQUID, 5, UniformInt.of(2, 5))
         }
 
         fun addDefaultMonsterSpawns(builder: MobSpawnSettings.Builder) {
-            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityTypes.SPIDER, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, 95, MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, 5, MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE_VILLAGER, 1, 1))
-            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityTypes.SKELETON, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityTypes.CREEPER, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, 100, MobSpawnSettings.SpawnerData(EntityTypes.SLIME, 4, 4))
-            builder.addSpawn(MobCategory.MONSTER, 10, MobSpawnSettings.SpawnerData(EntityTypes.ENDERMAN, 1, 4))
-            builder.addSpawn(MobCategory.MONSTER, 5, MobSpawnSettings.SpawnerData(EntityTypes.WITCH, 1, 1))
+            builder.addSpawn(EntityTypes.SPIDER, 100, UniformInt.of(4, 4))
+            builder.addSpawn(EntityTypes.ZOMBIE, 95, UniformInt.of(4, 4))
+            builder.addSpawn(EntityTypes.ZOMBIE_VILLAGER, 5, UniformInt.of(1, 1))
+            builder.addSpawn(EntityTypes.SKELETON, 100, UniformInt.of(4, 4))
+            builder.addSpawn(EntityTypes.CREEPER, 100, UniformInt.of(4, 4))
+            builder.addSpawn(EntityTypes.SLIME, 100, UniformInt.of(4, 4))
+            builder.addSpawn(EntityTypes.ENDERMAN, 10, UniformInt.of(1, 4))
+            builder.addSpawn(EntityTypes.WITCH, 5, UniformInt.of(1, 1))
         }
 
         data class SpawnerData(

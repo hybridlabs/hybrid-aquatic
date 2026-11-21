@@ -1,25 +1,28 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.block.TallDunegrassBlock
 import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf
 import net.minecraft.world.level.levelgen.Heightmap
+import net.minecraft.util.RandomSource
+import net.minecraft.world.level.WorldGenLevel
+import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
 
 @Suppress("DEPRECATION")
-class DunegrassFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
-    Feature<ProbabilityFeatureConfiguration>(codec) {
+data class DunegrassFeature(val probability: Float) : Feature {
+    override fun codec(): MapCodec<DunegrassFeature> = CODEC
 
-    override fun place(context: FeaturePlaceContext<ProbabilityFeatureConfiguration>): Boolean {
+    override fun place(
+        world: WorldGenLevel,
+        chunkGenerator: ChunkGenerator,
+        random: RandomSource,
+        origin: BlockPos,
+    ): Boolean {
         var placed = false
-        val random = context.random()
-        val world = context.level()
-        val origin = context.origin()
-        val config = context.config()
 
         val dx = random.nextInt(8) - random.nextInt(8)
         val dz = random.nextInt(8) - random.nextInt(8)
@@ -28,7 +31,7 @@ class DunegrassFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
         val seaLevel = world.level.chunkSource.generator.seaLevel
 
         if (posY > seaLevel + 2 && world.isEmptyBlock(pos)) {
-            val blTall = random.nextDouble() < config.probability
+            val blTall = random.nextDouble() < this.probability
 
             if (blTall) {
                 val lower = HAPlatformBlocks.TALL_DUNEGRASS.get().defaultBlockState()
@@ -54,5 +57,14 @@ class DunegrassFeature(codec: Codec<ProbabilityFeatureConfiguration>) :
         }
 
         return placed
+    }
+
+    companion object {
+        val CODEC: MapCodec<DunegrassFeature> = RecordCodecBuilder.mapCodec { instance ->
+            instance.group(
+                com.mojang.serialization.Codec.floatRange(0.0f, 1.0f).fieldOf("probability")
+                    .forGetter(DunegrassFeature::probability)
+            ).apply(instance, ::DunegrassFeature)
+        }
     }
 }

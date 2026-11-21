@@ -92,12 +92,8 @@ class BoneWormsBlock(settings: Properties) : BushBlock(settings), LiquidBlockCon
         return false
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<BoneWormsBlock> = simpleCodec(::BoneWormsBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
     }
 }

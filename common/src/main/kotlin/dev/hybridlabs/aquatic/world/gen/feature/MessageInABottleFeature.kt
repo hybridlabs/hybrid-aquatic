@@ -1,32 +1,39 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.block.MessageInABottleBlock
 import dev.hybridlabs.aquatic.block.entity.MessageInABottleBlockEntity
+import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED
+import net.minecraft.util.RandomSource
+import net.minecraft.world.level.WorldGenLevel
+import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
 /**
  * A feature for placing Message in a Bottle blocks in the world.
  */
-class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
-    Feature<MessageInABottleFeatureConfig>(codec) {
-    override fun place(context: FeaturePlaceContext<MessageInABottleFeatureConfig>): Boolean {
-        val config = context.config()
-        val world = context.level()
-        val origin = context.origin()
-        val random = context.random()
-        val placedState = config.toPlace.getState(world, random, origin)
+data class MessageInABottleFeature(val toPlace: BlockStateProvider) : Feature {
+    override fun codec(): MapCodec<MessageInABottleFeature> = CODEC
+
+    override fun place(
+        world: WorldGenLevel,
+        chunkGenerator: ChunkGenerator,
+        random: RandomSource,
+        origin: BlockPos,
+    ): Boolean {
+        val placedState = this.toPlace.getState(world, random, origin)
         val originalState = world.getBlockState(origin.mutable())
 
         if (originalState.isSolid || placedState.block !is MessageInABottleBlock) {
             return false
         }
 
-        val pos = context.origin().mutable()
+        val pos = origin.mutable()
 
         if (!placedState.canSurvive(world, pos)) {
             // if it can spawn below, move down
@@ -51,5 +58,14 @@ class MessageInABottleFeature(codec: Codec<MessageInABottleFeatureConfig>) :
         }
 
         return true
+    }
+
+    companion object {
+        val CODEC: MapCodec<MessageInABottleFeature> = RecordCodecBuilder.mapCodec { instance ->
+            instance.group(
+                BlockStateProvider.DIRECT_CODEC.fieldOf("to_place")
+                    .forGetter(MessageInABottleFeature::toPlace)
+            ).apply(instance, ::MessageInABottleFeature)
+        }
     }
 }

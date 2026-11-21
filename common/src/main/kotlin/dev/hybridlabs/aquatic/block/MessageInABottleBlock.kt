@@ -132,9 +132,6 @@ class MessageInABottleBlock(settings: Properties) : BaseEntityBlock(settings), S
         builder.add(WATERLOGGED)
     }
 
-    override fun codec(): MapCodec<out BaseEntityBlock?> {
-        TODO("Not yet implemented")
-    }
 
     override fun getRenderShape(state: BlockState): RenderShape {
         return RenderShape.MODEL

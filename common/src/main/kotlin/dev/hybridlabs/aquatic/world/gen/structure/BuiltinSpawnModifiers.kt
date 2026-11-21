@@ -9,14 +9,14 @@ val BuiltinSpawnModifiers: Set<SpawnModifier> = setOf(
     SpawnModifier(
         "shipwreck", BuiltinStructures.SHIPWRECK, BoundingBoxType.STRUCTURE, mapOf(
             "shark" to listOf(
-                MobSpawnSettings.SpawnerData(HAEntityTypes.GREAT_WHITE_SHARK.get(), 1, 3)
+                MobSpawnSettings.SpawnerData(HAEntityTypes.GREAT_WHITE_SHARK.get(), net.minecraft.util.valueproviders.UniformInt.of(1, 3))
             )
         )
     ),
     SpawnModifier(
         "shipwreck_beached", BuiltinStructures.SHIPWRECK_BEACHED, BoundingBoxType.STRUCTURE, mapOf(
             "crustacean" to listOf(
-                MobSpawnSettings.SpawnerData(HAEntityTypes.COCONUT_CRAB.get(), 1, 4)
+                MobSpawnSettings.SpawnerData(HAEntityTypes.COCONUT_CRAB.get(), net.minecraft.util.valueproviders.UniformInt.of(1, 4))
             )
         )
     )

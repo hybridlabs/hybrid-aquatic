@@ -1,21 +1,29 @@
 package dev.hybridlabs.aquatic.world.gen.feature.kelp
 
-import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import dev.hybridlabs.aquatic.block.HABlocks
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.KelpBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.Heightmap
+import net.minecraft.util.RandomSource
+import net.minecraft.world.level.WorldGenLevel
+import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
 
-class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) : Feature<BullKelpFeatureConfig>(codec) {
-    override fun place(context: FeaturePlaceContext<BullKelpFeatureConfig>): Boolean {
+data class BullKelpFeature(val toPlace: BlockStateProvider) : Feature {
+    override fun codec(): MapCodec<BullKelpFeature> = CODEC
+
+    override fun place(
+        structureLevelAccessor: WorldGenLevel,
+        chunkGenerator: ChunkGenerator,
+        random: RandomSource,
+        blockPos: BlockPos,
+    ): Boolean {
         var i = 0
-        val structureLevelAccessor = context.level()
-        val blockPos = context.origin()
-        val random = context.random()
         val j = structureLevelAccessor.getHeight(Heightmap.Types.OCEAN_FLOOR, blockPos.x, blockPos.z)
         var blockPos2 = BlockPos(blockPos.x, j, blockPos.z)
         if (structureLevelAccessor.getBlockState(blockPos2).`is`(Blocks.WATER)) {
@@ -59,5 +67,14 @@ class BullKelpFeature(codec: Codec<BullKelpFeatureConfig>) : Feature<BullKelpFea
         }
 
         return i > 0
+    }
+
+    companion object {
+        val CODEC: MapCodec<BullKelpFeature> = RecordCodecBuilder.mapCodec { instance ->
+            instance.group(
+                BlockStateProvider.DIRECT_CODEC.fieldOf("to_place")
+                    .forGetter(BullKelpFeature::toPlace)
+            ).apply(instance, ::BullKelpFeature)
+        }
     }
 }

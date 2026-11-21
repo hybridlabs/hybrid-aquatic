@@ -84,7 +84,7 @@ class StarfishProjectileEntity : AbstractArrow, ItemSupplier, GeoEntity {
             val item = ItemStack(HAItems.STARFISH.get())
 
             if (!player.addItem(item)) {
-                player.drop(item, false)
+                player.drop(item, false, net.minecraft.util.Prediction.PREDICTED)
             }
 
             this.discard()

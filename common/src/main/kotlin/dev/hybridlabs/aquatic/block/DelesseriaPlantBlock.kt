@@ -52,11 +52,7 @@ class DelesseriaPlantBlock(settings: Properties) :
         return false
     }
 
-    override fun codec(): MapCodec<GrowingPlantBodyBlock> {
-        return CODEC as MapCodec<GrowingPlantBodyBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<DelesseriaPlantBlock> = simpleCodec(::DelesseriaPlantBlock)
     }
 }

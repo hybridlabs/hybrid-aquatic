@@ -27,8 +27,8 @@ import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders
 
 class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: CompletableFuture<HolderLookup.Provider>) :
     SimpleFabricLootTableSubProvider(output, lookupProvider,LootContextParamSets.ALL_PARAMS) {
@@ -38,30 +38,30 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
         //#region Universal Crate Loot
         fun universalCratePool(): LootPool.Builder {
             return LootPool.lootPool()
-                .setRolls(ConstantValue.exactly(1.0f))
+                .setRolls(ContextIntProviders.exactly(1))
                 .add(LootItem.lootTableItem(HAItems.BARBED_HOOK.get()))
                 .add(LootItem.lootTableItem(HAItems.GLOWING_HOOK.get()))
                 .add(LootItem.lootTableItem(HAItems.MAGNETIC_HOOK.get()))
                 .add(LootItem.lootTableItem(HAItems.DIVING_ARMOR_UPGRADE_TEMPLATE.get())
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 2f))))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 2))))
                 .add(LootItem.lootTableItem(Items.IRON_INGOT)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(3f, 9f))))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.between(3, 9))))
                 .add(LootItem.lootTableItem(Items.GOLD_INGOT)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(3f, 9f))))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.between(3, 9))))
                 .add(LootItem.lootTableItem(Items.DIAMOND)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3))))
                 .add(LootItem.lootTableItem(Items.EMERALD)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 3f))))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3))))
                 .add(LootItem.lootTableItem(Items.SKULL_BANNER_PATTERN))
                 .add(LootItem.lootTableItem(Items.COAST_ARMOR_TRIM_SMITHING_TEMPLATE)
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1f, 4f))))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4))))
         }
 
         fun driftwoodPool(): LootPool.Builder {
             return LootPool.lootPool()
                 .`when`(LootItemRandomChanceCondition.randomChance(0.5f))
                 .add(LootItem.lootTableItem(HAPlatformItems.DRIFTWOOD_LOG.get())
-                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(16f, 32f))))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.between(16, 32))))
         }
 
         fun plushiePool(): LootPool.Builder {
@@ -87,51 +87,51 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                     LootPool.lootPool()
                         .add(
                             LootItem.lootTableItem(HAItems.COCONUT_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.GHOST_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.YETI_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.SPIDER_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.VAMPIRE_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.DUNGENESS_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.LIGHTFOOT_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.FIDDLER_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.FLOWER_CRAB_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.RAW_SHRIMP.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.LOBSTER_CLAW.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         )
                         .add(
                             LootItem.lootTableItem(HAItems.RAW_LOBSTER_TAIL.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         ).build()
                 )
         )
@@ -144,8 +144,8 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .setRandomSequence(HALootTables.HYBRID_CRATE_TREASURE_ID)
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
-                        .setBonusRolls(UniformGenerator.between(0.0f, 1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .setBonusRolls(ContextFloatProviders.between(0.0f, 1.0f))
                         .add(LootItem.lootTableItem(HAItems.MANGLERFISH_FIN.get()))
                         .add(LootItem.lootTableItem(HAItems.MANGLERFISH_LURE.get()))
                         .add(LootItem.lootTableItem(HAItems.EEL_SCARF.get()))
@@ -178,18 +178,18 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.OAK_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.OAK_SAPLING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.APPLE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(3, 9)))
                         ).build()
                 )
         )
@@ -204,18 +204,18 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.SPRUCE_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.SPRUCE_SAPLING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.SWEET_BERRIES)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 16.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 16)))
                         ).build()
                 )
         )
@@ -230,18 +230,18 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.BIRCH_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.BIRCH_SAPLING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.PUMPKIN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         ).build()
                 )
         )
@@ -256,18 +256,18 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.ACACIA_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.ACACIA_SAPLING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.BEETROOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(3, 9)))
                         ).build()
                 )
         )
@@ -282,18 +282,18 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.DARK_OAK_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.DARK_OAK_SAPLING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0f, 8.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 8)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.APPLE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0f, 12.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 12)))
                         ).build()
                 )
         )
@@ -308,18 +308,18 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.MANGROVE_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.MANGROVE_PROPAGULE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.FROGSPAWN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 3.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3)))
                         ).build()
                 )
         )
@@ -334,18 +334,18 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.CHERRY_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.CHERRY_SAPLING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.PINK_PETALS)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0f, 12.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(4, 12)))
                         ).build()
                 )
         )
@@ -360,22 +360,22 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.JUNGLE_LOG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(8, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.JUNGLE_SAPLING)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.MELON)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(3, 9)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.COCOA_BEANS)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 9.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(3, 9)))
                         ).build()
                 )
         )
@@ -390,26 +390,26 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .pool(plushiePool().build())
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0f))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(Items.BAMBOO)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(16.0f, 32.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(16, 32)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.SPYGLASS)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 1)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.SNIFFER_EGG)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 1.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 1)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.TORCHFLOWER_SEEDS)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 4.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 4)))
                         )
                         .add(
                             LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0f, 12.0f)))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(3, 12)))
                         ).build()
                 )
         )
@@ -520,10 +520,10 @@ class GenericLootTableProvider(output: FabricPackOutput, val lookupProvider: Com
                 .setRandomSequence(HALootTables.VENT_LOOT_ID)
                 .pool(
                     LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1F))
+                        .setRolls(ContextIntProviders.exactly(1))
                         .add(
                             LootItem.lootTableItem(HAItems.SULFUR.get())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0f, 2.0f))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                         .build()
                 )
                 .pool(

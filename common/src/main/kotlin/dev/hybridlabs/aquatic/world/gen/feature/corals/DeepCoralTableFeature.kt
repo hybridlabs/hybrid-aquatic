@@ -1,13 +1,15 @@
 package dev.hybridlabs.aquatic.world.gen.feature.corals
 
-import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.util.RandomSource
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class DeepCoralTableFeature(codec: Codec<NoneFeatureConfiguration>) : DeepCoralFeature(codec) {
+class DeepCoralTableFeature : DeepCoralFeature() {
+    override fun codec(): MapCodec<out Feature> = CODEC
+
 
     override fun placeFeature(
         level: LevelAccessor,
@@ -45,5 +47,9 @@ class DeepCoralTableFeature(codec: Codec<NoneFeatureConfiguration>) : DeepCoralF
         }
 
         return true
+    }
+
+    companion object {
+        val CODEC: MapCodec<DeepCoralTableFeature> = MapCodec.unit(DeepCoralTableFeature())
     }
 }

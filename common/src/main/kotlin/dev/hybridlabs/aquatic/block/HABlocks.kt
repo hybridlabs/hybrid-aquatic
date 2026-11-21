@@ -26,7 +26,7 @@ object HABlocks {
             .randomTicks()
             .strength(0.4f)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .sound(SoundType.SLIME_BLOCK)
             .noTerrainParticles()
         )
@@ -38,7 +38,7 @@ object HABlocks {
             .randomTicks()
             .strength(0.4f)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .sound(SoundType.SLIME_BLOCK)
             .noTerrainParticles()
         )
@@ -50,7 +50,7 @@ object HABlocks {
             .randomTicks()
             .strength(0.4f)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .sound(SoundType.SLIME_BLOCK)
             .noTerrainParticles()
         )
@@ -59,7 +59,7 @@ object HABlocks {
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") {
         MessageInABottleBlock(HABlockProperties.ofFullCopy(Blocks.GLASS)
             .instabreak()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .noCollision()
             .noTerrainParticles()
         )
@@ -755,14 +755,14 @@ object HABlocks {
             HABlockProperties.ofFullCopy(Blocks.TUFF)
             .noOcclusion()
             .strength(0.5F)
-            .pushReaction(PushReaction.DESTROY))
+            .pushReaction(PushReaction.POPPED))
     }
 
     val GIANT_THERMAL_VENT = register("giant_thermal_vent") {
         GiantThermalVentBlock(2,
             HABlockProperties.ofFullCopy(Blocks.TUFF)
             .strength(0.5F)
-            .pushReaction(PushReaction.NORMAL))
+            .pushReaction(PushReaction.PUSH_PULL))
     }
 
     val TUBE_WORM = register("tube_worm") {
@@ -770,7 +770,7 @@ object HABlocks {
             .mapColor(MapColor.COLOR_GREEN)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY))
+            .pushReaction(PushReaction.POPPED))
     }
 
     val TUBE_SPONGE = register("tube_sponge") {
@@ -778,7 +778,7 @@ object HABlocks {
             .mapColor(MapColor.COLOR_YELLOW)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY))
+            .pushReaction(PushReaction.POPPED))
     }
 
     val GLASS_SPONGE = register("glass_sponge") {
@@ -786,7 +786,7 @@ object HABlocks {
             .mapColor(MapColor.COLOR_LIGHT_GRAY)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
         )
     }
 
@@ -796,7 +796,7 @@ object HABlocks {
             .sound(SoundType.SLIME_BLOCK)
             .noCollision()
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
         )
     }
 
@@ -806,7 +806,7 @@ object HABlocks {
             .sound(SoundType.SLIME_BLOCK)
             .noCollision()
             .noOcclusion()
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
         )
     }
 
@@ -814,14 +814,14 @@ object HABlocks {
         GiantClamBlock(true, HABlockProperties.ofFullCopy(Blocks.TUFF)
             .noOcclusion()
             .strength(1.0F)
-            .pushReaction(PushReaction.DESTROY))
+            .pushReaction(PushReaction.POPPED))
     }
 
     val OYSTER = register("oyster_block") {
         OysterBlock(true, HABlockProperties.ofFullCopy(Blocks.TUFF)
             .noOcclusion()
             .strength(1.0F)
-            .pushReaction(PushReaction.DESTROY))
+            .pushReaction(PushReaction.POPPED))
     }
 
     val BUOY = register("buoy") {
@@ -848,7 +848,7 @@ object HABlocks {
     private fun createPlushieBlock(variant: PlushieBlock.Variant): PlushieBlock {
         return PlushieBlock(
             variant,
-            HABlockProperties.of().instabreak().pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL)
+            HABlockProperties.of().instabreak().pushReaction(PushReaction.POPPED).sound(SoundType.WOOL)
                 .instrument(NoteBlockInstrument.CUSTOM_HEAD)
                 .noTerrainParticles()
         )

@@ -418,7 +418,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
             if (canPerformAttack(enemy))
             {
                 this.resetAttackCooldown()
-                otter.swing(InteractionHand.MAIN_HAND)
+                otter.swingForAttack(InteractionHand.MAIN_HAND)
                 (otter.level() as? ServerLevel)?.let { otter.doHurtTarget(it, enemy) }
 
                 if (enemy.health <= 0) otter.hunger = MAX_HUNGER

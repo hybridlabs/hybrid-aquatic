@@ -95,7 +95,7 @@ class ArgonautMenu(type: MenuType<*>, containerId: Int, playerInventory: Invento
     }
 
     fun isFuel(stack: ItemStack): Boolean {
-        return this.player.level().fuelValues().isFuel(stack)
+        return stack.has(net.minecraft.core.component.DataComponents.COOKING_FUEL)
     }
 
     fun getLitProgress(): Int {

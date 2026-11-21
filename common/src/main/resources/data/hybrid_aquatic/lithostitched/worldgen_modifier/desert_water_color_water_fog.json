@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "minecraft:desert",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#32a598"
+  }
+}

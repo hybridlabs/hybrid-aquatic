@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "#minecraft:is_badlands",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#4e7f81"
+  }
+}

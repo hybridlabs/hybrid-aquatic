@@ -102,7 +102,7 @@ open class KarkinosMeleeAttackGoal(
 
     override fun checkAndPerformAttack(enemy: LivingEntity) {
         if (canPerformAttack(enemy) && ticksUntilNextAttack <= 0 && attackDelayTicks == 0) {
-            karkinos.swing(InteractionHand.MAIN_HAND)
+            karkinos.swingForAttack(InteractionHand.MAIN_HAND)
             attackDelayTicks = 10
             pendingTarget = enemy
             ticksUntilNextAttack = attackDelayTicks

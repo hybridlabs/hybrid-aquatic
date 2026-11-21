@@ -48,9 +48,9 @@ class DepthChargeEntityRenderer(context: EntityRendererProvider.Context) :
             poseStack.scale(f1, f1, f1)
         }
 
-        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0f))
+        poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.YP.rotationDegrees(-90.0f)))
         poseStack.translate(-0.5f, -0.5f, 0.5f)
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0f))
+        poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.YP.rotationDegrees(90.0f)))
 
         blockModelResolver.update(state.blockState, HABlocks.DEPTH_CHARGE.get().defaultBlockState(), TntRenderer.BLOCK_DISPLAY_CONTEXT)
         TntMinecartRenderer.submitWhiteSolidBlock(

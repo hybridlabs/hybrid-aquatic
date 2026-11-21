@@ -1,8 +1,7 @@
 {
-  "type": "lithostitched:replace_effects",
+  "type": "lithostitched:set_biome_effects",
   "biomes": "#minecraft:is_jungle",
   "effects": {
-    "water_color": 1352389,
-    "water_fog_color": 1352389
+    "water_color": 1352389
   }
 }

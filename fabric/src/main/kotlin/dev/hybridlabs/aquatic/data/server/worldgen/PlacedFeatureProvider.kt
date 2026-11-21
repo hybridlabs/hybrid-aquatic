@@ -7,6 +7,7 @@ import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Vec3i
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
@@ -38,7 +39,7 @@ class PlacedFeatureProvider(
         }
 
         fun bootstrapPlacedFeatures(bootstrap: BootstrapContext<PlacedFeature>) {
-            val reg = bootstrap.lookup(Registries.CONFIGURED_FEATURE)
+            val reg = bootstrap.lookup(Registries.FEATURE)
 
             // tide pools
             PlacementUtils.register(
@@ -46,11 +47,11 @@ class PlacedFeatureProvider(
                 HAPlacedFeatures.TIDE_POOLS,
                 reg.get(HAConfiguredFeatures.TIDE_POOLS).get(), listOf(
                     CountPlacement.of(24),
-                    RandomOffsetPlacement.of(ConstantInt.of(8), ConstantInt.ZERO),
-                    RandomOffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ConstantInt.ZERO),
+                    OffsetPlacement.of(ConstantInt.of(8), ConstantInt.ZERO),
+                    OffsetPlacement.of(ClampedNormalInt.of(0.0f, 3.0f, -10, 10), ConstantInt.ZERO),
                     HeightRangePlacement.triangle(VerticalAnchor.absolute(63), VerticalAnchor.absolute(68)),
                     CountPlacement.of(3),
-                    RandomOffsetPlacement.of(UniformInt.of(-12, 12), ConstantInt.ZERO),
+                    OffsetPlacement.of(UniformInt.of(-12, 12), ConstantInt.ZERO),
                     BiomeFilter.biome()
                 )
             )
@@ -62,8 +63,8 @@ class PlacedFeatureProvider(
                 reg.get(HAConfiguredFeatures.BOULDER).get(), listOf(
                     CountPlacement.of(UniformInt.of(4, 6)),
                     HeightRangePlacement.uniform(VerticalAnchor.absolute(53), VerticalAnchor.absolute(53)),
-                    RandomOffsetPlacement.of(ConstantInt.of(8), ConstantInt.ZERO),
-                    RandomOffsetPlacement.of(UniformInt.of(-3, 3), UniformInt.of(-3, 1)),
+                    OffsetPlacement.of(ConstantInt.of(8), ConstantInt.ZERO),
+                    OffsetPlacement.of(UniformInt.of(-3, 3), UniformInt.of(-3, 1)),
                     SurfaceWaterDepthFilter.forMaxDepth(6),
                     BiomeFilter.biome()
                 )
@@ -271,8 +272,8 @@ class PlacedFeatureProvider(
 
                     BlockPredicateFilter.forPredicate(
                         BlockPredicate.matchesFluids(
-                            BlockPos(0, 1, 0),
-                            Fluids.WATER
+                            Vec3i(0, 1, 0),
+                            listOf(Fluids.WATER)
                         )
                     ),
                     BiomeFilter.biome()
@@ -522,8 +523,8 @@ class PlacedFeatureProvider(
                     RarityFilter.onAverageOnceEvery(3),
                     NoiseBasedCountPlacement.of(10, 90.0, 0.0),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
-                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
-                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    OffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    OffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
                     BiomeFilter.biome()
                 )
             )
@@ -548,8 +549,8 @@ class PlacedFeatureProvider(
                     RarityFilter.onAverageOnceEvery(3),
                     NoiseBasedCountPlacement.of(10, 90.0, 0.0),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
-                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
-                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    OffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    OffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
                     BiomeFilter.biome()
                 )
             )
@@ -561,8 +562,8 @@ class PlacedFeatureProvider(
                     RarityFilter.onAverageOnceEvery(3),
                     NoiseBasedCountPlacement.of(10, 90.0, 0.0),
                     HeightmapPlacement.onHeightmap(Heightmap.Types.OCEAN_FLOOR),
-                    RandomOffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
-                    RandomOffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
+                    OffsetPlacement.of(ConstantInt.of(7), ConstantInt.ZERO),
+                    OffsetPlacement.of(UniformInt.of(-5, 5), ConstantInt.ZERO),
                     BiomeFilter.biome()
                 )
             )

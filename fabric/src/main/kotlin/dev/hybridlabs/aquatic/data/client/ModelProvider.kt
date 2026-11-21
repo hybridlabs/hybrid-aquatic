@@ -132,7 +132,7 @@ class ModelProvider(output: FabricPackOutput) : FabricModelProvider(output) {
                 HABlocks.CHISELED_CHIMNEYSTONE.get(),
                 HABlocks.WHITE_SANDSTONE.get(),
             ).forEach { block ->
-                generator.createTrivialBlock(block, TexturedModel.CUBE_TOP_BOTTOM)
+                generator.createTrivialBlock(block, TexturedModel.CUBE_BOTTOM_TOP)
             }
 
             generator.family(HABlocks.SMOOTH_WHITE_SANDSTONE.get())

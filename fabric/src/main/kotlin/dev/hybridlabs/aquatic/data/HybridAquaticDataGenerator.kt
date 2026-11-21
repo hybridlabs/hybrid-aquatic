@@ -71,11 +71,12 @@ object HybridAquaticDataGenerator : DataGeneratorEntrypoint {
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
         registryBuilder.add(HARegistryKeys.STRUCTURE_SPAWN_MODIFIER) {}
         registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatureProvider::bootstrapPlacedFeatures)
-        registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureProvider::bootstrapConfiguredFeatures)
+        registryBuilder.add(Registries.FEATURE, ConfiguredFeatureProvider::bootstrapConfiguredFeatures)
         registryBuilder.add(Registries.BIOME, BiomeProvider::bootstrapBiomes )
         registryBuilder.add(Registries.NOISE, HABiomeInjectors::bootstrapNoises)
         registryBuilder.add(Registries.DENSITY_FUNCTION, HABiomeInjectors::bootstrapDensityFunctions)
         registryBuilder.add(LithostitchedRegistries.BIOME_INJECTOR, HABiomeInjectors::bootstrap)
+        registryBuilder.add(Registries.MATERIAL_RULE, HABiomes::bootstrapMaterialRules)
         registryBuilder.add(LithostitchedRegistries.WORLDGEN_MODIFIER, HABiomes::bootstrapSurfaceRules)
         registryBuilder.add(Registries.PAINTING_VARIANT, PaintingProvider::bootstrapVariants)
     }

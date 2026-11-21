@@ -1,25 +1,27 @@
 {
   "type": "minecraft:interpolated",
-  "argument": {
+  "input": {
     "type": "minecraft:add",
-    "argument1": {
+    "left": {
       "type": "minecraft:max",
-      "argument1": {
-        "type": "minecraft:y_clamped_gradient",
-        "from_y": -58,
-        "to_y": -18,
+      "left": {
+        "type": "minecraft:gradient",
+    "axis": "y",
+        "from_coordinate": -58,
+        "to_coordinate": -18,
         "from_value": 0.5,
         "to_value": -0.5
       },
-      "argument2": {
-        "type": "minecraft:y_clamped_gradient",
-        "from_y": 30,
-        "to_y": 60,
+      "right": {
+        "type": "minecraft:gradient",
+    "axis": "y",
+        "from_coordinate": 30,
+        "to_coordinate": 60,
         "from_value": -0.5,
         "to_value": 0.5
       }
     },
-    "argument2": {
+    "right": {
       "type": "minecraft:spline",
       "spline": {
         "coordinate": {
@@ -49,5 +51,7 @@
         ]
       }
     }
-  }
+  },
+  "cell_size_xz": 4,
+  "cell_size_y": 8
 }

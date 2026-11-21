@@ -46,7 +46,7 @@ class MessageInABottleBlockEntityRenderer(context: BlockEntityRendererProvider.C
         // random rotation
         random.setSeed(Mth.getSeed(pos.x, 0, pos.z))
         poseStack.translate(0.5, 0.0, 0.5)
-        poseStack.mulPose(Axis.YP.rotationDegrees(random.nextFloat() * 360.0f + (ROTATION_PER * (variant + 1))))
+        poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.YP.rotationDegrees(random.nextFloat() * 360.0f + (ROTATION_PER * (variant + 1)))))
         poseStack.translate(-0.5, 0.0, -0.5)
 
         // translate in water

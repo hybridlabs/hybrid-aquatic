@@ -48,9 +48,9 @@ class SmallTNTEntityRenderer(context: EntityRendererProvider.Context) :
             poseStack.scale(f1, f1, f1)
         }
 
-        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0f))
+        poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.YP.rotationDegrees(-90.0f)))
         poseStack.translate(-0.25f, -0.5f, 0.25f)
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0f))
+        poseStack.mulPose(org.joml.Matrix4f().rotation(Axis.YP.rotationDegrees(90.0f)))
         poseStack.scale(0.5f, 0.5f, 0.5f)
 
         blockModelResolver.update(state.blockState, Blocks.TNT.defaultBlockState(), TntRenderer.BLOCK_DISPLAY_CONTEXT)

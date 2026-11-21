@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.entity.AreaEffectCloud
-import net.minecraft.world.entity.player.Player
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Explosion
 import net.minecraft.world.level.Level
@@ -18,16 +18,14 @@ import net.minecraft.world.level.block.state.BlockState
 class CrystallineSulfurBlock(settings: Properties): Block(settings) {
 
     override fun playerDestroy(
-        level: Level,
-        player: Player,
+        level: ServerLevel,
+        player: ServerPlayer,
         pos: BlockPos,
         state: BlockState,
         blockEntity: BlockEntity?,
         tool: ItemStack
     ) {
         super.playerDestroy(level, player, pos, state, blockEntity, tool)
-
-        if (level.isClientSide) return
 
         val cloud = AreaEffectCloud(level, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5)
 

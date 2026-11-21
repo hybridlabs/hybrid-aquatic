@@ -59,7 +59,7 @@ class WaterHyacinthBlock(settings: Properties) : BushBlock(settings), SimpleWate
     ) {
         super.entityInside(state, level, pos, entity, applier, intersects)
         if (level is ServerLevel && entity.type.builtInRegistryHolder().`is`(HAPIEntityTags.BOATS)) {
-            level.destroyBlock(BlockPos(pos), true, entity)
+            level.destroyBlock(pos, true, entity)
         }
     }
 
@@ -112,12 +112,8 @@ class WaterHyacinthBlock(settings: Properties) : BushBlock(settings), SimpleWate
         builder.add(WATERLOGGED)
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<WaterHyacinthBlock> = simpleCodec(::WaterHyacinthBlock)
         private val SHAPE: VoxelShape = box(3.0, 14.0, 3.0, 13.0, 16.0, 13.0)
     }
 }

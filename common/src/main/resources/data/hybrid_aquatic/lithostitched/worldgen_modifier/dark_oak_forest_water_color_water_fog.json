@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "minecraft:dark_forest",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#36282b"
+  }
+}

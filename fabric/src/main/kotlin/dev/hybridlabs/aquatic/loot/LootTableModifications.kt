@@ -28,28 +28,24 @@ object LootTableModifications {
                             defaultPools
                                 // add fishing loot tables
                                 .add(
-                                    NestedLootTable.lootTableReference(
-                                        ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_SMALL_FISH))
+                                    NestedLootTable.lootTableReference(registries.lookupOrThrow(Registries.LOOT_TABLE).getOrThrow(ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_SMALL_FISH)))
                                         .setWeight(30)
                                         .setQuality(1)
                                 )
                                 .add(
-                                    NestedLootTable.lootTableReference(
-                                        ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_MEDIUM_FISH))
+                                    NestedLootTable.lootTableReference(registries.lookupOrThrow(Registries.LOOT_TABLE).getOrThrow(ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_MEDIUM_FISH)))
                                         .setWeight(25)
                                         .setQuality(1)
                                 )
                                 .add(
-                                    NestedLootTable.lootTableReference(
-                                        ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_LARGE_FISH))
+                                    NestedLootTable.lootTableReference(registries.lookupOrThrow(Registries.LOOT_TABLE).getOrThrow(ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_LARGE_FISH)))
                                         .setWeight(20)
                                         .setQuality(1)
                                 )
 
                                 // add fishing treasure loot table
                                 .add(
-                                    NestedLootTable.lootTableReference(
-                                        ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_CRATES))
+                                    NestedLootTable.lootTableReference(registries.lookupOrThrow(Registries.LOOT_TABLE).getOrThrow(ResourceKey.create(Registries.LOOT_TABLE, HALootTables.HA_CRATES)))
                                         .setWeight(15)
                                         .setQuality(2)
                                         .`when`(

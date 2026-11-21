@@ -38,11 +38,7 @@ class BiomeModifierProvider(context: BootstrapContext<BiomeModifier>) {
                 key, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
                     biomeRegistry.get(spawnConfig.biomes).get(),
                     Weighted(
-                        MobSpawnSettings.SpawnerData(
-                            spawnConfig.type,
-                            spawnConfig.minGroupSize,
-                            spawnConfig.maxGroupSize
-                        ),
+                        MobSpawnSettings.SpawnerData(spawnConfig.type, net.minecraft.util.valueproviders.UniformInt.of(spawnConfig.minGroupSize, spawnConfig.maxGroupSize)),
                         spawnConfig.weight
                     )
                 )

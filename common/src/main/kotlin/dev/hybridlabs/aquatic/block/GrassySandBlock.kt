@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import net.minecraft.world.level.BlockGetter
 
 import com.mojang.serialization.MapCodec
@@ -20,15 +21,12 @@ import net.minecraft.world.level.block.state.BlockState
 class GrassySandBlock(properties: Properties) :
     FallingBlock(properties), BonemealableBlock {
 
-    override fun codec(): MapCodec<FallingBlock> {
-        return CODEC as MapCodec<FallingBlock>
-    }
 
     override fun getDustColor(state: BlockState, level: BlockGetter, pos: BlockPos): Int {
         return 0xC7B47A
     }
 
-    override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState): Boolean {
+    override fun isValidBonemealTarget(level: LevelReader, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return level.getBlockState(pos.above()).isAir
     }
 
@@ -36,15 +34,13 @@ class GrassySandBlock(properties: Properties) :
         level: Level,
         random: RandomSource,
         pos: BlockPos,
-        state: BlockState,
-    ): Boolean = true
+        state: BlockState, source: BonemealSource): Boolean = true
 
     override fun performBonemeal(
         level: ServerLevel,
         random: RandomSource,
         pos: BlockPos,
-        state: BlockState,
-    ) {
+        state: BlockState, source: BonemealSource) {
         val startPos = pos.above()
 
         val optional = level.registryAccess()
@@ -103,6 +99,5 @@ class GrassySandBlock(properties: Properties) :
     override fun isRandomlyTicking(state: BlockState): Boolean = true
 
     companion object {
-        val CODEC: MapCodec<GrassySandBlock> = simpleCodec(::GrassySandBlock)
     }
 }

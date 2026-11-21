@@ -3,6 +3,7 @@ package dev.hybridlabs.aquatic.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.hybridlabs.aquatic.block.HABlocks;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,9 +17,11 @@ public class FlowingFluidMixin {
 			method = "canHoldAnyFluid",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z")
+					target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z")
 	)
-	private static boolean decorativeBubbleColumn_givesAirParity(BlockState instance, Object block, Operation<Boolean> original) {
-		return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get()) ? block == Blocks.BUBBLE_COLUMN : original.call(instance, block);
+	private static boolean decorativeBubbleColumn_givesAirParity(BlockState instance, TagKey<Block> tag, Operation<Boolean> original) {
+		return instance.is(HABlocks.INSTANCE.getDECORATIVE_BUBBLE_COLUMN().get())
+				? Blocks.BUBBLE_COLUMN.defaultBlockState().is(tag)
+				: original.call(instance, tag);
 	}
 }

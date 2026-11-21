@@ -142,7 +142,7 @@ class HermitCrabEntity(entityType: EntityType<out HermitCrabEntity>, world: Leve
 
             if (!oldStack.isEmpty) {
                 if (!player.addItem(oldStack)) {
-                    player.drop(oldStack, false)
+                    player.drop(oldStack, false, net.minecraft.util.Prediction.PREDICTED)
                 }
             }
 

@@ -5,7 +5,6 @@
     "plugin": "dev.hybridlabs.aquatic.mixin.FabricMixinPlugin",
     "mixins": [
         "compat.GeckoLibAnimationTimelineMixin",
-        "compat.LithostitchedParameterMapMixin",
         "HolderReferenceInvoker",
         "MinecraftServerMixin",
         "BreathAirGoalMixin",

@@ -1,5 +1,6 @@
 package dev.hybridlabs.aquatic.block
 
+import net.minecraft.world.level.block.BonemealSource
 import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -31,12 +32,11 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
     override fun isValidBonemealTarget(
         p0: LevelReader,
         p1: BlockPos,
-        p2: BlockState
-    ): Boolean {
+        p2: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
-    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState): Boolean {
+    override fun isBonemealSuccess(world: Level, random: RandomSource, pos: BlockPos, state: BlockState, source: BonemealSource): Boolean {
         return true
     }
 
@@ -44,8 +44,7 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
         level: ServerLevel,
         random: RandomSource,
         pos: BlockPos,
-        state: BlockState
-    ) {
+        state: BlockState, source: BonemealSource) {
     }
 
     override fun mayPlaceOn(state: BlockState, level: BlockGetter, pos: BlockPos): Boolean {
@@ -70,12 +69,8 @@ open class BaseDunegrassBlock(settings: Properties) : BushBlock(settings), Bonem
         return this.mayPlaceOn(level.getBlockState(blockPos), level, blockPos)
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<BaseDunegrassBlock> = simpleCodec(::BaseDunegrassBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 16.0, 14.0)
     }
 }

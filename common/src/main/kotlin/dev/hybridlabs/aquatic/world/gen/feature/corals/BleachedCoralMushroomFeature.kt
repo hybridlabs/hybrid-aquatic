@@ -1,14 +1,16 @@
 package dev.hybridlabs.aquatic.world.gen.feature.corals
 
-import com.mojang.serialization.Codec
+import com.mojang.serialization.MapCodec
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.util.RandomSource
 import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.levelgen.feature.Feature
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 
-class BleachedCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration>) : BleachedCoralFeature(codec) {
+class BleachedCoralMushroomFeature : BleachedCoralFeature() {
+    override fun codec(): MapCodec<out Feature> = CODEC
+
     override fun placeFeature(
         level: LevelAccessor,
         random: RandomSource,
@@ -45,5 +47,9 @@ class BleachedCoralMushroomFeature(codec: Codec<NoneFeatureConfiguration>) : Ble
         }
 
         return true
+    }
+
+    companion object {
+        val CODEC: MapCodec<BleachedCoralMushroomFeature> = MapCodec.unit(BleachedCoralMushroomFeature())
     }
 }

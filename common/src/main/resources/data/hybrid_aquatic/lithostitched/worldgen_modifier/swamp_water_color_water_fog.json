@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "#hybrid_aquatic:is_swamp",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#232317"
+  }
+}

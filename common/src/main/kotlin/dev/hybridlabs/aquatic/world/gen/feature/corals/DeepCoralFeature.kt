@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.world.gen.feature.corals
 
-import com.mojang.serialization.Codec
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.TubeWormBlock
 import dev.hybridlabs.aquatic.tag.HABlockTags
@@ -15,17 +14,22 @@ import net.minecraft.world.level.block.BaseCoralWallFanBlock
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.WorldGenLevel
+import net.minecraft.world.level.chunk.ChunkGenerator
 import net.minecraft.world.level.levelgen.feature.Feature
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration
 import java.util.function.Consumer
 import java.util.function.Function
 
-abstract class DeepCoralFeature(codec: Codec<NoneFeatureConfiguration>) : Feature<NoneFeatureConfiguration>(codec) {
-    override fun place(context: FeaturePlaceContext<NoneFeatureConfiguration>): Boolean {
-        val randomSource = context.random()
-        val worldGenLevel = context.level()
-        val blockPos = context.origin()
+abstract class DeepCoralFeature : Feature {
+    override fun place(
+        level: WorldGenLevel,
+        chunkGenerator: ChunkGenerator,
+        random: RandomSource,
+        origin: BlockPos,
+    ): Boolean {
+        val randomSource = random
+        val worldGenLevel = level
+        val blockPos = origin
         val optional = BuiltInRegistries.BLOCK.get(HABlockTags.DEEP_CORAL_BLOCKS)
             .flatMap(Function { named: HolderSet.Named<Block>? ->
                 named!!.getRandomElement(randomSource)

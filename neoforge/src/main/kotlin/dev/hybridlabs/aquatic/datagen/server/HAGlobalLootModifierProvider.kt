@@ -21,7 +21,7 @@ class HAGlobalLootModifierProvider
         this.add(
             "fishing_fish",
             HAGlobalLootModifier(
-                emptyArray<LootItemCondition>(),
+                java.util.Optional.empty(),
                 0,
                 BuiltInLootTables.FISHING.identifier(),
                 ItemTags.FISHES,
@@ -36,7 +36,7 @@ class HAGlobalLootModifierProvider
         this.add(
             "fishing_treasure",
             HAGlobalLootModifier(
-                emptyArray<LootItemCondition>(),
+                java.util.Optional.empty(),
                 0,
                 BuiltInLootTables.FISHING.identifier(),
                 HAItemTags.FISHING_TREASURE,

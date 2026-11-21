@@ -8,26 +8,38 @@
       "spawns": [
         {
           "type": "hybrid_aquatic:giant_isopod",
-          "maxCount": 5,
-          "minCount": 1,
+          "count": {
+            "type": "minecraft:uniform",
+            "min_inclusive": 1,
+            "max_inclusive": 5
+          },
           "weight": 1
         },
         {
           "type": "hybrid_aquatic:spider_crab",
-          "maxCount": 5,
-          "minCount": 1,
+          "count": {
+            "type": "minecraft:uniform",
+            "min_inclusive": 1,
+            "max_inclusive": 5
+          },
           "weight": 1
         },
         {
           "type": "hybrid_aquatic:hagfish",
-          "maxCount": 5,
-          "minCount": 3,
+          "count": {
+            "type": "minecraft:uniform",
+            "min_inclusive": 3,
+            "max_inclusive": 5
+          },
           "weight": 2
         },
-      {
+        {
           "type": "hybrid_aquatic:starfish",
-          "maxCount": 6,
-          "minCount": 2,
+          "count": {
+            "type": "minecraft:uniform",
+            "min_inclusive": 2,
+            "max_inclusive": 6
+          },
           "weight": 1
         }
       ]

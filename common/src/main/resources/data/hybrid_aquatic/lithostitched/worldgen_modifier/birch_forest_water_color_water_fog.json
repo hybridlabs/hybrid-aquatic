@@ -1,0 +1,10 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": [
+    "minecraft:birch_forest",
+    "minecraft:old_growth_birch_forest"
+  ],
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#0677ce"
+  }
+}

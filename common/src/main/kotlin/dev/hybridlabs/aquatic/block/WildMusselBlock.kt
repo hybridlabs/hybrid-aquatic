@@ -105,12 +105,8 @@ class WildMusselBlock(properties: Properties) :
         return false
     }
 
-    override fun codec(): MapCodec<BushBlock> {
-        return CODEC as MapCodec<BushBlock>
-    }
 
     companion object {
-        val CODEC: MapCodec<WildMusselBlock> = simpleCodec(::WildMusselBlock)
         private val SHAPE: VoxelShape = box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0)
 
         val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED

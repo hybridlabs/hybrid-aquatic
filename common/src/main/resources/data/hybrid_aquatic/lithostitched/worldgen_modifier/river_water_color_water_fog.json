@@ -1,0 +1,7 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": "minecraft:river",
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#0084ff"
+  }
+}

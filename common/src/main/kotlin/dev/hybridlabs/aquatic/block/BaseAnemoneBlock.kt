@@ -112,12 +112,8 @@ open class BaseAnemoneBlock(settings: Properties) : DirectionalBlock(settings),
         TODO("Not yet implemented")
     }
 
-    override fun codec(): MapCodec<out DirectionalBlock?> {
-        return CODEC
-    }
 
     companion object {
-        val CODEC: MapCodec<BaseAnemoneBlock> = simpleCodec(::BaseAnemoneBlock)
         private val CEILING_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val FLOOR_SHAPE: VoxelShape = box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0)
         private val NORTH_SHAPE: VoxelShape = box(1.0, 1.0, 0.0, 15.0, 15.0, 16.0)

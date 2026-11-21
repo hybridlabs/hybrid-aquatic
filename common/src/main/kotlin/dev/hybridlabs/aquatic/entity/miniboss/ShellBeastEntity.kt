@@ -1,5 +1,8 @@
 package dev.hybridlabs.aquatic.entity.miniboss
 
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.item.SwingAnimationType
+import net.minecraft.world.item.component.SwingAnimation
 import java.util.UUID
 import net.minecraft.world.entity.ai.targeting.TargetingConditions
 
@@ -129,32 +132,8 @@ class ShellBeastEntity(type: EntityType<out HAMinibossEntity>, world: Level) :
         )
     }
 
-    private fun getHandSwingDuration(): Int {
-        return 20
-    }
-
-    override fun updateSwingTime() {
-        val i = this.getHandSwingDuration()
-        if (this.swinging) {
-            ++this.swingTime
-            if (this.swingTime >= i) {
-                this.swingTime = 0
-                this.swinging = false
-            }
-        } else {
-            this.swingTime = 0
-        }
-
-        this.attackAnim = swingTime.toFloat() / i.toFloat()
-    }
-
-    override fun getAttackAnim(tickDelta: Float): Float {
-        var f = this.attackAnim - this.oAttackAnim
-        if (f < 0.0f) {
-            ++f
-        }
-
-        return this.oAttackAnim + f * tickDelta
+    override fun swingForAttack(hand: InteractionHand) {
+        this.swing(hand, SwingAnimation(SwingAnimationType.WHACK, 20), false)
     }
 
     override fun startSeenByPlayer(player: ServerPlayer) {

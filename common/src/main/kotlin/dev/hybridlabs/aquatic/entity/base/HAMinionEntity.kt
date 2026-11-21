@@ -129,10 +129,6 @@ abstract class HAMinionEntity(type: EntityType<out Monster>, world: Level) :
         return super.finalizeSpawn(level, difficulty, reason, spawnData)
     }
 
-    override fun aiStep() {
-        this.updateSwingTime()
-        super.aiStep()
-    }
 
     override fun removeWhenFarAway(distanceSquared: Double): Boolean {
         return false

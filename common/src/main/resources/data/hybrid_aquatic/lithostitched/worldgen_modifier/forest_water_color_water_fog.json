@@ -1,0 +1,10 @@
+{
+  "type": "lithostitched:set_biome_attributes",
+  "biomes": [
+    "minecraft:forest",
+    "minecraft:windswept_forest"
+  ],
+  "attributes": {
+    "minecraft:visual/water_fog_color": "#1e97f2"
+  }
+}

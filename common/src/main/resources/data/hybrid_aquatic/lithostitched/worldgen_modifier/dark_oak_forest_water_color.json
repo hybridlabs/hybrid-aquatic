@@ -1,8 +1,7 @@
 {
-  "type": "lithostitched:replace_effects",
+  "type": "lithostitched:set_biome_effects",
   "biomes": "minecraft:dark_forest",
   "effects": {
-    "water_color": 3030633,
-    "water_fog_color": 3549227
+    "water_color": 3030633
   }
 }

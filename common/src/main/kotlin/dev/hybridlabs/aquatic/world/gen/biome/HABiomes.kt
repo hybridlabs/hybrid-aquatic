@@ -1,31 +1,29 @@
 package dev.hybridlabs.aquatic.world.gen.biome
 
-import net.minecraft.world.level.dimension.LevelStem
-
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors.BiomeEnabledPredicate
-import dev.hybridlabs.aquatic.world.gen.biome.HABiomes.surfaceRule
 import dev.worldgen.lithostitched.api.registry.LithostitchedRegistries
 import dev.worldgen.lithostitched.api.util.InjectionType
 import dev.worldgen.lithostitched.api.worldgen.modifier.WorldgenModifier
+import net.minecraft.core.Holder
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstrapContext
+import net.minecraft.data.worldgen.material.OverworldMaterialRules
 import net.minecraft.resources.ResourceKey
-import net.minecraft.world.level.Level
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.Biomes
 import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.levelgen.SurfaceRules.DEEP_UNDER_FLOOR
-import net.minecraft.world.level.levelgen.SurfaceRules.ON_FLOOR
-import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource
-import net.minecraft.world.level.levelgen.SurfaceRules.UNDER_FLOOR
-import net.minecraft.world.level.levelgen.SurfaceRules.abovePreliminarySurface
-import net.minecraft.world.level.levelgen.SurfaceRules.ifTrue
-import net.minecraft.world.level.levelgen.SurfaceRules.isBiome
-import net.minecraft.world.level.levelgen.SurfaceRules.sequence
-import net.minecraft.world.level.levelgen.SurfaceRules.state
+import net.minecraft.world.level.levelgen.material.MaterialRules
+import net.minecraft.world.level.levelgen.material.MaterialRules.abovePreliminarySurface
+import net.minecraft.world.level.levelgen.material.MaterialRules.ifTrue
+import net.minecraft.world.level.levelgen.material.MaterialRules.isBiome
+import net.minecraft.world.level.levelgen.material.MaterialRules.sequence
+import net.minecraft.world.level.levelgen.material.MaterialRules.state
+import net.minecraft.world.level.levelgen.material.MaterialRules.stoneDepthCheck
+import net.minecraft.world.level.levelgen.material.rule.MaterialRule
+import net.minecraft.world.level.levelgen.placement.CaveSurface
 
 object HABiomes {
     val config = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
@@ -64,146 +62,209 @@ object HABiomes {
     val DEEP_CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_coral_reef"))
     val TROPICAL_DEEP_CORAL_REEF: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tropical_deep_coral_reef"))
 
-    /**
-     * Registers each biome's surface rule as a Lithostitched `add_surface_rule` worldgen modifier named
-     * `surface_rule/<biome>`. Each rule only applies inside its biome and above the preliminary surface, and is
-     * prepended so it runs before the vanilla rules. To give a biome a surface, add a [surfaceRule] call here.
-     */
-    fun bootstrapSurfaceRules(context: BootstrapContext<WorldgenModifier>) {
+    private val ON_FLOOR = stoneDepthCheck(0, false, CaveSurface.FLOOR)
+    private val UNDER_FLOOR = stoneDepthCheck(0, true, CaveSurface.FLOOR)
+    private val DEEP_UNDER_FLOOR = stoneDepthCheck(0, true, 6, CaveSurface.FLOOR)
+
+    private data class BiomeSurfaceRule(val biome: ResourceKey<Biome>, val rule: MaterialRule)
+
+    private fun biomeSurfaceRules(): List<BiomeSurfaceRule> = buildList {
         //#region Reworked Vanilla Surface Rules
-        context.surfaceRule(
-            Biomes.WARM_OCEAN,
-            sequence(
-                ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+        add(
+            BiomeSurfaceRule(
+                Biomes.WARM_OCEAN,
+                sequence(
+                    ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
+                    ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+                )
             )
         )
 
-        context.surfaceRule(
-            Biomes.LUKEWARM_OCEAN,
-            sequence(
-                ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SMOOTH_SANDSTONE.defaultBlockState()))
+        add(
+            BiomeSurfaceRule(
+                Biomes.LUKEWARM_OCEAN,
+                sequence(
+                    ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState())),
+                    ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SMOOTH_SANDSTONE.defaultBlockState()))
+                )
             )
         )
         //#endregion
 
         //#region Beach Biome Surface Rules
-        context.surfaceRule(
-            TIDE_POOLS,
-            sequence(
-                ifTrue(ON_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState())),
+        add(
+            BiomeSurfaceRule(
+                TIDE_POOLS,
+                sequence(
+                    ifTrue(ON_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState())),
+                )
             )
         )
         //#endregion
 
         //#region Warm Ocean Biome Surface Rules
-        context.surfaceRule(
-            DEEP_WARM_OCEAN,
-            sequence(
-                ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+        add(
+            BiomeSurfaceRule(
+                DEEP_WARM_OCEAN,
+                sequence(
+                    ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
+                    ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+                )
             )
         )
 
-        context.surfaceRule(
-            SEAGRASS_BED,
-            sequence(
-                ifTrue(ON_FLOOR, state(HABlocks.GRASSY_SAND.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.SAND.defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+        add(
+            BiomeSurfaceRule(
+                SEAGRASS_BED,
+                sequence(
+                    ifTrue(ON_FLOOR, state(HABlocks.GRASSY_SAND.get().defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.SAND.defaultBlockState())),
+                    ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+                )
             )
         )
 
-        context.surfaceRule(
-            RED_MEADOW,
-            sequence(
-                ifTrue(ON_FLOOR, state(HABlocks.WHITE_SAND.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(HABlocks.WHITE_SAND.get().defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.WHITE_SANDSTONE.get().defaultBlockState()))
+        add(
+            BiomeSurfaceRule(
+                RED_MEADOW,
+                sequence(
+                    ifTrue(ON_FLOOR, state(HABlocks.WHITE_SAND.get().defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(HABlocks.WHITE_SAND.get().defaultBlockState())),
+                    ifTrue(DEEP_UNDER_FLOOR, state(HABlocks.WHITE_SANDSTONE.get().defaultBlockState()))
+                )
             )
         )
 
-        context.surfaceRule(
-            CORAL_REEF,
-            sequence(
-                ifTrue(ON_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.SMOOTH_SANDSTONE.defaultBlockState())),
-                ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+        add(
+            BiomeSurfaceRule(
+                CORAL_REEF,
+                sequence(
+                    ifTrue(ON_FLOOR, state(HABlocks.SHORESTONE.get().defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.SMOOTH_SANDSTONE.defaultBlockState())),
+                    ifTrue(DEEP_UNDER_FLOOR, state(Blocks.SANDSTONE.defaultBlockState()))
+                )
             )
         )
         //#endregion
 
         //#region River Biome Surface Rules
-        context.surfaceRule(TROPICAL_RIVER, ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())))
-        context.surfaceRule(COLD_RIVER, ifTrue(ON_FLOOR, state(Blocks.GRAVEL.defaultBlockState())))
+        add(BiomeSurfaceRule(TROPICAL_RIVER, ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState()))))
+        add(BiomeSurfaceRule(COLD_RIVER, ifTrue(ON_FLOOR, state(Blocks.GRAVEL.defaultBlockState()))))
 
-        context.surfaceRule(EXOTIC_RIVER,
-            sequence(
-                ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+        add(
+            BiomeSurfaceRule(
+                EXOTIC_RIVER,
+                sequence(
+                    ifTrue(ON_FLOOR, state(Blocks.MUD.defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+                )
             )
         )
 
-        context.surfaceRule(EXOTIC_DESERT_RIVER,
-            sequence(
-                ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+        add(
+            BiomeSurfaceRule(
+                EXOTIC_DESERT_RIVER,
+                sequence(
+                    ifTrue(ON_FLOOR, state(Blocks.SAND.defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+                )
             )
         )
 
-        context.surfaceRule(LUSH_DESERT,
-            sequence(
-                ifTrue(ON_FLOOR, state(Blocks.GRASS_BLOCK.defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.COARSE_DIRT.defaultBlockState())),
+        add(
+            BiomeSurfaceRule(
+                LUSH_DESERT,
+                sequence(
+                    ifTrue(ON_FLOOR, state(Blocks.GRASS_BLOCK.defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.COARSE_DIRT.defaultBlockState())),
+                )
             )
         )
 
-        context.surfaceRule(EXOTIC_BADLANDS_RIVER,
-            sequence(
-                ifTrue(ON_FLOOR, state(Blocks.RED_SAND.defaultBlockState())),
-                ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+        add(
+            BiomeSurfaceRule(
+                EXOTIC_BADLANDS_RIVER,
+                sequence(
+                    ifTrue(ON_FLOOR, state(Blocks.RED_SAND.defaultBlockState())),
+                    ifTrue(UNDER_FLOOR, state(Blocks.CLAY.defaultBlockState())),
+                )
             )
         )
-
         //#endregion
 
         //#region Trench Rules
         for (trench in listOf(TRENCH, WARM_TRENCH, LUKEWARM_TRENCH, COLD_TRENCH, FROZEN_TRENCH)) {
-            context.surfaceRule(
-                trench,
-                sequence(
-                    ifTrue(ON_FLOOR, state(HABlocks.MARINE_SNOW.get().defaultBlockState())),
-                    state(HABlocks.SCHIST.get().defaultBlockState())
+            add(
+                BiomeSurfaceRule(
+                    trench,
+                    sequence(
+                        ifTrue(ON_FLOOR, state(HABlocks.MARINE_SNOW.get().defaultBlockState())),
+                        state(HABlocks.SCHIST.get().defaultBlockState())
+                    )
                 )
             )
         }
         //#endregion
 
         //#region Deep Reefs
-        context.surfaceRule(DEEP_CORAL_REEF, ifTrue(ON_FLOOR, state(Blocks.TUFF.defaultBlockState())))
-        context.surfaceRule(
-            TROPICAL_DEEP_CORAL_REEF,
-            ifTrue(ON_FLOOR, state(HABlocks.CORALSTONE.get().defaultBlockState()))
+        add(BiomeSurfaceRule(DEEP_CORAL_REEF, ifTrue(ON_FLOOR, state(Blocks.TUFF.defaultBlockState()))))
+        add(
+            BiomeSurfaceRule(
+                TROPICAL_DEEP_CORAL_REEF,
+                ifTrue(ON_FLOOR, state(HABlocks.CORALSTONE.get().defaultBlockState()))
+            )
         )
         //#endregion
     }
 
-    private fun BootstrapContext<WorldgenModifier>.surfaceRule(biome: ResourceKey<Biome>, rule: RuleSource) {
-        register(
-            ResourceKey.create(
-                LithostitchedRegistries.WORLDGEN_MODIFIER,
-                CommonClass.locate("surface_rule/${biome.identifier().path}")
-            ),
-            WorldgenModifier.builder(BiomeEnabledPredicate(biome)).addSurfaceRule(
-                Level.OVERWORLD,
-                InjectionType.PREPEND,
-                ifTrue(abovePreliminarySurface(), ifTrue(isBiome(lookup(Registries.BIOME), biome), rule))
+    /**
+     * Registers each biome's surface rule as a named material rule.
+     */
+    fun bootstrapMaterialRules(context: BootstrapContext<MaterialRule>) {
+        for (entry in biomeSurfaceRules()) {
+            context.register(materialRuleKey(entry.biome), entry.rule)
+        }
+    }
+
+    /**
+     * Registers each biome's surface rule as a Lithostitched `set_material_rule` worldgen modifier named
+     * `surface_rule/<biome>`. Each rule only applies inside its biome and above the preliminary surface, and is
+     * prepended to the overworld material rule so it runs before the vanilla rules. To give a biome a surface,
+     * add an entry to [biomeSurfaceRules].
+     */
+    fun bootstrapSurfaceRules(context: BootstrapContext<WorldgenModifier>) {
+        val materialRules = context.lookup(Registries.MATERIAL_RULE)
+        val biomes = context.lookup(Registries.BIOME)
+        val overworld: Holder<MaterialRule> = materialRules.getOrThrow(OverworldMaterialRules.OVERWORLD)
+
+        for (entry in biomeSurfaceRules()) {
+            val rule = MaterialRules.getRule(materialRules, materialRuleKey(entry.biome))
+            val wrapped = ifTrue(
+                abovePreliminarySurface(),
+                ifTrue(isBiome(biomes, entry.biome), rule)
             )
+
+            context.register(
+                ResourceKey.create(
+                    LithostitchedRegistries.WORLDGEN_MODIFIER,
+                    CommonClass.locate("surface_rule/${entry.biome.identifier().path}")
+                ),
+                WorldgenModifier.builder(BiomeEnabledPredicate(entry.biome))
+                    .setMaterialRule(overworld, Holder.direct(wrapped), InjectionType.PREPEND)
+            )
+        }
+    }
+
+    fun surfaceRuleKeys(): List<ResourceKey<MaterialRule>> = biomeSurfaceRules().map { materialRuleKey(it.biome) }
+
+    private fun materialRuleKey(biome: ResourceKey<Biome>): ResourceKey<MaterialRule> {
+        return ResourceKey.create(
+            Registries.MATERIAL_RULE,
+            CommonClass.locate("surface_rule/${biome.identifier().path}")
         )
     }
 }
