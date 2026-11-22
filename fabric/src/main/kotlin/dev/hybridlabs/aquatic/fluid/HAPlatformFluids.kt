@@ -1,7 +1,9 @@
 package dev.hybridlabs.aquatic.fluid
 
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.block.HABlockProperties
+import dev.hybridlabs.hapi.block.HAPIBlockProperties
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
@@ -16,7 +18,7 @@ object HAPlatformFluids {
     val BRINE = registerFluidBlock("brine") {
         LiquidBlock(
             BRINE_STILL.get(),
-            HABlockProperties.ofFullCopy(Blocks.WATER).liquid()
+            HAPIBlockProperties.ofFullCopy(Blocks.WATER).liquid()
         )
     }
 
@@ -25,6 +27,8 @@ object HAPlatformFluids {
     }
 
     fun <T : Block> registerFluidBlock(id: String, block: Supplier<T>): RegistryObject<Block> {
-        return CommonClass.BLOCKS.register(id) { HABlockProperties.withId(id, block::get) }
+        return CommonClass.BLOCKS.register(id) {
+            HAPIBlockProperties.withId(ResourceKey.create(Registries.BLOCK, CommonClass.locate(id))) { block.get() }
+        }
     }
 }
