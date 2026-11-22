@@ -2,6 +2,9 @@ package dev.hybridlabs.aquatic.block
 
 import com.google.common.collect.ImmutableSet
 import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.hapi.block.HAPIBlockProperties
+import net.minecraft.core.registries.Registries
+import net.minecraft.resources.ResourceKey
 import dev.hybridlabs.aquatic.platform.registration.RegistryObject
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.util.ColorRGBA
@@ -21,7 +24,7 @@ import java.util.function.Supplier
  */
 object HABlocks {
     val ANEMONE = register("anemone") {
-        AnemoneBlock(HABlockProperties.of()
+        AnemoneBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.TERRACOTTA_PINK)
             .randomTicks()
             .strength(0.4f)
@@ -33,7 +36,7 @@ object HABlocks {
     }
 
     val GIANT_GREEN_ANEMONE = register("giant_green_anemone") {
-        GiantGreenAnemoneBlock(HABlockProperties.of()
+        GiantGreenAnemoneBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.COLOR_LIGHT_GREEN)
             .randomTicks()
             .strength(0.4f)
@@ -45,7 +48,7 @@ object HABlocks {
     }
 
     val STRAWBERRY_ANEMONE = register("strawberry_anemone") {
-        StrawberryAnemoneBlock(HABlockProperties.of()
+        StrawberryAnemoneBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.COLOR_RED)
             .randomTicks()
             .strength(0.4f)
@@ -57,7 +60,7 @@ object HABlocks {
     }
 
     val MESSAGE_IN_A_BOTTLE = register("message_in_a_bottle") {
-        MessageInABottleBlock(HABlockProperties.ofFullCopy(Blocks.GLASS)
+        MessageInABottleBlock(HAPIBlockProperties.ofFullCopy(Blocks.GLASS)
             .instabreak()
             .pushReaction(PushReaction.POPPED)
             .noCollision()
@@ -65,232 +68,232 @@ object HABlocks {
         )
     }
 
-    val CLAMS = register("clams") { ClamBlock(HABlockProperties.ofFullCopy(Blocks.CARROTS)) }
-    val MUSSELS = register("mussels") { MusselBlock(HABlockProperties.ofFullCopy(Blocks.CARROTS)) }
-    val WILD_MUSSELS = register("wild_mussels") { WildMusselBlock(HABlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
-    val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND).postProcess { _, _, pos -> pos }) }
-    val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND).postProcess { _, _, pos -> pos }) }
-    val WHITE_SAND = register("white_sand") { ColoredFallingBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.SAND)) }
+    val CLAMS = register("clams") { ClamBlock(HAPIBlockProperties.ofFullCopy(Blocks.CARROTS)) }
+    val MUSSELS = register("mussels") { MusselBlock(HAPIBlockProperties.ofFullCopy(Blocks.CARROTS)) }
+    val WILD_MUSSELS = register("wild_mussels") { WildMusselBlock(HAPIBlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
+    val AERATED_SAND = register("aerated_sand") { AeratedSandBlock(ColorRGBA(14406560), HAPIBlockProperties.ofFullCopy(Blocks.SAND).postProcess { _, _, pos -> pos }) }
+    val BUBBLE_GEYSER = register("bubble_geyser") { BubbleGeyserBlock(ColorRGBA(14406560), HAPIBlockProperties.ofFullCopy(Blocks.SAND).postProcess { _, _, pos -> pos }) }
+    val WHITE_SAND = register("white_sand") { ColoredFallingBlock(ColorRGBA(14406560), HAPIBlockProperties.ofFullCopy(Blocks.SAND)) }
 
     val WHITE_SANDSTONE = register("white_sandstone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
     val WHITE_SANDSTONE_STAIRS = register("white_sandstone_stairs") {
-        StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
+        StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
     val WHITE_SANDSTONE_SLAB = register("white_sandstone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
     val WHITE_SANDSTONE_WALL = register("white_sandstone_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())) }
 
     val SMOOTH_WHITE_SANDSTONE = register("smooth_white_sandstone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
     val SMOOTH_WHITE_SANDSTONE_SLAB = register("smooth_white_sandstone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
     val SMOOTH_WHITE_SANDSTONE_STAIRS = register("smooth_white_sandstone_stairs") {
-        StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
+        StairBlock(WHITE_SANDSTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
 
     val CUT_WHITE_SANDSTONE = register("cut_white_sandstone") {
-        Block(HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
+        Block(HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
     val CUT_WHITE_SANDSTONE_SLAB = register("cut_white_sandstone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
 
     val CHISELED_WHITE_SANDSTONE = register("chiseled_white_sandstone") {
-        Block(HABlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
+        Block(HAPIBlockProperties.ofFullCopy(WHITE_SANDSTONE.get())
             .mapColor(DyeColor.WHITE)) }
 
     val BONE_STAIRS = register("bone_stairs") {
-        StairBlock(Blocks.BONE_BLOCK.defaultBlockState(), HABlockProperties.ofFullCopy(Blocks.BONE_BLOCK)
+        StairBlock(Blocks.BONE_BLOCK.defaultBlockState(), HAPIBlockProperties.ofFullCopy(Blocks.BONE_BLOCK)
             .mapColor(DyeColor.WHITE)) }
     val BONE_SLAB = register("bone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(Blocks.BONE_BLOCK)
+        SlabBlock(HAPIBlockProperties.ofFullCopy(Blocks.BONE_BLOCK)
             .mapColor(DyeColor.WHITE)) }
     val BONE_WALL = register("bone_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(Blocks.BONE_BLOCK)) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(Blocks.BONE_BLOCK)) }
     val BONE_FENCE = register("bone_fence") {
-        FenceBlock(HABlockProperties.ofFullCopy(Blocks.BONE_BLOCK)) }
+        FenceBlock(HAPIBlockProperties.ofFullCopy(Blocks.BONE_BLOCK)) }
 
     val SUSPICIOUS_RED_SAND = register("suspicious_red_sand") {
         BrushableBlock(Blocks.RED_SAND,
             SoundEvents.BRUSH_SAND,
             SoundEvents.BRUSH_SAND_COMPLETED,
-        HABlockProperties.ofFullCopy(Blocks.RED_SAND)) }
+        HAPIBlockProperties.ofFullCopy(Blocks.RED_SAND)) }
 
-    val CRYSTALLINE_SULFUR = register("crystalline_sulfur") { CrystallineSulfurBlock(HABlockProperties.ofFullCopy(Blocks.AMETHYST_BLOCK)) }
-    val GRASSY_SAND = register("grassy_sand") { GrassySandBlock(HABlockProperties.ofFullCopy(Blocks.SAND)) }
-    val DEPTH_CHARGE = register("depth_charge") { DepthChargeBlock(HABlockProperties.ofFullCopy(Blocks.TNT)) }
-    val CORALSTONE = register("coralstone") { Block(HABlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
-    val SHORESTONE = register("shorestone") { Block(HABlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
-    val BARNACLE_SHORESTONE = register("barnacle_shorestone") { Block(HABlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
+    val CRYSTALLINE_SULFUR = register("crystalline_sulfur") { CrystallineSulfurBlock(HAPIBlockProperties.ofFullCopy(Blocks.AMETHYST_BLOCK)) }
+    val GRASSY_SAND = register("grassy_sand") { GrassySandBlock(HAPIBlockProperties.ofFullCopy(Blocks.SAND)) }
+    val DEPTH_CHARGE = register("depth_charge") { DepthChargeBlock(HAPIBlockProperties.ofFullCopy(Blocks.TNT)) }
+    val CORALSTONE = register("coralstone") { Block(HAPIBlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
+    val SHORESTONE = register("shorestone") { Block(HAPIBlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
+    val BARNACLE_SHORESTONE = register("barnacle_shorestone") { Block(HAPIBlockProperties.ofFullCopy(Blocks.SANDSTONE)) }
 
-    val MARINE_SNOW = register("marine_snow") { ColoredFallingBlock(ColorRGBA(14406560), HABlockProperties.ofFullCopy(Blocks.MUD)) }
+    val MARINE_SNOW = register("marine_snow") { ColoredFallingBlock(ColorRGBA(14406560), HAPIBlockProperties.ofFullCopy(Blocks.MUD)) }
 
     val RED_BRINESTONE = register("red_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
     val RED_BRINESTONE_STAIRS = register("red_brinestone_stairs") {
-        StairBlock(RED_BRINESTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(RED_BRINESTONE.get())
+        StairBlock(RED_BRINESTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(RED_BRINESTONE.get())
             .mapColor(DyeColor.RED)) }
     val RED_BRINESTONE_SLAB = register("red_brinestone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(RED_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(RED_BRINESTONE.get())
         .mapColor(DyeColor.RED)) }
     val RED_BRINESTONE_WALL = register("red_brinestone_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(RED_BRINESTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(RED_BRINESTONE.get())) }
 
     val RED_BRINESTONE_BRICKS = register("red_brinestone_bricks") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val RED_BRINESTONE_BRICK_STAIRS = register("red_brinestone_brick_stairs") {
-        StairBlock(RED_BRINESTONE_BRICKS.get().defaultBlockState(), HABlockProperties.ofFullCopy(RED_BRINESTONE.get())
+        StairBlock(RED_BRINESTONE_BRICKS.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(RED_BRINESTONE.get())
             .mapColor(DyeColor.RED)) }
     val RED_BRINESTONE_BRICK_SLAB = register("red_brinestone_brick_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(RED_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(RED_BRINESTONE.get())
             .mapColor(DyeColor.RED)) }
     val RED_BRINESTONE_BRICK_WALL = register("red_brinestone_brick_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(RED_BRINESTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(RED_BRINESTONE.get())) }
 
     val CHISELED_RED_BRINESTONE = register("chiseled_red_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_RED_BRINESTONE = register("polished_red_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_RED_BRINESTONE_STAIRS = register("polished_red_brinestone_stairs") {
-        StairBlock(POLISHED_RED_BRINESTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(POLISHED_RED_BRINESTONE.get())
+        StairBlock(POLISHED_RED_BRINESTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(POLISHED_RED_BRINESTONE.get())
             .mapColor(DyeColor.RED)) }
     val POLISHED_RED_BRINESTONE_SLAB = register("polished_red_brinestone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(POLISHED_RED_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(POLISHED_RED_BRINESTONE.get())
             .mapColor(DyeColor.RED)) }
 
     val ORANGE_BRINESTONE = register("orange_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
     val ORANGE_BRINESTONE_STAIRS = register("orange_brinestone_stairs") {
-        StairBlock(ORANGE_BRINESTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
+        StairBlock(ORANGE_BRINESTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
             .mapColor(DyeColor.ORANGE)) }
     val ORANGE_BRINESTONE_SLAB = register("orange_brinestone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
             .mapColor(DyeColor.ORANGE)) }
     val ORANGE_BRINESTONE_WALL = register("orange_brinestone_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())) }
 
     val ORANGE_BRINESTONE_BRICKS = register("orange_brinestone_bricks") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val ORANGE_BRINESTONE_BRICK_STAIRS = register("orange_brinestone_brick_stairs") {
-        StairBlock(ORANGE_BRINESTONE_BRICKS.get().defaultBlockState(), HABlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
+        StairBlock(ORANGE_BRINESTONE_BRICKS.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
             .mapColor(DyeColor.ORANGE)) }
     val ORANGE_BRINESTONE_BRICK_SLAB = register("orange_brinestone_brick_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())
             .mapColor(DyeColor.ORANGE)) }
     val ORANGE_BRINESTONE_BRICK_WALL = register("orange_brinestone_brick_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(ORANGE_BRINESTONE.get())) }
 
     val CHISELED_ORANGE_BRINESTONE = register("chiseled_orange_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_ORANGE_BRINESTONE = register("polished_orange_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_ORANGE_BRINESTONE_STAIRS = register("polished_orange_brinestone_stairs") {
-        StairBlock(POLISHED_ORANGE_BRINESTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(POLISHED_ORANGE_BRINESTONE.get())
+        StairBlock(POLISHED_ORANGE_BRINESTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(POLISHED_ORANGE_BRINESTONE.get())
             .mapColor(DyeColor.ORANGE)) }
     val POLISHED_ORANGE_BRINESTONE_SLAB = register("polished_orange_brinestone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(POLISHED_ORANGE_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(POLISHED_ORANGE_BRINESTONE.get())
             .mapColor(DyeColor.ORANGE)) }
 
     val YELLOW_BRINESTONE = register("yellow_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
     val YELLOW_BRINESTONE_STAIRS = register("yellow_brinestone_stairs") {
-        StairBlock(YELLOW_BRINESTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
+        StairBlock(YELLOW_BRINESTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
             .mapColor(DyeColor.YELLOW)) }
     val YELLOW_BRINESTONE_SLAB = register("yellow_brinestone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
             .mapColor(DyeColor.YELLOW)) }
     val YELLOW_BRINESTONE_WALL = register("yellow_brinestone_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())) }
 
     val YELLOW_BRINESTONE_BRICKS = register("yellow_brinestone_bricks") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val YELLOW_BRINESTONE_BRICK_STAIRS = register("yellow_brinestone_brick_stairs") {
-        StairBlock(YELLOW_BRINESTONE_BRICKS.get().defaultBlockState(), HABlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
+        StairBlock(YELLOW_BRINESTONE_BRICKS.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
             .mapColor(DyeColor.YELLOW)) }
     val YELLOW_BRINESTONE_BRICK_SLAB = register("yellow_brinestone_brick_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())
             .mapColor(DyeColor.YELLOW)) }
     val YELLOW_BRINESTONE_BRICK_WALL = register("yellow_brinestone_brick_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(YELLOW_BRINESTONE.get())) }
 
     val CHISELED_YELLOW_BRINESTONE = register("chiseled_yellow_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_YELLOW_BRINESTONE = register("polished_yellow_brinestone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_YELLOW_BRINESTONE_STAIRS = register("polished_yellow_brinestone_stairs") {
-        StairBlock(POLISHED_YELLOW_BRINESTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(POLISHED_YELLOW_BRINESTONE.get())
+        StairBlock(POLISHED_YELLOW_BRINESTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(POLISHED_YELLOW_BRINESTONE.get())
             .mapColor(DyeColor.YELLOW)) }
     val POLISHED_YELLOW_BRINESTONE_SLAB = register("polished_yellow_brinestone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(POLISHED_YELLOW_BRINESTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(POLISHED_YELLOW_BRINESTONE.get())
             .mapColor(DyeColor.YELLOW)) }
 
     val SCHIST = register("schist") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEEPSLATE)) }
     val SCHIST_STAIRS = register("schist_stairs") {
-        StairBlock(SCHIST.get().defaultBlockState(), HABlockProperties.ofFullCopy(SCHIST.get())
+        StairBlock(SCHIST.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(SCHIST.get())
         .mapColor(DyeColor.BLACK)) }
     val SCHIST_SLAB = register("schist_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(SCHIST.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(SCHIST.get())
         .mapColor(DyeColor.BLACK)) }
     val SCHIST_WALL = register("schist_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(SCHIST.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(SCHIST.get())) }
 
     val SCHIST_BRICKS = register("schist_bricks") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val SCHIST_BRICK_STAIRS = register("schist_brick_stairs") {
-        StairBlock(SCHIST_BRICKS.get().defaultBlockState(), HABlockProperties.ofFullCopy(SCHIST.get()).mapColor(DyeColor.BLACK)) }
+        StairBlock(SCHIST_BRICKS.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(SCHIST.get()).mapColor(DyeColor.BLACK)) }
     val SCHIST_BRICK_SLAB = register("schist_brick_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(SCHIST.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(SCHIST.get())
             .mapColor(DyeColor.BLACK)) }
     val SCHIST_BRICK_WALL = register("schist_brick_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(SCHIST.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(SCHIST.get())) }
 
     val CHISELED_SCHIST = register("chiseled_schist") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_SCHIST = register("polished_schist") {
-        Block(HABlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)) }
     val POLISHED_SCHIST_STAIRS = register("polished_schist_stairs") {
-        StairBlock(POLISHED_SCHIST.get().defaultBlockState(), HABlockProperties.ofFullCopy(POLISHED_SCHIST.get())
+        StairBlock(POLISHED_SCHIST.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(POLISHED_SCHIST.get())
             .mapColor(DyeColor.BLACK)) }
     val POLISHED_SCHIST_SLAB = register("polished_schist_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(POLISHED_SCHIST.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(POLISHED_SCHIST.get())
             .mapColor(DyeColor.BLACK)) }
 
     val CHIMNEYSTONE = register("chimneystone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.TUFF)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.TUFF)) }
     val CHIMNEYSTONE_STAIRS = register("chimneystone_stairs") {
-        StairBlock(CHIMNEYSTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(CHIMNEYSTONE.get())
+        StairBlock(CHIMNEYSTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(CHIMNEYSTONE.get())
             .mapColor(DyeColor.BROWN)) }
     val CHIMNEYSTONE_SLAB = register("chimneystone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(CHIMNEYSTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(CHIMNEYSTONE.get())
             .mapColor(DyeColor.BROWN)) }
     val CHIMNEYSTONE_WALL = register("chimneystone_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(CHIMNEYSTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(CHIMNEYSTONE.get())) }
 
     val CHIMNEYSTONE_BRICKS = register("chimneystone_bricks") {
-        Block(HABlockProperties.ofFullCopy(Blocks.TUFF)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.TUFF)) }
     val CHIMNEYSTONE_BRICK_STAIRS = register("chimneystone_brick_stairs") {
-        StairBlock(CHIMNEYSTONE_BRICKS.get().defaultBlockState(), HABlockProperties.ofFullCopy(CHIMNEYSTONE.get())
+        StairBlock(CHIMNEYSTONE_BRICKS.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(CHIMNEYSTONE.get())
             .mapColor(DyeColor.BROWN)) }
     val CHIMNEYSTONE_BRICK_SLAB = register("chimneystone_brick_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(CHIMNEYSTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(CHIMNEYSTONE.get())
             .mapColor(DyeColor.BROWN)) }
     val CHIMNEYSTONE_BRICK_WALL = register("chimneystone_brick_wall") {
-        WallBlock(HABlockProperties.ofFullCopy(CHIMNEYSTONE.get())) }
+        WallBlock(HAPIBlockProperties.ofFullCopy(CHIMNEYSTONE.get())) }
 
     val CHISELED_CHIMNEYSTONE = register("chiseled_chimneystone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.TUFF)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.TUFF)) }
     val POLISHED_CHIMNEYSTONE = register("polished_chimneystone") {
-        Block(HABlockProperties.ofFullCopy(Blocks.TUFF)) }
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.TUFF)) }
     val POLISHED_CHIMNEYSTONE_STAIRS = register("polished_chimneystone_stairs") {
-        StairBlock(POLISHED_CHIMNEYSTONE.get().defaultBlockState(), HABlockProperties.ofFullCopy(POLISHED_CHIMNEYSTONE.get())
+        StairBlock(POLISHED_CHIMNEYSTONE.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(POLISHED_CHIMNEYSTONE.get())
             .mapColor(DyeColor.BROWN)) }
     val POLISHED_CHIMNEYSTONE_SLAB = register("polished_chimneystone_slab") {
-        SlabBlock(HABlockProperties.ofFullCopy(POLISHED_CHIMNEYSTONE.get())
+        SlabBlock(HAPIBlockProperties.ofFullCopy(POLISHED_CHIMNEYSTONE.get())
             .mapColor(DyeColor.BROWN)) }
 
     val BASKING_SHARK_PLUSHIE = register("basking_shark_plushie") {
@@ -310,77 +313,77 @@ object HABlocks {
     val WHALE_SHARK_PLUSHIE = register("whale_shark_plushie") {
         createPlushieBlock(PlushieBlock.Variant.WHALE_SHARK) }
 
-    val PEARL_BLOCK = register("pearl_block") { Block(HABlockProperties.ofFullCopy(Blocks.QUARTZ_BLOCK)) }
-    val BLACK_PEARL_BLOCK = register("black_pearl_block") { Block(HABlockProperties.ofFullCopy(Blocks.QUARTZ_BLOCK)) }
+    val PEARL_BLOCK = register("pearl_block") { Block(HAPIBlockProperties.ofFullCopy(Blocks.QUARTZ_BLOCK)) }
+    val BLACK_PEARL_BLOCK = register("black_pearl_block") { Block(HAPIBlockProperties.ofFullCopy(Blocks.QUARTZ_BLOCK)) }
 
-    val CRAB_POT = register("crab_pot") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()) }
-    val HYBRID_CRATE = register("hybrid_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.OAK_PLANKS)) }
-    val OAK_CRATE = register("oak_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.OAK_PLANKS)) }
-    val SPRUCE_CRATE = register("spruce_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.SPRUCE_PLANKS)) }
-    val BIRCH_CRATE = register("birch_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.BIRCH_PLANKS)) }
-    val DARK_OAK_CRATE = register("dark_oak_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.DARK_OAK_PLANKS)) }
-    val ACACIA_CRATE = register("acacia_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.ACACIA_PLANKS)) }
-    val JUNGLE_CRATE = register("jungle_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.JUNGLE_PLANKS)) }
-    val MANGROVE_CRATE = register("mangrove_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.MANGROVE_PLANKS)) }
-    val CHERRY_CRATE = register("cherry_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.CHERRY_PLANKS)) }
-    val BAMBOO_CRATE = register("bamboo_crate") { CrateBlock(HABlockProperties.ofFullCopy(Blocks.BAMBOO_PLANKS)) }
+    val CRAB_POT = register("crab_pot") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()) }
+    val HYBRID_CRATE = register("hybrid_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_PLANKS)) }
+    val OAK_CRATE = register("oak_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_PLANKS)) }
+    val SPRUCE_CRATE = register("spruce_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.SPRUCE_PLANKS)) }
+    val BIRCH_CRATE = register("birch_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.BIRCH_PLANKS)) }
+    val DARK_OAK_CRATE = register("dark_oak_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.DARK_OAK_PLANKS)) }
+    val ACACIA_CRATE = register("acacia_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.ACACIA_PLANKS)) }
+    val JUNGLE_CRATE = register("jungle_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.JUNGLE_PLANKS)) }
+    val MANGROVE_CRATE = register("mangrove_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.MANGROVE_PLANKS)) }
+    val CHERRY_CRATE = register("cherry_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.CHERRY_PLANKS)) }
+    val BAMBOO_CRATE = register("bamboo_crate") { CrateBlock(HAPIBlockProperties.ofFullCopy(Blocks.BAMBOO_PLANKS)) }
 
     val SARGASSUM = register("sargassum") {
-        SargassumBlock(HABlockProperties.ofFullCopy(Blocks.KELP)
+        SargassumBlock(HAPIBlockProperties.ofFullCopy(Blocks.KELP)
             .noOcclusion())
     }
 
     val SARGASSUM_PLANT = register("sargassum_plant") {
-        SargassumPlantBlock(HABlockProperties.ofFullCopy(Blocks.KELP_PLANT)
+        SargassumPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.KELP_PLANT)
             .noOcclusion()
             )
     }
 
     val BULL_KELP = register("bull_kelp") {
-        BullKelpBlock(HABlockProperties.ofFullCopy(Blocks.KELP)
+        BullKelpBlock(HAPIBlockProperties.ofFullCopy(Blocks.KELP)
             .noOcclusion())
     }
 
     val BULL_KELP_PLANT = register("bull_kelp_plant") {
-        BullKelpPlantBlock(HABlockProperties.ofFullCopy(Blocks.KELP_PLANT)
+        BullKelpPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.KELP_PLANT)
             .noOcclusion()
             )
     }
 
     val DELESSERIA = register("delesseria") {
-        DelesseriaBlock(HABlockProperties.ofFullCopy(Blocks.KELP)
+        DelesseriaBlock(HAPIBlockProperties.ofFullCopy(Blocks.KELP)
             .noOcclusion())
     }
 
     val DELESSERIA_PLANT = register("delesseria_plant") {
-        DelesseriaPlantBlock(HABlockProperties.ofFullCopy(Blocks.KELP_PLANT)
+        DelesseriaPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.KELP_PLANT)
             .noOcclusion()
             )
     }
 
     val FLOATING_SARGASSUM = register("floating_sargassum") {
-        FloatingSargassumBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        FloatingSargassumBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .noCollision()
             .instabreak()
             .mapColor(MapColor.WOOD))
     }
 
     val FLOATING_PETALS = register("floating_petals") {
-        FloatingPetalsBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        FloatingPetalsBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .noCollision()
             .instabreak()
             .mapColor(MapColor.COLOR_PINK))
     }
 
     val FLOATING_LEAVES = register("floating_leaves") {
-        FloatingLitterBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        FloatingLitterBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .noCollision()
             .instabreak()
             .mapColor(MapColor.PLANT))
     }
 
     val FLOATING_LEAF_LITTER = register("floating_leaf_litter") {
-        FloatingLitterBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        FloatingLitterBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .noCollision()
             .instabreak()
             .mapColor(MapColor.TERRACOTTA_BROWN)
@@ -389,7 +392,7 @@ object HABlocks {
     }
 
     val DUCKWEED = register("duckweed") {
-        FloatingLitterBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        FloatingLitterBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .noCollision()
             .instabreak()
             .mapColor(MapColor.PLANT)
@@ -397,353 +400,353 @@ object HABlocks {
     }
 
     val WATER_LETTUCE = register("water_lettuce") {
-        WaterLettuceBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        WaterLettuceBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .mapColor(MapColor.PLANT)
             .noCollision()
             .instabreak())
     }
 
     val WATER_HYACINTH = register("water_hyacinth") {
-        WaterHyacinthBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        WaterHyacinthBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .mapColor(MapColor.PLANT)
             .noCollision()
             .instabreak())
     }
 
     val JUNGLE_LILY_PAD = register("jungle_lily_pad") {
-        JungleLilyPadBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        JungleLilyPadBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
             .mapColor(MapColor.PLANT)
             .instabreak())
     }
 
     val RAFT = register("raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.OAK_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_WOOD))
     }
 
     val OAK_RAFT = register("oak_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.OAK_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_WOOD))
     }
 
     val SPRUCE_RAFT = register("spruce_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.SPRUCE_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.SPRUCE_WOOD))
     }
 
     val DARK_OAK_RAFT = register("dark_oak_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.DARK_OAK_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.DARK_OAK_WOOD))
     }
 
     val BIRCH_RAFT = register("birch_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.BIRCH_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.BIRCH_WOOD))
     }
 
     val CHERRY_RAFT = register("cherry_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.CHERRY_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.CHERRY_WOOD))
     }
 
     val JUNGLE_RAFT = register("jungle_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.JUNGLE_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.JUNGLE_WOOD))
     }
 
     val ACACIA_RAFT = register("acacia_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.ACACIA_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.ACACIA_WOOD))
     }
 
     val MANGROVE_RAFT = register("mangrove_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.MANGROVE_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.MANGROVE_WOOD))
     }
 
     val DRIFTWOOD_RAFT = register("driftwood_raft") {
-        RaftBlock(HABlockProperties.ofFullCopy(Blocks.OAK_WOOD))
+        RaftBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_WOOD))
     }
 
     val GLOWING_PLANKTON = register("glowing_plankton") {
-        GlowingPlanktonBlock(HABlockProperties.ofFullCopy(Blocks.LILY_PAD)
+        GlowingPlanktonBlock(HAPIBlockProperties.ofFullCopy(Blocks.LILY_PAD)
         .noOcclusion()
         .replaceable()
         .noCollision()
         .instabreak())
     }
 
-    val SHORT_RED_ALGAE = register("short_red_algae") { ShortRedAlgaeBlock(HABlockProperties.ofFullCopy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
-    val RED_ALGAE = register("red_algae") { RedAlgaeBlock(HABlockProperties.ofFullCopy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
-    val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(HABlockProperties.ofFullCopy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
+    val SHORT_RED_ALGAE = register("short_red_algae") { ShortRedAlgaeBlock(HAPIBlockProperties.ofFullCopy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
+    val RED_ALGAE = register("red_algae") { RedAlgaeBlock(HAPIBlockProperties.ofFullCopy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
+    val TALL_RED_ALGAE = register("tall_red_algae") { TallRedAlgaeBlock(HAPIBlockProperties.ofFullCopy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
 
-    val SEA_LETTUCE = register("sea_lettuce") { SeaLettuceBlock(HABlockProperties.ofFullCopy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
-    val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(HABlockProperties.ofFullCopy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
+    val SEA_LETTUCE = register("sea_lettuce") { SeaLettuceBlock(HAPIBlockProperties.ofFullCopy(Blocks.SEAGRASS).offsetType(BlockBehaviour.OffsetType.XZ)) }
+    val TALL_SEA_LETTUCE = register("tall_sea_lettuce") { TallSeaLettuceBlock(HAPIBlockProperties.ofFullCopy(Blocks.TALL_SEAGRASS).offsetType(BlockBehaviour.OffsetType.NONE)) }
 
-    val BONE_WORMS = register("bone_worms") { BoneWormsBlock(HABlockProperties.ofFullCopy(Blocks.SEAGRASS)) }
+    val BONE_WORMS = register("bone_worms") { BoneWormsBlock(HAPIBlockProperties.ofFullCopy(Blocks.SEAGRASS)) }
 
     val DEAD_LOPHELIA_CORAL_BLOCK = register("dead_lophelia_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BLEACHED_LOPHELIA_CORAL_BLOCK = register("bleached_lophelia_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val LOPHELIA_CORAL_BLOCK = register("lophelia_coral_block") {
         CoralBlock(DEAD_LOPHELIA_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_LOPHELIA_CORAL_FAN = register("dead_lophelia_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_LOPHELIA_CORAL_FAN = register("bleached_lophelia_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val LOPHELIA_CORAL_FAN = register("lophelia_coral_fan") { CoralFanBlock(DEAD_LOPHELIA_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_LOPHELIA_CORAL = register("dead_lophelia_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_LOPHELIA_CORAL = register("bleached_lophelia_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val LOPHELIA_CORAL = register("lophelia_coral") { CoralPlantBlock(DEAD_LOPHELIA_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val DEAD_LOPHELIA_CORAL_WALL_FAN = register("dead_lophelia_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_LOPHELIA_CORAL_WALL_FAN = register("bleached_lophelia_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val LOPHELIA_CORAL_WALL_FAN = register("lophelia_coral_wall_fan") { CoralWallFanBlock(DEAD_LOPHELIA_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_LOPHELIA_CORAL_FAN = register("dead_lophelia_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_LOPHELIA_CORAL_FAN = register("bleached_lophelia_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val LOPHELIA_CORAL_FAN = register("lophelia_coral_fan") { CoralFanBlock(DEAD_LOPHELIA_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_LOPHELIA_CORAL = register("dead_lophelia_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_LOPHELIA_CORAL = register("bleached_lophelia_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val LOPHELIA_CORAL = register("lophelia_coral") { CoralPlantBlock(DEAD_LOPHELIA_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val DEAD_LOPHELIA_CORAL_WALL_FAN = register("dead_lophelia_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_LOPHELIA_CORAL_WALL_FAN = register("bleached_lophelia_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val LOPHELIA_CORAL_WALL_FAN = register("lophelia_coral_wall_fan") { CoralWallFanBlock(DEAD_LOPHELIA_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_BAMBOO_CORAL_BLOCK = register("dead_bamboo_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BLEACHED_BAMBOO_CORAL_BLOCK = register("bleached_bamboo_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BAMBOO_CORAL_BLOCK = register("bamboo_coral_block") {
         CoralBlock(DEAD_BAMBOO_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_BAMBOO_CORAL_FAN = register("dead_bamboo_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_BAMBOO_CORAL_FAN = register("bleached_bamboo_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BAMBOO_CORAL_FAN = register("bamboo_coral_fan") { CoralFanBlock(DEAD_BAMBOO_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_BAMBOO_CORAL = register("dead_bamboo_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_BAMBOO_CORAL = register("bleached_bamboo_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BAMBOO_CORAL = register("bamboo_coral") { CoralPlantBlock(DEAD_BAMBOO_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val DEAD_BAMBOO_CORAL_WALL_FAN = register("dead_bamboo_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_BAMBOO_CORAL_WALL_FAN = register("bleached_bamboo_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BAMBOO_CORAL_WALL_FAN = register("bamboo_coral_wall_fan") { CoralWallFanBlock(DEAD_BAMBOO_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_BAMBOO_CORAL_FAN = register("dead_bamboo_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_BAMBOO_CORAL_FAN = register("bleached_bamboo_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BAMBOO_CORAL_FAN = register("bamboo_coral_fan") { CoralFanBlock(DEAD_BAMBOO_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_BAMBOO_CORAL = register("dead_bamboo_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_BAMBOO_CORAL = register("bleached_bamboo_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BAMBOO_CORAL = register("bamboo_coral") { CoralPlantBlock(DEAD_BAMBOO_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val DEAD_BAMBOO_CORAL_WALL_FAN = register("dead_bamboo_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_BAMBOO_CORAL_WALL_FAN = register("bleached_bamboo_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BAMBOO_CORAL_WALL_FAN = register("bamboo_coral_wall_fan") { CoralWallFanBlock(DEAD_BAMBOO_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_ROSE_CORAL_BLOCK = register("dead_rose_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_PINK))
     }
 
     val BLEACHED_ROSE_CORAL_BLOCK = register("bleached_rose_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val ROSE_CORAL_BLOCK = register("rose_coral_block") {
         CoralBlock(
             DEAD_ROSE_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_PINK)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_ROSE_CORAL_FAN = register("dead_rose_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_ROSE_CORAL_FAN = register("bleached_rose_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val ROSE_CORAL_FAN = register("rose_coral_fan") { CoralFanBlock(DEAD_ROSE_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_ROSE_CORAL = register("dead_rose_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_ROSE_CORAL = register("bleached_rose_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val ROSE_CORAL = register("rose_coral") { CoralPlantBlock(DEAD_ROSE_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val DEAD_ROSE_CORAL_WALL_FAN = register("dead_rose_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_ROSE_CORAL_WALL_FAN = register("bleached_rose_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val ROSE_CORAL_WALL_FAN = register("rose_coral_wall_fan") { CoralWallFanBlock(DEAD_ROSE_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_ROSE_CORAL_FAN = register("dead_rose_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_ROSE_CORAL_FAN = register("bleached_rose_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val ROSE_CORAL_FAN = register("rose_coral_fan") { CoralFanBlock(DEAD_ROSE_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_ROSE_CORAL = register("dead_rose_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_ROSE_CORAL = register("bleached_rose_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val ROSE_CORAL = register("rose_coral") { CoralPlantBlock(DEAD_ROSE_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val DEAD_ROSE_CORAL_WALL_FAN = register("dead_rose_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_ROSE_CORAL_WALL_FAN = register("bleached_rose_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val ROSE_CORAL_WALL_FAN = register("rose_coral_wall_fan") { CoralWallFanBlock(DEAD_ROSE_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_LEAF_CORAL_BLOCK = register("dead_leaf_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_GREEN))
     }
 
     val BLEACHED_LEAF_CORAL_BLOCK = register("bleached_leaf_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_GREEN))
     }
 
     val LEAF_CORAL_BLOCK = register("leaf_coral_block") {
         CoralBlock(DEAD_LEAF_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_GREEN)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_LEAF_CORAL_FAN = register("dead_leaf_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_LEAF_CORAL_FAN = register("bleached_leaf_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val LEAF_CORAL_FAN = register("leaf_coral_fan") { CoralFanBlock(DEAD_LEAF_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_LEAF_CORAL = register("dead_leaf_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_LEAF_CORAL = register("bleached_leaf_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val LEAF_CORAL = register("leaf_coral") { CoralPlantBlock(DEAD_LEAF_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val DEAD_LEAF_CORAL_WALL_FAN = register("dead_leaf_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_LEAF_CORAL_WALL_FAN = register("bleached_leaf_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val LEAF_CORAL_WALL_FAN = register("leaf_coral_wall_fan") { CoralWallFanBlock(DEAD_LEAF_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_LEAF_CORAL_FAN = register("dead_leaf_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_LEAF_CORAL_FAN = register("bleached_leaf_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val LEAF_CORAL_FAN = register("leaf_coral_fan") { CoralFanBlock(DEAD_LEAF_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_LEAF_CORAL = register("dead_leaf_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_LEAF_CORAL = register("bleached_leaf_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val LEAF_CORAL = register("leaf_coral") { CoralPlantBlock(DEAD_LEAF_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val DEAD_LEAF_CORAL_WALL_FAN = register("dead_leaf_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_LEAF_CORAL_WALL_FAN = register("bleached_leaf_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val LEAF_CORAL_WALL_FAN = register("leaf_coral_wall_fan") { CoralWallFanBlock(DEAD_LEAF_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_SUN_CORAL_BLOCK = register("dead_sun_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BLEACHED_SUN_CORAL_BLOCK = register("bleached_sun_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val SUN_CORAL_BLOCK = register("sun_coral_block") {
         CoralBlock(DEAD_SUN_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_ORANGE)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_SUN_CORAL_FAN = register("dead_sun_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_SUN_CORAL_FAN = register("bleached_sun_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val SUN_CORAL_FAN = register("sun_coral_fan") { CoralFanBlock(DEAD_SUN_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_SUN_CORAL = register("dead_sun_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_SUN_CORAL = register("bleached_sun_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val SUN_CORAL = register("sun_coral") { CoralPlantBlock(DEAD_SUN_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val DEAD_SUN_CORAL_WALL_FAN = register("dead_sun_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_SUN_CORAL_WALL_FAN = register("bleached_sun_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val SUN_CORAL_WALL_FAN = register("sun_coral_wall_fan") { CoralWallFanBlock(DEAD_SUN_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_SUN_CORAL_FAN = register("dead_sun_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_SUN_CORAL_FAN = register("bleached_sun_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val SUN_CORAL_FAN = register("sun_coral_fan") { CoralFanBlock(DEAD_SUN_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_SUN_CORAL = register("dead_sun_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_SUN_CORAL = register("bleached_sun_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val SUN_CORAL = register("sun_coral") { CoralPlantBlock(DEAD_SUN_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val DEAD_SUN_CORAL_WALL_FAN = register("dead_sun_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_SUN_CORAL_WALL_FAN = register("bleached_sun_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val SUN_CORAL_WALL_FAN = register("sun_coral_wall_fan") { CoralWallFanBlock(DEAD_SUN_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_BUTTON_CORAL_BLOCK = register("dead_button_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BLEACHED_BUTTON_CORAL_BLOCK = register("bleached_button_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BUTTON_CORAL_BLOCK = register("button_coral_block") {
         CoralBlock(DEAD_BUTTON_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_BUTTON_CORAL_FAN = register("dead_button_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_BUTTON_CORAL_FAN = register("bleached_button_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BUTTON_CORAL_FAN = register("button_coral_fan") { CoralFanBlock(DEAD_BUTTON_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_BUTTON_CORAL = register("dead_button_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_BUTTON_CORAL = register("bleached_button_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BUTTON_CORAL = register("button_coral") { CoralPlantBlock(DEAD_BUTTON_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val DEAD_BUTTON_CORAL_WALL_FAN = register("dead_button_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_BUTTON_CORAL_WALL_FAN = register("bleached_button_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BUTTON_CORAL_WALL_FAN = register("button_coral_wall_fan") { CoralWallFanBlock(DEAD_BUTTON_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_BUTTON_CORAL_FAN = register("dead_button_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_BUTTON_CORAL_FAN = register("bleached_button_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BUTTON_CORAL_FAN = register("button_coral_fan") { CoralFanBlock(DEAD_BUTTON_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_BUTTON_CORAL = register("dead_button_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_BUTTON_CORAL = register("bleached_button_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BUTTON_CORAL = register("button_coral") { CoralPlantBlock(DEAD_BUTTON_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val DEAD_BUTTON_CORAL_WALL_FAN = register("dead_button_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_BUTTON_CORAL_WALL_FAN = register("bleached_button_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BUTTON_CORAL_WALL_FAN = register("button_coral_wall_fan") { CoralWallFanBlock(DEAD_BUTTON_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_ZIGZAG_CORAL_BLOCK = register("dead_zigzag_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BLEACHED_ZIGZAG_CORAL_BLOCK = register("bleached_zigzag_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val ZIGZAG_CORAL_BLOCK = register("zigzag_coral_block") {
         CoralBlock(DEAD_ZIGZAG_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_ZIGZAG_CORAL_FAN = register("dead_zigzag_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_ZIGZAG_CORAL_FAN = register("bleached_zigzag_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val ZIGZAG_CORAL_FAN = register("zigzag_coral_fan") { CoralFanBlock(DEAD_ZIGZAG_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_ZIGZAG_CORAL = register("dead_zigzag_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_ZIGZAG_CORAL = register("bleached_zigzag_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val ZIGZAG_CORAL = register("zigzag_coral") { CoralPlantBlock(DEAD_ZIGZAG_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val DEAD_ZIGZAG_CORAL_WALL_FAN = register("dead_zigzag_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_ZIGZAG_CORAL_WALL_FAN = register("bleached_zigzag_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val ZIGZAG_CORAL_WALL_FAN = register("zigzag_coral_wall_fan") { CoralWallFanBlock(DEAD_ZIGZAG_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_ZIGZAG_CORAL_FAN = register("dead_zigzag_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_ZIGZAG_CORAL_FAN = register("bleached_zigzag_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val ZIGZAG_CORAL_FAN = register("zigzag_coral_fan") { CoralFanBlock(DEAD_ZIGZAG_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_ZIGZAG_CORAL = register("dead_zigzag_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_ZIGZAG_CORAL = register("bleached_zigzag_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val ZIGZAG_CORAL = register("zigzag_coral") { CoralPlantBlock(DEAD_ZIGZAG_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val DEAD_ZIGZAG_CORAL_WALL_FAN = register("dead_zigzag_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_ZIGZAG_CORAL_WALL_FAN = register("bleached_zigzag_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val ZIGZAG_CORAL_WALL_FAN = register("zigzag_coral_wall_fan") { CoralWallFanBlock(DEAD_ZIGZAG_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val DEAD_THORN_CORAL_BLOCK = register("dead_thorn_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val BLEACHED_THORN_CORAL_BLOCK = register("bleached_thorn_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
     val THORN_CORAL_BLOCK = register("thorn_coral_block") {
         CoralBlock(DEAD_THORN_CORAL_BLOCK.get(),
-            HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
+            HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_BLOCK)
                 .mapColor(MapColor.COLOR_BLACK)
                 .sound(SoundType.CORAL_BLOCK))
     }
 
-    val DEAD_THORN_CORAL_FAN = register("dead_thorn_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_THORN_CORAL_FAN = register("bleached_thorn_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val THORN_CORAL_FAN = register("thorn_coral_fan") { CoralFanBlock(DEAD_THORN_CORAL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
-    val DEAD_THORN_CORAL = register("dead_thorn_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_THORN_CORAL = register("bleached_thorn_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val DEAD_THORN_CORAL_WALL_FAN = register("dead_thorn_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val BLEACHED_THORN_CORAL_WALL_FAN = register("bleached_thorn_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
-    val THORN_CORAL = register("thorn_coral") { CoralPlantBlock(DEAD_THORN_CORAL.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
-    val THORN_CORAL_WALL_FAN = register("thorn_coral_wall_fan") { CoralWallFanBlock(DEAD_THORN_CORAL_WALL_FAN.get(), HABlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
+    val DEAD_THORN_CORAL_FAN = register("dead_thorn_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_THORN_CORAL_FAN = register("bleached_thorn_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val THORN_CORAL_FAN = register("thorn_coral_fan") { CoralFanBlock(DEAD_THORN_CORAL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_FAN)) }
+    val DEAD_THORN_CORAL = register("dead_thorn_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_THORN_CORAL = register("bleached_thorn_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val DEAD_THORN_CORAL_WALL_FAN = register("dead_thorn_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_THORN_CORAL_WALL_FAN = register("bleached_thorn_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val THORN_CORAL = register("thorn_coral") { CoralPlantBlock(DEAD_THORN_CORAL.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL)) }
+    val THORN_CORAL_WALL_FAN = register("thorn_coral_wall_fan") { CoralWallFanBlock(DEAD_THORN_CORAL_WALL_FAN.get(), HAPIBlockProperties.ofFullCopy(Blocks.FIRE_CORAL_WALL_FAN)) }
 
     val BLEACHED_FIRE_CORAL_BLOCK = register("bleached_fire_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
-    val BLEACHED_FIRE_CORAL_FAN = register("bleached_fire_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_FIRE_CORAL = register("bleached_fire_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_FIRE_CORAL_WALL_FAN = register("bleached_fire_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_FIRE_CORAL_FAN = register("bleached_fire_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_FIRE_CORAL = register("bleached_fire_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_FIRE_CORAL_WALL_FAN = register("bleached_fire_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
 
     val BLEACHED_TUBE_CORAL_BLOCK = register("bleached_tube_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
-    val BLEACHED_TUBE_CORAL_FAN = register("bleached_tube_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_TUBE_CORAL = register("bleached_tube_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_TUBE_CORAL_WALL_FAN = register("bleached_tube_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_TUBE_CORAL_FAN = register("bleached_tube_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_TUBE_CORAL = register("bleached_tube_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_TUBE_CORAL_WALL_FAN = register("bleached_tube_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
 
     val BLEACHED_HORN_CORAL_BLOCK = register("bleached_horn_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
-    val BLEACHED_HORN_CORAL_FAN = register("bleached_horn_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_HORN_CORAL = register("bleached_horn_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_HORN_CORAL_WALL_FAN = register("bleached_horn_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_HORN_CORAL_FAN = register("bleached_horn_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_HORN_CORAL = register("bleached_horn_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_HORN_CORAL_WALL_FAN = register("bleached_horn_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
 
     val BLEACHED_BUBBLE_CORAL_BLOCK = register("bleached_bubble_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
-    val BLEACHED_BUBBLE_CORAL_FAN = register("bleached_bubble_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_BUBBLE_CORAL = register("bleached_bubble_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_BUBBLE_CORAL_WALL_FAN = register("bleached_bubble_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_BUBBLE_CORAL_FAN = register("bleached_bubble_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_BUBBLE_CORAL = register("bleached_bubble_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_BUBBLE_CORAL_WALL_FAN = register("bleached_bubble_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
 
     val BLEACHED_BRAIN_CORAL_BLOCK = register("bleached_brain_coral_block") {
-        Block(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
+        Block(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_BLOCK)
             .mapColor(MapColor.TERRACOTTA_WHITE))
     }
 
-    val BLEACHED_BRAIN_CORAL_FAN = register("bleached_brain_coral_fan") { BaseCoralFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
-    val BLEACHED_BRAIN_CORAL = register("bleached_brain_coral") { BaseCoralPlantBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
-    val BLEACHED_BRAIN_CORAL_WALL_FAN = register("bleached_brain_coral_wall_fan") { BaseCoralWallFanBlock(HABlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
+    val BLEACHED_BRAIN_CORAL_FAN = register("bleached_brain_coral_fan") { BaseCoralFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_FAN)) }
+    val BLEACHED_BRAIN_CORAL = register("bleached_brain_coral") { BaseCoralPlantBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL)) }
+    val BLEACHED_BRAIN_CORAL_WALL_FAN = register("bleached_brain_coral_wall_fan") { BaseCoralWallFanBlock(HAPIBlockProperties.ofFullCopy(Blocks.DEAD_FIRE_CORAL_WALL_FAN)) }
 
     val GLOWSTICK = register("glowstick") {
-        GlowstickBlock(HABlockProperties.ofFullCopy(Blocks.TORCH)
+        GlowstickBlock(HAPIBlockProperties.ofFullCopy(Blocks.TORCH)
             .noCollision()
             .lightLevel { 12 }
             .noOcclusion())
     }
 
     val WALL_GLOWSTICK = register("wall_glowstick") {
-        WallGlowstickBlock(HABlockProperties.ofFullCopy(Blocks.WALL_TORCH)
+        WallGlowstickBlock(HAPIBlockProperties.ofFullCopy(Blocks.WALL_TORCH)
 
             .noCollision()
             .lightLevel { 12 }
@@ -752,7 +755,7 @@ object HABlocks {
 
     val THERMAL_VENT = register("hydrothermal_vent_shaft") {
         ThermalVentBlock(2,
-            HABlockProperties.ofFullCopy(Blocks.TUFF)
+            HAPIBlockProperties.ofFullCopy(Blocks.TUFF)
             .noOcclusion()
             .strength(0.5F)
             .pushReaction(PushReaction.POPPED))
@@ -760,13 +763,13 @@ object HABlocks {
 
     val GIANT_THERMAL_VENT = register("giant_thermal_vent") {
         GiantThermalVentBlock(2,
-            HABlockProperties.ofFullCopy(Blocks.TUFF)
+            HAPIBlockProperties.ofFullCopy(Blocks.TUFF)
             .strength(0.5F)
             .pushReaction(PushReaction.PUSH_PULL))
     }
 
     val TUBE_WORM = register("tube_worm") {
-        TubeWormBlock(HABlockProperties.of()
+        TubeWormBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.COLOR_GREEN)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
@@ -774,7 +777,7 @@ object HABlocks {
     }
 
     val TUBE_SPONGE = register("tube_sponge") {
-        LivingSpongeBlock(HABlockProperties.of()
+        LivingSpongeBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.COLOR_YELLOW)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
@@ -782,7 +785,7 @@ object HABlocks {
     }
 
     val GLASS_SPONGE = register("glass_sponge") {
-        LivingSpongeBlock(HABlockProperties.of()
+        LivingSpongeBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.COLOR_LIGHT_GRAY)
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()
@@ -791,7 +794,7 @@ object HABlocks {
     }
 
     val HARP_SPONGE = register("harp_sponge") {
-        LivingSpongeBlock(HABlockProperties.of()
+        LivingSpongeBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.COLOR_LIGHT_GRAY)
             .sound(SoundType.SLIME_BLOCK)
             .noCollision()
@@ -801,7 +804,7 @@ object HABlocks {
     }
 
     val PING_PONG_SPONGE = register("ping_pong_sponge") {
-        LivingSpongeBlock(HABlockProperties.of()
+        LivingSpongeBlock(HAPIBlockProperties.of()
             .mapColor(MapColor.COLOR_LIGHT_GRAY)
             .sound(SoundType.SLIME_BLOCK)
             .noCollision()
@@ -811,51 +814,53 @@ object HABlocks {
     }
 
     val GIANT_CLAM = register("giant_clam") {
-        GiantClamBlock(true, HABlockProperties.ofFullCopy(Blocks.TUFF)
+        GiantClamBlock(true, HAPIBlockProperties.ofFullCopy(Blocks.TUFF)
             .noOcclusion()
             .strength(1.0F)
             .pushReaction(PushReaction.POPPED))
     }
 
     val OYSTER = register("oyster_block") {
-        OysterBlock(true, HABlockProperties.ofFullCopy(Blocks.TUFF)
+        OysterBlock(true, HAPIBlockProperties.ofFullCopy(Blocks.TUFF)
             .noOcclusion()
             .strength(1.0F)
             .pushReaction(PushReaction.POPPED))
     }
 
     val BUOY = register("buoy") {
-        BuoyBlock(HABlockProperties.ofFullCopy(Blocks.OAK_PLANKS)
+        BuoyBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_PLANKS)
             .noOcclusion()
             .noTerrainParticles()
             .lightLevel { 12 })
     }
 
     val BELL_BUOY = register("bell_buoy") {
-        BellBuoyBlock(HABlockProperties.ofFullCopy(Blocks.OAK_PLANKS)
+        BellBuoyBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_PLANKS)
             .noOcclusion()
             .noTerrainParticles())
     }
 
     val DECORATIVE_BUBBLE_COLUMN = register("decorative_bubble_column") {
-        DecorativeBubbleColumnBlock(HABlockProperties.ofFullCopy(Blocks.BUBBLE_COLUMN))
+        DecorativeBubbleColumnBlock(HAPIBlockProperties.ofFullCopy(Blocks.BUBBLE_COLUMN))
     }
 
     val BUBBLE_NET = register("bubble_net") {
-        BubbleNetBlock(HABlockProperties.ofFullCopy(Blocks.BUBBLE_COLUMN))
+        BubbleNetBlock(HAPIBlockProperties.ofFullCopy(Blocks.BUBBLE_COLUMN))
     }
 
     private fun createPlushieBlock(variant: PlushieBlock.Variant): PlushieBlock {
         return PlushieBlock(
             variant,
-            HABlockProperties.of().instabreak().pushReaction(PushReaction.POPPED).sound(SoundType.WOOL)
+            HAPIBlockProperties.of().instabreak().pushReaction(PushReaction.POPPED).sound(SoundType.WOOL)
                 .instrument(NoteBlockInstrument.CUSTOM_HEAD)
                 .noTerrainParticles()
         )
     }
 
     fun <T : Block> register(id: String, block: Supplier<T>): RegistryObject<Block> {
-        return CommonClass.BLOCKS.register(id) { HABlockProperties.withId(id, block::get) }
+        return CommonClass.BLOCKS.register(id) {
+            HAPIBlockProperties.withId(ResourceKey.create(Registries.BLOCK, CommonClass.locate(id))) { block.get() }
+        }
     }
 
 }
