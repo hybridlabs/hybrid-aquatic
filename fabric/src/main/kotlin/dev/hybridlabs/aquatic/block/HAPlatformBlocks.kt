@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.block
 
 import dev.hybridlabs.aquatic.block.wood.HAWoodTypes
+import dev.hybridlabs.hapi.block.HAPIBlockProperties
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraft.world.level.block.state.properties.BlockSetType
@@ -8,26 +9,26 @@ import net.minecraft.world.level.material.MapColor
 
 object HAPlatformBlocks {
     val DRIFTWOOD_LOG =
-        HABlocks.register("driftwood_log") { RotatedPillarBlock(HABlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
+        HABlocks.register("driftwood_log") { RotatedPillarBlock(HAPIBlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
     val STRIPPED_DRIFTWOOD_LOG =
-        HABlocks.register("stripped_driftwood_log") { RotatedPillarBlock(HABlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
+        HABlocks.register("stripped_driftwood_log") { RotatedPillarBlock(HAPIBlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
     val DRIFTWOOD_WOOD =
-        HABlocks.register("driftwood_wood") { RotatedPillarBlock(HABlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
+        HABlocks.register("driftwood_wood") { RotatedPillarBlock(HAPIBlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
     val STRIPPED_DRIFTWOOD_WOOD =
-        HABlocks.register("stripped_driftwood_wood") { RotatedPillarBlock(HABlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
+        HABlocks.register("stripped_driftwood_wood") { RotatedPillarBlock(HAPIBlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
     val DRIFTWOOD_PLANKS =
-        HABlocks.register("driftwood_planks") { Block(HABlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
+        HABlocks.register("driftwood_planks") { Block(HAPIBlockProperties.ofFullCopy((Blocks.OAK_PLANKS))) }
     val DRIFTWOOD_STAIRS = HABlocks.register(
         "driftwood_stairs"
-    ) { StairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), HABlockProperties.ofFullCopy(Blocks.OAK_STAIRS)) }
+    ) { StairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), HAPIBlockProperties.ofFullCopy(Blocks.OAK_STAIRS)) }
     val DRIFTWOOD_SLAB =
-        HABlocks.register("driftwood_slab") { SlabBlock(HABlockProperties.ofFullCopy(Blocks.OAK_STAIRS)) }
+        HABlocks.register("driftwood_slab") { SlabBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_STAIRS)) }
     val DRIFTWOOD_BUTTON = HABlocks.register(
         "driftwood_button"
     ) {
         ButtonBlock(
             BlockSetType.OAK, 25,
-            HABlockProperties.ofFullCopy(
+            HAPIBlockProperties.ofFullCopy(
                 Blocks.OAK_BUTTON
             )
         )
@@ -36,46 +37,46 @@ object HAPlatformBlocks {
         "driftwood_pressure_plate"
     ) {
         PressurePlateBlock(
-            BlockSetType.OAK, HABlockProperties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE)
+            BlockSetType.OAK, HAPIBlockProperties.ofFullCopy(Blocks.OAK_PRESSURE_PLATE)
         )
     }
     val DRIFTWOOD_FENCE =
-        HABlocks.register("driftwood_fence") { FenceBlock(HABlockProperties.ofFullCopy(Blocks.OAK_FENCE)) }
+        HABlocks.register("driftwood_fence") { FenceBlock(HAPIBlockProperties.ofFullCopy(Blocks.OAK_FENCE)) }
     val DRIFTWOOD_FENCE_GATE = HABlocks.register(
         "driftwood_fence_gate"
     ) {
         FenceGateBlock(
             HAWoodTypes.DRIFTWOOD,
-            HABlockProperties.ofFullCopy(Blocks.OAK_FENCE)
+            HAPIBlockProperties.ofFullCopy(Blocks.OAK_FENCE)
         )
     }
     val DRIFTWOOD_DOOR =
         HABlocks.register("driftwood_door") {
             DoorBlock(
                 BlockSetType.OAK,
-                HABlockProperties.ofFullCopy(Blocks.OAK_DOOR)
+                HAPIBlockProperties.ofFullCopy(Blocks.OAK_DOOR)
             )
         }
     val DRIFTWOOD_TRAPDOOR =
         HABlocks.register("driftwood_trapdoor") {
             TrapDoorBlock(
                 BlockSetType.OAK,
-                HABlockProperties.ofFullCopy(Blocks.OAK_TRAPDOOR)
+                HAPIBlockProperties.ofFullCopy(Blocks.OAK_TRAPDOOR)
             )
         }
 
     val DUNEGRASS =
-        HABlocks.register("dunegrass") { DunegrassBlock(HABlockProperties.ofFullCopy(Blocks.SHORT_GRASS)) }
+        HABlocks.register("dunegrass") { DunegrassBlock(HAPIBlockProperties.ofFullCopy(Blocks.SHORT_GRASS)) }
     val TALL_DUNEGRASS =
-        HABlocks.register("tall_dunegrass") { TallDunegrassBlock(HABlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
+        HABlocks.register("tall_dunegrass") { TallDunegrassBlock(HAPIBlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
     val CATTAIL =
-        HABlocks.register("cattail") { CattailBlock(HABlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
+        HABlocks.register("cattail") { CattailBlock(HAPIBlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
     val PAPYRUS =
-        HABlocks.register("papyrus") { PapyrusBlock(HABlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
+        HABlocks.register("papyrus") { PapyrusBlock(HAPIBlockProperties.ofFullCopy(Blocks.TALL_GRASS)) }
 
     val GLOWSLIME_BLOCK = HABlocks.register("glowslime_block") {
         GlowslimeBlock(
-            HABlockProperties.of()
+            HAPIBlockProperties.of()
             .friction(0.8F)
             .bounceRestitution(1.0F)
             .instabreak()
@@ -88,7 +89,7 @@ object HAPlatformBlocks {
 
     val HAGSLIME_BLOCK = HABlocks.register("hagslime_block") {
         HagslimeBlock(
-            HABlockProperties.of()
+            HAPIBlockProperties.of()
                 .instabreak()
                 .noOcclusion()
                 .sound(SoundType.HONEY_BLOCK)
