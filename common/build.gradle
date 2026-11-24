@@ -11,7 +11,7 @@ neoForge {
 }
 
 dependencies {
-    compileOnly("dev.hybridlabs.hapi:hapi-common-26.1.2:1.4.0")
+    compileOnly("dev.hybridlabs.hapi:hapi-common-26.1.2:1.2.0")
 
     implementation "com.geckolib:geckolib-neoforge-${geckolib_version}"
 
