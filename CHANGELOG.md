@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+- Fixed the config file not being created on NeoForge
+- Fixed worldgen feature options not applying without rebuilding the mod
+- Added config options for coral reef, tropical deep coral reef and all trench biomes
+- Malformed or outdated config files are now backed up before being reset
+- Fixed the deep warm ocean config option using an incorrect key
+- Fixed a crash when wandering traders generated with unbound items
+- Fixed fish heads and tails spinning
+- Fixed missing blockstates and models for anemones, plushies, message in a bottle, buoy and bell buoy
+- Fixed plushie models being recreated repeatedly, which caused EMF errors
+- Added the missing brine translation
+- Moved shared config handling to Hybrid API
+
 ## [1.7.5] 2026-11-20
 - Changed jungle lilypads to break on contact with anything in the "boats" tag
 - Added Diving Armor Upgrade Templates to crate loot
