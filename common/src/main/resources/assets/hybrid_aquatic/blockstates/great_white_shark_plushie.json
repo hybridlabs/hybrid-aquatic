@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "hybrid_aquatic:block/great_white_shark_plushie"
+      }
+    }
+  ]
+}

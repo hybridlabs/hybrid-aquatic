@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "hybrid_aquatic:block/hammerhead_shark_plushie"
+      }
+    }
+  ]
+}

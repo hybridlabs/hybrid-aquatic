@@ -38,7 +38,6 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 .filterIsInstance<PlushieBlock>()
                 .forEach { block ->
                     skipAutoItemBlock(block)
-                    createAirLikeBlock(block, block.asItem())
                     delegateItemModel(block, TEMPLATE_PLUSHIE)
                 }
 
@@ -53,33 +52,14 @@ class ModelProvider(output: FabricDataOutput) : FabricModelProvider(output) {
                 }
 
             // builtin
-            mapOf<Block, Pair<Block?, ResourceLocation>>(
-                HABlocks.ANEMONE.get() to (null to TEMPLATE_ANEMONE),
-                HABlocks.STRAWBERRY_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
-                HABlocks.GIANT_GREEN_ANEMONE.get() to (null to TEMPLATE_ANEMONE),
-            ).forEach { (block, info) ->
-                val (particleBlock, template) = info
-
+            mapOf<Block, ResourceLocation>(
+                HABlocks.ANEMONE.get() to TEMPLATE_ANEMONE,
+                HABlocks.STRAWBERRY_ANEMONE.get() to TEMPLATE_ANEMONE,
+                HABlocks.GIANT_GREEN_ANEMONE.get() to TEMPLATE_ANEMONE,
+            ).forEach { (block, template) ->
                 skipAutoItemBlock(block)
-
-                particleBlock?.let { b -> createAirLikeBlock(block, TextureMapping.getBlockTexture(b)) }
                 delegateItemModel(block, template)
             }
-
-            createAirLikeBlock(
-                HABlocks.ANEMONE.get(),
-                TextureMapping.getBlockTexture(HABlocks.ANEMONE.get(), "_top")
-            )
-
-            createAirLikeBlock(
-                HABlocks.GIANT_GREEN_ANEMONE.get(),
-                TextureMapping.getBlockTexture(HABlocks.GIANT_GREEN_ANEMONE.get(), "_top")
-            )
-
-            createAirLikeBlock(
-                HABlocks.STRAWBERRY_ANEMONE.get(),
-                TextureMapping.getBlockTexture(HABlocks.STRAWBERRY_ANEMONE.get(), "_top")
-            )
 
             // simple cubes
             setOf(

@@ -35,45 +35,51 @@ object HAEntityModelLayers {
 
     /**
      * Injects Plushie models into the given [builder].
+     *
+     * The models are cached because some mods (EMF in particular) treat repeated [EntityModelSet.bakeLayer] calls
+     * as a model leak.
      * @see dev.hybridlabs.aquatic.mixin.client.SkullBlockEntityModelMixin
      */
+    private var plushieModels: Map<PlushieBlock.Variant, SkullModelBase>? = null
+
     fun injectModels(
         modelLoader: EntityModelSet, builder: ImmutableMap.Builder<SkullBlock.Type, SkullModelBase>
     ) {
-        builder.put(
-            PlushieBlock.Variant.BASKING_SHARK, BaskingSharkPlushieModel(modelLoader.bakeLayer(
-                BASKING_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.BULL_SHARK, BullSharkPlushieModel(modelLoader.bakeLayer(
-                BULL_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.FRILLED_SHARK, FrilledSharkPlushieModel(modelLoader.bakeLayer(
-                FRILLED_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.GREAT_WHITE_SHARK,
-            GreatWhiteSharkPlushieModel(modelLoader.bakeLayer(
-                GREAT_WHITE_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.HAMMERHEAD_SHARK,
-            HammerheadSharkPlushieModel(modelLoader.bakeLayer(
-                HAMMERHEAD_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.THRESHER_SHARK,
-            ThresherSharkPlushieModel(modelLoader.bakeLayer(
-                THRESHER_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.TIGER_SHARK, TigerSharkPlushieModel(modelLoader.bakeLayer(
-                TIGER_SHARK_PLUSHIE))
-        )
-        builder.put(
-            PlushieBlock.Variant.WHALE_SHARK, WhaleSharkPlushieModel(modelLoader.bakeLayer(
-                WHALE_SHARK_PLUSHIE))
-        )
+        val models = plushieModels ?: buildMap {
+            put(
+                PlushieBlock.Variant.BASKING_SHARK,
+                BaskingSharkPlushieModel(modelLoader.bakeLayer(BASKING_SHARK_PLUSHIE))
+            )
+            put(
+                PlushieBlock.Variant.BULL_SHARK,
+                BullSharkPlushieModel(modelLoader.bakeLayer(BULL_SHARK_PLUSHIE))
+            )
+            put(
+                PlushieBlock.Variant.FRILLED_SHARK,
+                FrilledSharkPlushieModel(modelLoader.bakeLayer(FRILLED_SHARK_PLUSHIE))
+            )
+            put(
+                PlushieBlock.Variant.GREAT_WHITE_SHARK,
+                GreatWhiteSharkPlushieModel(modelLoader.bakeLayer(GREAT_WHITE_SHARK_PLUSHIE))
+            )
+            put(
+                PlushieBlock.Variant.HAMMERHEAD_SHARK,
+                HammerheadSharkPlushieModel(modelLoader.bakeLayer(HAMMERHEAD_SHARK_PLUSHIE))
+            )
+            put(
+                PlushieBlock.Variant.THRESHER_SHARK,
+                ThresherSharkPlushieModel(modelLoader.bakeLayer(THRESHER_SHARK_PLUSHIE))
+            )
+            put(
+                PlushieBlock.Variant.TIGER_SHARK,
+                TigerSharkPlushieModel(modelLoader.bakeLayer(TIGER_SHARK_PLUSHIE))
+            )
+            put(
+                PlushieBlock.Variant.WHALE_SHARK,
+                WhaleSharkPlushieModel(modelLoader.bakeLayer(WHALE_SHARK_PLUSHIE))
+            )
+        }.also { plushieModels = it }
+
+        models.forEach { (variant, model) -> builder.put(variant, model) }
     }
 }
