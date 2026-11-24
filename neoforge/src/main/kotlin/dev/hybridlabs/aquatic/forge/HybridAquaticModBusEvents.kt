@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.Constants
 import dev.hybridlabs.aquatic.block.HABlocks
 import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
+import dev.hybridlabs.aquatic.config.HAConfigHolder
 import dev.hybridlabs.aquatic.client.gui.screen.HAMenuScreens
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BASKING_SHARK_PLUSHIE
 import dev.hybridlabs.aquatic.client.model.HAEntityModelLayers.BULL_SHARK_PLUSHIE
@@ -35,6 +36,7 @@ import net.minecraft.client.renderer.BiomeColors
 import net.minecraft.world.level.FoliageColor
 import net.minecraft.world.level.block.state.BlockState
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
 import net.neoforged.fml.event.lifecycle.FMLDedicatedServerSetupEvent
 import net.neoforged.neoforge.client.event.EntityRenderersEvent
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent
@@ -51,6 +53,7 @@ object HybridAquaticModBusEvents {
     init {
         MOD_BUS.addListener(::registerSpawnPlacements)
         MOD_BUS.addListener(::registerNetworking)
+        MOD_BUS.addListener(::onCommonSetup)
 
         runForDist(
             clientTarget = {
@@ -179,6 +182,11 @@ object HybridAquaticModBusEvents {
         event.registerSpriteSet(HAParticleTypes.VENT_SMOKE.get()) { sprites ->
             VentSmokeParticle.Companion.Provider(sprites)
         }
+    }
+
+    private fun onCommonSetup(event: FMLCommonSetupEvent) {
+        // Deferred registries are bound by this point, so generating the default spawn config is safe.
+        event.enqueueWork { HAConfigHolder.handler }
     }
 
     private fun onClientSetup(event: FMLClientSetupEvent) {
