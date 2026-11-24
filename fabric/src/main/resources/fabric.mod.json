@@ -59,7 +59,7 @@
         "fabric-api": ">=0.155",
         "geckolib": ">=5.5.5",
         "lithostitched": ">=1.8.0",
-        "hapi": ">=1.5.0"
+        "hapi": ">=1.2.0"
     },
 
     "custom": {

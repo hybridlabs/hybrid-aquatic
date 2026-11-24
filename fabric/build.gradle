@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation("dev.hybridlabs.hapi:hapi-fabric-26.2:1.5.0")
+    implementation("dev.hybridlabs.hapi:hapi-fabric-26.2:1.2.0")
 
     implementation "com.geckolib:geckolib-fabric-$geckolib_version"
     localRuntime("com.terraformersmc:modmenu:${modmenu_version}")
