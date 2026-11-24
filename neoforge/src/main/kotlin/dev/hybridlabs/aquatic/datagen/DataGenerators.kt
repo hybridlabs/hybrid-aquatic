@@ -2,11 +2,12 @@ package dev.hybridlabs.aquatic.datagen
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.Constants
-import dev.hybridlabs.aquatic.config.ConfigHelper.initializeConfig
+import dev.hybridlabs.aquatic.config.HAConfigHolder
 import dev.hybridlabs.aquatic.datagen.server.HAGlobalLootModifierProvider
 import dev.hybridlabs.aquatic.utils.NaughtyRegistrySetBuilder
 import dev.hybridlabs.aquatic.world.gen.feature.BiomeFeatureAddition
 import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
+import dev.hybridlabs.aquatic.world.gen.modifier.ConfigGatedFeatureBiomeModifier
 import dev.hybridlabs.aquatic.world.gen.structure.BuiltinSpawnModifiers
 import net.minecraft.core.HolderSet
 import net.minecraft.core.registries.Registries
@@ -112,10 +113,11 @@ object DataGenerators {
                 CommonClass.locate(location)
             )
             context.register(
-                key, BiomeModifiers.AddFeaturesBiomeModifier(
+                key, ConfigGatedFeatureBiomeModifier(
                     biomeRegistry.getOrThrow(addition.biomeTag),
                     HolderSet.direct(featureRegistry.getOrThrow(addition.placedFeature)),
-                    addition.step
+                    addition.step,
+                    addition.toggle
                 )
             )
         }
@@ -127,7 +129,7 @@ object DataGenerators {
     private fun registerBiomeSpawns(
         context: BootstrapContext<BiomeModifier>,
     ) {
-        val configHandler = initializeConfig(CommonClass.CONFIG_FILE)
+        val configHandler = HAConfigHolder.handler
         val biomeRegistry = context.lookup(Registries.BIOME)
         for (spawnConfig in configHandler.defaultConfig.entitySpawnConfig) {
 

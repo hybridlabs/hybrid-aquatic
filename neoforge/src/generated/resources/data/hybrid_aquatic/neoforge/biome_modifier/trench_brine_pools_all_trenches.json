@@ -1,6 +1,7 @@
 {
-  "type": "neoforge:add_features",
+  "type": "hybrid_aquatic:config_gated_features",
   "biomes": "#hapi:all_trenches",
   "features": "hybrid_aquatic:trench_brine_pools",
-  "step": "lakes"
+  "step": "lakes",
+  "toggle": "brine_pools"
 }

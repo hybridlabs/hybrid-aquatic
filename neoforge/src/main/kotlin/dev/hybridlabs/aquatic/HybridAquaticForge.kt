@@ -29,6 +29,7 @@ import dev.hybridlabs.aquatic.world.gen.feature.HAConfiguredFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HAFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.HAPlacedFeatures
 import dev.hybridlabs.aquatic.world.gen.feature.PapyrusFeature
+import dev.hybridlabs.aquatic.world.gen.modifier.HABiomeModifierSerializers
 import dev.hybridlabs.aquatic.world.gen.structure.StructureSpawnModifier
 import dev.hybridlabs.aquatic.world.inventory.HAMenuTypes
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration
@@ -43,6 +44,9 @@ import thedarkcolour.kotlinforforge.neoforge.forge.MOD_BUS
 object HybridAquaticForge {
 
     init {
+        // Register the serializer before datagen or any biome modifier JSON is decoded.
+        HABiomeModifierSerializers.register()
+
         CommonClass.init()
 
         StructureSpawnModifier
