@@ -7,7 +7,7 @@ dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-$geckolib_version"
 
     implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.1"
-    implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.1.3")
+    implementation("dev.hybridlabs.hapi:hapi-neoforge-1.21.1:1.2.0")
 
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"

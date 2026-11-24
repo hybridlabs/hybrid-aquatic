@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation("dev.hybridlabs.hapi:hapi-common-1.21.1:1.1.3")
-    modImplementation("dev.hybridlabs.hapi:hapi-fabric-1.21.1:1.1.3")
+    implementation("dev.hybridlabs.hapi:hapi-common-1.21.1:1.2.0")
+    modImplementation("dev.hybridlabs.hapi:hapi-fabric-1.21.1:1.2.0")
 
     modApi "software.bernie.geckolib:geckolib-fabric-$geckolib_version"
     modLocalRuntime("com.terraformersmc:modmenu:${modmenu_version}")
