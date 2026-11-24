@@ -2,7 +2,9 @@ package dev.hybridlabs.aquatic.world.gen.biome
 
 import dev.hybridlabs.aquatic.CommonClass
 import dev.hybridlabs.aquatic.block.HABlocks
-import dev.hybridlabs.aquatic.config.ConfigHelper
+import dev.hybridlabs.aquatic.config.HAConfig
+import dev.hybridlabs.aquatic.config.HAConfigHolder
+import dev.hybridlabs.hapi.config.ConfigHandler
 import dev.hybridlabs.aquatic.world.gen.biome.HABiomeInjectors.BiomeEnabledPredicate
 import dev.worldgen.lithostitched.api.registry.LithostitchedRegistries
 import dev.worldgen.lithostitched.api.util.InjectionType
@@ -26,7 +28,8 @@ import net.minecraft.world.level.levelgen.material.rule.MaterialRule
 import net.minecraft.world.level.levelgen.placement.CaveSurface
 
 object HABiomes {
-    val config = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
+    val config: ConfigHandler<HAConfig>
+        get() = HAConfigHolder.handler
 
     val TIDE_POOLS: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("tide_pools"))
     val DEEP_WARM_OCEAN: ResourceKey<Biome> = ResourceKey.create(Registries.BIOME, CommonClass.locate("deep_warm_ocean"))

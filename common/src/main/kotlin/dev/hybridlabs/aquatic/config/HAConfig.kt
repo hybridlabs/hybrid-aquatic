@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.config
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.hybridlabs.hapi.config.EntitySpawnConfig
 
 data class HAConfig(
     /**

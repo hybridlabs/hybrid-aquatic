@@ -3,7 +3,7 @@ package dev.hybridlabs.aquatic.datagen.server
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.hybridlabs.aquatic.CommonClass
-import dev.hybridlabs.aquatic.config.ConfigHelper.initializeConfig
+import dev.hybridlabs.aquatic.config.HAConfigHolder
 import dev.hybridlabs.aquatic.world.gen.feature.BiomeFeatureAddition
 import java.util.concurrent.CompletableFuture
 import net.minecraft.data.CachedOutput
@@ -31,10 +31,11 @@ class HABiomeModifierProvider(output: PackOutput) : DataProvider {
         for (addition in BiomeFeatureAddition.builtIn) {
             val location = "${addition.placedFeature.identifier().path}_${addition.biomeTag.location.path}"
             val json = JsonObject().apply {
-                addProperty("type", "neoforge:add_features")
+                addProperty("type", "hybrid_aquatic:config_gated_features")
                 addProperty("biomes", "#${addition.biomeTag.location}")
                 addProperty("features", addition.placedFeature.identifier().toString())
                 addProperty("step", addition.step.getSerializedName())
+                addProperty("toggle", addition.toggle.name.lowercase())
             }
             futures += DataProvider.saveStable(
                 cache,
@@ -43,7 +44,7 @@ class HABiomeModifierProvider(output: PackOutput) : DataProvider {
             )
         }
 
-        val config = initializeConfig(CommonClass.CONFIG_FILE).defaultConfig
+        val config = HAConfigHolder.handler.defaultConfig
         for (spawnConfig in config.entitySpawnConfig) {
             val location = "${spawnConfig.type.toShortString()}_${spawnConfig.biomes.location.path}"
             val spawner = Weighted(

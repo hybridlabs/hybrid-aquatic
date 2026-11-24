@@ -1,6 +1,7 @@
 {
-  "type": "neoforge:add_features",
+  "type": "hybrid_aquatic:config_gated_features",
   "biomes": "#hapi:shallow_cold_oceans",
   "features": "hybrid_aquatic:delesseria",
-  "step": "vegetal_decoration"
+  "step": "vegetal_decoration",
+  "toggle": "delesseria"
 }
