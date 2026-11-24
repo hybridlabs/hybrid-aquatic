@@ -66,7 +66,11 @@ public class HACustomTrades {
 
     public static void registerWandererTrades(WandererTradesEvent event) {
         var rareTrades = event.getRareTrades();
-        BuiltInRegistries.ITEM.stream().filter((item) -> item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof PlushieBlock).forEach((block) -> rareTrades.add(new BasicItemListing(8, new ItemStack(block), 1, 2, 2f)));
+        BuiltInRegistries.ITEM.holders()
+                .filter(holder -> holder.isBound())
+                .map(holder -> holder.value())
+                .filter(item -> item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof PlushieBlock)
+                .forEach(item -> rareTrades.add(new BasicItemListing(8, new ItemStack(item), 1, 2, 2f)));
     }
 }
 
