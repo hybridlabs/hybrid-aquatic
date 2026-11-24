@@ -24,6 +24,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Jungle lily pads now break for modded boats as well
 - Fixed pick-blocking papyrus giving cattails instead of papyrus
 - Paintings now show their title and author in the item tooltip
+- Fixed the config file not being created on NeoForge
+- Fixed worldgen feature options not applying without rebuilding the mod
+- Added config options for coral reef, tropical deep coral reef and all trench biomes
+- Malformed or outdated config files are now backed up before being reset
+- Fixed the deep warm ocean config option using an incorrect key
+- Fixed plushie models being recreated repeatedly, which caused EMF errors
+- Added the missing brine translation
 
 <details>
 <summary>Developer notes</summary>
@@ -68,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   near-water check
 - The biome survey samples through `BiomeSource.createUncachedResolver` on 26.3, and each survey run
   loads Lithostitched from its own `mods` directory
+- Config loading moved to the shared Hybrid API config API
 
 </details>
 
