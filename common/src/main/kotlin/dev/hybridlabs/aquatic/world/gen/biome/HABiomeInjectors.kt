@@ -407,6 +407,19 @@ object HABiomeInjectors {
             val biomeConfig = HABiomes.config.config.biomeConfig
             return biomeConfig.enableBiomes && when (biome) {
                 HABiomes.TIDE_POOLS -> biomeConfig.generateTidePools
+                HABiomes.DEEP_WARM_OCEAN -> biomeConfig.generateDeepWarmOcean
+                HABiomes.DEEP_CORAL_REEF -> biomeConfig.generateDeepCoralReef
+                HABiomes.CORAL_REEF -> biomeConfig.generateCoralReef
+                HABiomes.TROPICAL_DEEP_CORAL_REEF -> biomeConfig.generateTropicalDeepCoralReef
+                HABiomes.RED_MEADOW -> biomeConfig.generateRedMeadow
+                HABiomes.SEAGRASS_BED -> biomeConfig.generateSeagrassBed
+                HABiomes.TROPICAL_RIVER -> biomeConfig.generateTropicalRiver
+                HABiomes.SULFURIC_CAVES -> biomeConfig.generateSulfuricCave
+                HABiomes.TRENCH -> biomeConfig.generateTrench
+                HABiomes.WARM_TRENCH -> biomeConfig.generateWarmTrench
+                HABiomes.LUKEWARM_TRENCH -> biomeConfig.generateLukewarmTrench
+                HABiomes.COLD_TRENCH -> biomeConfig.generateColdTrench
+                HABiomes.FROZEN_TRENCH -> biomeConfig.generateFrozenTrench
                 else -> true
             }
         }

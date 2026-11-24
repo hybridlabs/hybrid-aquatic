@@ -1,6 +1,7 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
 import dev.hybridlabs.aquatic.CommonClass
+import dev.hybridlabs.aquatic.config.HAConfigHolder
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase
@@ -24,7 +25,11 @@ object FeatureBiomeModifications {
     private val WARM_OCEAN_REMOVALS = placedFeatures("warm_ocean_vegetation")
 
     fun registerBiomeModifications() {
+        val featureConfig = HAConfigHolder.config.featureConfig
         for (addition in BiomeFeatureAddition.builtIn) {
+            if (!addition.toggle.isEnabled(featureConfig)) {
+                continue
+            }
 
             BiomeModifications.addFeature(
                 BiomeSelectors.tag(addition.biomeTag),

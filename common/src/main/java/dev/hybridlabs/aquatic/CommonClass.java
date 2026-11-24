@@ -23,8 +23,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryType;
 
-import java.nio.file.Path;
-
 import static dev.hybridlabs.aquatic.Constants.MOD_ID;
 import static dev.hybridlabs.aquatic.Constants.MOD_NAME;
 
@@ -71,8 +69,6 @@ public class CommonClass {
 	public static final RegistrationProvider<MenuType<?>> MENU_TYPE =
 			RegistrationProvider.get(BuiltInRegistries.MENU, MOD_ID);
 	
-    public static final Path CONFIG_FILE = Services.PLATFORM.getConfigDir().resolve(MOD_ID + ".json");
-
     public static ResourceLocation locate(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }

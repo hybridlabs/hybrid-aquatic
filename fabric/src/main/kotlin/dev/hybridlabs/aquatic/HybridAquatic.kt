@@ -6,8 +6,8 @@ import dev.hybridlabs.aquatic.block.PlushieBlock
 import dev.hybridlabs.aquatic.block.entity.HABlockEntityTypes
 import dev.hybridlabs.aquatic.block.property.FlammableProperty
 import dev.hybridlabs.aquatic.block.property.StrippableProperty
-import dev.hybridlabs.aquatic.config.ConfigHelper
 import dev.hybridlabs.aquatic.config.HAConfig
+import dev.hybridlabs.aquatic.config.HAConfigHolder
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.entity.SpawnRestrictionRegistry
@@ -56,7 +56,7 @@ object HybridAquatic : ModInitializer {
 
     @Suppress("UnusedExpression")
     override fun onInitialize() {
-        val configHandler = ConfigHelper.initializeConfig(CommonClass.CONFIG_FILE)
+        val configHandler = HAConfigHolder.handler
         logger.info("Initializing ${Constants.MOD_NAME}")
         CommonClass.init()
 
@@ -107,7 +107,7 @@ object HybridAquatic : ModInitializer {
         if (configHandler.config.enableWanderingTraderTrades) {
             registerWanderingTraderTrades()
         }
-        if (configHandler.config.enableWanderingTraderTrades) {
+        if (configHandler.config.enableVillagerTrades) {
             registerCustomTrades()
         }
 
@@ -127,7 +127,9 @@ object HybridAquatic : ModInitializer {
 
     private fun registerWanderingTraderTrades() {
         // plushies
-        BuiltInRegistries.ITEM
+        BuiltInRegistries.ITEM.holders()
+            .filter { it.isBound }
+            .map { it.value() }
             .filter { it is BlockItem && it.block is PlushieBlock }
             .forEach { block ->
                 TradeOfferHelper.registerWanderingTraderOffers(2) { list ->

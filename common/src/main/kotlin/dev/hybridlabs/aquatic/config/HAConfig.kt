@@ -2,13 +2,14 @@ package dev.hybridlabs.aquatic.config
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import dev.hybridlabs.hapi.config.EntitySpawnConfig
 
 data class HAConfig(
     /**
      * The version of the data stored.
      * Increase when the config needs to be reset, i.e. when new entity spawn configs are added.
      */
-    val dataVersion: Int = 8,
+    val dataVersion: Int = 9,
     val enableWanderingTraderTrades: Boolean = true,
     val enableVillagerTrades: Boolean = true,
     val addFishingLoot: Boolean = true,

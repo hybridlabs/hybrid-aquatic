@@ -2,6 +2,7 @@ package dev.hybridlabs.aquatic.config
 
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
 import dev.hybridlabs.aquatic.platform.Services
+import dev.hybridlabs.hapi.config.EntitySpawnConfig
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import net.minecraft.tags.BiomeTags
 import net.minecraft.tags.TagKey

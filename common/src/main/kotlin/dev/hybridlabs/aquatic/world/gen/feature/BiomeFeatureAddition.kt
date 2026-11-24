@@ -1,6 +1,5 @@
 package dev.hybridlabs.aquatic.world.gen.feature
 
-import dev.hybridlabs.aquatic.world.gen.biome.HABiomes.config
 import dev.hybridlabs.hapi.tag.HAPIBiomeTags
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.BiomeTags
@@ -10,7 +9,10 @@ import net.minecraft.world.level.levelgen.GenerationStep
 import net.minecraft.world.level.levelgen.placement.PlacedFeature
 
 data class BiomeFeatureAddition(
-    val biomeTag: TagKey<Biome>, val step: GenerationStep.Decoration, val placedFeature: ResourceKey<PlacedFeature>,
+    val biomeTag: TagKey<Biome>,
+    val step: GenerationStep.Decoration,
+    val placedFeature: ResourceKey<PlacedFeature>,
+    val toggle: FeatureToggle = FeatureToggle.ALWAYS,
 ) {
     companion object {
         val builtIn = buildList {
@@ -65,23 +67,23 @@ data class BiomeFeatureAddition(
                 ),
             )
 
-            if (config.config.featureConfig.generateBrinePools) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.ALL_TRENCHES,
-                        GenerationStep.Decoration.LAKES,
-                        HAPlacedFeatures.TRENCH_BRINE_POOLS
-                    ),
-                )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.ALL_TRENCHES,
+                    GenerationStep.Decoration.LAKES,
+                    HAPlacedFeatures.TRENCH_BRINE_POOLS,
+                    FeatureToggle.BRINE_POOLS
+                ),
+            )
 
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.SULFURIC_CAVE,
-                        GenerationStep.Decoration.LAKES,
-                        HAPlacedFeatures.CAVE_BRINE_POOLS
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SULFURIC_CAVE,
+                    GenerationStep.Decoration.LAKES,
+                    HAPlacedFeatures.CAVE_BRINE_POOLS,
+                    FeatureToggle.BRINE_POOLS
+                ),
+            )
             //#endregion
 
             //#region Shellfish
@@ -177,89 +179,88 @@ data class BiomeFeatureAddition(
                 ),
             )
 
-            if (config.config.featureConfig.generateRiverPlants) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.RIVERS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.WATER_LETTUCE
-                    ),
-                )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.RIVERS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.WATER_LETTUCE,
+                    FeatureToggle.RIVER_PLANTS
+                ),
+            )
 
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.SWAMP,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.WATER_LETTUCE
-                    ),
-                )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SWAMP,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.WATER_LETTUCE,
+                    FeatureToggle.RIVER_PLANTS
+                ),
+            )
 
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.MARSHES,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.WATER_LETTUCE
-                    ),
-                )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.MARSHES,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.WATER_LETTUCE,
+                    FeatureToggle.RIVER_PLANTS
+                ),
+            )
 
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.TROPICAL_RIVERS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.JUNGLE_LILY_PAD
-                    ),
-                )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.TROPICAL_RIVERS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.JUNGLE_LILY_PAD,
+                    FeatureToggle.RIVER_PLANTS
+                ),
+            )
 
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.TROPICAL_RIVERS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.WATER_HYACINTH
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.TROPICAL_RIVERS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.WATER_HYACINTH,
+                    FeatureToggle.RIVER_PLANTS
+                ),
+            )
             //#endregion
 
             //#region Kelp Plants
-            if (config.config.featureConfig.generateSargassum) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.SHALLOW_LUKEWARM_OCEANS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.SARGASSUM
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SHALLOW_LUKEWARM_OCEANS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.SARGASSUM,
+                    FeatureToggle.SARGASSUM
+                ),
+            )
 
-            if (config.config.featureConfig.generateFloatingSargassum) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.DEEP_LUKEWARM_OCEANS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.FLOATING_SARGASSUM
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.DEEP_LUKEWARM_OCEANS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.FLOATING_SARGASSUM,
+                    FeatureToggle.FLOATING_SARGASSUM
+                ),
+            )
 
-            if (config.config.featureConfig.generateBullKelp) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.SHALLOW_TEMPERATE_OCEANS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.BULL_KELP
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SHALLOW_TEMPERATE_OCEANS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.BULL_KELP,
+                    FeatureToggle.BULL_KELP
+                ),
+            )
 
-            if (config.config.featureConfig.generateDelesseria) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.SHALLOW_COLD_OCEANS,
-                        GenerationStep.Decoration.VEGETAL_DECORATION,
-                        HAPlacedFeatures.DELESSERIA
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SHALLOW_COLD_OCEANS,
+                    GenerationStep.Decoration.VEGETAL_DECORATION,
+                    HAPlacedFeatures.DELESSERIA,
+                    FeatureToggle.DELESSERIA
+                ),
+            )
             //#endregion
 
             //#region Vents & Sulfur
@@ -271,23 +272,23 @@ data class BiomeFeatureAddition(
                 ),
             )
 
-            if (config.config.featureConfig.generateThermalVents) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.SULFURIC_CAVE,
-                        GenerationStep.Decoration.SURFACE_STRUCTURES,
-                        HAPlacedFeatures.THERMAL_VENT_CAVES
-                    )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SULFURIC_CAVE,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
+                    HAPlacedFeatures.THERMAL_VENT_CAVES,
+                    FeatureToggle.THERMAL_VENTS
                 )
+            )
 
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.ALL_TRENCHES,
-                        GenerationStep.Decoration.SURFACE_STRUCTURES,
-                        HAPlacedFeatures.THERMAL_VENT_TRENCHES
-                    )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.ALL_TRENCHES,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
+                    HAPlacedFeatures.THERMAL_VENT_TRENCHES,
+                    FeatureToggle.THERMAL_VENTS
                 )
-            }
+            )
             //#endregion
 
             add(
@@ -306,23 +307,23 @@ data class BiomeFeatureAddition(
                 ),
             )
 
-            if (config.config.featureConfig.generateMounds) {
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.HAPI_DEEP_OCEANS,
-                        GenerationStep.Decoration.SURFACE_STRUCTURES,
-                        HAPlacedFeatures.MOUND
-                    ),
-                )
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.HAPI_DEEP_OCEANS,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
+                    HAPlacedFeatures.MOUND,
+                    FeatureToggle.MOUNDS
+                ),
+            )
 
-                add(
-                    BiomeFeatureAddition(
-                        HAPIBiomeTags.SEAGRASS_BED,
-                        GenerationStep.Decoration.SURFACE_STRUCTURES,
-                        HAPlacedFeatures.MOUND
-                    ),
-                )
-            }
+            add(
+                BiomeFeatureAddition(
+                    HAPIBiomeTags.SEAGRASS_BED,
+                    GenerationStep.Decoration.SURFACE_STRUCTURES,
+                    HAPlacedFeatures.MOUND,
+                    FeatureToggle.MOUNDS
+                ),
+            )
 
             add(
                 BiomeFeatureAddition(
