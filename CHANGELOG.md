@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated to Minecraft 26.1.2
 - Added diving armor upgrade templates to crate loot
 - Jungle lily pads now break for modded boats as well
+- Fixed the config file not being created on NeoForge
+- Fixed worldgen feature options not applying without rebuilding the mod
+- Added config options for coral reef, tropical deep coral reef and all trench biomes
+- Malformed or outdated config files are now backed up before being reset
+- Fixed the deep warm ocean config option using an incorrect key
+- Fixed plushie models being recreated repeatedly, which caused EMF errors
+- Added the missing brine translation
 
 <details>
 <summary>Developer notes</summary>
@@ -35,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Trinkets support is compile-only for this release
 - Added a compatibility mixin for Lithostitched 1.7.2 biome injectors and a guard for missing
   GeckoLib animation names
+- Config loading moved to the shared Hybrid API config API
 
 </details>
 
