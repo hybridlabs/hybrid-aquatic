@@ -5,6 +5,7 @@ import dev.hybridlabs.aquatic.block.HAPlatformBlocks
 import dev.hybridlabs.aquatic.data.HybridAquaticDataGenerator.filterHybridAquatic
 import dev.hybridlabs.aquatic.effect.HAMobEffects
 import dev.hybridlabs.aquatic.entity.HAEntityTypes
+import dev.hybridlabs.aquatic.fluid.HAPlatformFluids
 import dev.hybridlabs.aquatic.item.HAItemGroups
 import dev.hybridlabs.aquatic.item.HAItems
 import dev.hybridlabs.aquatic.item.HAPlatformItems
@@ -317,6 +318,7 @@ class LanguageProvider( output: FabricPackOutput, lookupProvider: CompletableFut
 
         // blocks
         mapOf(
+            HAPlatformFluids.BRINE.get() to "Brine",
             HABlocks.BASKING_SHARK_PLUSHIE.get() to "Basking Shark Plushie",
             HABlocks.BULL_SHARK_PLUSHIE.get() to "Bull Shark Plushie",
             HABlocks.FRILLED_SHARK_PLUSHIE.get() to "Frilled Shark Plushie",
