@@ -177,6 +177,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
         this.variant = selectedType
+        this.hunger = MAX_HUNGER
 
         if (this.random.nextFloat() < 0.1f) {
             this.setAge(-6000)
