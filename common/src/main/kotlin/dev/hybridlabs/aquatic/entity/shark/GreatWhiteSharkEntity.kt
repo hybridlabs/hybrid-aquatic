@@ -1,14 +1,22 @@
 package dev.hybridlabs.aquatic.entity.shark
 
+import dev.hybridlabs.aquatic.entity.ai.goal.SharkAttackGoal
 import dev.hybridlabs.hapi.tag.HAPIEntityTags
 import dev.hybridlabs.hapi.entity.ai.MobTargetConfiguration
 import dev.hybridlabs.hapi.entity.ai.goal.aquatic.WaterAnimalJumpGoal
+import dev.hybridlabs.hapi.entity.ai.goal.aquatic.boids.StayInWaterGoal
 import dev.hybridlabs.hapi.entity.base.aquatic.BaseSharkEntity
+import dev.hybridlabs.hapi.entity.base.aquatic.BaseWaterAnimal
 import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.entity.ai.attributes.Attributes
 import net.minecraft.world.entity.ai.goal.FollowBoatGoal
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal
+import net.minecraft.world.entity.ai.goal.TemptGoal
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 
 class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: Level) :
@@ -30,9 +38,21 @@ class GreatWhiteSharkEntity(type: EntityType<out GreatWhiteSharkEntity>, world: 
 
     override fun registerGoals() {
         super.registerGoals()
+        goalSelector.addGoal(0, SharkAttackGoal(this, 1.1, true))
         goalSelector.addGoal(1, HurtByTargetGoal(this))
+        goalSelector.addGoal(0, StayInWaterGoal(this))
+        goalSelector.addGoal(1, TemptGoal(this, 1.1, BREEDING_INGREDIENT, false))
         goalSelector.addGoal(8, FollowBoatGoal(this))
         goalSelector.addGoal(5, WaterAnimalJumpGoal(this, 25, 5.0))
+        goalSelector.addGoal(2, RandomSwimmingGoal(this, 1.0, 2))
+        targetSelector.addGoal(
+            1,
+            NearestAttackableTargetGoal(this, Player::class.java, 10, true, true) {
+                    entity: LivingEntity -> isAngryAt(entity) && !isPassive
+            }
+        )
+        getTargetConfig().addAttackTarget(targetSelector, MAX_HUNGER / 4, this, BaseWaterAnimal::hunger)
+        getTargetConfig().addAvoidanceGoal(goalSelector, this)
     }
 
     companion object {
