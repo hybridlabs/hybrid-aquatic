@@ -5,8 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
+## [1.7.5] 2026-11-27
 - Fixed the config file not being created on NeoForge
 - Fixed worldgen feature options not applying without rebuilding the mod
 - Added config options for coral reef, tropical deep coral reef and all trench biomes
@@ -16,10 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed fish heads and tails spinning
 - Fixed missing blockstates and models for anemones, plushies, message in a bottle, buoy and bell buoy
 - Fixed plushie models being recreated repeatedly, which caused EMF errors
+- Fixed sharks not targeting bleeding entities
+- Fixed sharks not inflicting bleeding on attack
+- Fixed sharks not dropping teeth when blocked with a shield
 - Added the missing brine translation
 - Moved shared config handling to Hybrid API
-
-## [1.7.5] 2026-11-20
 - Changed jungle lilypads to break on contact with anything in the "boats" tag
 - Added Diving Armor Upgrade Templates to crate loot
 
