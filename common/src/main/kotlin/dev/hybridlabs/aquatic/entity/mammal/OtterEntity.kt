@@ -170,6 +170,7 @@ class OtterEntity(entityType: EntityType<out OtterEntity>, world: Level) : BaseM
     ): SpawnGroupData? {
         val biome = world.getBiome(this.blockPosition())
         val selectedType = Type.fromBiome(biome)
+        this.hunger = MAX_HUNGER
         this.variant = selectedType
 
         if (this.random.nextFloat() < 0.1f) {
